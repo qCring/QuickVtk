@@ -3,6 +3,7 @@
 #include "quickAppController.hpp"
 
 #include <QApplication>
+#include <QQmlContext>
 #include <QQmlEngine>
 #include <QDir>
 
@@ -55,6 +56,7 @@ namespace quick {
 
         this->m_view = new QQuickView();
         this->m_view->setTitle(this->m_appName);
+        this->m_view->engine()->rootContext()->setContextProperty("App", controller);
         this->m_view->setSource(QUrl::fromLocalFile(this->m_resourceDir + this->m_resourceFile));
         this->m_view->setResizeMode(QQuickView::SizeRootObjectToView);
         this->m_view->showMaximized();

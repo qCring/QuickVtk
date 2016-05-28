@@ -82,13 +82,8 @@ find_package(Qt5 ${QUICKVTK_QT_VERSION} EXACT CONFIG REQUIRED ${QUICKVTK_QT_MODU
 add_definitions(${QT_DEFINITIONS})
 
 # Vtk
-find_package(VTK REQUIRED)
+find_package(VTK 7.1.0 EXACT CONFIG REQUIRED)
 include(${VTK_USE_FILE})
-
-# application
-# ******************************************************************************
-configure_file(${ROOT_DIR}/cmake/meta_quickvtk.hpp.in ${BINARY_DIR}/meta_quickvtk.hpp)
-configure_file(${ROOT_DIR}/cmake/info.plist.in ${BINARY_DIR}/info.plist)
 
 # sources
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
@@ -105,6 +100,20 @@ if(APPLE)
 
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${list_app_src} ${MACOSX_BUNDLE_ICON})
 endif()
+
+# application
+# ******************************************************************************
+configure_file(${ROOT_DIR}/cmake/meta_quickvtk.hpp.in ${BINARY_DIR}/meta_quickvtk.hpp)
+configure_file(${ROOT_DIR}/cmake/info.plist.in ${BINARY_DIR}/info.plist)
+
+# target properties
+# ******************************************************************************
+if(APPLE)
+  set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${BINARY_DIR}/info.plist)
+endif()
+
+#include binary dir
+target_include_directories(${PROJECT_NAME} PUBLIC ${BINARY_DIR})
 
 # resources
 if(APPLE)

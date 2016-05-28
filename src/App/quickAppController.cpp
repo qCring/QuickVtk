@@ -11,6 +11,9 @@ namespace quick {
         instance = this;
     }
 
+    auto AppController::init() -> void {
+    }
+
     auto AppController::Create() -> AppController* {
         return new AppController();
     }

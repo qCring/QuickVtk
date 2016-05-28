@@ -2,6 +2,7 @@
 
 #include "quickAppController.hpp"
 
+#include <QFontDatabase>
 #include <QApplication>
 #include <QQmlContext>
 #include <QQmlEngine>
@@ -50,6 +51,19 @@ namespace quick {
         path.cdUp();
 
         this->m_resourceDir = path.absolutePath() + "/Resources";
+
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Black.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-BlackItalic.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Bold.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-BoldItalic.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Italic.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Light.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-LightItalic.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Medium.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-MediumItalic.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Regular.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-Thin.ttf");
+        QFontDatabase::addApplicationFont(this->m_resourceDir + "/fonts/roboto/Roboto-ThinItalic.ttf");
 
         auto controller = AppController::Create();
         controller->setVersion(this->m_versionString);

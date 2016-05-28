@@ -1,5 +1,7 @@
 import QtQuick 2.5
 
+import "./lib" as Lib
+
 Rectangle {
     height: 24;
     color: "#21252B"
@@ -14,7 +16,7 @@ Rectangle {
         color: "#181A1F"
     }
 
-    Text {
+    Lib.Label {
         anchors.right: parent.right;
         anchors.verticalCenter: parent.verticalCenter;
         anchors.margins: 4;

@@ -1,9 +1,11 @@
 import QtQuick 2.5
 
+import "./lib" as Lib
+
 Rectangle {
     color: "#282C34"
 
-    Text {
+    Lib.Label {
         anchors.centerIn: parent;
 
         color: "#fff"

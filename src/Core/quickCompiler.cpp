@@ -22,9 +22,16 @@ namespace quick {
 
     }
 
+    auto Compiler::getSource() -> QString {
+        return this->m_source;
+    }
+
     auto Compiler::openFile() -> void {
         this->m_fileName = Util::IO::FileFromDialog("Load QML File", "*.qml*");
         emit this->fileNameChanged();
+
+        this->m_source = Util::IO::ReadTextFromFile(this->m_fileName);
+        emit this->sourceChanged();
     }
 
     auto Compiler::getFileName() -> QString {

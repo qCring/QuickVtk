@@ -1,6 +1,7 @@
 #include "quickUtilIO.hpp"
 
 #include <QDirIterator>
+#include <QTextStream>
 #include <QFileDialog>
 
 namespace quick {
@@ -21,9 +22,25 @@ namespace quick {
                 return fileList;
             }
 
-            auto FileFromDialog(const QString &title, const QString &filter) -> QString
-            {
+            auto FileFromDialog(const QString &title, const QString &filter) -> QString {
                 return QFileDialog::getOpenFileName(0, title, 0, filter);
+            }
+
+            auto ReadTextFromFile(const QString& filePath) -> QString {
+                QString text;
+                QFile file(filePath);
+
+                if (!file.exists()) {
+                    return "";
+                }
+
+                if (file.open(QIODevice::ReadOnly)) {
+                    QTextStream stream(&file);
+                    text = file.readAll();
+                    file.close();
+                }
+
+                return text;
             }
         }
     }

@@ -8,14 +8,14 @@ Rectangle {
     Header {
         anchors.left: parent.left;
         anchors.right: parent.right;
-        anchors.top: parent.top;    
+        anchors.top: parent.top;
     }
 
     Lib.Label {
         anchors.centerIn: parent;
 
         color: "#fff"
-        text: "QuickVtk"
+        text: App.compiler.source;
     }
 
     Footer {

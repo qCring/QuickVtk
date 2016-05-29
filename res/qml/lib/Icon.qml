@@ -5,7 +5,7 @@ import "Icons.js" as Icons
 Text
 {
     property var types: Icons.Types;
-    property string type: "-"
+    property string type;
 
     textFormat: Text.PlainText;
     style: Text.Normal;

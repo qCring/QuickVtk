@@ -2,6 +2,8 @@
 
 #include "meta_quickvtk.hpp"
 
+#include "quickCompiler.hpp"
+
 namespace quick {
     namespace App {
 
@@ -24,6 +26,10 @@ namespace quick {
 
         auto Controller::getVersion() -> QString {
             return Meta::versionString;
+        }
+
+        auto Controller::getCompiler() -> Compiler* {
+            return Compiler::instance;
         }
 
         auto Controller::isDebugBuild() -> bool {

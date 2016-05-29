@@ -5,14 +5,24 @@ import "./lib" as Lib
 Rectangle {
     color: "#282C34"
 
-    Lib.Label {
-        anchors.centerIn: parent;
+    Header {
+        id: header;
+        
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: parent.top;
+    }
 
-        color: "#fff"
-        text: "QuickVtk"
+    ContainerView {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: header.bottom;
+        anchors.bottom: footer.top;
     }
 
     Footer {
+        id: footer;
+
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.bottom: parent.bottom;

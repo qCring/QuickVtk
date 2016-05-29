@@ -35,7 +35,7 @@ namespace quick {
 
             resourceDir = path.absolutePath() + "/Resources/";
 
-            AddFontDir(resourceDir + "fonts/vonique/");
+            AddFontDir(resourceDir + "fonts/roboto/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
             auto controller = Controller::Create();

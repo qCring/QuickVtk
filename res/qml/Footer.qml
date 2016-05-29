@@ -16,11 +16,24 @@ Rectangle {
         color: "#181A1F"
     }
 
-    Lib.Label {
+    Row {
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
         anchors.right: parent.right;
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.margins: 4;
-        text: "version " + App.version;
-        color: "#fff"
+        anchors.rightMargin: 4;
+
+        spacing: 4;
+
+        Lib.Icon {
+            anchors.verticalCenter: parent.verticalCenter;
+            type: types.fa_bug;
+            visible: App.debugBuild;
+        }
+
+        Lib.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+            text: "version " + App.version;
+            color: "#fff"
+        }
     }
 }

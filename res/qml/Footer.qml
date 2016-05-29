@@ -33,7 +33,6 @@ Rectangle {
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
             text: "version " + App.version;
-            color: "#fff"
         }
     }
 }

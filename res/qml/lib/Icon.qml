@@ -9,7 +9,7 @@ Text
 
     textFormat: Text.PlainText;
     style: Text.Normal;
-    color: "#fff"
+    color: enabled ? "#9DA5B4" : "#6E7582"
     font.family: "FontAwesome";
     verticalAlignment: Text.AlignVCenter;
     text: type;

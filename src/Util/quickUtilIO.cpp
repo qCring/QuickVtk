@@ -1,6 +1,7 @@
 #include "quickUtilIO.hpp"
 
 #include <QDirIterator>
+#include <QFileDialog>
 
 namespace quick {
     namespace Util {
@@ -18,6 +19,11 @@ namespace quick {
                 }
                 
                 return fileList;
+            }
+
+            auto FileFromDialog(const QString &title, const QString &filter) -> QString
+            {
+                return QFileDialog::getOpenFileName(0, title, 0, filter);
             }
         }
     }

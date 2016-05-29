@@ -1,36 +1,37 @@
 #include "quickAppController.hpp"
 
-namespace quick {
-    AppController* AppController::instance = nullptr;
+#include "meta_quickvtk.hpp"
 
-    AppController::AppController() {
-        if (instance) {
-            throw std::runtime_error("instance already existing");
+namespace quick {
+    namespace App {
+
+        Controller* Controller::instance = nullptr;
+
+        Controller::Controller() {
+            if (instance) {
+                throw std::runtime_error("instance already existing");
+            }
+
+            instance = this;
         }
 
-        instance = this;
-    }
+        auto Controller::init() -> void {
+        }
 
-    auto AppController::init() -> void {
-    }
+        auto Controller::Create() -> Controller* {
+            return new Controller();
+        }
 
-    auto AppController::Create() -> AppController* {
-        return new AppController();
-    }
-    
-    auto AppController::setVersion(const QString& version) -> void {
-        this->m_version = version;
-    }
+        auto Controller::getVersion() -> QString {
+            return Meta::versionString;
+        }
 
-    auto AppController::getVersion() -> QString {
-        return this->m_version;
-    }
-
-    auto AppController::isDebugBuild() -> bool {
+        auto Controller::isDebugBuild() -> bool {
 #ifdef NDEBUG
-        return false;
+            return false;
 #else
-        return true;
+            return true;
 #endif
+        }
     }
 }

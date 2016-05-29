@@ -87,6 +87,7 @@ include(${VTK_USE_FILE})
 
 # sources
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
+AddSources("${SOURCE_DIR}/Util" "Util" list_app_src)
 
 # target
 if(APPLE)

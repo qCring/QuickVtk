@@ -3,8 +3,9 @@ import QtQuick 2.5
 Item {
     id: root;
 
-    clip: true;
+    property var previousObject: undefined;
 
+    clip: true;
 
     Item {
         id: container;
@@ -17,6 +18,12 @@ Item {
 
         try {
             qmlObject = Qt.createQmlObject(App.compiler.source, container, "root");
+
+            if (previousObject) {
+                previousObject.destroy();
+            }
+
+            previousObject = qmlObject;
         }
         catch (exc) {
             console.log (exc);

@@ -22,6 +22,7 @@ Rectangle {
         anchors.leftMargin: 4;
 
         label.text: "Open File";
+        icon.type: icon.types.fa_folder_open;
 
         onClicked: App.compiler.openFile();
     }

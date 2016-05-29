@@ -6,19 +6,23 @@ Rectangle {
     color: "#282C34"
 
     Header {
+        id: header;
+        
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.top: parent.top;
     }
 
-    Lib.Label {
-        anchors.centerIn: parent;
-
-        color: "#fff"
-        text: App.compiler.source;
+    ContainerView {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: header.bottom;
+        anchors.bottom: footer.top;
     }
 
     Footer {
+        id: footer;
+
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.bottom: parent.bottom;

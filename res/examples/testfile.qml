@@ -1,24 +1,14 @@
 import QtQuick 2.5
 
 Rectangle {
-    color: "#282C34"
+    color: "#444"
 
-    Header {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-    }
+    anchors.fill: parent;
 
-    Lib.Label {
+    Text {
         anchors.centerIn: parent;
-
+        font.pixelSize: 40;
         color: "#fff"
-        text: App.compiler.source;
-    }
-
-    Footer {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
+        text: "yay, i was compiled at runtime!"
     }
 }

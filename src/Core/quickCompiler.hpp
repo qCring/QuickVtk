@@ -20,10 +20,10 @@ namespace quick {
         auto getSource() -> QString;
         auto getFileName() -> QString;
     public slots:
-        void compile();
         void openFile();
     signals:
         void fileNameChanged();
         void sourceChanged();
+        void compile();
     };
 }

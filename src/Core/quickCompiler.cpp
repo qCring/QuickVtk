@@ -18,10 +18,6 @@ namespace quick {
         instance = new Compiler();
     }
 
-    auto Compiler::compile() -> void {
-
-    }
-
     auto Compiler::getSource() -> QString {
         return this->m_source;
     }
@@ -32,6 +28,10 @@ namespace quick {
 
         this->m_source = Util::IO::ReadTextFromFile(this->m_fileName);
         emit this->sourceChanged();
+
+        if (this->m_source.length() > 0) {
+            emit this->compile();
+        }
     }
 
     auto Compiler::getFileName() -> QString {

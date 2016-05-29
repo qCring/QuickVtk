@@ -27,6 +27,8 @@ namespace quick {
         auto getFileName() -> QString;
     public slots:
         void openFile();
+        void finished();
+        void updateSource();
         void onFileChanged(const QString&);
     signals:
         void fileNameChanged();

@@ -37,7 +37,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             font.weight: Font.Medium;
-            color: ma.containsMouse ? "#fff" : "#9DA5B4"
+            color: enabled ? ma.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
         }
     }
 

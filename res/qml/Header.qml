@@ -16,15 +16,35 @@ Rectangle {
         color: "#181A1F"
     }
 
-    Lib.Button {
+    Row {
         anchors.left: parent.left;
-        anchors.verticalCenter: parent.verticalCenter;
         anchors.leftMargin: 4;
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
 
-        label.text: "Open File";
-        icon.type: icon.types.fa_folder_open;
+        spacing: 4;
 
-        onClicked: App.compiler.openFile();
+        Lib.Button {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Open File";
+            icon.type: icon.types.fa_folder_open;
+
+            onClicked: App.compiler.openFile();
+        }
+
+        Lib.Button {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Compile";
+            icon.type: icon.types.fa_play_circle;
+            enabled: App.compiler.modified;
+
+            onClicked: {
+                App.compiler.updateSource();
+                App.compiler.compile();
+            }
+        }
     }
 
     Row {

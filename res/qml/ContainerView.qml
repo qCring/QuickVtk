@@ -24,6 +24,7 @@ Item {
             }
 
             previousObject = qmlObject;
+            App.compiler.finished();
         }
         catch (exc) {
             console.log (exc);

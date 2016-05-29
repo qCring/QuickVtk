@@ -33,12 +33,23 @@ namespace quick {
         return this->m_modified;
     }
 
+    auto Compiler::updateSource() -> void {
+        if (this->m_fileName.length()) {
+            this->m_source = Util::IO::ReadTextFromFile(this->m_fileName);
+            emit this->sourceChanged();
+        }
+    }
+
     auto Compiler::getSource() -> QString {
         return this->m_source;
     }
 
     auto Compiler::onFileChanged(const QString&) -> void {
         this->setModified(true);
+    }
+
+    auto Compiler::finished() -> void {
+        this->setModified(false);
     }
 
     auto Compiler::openFile() -> void {
@@ -54,12 +65,8 @@ namespace quick {
             this->m_fileWatcher->addPath(this->m_fileName);
         }
 
-        this->m_source = Util::IO::ReadTextFromFile(this->m_fileName);
-        emit this->sourceChanged();
-
-        if (this->m_source.length() > 0) {
-            emit this->compile();
-        }
+        this->updateSource();
+        emit this->compile();
     }
 
     auto Compiler::getFileName() -> QString {

@@ -45,6 +45,15 @@ Rectangle {
                 App.compiler.compile();
             }
         }
+
+        Lib.CheckBox {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Auto-Compile"
+            checked: App.compiler.autocompile;
+
+            onClicked: App.compiler.autocompile = !App.compiler.autocompile;
+        }
     }
 
     Row {

@@ -11,6 +11,7 @@ namespace quick {
             throw std::runtime_error("instance already existing");
         }
 
+        this->m_autocompile = false;
         this->m_modified = false;
         instance = this;
 
@@ -26,6 +27,11 @@ namespace quick {
         if (this->m_modified != modified) {
             this->m_modified = modified;
             emit this->modifiedChanged();
+
+            if (modified && this->m_autocompile) {
+                this->updateSource();
+                emit this->compile();
+            }
         }
     }
 
@@ -38,6 +44,22 @@ namespace quick {
             this->m_source = Util::IO::ReadTextFromFile(this->m_fileName);
             emit this->sourceChanged();
         }
+    }
+
+    auto Compiler::setAutocompile(bool autocompile) -> void {
+        if (this->m_autocompile != autocompile) {
+            this->m_autocompile = autocompile;
+            emit this->autocompileChanged();
+
+            if (autocompile && this->m_modified) {
+                this->updateSource();
+                emit this->compile();
+            }
+        }
+    }
+
+    auto Compiler::getAutocompile() -> bool {
+        return this->m_autocompile;
     }
 
     auto Compiler::getSource() -> QString {

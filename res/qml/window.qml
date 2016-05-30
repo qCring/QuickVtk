@@ -7,7 +7,7 @@ Rectangle {
 
     Header {
         id: header;
-        
+
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.top: parent.top;
@@ -18,6 +18,12 @@ Rectangle {
         anchors.right: parent.right;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
+    }
+
+    ErrorList {
+        anchors.left: parent.left;
+        anchors.bottom: footer.top;
+        anchors.margins: 4;
     }
 
     Footer {

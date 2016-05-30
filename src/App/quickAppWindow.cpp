@@ -38,11 +38,9 @@ namespace quick {
             AddFontDir(resourceDir + "fonts/roboto/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
-            auto controller = Controller::Create();
-
             this->m_view = new QQuickView();
             this->m_view->setTitle(QGuiApplication::applicationName());
-            this->m_view->engine()->rootContext()->setContextProperty("App", controller);
+            this->m_view->engine()->rootContext()->setContextProperty("App", Controller::instance);
             this->m_view->setSource(QUrl::fromLocalFile(resourceDir + "qml/window.qml"));
             this->m_view->setResizeMode(QQuickView::SizeRootObjectToView);
             this->m_view->showMaximized();

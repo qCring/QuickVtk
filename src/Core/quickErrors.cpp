@@ -4,7 +4,7 @@ namespace quick {
 
     Errors* Errors::instance = nullptr;
 
-    Qml::Register::Controller<Errors> Register;
+    Qml::Register::Controller<Errors> Errors::Register;
 
     Errors::Errors() {
         if (instance) {

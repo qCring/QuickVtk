@@ -27,10 +27,10 @@ Rectangle {
         Lib.Button {
             anchors.verticalCenter: parent.verticalCenter;
 
-            label.text: "Open File";
+            label.text: "Link File";
             icon.type: icon.types.fa_folder_open;
 
-            onClicked: App.compiler.openFile();
+            onClicked: App.compiler.linkFile();
         }
 
         Lib.Button {
@@ -75,7 +75,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             font.pixelSize: 11;
-            text: App.compiler.fileName;
+            text: App.compiler.filePath;
         }
     }
 }

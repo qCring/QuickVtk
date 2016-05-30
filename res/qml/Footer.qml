@@ -19,6 +19,28 @@ Rectangle {
     Row {
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
+        anchors.left: parent.left;
+        anchors.leftMargin: 4;
+
+        spacing: 8;
+
+        Lib.Icon {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            type: App.compiler.failed ? types.fa_exclamation_circle : types.fa_check_circle;
+            color: App.compiler.ready ? App.compiler.failed ? "#ff0000" : "#00ff00" : "#6E7582";
+        }
+
+        Lib.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            text: App.compiler.ready ? App.compiler.failed ? "compilation failed" : "compilation successful" : "no file to compile";
+        }
+    }
+
+    Row {
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
         anchors.right: parent.right;
         anchors.rightMargin: 4;
 

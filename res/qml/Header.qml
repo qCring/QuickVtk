@@ -16,15 +16,44 @@ Rectangle {
         color: "#181A1F"
     }
 
-    Lib.Button {
+    Row {
         anchors.left: parent.left;
-        anchors.verticalCenter: parent.verticalCenter;
         anchors.leftMargin: 4;
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
 
-        label.text: "Open File";
-        icon.type: icon.types.fa_folder_open;
+        spacing: 4;
 
-        onClicked: App.compiler.openFile();
+        Lib.Button {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Link File";
+            icon.type: icon.types.fa_folder_open;
+
+            onClicked: App.compiler.linkFile();
+        }
+
+        Lib.Button {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Compile";
+            icon.type: icon.types.fa_play_circle;
+            enabled: App.compiler.modified;
+
+            onClicked: {
+                App.compiler.updateSource();
+                App.compiler.compile();
+            }
+        }
+
+        Lib.CheckBox {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Auto-Compile"
+            checked: App.compiler.autocompile;
+
+            onClicked: App.compiler.autocompile = !App.compiler.autocompile;
+        }
     }
 
     Row {
@@ -46,7 +75,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             font.pixelSize: 11;
-            text: App.compiler.fileName;
+            text: App.compiler.filePath;
         }
     }
 }

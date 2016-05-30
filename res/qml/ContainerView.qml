@@ -24,9 +24,13 @@ Item {
             }
 
             previousObject = qmlObject;
+            App.compiler.failed = false;
+            App.compiler.finished();
         }
         catch (exc) {
             console.log (exc);
+            App.compiler.failed = true;
+            App.compiler.finished();
         }
     }
 

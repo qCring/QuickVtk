@@ -1,18 +1,13 @@
 import QtQuick 2.5
 
-Rectangle {
+Item {
     id: root;
 
     width: row.width + 24;
     height: label.height + 6;
 
     property alias label: label;
-    property alias icon: icon;
-
-    color: ma.pressed ? "#0289FF" : ma.containsMouse ? "#363C46" : "#333842"
-    border.color: "#181A1F"
-
-    radius: 2;
+    property bool checked: false;
 
     signal clicked;
 
@@ -23,12 +18,23 @@ Rectangle {
 
         spacing: 4;
 
-        Icon {
-            id: icon;
-
+        Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
-            color: label.color;
+            width: 16;
+            height: 16;
+
+            color: ma.pressed ? "#0289FF" : ma.containsMouse ? "#363C46" : "#333842"
+            border.color: "#181A1F";
+            radius: 2;
+
+            Icon {
+                anchors.centerIn: parent;
+
+                color: label.color;
+                visible: root.checked;
+                type: types.fa_check;
+            }
         }
 
         Label {

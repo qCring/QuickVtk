@@ -3,6 +3,36 @@ QuickVtk
 
 A **[VTK](http://www.vtk.org)** prototyping application based on **[QtQuick](http://qt-project.org)**/**[QML](http://doc.qt.io/qt-5/qtqml-index.html)**
 
+
+###...More to come... 
+until then there's a screenshot of the work-in-progress application at least!
+
+<center>
+	<img src="doc/img/screenshot.png" width="100%" />
+</center>
+
+Interact with **[VTK](http://www.vtk.org)** from **[QML](http://doc.qt.io/qt-5/qtqml-index.html)**. The code behind the above example:
+
+	import QtQuick 2.5
+	import Vtk 1.0
+
+	Item {
+		anchors.fill: parent;
+		
+		Viewer { 
+			anchors.fill: parent;
+			mouseEnabled: true;
+			
+			Actor {
+				PolyDataMapper {
+					OBJReader {
+						fileName: "coffee.obj"
+					}
+				}
+			}
+		}
+	}
+
 Contact Me
 ----
 

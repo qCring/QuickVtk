@@ -42,6 +42,11 @@ namespace quick {
 
                 return text;
             }
+
+            auto FileExists(const QString& filePath) -> bool {
+                QFile file(filePath);
+                return file.exists();
+            }
         }
     }
 }

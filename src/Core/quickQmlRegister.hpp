@@ -12,6 +12,13 @@ namespace quick {
                     T::Create();
                 }
             };
+
+            template <class T>
+            struct Type {
+                Type() {
+                    qmlRegisterType<T>();
+                }
+            };
         }
     }
 }

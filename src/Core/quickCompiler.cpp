@@ -4,7 +4,7 @@
 namespace quick {
     Compiler* Compiler::instance = nullptr;
 
-    Qml::Register::Controller<Compiler> Compiler::Register = Qml::Register::Controller<Compiler>();
+    Qml::Register::Controller<Compiler> Compiler::Register;
 
     Compiler::Compiler() {
         if (instance) {

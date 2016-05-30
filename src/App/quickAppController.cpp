@@ -3,25 +3,26 @@
 #include "meta_quickvtk.hpp"
 
 #include "quickCompiler.hpp"
+#include "quickErrors.hpp"
 
 namespace quick {
     namespace App {
 
         Controller* Controller::instance = nullptr;
 
+        Qml::Register::Controller<Controller> Controller::Register;
+
         Controller::Controller() {
             if (instance) {
                 throw std::runtime_error("instance already existing");
             }
-
-            instance = this;
         }
 
         auto Controller::init() -> void {
         }
 
-        auto Controller::Create() -> Controller* {
-            return new Controller();
+        auto Controller::Create() -> void {
+            instance = new Controller();
         }
 
         auto Controller::getVersion() -> QString {
@@ -30,6 +31,10 @@ namespace quick {
 
         auto Controller::getCompiler() -> Compiler* {
             return Compiler::instance;
+        }
+
+        auto Controller::getErrors() -> Errors* {
+            return Errors::instance;
         }
 
         auto Controller::isDebugBuild() -> bool {

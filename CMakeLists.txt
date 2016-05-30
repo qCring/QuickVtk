@@ -87,6 +87,14 @@ include(${VTK_USE_FILE})
 
 # sources
 AddSources("${SOURCE_DIR}/Util" "Util" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Viewer" "Vtk\\Viewer" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Prop" "Vtk\\Prop" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Prop/Prop3D" "Vtk\\Prop\\Prop3D" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Mapper" "Vtk\\Mapper" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D" "Vtk\\Mapper\\AbstractMapper3D" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D/Mapper" "Vtk\\Mapper\\AbstractMapper3D\\Mapper" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Algorithm" "Vtk\\Algorithm" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Core" "Core" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
 

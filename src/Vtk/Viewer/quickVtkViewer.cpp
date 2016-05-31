@@ -34,6 +34,8 @@ namespace quick {
         Viewer::Viewer() {
             this->m_renderer = 0;
             m_win = FboOffscreenWindow::New();
+
+            this->setMirrorVertically(true);
         }
 
         auto Viewer::init() -> void {
@@ -57,22 +59,7 @@ namespace quick {
 
             this->update();
         }
-
-        auto Viewer::updatePaintNode(QSGNode* node, UpdatePaintNodeData* dataNode) -> QSGNode* {
-            if (!node) {
-                node = QQuickFramebufferObject::updatePaintNode(node, dataNode);
-                auto n = static_cast<QSGSimpleTextureNode*>(node);
-
-                if (n) {
-                    n->setTextureCoordinatesTransform(QSGSimpleTextureNode::MirrorVertically);
-                }
-
-                return node;
-            }
-
-            return QQuickFramebufferObject::updatePaintNode(node, dataNode);
-        }
-
+        
         auto Viewer::update() -> void {
             if (!this->m_initialized) {
                 return;

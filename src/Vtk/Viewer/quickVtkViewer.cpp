@@ -6,24 +6,12 @@
 #include <QOpenGLFunctions>
 #include <QQuickFramebufferObject>
 #include <QOpenGLFramebufferObject>
-#include <QSGTransformNode>
-#include <QSGSimpleTextureNode>
 
 #include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkRendererCollection.h>
 #include <vtkObjectFactory.h>
-#include <vtkRendererCollection.h>
-#include <vtkCamera.h>
-#include <vtkActor.h>
-#include <vtkConeSource.h>
-#include <vtkPolyDataMapper.h>
-#include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkRenderer.h>
 #include <vtkSmartPointer.h>
-#include <vtkRendererCollection.h>
-#include <vtkCamera.h>
-#include <vtkProperty.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkCommand.h>
+#include <vtkRenderer.h>
 
 namespace quick {
 

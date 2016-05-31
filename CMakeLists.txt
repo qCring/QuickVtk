@@ -75,6 +75,7 @@ endif()
 
 # Qt
 set(QUICKVTK_QT_VERSION "5.6.0" CACHE STRING "Qt Version")
+set(QUICKVTK_VTK_VERSION "7.0.0" CACHE STRING "VTK Version")
 set(QUICKVTK_QT_MODUlES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 set(QUICKVTK_INTERNAL_LIBRARY_TARGETS)
 
@@ -82,7 +83,7 @@ find_package(Qt5 ${QUICKVTK_QT_VERSION} EXACT CONFIG REQUIRED ${QUICKVTK_QT_MODU
 add_definitions(${QT_DEFINITIONS})
 
 # Vtk
-find_package(VTK 7.1.0 EXACT CONFIG REQUIRED)
+find_package(VTK ${QUICKVTK_VTK_VERSION} EXACT CONFIG REQUIRED)
 include(${VTK_USE_FILE})
 
 # sources

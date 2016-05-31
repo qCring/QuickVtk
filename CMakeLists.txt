@@ -76,10 +76,10 @@ endif()
 # Qt
 set(QUICKVTK_QT_VERSION "5.6.0" CACHE STRING "Qt Version")
 set(QUICKVTK_VTK_VERSION "7.0.0" CACHE STRING "VTK Version")
-set(QUICKVTK_QT_MODUlES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
+set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 set(QUICKVTK_INTERNAL_LIBRARY_TARGETS)
 
-find_package(Qt5 ${QUICKVTK_QT_VERSION} EXACT CONFIG REQUIRED ${QUICKVTK_QT_MODUlES})
+find_package(Qt5 ${QUICKVTK_QT_VERSION} EXACT CONFIG REQUIRED ${QUICKVTK_QT_MODULES})
 add_definitions(${QT_DEFINITIONS})
 
 # Vtk
@@ -112,6 +112,9 @@ if(APPLE)
 
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${list_app_src} ${MACOSX_BUNDLE_ICON})
 endif()
+if(WIN32)
+    add_executable(${PROJECT_NAME} ${list_app_src})
+endif()
 
 # application
 # ******************************************************************************
@@ -132,6 +135,9 @@ if(APPLE)
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${MACOSX_BUNDLE_RESOURCES})
     execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${MACOSX_BUNDLE_ICON} ${MACOSX_BUNDLE_RESOURCES})
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${ROOT_DIR}/res" ${BUILD_DIR}/${PROJECT_NAME}.app/Contents/Resources)
+endif()
+if(WIN32)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${ROOT_DIR}/res" ${BUILD_DIR}/Resources)
 endif()
 
 # link

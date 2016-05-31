@@ -52,7 +52,6 @@ namespace quick {
         protected:
             mutable FboRenderer* m_fboRenderer;
             vtkGenericOpenGLRenderWindow *m_win;
-            auto updatePaintNode(QSGNode*, UpdatePaintNodeData*) -> QSGNode* override;
             auto mousePressEvent(QMouseEvent*) -> void override;
             auto mouseReleaseEvent(QMouseEvent*) -> void override;
             auto mouseMoveEvent(QMouseEvent*) -> void override;

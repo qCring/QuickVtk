@@ -6,24 +6,12 @@
 #include <QOpenGLFunctions>
 #include <QQuickFramebufferObject>
 #include <QOpenGLFramebufferObject>
-#include <QSGTransformNode>
-#include <QSGSimpleTextureNode>
 
 #include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkRendererCollection.h>
 #include <vtkObjectFactory.h>
-#include <vtkRendererCollection.h>
-#include <vtkCamera.h>
-#include <vtkActor.h>
-#include <vtkConeSource.h>
-#include <vtkPolyDataMapper.h>
-#include <vtkGenericOpenGLRenderWindow.h>
-#include <vtkRenderer.h>
 #include <vtkSmartPointer.h>
-#include <vtkRendererCollection.h>
-#include <vtkCamera.h>
-#include <vtkProperty.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkCommand.h>
+#include <vtkRenderer.h>
 
 namespace quick {
 
@@ -34,6 +22,8 @@ namespace quick {
         Viewer::Viewer() {
             this->m_renderer = 0;
             m_win = FboOffscreenWindow::New();
+
+            this->setMirrorVertically(true);
         }
 
         auto Viewer::init() -> void {
@@ -57,22 +47,7 @@ namespace quick {
 
             this->update();
         }
-
-        auto Viewer::updatePaintNode(QSGNode* node, UpdatePaintNodeData* dataNode) -> QSGNode* {
-            if (!node) {
-                node = QQuickFramebufferObject::updatePaintNode(node, dataNode);
-                auto n = static_cast<QSGSimpleTextureNode*>(node);
-
-                if (n) {
-                    n->setTextureCoordinatesTransform(QSGSimpleTextureNode::MirrorVertically);
-                }
-
-                return node;
-            }
-
-            return QQuickFramebufferObject::updatePaintNode(node, dataNode);
-        }
-
+        
         auto Viewer::update() -> void {
             if (!this->m_initialized) {
                 return;

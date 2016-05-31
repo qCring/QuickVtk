@@ -2,6 +2,7 @@
 
 #include "quickUtilIO.hpp"
 #include "meta_quickvtk.hpp"
+#include "quickQmlRegister.hpp"
 #include "quickAppController.hpp"
 
 #include <QFontDatabase>
@@ -30,8 +31,13 @@ namespace quick {
             QApplication::setApplicationName(Meta::appName);
             QApplication::setApplicationVersion(Meta::versionString);
 
+            Qml::Register::Init();
+
             auto path = QDir(QGuiApplication::applicationDirPath());
+
+#ifndef _MSC_VER
             path.cdUp();
+#endif
 
             resourceDir = path.absolutePath() + "/Resources/";
 

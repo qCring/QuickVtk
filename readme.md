@@ -1,17 +1,16 @@
 QuickVtk
 ===
-
-A **[VTK](http://www.vtk.org)** prototyping application based on **[QtQuick](http://qt-project.org)**/**[QML](http://doc.qt.io/qt-5/qtqml-index.html)**
-
+A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with support for **[VTK](http://www.vtk.org)**. 
 
 ###...More to come... 
 until then there's a screenshot of the work-in-progress application at least!
 
 <center>
-	<img src="doc/img/screenshot.png" width="100%" />
+	<img src="doc/img/screenshot.png" width="80%" />
 </center>
 
 Interact with **[VTK](http://www.vtk.org)** from **[QML](http://doc.qt.io/qt-5/qtqml-index.html)**. The code behind the above example:
+
 
 	import QtQuick 2.5
 	import Vtk 1.0
@@ -32,6 +31,20 @@ Interact with **[VTK](http://www.vtk.org)** from **[QML](http://doc.qt.io/qt-5/q
 			}
 		}
 	}
+
+Build QuickVtk
+----
+QuickVtk can be built for Mac OS X and Windows via **[CMake](https://cmake.org)**
+
+1. Download and install **[Qt](https://www.qt.io/download/)**
+2. Get the **[VTK sources](https://github.com/Kitware/VTK)**
+3. Build VTK via CMake
+4. Build QuickVtk via CMake
+
+**Important Notes:**
+
+- When building VTK, make sure to use  **OpenGL** as **VTK\_RENDERING\_BACKEND** since things seem to have changed with **OpenGL2**
+- On windows, the renderWindowInteractor has an issue with the offscreen rendering setup and the application crashes :(
 
 Contact Me
 ----

@@ -9,7 +9,7 @@ Rectangle {
     property alias label: label;
     property alias icon: icon;
 
-    color: ma.pressed ? "#0289FF" : ma.containsMouse ? "#363C46" : "#333842"
+    color: ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
     border.color: "#181A1F"
 
     radius: 2;

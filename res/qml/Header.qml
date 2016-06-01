@@ -3,7 +3,9 @@ import QtQuick 2.5
 import "./lib" as Lib
 
 Rectangle {
-    height: 32;
+    height: visible ? 32 : 0;
+    visible: !App.expanded;
+
     color: "#21252B"
 
     Rectangle {
@@ -76,6 +78,25 @@ Rectangle {
 
             font.pixelSize: 11;
             text: App.compiler.filePath;
+        }
+
+        Lib.CheckBox {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "Symbols"
+            checked: App.symbols.visible;
+
+            onClicked: App.symbols.visible = !App.symbols.visible;
+        }
+
+        Lib.Button {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            icon.type: icon.types.fa_expand;
+            onClicked: App.expanded = true;
+
+            color: "#00000000"
+            border.color: "#00000000"
         }
     }
 }

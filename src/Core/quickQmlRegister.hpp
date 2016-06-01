@@ -20,14 +20,14 @@ namespace quick {
             template <class T>
             struct Controller {
                 Controller() {
-#ifdef _MSC_VER
-                    Queue::GetList().append([]() {
+                    auto initializer = [](){
                         qmlRegisterType<T>();
                         T::Create();
-                    });
+                    };
+#ifdef _MSC_VER
+                    Queue::GetList().append(initializer);
 #else
-                    qmlRegisterType<T>();
-                    T::Create();
+                    initializer();
 #endif
                 }
             };
@@ -35,29 +35,52 @@ namespace quick {
             template <class T>
             struct Type {
                 Type() {
-                    qmlRegisterType<T>();
+                    auto initializer = []() {
+                        qmlRegisterType<T>();
+                    };
+#ifdef _MSC_VER
+                    Queue::GetList().append(initializer);
+#else
+                    initializer();
+#endif
                 }
             };
 
             template <class T>
+            struct VtkAbstractClass {
+                VtkAbstractClass() {
+                    auto initializer = []() {
+                        QMetaObject metaObject = T::staticMetaObject;
+                        auto name = QString(metaObject.className());
+                        auto groupName = name.section("::", 1, 1);
+                        auto className = name.section("::", 2, 2);
+
+                        qmlRegisterUncreatableType<T>(groupName.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "abstract class \'" + className + "\' can not be instantiated.");
+                    };
+#ifdef _MSC_VER
+                    Queue::GetList().append(initializer);
+#else
+                    initializer();
+#endif
+                }
+            };
+
+
+            template <class T>
             struct VtkClass {
                 VtkClass() {
-#ifdef _MSC_VER
-                    Queue::GetList().append([]() {
+                    auto initializer = []() {
                         QMetaObject metaObject = T::staticMetaObject;
                         auto name = QString(metaObject.className());
                         auto groupName = name.section("::", 1, 1);
                         auto className = name.section("::", 2, 2);
 
                         qmlRegisterType<T>(groupName.toStdString().c_str(), 1, 0, className.toStdString().c_str());
-                    });
+                    };
+#ifdef _MSC_VER
+                    Queue::GetList().append(initializer);
 #else
-                    QMetaObject metaObject = T::staticMetaObject;
-                    auto name = QString(metaObject.className());
-                    auto groupName = name.section("::", 1, 1);
-                    auto className = name.section("::", 2, 2);
-                    
-                    qmlRegisterType<T>(groupName.toStdString().c_str(), 1, 0, className.toStdString().c_str());
+                    initializer();
 #endif
                 }
             };

@@ -14,12 +14,15 @@ namespace quick {
             m_fboOffscreenWindow->Register(NULL);
             m_fboOffscreenWindow->QtParentRenderer = this;
 
+            //todo: get the interactor working for windows. this at least prevents the application from crashing...
+#ifndef _MSC_VER
             m_interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
             m_interactorStyle = vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
 
             m_interactor->SetRenderWindow(offscreenWindow);
             m_interactor->Initialize();
             m_interactor->SetInteractorStyle(m_interactorStyle);
+#endif
         }
 
         auto FboRenderer::synchronize(QQuickFramebufferObject* fbo) -> void {

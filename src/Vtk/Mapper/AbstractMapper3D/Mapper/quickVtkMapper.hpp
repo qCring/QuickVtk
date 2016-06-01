@@ -24,7 +24,7 @@ namespace quick {
                 CellFieldData = VTK_SCALAR_MODE_USE_CELL_FIELD_DATA
             };
         private:
-            static Qml::Register::VtkClass<Mapper> Register;
+            static Qml::Register::VtkAbstractClass<Mapper> Register;
             vtkSmartPointer<vtkMapper> m_vtkMapper;
             ScalarMode m_scalarMode;
         public:

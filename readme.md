@@ -25,7 +25,7 @@ Here for example the **vtkShrinkPolyData**`s **shrinkFactor** parameter is contr
 </center>
 
 ###Really Simple
-All the information about types, attributes and their relationships becomes clear at first sight. Plus there's really not much of any setup overhead which keeps the code size at a minimum. The full code for the above example looks like this:
+All the information about types, attributes and their relationship becomes clear at first sight. Plus there's really not much of any setup overhead which keeps the code size at a minimum. The full code for the above example looks like this:
 
 	import QtQuick 2.5
 	import QtQuick.Controls 1.4

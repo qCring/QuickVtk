@@ -11,6 +11,11 @@
 namespace quick {
     namespace Qml {
         namespace Register {
+            namespace MakeSymbol {
+                auto Class(QMetaObject) -> void;
+                auto AbstractClass(QMetaObject) -> void;
+            }
+
             auto Init() -> void;
 #ifdef _MSC_VER
             struct Queue {
@@ -56,6 +61,8 @@ namespace quick {
                         auto className = name.section("::", 2, 2);
 
                         qmlRegisterUncreatableType<T>(groupName.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "abstract class \'" + className + "\' can not be instantiated.");
+
+                        MakeSymbol::AbstractClass(metaObject);
                     };
 #ifdef _MSC_VER
                     Queue::GetList().append(initializer);
@@ -76,6 +83,8 @@ namespace quick {
                         auto className = name.section("::", 2, 2);
 
                         qmlRegisterType<T>(groupName.toStdString().c_str(), 1, 0, className.toStdString().c_str());
+
+                        MakeSymbol::Class(metaObject);
                     };
 #ifdef _MSC_VER
                     Queue::GetList().append(initializer);

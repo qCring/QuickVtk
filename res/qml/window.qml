@@ -15,9 +15,19 @@ Rectangle {
 
     ContainerView {
         anchors.left: parent.left;
+        anchors.right: outline.left;
+        anchors.top: header.bottom;
+        anchors.bottom: footer.top;
+    }
+
+    Outline {
+        id: outline;
+
         anchors.right: parent.right;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
+
+        width: App.symbols.visible ? 220 : 0;
     }
 
     ErrorList {

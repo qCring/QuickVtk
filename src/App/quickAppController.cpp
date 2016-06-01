@@ -4,6 +4,7 @@
 
 #include "quickCompiler.hpp"
 #include "quickErrors.hpp"
+#include "quickSymbols.hpp"
 
 namespace quick {
     namespace App {
@@ -18,7 +19,24 @@ namespace quick {
             }
         }
 
-        auto Controller::init() -> void {
+        auto Controller::setExpanded(bool expanded) -> void {
+            if (this->m_expanded != expanded) {
+                this->m_expanded = expanded;
+                emit this->expandedChanged();
+
+                auto symbols = Symbols::GetInstance();
+
+                if (expanded) {
+                    this->m_symbolsWereVisible = symbols->isVisible();
+                    symbols->setVisible(false);
+                } else {
+                    symbols->setVisible(this->m_symbolsWereVisible);
+                }
+            }
+        }
+
+        auto Controller::isExpanded() -> bool {
+            return this->m_expanded;
         }
 
         auto Controller::Create() -> void {
@@ -35,6 +53,10 @@ namespace quick {
 
         auto Controller::getErrors() -> Errors* {
             return Errors::instance;
+        }
+
+        auto Controller::getSymbols() -> Symbols* {
+            return Symbols::GetInstance();
         }
 
         auto Controller::isDebugBuild() -> bool {

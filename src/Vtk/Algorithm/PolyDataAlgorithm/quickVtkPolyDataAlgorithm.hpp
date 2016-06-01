@@ -11,7 +11,7 @@ namespace quick {
         class PolyDataAlgorithm : public Algorithm {
             Q_OBJECT
         private:
-            static Qml::Register::VtkClass<PolyDataAlgorithm> Register;
+            static Qml::Register::VtkAbstractClass<PolyDataAlgorithm> Register;
             vtkSmartPointer<vtkPolyDataAlgorithm> m_vtkPolyDataAlgorithm;
         public:
             PolyDataAlgorithm();

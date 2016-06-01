@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<PolyDataAlgorithm> PolyDataAlgorithm::Register;
+        Qml::Register::VtkAbstractClass<PolyDataAlgorithm> PolyDataAlgorithm::Register;
 
         PolyDataAlgorithm::PolyDataAlgorithm() : Algorithm(this) {
             this->m_vtkPolyDataAlgorithm    = 0;

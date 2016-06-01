@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<AbstractMapper3D> AbstractMapper3D::Register;
+        Qml::Register::VtkAbstractClass<AbstractMapper3D> AbstractMapper3D::Register;
 
         AbstractMapper3D::AbstractMapper3D() : AbstractMapper(this) {
         }

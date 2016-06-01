@@ -6,7 +6,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<Algorithm> Algorithm::Register;
+        Qml::Register::VtkAbstractClass<Algorithm> Algorithm::Register;
 
         Algorithm::Algorithm() {
             this->m_prop = 0;

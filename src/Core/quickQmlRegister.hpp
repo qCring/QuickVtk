@@ -12,7 +12,7 @@ namespace quick {
     namespace Qml {
         namespace Register {
             namespace MakeSymbol {
-                auto Enum(const QString&, const QString&) -> void;
+                auto Enum(QMetaEnum) -> void;
                 auto Class(QMetaObject) -> void;
                 auto AbstractClass(QMetaObject) -> void;
             }
@@ -64,7 +64,7 @@ namespace quick {
                         qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "abstract class \'" + className + "\' can not be instantiated.");
 
                         for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                            MakeSymbol::Enum(prefix, metaObject.enumerator(i).name());
+                            MakeSymbol::Enum(metaObject.enumerator(i));
                         }
 
                         MakeSymbol::AbstractClass(metaObject);
@@ -89,7 +89,7 @@ namespace quick {
                         qmlRegisterType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str());
 
                         for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                            MakeSymbol::Enum(prefix, metaObject.enumerator(i).name());
+                            MakeSymbol::Enum(metaObject.enumerator(i));
                         }
 
                         MakeSymbol::Class(metaObject);

@@ -10,7 +10,9 @@ namespace quick {
         return EnumBlacklist;
     }
 
-    auto Symbol::CreateEnumSymbol(const QString& prefix, const QString& name) -> Symbol* {
+    auto Symbol::CreateEnumSymbol(QMetaEnum metaEnum) -> Symbol* {
+        auto prefix = QString(metaEnum.scope()).section("::", 1, 1);
+        auto name = QString(metaEnum.name());
 
         if (GetEnumBlacklist().contains(name)) {
             return nullptr;

@@ -21,13 +21,31 @@ namespace quick {
         return this->m_visible;
     }
 
+    auto Symbols::setFilter(const QString& filter) -> void {
+        this->m_filter = filter;
+        emit this->filterChanged();
+
+        this->beginResetModel();
+        this->m_symbols.clear();
+
+        for (auto symbol : this->m_allSymbols) {
+            if (symbol->matches(filter)) {
+                this->m_symbols.append(symbol);
+            }
+        }
+
+        this->endResetModel();
+    }
+
+    auto Symbols::getFilter() -> QString {
+        return this->m_filter;
+    }
+
     auto Symbols::Add(Symbol* symbol) -> void {
         auto instance = GetInstance();
-        auto index = instance->m_symbols.count();
 
-        instance->beginInsertRows(QModelIndex(), index, index);
         instance->m_symbols.append(symbol);
-        instance->endInsertRows();
+        instance->m_allSymbols.append(symbol);
     }
 
     auto Symbols::clear() -> void {

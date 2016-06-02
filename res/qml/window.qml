@@ -1,16 +1,18 @@
-import QtQuick 2.5
+import QtQuick 2.6
 
 import "./lib" as Lib
 
 Rectangle {
+    id: root;
+
     color: "#282C34"
 
-    Header {
-        id: header;
+    MouseArea {
+        anchors.fill: parent;
 
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.top: parent.top;
+        onClicked: {
+            root.forceActiveFocus();
+        }
     }
 
     ContainerView {
@@ -18,6 +20,14 @@ Rectangle {
         anchors.right: outline.left;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
+    }
+
+    Header {
+        id: header;
+
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: parent.top;
     }
 
     Outline {

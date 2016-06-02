@@ -1,4 +1,5 @@
-import QtQuick 2.5
+import QtQuick 2.6
+
 import "./lib" as Lib
 
 Item {

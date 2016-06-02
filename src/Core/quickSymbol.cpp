@@ -37,6 +37,10 @@ namespace quick {
         return symbol;
     }
 
+    auto Symbol::matches(const QString& filter) -> bool {
+        return this->m_name.contains(filter, Qt::CaseInsensitive);
+    }
+
     auto Symbol::getName() -> QString {
         return this->m_name;
     }

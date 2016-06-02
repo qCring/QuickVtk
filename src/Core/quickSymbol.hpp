@@ -34,6 +34,7 @@ namespace quick {
         auto getType() -> QString;
         auto getName() -> QString;
         auto getPrefix() -> QString;
+        auto matches(const QString&) -> bool;
         auto rowCount(const QModelIndex& = QModelIndex()) const -> int;
         auto data(const QModelIndex&, int) const -> QVariant;
         auto roleNames() const -> QHash<int, QByteArray>;

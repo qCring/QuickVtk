@@ -28,6 +28,8 @@ namespace quick {
         QList<Group*> m_groups;
     public:
         static Qml::Register::Type<Symbol> Register;
+        static auto GetEnumBlacklist() -> QStringList&;
+        static auto CreateEnumSymbol(const QString&, const QString&) -> Symbol*;
         static auto CreateClassSymbol(QMetaObject) -> Symbol*;
         static auto CreateAbstractClassSymbol(QMetaObject) -> Symbol*;
         auto getColor() -> QColor;

@@ -42,6 +42,10 @@ namespace quick {
     }
 
     auto Symbols::Add(Symbol* symbol) -> void {
+        if (!symbol) {
+            return;
+        }
+        
         auto instance = GetInstance();
 
         instance->m_symbols.append(symbol);

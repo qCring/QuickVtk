@@ -5,6 +5,35 @@ namespace quick {
 
     Qml::Register::Type<Symbol> Symbol::Register;
 
+    auto Symbol::GetEnumBlacklist() -> QStringList& {
+        static QStringList EnumBlacklist { "TransformOrigin" };
+        return EnumBlacklist;
+    }
+
+    auto Symbol::CreateEnumSymbol(QMetaEnum metaEnum) -> Symbol* {
+        auto prefix = QString(metaEnum.scope()).section("::", 1, 1);
+        auto name = QString(metaEnum.name());
+
+        if (GetEnumBlacklist().contains(name)) {
+            return nullptr;
+        }
+
+        auto symbol = new Symbol();
+
+        symbol->m_color = "#B75711";
+        symbol->m_type = "enum";
+        symbol->m_prefix = prefix;
+        symbol->m_name = name;
+
+        QChar character = symbol->m_prefix.at(0);
+        symbol->m_prefix = symbol->m_prefix.remove(0,1);
+        symbol->m_prefix.push_front(character.toLower());
+
+        GetEnumBlacklist().append(name);
+
+        return symbol;
+    }
+
     auto Symbol::CreateClassSymbol(QMetaObject metaObject) -> Symbol* {
         auto symbol = new Symbol();
 

@@ -10,6 +10,10 @@ namespace quick {
         namespace Register {
 
             namespace MakeSymbol {
+                auto Enum(QMetaEnum metaEnum) -> void {
+                    Symbols::Add(Symbol::CreateEnumSymbol(metaEnum));
+                }
+
                 auto Class(QMetaObject metaObject) -> void {
                     Symbols::Add(Symbol::CreateClassSymbol(metaObject));
                 }

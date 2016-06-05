@@ -30,7 +30,6 @@ namespace quick {
         public:
             static Qml::Register::Type<List> Register;
             static auto GetInstance() -> List*;
-            static auto GetEnums() -> QStringList&;
             auto selectItem(Symbol*) -> void;
             auto setVisible(bool) -> void;
             auto isVisible() -> bool;

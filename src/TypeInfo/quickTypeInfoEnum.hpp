@@ -12,7 +12,7 @@ namespace quick {
 
         class Enum : public Symbol {
             Q_OBJECT
-            Q_PROPERTY(QQmlListProperty<quick::TypeInfo::EnumItem> enumItems READ getEnumItemList CONSTANT);
+            Q_PROPERTY(QQmlListProperty<quick::TypeInfo::EnumItem> enumerations READ getEnumItemList CONSTANT);
         private:
             QList<EnumItem*> m_enumItems;
         private:

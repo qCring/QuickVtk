@@ -30,6 +30,8 @@ namespace quick {
             QString m_type;
             QString m_name;
             QString m_prefix;
+        private:
+            static auto GetEnums() -> QStringList&;
         public:
             static Qml::Register::Type<Symbol> Register;
             static auto MakeEnum(QMetaEnum) -> void;

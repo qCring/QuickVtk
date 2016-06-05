@@ -1,11 +1,12 @@
 import QtQuick 2.6
 
-import "./lib" as Lib
+import "./../lib" as Lib
 
 Rectangle {
 
-    visible: App.symbols.visible;
+    visible: App.typeList.visible;
 
+    width: visible ? 220 : 0;
     clip: true;
     color: "#21252B"
 
@@ -38,7 +39,7 @@ Rectangle {
             anchors.bottom: parent.bottom;
             anchors.margins: 4;
 
-            from: App.symbols;
+            from: App.typeList;
             bind: "filter";
 
             immediate: true;
@@ -64,8 +65,8 @@ Rectangle {
         boundsBehavior: Flickable.StopAtBounds;
         clip: true;
 
-        model: App.symbols;
-        delegate: SymbolView {
+        model: App.typeList;
+        delegate: Symbol {
             symbol: model.symbol;
         }
     }

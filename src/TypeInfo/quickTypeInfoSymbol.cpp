@@ -28,6 +28,11 @@ namespace quick {
 
         Qml::Register::Type<Symbol> Symbol::Register;
 
+        auto Symbol::GetEnums() -> QStringList& {
+            static QStringList Enums { "TransformOrigin" };
+            return Enums;
+        }
+
         auto Symbol::setSelected(bool selected) -> void {
             if (this->m_selected != selected) {
                 this->m_selected = selected;
@@ -36,16 +41,24 @@ namespace quick {
         }
 
         auto Symbol::MakeEnum(QMetaEnum metaEnum) -> void {
+            auto name = metaEnum.name();
+
+            if (GetEnums().contains(name)) {
+                return;
+            }
+
             auto symbol = new Enum();
 
             symbol->m_prefix = Get::EnumPrefix(metaEnum);
-            symbol->m_name = Get::EnumName(metaEnum);
+            symbol->m_name = name;
             symbol->m_type = "Enum";
             symbol->m_color = "#B75711";
 
             for (auto i = 0; i < metaEnum.keyCount(); ++i) {
                 symbol->add(new EnumItem(metaEnum.key(i), metaEnum.value(i)));
             }
+
+            GetEnums().append(name);
 
             List::Add(symbol);
         }

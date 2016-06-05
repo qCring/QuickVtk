@@ -60,9 +60,9 @@ Column {
     }
 
     Repeater {
-        model: symbol.selected ? symbol.enumItems : 0;
-        delegate: EnumItem {
-            enumItem: model;
+        model: symbol.selected ? symbol.enumerations : 0;
+        delegate: Enumeration {
+            item: model;
         }
     }
 

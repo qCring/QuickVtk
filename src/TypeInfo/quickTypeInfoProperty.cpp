@@ -15,14 +15,16 @@ namespace quick {
                 return nullptr;
             }
 
+            auto sequence = false;
             auto type = QString(metaProperty.typeName()).remove("*").remove("quick::").replace("::", ".");
 
             if (type.contains("List")) {
+                sequence = true;
                 if (auto bracketIndex = type.lastIndexOf("<")) {
-                    type.remove(0, bracketIndex);
-                    type.push_front("list ");
+                    type.remove(0, bracketIndex + 1);
+                    type = type.remove("<").remove(">");
                 } else if (type.contains("string")) {
-                    type = "list <string>";
+                    type = "string";
                 }
             }
 
@@ -36,8 +38,9 @@ namespace quick {
 
             property->m_type = type;
             property->m_name = name;
+            property->m_sequence = sequence;
             property->m_readable = metaProperty.isReadable();
-            property->m_writeable = metaProperty.isWritable();
+            property->m_writable = metaProperty.isWritable();
 
             return property;
         }
@@ -50,8 +53,12 @@ namespace quick {
             return this->m_name;
         }
 
-        auto Property::isWriteable() -> bool {
-            return this->m_writeable;
+        auto Property::isSequence() -> bool {
+            return this->m_sequence;
+        }
+
+        auto Property::isWritable() -> bool {
+            return this->m_writable;
         }
 
         auto Property::isReadable() -> bool {

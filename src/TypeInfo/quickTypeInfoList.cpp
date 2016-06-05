@@ -31,11 +31,6 @@ namespace quick {
             }
         }
 
-        auto List::GetEnums() -> QStringList& {
-            static QStringList Enums { "TransformOrigin" };
-            return Enums;
-        }
-
         auto List::isVisible() -> bool {
             return this->m_visible;
         }

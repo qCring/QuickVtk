@@ -8,7 +8,7 @@ namespace quick {
 
     namespace TypeInfo {
 
-        class Item;
+        class Symbol;
 
         class List : public QAbstractListModel {
             Q_OBJECT
@@ -16,24 +16,22 @@ namespace quick {
             Q_PROPERTY(QString filter READ getFilter WRITE setFilter NOTIFY filterChanged);
         public:
             enum Roles {
-                ItemRole = Qt::UserRole + 1
+                SymbolRole = Qt::UserRole + 1
             };
         private:
-            Item* m_selectedItem = nullptr;
+            friend class Symbol;
+            Symbol* m_selectedSymbol = nullptr;
             bool m_visible = false;
             QString m_filter;
-            QList<Item*> m_items;
-            QList<Item*> m_allItems;
+            QList<Symbol*> m_symbols;
+            QList<Symbol*> m_allSymbols;
         private:
-            static auto Add(Item*) -> void;
+            static auto Add(Symbol*) -> void;
         public:
             static Qml::Register::Type<List> Register;
             static auto GetInstance() -> List*;
-            static auto AddEnum(QMetaEnum) -> void;
-            static auto AddClass(QMetaObject) -> void;
-            static auto AddAbstract(QMetaObject) -> void;
             static auto GetEnums() -> QStringList&;
-            auto selectItem(Item*) -> void;
+            auto selectItem(Symbol*) -> void;
             auto setVisible(bool) -> void;
             auto isVisible() -> bool;
             auto setFilter(const QString&) -> void;
@@ -41,7 +39,6 @@ namespace quick {
             auto rowCount(const QModelIndex& = QModelIndex()) const -> int;
             auto data(const QModelIndex&, int) const -> QVariant;
             auto roleNames() const -> QHash<int, QByteArray>;
-            void clear();
         signals:
             void visibleChanged();
             void filterChanged();

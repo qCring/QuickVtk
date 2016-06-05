@@ -6,6 +6,7 @@ Rectangle {
 
     visible: App.typeList.visible;
 
+    width: visible ? 220 : 0;
     clip: true;
     color: "#21252B"
 
@@ -65,8 +66,8 @@ Rectangle {
         clip: true;
 
         model: App.typeList;
-        delegate: ListItem {
-            item: model.item;
+        delegate: Symbol {
+            symbol: model.symbol;
         }
     }
 

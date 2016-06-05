@@ -1,5 +1,5 @@
 #include "quickTypeInfoList.hpp"
-#include "quickTypeInfoItem.hpp"
+#include "quickTypeInfoSymbol.hpp"
 
 namespace quick {
 
@@ -12,16 +12,16 @@ namespace quick {
             return instance;
         }
 
-        auto List::selectItem(Item* item) -> void {
-            if (this->m_selectedItem) {
-                this->m_selectedItem->setSelected(false);
+        auto List::selectItem(Symbol* symbol) -> void {
+            if (this->m_selectedSymbol) {
+                this->m_selectedSymbol->setSelected(false);
             }
 
-            if (item) {
-                item->setSelected(true);
+            if (symbol) {
+                symbol->setSelected(true);
             }
 
-            this->m_selectedItem = item;
+            this->m_selectedSymbol = symbol;
         }   
 
         auto List::setVisible(bool visible) -> void {
@@ -45,11 +45,11 @@ namespace quick {
             emit this->filterChanged();
 
             this->beginResetModel();
-            this->m_items.clear();
+            this->m_symbols.clear();
 
-            for (auto item : this->m_allItems) {
-                if (item->matches(filter)) {
-                    this->m_items.append(item);
+            for (auto symbol : this->m_allSymbols) {
+                if (symbol->matches(filter)) {
+                    this->m_symbols.append(symbol);
                 }
             }
 
@@ -60,38 +60,20 @@ namespace quick {
             return this->m_filter;
         }
 
-        auto List::AddEnum(QMetaEnum metaEnum) -> void {
-            Add(Item::MakeEnum(metaEnum));
-        }
-
-        auto List::AddClass(QMetaObject metaObject) -> void {
-            Add(Item::MakeClass(metaObject));
-        }
-
-        auto List::AddAbstract(QMetaObject metaObject) -> void {
-            Add(Item::MakeAbstract(metaObject));
-        }
-
-        auto List::Add(Item* item) -> void {
-            if (!item) {
+        auto List::Add(Symbol* symbol) -> void {
+            if (!symbol) {
                 return;
             }
 
             auto instance = GetInstance();
 
-            instance->m_items.append(item);
-            instance->m_allItems.append(item);
-        }
-
-        auto List::clear() -> void {
-            beginResetModel();
-            this->m_items.clear();
-            endResetModel();
+            instance->m_symbols.append(symbol);
+            instance->m_allSymbols.append(symbol);
         }
 
         auto List::roleNames() const -> QHash<int, QByteArray> {
             QHash<int, QByteArray> roles;
-            roles[ItemRole] = "item";
+            roles[SymbolRole] = "symbol";
 
             return roles;
         }
@@ -100,8 +82,8 @@ namespace quick {
             QVariant var;
             
             if (index.isValid()) {
-                if (role == ItemRole) {
-                    var.setValue(this->m_items.at(index.row()));
+                if (role == SymbolRole) {
+                    var.setValue(this->m_symbols.at(index.row()));
                 }
             }
             
@@ -109,7 +91,7 @@ namespace quick {
         }
         
         auto List::rowCount(const QModelIndex&) const -> int {
-            return this->m_items.size();
+            return this->m_symbols.size();
         }
     }
 }

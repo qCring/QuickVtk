@@ -3,7 +3,7 @@ import QtQuick 2.6
 import "./../lib" as Lib
 
 Column {
-    property var item;
+    property var symbol;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
@@ -24,19 +24,19 @@ Column {
 
             Lib.TagLabel {
                 anchors.verticalCenter: parent.verticalCenter;
-                label.text: item.type[0];
+                label.text: symbol.type[0];
                 color: "#00000000"
-                border.color: item.color;
+                border.color: symbol.color;
                 width: height;
-                label.color: item.color;
+                label.color: symbol.color;
                 label.font.weight: Font.Bold;
                 label.font.pixelSize: 10;
             }
 
             Lib.Label {
                 anchors.verticalCenter: parent.verticalCenter;
-                text: item.name;
-                color: item.selected ? "#fff" : "#9DA5B4"
+                text: symbol.name;
+                color: symbol.selected ? "#fff" : "#9DA5B4"
                 font.pixelSize: 12;
             }
         }
@@ -46,24 +46,30 @@ Column {
             anchors.right: parent.right;
             anchors.rightMargin: 4;
 
-            text: item.prefix;
+            text: symbol.prefix;
             color: "#6E7582"
 
             font.weight: Font.Bold;
             font.pixelSize: 10;
         }
 
-
         MouseArea {
             anchors.fill: parent;
-            onClicked: item.select();
+            onClicked: symbol.select();
         }
     }
 
     Repeater {
-        model: item.selected ? item : 0;
-        delegate: Group {
-            group: model.group;
+        model: symbol.selected ? symbol.enumItems : 0;
+        delegate: EnumItem {
+            enumItem: model;
+        }
+    }
+
+    Repeater {
+        model: symbol.selected ? symbol.properties : 0;
+        delegate: Property {
+            item: model;
         }
     }
 }

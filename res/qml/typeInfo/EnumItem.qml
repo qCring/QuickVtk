@@ -3,13 +3,15 @@ import QtQuick 2.6
 import "./../lib" as Lib
 
 Lib.Label {
-    property var attribute;
+    property var enumItem;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
+    anchors.leftMargin: 24;
+
     topPadding: 2;
     bottomPadding: 2;
 
     font.pixelSize: 10;
-    text: attribute.type + ": " + attribute.name;
+    text: enumItem.name + ": " + enumItem.value;
 }

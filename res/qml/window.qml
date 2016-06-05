@@ -37,8 +37,6 @@ Rectangle {
         anchors.right: parent.right;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
-
-        width: App.typeList.visible ? 220 : 0;
     }
 
     ErrorList {

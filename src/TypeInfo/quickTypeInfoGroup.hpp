@@ -8,15 +8,23 @@ namespace quick {
 
     namespace TypeInfo {
 
+        class Item;
+        class Attribute;
+
         class Group : public QObject {
             Q_OBJECT
-            Q_PROPERTY(QString name READ getName CONSTANT);
+            Q_PROPERTY(quick::TypeInfo::Item* item READ getItem CONSTANT);
+            Q_PROPERTY(QQmlListProperty<quick::TypeInfo::Attribute> attributes READ getAttributes CONSTANT);
         private:
-            QString m_name;
+            Item* m_item;
+            QList<Attribute*> m_attributes;
         public:
             static Qml::Register::Type<Group> Register;
-            auto setName(const QString&) -> void;
-            auto getName() -> QString;
+            auto getAttributes() -> QQmlListProperty<Attribute>;
+            Group() = delete;
+            Group(Item*);
+            auto getItem() -> Item*;
+            auto add(Attribute*) -> void;
         };
     }
 }

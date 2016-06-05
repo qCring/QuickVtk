@@ -1,5 +1,7 @@
 #include "quickTypeInfoItem.hpp"
+#include "quickTypeInfoList.hpp"
 #include "quickTypeInfoGroup.hpp"
+#include "quickTypeInfoAttribute.hpp"
 
 namespace quick {
 
@@ -7,16 +9,11 @@ namespace quick {
 
         Qml::Register::Type<Item> Item::Register;
 
-        auto Item::GetEnumList() -> QStringList& {
-            static QStringList EnumList { "TransformOrigin" };
-            return EnumList;
-        }
-
         auto Item::MakeEnum(QMetaEnum metaEnum) -> Item* {
             auto prefix = QString(metaEnum.scope()).section("::", 1, 1);
             auto name = QString(metaEnum.name());
 
-            if (GetEnumList().contains(name)) {
+            if (List::GetEnums().contains(name)) {
                 return nullptr;
             }
 
@@ -27,9 +24,28 @@ namespace quick {
             item->m_prefix = prefix;
             item->m_name = name;
 
-            GetEnumList().append(name);
+            auto group = new Group(item);
+
+            for (auto i = 0; i < metaEnum.keyCount(); ++i) {
+                group->add(new Attribute(metaEnum.key(i), QString::number(i)));
+            }
+
+            item->add(group);
+
+            List::GetEnums().append(name);
 
             return item;
+        }
+
+        auto Item::setSelected(bool selected) -> void {
+            if (this->m_selected != selected) {
+                this->m_selected = selected;
+                emit this->selectedChanged();
+            }
+        }
+
+        auto Item::isSelected() -> bool {
+            return this->m_selected;
         }
 
         auto Item::MakeClass(QMetaObject metaObject) -> Item* {
@@ -111,6 +127,10 @@ namespace quick {
         
         auto Item::rowCount(const QModelIndex&) const -> int {
             return this->m_groups.size();
+        }
+
+        void Item::select() {
+            List::GetInstance()->selectItem(this);
         }
     }
 }

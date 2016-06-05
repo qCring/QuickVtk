@@ -1,4 +1,5 @@
 #include "quickTypeInfoGroup.hpp"
+#include "quickTypeInfoItem.hpp"
 
 namespace quick {
 
@@ -6,12 +7,20 @@ namespace quick {
 
         Qml::Register::Type<Group> Group::Register;
 
-        auto Group::setName(const QString& name) -> void {
-            this->m_name = name;
+        Group::Group(Item* item) : m_item(item) {
+
         }
 
-        auto Group::getName() -> QString {
-            return this->m_name;
+        auto Group::getItem() -> Item* {
+            return this->m_item;
+        }
+
+        auto Group::add(Attribute* attribute) -> void {
+            this->m_attributes.append(attribute);
+        }
+
+        auto Group::getAttributes() -> QQmlListProperty<Attribute> {
+            return QQmlListProperty<Attribute>(this, this->m_attributes);
         }
     }
 }

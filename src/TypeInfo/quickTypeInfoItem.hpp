@@ -18,11 +18,13 @@ namespace quick {
             Q_PROPERTY(QString type READ getType CONSTANT);
             Q_PROPERTY(QString name READ getName CONSTANT);
             Q_PROPERTY(QString prefix READ getPrefix CONSTANT);
+            Q_PROPERTY(bool selected READ isSelected NOTIFY selectedChanged);
         public:
             enum Roles {
                 GroupRole = Qt::UserRole + 1
             };
         private:
+            bool m_selected = false;
             QColor m_color;
             QString m_type;
             QString m_name;
@@ -30,10 +32,11 @@ namespace quick {
             QList<Group*> m_groups;
         public:
             static Qml::Register::Type<Item> Register;
-            static auto GetEnumList() -> QStringList&;
             static auto MakeEnum(QMetaEnum) -> Item*;
             static auto MakeClass(QMetaObject) -> Item*;
             static auto MakeAbstract(QMetaObject) -> Item*;
+            auto setSelected(bool) -> void;
+            auto isSelected() -> bool;
             auto getColor() -> QColor;
             auto getType() -> QString;
             auto getName() -> QString;
@@ -44,6 +47,10 @@ namespace quick {
             auto roleNames() const -> QHash<int, QByteArray>;
             void add(Group*);
             void clear();
+        public slots:
+            void select();
+        signals:
+            void selectedChanged();
         };
     }
 }

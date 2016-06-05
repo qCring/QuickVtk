@@ -12,11 +12,28 @@ namespace quick {
             return instance;
         }
 
+        auto List::selectItem(Item* item) -> void {
+            if (this->m_selectedItem) {
+                this->m_selectedItem->setSelected(false);
+            }
+
+            if (item) {
+                item->setSelected(true);
+            }
+
+            this->m_selectedItem = item;
+        }   
+
         auto List::setVisible(bool visible) -> void {
             if (this->m_visible != visible) {
                 this->m_visible = visible;
                 emit this->visibleChanged();
             }
+        }
+
+        auto List::GetEnums() -> QStringList& {
+            static QStringList Enums { "TransformOrigin" };
+            return Enums;
         }
 
         auto List::isVisible() -> bool {

@@ -19,6 +19,7 @@ namespace quick {
                 ItemRole = Qt::UserRole + 1
             };
         private:
+            Item* m_selectedItem = nullptr;
             bool m_visible = false;
             QString m_filter;
             QList<Item*> m_items;
@@ -31,6 +32,8 @@ namespace quick {
             static auto AddEnum(QMetaEnum) -> void;
             static auto AddClass(QMetaObject) -> void;
             static auto AddAbstract(QMetaObject) -> void;
+            static auto GetEnums() -> QStringList&;
+            auto selectItem(Item*) -> void;
             auto setVisible(bool) -> void;
             auto isVisible() -> bool;
             auto setFilter(const QString&) -> void;

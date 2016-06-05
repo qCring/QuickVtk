@@ -83,10 +83,10 @@ Rectangle {
         Lib.CheckBox {
             anchors.verticalCenter: parent.verticalCenter;
 
-            label.text: "Symbols"
-            checked: App.symbols.visible;
+            label.text: "TypeList"
+            checked: App.typeList.visible;
 
-            onClicked: App.symbols.visible = !App.symbols.visible;
+            onClicked: App.typeList.visible = !App.typeList.visible;
         }
 
         Lib.Button {

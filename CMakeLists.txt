@@ -97,6 +97,7 @@ AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D/Mapper" "Vtk\\Mapper\\Abst
 AddSources("${SOURCE_DIR}/Vtk/Algorithm" "Vtk\\Algorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_app_src)
+AddSources("${SOURCE_DIR}/TypeInfo" "TypeInfo" list_app_src)
 AddSources("${SOURCE_DIR}/Core" "Core" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
 

@@ -4,7 +4,7 @@
 
 #include "quickCompiler.hpp"
 #include "quickErrors.hpp"
-#include "quickSymbols.hpp"
+#include "quickTypeInfoList.hpp"
 
 namespace quick {
     namespace App {
@@ -24,13 +24,13 @@ namespace quick {
                 this->m_expanded = expanded;
                 emit this->expandedChanged();
 
-                auto symbols = Symbols::GetInstance();
+                auto typeList = TypeInfo::List::GetInstance();
 
                 if (expanded) {
-                    this->m_symbolsWereVisible = symbols->isVisible();
-                    symbols->setVisible(false);
+                    this->m_showList = typeList->isVisible();
+                    typeList->setVisible(false);
                 } else {
-                    symbols->setVisible(this->m_symbolsWereVisible);
+                    typeList->setVisible(this->m_showList);
                 }
             }
         }
@@ -55,8 +55,8 @@ namespace quick {
             return Errors::instance;
         }
 
-        auto Controller::getSymbols() -> Symbols* {
-            return Symbols::GetInstance();
+        auto Controller::getTypeList() -> TypeInfo::List* {
+            return TypeInfo::List::GetInstance();
         }
 
         auto Controller::isDebugBuild() -> bool {

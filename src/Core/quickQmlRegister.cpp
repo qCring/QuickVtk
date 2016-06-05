@@ -1,7 +1,6 @@
 #include "quickQmlRegister.hpp"
 
-#include "quickSymbols.hpp"
-#include "quickSymbol.hpp"
+#include "quickTypeInfoList.hpp"
 
 namespace quick {
 
@@ -11,15 +10,15 @@ namespace quick {
 
             namespace MakeSymbol {
                 auto Enum(QMetaEnum metaEnum) -> void {
-                    Symbols::Add(Symbol::CreateEnumSymbol(metaEnum));
+                    TypeInfo::List::AddEnum(metaEnum);
                 }
 
                 auto Class(QMetaObject metaObject) -> void {
-                    Symbols::Add(Symbol::CreateClassSymbol(metaObject));
+                    TypeInfo::List::AddClass(metaObject);
                 }
 
                 auto AbstractClass(QMetaObject metaObject) -> void {
-                    Symbols::Add(Symbol::CreateAbstractClassSymbol(metaObject));
+                    TypeInfo::List::AddAbstract(metaObject);
                 }
             }
 

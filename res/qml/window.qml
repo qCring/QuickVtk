@@ -1,6 +1,7 @@
 import QtQuick 2.6
 
 import "./lib" as Lib
+import "./typeInfo" as TypeInfo
 
 Rectangle {
     id: root;
@@ -17,7 +18,7 @@ Rectangle {
 
     ContainerView {
         anchors.left: parent.left;
-        anchors.right: outline.left;
+        anchors.right: typeList.left;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
     }
@@ -30,14 +31,14 @@ Rectangle {
         anchors.top: parent.top;
     }
 
-    Outline {
-        id: outline;
+    TypeInfo.List {
+        id: typeList;
 
         anchors.right: parent.right;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
 
-        width: App.symbols.visible ? 220 : 0;
+        width: App.typeList.visible ? 220 : 0;
     }
 
     ErrorList {

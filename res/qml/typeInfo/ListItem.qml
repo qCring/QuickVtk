@@ -1,9 +1,9 @@
 import QtQuick 2.6
 
-import "./lib" as Lib
+import "./../lib" as Lib
 
 Item {
-    property var symbol;
+    property var item;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
@@ -20,13 +20,18 @@ Item {
 
         Lib.TagLabel {
             anchors.verticalCenter: parent.verticalCenter;
-            label.text: symbol.type;
-            color: symbol.color;
+            label.text: item.type[0];
+            color: "#00000000"
+            border.color: item.color;
+            width: height;
+            label.color: item.color;
+            label.font.weight: Font.Bold;
+            label.font.pixelSize: 10;
         }
 
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
-            text: symbol.prefix + "::" + symbol.name;
+            text: item.prefix + "::" + item.name;
             font.pixelSize: 12;
         }
     }

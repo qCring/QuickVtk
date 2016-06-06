@@ -5,8 +5,8 @@ import "./../lib" as Lib
 Column {
     property var symbol;
 
-    anchors.left: parent.left;
-    anchors.right: parent.right;
+    anchors.left: parent ? parent.left : undefined;
+    anchors.right: parent ? parent.right : undefined;
 
     Item {
         anchors.left: parent.left;
@@ -37,8 +37,8 @@ Column {
             anchors.right: prefixLabel.left;
 
             text: symbol.name;
-            color: symbol.selected ? "#fff" : "#9DA5B4"
-            font.bold: symbol.selected;
+            color: symbol.color;
+            font.bold: true;
             font.pixelSize: 12;
         }
 
@@ -54,22 +54,17 @@ Column {
             font.weight: Font.Bold;
             font.pixelSize: 10;
         }
-
-        MouseArea {
-            anchors.fill: parent;
-            onClicked: symbol.select();
-        }
     }
 
     Repeater {
-        model: symbol.selected ? symbol.enumerations : 0;
+        model: symbol.enumerations;
         delegate: Enumeration {
             item: model;
         }
     }
 
     Repeater {
-        model: symbol.selected ? symbol.properties : 0;
+        model: symbol.properties;
         delegate: Property {
             item: model;
         }

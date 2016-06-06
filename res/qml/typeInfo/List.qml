@@ -10,6 +10,12 @@ Rectangle {
     clip: true;
     color: "#21252B"
 
+    onVisibleChanged: {
+        if (visible) {
+            input.forceActiveFocus();
+        }
+    }
+
     Item {
         id: search;
 

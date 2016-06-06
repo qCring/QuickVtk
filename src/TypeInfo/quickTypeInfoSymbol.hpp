@@ -16,7 +16,6 @@ namespace quick {
             Q_PROPERTY(QString name READ getName CONSTANT);
             Q_PROPERTY(QString type READ getType CONSTANT);
             Q_PROPERTY(QString prefix READ getPrefix CONSTANT);
-            Q_PROPERTY(bool selected READ isSelected NOTIFY selectedChanged);
         private:
             struct Get {
                 static auto ClassName(QMetaObject) -> QString;
@@ -25,7 +24,6 @@ namespace quick {
                 static auto EnumPrefix(QMetaEnum) -> QString;
             };
         private:
-            bool m_selected = false;
             QColor m_color;
             QString m_type;
             QString m_name;
@@ -37,17 +35,11 @@ namespace quick {
             static auto MakeEnum(QMetaEnum) -> void;
             static auto MakeClass(QMetaObject) -> void;
             static auto MakeAbstractClass(QMetaObject) -> void;
-            auto setSelected(bool) -> void;
-            auto isSelected() -> bool;
             auto getColor() -> QColor;
             auto getType() -> QString;
             auto getName() -> QString;
             auto getPrefix() -> QString;
             auto matches(const QString&) -> bool;
-        public slots:
-            void select();
-        signals:
-            void selectedChanged();
         };
     }
 }

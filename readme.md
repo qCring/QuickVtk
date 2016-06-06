@@ -3,48 +3,34 @@ QuickVtk
 A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedded **[VTK](http://www.vtk.org)** support
 
 <center>
-	<img src="doc/img/screenshot.png" width="100%" />
+	<img src="doc/img/screenshot1.png" width="100%" />
 </center>
 
 ##Overview
 ###QML Prototyping
-Even if you're not particularly interested in **[VTK](http://www.vtk.org)**, QuickVtk can be used to quickly write some **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code. Load a *.qml* file in the application, edit the code in an external editor of your choice and save the file. QuickVtk automatically recompiles and updates the content view if the currently loaded file has been modified.
+Use QuickVtk to quickly prototype **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code. Load a *.qml* file, edit the code in an external editor and save the file (an embedded editor will also be available, but until now that's just another item on the to-do list). QuickVtk then automatically reloads and compiles the modified file, informs you about eventual errors during compilation and finally shows the result in an embedded content view.
 
-Dynamically created **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** content will be embedded in a container item to prevent items from overlapping control elements of the application. An "expanded view mode" allows to exclusively view the created content.
-
-<center>
-	<img src="doc/img/content.png" width="50%"/>
-</center>
-
-###Use VTK With QML
-Since **[VTK](http://www.vtk.org)**  classes are available in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** just like built-in types, it's possible to interact with associated member variables using **[property bindings](http://doc.qt.io/qt-5/qtqml-syntax-propertybinding.html)**. Basically, this allows any parameter to be controlled by any other static or dynamic property.
-Here for example the **vtkShrinkPolyData**`s **shrinkFactor** parameter is controlled by user interaction with a **[QtQuick.Controls](http://doc.qt.io/qt-5/qtquickcontrols-index.html)** Slider component:
-
-<center>
-	<img src="doc/img/anim.gif" width="50%"/>
-</center>
-
-###Really Simple
-All the information about types, attributes and their relationship becomes clear at first sight. Plus there's really not much of any setup overhead which keeps the code size at a minimum. The full code for the above example looks like this:
-
+###Declarative VTK
+You can simply declare **[VTK](http://www.vtk.org)** objects and their attributes just like it's done with built-in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** types. Internally, the underlying **[VTK](http://www.vtk.org)** pipeline handles data propagation or updating the renderer. Also, the source code is pretty much straightforward:
+ 
 	import QtQuick 2.5
 	import QtQuick.Controls 1.4
-	import Vtk 1.0
+	import Vtk 1.0 as Vtk
 
 	Item {
 		anchors.fill: parent;
 		
-		Viewer { 
+		Vtk.Viewer { 
 			anchors.fill: parent;
 			mouseEnabled: true;
 			
-			Actor {
-				PolyDataMapper {
-					ShrinkPolyData {
+			Vtk.Actor {
+				Vtk.PolyDataMapper {
+					Vtk.ShrinkPolyData {
 						shrinkFactor: slider.value;
 						
-						OBJReader {
-							fileName: "coffee.obj"
+						Vtk.OBJReader {
+							fileName: "car.obj"
 						}
 					}
 				}
@@ -62,21 +48,46 @@ All the information about types, attributes and their relationship becomes clear
 			maximumValue: 1;
 			value: 0.5;
 		}
-	}	
+	}
+
+###Reactive Programming For VTK
+Probably the coolest thing about bringing **[VTK](http://www.vtk.org)** to **[QML](http://doc.qt.io/qt-5/qtqml-index.html)**. You can bind **[VTK](http://www.vtk.org)** class attributes to pretty much anything using **[Property Bindings](http://doc.qt.io/qt-5/qtqml-syntax-propertybinding.html)** which allow you to control variables directly or inderectly by:
+
+- other properties
+- user interaction with UI elements
+- inline or included **[JavaScript](http://doc.qt.io/qt-5/qtqml-javascript-expressions.html)** code
+- **[QML Animations](http://doc.qt.io/qt-5/qml-qtquick-animation.html)**
+- **[QML Behaviors](http://doc.qt.io/qt-5/qml-qtquick-behavior.html)**
+
+<center>
+	<img src="doc/img/screenshot3.png" width="100%" />
+</center>
+*A slider's value is updated by user interaction and controls the 'lineThickness' property of an underlying vtkProperty object. All changes are applied and rendered immediately.*
+
+###Type Information
+In order to become available in QuickVtk, types from **[VTK](http://www.vtk.org)** have to be wrapped manually in **[QObject](http://doc.qt.io/qt-5/qobject.html)** derived classes. All the type information is stored in an associated static **[QMetaObject](http://doc.qt.io/qt-5/qmetaobject.html)** instance and used to create an entry in QuickVtk's embedded type browser. Information of wrapper classes is generated automatically, reflecting the API as is.
+
+###Performance
+QuickVtk is written in fast C++. Rendering of **[VTK](http://www.vtk.org)** in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** is not perfect (also not well documented) but does okay performance-wise. It's possible to have multiple Viewer items, each with an own interactor and an own set scene actors. Eventually, I'll make some sort of benchmark or even compare the rendering performance to **[VTK](http://www.vtk.org)** in a **[QtGUI](http://doc.qt.io/qt-5/qtgui-module.html)** application, but that's another to-do thing for later...
+
+<center>
+	<img src="doc/img/screenshot2.png" width="100%" />
+</center>
 
 Building QuickVtk
 ----
 QuickVtk can be built for Mac OS X and Windows via **[CMake](https://cmake.org)**
 
-1. Download and install **[Qt](https://www.qt.io/download/)**
-2. Get the **[VTK sources](https://github.com/Kitware/VTK)**
-3. Build VTK via CMake
-4. Build QuickVtk via CMake
+1. Download and install **[CMake](https://cmake.org)**
+2. Download and install **[Qt](https://www.qt.io/download/)**
+3. Get the **[VTK sources](https://github.com/Kitware/VTK)**
+4. Build VTK via CMake
+5. Build QuickVtk via CMake
 
 **Important Notes:**
 
 - When building VTK, make sure to use  **OpenGL** as **VTK\_RENDERING\_BACKEND** since things seem to have changed with **OpenGL2**
-- On Windows, the renderWindowInteractor has an issue with the offscreen rendering setup and therefore is currently disabled. Which is sad but at least prevents the app from crashing.
+- **On Windows**, the renderWindowInteractor has an issue with the offscreen rendering setup and therefore is currently disabled. Which is sad but at least prevents the app from crashing.
 
 Contact
 ----

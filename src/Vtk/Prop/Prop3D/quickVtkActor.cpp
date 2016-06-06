@@ -1,5 +1,6 @@
 #include "quickVtkActor.hpp"
 #include "quickVtkMapper.hpp"
+#include "quickVtkProperty.hpp"
 
 namespace quick {
 
@@ -19,6 +20,23 @@ namespace quick {
         auto Actor::setVtkActor(vtkSmartPointer<vtkActor> vtkActor) -> void {
             this->m_vtkActor = vtkActor;
             Prop3D::setVtkProp3D(vtkActor);
+        }
+
+        auto Actor::setProperty(Property* property) -> void {
+            if (this->m_property) {
+                delete this->m_property;
+                this->m_property = nullptr;
+            }
+
+            this->m_property = property;
+        }
+
+        auto Actor::getProperty() -> Property* {
+            if (!this->m_property) {
+                this->m_property = new Property(this);
+            }
+
+            return this->m_property;
         }
 
         auto Actor::setMapper(Mapper* mapper) -> void {

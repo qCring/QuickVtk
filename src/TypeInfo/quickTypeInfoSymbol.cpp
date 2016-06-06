@@ -33,13 +33,6 @@ namespace quick {
             return Enums;
         }
 
-        auto Symbol::setSelected(bool selected) -> void {
-            if (this->m_selected != selected) {
-                this->m_selected = selected;
-                emit this->selectedChanged();
-            }
-        }
-
         auto Symbol::MakeEnum(QMetaEnum metaEnum) -> void {
             auto name = metaEnum.name();
 
@@ -52,7 +45,7 @@ namespace quick {
             symbol->m_prefix = Get::EnumPrefix(metaEnum);
             symbol->m_name = name;
             symbol->m_type = "Enum";
-            symbol->m_color = "#B75711";
+            symbol->m_color = "#E6713E";
 
             for (auto i = 0; i < metaEnum.keyCount(); ++i) {
                 symbol->add(new EnumItem(metaEnum.key(i), metaEnum.value(i)));
@@ -84,7 +77,7 @@ namespace quick {
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "Abstract";
-            symbol->m_color = "#6E7582";
+            symbol->m_color = "#9DA5B4";
 
             symbol->setAbstract(true);
 
@@ -93,10 +86,6 @@ namespace quick {
             }
 
             List::Add(symbol);
-        }
-
-        auto Symbol::isSelected() -> bool {
-            return this->m_selected;
         }
 
         auto Symbol::matches(const QString& filter) -> bool {
@@ -129,10 +118,6 @@ namespace quick {
 
         auto Symbol::getColor() -> QColor {
             return this->m_color;
-        }
-
-        void Symbol::select() {
-            List::GetInstance()->selectItem(this);
         }
     }
 }

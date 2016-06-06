@@ -14,76 +14,67 @@ Item {
 
     property color typeColor: "#9DA5B4"
 
-    Row {
-        id: labels;
+    Lib.Label {
+        id: nameLabel;
 
+        anchors.verticalCenter: parent.verticalCenter;
         anchors.left: parent.left;
-        anchors.top: parent.top;
-        anchors.right: rwRow.left;
-        anchors.bottom: parent.bottom;
         anchors.leftMargin: 24;
 
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-            font.pixelSize: 12;
-            color: "#fff";
+        font.pixelSize: 12;
+        color: "#fff";
 
-            text: item.name + ":  ";
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            visible: item.sequence;
-            font.pixelSize: 12;
-            color: root.typeColor;
-            text: "list <"
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-            font.pixelSize: 12;
-            color: item.sequence ? "#fff" : root.typeColor;
-
-            text: item.type;
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            visible: item.sequence;
-            font.pixelSize: 12;
-            color: root.typeColor;
-            text: ">"
-        }
+        text: item.name + ":  ";
     }
 
-    Row {
-        id: rwRow;
+    Lib.Label {
+        id: typePrefix;
 
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-        anchors.bottom: parent.bottom;
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.left: nameLabel.right;
+
+        visible: item.sequence;
+        font.pixelSize: 12;
+        color: root.typeColor;
+        text: "list <"
+    }
+
+    Lib.Label {
+        id: typeLabel;
+
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.left: typePrefix.visible ? typePrefix.right : nameLabel.right;
+
+        font.pixelSize: 12;
+        color: item.sequence ? "#fff" : root.typeColor;
+
+        text: item.type;
+    }
+
+    Lib.Label {
+        id: typeSuffix;
+
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.left: typeLabel.right;
+        anchors.right: rwLabel.left;
         anchors.rightMargin: 4;
 
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
+        visible: item.sequence;
+        font.pixelSize: 12;
+        color: root.typeColor;
+        text: ">"
+    }
 
-            visible: item.readable;
-            text: "R";
-            font.pixelSize: 8;
-            font.bold: true;
-            color: "#6E7582";
-        }
+    Lib.Label {
+        id: rwLabel;
 
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.right: parent.right;
+        anchors.rightMargin: 4;
 
-            visible: item.writable;
-            text: "W";
-            font.pixelSize: 8;
-            font.bold: true;
-            color: "#6E7582";
-        }
+        text: item.writable ? item.readable ? "R+W" : "W" : "R";
+        font.pixelSize: 8;
+        font.bold: true;
+        color: "#9DA5B4";
     }
 }

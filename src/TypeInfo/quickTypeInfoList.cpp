@@ -12,18 +12,6 @@ namespace quick {
             return instance;
         }
 
-        auto List::selectItem(Symbol* symbol) -> void {
-            if (this->m_selectedSymbol) {
-                this->m_selectedSymbol->setSelected(false);
-            }
-
-            if (symbol) {
-                symbol->setSelected(true);
-            }
-
-            this->m_selectedSymbol = symbol;
-        }   
-
         auto List::setVisible(bool visible) -> void {
             if (this->m_visible != visible) {
                 this->m_visible = visible;

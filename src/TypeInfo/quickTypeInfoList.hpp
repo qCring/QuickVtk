@@ -20,7 +20,6 @@ namespace quick {
             };
         private:
             friend class Symbol;
-            Symbol* m_selectedSymbol = nullptr;
             bool m_visible = false;
             QString m_filter;
             QList<Symbol*> m_symbols;
@@ -30,7 +29,6 @@ namespace quick {
         public:
             static Qml::Register::Type<List> Register;
             static auto GetInstance() -> List*;
-            auto selectItem(Symbol*) -> void;
             auto setVisible(bool) -> void;
             auto isVisible() -> bool;
             auto setFilter(const QString&) -> void;

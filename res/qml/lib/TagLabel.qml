@@ -18,7 +18,7 @@ Rectangle {
 
         anchors.centerIn: parent;
         font.weight: Font.Medium;
-        font.pixelSize: 11;
+        font.pointSize: 11;
         color: "#fff"
     }
 }

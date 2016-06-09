@@ -27,6 +27,7 @@ TextInput {
     selectionColor: root.borderActive;
 
     font.family: "Roboto";
+    font.pointSize: 13;
     verticalAlignment: TextInput.AlignVCenter;
 
     activeFocusOnPress: true;

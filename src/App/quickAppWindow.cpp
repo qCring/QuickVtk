@@ -23,7 +23,8 @@ namespace quick {
             instance = this;
         }
 
-        auto Window::start(int argc, char ** argv) -> int {
+        auto Window::start(int argc, char** argv) -> int {
+            QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
             QApplication application(argc, argv);
 
             QApplication::setOrganizationName(Meta::orgName);

@@ -7,10 +7,11 @@ Text
     property var types: Icons.Types;
     property string type;
 
-    textFormat: Text.PlainText;
+    font.family: "FontAwesome";
+    font.pointSize: 13;
     style: Text.Normal;
     color: enabled ? "#9DA5B4" : "#6E7582"
-    font.family: "FontAwesome";
+    textFormat: Text.PlainText;
     verticalAlignment: Text.AlignVCenter;
     text: type;
 }

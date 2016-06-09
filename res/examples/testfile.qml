@@ -7,7 +7,7 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent;
-        font.pixelSize: 40;
+        font.pointSize: 40;
         color: "#fff"
         text: "yay, i was compiled at runtime!"
     }

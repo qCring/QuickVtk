@@ -27,7 +27,7 @@ Column {
             width: height;
             label.color: symbol.color;
             label.font.weight: Font.Bold;
-            label.font.pixelSize: 10;
+            label.font.pointSize: 10;
         }
 
         Lib.Label {
@@ -39,7 +39,7 @@ Column {
             text: symbol.name;
             color: symbol.color;
             font.bold: true;
-            font.pixelSize: 12;
+            font.pointSize: 12;
         }
 
         Lib.Label {
@@ -52,7 +52,7 @@ Column {
             text: symbol.prefix;
             color: "#6E7582"
             font.weight: Font.Bold;
-            font.pixelSize: 10;
+            font.pointSize: 10;
         }
     }
 

@@ -33,13 +33,13 @@ Column {
                 Lib.Label {
                     anchors.verticalCenter: parent.verticalCenter;
                     text: model.line + ":" + model.column + ":";
-                    font.pixelSize: 11;
+                    font.pointSize: 11;
                 }
 
                 Lib.Label {
                     anchors.verticalCenter: parent.verticalCenter;
                     text: model.message + "  ";
-                    font.pixelSize: 11;
+                    font.pointSize: 11;
                     color: "#fff"
                 }
             }

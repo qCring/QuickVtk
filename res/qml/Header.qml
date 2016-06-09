@@ -51,7 +51,7 @@ Rectangle {
         Lib.CheckBox {
             anchors.verticalCenter: parent.verticalCenter;
 
-            label.text: "Auto-Compile"
+            label.text: "Auto-Compile";
             checked: App.compiler.autocompile;
 
             onClicked: App.compiler.autocompile = !App.compiler.autocompile;
@@ -76,7 +76,7 @@ Rectangle {
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            font.pixelSize: 11;
+            font.pointSize: 11;
             text: App.compiler.filePath;
         }
 

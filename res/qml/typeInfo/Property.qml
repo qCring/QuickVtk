@@ -10,7 +10,7 @@ Item {
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    height: 22;
+    height: nameLabel.height + 2;
 
     property color typeColor: "#9DA5B4"
 
@@ -21,7 +21,7 @@ Item {
         anchors.left: parent.left;
         anchors.leftMargin: 24;
 
-        font.pixelSize: 12;
+        font.pointSize: 12;
         color: "#fff";
 
         text: item.name + ":  ";
@@ -34,7 +34,7 @@ Item {
         anchors.left: nameLabel.right;
 
         visible: item.sequence;
-        font.pixelSize: 12;
+        font.pointSize: 12;
         color: root.typeColor;
         text: "list <"
     }
@@ -45,7 +45,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter;
         anchors.left: typePrefix.visible ? typePrefix.right : nameLabel.right;
 
-        font.pixelSize: 12;
+        font.pointSize: 12;
         color: item.sequence ? "#fff" : root.typeColor;
 
         text: item.type;
@@ -60,7 +60,7 @@ Item {
         anchors.rightMargin: 4;
 
         visible: item.sequence;
-        font.pixelSize: 12;
+        font.pointSize: 12;
         color: root.typeColor;
         text: ">"
     }
@@ -73,7 +73,7 @@ Item {
         anchors.rightMargin: 4;
 
         text: item.writable ? item.readable ? "R+W" : "W" : "R";
-        font.pixelSize: 8;
+        font.pointSize: 8;
         font.bold: true;
         color: "#9DA5B4";
     }

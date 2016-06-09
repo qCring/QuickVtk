@@ -10,7 +10,7 @@ Item {
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    height: 22;
+    height: nameLabel.height + 2;
 
     Row {
         id: labels;
@@ -22,8 +22,10 @@ Item {
         anchors.leftMargin: 24;
 
         Lib.Label {
+            id: nameLabel;
+
             anchors.verticalCenter: parent.verticalCenter;
-            font.pixelSize: 12;
+            font.pointSize: 12;
             color: "#fff";
 
             text: item.name + ":  ";
@@ -32,7 +34,7 @@ Item {
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            font.pixelSize: 12;
+            font.pointSize: 12;
             color: "#9DA5B4";
             text: item.value
         }

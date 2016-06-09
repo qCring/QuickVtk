@@ -68,7 +68,7 @@ Probably the coolest thing about bringing **[VTK](http://www.vtk.org)** to **[QM
 In order to become available in QuickVtk, types from **[VTK](http://www.vtk.org)** have to be wrapped manually in **[QObject](http://doc.qt.io/qt-5/qobject.html)** derived classes. All the type information is stored in an associated static **[QMetaObject](http://doc.qt.io/qt-5/qmetaobject.html)** instance and used to create an entry in QuickVtk's embedded type browser. Information of wrapper classes is generated automatically, reflecting the API as is.
 
 ###Performance
-QuickVtk is written in fast C++. Rendering of **[VTK](http://www.vtk.org)** in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** is not perfect (also not well documented) but does okay performance-wise. It's possible to have multiple Viewer items, each with an own interactor and an own set scene actors. Eventually, I'll make some sort of benchmark or even compare the rendering performance to **[VTK](http://www.vtk.org)** in a **[QtGUI](http://doc.qt.io/qt-5/qtgui-module.html)** application, but that's another to-do thing for later...
+QuickVtk is written in C++. Rendering of **[VTK](http://www.vtk.org)** in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** is not perfect (also not well documented) but does okay performance-wise. It's possible to have multiple Viewer items, each with an own interactor and an own set of scene actors. Eventually, I'll make some sort of benchmark or even compare the rendering performance to **[VTK](http://www.vtk.org)** in a **[QtGUI](http://doc.qt.io/qt-5/qtgui-module.html)** application, but that's another to-do thing for later...
 
 <center>
 	<img src="doc/img/screenshot2.png" width="100%" />
@@ -88,6 +88,7 @@ QuickVtk can be built for Mac OS X and Windows via **[CMake](https://cmake.org)*
 
 - When building VTK, make sure to use  **OpenGL** as **VTK\_RENDERING\_BACKEND** since things seem to have changed with **OpenGL2**
 - **On Windows**, the renderWindowInteractor has an issue with the offscreen rendering setup and therefore is currently disabled. Which is sad but at least prevents the app from crashing.
+- When building for **Windows** use **[Qt 5.6.1](https://www.qt.io/)** which is now capable of scaling the UI properly on high resolution displays.
 
 Contact
 ----

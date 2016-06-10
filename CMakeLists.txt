@@ -88,6 +88,7 @@ include(${VTK_USE_FILE})
 
 # sources
 AddSources("${SOURCE_DIR}/Util" "Util" list_app_src)
+AddSources("${SOURCE_DIR}/Math" "Math" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Viewer" "Vtk\\Viewer" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/ImplicitFunction" "Vtk\\ImplicitFunction" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Prop" "Vtk\\Prop" list_app_src)

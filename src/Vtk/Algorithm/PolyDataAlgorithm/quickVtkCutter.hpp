@@ -1,5 +1,6 @@
 #pragma once
 
+#include "quickVtkImplicitFunction.hpp"
 #include "quickVtkPolyDataAlgorithm.hpp"
 
 #include <vtkCutter.h>
@@ -16,11 +17,13 @@ namespace quick
             Q_PROPERTY(quick::Vtk::ImplicitFunction* cutFunction READ getCutFunction WRITE setCutFunction NOTIFY cutFunctionChanged);
         private:
             static Qml::Register::VtkClass<Cutter> Register;
-            ImplicitFunction* m_cutFunction;
+            ImplicitFunction::cb_t m_cutFunctionCb;
+            ImplicitFunction* m_cutFunction = nullptr;
             vtkSmartPointer<vtkCutter> m_vtkCutter;
         public:
             Cutter();
             Cutter(Cutter*);
+            auto updateCutFunction() -> void;
             auto setCutFunction(ImplicitFunction*) -> void;
             auto getCutFunction() -> ImplicitFunction*;
             ~Cutter();

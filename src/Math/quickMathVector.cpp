@@ -18,7 +18,11 @@ namespace quick {
             }
         }
 
-        auto Vector::setCallback(cb_t&& callback) -> void {
+        auto Vector::addCallback(cb_t&& callback) -> void {
+            if (this->m_callbacks.contains(&callback)) {
+                return;
+            }
+
             this->m_callbacks.append(&callback);
         }
 

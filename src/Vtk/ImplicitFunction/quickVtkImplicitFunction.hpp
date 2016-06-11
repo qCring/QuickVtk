@@ -3,6 +3,7 @@
 #include "quickQmlRegister.hpp"
 
 #include <QObject>
+#include <QList>
 
 #include <vtkSmartPointer.h>
 #include <vtkImplicitFunction.h>
@@ -13,12 +14,17 @@ namespace quick {
 
         class ImplicitFunction : public QObject {
             Q_OBJECT
+        public:
+            using cb_t = std::function<void(void)>;
         private:
             static Qml::Register::VtkAbstractClass<ImplicitFunction> Register;
             vtkSmartPointer<vtkImplicitFunction> m_vtkImplicitFunction;
+            QList<cb_t*> m_callbacks;
         public:
-            ImplicitFunction();
             ImplicitFunction(ImplicitFunction*);
+            auto update() -> void;
+            auto addCallback(cb_t&&) -> void;
+            auto removeCallback(cb_t&&) -> void;
             auto setVtkImplicitFunction(vtkSmartPointer<vtkImplicitFunction>) -> void;
             auto getVtkImplicitFunction() -> vtkSmartPointer<vtkImplicitFunction> ;
             ~ImplicitFunction();

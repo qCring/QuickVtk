@@ -28,7 +28,7 @@ namespace quick {
             Vector();
             Vector(double, double, double);
             Vector(double*);
-            auto setCallback(cb_t&&) -> void;
+            auto addCallback(cb_t&&) -> void;
             auto setX(double) -> void;
             auto getX() -> double;
             auto setY(double) -> void;

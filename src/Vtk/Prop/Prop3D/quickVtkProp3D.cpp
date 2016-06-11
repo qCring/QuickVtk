@@ -55,9 +55,11 @@ namespace quick {
             this->m_scale = vector;
 
             if (vector) {
-                vector->setCallback(std::move(this->m_scaleCb));
+                vector->addCallback(std::move(this->m_scaleCb));
                 this->updateScale(std::move(*vector));
             }
+
+            emit this->scaleChanged();
         }
 
         auto Prop3D::getScale() -> Math::Vector* {
@@ -77,9 +79,11 @@ namespace quick {
             this->m_position = vector;
 
             if (vector) {
-                vector->setCallback(std::move(this->m_positionCb));
+                vector->addCallback(std::move(this->m_positionCb));
                 this->updatePosition(std::move(*vector));
             }
+
+            emit this->positionChanged();
         }
 
         auto Prop3D::getPosition() -> Math::Vector* {
@@ -99,9 +103,11 @@ namespace quick {
             this->m_orientation = vector;
 
             if (vector) {
-                vector->setCallback(std::move(this->m_orientationCb));
+                vector->addCallback(std::move(this->m_orientationCb));
                 this->updateOrientation(std::move(*vector));
             }
+
+            emit this->orientationChanged();
         }
 
         auto Prop3D::getOrientation() -> Math::Vector* {
@@ -121,9 +127,11 @@ namespace quick {
             this->m_origin = vector;
 
             if (vector) {
-                vector->setCallback(std::move(this->m_originCb));
+                vector->addCallback(std::move(this->m_originCb));
                 this->updateOrigin(std::move(*vector));
             }
+
+            emit this->orientationChanged();
         }
 
         auto Prop3D::getOrigin() -> Math::Vector* {

@@ -4,24 +4,18 @@ import QtQuick.Controls 1.5
 import Vtk 1.0 as Vtk
 import Math 1.0 as Math
 
-/*  One Math.Vector is assigned to different Prop3D instances. The top slider
- *  controls the number of DiskSource objects at runtime, the bottom slider
- *  controls the x value of the single Math.Vector instance. All DiscSource
- *  objects dynamically bind to the vector and update properly when the vector
- *  changes.
- */
-
 Item {
     id: root;
 
     anchors.fill: parent;
 
-    Math.Vector {
-        id: vec;
 
-        x: slider.value / 10;
-        y: 1;
-        z: 1;
+    Vtk.PerlinNoise {
+        id: cutFunc;
+
+        amplitude: 1
+
+        frequency.x: slider.value;
     }
 
     Grid {
@@ -39,11 +33,12 @@ Item {
                 mouseEnabled: true;
 
                 Vtk.Actor {
-                    scale: vec
-
                     Vtk.PolyDataMapper {
-                        Vtk.DiskSource {
+                        Vtk.Cutter {
+                            cutFunction: cutFunc;
 
+                            Vtk.SphereSource {
+                            }
                         }
                     }
                 }
@@ -60,7 +55,7 @@ Item {
 
         minimumValue: 1;
         maximumValue: 10;
-        value: 1;
+        value: 3;
         stepSize: 1;
     }
 
@@ -74,11 +69,5 @@ Item {
         minimumValue: 1;
         maximumValue: 100;
         value: 1;
-    }
-
-    Text {
-        anchors.top: parent.top;
-        anchors.right: parent.right;
-        text: "x: " + vec.x + "\ny: " + vec.y + "\nz: " + vec.z;
     }
 }

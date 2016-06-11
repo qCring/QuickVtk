@@ -18,11 +18,15 @@ namespace quick {
             }
         }
 
-        auto Vector::onChange(std::function<void(Vector&&)>&& callback) -> void {
+        auto Vector::addCallback(cb_t&& callback) -> void {
+            if (this->m_callbacks.contains(&callback)) {
+                return;
+            }
+
             this->m_callbacks.append(&callback);
         }
 
-        auto Vector::removeCallback(std::function<void(Vector&&)>&& callback) -> void {
+        auto Vector::removeCallback(cb_t&& callback) -> void {
             this->m_callbacks.removeOne(&callback);
         }
 

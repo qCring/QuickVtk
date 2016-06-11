@@ -17,8 +17,10 @@ namespace quick {
             Q_PROPERTY(double x READ getX WRITE setX NOTIFY xChanged);
             Q_PROPERTY(double y READ getY WRITE setY NOTIFY yChanged);
             Q_PROPERTY(double z READ getZ WRITE setZ NOTIFY zChanged);
+        public:
+            using cb_t = std::function<void(Vector&&)>;
         private:
-            QList<std::function<void(Vector&&)>*> m_callbacks;
+            QList<cb_t*> m_callbacks;
             std::array<double, 3> m_values;
             auto notify() -> void;
         public:
@@ -26,7 +28,7 @@ namespace quick {
             Vector();
             Vector(double, double, double);
             Vector(double*);
-            auto onChange(std::function<void(Vector&&)>&&) -> void;
+            auto addCallback(cb_t&&) -> void;
             auto setX(double) -> void;
             auto getX() -> double;
             auto setY(double) -> void;
@@ -34,7 +36,7 @@ namespace quick {
             auto setZ(double) -> void;
             auto getZ() -> double;
             auto getValues() -> std::array<double, 3>;
-            auto removeCallback(std::function<void(Vector&&)>&&) -> void;
+            auto removeCallback(cb_t&&) -> void;
         signals:
             void xChanged();
             void yChanged();

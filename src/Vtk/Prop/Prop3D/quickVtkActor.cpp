@@ -10,11 +10,11 @@ namespace quick {
 
         Actor::Actor() : Prop3D(this) {
             this->setVtkActor(vtkSmartPointer<vtkActor>::New());
-            this->m_mapper      = nullptr;
+            this->m_mapper = nullptr;
         }
 
         Actor::Actor(Actor* other) : Prop3D(this) {
-            this->m_mapper      = nullptr;
+            this->m_mapper = nullptr;
         }
 
         auto Actor::setVtkActor(vtkSmartPointer<vtkActor> vtkActor) -> void {

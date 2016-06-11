@@ -44,7 +44,6 @@ namespace quick {
         }
 
         auto Prop::setVisible(bool visible) -> void {
-            this->m_visible = visible;
             this->m_vtkProp->SetVisibility(visible);
 
             emit this->visibleChanged();
@@ -53,7 +52,7 @@ namespace quick {
         }
 
         auto Prop::isVisible() -> bool {
-            return this->m_visible;
+            return this->m_vtkProp->GetVisibility();
         }
 
         Prop::~Prop() {

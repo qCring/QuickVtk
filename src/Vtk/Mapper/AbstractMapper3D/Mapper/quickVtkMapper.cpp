@@ -22,15 +22,14 @@ namespace quick {
             return this->m_vtkMapper;
         }
 
-        auto Mapper::setScalarMode(ScalarMode val) -> void {
-            this->m_scalarMode = val;
-            this->m_vtkMapper->SetScalarMode(val);
+        auto Mapper::setScalarMode(ScalarMode scalarMode) -> void {
+            this->m_vtkMapper->SetScalarMode(scalarMode);
             emit this->scalarModeChanged();
             this->update();
         }
 
         auto Mapper::getScalarMode() -> ScalarMode {
-            return this->m_scalarMode;
+            return (ScalarMode) this->m_vtkMapper->GetScalarMode();
         }
 
         auto Mapper::setScalarVisibility(bool val) -> void {

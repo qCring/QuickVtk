@@ -18,7 +18,6 @@ namespace quick {
             Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged);
         private:
             bool m_initialized;
-            bool m_visible;
             vtkSmartPointer<vtkProp> m_vtkProp;
             QList<Viewer*> m_viewers;
             static Qml::Register::VtkAbstractClass<Prop> Register;

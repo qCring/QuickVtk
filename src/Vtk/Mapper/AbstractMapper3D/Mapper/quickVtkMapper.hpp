@@ -26,7 +26,6 @@ namespace quick {
         private:
             static Qml::Register::VtkAbstractClass<Mapper> Register;
             vtkSmartPointer<vtkMapper> m_vtkMapper;
-            ScalarMode m_scalarMode;
         public:
             Mapper();
             Mapper(Mapper*);

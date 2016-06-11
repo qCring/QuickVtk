@@ -19,7 +19,9 @@ Item {
     Math.Vector {
         id: vec;
 
-        x: slider.value / 100;
+        x: slider.value / 10;
+        y: 1;
+        z: 1;
     }
 
     Grid {
@@ -37,7 +39,7 @@ Item {
                 mouseEnabled: true;
 
                 Vtk.Actor {
-                    position: vec
+                    scale: vec
 
                     Vtk.PolyDataMapper {
                         Vtk.DiskSource {
@@ -74,4 +76,9 @@ Item {
         value: 1;
     }
 
+    Text {
+        anchors.top: parent.top;
+        anchors.right: parent.right;
+        text: "x: " + vec.x + "\ny: " + vec.y + "\nz: " + vec.z;
+    }
 }

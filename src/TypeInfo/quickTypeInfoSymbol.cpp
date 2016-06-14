@@ -68,6 +68,13 @@ namespace quick {
                 symbol->addProperty(metaObject.property(i));
             }
 
+            for (auto i = 0; i < metaObject.methodCount(); ++i) {
+                auto method = metaObject.method(i);
+                if (method.methodType() == QMetaMethod::MethodType::Slot && method.access() == QMetaMethod::Access::Public) {
+                    symbol->addMethod(metaObject.method(i));
+                }
+            }
+
             List::Add(symbol);
         }
 

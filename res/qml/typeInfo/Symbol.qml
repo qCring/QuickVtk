@@ -69,4 +69,11 @@ Column {
             item: model;
         }
     }
+
+    Repeater {
+        model: symbol.methods;
+        delegate: Method {
+            item: model;
+        }
+    }
 }

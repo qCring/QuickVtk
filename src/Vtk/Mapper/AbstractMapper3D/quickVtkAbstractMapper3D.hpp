@@ -11,7 +11,7 @@ namespace quick {
         class AbstractMapper3D : public AbstractMapper {
             Q_OBJECT
         private:
-            static Qml::Register::VtkAbstractClass<AbstractMapper3D> Register;
+            static Qml::Register::AbstractClass<AbstractMapper3D> Register;
             vtkSmartPointer<vtkAbstractMapper3D> m_vtkAbstractMapper3D;
         public:
             AbstractMapper3D();

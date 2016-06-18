@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(float shrinkFactor READ getShrinkFactor WRITE setShrinkFactor NOTIFY shrinkFactorChanged);
         private:
-            static Qml::Register::VtkClass<ShrinkPolyData> Register;
+            static Qml::Register::Class<ShrinkPolyData> Register;
             vtkSmartPointer<vtkShrinkPolyData> m_vtkShrinkPolyData;
         public:
             ShrinkPolyData();

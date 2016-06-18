@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Math {
 
-        Qml::Register::VtkClass<Vector> Vector::Register;
+        Qml::Register::Class<Vector> Vector::Register;
 
         Vector::Vector() : m_values({{0,0,0}}) {
         }

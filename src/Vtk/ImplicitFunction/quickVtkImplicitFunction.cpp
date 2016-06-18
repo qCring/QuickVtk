@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkAbstractClass<ImplicitFunction> ImplicitFunction::Register;
+        Qml::Register::AbstractClass<ImplicitFunction> ImplicitFunction::Register;
 
         ImplicitFunction::ImplicitFunction(ImplicitFunction* other) {
         }

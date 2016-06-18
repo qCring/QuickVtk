@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<SphereSource> SphereSource::Register;
+        Qml::Register::Class<SphereSource> SphereSource::Register;
 
         SphereSource::SphereSource() : PolyDataAlgorithm(this) {
             this->m_vtkSphereSource = vtkSmartPointer<vtkSphereSource>::New();

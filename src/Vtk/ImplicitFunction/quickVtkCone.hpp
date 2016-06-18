@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(float angle READ getAngle WRITE setAngle NOTIFY angleChanged);
         private:
-            static Qml::Register::VtkClass<Cone> Register;
+            static Qml::Register::Class<Cone> Register;
             vtkSmartPointer<vtkCone> m_vtkCone;
         public:
             Cone();

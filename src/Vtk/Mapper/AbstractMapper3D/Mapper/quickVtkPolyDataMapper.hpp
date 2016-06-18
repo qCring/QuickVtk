@@ -16,7 +16,7 @@ namespace quick {
         class PolyDataMapper : public Mapper {
             Q_OBJECT
         private:
-            static Qml::Register::VtkClass<PolyDataMapper> Register;
+            static Qml::Register::Class<PolyDataMapper> Register;
             vtkSmartPointer<vtkPolyDataMapper> m_vtkPolyDataMapper;
         public:
             PolyDataMapper();

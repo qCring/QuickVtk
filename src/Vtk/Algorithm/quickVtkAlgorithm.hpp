@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(QQmlListProperty<quick::Vtk::Algorithm> input READ getInput NOTIFY inputChanged);
             Q_CLASSINFO("DefaultProperty", "input");
         private:
-            static Qml::Register::VtkAbstractClass<Algorithm> Register;
+            static Qml::Register::AbstractClass<Algorithm> Register;
             QList<Algorithm*> m_input;
             vtkSmartPointer<vtkAlgorithm> m_vtkAlgorithm;
             Prop* m_prop;

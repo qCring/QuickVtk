@@ -14,7 +14,7 @@ namespace quick {
             Q_PROPERTY(float radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
             Q_PROPERTY(quick::Math::Vector* center READ getCenter WRITE setCenter NOTIFY centerChanged);
         private:
-            static Qml::Register::VtkClass<Sphere> Register;
+            static Qml::Register::Class<Sphere> Register;
             vtkSmartPointer<vtkSphere> m_vtkSphere;
             Math::Vector::cb_t m_centerCb;
             Math::Vector* m_center;

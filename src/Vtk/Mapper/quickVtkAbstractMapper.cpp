@@ -5,7 +5,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkAbstractClass<AbstractMapper> AbstractMapper::Register;
+        Qml::Register::AbstractClass<AbstractMapper> AbstractMapper::Register;
 
         AbstractMapper::AbstractMapper() : Algorithm(this) {
             this->m_vtkAbstractMapper   = 0;

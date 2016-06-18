@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(quick::Vtk::Mapper* mapper READ getMapper WRITE setMapper NOTIFY mapperChanged);
             Q_CLASSINFO("DefaultProperty", "mapper");
         private:
-            static Qml::Register::VtkClass<Actor> Register;
+            static Qml::Register::Class<Actor> Register;
             Property* m_property = nullptr;
             Mapper* m_mapper = nullptr;
             vtkSmartPointer<vtkActor> m_vtkActor;

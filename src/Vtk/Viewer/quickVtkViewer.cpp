@@ -17,7 +17,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<Viewer> Viewer::Register;
+        Qml::Register::Class<Viewer> Viewer::Register;
 
         Viewer::Viewer() {
             this->m_renderer = 0;

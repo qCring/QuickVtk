@@ -53,8 +53,8 @@ namespace quick {
             };
 
             template <class T>
-            struct VtkAbstractClass {
-                VtkAbstractClass() {
+            struct AbstractClass {
+                AbstractClass() {
                     auto initializer = []() {
                         QMetaObject metaObject = T::staticMetaObject;
                         auto name = QString(metaObject.className());
@@ -78,8 +78,8 @@ namespace quick {
             };
 
             template <class T>
-            struct VtkClass {
-                VtkClass() {
+            struct Class {
+                Class() {
                     auto initializer = []() {
                         QMetaObject metaObject = T::staticMetaObject;
                         auto name = QString(metaObject.className());

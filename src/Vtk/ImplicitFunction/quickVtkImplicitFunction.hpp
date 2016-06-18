@@ -17,7 +17,7 @@ namespace quick {
         public:
             using cb_t = std::function<void(void)>;
         private:
-            static Qml::Register::VtkAbstractClass<ImplicitFunction> Register;
+            static Qml::Register::AbstractClass<ImplicitFunction> Register;
             vtkSmartPointer<vtkImplicitFunction> m_vtkImplicitFunction;
             QList<cb_t*> m_callbacks;
         public:

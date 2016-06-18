@@ -20,11 +20,11 @@ Column {
             anchors.verticalCenter: parent.verticalCenter;
             anchors.left: parent.left;
             anchors.leftMargin: 4;
+            width: height;
 
             label.text: symbol.type[0];
             color: "#00000000"
-            border.color: symbol.color;
-            width: height;
+            border.color: symbol.color
             label.color: symbol.color;
             label.font.weight: Font.Bold;
             label.font.pointSize: 10;
@@ -50,30 +50,36 @@ Column {
             anchors.rightMargin: 4;
 
             text: symbol.prefix;
-            color: "#6E7582"
+            color: symbol.color;
             font.weight: Font.Bold;
             font.pointSize: 10;
         }
     }
 
-    Repeater {
+    Section {
+        title: "values"
         model: symbol.enumerations;
         delegate: Enumeration {
             item: model;
+            anchors.leftMargin: 12;
         }
     }
 
-    Repeater {
+    Section {
+        title: "properties"
         model: symbol.properties;
         delegate: Property {
             item: model;
+            anchors.leftMargin: 12;
         }
     }
 
-    Repeater {
+    Section {
+        title: "methods"
         model: symbol.methods;
         delegate: Method {
             item: model;
+            anchors.leftMargin: 12;
         }
     }
 }

@@ -16,7 +16,7 @@ Item {
 
     anchors.fill: parent;
 
-    Math.Vector {
+    Math.Vector3 {
         id: vec;
 
         x: slider.value / 10;

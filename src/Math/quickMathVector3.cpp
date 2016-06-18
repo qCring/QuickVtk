@@ -1,24 +1,24 @@
-#include "quickMathVector.hpp"
+#include "quickMathVector3.hpp"
 
 namespace quick {
 
     namespace Math {
 
-        Qml::Register::Class<Vector> Vector::Register;
+        Qml::Register::Class<Vector3> Vector3::Register;
 
-        Vector::Vector() : m_values({{0,0,0}}) {
+        Vector3::Vector3() : m_values({{0,0,0}}) {
         }
 
-        Vector::Vector(double x, double y, double z) : m_values{{x,y,z,}} {
+        Vector3::Vector3(double x, double y, double z) : m_values{{x,y,z}} {
         }
 
-        auto Vector::notify() -> void {
+        auto Vector3::notify() -> void {
             for (auto callback : this->m_callbacks) {
                 callback->operator()(std::move(*this));
             }
         }
 
-        auto Vector::addCallback(cb_t&& callback) -> void {
+        auto Vector3::addCallback(cb_t&& callback) -> void {
             if (this->m_callbacks.contains(&callback)) {
                 return;
             }
@@ -26,41 +26,41 @@ namespace quick {
             this->m_callbacks.append(&callback);
         }
 
-        auto Vector::removeCallback(cb_t&& callback) -> void {
+        auto Vector3::removeCallback(cb_t&& callback) -> void {
             this->m_callbacks.removeOne(&callback);
         }
 
-        auto Vector::setX(double x) -> void {
+        auto Vector3::setX(double x) -> void {
             this->m_values[0] = x;
             emit this->xChanged();
             this->notify();
         }
 
-        auto Vector::getX() -> double {
+        auto Vector3::getX() -> double {
             return this->m_values[0];
         }
 
-        auto Vector::setY(double y) -> void {
+        auto Vector3::setY(double y) -> void {
             this->m_values[1] = y;
             emit this->yChanged();
             this->notify();
         }
 
-        auto Vector::getY() -> double {
+        auto Vector3::getY() -> double {
             return this->m_values[1];
         }
 
-        auto Vector::setZ(double z) -> void {
+        auto Vector3::setZ(double z) -> void {
             this->m_values[2] = z;
             emit this->zChanged();
             this->notify();
         }
 
-        auto Vector::getZ() -> double {
+        auto Vector3::getZ() -> double {
             return this->m_values[2];
         }
 
-        auto Vector::getValues() -> std::array<double, 3> {
+        auto Vector3::getValues() -> std::array<double, 3> {
             return this->m_values;
         }
     }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "quickMathVector.hpp"
+#include "quickMathVector3.hpp"
 #include "quickVtkPolyDataAlgorithm.hpp"
 
 #include <vtkSphereSource.h>
@@ -11,7 +11,7 @@ namespace quick {
 
         class SphereSource : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(quick::Math::Vector* center READ getCenter WRITE setCenter NOTIFY centerChanged);
+            Q_PROPERTY(quick::Math::Vector3* center READ getCenter WRITE setCenter NOTIFY centerChanged);
             Q_PROPERTY(bool latLongTessellation READ getLatLongTessellation WRITE setLatLongTessellation NOTIFY latLongTessellationChanged);
             Q_PROPERTY(int thetaResolution READ getThetaResolution WRITE setThetaResolution NOTIFY thetaResolutionChanged);
             Q_PROPERTY(int phiResolution READ getPhiResolution WRITE setPhiResolution NOTIFY phiResolutionChanged);
@@ -23,13 +23,13 @@ namespace quick {
         private:
             static Qml::Register::Class<SphereSource> Register;
             vtkSmartPointer<vtkSphereSource> m_vtkSphereSource;
-            Math::Vector::cb_t m_centerCb;
-            Math::Vector* m_center = nullptr;
+            Math::Vector3::cb_t m_centerCb;
+            Math::Vector3* m_center = nullptr;
         public:
             SphereSource();
-            auto setCenter(Math::Vector*) -> void;
-            auto getCenter() -> Math::Vector*;
-            auto updateCenter(Math::Vector&&) -> void;
+            auto setCenter(Math::Vector3*) -> void;
+            auto getCenter() -> Math::Vector3*;
+            auto updateCenter(Math::Vector3&&) -> void;
             auto setLatLongTessellation(bool) -> void;
             auto getLatLongTessellation() -> bool;
             auto setRadius(float) -> void;

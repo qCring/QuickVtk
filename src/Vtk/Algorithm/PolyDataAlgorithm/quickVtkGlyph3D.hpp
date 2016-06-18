@@ -1,6 +1,7 @@
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
+#include "quickMathVector2.hpp"
 
 #include <vtkGlyph3D.h>
 
@@ -12,6 +13,7 @@ namespace quick {
             Q_OBJECT
             Q_ENUMS(ScaleMode);
             Q_ENUMS(ColorMode);
+            Q_PROPERTY(quick::Math::Vector2* range READ getRange WRITE setRange NOTIFY rangeChanged);
             Q_PROPERTY(ScaleMode scaleMode READ getScaleMode WRITE setScaleMode NOTIFY scaleModeChanged);
             Q_PROPERTY(ColorMode colorMode READ getColorMode WRITE setColorMode NOTIFY colorModeChanged);
             Q_PROPERTY(double scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
@@ -30,6 +32,10 @@ namespace quick {
         private:
             static Qml::Register::Class<Glyph3D> Register;
             vtkSmartPointer<vtkGlyph3D> m_vtkGlyph3D;
+            Math::Vector2::cb_t m_rangeCb;
+            Math::Vector2* m_range;
+        private:
+            auto updateRange(Math::Vector2&&) -> void;
         public:
             Glyph3D();
             auto setScaleMode(ScaleMode) -> void;
@@ -38,8 +44,11 @@ namespace quick {
             auto getColorMode() -> ColorMode;
             auto setScaleFactor(double) -> void;
             auto getScaleFactor() -> double;
+            auto setRange(Math::Vector2*) -> void;
+            auto getRange() -> Math::Vector2*;
             ~Glyph3D();
         signals:
+            void rangeChanged();
             void scaleModeChanged();
             void colorModeChanged();
             void scaleFactorChanged();

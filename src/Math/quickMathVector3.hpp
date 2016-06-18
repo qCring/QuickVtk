@@ -12,22 +12,22 @@ namespace quick {
 
     namespace Math {
 
-        class Vector : public QObject {
+        class Vector3 : public QObject {
             Q_OBJECT
             Q_PROPERTY(double x READ getX WRITE setX NOTIFY xChanged);
             Q_PROPERTY(double y READ getY WRITE setY NOTIFY yChanged);
             Q_PROPERTY(double z READ getZ WRITE setZ NOTIFY zChanged);
         public:
-            using cb_t = std::function<void(Vector&&)>;
+            using cb_t = std::function<void(Vector3&&)>;
         private:
             QList<cb_t*> m_callbacks;
             std::array<double, 3> m_values;
             auto notify() -> void;
         public:
-            static Qml::Register::Class<Vector> Register;
-            Vector();
-            Vector(double, double, double);
-            Vector(double*);
+            static Qml::Register::Class<Vector3> Register;
+            Vector3();
+            Vector3(double, double, double);
+            Vector3(double*);
             auto addCallback(cb_t&&) -> void;
             auto setX(double) -> void;
             auto getX() -> double;

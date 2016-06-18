@@ -11,12 +11,12 @@ namespace quick {
 
             PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkSphereSource);
 
-            this->m_centerCb = [this](Math::Vector&& vector) {
+            this->m_centerCb = [this](Math::Vector3&& vector) {
                 this->updateCenter(std::move(vector));
             };
         }
 
-        auto SphereSource::setCenter(Math::Vector* vector) -> void {
+        auto SphereSource::setCenter(Math::Vector3* vector) -> void {
             if (this->m_center) {
                 this->m_center->removeCallback(std::move(this->m_centerCb));
             }
@@ -31,16 +31,16 @@ namespace quick {
             emit this->centerChanged();
         }
 
-        auto SphereSource::getCenter() -> Math::Vector* {
+        auto SphereSource::getCenter() -> Math::Vector3* {
             if (!this->m_center) {
                 auto center = this->m_vtkSphereSource->GetCenter();
-                this->setCenter(new Math::Vector(center[0], center[1], center[2]));
+                this->setCenter(new Math::Vector3(center[0], center[1], center[2]));
             }
 
             return this->m_center;
         }
 
-        auto SphereSource::updateCenter(Math::Vector&& vector) -> void {
+        auto SphereSource::updateCenter(Math::Vector3&& vector) -> void {
             this->m_vtkSphereSource->SetCenter(vector.getValues().data());
             this->update();
         }

@@ -4,8 +4,11 @@ import "Icons.js" as Icons
 
 Text
 {
+    id: root;
+
     property var types: Icons.Types;
-    property string type;
+    property alias type: root.text;
+    property alias pointSize: root.font.pointSize;
 
     font.family: "FontAwesome";
     font.pointSize: 13;

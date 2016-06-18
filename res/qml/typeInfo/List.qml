@@ -6,7 +6,7 @@ Rectangle {
 
     visible: App.typeList.visible;
 
-    width: visible ? 260 : 0;
+    width: visible ? 280 : 0;
     clip: true;
     color: "#21252B"
 

@@ -5,7 +5,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkAbstractClass<Prop> Prop::Register;
+        Qml::Register::AbstractClass<Prop> Prop::Register;
 
         Prop::Prop() {
             this->m_vtkProp = 0;

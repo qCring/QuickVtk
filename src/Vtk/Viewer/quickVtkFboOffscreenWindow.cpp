@@ -1,19 +1,17 @@
 #include "quickVtkFboOffscreenWindow.hpp"
 #include "quickVtkFboRenderer.hpp"
 
-namespace quick
-{
-    namespace Vtk
-    {
+namespace quick {
+
+    namespace Vtk {
+
         FboOffscreenWindow::FboOffscreenWindow() : QtParentRenderer(0) { }
 
-        auto FboOffscreenWindow::New() -> FboOffscreenWindow*
-        {
+        auto FboOffscreenWindow::New() -> FboOffscreenWindow* {
             return new FboOffscreenWindow();
         }
 
-        auto FboOffscreenWindow::OpenGLInitState() -> void
-        {
+        auto FboOffscreenWindow::OpenGLInitState() -> void {
             Superclass::OpenGLInitState();
 
             this->MakeCurrent();
@@ -27,19 +25,17 @@ namespace quick
             glDepthMask(GL_TRUE);
         }
 
-        auto FboOffscreenWindow::Render() -> void
-        {
-            if (this->QtParentRenderer)
+        auto FboOffscreenWindow::Render() -> void {
+            if (this->QtParentRenderer) {
                 this->QtParentRenderer->update();
-                }
+            }
+        }
 
-        auto FboOffscreenWindow::InternalRender() -> void
-        {
+        auto FboOffscreenWindow::InternalRender() -> void {
             Superclass::Render();
         }
 
-        auto FboOffscreenWindow::SetFramebufferObject(QOpenGLFramebufferObject *fbo) -> void
-        {
+        auto FboOffscreenWindow::SetFramebufferObject(QOpenGLFramebufferObject *fbo) -> void {
             this->BackLeftBuffer = this->FrontLeftBuffer = this->BackBuffer = this->FrontBuffer = static_cast<unsigned int>(GL_COLOR_ATTACHMENT0);
 
             auto size                    = fbo->size();
@@ -55,8 +51,7 @@ namespace quick
             this->Modified();
         }
 
-        FboOffscreenWindow::~FboOffscreenWindow()
-        {
+        FboOffscreenWindow::~FboOffscreenWindow() {
             this->OffScreenRendering = 0;
         }
     }

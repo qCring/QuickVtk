@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::VtkClass<Sphere> Sphere::Register;
+        Qml::Register::Class<Sphere> Sphere::Register;
 
         Sphere::Sphere() : ImplicitFunction(this) {
             this->setVtkSphere(vtkSmartPointer<vtkSphere>::New());

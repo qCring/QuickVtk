@@ -2,41 +2,29 @@ import QtQuick 2.6
 
 import "./../lib" as Lib
 
-Item {
+Row {
     id: root;
-
-    property var item;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    height: nameLabel.height + 2;
+    property var item;
 
-    Row {
-        id: labels;
+    Lib.Label {
+        id: nameLabel;
 
-        anchors.left: parent.left;
-        anchors.top: parent.top;
-        anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
-        anchors.leftMargin: 24;
+        anchors.verticalCenter: parent.verticalCenter;
+        font.pointSize: 12;
+        color: "#fff";
 
-        Lib.Label {
-            id: nameLabel;
+        text: item.name + ":  ";
+    }
 
-            anchors.verticalCenter: parent.verticalCenter;
-            font.pointSize: 12;
-            color: "#fff";
+    Lib.Label {
+        anchors.verticalCenter: parent.verticalCenter;
 
-            text: item.name + ":  ";
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            font.pointSize: 12;
-            color: "#9DA5B4";
-            text: item.value
-        }
+        font.pointSize: 12;
+        color: "#9DA5B4";
+        text: item.value
     }
 }

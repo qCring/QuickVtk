@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<Prop3D> Prop3D::Register;
+        Qml::Register::Class<Prop3D> Prop3D::Register;
 
         Prop3D::Prop3D() : Prop(this) {
         }

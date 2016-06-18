@@ -2,36 +2,59 @@ import QtQuick 2.6
 
 import "./../lib" as Lib
 
-Column {
+Row {
     id: root;
-
-    property var item;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
 
+    height: nameLabel.height;
+
+    property var item;
     property color typeColor: "#9DA5B4"
 
     Lib.Label {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.leftMargin: 24;
-        anchors.rightMargin: 4;
+        id: nameLabel;
+
+        anchors.verticalCenter: parent.verticalCenter;
 
         font.pointSize: 12;
         color: "#fff";
 
-        text: item.name;
+        text: item.name + ": ";
     }
 
     Lib.Label {
-        anchors.left: parent.left;
-        anchors.leftMargin: 24;
-        anchors.right: parent.right;
-        anchors.rightMargin: 4;
+        anchors.verticalCenter: parent.verticalCenter;
 
-        text: item.paramTypes + " -> " + item.returnType;
-        font.pointSize: 9;
-        color: "#9DA5B4";
+        text: "(";
+        color: "#fff"
+    }
+
+    Lib.TagLabel {
+        anchors.verticalCenter: parent.verticalCenter;
+
+        label.text: item.paramTypes;
+        label.font.pointSize: 9;
+        label.color: "#9DA5B4";
+        border.color: "#333842"
+        color: "#00000000"
+    }
+
+    Lib.Label {
+        anchors.verticalCenter: parent.verticalCenter;
+
+        text: ") ->";
+        color: "#fff"
+    }
+
+    Lib.TagLabel {
+        anchors.verticalCenter: parent.verticalCenter;
+
+        label.text: item.returnType;
+        label.font.pointSize: 9;
+        label.color: "#9DA5B4";
+        border.color: "#333842"
+        color: "#00000000"
     }
 }

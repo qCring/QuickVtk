@@ -21,7 +21,7 @@ namespace quick {
             Q_PROPERTY(float endTheta READ getEndTheta WRITE setEndTheta NOTIFY endThetaChanged);
             Q_PROPERTY(float endPhi READ getEndPhi WRITE setEndPhi NOTIFY endPhiChanged);
         private:
-            static Qml::Register::VtkClass<SphereSource> Register;
+            static Qml::Register::Class<SphereSource> Register;
             vtkSmartPointer<vtkSphereSource> m_vtkSphereSource;
             Math::Vector::cb_t m_centerCb;
             Math::Vector* m_center = nullptr;

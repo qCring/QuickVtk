@@ -20,7 +20,7 @@ namespace quick {
             bool m_initialized;
             vtkSmartPointer<vtkProp> m_vtkProp;
             QList<Viewer*> m_viewers;
-            static Qml::Register::VtkAbstractClass<Prop> Register;
+            static Qml::Register::AbstractClass<Prop> Register;
         public:
             Prop();
             Prop(Prop*);

@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::VtkClass<Cone> Cone::Register;
+        Qml::Register::Class<Cone> Cone::Register;
 
         Cone::Cone() : ImplicitFunction(this) {
             this->setVtkCone(vtkSmartPointer<vtkCone>::New());

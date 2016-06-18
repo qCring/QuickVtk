@@ -30,7 +30,7 @@ namespace quick {
             bool m_mouseEnabled;
             vtkSmartPointer<vtkRenderer> m_renderer;
         public:
-            static Qml::Register::VtkClass<Viewer> Register;
+            static Qml::Register::Class<Viewer> Register;
             Viewer();
             ~Viewer();
             Renderer *createRenderer() const override;

@@ -29,6 +29,10 @@ namespace quick {
                 paramTypes.remove(paramTypes.length() - 3, paramTypes.length());
             }
 
+            if (paramTypeList.count() == 0) {
+                paramTypes = "void";
+            }
+
             if (returnType.contains("List")) {
                 sequence = true;
                 if (auto bracketIndex = returnType.lastIndexOf("<")) {

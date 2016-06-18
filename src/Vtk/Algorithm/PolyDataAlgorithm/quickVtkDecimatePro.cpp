@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<DecimatePro> DecimatePro::Register;
+        Qml::Register::Class<DecimatePro> DecimatePro::Register;
 
         DecimatePro::DecimatePro() : PolyDataAlgorithm(this) {
             this->m_vtkDecimatePro = vtkSmartPointer<vtkDecimatePro>::New();

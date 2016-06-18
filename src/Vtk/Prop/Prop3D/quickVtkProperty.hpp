@@ -50,7 +50,7 @@ namespace quick {
                 Surface = VTK_SURFACE
             };
         private:
-            static Qml::Register::VtkClass<Property> Register;
+            static Qml::Register::Class<Property> Register;
             quick::Vtk::Actor* m_actor;
             vtkSmartPointer<vtkActor> m_vtkActor;
             Interpolation m_interpolation;

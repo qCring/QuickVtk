@@ -14,55 +14,55 @@ Item {
 
     property color typeColor: "#9DA5B4"
 
-    Lib.Label {
-        id: nameLabel;
-
-        anchors.verticalCenter: parent.verticalCenter;
+    Row {
         anchors.left: parent.left;
-        anchors.leftMargin: 24;
+        anchors.right: parent.right;
 
-        font.pointSize: 12;
-        color: "#fff";
+        height: nameLabel.height;
 
-        text: item.name + ":  ";
-    }
+        Lib.Label {
+            id: nameLabel;
 
-    Lib.Label {
-        id: typePrefix;
+            anchors.verticalCenter: parent.verticalCenter;
 
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: nameLabel.right;
+            font.pointSize: 12;
+            color: "#fff";
 
-        visible: item.sequence;
-        font.pointSize: 12;
-        color: root.typeColor;
-        text: "list <"
-    }
+            text: item.name + ": ";
+        }
 
-    Lib.Label {
-        id: typeLabel;
+        Lib.Label {
+            id: typePrefix;
 
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: typePrefix.visible ? typePrefix.right : nameLabel.right;
+            anchors.verticalCenter: parent.verticalCenter;
 
-        font.pointSize: 12;
-        color: item.sequence ? "#fff" : root.typeColor;
+            visible: item.sequence;
+            font.pointSize: 12;
+            color: root.typeColor;
+            text: "list <"
+        }
 
-        text: item.type;
-    }
+        Lib.Label {
+            id: typeLabel;
 
-    Lib.Label {
-        id: typeSuffix;
+            anchors.verticalCenter: parent.verticalCenter;
 
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: typeLabel.right;
-        anchors.right: rwLabel.left;
-        anchors.rightMargin: 4;
+            font.pointSize: 12;
+            color: item.sequence ? "#fff" : root.typeColor;
 
-        visible: item.sequence;
-        font.pointSize: 12;
-        color: root.typeColor;
-        text: ">"
+            text: item.type;
+        }
+
+        Lib.Label {
+            id: typeSuffix;
+
+            anchors.verticalCenter: parent.verticalCenter;
+
+            visible: item.sequence;
+            font.pointSize: 12;
+            color: root.typeColor;
+            text: ">"
+        }
     }
 
     Lib.Label {

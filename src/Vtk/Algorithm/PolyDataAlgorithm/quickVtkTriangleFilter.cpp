@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<TriangleFilter> TriangleFilter::Register;
+        Qml::Register::Class<TriangleFilter> TriangleFilter::Register;
 
         TriangleFilter::TriangleFilter() : PolyDataAlgorithm(this) {
             this->m_vtkTriangleFilter = vtkSmartPointer<vtkTriangleFilter>::New();

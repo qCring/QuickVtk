@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector* position READ getPosition WRITE setPosition NOTIFY positionChanged);
             Q_PROPERTY(quick::Math::Vector* orientation READ getOrientation WRITE setOrientation NOTIFY orientationChanged);
         private:
-            static Qml::Register::VtkClass<Prop3D> Register;
+            static Qml::Register::Class<Prop3D> Register;
             Math::Vector* m_scale = nullptr;
             Math::Vector* m_origin = nullptr;
             Math::Vector* m_position = nullptr;

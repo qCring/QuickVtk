@@ -15,8 +15,8 @@ namespace quick {
         public:
             FboRenderer* QtParentRenderer;
             static auto New() -> FboOffscreenWindow*;
-            virtual auto OpenGLInitState() -> void;
-            auto Render() -> void;
+            virtual auto OpenGLInitState() -> void override;
+            auto Render() -> void override;
             auto InternalRender() -> void;
             auto SetFramebufferObject(QOpenGLFramebufferObject*) -> void;
         protected:

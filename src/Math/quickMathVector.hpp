@@ -24,7 +24,7 @@ namespace quick {
             std::array<double, 3> m_values;
             auto notify() -> void;
         public:
-            static Qml::Register::VtkClass<Vector> Register;
+            static Qml::Register::Class<Vector> Register;
             Vector();
             Vector(double, double, double);
             Vector(double*);

@@ -11,7 +11,7 @@ namespace quick {
         class OBJReader : public AbstractPolyDataReader {
             Q_OBJECT
         private:
-            static Qml::Register::VtkClass<OBJReader> Register;
+            static Qml::Register::Class<OBJReader> Register;
             vtkSmartPointer<vtkOBJReader> m_vtkOBJReader;
         public:
             OBJReader();

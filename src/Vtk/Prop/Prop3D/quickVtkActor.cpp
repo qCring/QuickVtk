@@ -6,7 +6,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::VtkClass<Actor> Actor::Register;
+        Qml::Register::Class<Actor> Actor::Register;
 
         Actor::Actor() : Prop3D(this) {
             this->setVtkActor(vtkSmartPointer<vtkActor>::New());

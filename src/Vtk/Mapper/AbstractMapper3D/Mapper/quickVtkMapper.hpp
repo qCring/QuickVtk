@@ -12,17 +12,18 @@ namespace quick {
 
         class Mapper : public AbstractMapper3D {
             Q_OBJECT
-            Q_ENUMS(ScalarMode);
-            Q_PROPERTY(ScalarMode scalarMode READ getScalarMode WRITE setScalarMode NOTIFY scalarModeChanged);
-            Q_PROPERTY(bool scalarVisibility READ getScalarVisibility WRITE setScalarVisibility NOTIFY scalarVisibilityChanged);
         public:
             enum ScalarMode {
-                DefaultScalarMode = VTK_SCALAR_MODE_DEFAULT,
-                PointData = VTK_SCALAR_MODE_USE_POINT_DATA,
-                CellData = VTK_SCALAR_MODE_USE_CELL_DATA,
-                PointFieldData = VTK_SCALAR_MODE_USE_POINT_FIELD_DATA,
-                CellFieldData = VTK_SCALAR_MODE_USE_CELL_FIELD_DATA
+                ScalarModeDefault = VTK_SCALAR_MODE_DEFAULT,
+                ScalarModeUsePointData = VTK_SCALAR_MODE_USE_POINT_DATA,
+                ScalarModeUseCellData = VTK_SCALAR_MODE_USE_CELL_DATA,
+                ScalarModeUsePointFieldData = VTK_SCALAR_MODE_USE_POINT_FIELD_DATA,
+                ScalarModeUseCellFieldData = VTK_SCALAR_MODE_USE_CELL_FIELD_DATA
             };
+        private:
+            Q_ENUM(ScalarMode);
+            Q_PROPERTY(ScalarMode scalarMode READ getScalarMode WRITE setScalarMode NOTIFY scalarModeChanged);
+            Q_PROPERTY(bool scalarVisibility READ getScalarVisibility WRITE setScalarVisibility NOTIFY scalarVisibilityChanged);
         private:
             static Qml::Register::AbstractClass<Mapper> Register;
             vtkSmartPointer<vtkMapper> m_vtkMapper;

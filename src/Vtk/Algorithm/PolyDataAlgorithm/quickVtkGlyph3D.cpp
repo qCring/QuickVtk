@@ -74,6 +74,16 @@ namespace quick {
             return (IndexMode) this->m_vtkGlyph3D->GetIndexMode();
         }
 
+        auto Glyph3D::setVectorMode(VectorMode vectorMode) -> void {
+            this->m_vtkGlyph3D->SetVectorMode(vectorMode);
+            emit this->vectorModeChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getVectorMode() -> VectorMode {
+            return (VectorMode) this->m_vtkGlyph3D->GetVectorMode();
+        }
+
         auto Glyph3D::setScaleFactor(double scaleFactor) -> void {
             this->m_vtkGlyph3D->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
@@ -83,7 +93,57 @@ namespace quick {
         auto Glyph3D::getScaleFactor() -> double {
             return this->m_vtkGlyph3D->GetScaleFactor();
         }
-        
+
+        auto Glyph3D::setOrient(bool orient) -> void {
+            this->m_vtkGlyph3D->SetOrient(orient);
+            emit this->orientChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getOrient() -> bool {
+            return this->m_vtkGlyph3D->GetOrient();
+        }
+
+        auto Glyph3D::setClamping(bool clamping) -> void {
+            this->m_vtkGlyph3D->SetClamping(clamping);
+            emit this->clampingChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getClamping() -> bool {
+            return this->m_vtkGlyph3D->GetClamping();
+        }
+
+        auto Glyph3D::setScaling(bool scaling) -> void {
+            this->m_vtkGlyph3D->SetScaling(scaling);
+            emit this->scalingChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getScaling() -> bool {
+            return this->m_vtkGlyph3D->GetScaling();
+        }
+
+        auto Glyph3D::setFillCellData(bool fillCellData) -> void {
+            this->m_vtkGlyph3D->SetFillCellData(fillCellData);
+            emit this->fillCellDataChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getFillCellData() -> bool {
+            return this->m_vtkGlyph3D->GetFillCellData();
+        }
+
+        auto Glyph3D::setGeneratePointIds(bool generatePointIds) -> void {
+            this->m_vtkGlyph3D->SetGeneratePointIds(generatePointIds);
+            emit this->generatePointIdsChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getGeneratePointIds() -> bool {
+            return this->m_vtkGlyph3D->GetGeneratePointIds();
+        }
+
         Glyph3D::~Glyph3D() {
             this->m_vtkGlyph3D = nullptr;
         }

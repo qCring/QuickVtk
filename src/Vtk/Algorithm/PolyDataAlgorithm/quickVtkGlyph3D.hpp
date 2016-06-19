@@ -28,15 +28,27 @@ namespace quick {
                 IndexingByScalar = VTK_INDEXING_BY_SCALAR,
                 IndexingByVector = VTK_INDEXING_BY_VECTOR
             };
+            enum VectorMode {
+                UseVector = VTK_USE_VECTOR,
+                UseNormal = VTK_USE_NORMAL,
+                VectorRotationOff = VTK_VECTOR_ROTATION_OFF
+            };
         private:
             Q_ENUM(ScaleMode);
             Q_ENUM(ColorMode);
             Q_ENUM(IndexMode);
+            Q_ENUM(VectorMode);
             Q_PROPERTY(quick::Math::Vector2* range READ getRange WRITE setRange NOTIFY rangeChanged);
             Q_PROPERTY(ScaleMode scaleMode READ getScaleMode WRITE setScaleMode NOTIFY scaleModeChanged);
             Q_PROPERTY(ColorMode colorMode READ getColorMode WRITE setColorMode NOTIFY colorModeChanged);
             Q_PROPERTY(IndexMode indexMode READ getIndexMode WRITE setIndexMode NOTIFY indexModeChanged);
+            Q_PROPERTY(VectorMode vectorMode READ getVectorMode WRITE setVectorMode NOTIFY vectorModeChanged);
             Q_PROPERTY(double scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
+            Q_PROPERTY(bool orient READ getOrient WRITE setOrient NOTIFY orientChanged);
+            Q_PROPERTY(bool scaling READ getScaling WRITE setScaling NOTIFY scalingChanged);
+            Q_PROPERTY(bool clamping READ getClamping WRITE setClamping NOTIFY clampingChanged);
+            Q_PROPERTY(bool fillCellData READ getFillCellData WRITE setFillCellData NOTIFY fillCellDataChanged);
+            Q_PROPERTY(bool generatePointIds READ getGeneratePointIds WRITE setGeneratePointIds NOTIFY generatePointIdsChanged);
         private:
             static Qml::Register::Class<Glyph3D> Register;
             vtkSmartPointer<vtkGlyph3D> m_vtkGlyph3D;
@@ -52,17 +64,35 @@ namespace quick {
             auto getColorMode() -> ColorMode;
             auto setIndexMode(IndexMode) -> void;
             auto getIndexMode() -> IndexMode;
+            auto setVectorMode(VectorMode) -> void;
+            auto getVectorMode() -> VectorMode;
             auto setScaleFactor(double) -> void;
             auto getScaleFactor() -> double;
             auto setRange(Math::Vector2*) -> void;
             auto getRange() -> Math::Vector2*;
+            auto setOrient(bool) -> void;
+            auto getOrient() -> bool;
+            auto setClamping(bool) -> void;
+            auto getClamping() -> bool;
+            auto setScaling(bool) -> void;
+            auto getScaling() -> bool;
+            auto setFillCellData(bool) -> void;
+            auto getFillCellData() -> bool;
+            auto setGeneratePointIds(bool) -> void;
+            auto getGeneratePointIds() -> bool;
             ~Glyph3D();
         signals:
             void rangeChanged();
             void scaleModeChanged();
             void colorModeChanged();
             void indexModeChanged();
+            void vectorModeChanged();
             void scaleFactorChanged();
+            void orientChanged();
+            void scalingChanged();
+            void clampingChanged();
+            void fillCellDataChanged();
+            void generatePointIdsChanged();
         };
     }
 }

@@ -8,7 +8,6 @@ namespace quick {
         Qml::Register::Type<Enum> Enum::Register;
 
         Enum::Enum() {
-
         }
 
         auto Enum::add(EnumItem* item) -> void {

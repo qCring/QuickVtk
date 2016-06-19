@@ -17,8 +17,20 @@ namespace quick {
 
         class Property : public QObject {
             Q_OBJECT
-            Q_ENUMS(Interpolation);
-            Q_ENUMS(Representation);
+        public:
+            enum Interpolation {
+                Flat = VTK_FLAT,
+                Gouraud = VTK_GOURAUD,
+                Phong = VTK_PHONG
+            };
+            enum Representation {
+                Points = VTK_POINTS,
+                Wireframe = VTK_WIREFRAME,
+                Surface = VTK_SURFACE
+            };
+        private:
+            Q_ENUM(Interpolation);
+            Q_ENUM(Representation);
             Q_PROPERTY(Interpolation interpolation READ getInterpolation WRITE setInterpolation NOTIFY interpolationChanged);
             Q_PROPERTY(Representation representation READ getRepresentation WRITE setRepresentation NOTIFY representationChanged);
             Q_PROPERTY(float opacity READ getOpacity WRITE setOpacity NOTIFY opacityChanged);
@@ -38,23 +50,10 @@ namespace quick {
             Q_PROPERTY(float diffuse READ getDiffuse WRITE setDiffuse NOTIFY diffuseChanged);
             Q_PROPERTY(float specular READ getSpecular WRITE setSpecular NOTIFY specularChanged);
             Q_PROPERTY(float specularPower READ getSpecularPower WRITE setSpecularPower NOTIFY specularPowerChanged);
-        public:
-            enum Interpolation {
-                Flat = VTK_FLAT,
-                Gouraud = VTK_GOURAUD,
-                Phong = VTK_PHONG
-            };
-            enum Representation {
-                Points = VTK_POINTS,
-                Wireframe = VTK_WIREFRAME,
-                Surface = VTK_SURFACE
-            };
         private:
             static Qml::Register::Class<Property> Register;
             quick::Vtk::Actor* m_actor;
             vtkSmartPointer<vtkActor> m_vtkActor;
-            Interpolation m_interpolation;
-            Representation m_representation;
             QColor m_color;
             QColor m_specularColor;
             QColor m_diffuseColor;

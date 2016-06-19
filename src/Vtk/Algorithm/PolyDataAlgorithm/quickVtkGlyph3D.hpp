@@ -11,24 +11,32 @@ namespace quick {
 
         class Glyph3D : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_ENUMS(ScaleMode);
-            Q_ENUMS(ColorMode);
-            Q_PROPERTY(quick::Math::Vector2* range READ getRange WRITE setRange NOTIFY rangeChanged);
-            Q_PROPERTY(ScaleMode scaleMode READ getScaleMode WRITE setScaleMode NOTIFY scaleModeChanged);
-            Q_PROPERTY(ColorMode colorMode READ getColorMode WRITE setColorMode NOTIFY colorModeChanged);
-            Q_PROPERTY(double scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
         public:
             enum ScaleMode {
                 ScaleByScalar = VTK_SCALE_BY_SCALAR,
                 ScaleByVector = VTK_SCALE_BY_VECTOR,
                 ScaleByVectorComponents = VTK_SCALE_BY_VECTORCOMPONENTS,
-                ScaleOff = VTK_DATA_SCALING_OFF
+                DataScalingOff = VTK_DATA_SCALING_OFF
             };
             enum ColorMode {
                 ColorByScale = VTK_COLOR_BY_SCALE,
                 ColorByScalar = VTK_COLOR_BY_SCALAR,
                 ColorByVector = VTK_COLOR_BY_VECTOR
             };
+            enum IndexMode {
+                IndexingOff = VTK_INDEXING_OFF,
+                IndexingByScalar = VTK_INDEXING_BY_SCALAR,
+                IndexingByVector = VTK_INDEXING_BY_VECTOR
+            };
+        private:
+            Q_ENUM(ScaleMode);
+            Q_ENUM(ColorMode);
+            Q_ENUM(IndexMode);
+            Q_PROPERTY(quick::Math::Vector2* range READ getRange WRITE setRange NOTIFY rangeChanged);
+            Q_PROPERTY(ScaleMode scaleMode READ getScaleMode WRITE setScaleMode NOTIFY scaleModeChanged);
+            Q_PROPERTY(ColorMode colorMode READ getColorMode WRITE setColorMode NOTIFY colorModeChanged);
+            Q_PROPERTY(IndexMode indexMode READ getIndexMode WRITE setIndexMode NOTIFY indexModeChanged);
+            Q_PROPERTY(double scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
         private:
             static Qml::Register::Class<Glyph3D> Register;
             vtkSmartPointer<vtkGlyph3D> m_vtkGlyph3D;
@@ -42,6 +50,8 @@ namespace quick {
             auto getScaleMode() -> ScaleMode;
             auto setColorMode(ColorMode) -> void;
             auto getColorMode() -> ColorMode;
+            auto setIndexMode(IndexMode) -> void;
+            auto getIndexMode() -> IndexMode;
             auto setScaleFactor(double) -> void;
             auto getScaleFactor() -> double;
             auto setRange(Math::Vector2*) -> void;
@@ -51,6 +61,7 @@ namespace quick {
             void rangeChanged();
             void scaleModeChanged();
             void colorModeChanged();
+            void indexModeChanged();
             void scaleFactorChanged();
         };
     }

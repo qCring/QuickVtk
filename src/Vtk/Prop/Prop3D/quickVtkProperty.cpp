@@ -8,7 +8,6 @@ namespace quick {
         Qml::Register::Class<Property> Property::Register;
 
         Property::Property() {
-
         }
 
         Property::Property(Actor* actor) : m_actor(actor) {
@@ -123,10 +122,18 @@ namespace quick {
             this->update();
         }
 
+        auto Property::getInterpolation() -> Interpolation {
+            return (Interpolation) this->m_vtkActor->GetProperty()->GetInterpolation();
+        }
+
         auto Property::setRepresentation(Representation representation) -> void {
             this->m_vtkActor->GetProperty()->SetRepresentation(representation);
             emit this->representationChanged();
             this->update();
+        }
+
+        auto Property::getRepresentation() -> Representation {
+            return (Representation) this->m_vtkActor->GetProperty()->GetRepresentation();
         }
 
         auto Property::setAmbient(float ambient) -> void {
@@ -203,14 +210,6 @@ namespace quick {
 
         auto Property::getPointSize() -> float {
             return this->m_vtkActor->GetProperty()->GetPointSize();
-        }
-
-        auto Property::getInterpolation() -> Interpolation {
-            return this->m_interpolation;
-        }
-
-        auto Property::getRepresentation() -> Representation {
-            return this->m_representation;
         }
 
         auto Property::getAmbient() -> float {

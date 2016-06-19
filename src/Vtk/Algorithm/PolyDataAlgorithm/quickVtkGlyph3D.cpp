@@ -44,7 +44,7 @@ namespace quick {
             return this->m_range;
         }
 
-        auto Glyph3D::setScaleMode(Glyph3D::ScaleMode scaleMode) -> void {
+        auto Glyph3D::setScaleMode(ScaleMode scaleMode) -> void {
             this->m_vtkGlyph3D->SetScaleMode(scaleMode);
             emit this->scaleModeChanged();
             this->update();
@@ -54,14 +54,24 @@ namespace quick {
             return (Glyph3D::ScaleMode) this->m_vtkGlyph3D->GetScaleMode();
         }
 
-        auto Glyph3D::setColorMode(Glyph3D::ColorMode colorMode) -> void {
+        auto Glyph3D::setColorMode(ColorMode colorMode) -> void {
             this->m_vtkGlyph3D->SetColorMode(colorMode);
             emit this->colorModeChanged();
             this->update();
         }
 
-        auto Glyph3D::getColorMode() -> Glyph3D::ColorMode {
-            return (Glyph3D::ColorMode) this->m_vtkGlyph3D->GetColorMode();
+        auto Glyph3D::getColorMode() -> ColorMode {
+            return (ColorMode) this->m_vtkGlyph3D->GetColorMode();
+        }
+
+        auto Glyph3D::setIndexMode(IndexMode indexMode) -> void {
+            this->m_vtkGlyph3D->SetIndexMode(indexMode);
+            emit this->indexModeChanged();
+            this->update();
+        }
+
+        auto Glyph3D::getIndexMode() -> IndexMode {
+            return (IndexMode) this->m_vtkGlyph3D->GetIndexMode();
         }
 
         auto Glyph3D::setScaleFactor(double scaleFactor) -> void {

@@ -19,7 +19,7 @@ namespace quick {
         }
 
         auto Symbol::Get::EnumName(QMetaEnum metaEnum) -> QString {
-            return metaEnum.name();
+            return QString(metaEnum.scope()).section("::", 2, 2) + "." + metaEnum.name();
         }
 
         auto Symbol::Get::EnumPrefix(QMetaEnum metaEnum) -> QString {
@@ -29,12 +29,12 @@ namespace quick {
         Qml::Register::Type<Symbol> Symbol::Register;
 
         auto Symbol::GetEnums() -> QStringList& {
-            static QStringList Enums { "TransformOrigin" };
+            static QStringList Enums { ".TransformOrigin" };
             return Enums;
         }
 
         auto Symbol::MakeEnum(QMetaEnum metaEnum) -> void {
-            auto name = metaEnum.name();
+            auto name = Get::EnumName(metaEnum);
 
             if (GetEnums().contains(name)) {
                 return;

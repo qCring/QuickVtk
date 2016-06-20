@@ -44,7 +44,7 @@ namespace quick {
 
             symbol->m_prefix = Get::EnumPrefix(metaEnum);
             symbol->m_name = name;
-            symbol->m_type = "Enum";
+            symbol->m_type = "enum";
             symbol->m_color = "#E6713E";
 
             for (auto i = 0; i < metaEnum.keyCount(); ++i) {
@@ -61,7 +61,7 @@ namespace quick {
 
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
-            symbol->m_type = "Class";
+            symbol->m_type = "class";
             symbol->m_color = "#319CD3";
 
             for (auto i = 0; i < metaObject.propertyCount(); ++i) {
@@ -83,7 +83,7 @@ namespace quick {
 
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
-            symbol->m_type = "Abstract";
+            symbol->m_type = "abstract";
             symbol->m_color = "#9DA5B4";
 
             symbol->setAbstract(true);

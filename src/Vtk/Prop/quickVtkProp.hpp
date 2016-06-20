@@ -15,7 +15,7 @@ namespace quick {
 
         class Prop : public QObject {
             Q_OBJECT
-            Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged);
+            Q_PROPERTY(bool visibility READ getVisibility WRITE setVisibility NOTIFY visibilityChanged);
         private:
             bool m_initialized;
             vtkSmartPointer<vtkProp> m_vtkProp;
@@ -25,15 +25,15 @@ namespace quick {
             Prop();
             Prop(Prop*);
             auto update() -> void;
-            auto setVisible(bool) -> void;
+            auto setVisibility(bool) -> void;
+            auto getVisibility() -> bool;
             auto linkViewer(Viewer*) -> void;
             auto unlinkViewer(Viewer*) -> void;
             auto setVtkProp(vtkSmartPointer<vtkProp>) -> void;
             auto getVtkProp() -> vtkSmartPointer<vtkProp> ;
-            auto isVisible() -> bool;
             virtual ~Prop();
         signals:
-            void visibleChanged();
+            void visibilityChanged();
         };
     }
 }

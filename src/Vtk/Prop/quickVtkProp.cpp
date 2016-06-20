@@ -43,26 +43,19 @@ namespace quick {
             }
         }
 
-        auto Prop::setVisible(bool visible) -> void {
+        auto Prop::setVisibility(bool visible) -> void {
             this->m_vtkProp->SetVisibility(visible);
-
-            emit this->visibleChanged();
-
+            emit this->visibilityChanged();
             update();
         }
 
-        auto Prop::isVisible() -> bool {
+        auto Prop::getVisibility() -> bool {
             return this->m_vtkProp->GetVisibility();
         }
 
         Prop::~Prop() {
-            /*
-             if (this->m_renderView)
-             {
-             this->m_renderView->removeData(this);
-             }*/
             this->m_initialized = false;
-            this->m_vtkProp     = 0;
+            this->m_vtkProp = nullptr;
         }
     }
 }

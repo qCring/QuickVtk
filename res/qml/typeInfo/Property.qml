@@ -75,6 +75,6 @@ Item {
         text: item.writable ? item.readable ? "R+W" : "W" : "R";
         font.pointSize: 8;
         font.bold: true;
-        color: "#9DA5B4";
+        color: "#6E7582";
     }
 }

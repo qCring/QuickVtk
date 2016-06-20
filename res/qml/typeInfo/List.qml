@@ -6,7 +6,7 @@ Rectangle {
 
     visible: App.typeList.visible;
 
-    width: visible ? 280 : 0;
+    width: visible ? 320 : 0;
     clip: true;
     color: "#21252B"
 
@@ -70,6 +70,7 @@ Rectangle {
 
         boundsBehavior: Flickable.StopAtBounds;
         clip: true;
+        spacing: 2;
 
         model: App.typeList;
         delegate: Symbol {

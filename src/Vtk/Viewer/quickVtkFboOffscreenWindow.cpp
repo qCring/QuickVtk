@@ -5,7 +5,9 @@ namespace quick {
 
     namespace Vtk {
 
-        FboOffscreenWindow::FboOffscreenWindow() : QtParentRenderer(0) { }
+        FboOffscreenWindow::FboOffscreenWindow() : QtParentRenderer(0) {
+            this->OffScreenRenderingOn();
+        }
 
         auto FboOffscreenWindow::New() -> FboOffscreenWindow* {
             return new FboOffscreenWindow();

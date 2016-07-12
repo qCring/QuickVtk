@@ -15,10 +15,14 @@ Item {
         mouseEnabled: true;
 
         Vtk.Actor {
-            property.representation: Vtk.Property.Points;
+            property.representation: Vtk.Property.Wireframe;
+
 
             Vtk.PolyDataMapper {
-                Vtk.SphereSource {
+                Vtk.LoopSubdivisionFilter {
+                    numberOfSubdivisions: 2;
+                    Vtk.SphereSource {
+                    }
                 }
             }
         }

@@ -87,13 +87,13 @@ QuickVtk can be built for Mac OS X and Windows via **[CMake](https://cmake.org)*
 **Important Notes:**
 
 - When building VTK, make sure to use  **OpenGL** as **VTK\_RENDERING\_BACKEND** since things seem to have changed with **OpenGL2**
-- **On Windows**, the renderWindowInteractor has an issue with the offscreen rendering setup and therefore is currently disabled. Which is sad but at least prevents the app from crashing.
-- When building for **Windows** use **[Qt 5.6.1](https://www.qt.io/)** which is now capable of scaling the UI properly on high resolution displays.
+- <del>On Windows, the renderWindowInteractor has an issue with the offscreen rendering setup and therefore is currently disabled. Which is sad but at least prevents the app from crashing.</del>
+- When building for **Windows** use **[Qt 5.6.1 or later](https://www.qt.io/)** which is now capable of scaling the UI properly on high resolution displays.
 
 Contact
 ----
 
-Write me an <a href="mailto:a.e.szalo@gmail.com">e-mail</a>!
+Write me an <a href="mailto:qCring@gmail.com">e-mail</a>!
 
 License
 ----

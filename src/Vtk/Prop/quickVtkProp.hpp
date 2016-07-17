@@ -30,7 +30,7 @@ namespace quick {
             auto linkViewer(Viewer*) -> void;
             auto unlinkViewer(Viewer*) -> void;
             auto setVtkProp(vtkSmartPointer<vtkProp>) -> void;
-            auto getVtkProp() -> vtkSmartPointer<vtkProp> ;
+            auto getVtkProp() -> vtkSmartPointer<vtkProp>;
             virtual ~Prop();
         signals:
             void visibilityChanged();

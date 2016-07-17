@@ -3,7 +3,7 @@
 #include "meta_quickvtk.hpp"
 
 #include "quickCompiler.hpp"
-#include "quickErrors.hpp"
+#include "quickNotifications.hpp"
 #include "quickTypeInfoList.hpp"
 
 namespace quick {
@@ -51,8 +51,8 @@ namespace quick {
             return Compiler::instance;
         }
 
-        auto Controller::getErrors() -> Errors* {
-            return Errors::instance;
+        auto Controller::getNotifications() -> Notifications* {
+            return Notifications::instance;
         }
 
         auto Controller::getTypeList() -> TypeInfo::List* {

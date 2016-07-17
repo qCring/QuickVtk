@@ -44,18 +44,22 @@ namespace quick {
             }
         }
 
-        auto Algorithm::getInput() -> QQmlListProperty<Algorithm> {
-            return QQmlListProperty<Algorithm>(this, 0, &appendInput, &inputCount, &inputAt, &clearInputs);
+        auto Algorithm::isValid() -> bool {
+            return true;
         }
 
-        auto Algorithm::onInputAdded(Algorithm *algorithm) -> void {
-
+        auto Algorithm::getInput() -> QQmlListProperty<Algorithm> {
+            return QQmlListProperty<Algorithm>(this, 0, &appendInput, &inputCount, &inputAt, &clearInputs);
         }
 
         auto Algorithm::appendInput(QQmlListProperty<Algorithm>* list, Algorithm* algorithm) -> void {
             auto parent = qobject_cast<Algorithm*>(list->object);
 
             if(parent && algorithm) {
+                if (!algorithm->isValid()) {
+                    return;
+                }
+
                 parent->m_input.append(algorithm);
                 int count = parent->m_input.count() - 1;
 
@@ -64,7 +68,6 @@ namespace quick {
                 emit parent->inputChanged();
 
                 parent->setProp(algorithm->m_prop);
-                parent->onInputAdded(algorithm);
             }
 
             parent->update();

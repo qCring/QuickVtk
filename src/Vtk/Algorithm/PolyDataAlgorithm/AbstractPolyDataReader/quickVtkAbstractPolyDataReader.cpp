@@ -1,4 +1,5 @@
 #include "quickVtkAbstractPolyDataReader.hpp"
+#include "quickNotifications.hpp"
 #include "quickUtilIO.hpp"
 
 namespace quick {
@@ -9,6 +10,15 @@ namespace quick {
         AbstractPolyDataReader::AbstractPolyDataReader() : PolyDataAlgorithm(this) {
             this->m_fileName = "";
             PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkAbstractPolyDataReader);
+        }
+
+        auto AbstractPolyDataReader::isValid() -> bool {
+            if (!Util::IO::FileExists(QString(this->m_vtkAbstractPolyDataReader->GetFileName()))) {
+                Notifications::instance->addWarning("No fileName specified for AbstractPolyDataReader!");
+                return false;
+            }
+
+            return true;
         }
 
         AbstractPolyDataReader::AbstractPolyDataReader(AbstractPolyDataReader* other) {

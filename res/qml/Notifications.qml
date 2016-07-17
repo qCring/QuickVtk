@@ -8,7 +8,7 @@ Column {
     width: 100;
 
     Repeater {
-        model: App.errors;
+        model: App.notifications;
         delegate: Rectangle {
             height: 20;
             width: row.width;
@@ -21,19 +21,21 @@ Column {
                 anchors.top: parent.top;
                 anchors.bottom: parent.bottom;
 
+
                 spacing: 4;
 
                 Lib.TagLabel {
                     anchors.top: parent.top;
                     anchors.bottom: parent.bottom;
-                    color: "#ff0000"
-                    label.text: "Error";
+                    color: model.isError ? "#ff0000" : model.isWarning ? "#cc6600" : "#666"
+                    label.text: model.isError ? "Error" : model.isWarning ? "Warning" : "Info";
                 }
 
                 Lib.Label {
                     anchors.verticalCenter: parent.verticalCenter;
                     text: model.line + ":" + model.column + ":";
                     font.pointSize: 11;
+                    visible: model.isError;
                 }
 
                 Lib.Label {

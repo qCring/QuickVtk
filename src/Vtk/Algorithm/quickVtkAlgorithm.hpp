@@ -32,7 +32,7 @@ namespace quick {
             auto getInput() -> QQmlListProperty<Algorithm>;
             auto update() -> void;
             auto getVtkAlgorithm() -> vtkSmartPointer<vtkAlgorithm>;
-            virtual auto onInputAdded(Algorithm*) -> void;
+            virtual auto isValid() -> bool;
             static auto appendInput(QQmlListProperty<Algorithm>*, Algorithm*) -> void;
             static auto inputCount(QQmlListProperty<Algorithm>*) -> int;
             static auto inputAt(QQmlListProperty<Algorithm>*, int) -> Algorithm*;

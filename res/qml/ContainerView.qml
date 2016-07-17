@@ -45,7 +45,7 @@ Item {
 
     function compile() {
         var qmlObject = undefined;
-        App.errors.clear();
+        App.notifications.clear();
 
         try {
             qmlObject = Qt.createQmlObject(App.compiler.source, container, "root");
@@ -64,7 +64,7 @@ Item {
             for (var i = 0; i < errors.length; i++) {
                 var error = errors[i];
 
-                App.errors.add(error.lineNumber, error.columnNumber, error.message);
+                App.notifications.addError(error.lineNumber, error.columnNumber, error.message);
             }
 
             App.compiler.failed = true;

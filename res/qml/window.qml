@@ -39,7 +39,7 @@ Rectangle {
         anchors.bottom: footer.top;
     }
 
-    ErrorList {
+    Notifications {
         anchors.left: parent.left;
         anchors.bottom: footer.top;
         anchors.margins: 4;

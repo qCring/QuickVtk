@@ -18,6 +18,7 @@ namespace quick {
         public:
             AbstractPolyDataReader();
             AbstractPolyDataReader(AbstractPolyDataReader*);
+            auto readyToUpdate() -> bool override;
             auto setVtkAbstractPolyDataReader(vtkSmartPointer<vtkAbstractPolyDataReader>) -> void;
             auto getVtkAbstractPolyDataReader() -> vtkSmartPointer<vtkAbstractPolyDataReader>;
             auto setFileName(const QString&) -> void;

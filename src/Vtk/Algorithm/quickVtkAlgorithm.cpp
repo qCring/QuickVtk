@@ -33,7 +33,7 @@ namespace quick {
         }
 
         auto Algorithm::update() -> void {
-            if (this->m_input.empty()) {
+            if (this->m_input.empty() && this->readyToUpdate()) {
                 if (this->m_prop) {
                     this->m_prop->update();
                 }
@@ -44,12 +44,12 @@ namespace quick {
             }
         }
 
-        auto Algorithm::getInput() -> QQmlListProperty<Algorithm> {
-            return QQmlListProperty<Algorithm>(this, 0, &appendInput, &inputCount, &inputAt, &clearInputs);
+        auto Algorithm::readyToUpdate() -> bool {
+            return true;
         }
 
-        auto Algorithm::onInputAdded(Algorithm *algorithm) -> void {
-
+        auto Algorithm::getInput() -> QQmlListProperty<Algorithm> {
+            return QQmlListProperty<Algorithm>(this, 0, &appendInput, &inputCount, &inputAt, &clearInputs);
         }
 
         auto Algorithm::appendInput(QQmlListProperty<Algorithm>* list, Algorithm* algorithm) -> void {
@@ -64,7 +64,6 @@ namespace quick {
                 emit parent->inputChanged();
 
                 parent->setProp(algorithm->m_prop);
-                parent->onInputAdded(algorithm);
             }
 
             parent->update();

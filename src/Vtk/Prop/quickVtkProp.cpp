@@ -52,7 +52,7 @@ namespace quick {
         auto Prop::getVisibility() -> bool {
             return this->m_vtkProp->GetVisibility();
         }
-
+        
         Prop::~Prop() {
             this->m_initialized = false;
             this->m_vtkProp = nullptr;

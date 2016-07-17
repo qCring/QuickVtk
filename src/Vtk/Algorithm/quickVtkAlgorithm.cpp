@@ -33,7 +33,7 @@ namespace quick {
         }
 
         auto Algorithm::update() -> void {
-            if (this->m_input.empty() && this->readyToUpdate()) {
+            if (this->m_input.empty()) {
                 if (this->m_prop) {
                     this->m_prop->update();
                 }
@@ -44,7 +44,7 @@ namespace quick {
             }
         }
 
-        auto Algorithm::readyToUpdate() -> bool {
+        auto Algorithm::isValid() -> bool {
             return true;
         }
 
@@ -56,6 +56,10 @@ namespace quick {
             auto parent = qobject_cast<Algorithm*>(list->object);
 
             if(parent && algorithm) {
+                if (!algorithm->isValid()) {
+                    return;
+                }
+
                 parent->m_input.append(algorithm);
                 int count = parent->m_input.count() - 1;
 

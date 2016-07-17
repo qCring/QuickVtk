@@ -12,14 +12,13 @@ namespace quick {
             PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkAbstractPolyDataReader);
         }
 
-        auto AbstractPolyDataReader::readyToUpdate() -> bool {
-            if (Util::IO::FileExists(QString(this->m_vtkAbstractPolyDataReader->GetFileName()))) {
-                return true;
-            } else {
+        auto AbstractPolyDataReader::isValid() -> bool {
+            if (!Util::IO::FileExists(QString(this->m_vtkAbstractPolyDataReader->GetFileName()))) {
                 Notifications::instance->addWarning("No fileName specified for AbstractPolyDataReader!");
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         AbstractPolyDataReader::AbstractPolyDataReader(AbstractPolyDataReader* other) {

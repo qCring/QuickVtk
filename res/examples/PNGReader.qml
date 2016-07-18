@@ -14,11 +14,10 @@ Item {
 
         mouseEnabled: true;
 
-        Vtk.Actor {
+        Vtk.Actor2D {
 
-            Vtk.PolyDataMapper {
-                Vtk.STLReader {
-
+            Vtk.ImageMapper {
+                Vtk.PNGReader {
                 }
             }
         }

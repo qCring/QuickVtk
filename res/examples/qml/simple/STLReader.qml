@@ -15,10 +15,9 @@ Item {
         mouseEnabled: true;
 
         Vtk.Actor {
-
             Vtk.PolyDataMapper {
                 Vtk.STLReader {
-
+                    fileName: SampleData.meshes.suzanne;
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace quick {
             vtkSmartPointer<vtkSTLReader> m_vtkSTLReader;
         public:
             STLReader();
-            ~STLReader();
+            auto getSuffix() -> QString override;
         };
     }
 }

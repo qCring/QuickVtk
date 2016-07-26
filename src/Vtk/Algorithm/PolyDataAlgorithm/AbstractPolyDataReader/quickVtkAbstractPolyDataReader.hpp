@@ -21,9 +21,10 @@ namespace quick {
             auto isValid() -> bool override;
             auto setVtkAbstractPolyDataReader(vtkSmartPointer<vtkAbstractPolyDataReader>) -> void;
             auto getVtkAbstractPolyDataReader() -> vtkSmartPointer<vtkAbstractPolyDataReader>;
-            auto setFileName(const QString&) -> void;
+            auto setFileName(QString&) -> void;
             auto getFileName() -> QString;
-            ~AbstractPolyDataReader();
+            virtual auto getSuffix() -> QString = 0;
+            virtual ~AbstractPolyDataReader();
         signals:
             void fileNameChanged();
         };

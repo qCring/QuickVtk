@@ -20,8 +20,9 @@ namespace quick {
             ImageReader2(ImageReader2*);
             auto setVtkImageReader2(vtkSmartPointer<vtkImageReader2>) -> void;
             auto getVtkImageReader2() -> vtkSmartPointer<vtkImageReader2>;
-            auto setFileName(const QString&) -> void;
+            auto setFileName(QString&) -> void;
             auto getFileName() -> QString;
+            virtual auto getSuffix() -> QString = 0;
             virtual auto isValid() -> bool;
             ~ImageReader2();
         signals:

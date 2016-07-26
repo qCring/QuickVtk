@@ -4,6 +4,7 @@
 #include "meta_quickvtk.hpp"
 #include "quickQmlRegister.hpp"
 #include "quickAppController.hpp"
+#include "quickSampleDataController.hpp"
 
 #include <QFontDatabase>
 #include <QApplication>
@@ -23,10 +24,7 @@ namespace quick {
             instance = this;
         }
 
-        auto Window::start(int argc, char** argv) -> int {
-            QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-            QApplication application(argc, argv);
-
+        auto Window::init() -> void {
             QApplication::setOrganizationName(Meta::orgName);
             QApplication::setOrganizationDomain(Meta::orgDomain);
             QApplication::setApplicationName(Meta::appName);
@@ -47,10 +45,22 @@ namespace quick {
 
             this->m_view = new QQuickView();
             this->m_view->setTitle(QGuiApplication::applicationName());
-            this->m_view->engine()->rootContext()->setContextProperty("App", Controller::instance);
+
+            auto context = this->m_view->engine()->rootContext();
+
+            context->setContextProperty("App", Controller::instance);
+            context->setContextProperty("SampleData", SampleData::Controller::Create());
+
             this->m_view->setSource(QUrl::fromLocalFile(resourceDir + "qml/window.qml"));
             this->m_view->setResizeMode(QQuickView::SizeRootObjectToView);
             this->m_view->showMaximized();
+        }
+        
+        auto Window::start(int argc, char** argv) -> int {
+            QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+            QApplication application(argc, argv);
+
+            this->init();
 
             return application.exec();
         }
@@ -61,6 +71,10 @@ namespace quick {
             for (auto font : fontList) {
                 QFontDatabase::addApplicationFont(font);
             }
+        }
+
+        auto Window::getResourceDir() -> QString {
+            return this->resourceDir;
         }
     }
 }

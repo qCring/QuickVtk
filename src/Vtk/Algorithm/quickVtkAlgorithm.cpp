@@ -9,11 +9,11 @@ namespace quick {
         Qml::Register::AbstractClass<Algorithm> Algorithm::Register;
 
         Algorithm::Algorithm() {
-            this->m_prop = 0;
+            this->m_prop = nullptr;
         }
 
         Algorithm::Algorithm(Algorithm* other) {
-            this->m_prop = 0;
+            this->m_prop = nullptr;
         }
 
         auto Algorithm::setVtkAlgorithm(vtkSmartPointer<vtkAlgorithm> vtkAlgorithm) -> void {
@@ -56,10 +56,6 @@ namespace quick {
             auto parent = qobject_cast<Algorithm*>(list->object);
 
             if(parent && algorithm) {
-                if (!algorithm->isValid()) {
-                    return;
-                }
-
                 parent->m_input.append(algorithm);
                 int count = parent->m_input.count() - 1;
 
@@ -69,8 +65,6 @@ namespace quick {
 
                 parent->setProp(algorithm->m_prop);
             }
-
-            parent->update();
         }
 
         auto Algorithm::inputCount(QQmlListProperty<Algorithm>* list) -> int {
@@ -106,7 +100,7 @@ namespace quick {
         }
 
         Algorithm::~Algorithm() {
-            this->m_prop = 0;
+            this->m_prop = nullptr;
         }
     }
 }

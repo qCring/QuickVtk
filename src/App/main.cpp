@@ -9,8 +9,8 @@ auto main(int argc, char *argv[]) -> int {
 #endif
 
 #ifdef _MSC_VER
-    putenv("QML_BAD_GUI_RENDER_LOOP=1");
-    putenv("QT_AUTO_SCREEN_SCALE_FACTOR=1");
+    _putenv("QML_BAD_GUI_RENDER_LOOP=1");
+    _putenv("QT_AUTO_SCREEN_SCALE_FACTOR=1");
 #endif
 
     auto appWindow = new quick::App::Window();

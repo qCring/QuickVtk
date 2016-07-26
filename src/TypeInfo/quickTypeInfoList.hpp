@@ -20,7 +20,7 @@ namespace quick {
             };
         private:
             friend class Symbol;
-            bool m_visible = false;
+            bool m_visible = true;
             QString m_filter;
             QList<Symbol*> m_symbols;
             QList<Symbol*> m_allSymbols;

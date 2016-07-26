@@ -11,7 +11,8 @@ namespace quick {
             AbstractPolyDataReader::setVtkAbstractPolyDataReader(m_vtkOBJReader);
         }
 
-        OBJReader::~OBJReader() {
+        auto OBJReader::getSuffix() -> QString {
+            return ".obj";
         }
     }
 }

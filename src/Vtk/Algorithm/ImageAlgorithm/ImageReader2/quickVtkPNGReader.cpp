@@ -10,5 +10,9 @@ namespace quick {
             this->m_vtkPNGReader = vtkSmartPointer<vtkPNGReader>::New();
             this->setVtkImageReader2(this->m_vtkPNGReader);
         }
+
+        auto PNGReader::getSuffix() -> QString {
+            return ".png";
+        }
     }
 }

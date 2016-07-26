@@ -14,10 +14,10 @@ Item {
 
         mouseEnabled: true;
 
-        Vtk.Actor2D {
-
-            Vtk.ImageMapper {
-                Vtk.PNGReader {
+        Vtk.Actor {
+            Vtk.PolyDataMapper {
+                Vtk.OBJReader {
+                    fileName: SampleData.meshes.suzanne;
                 }
             }
         }

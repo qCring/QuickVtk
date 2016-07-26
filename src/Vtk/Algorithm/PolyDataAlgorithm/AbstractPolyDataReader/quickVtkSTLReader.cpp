@@ -11,7 +11,8 @@ namespace quick {
             AbstractPolyDataReader::setVtkAbstractPolyDataReader(m_vtkSTLReader);
         }
 
-        STLReader::~STLReader() {
+        auto STLReader::getSuffix() -> QString {
+            return ".stl";
         }
     }
 }

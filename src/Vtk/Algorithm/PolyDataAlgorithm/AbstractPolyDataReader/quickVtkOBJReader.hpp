@@ -15,7 +15,7 @@ namespace quick {
             vtkSmartPointer<vtkOBJReader> m_vtkOBJReader;
         public:
             OBJReader();
-            ~OBJReader();
+            auto getSuffix() -> QString override;
         };
     }
 }

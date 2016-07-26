@@ -25,7 +25,7 @@ namespace quick {
         }
 
         auto ImageReader2::isValid() -> bool {
-            if (!Util::IO::FileExists(QString(this->m_vtkImageReader2->GetFileName()))) {
+            if (!Util::IO::FileExists(this->m_fileName)) {
                 Notifications::instance->addWarning("No fileName specified for ImageReader2!");
                 return false;
             }
@@ -33,7 +33,13 @@ namespace quick {
             return true;
         }
 
-        auto ImageReader2::setFileName(const QString& fileName) -> void {
+        auto ImageReader2::setFileName(QString& fileName) -> void {
+            auto suffix = this->getSuffix();
+
+            if (!fileName.endsWith(suffix)) {
+                fileName += suffix;
+            }
+
             this->m_fileName = fileName;
 
             emit this->fileNameChanged();

@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(quick::SampleData::Images* images READ getImages CONSTANT);
             Q_PROPERTY(quick::SampleData::Meshes* meshes READ getMeshes CONSTANT);
         public:
-            static Qml::Register::Class<Controller> Register;
+            static Qml::Register::Type<Controller> Register;
             static Controller* instance;
             static auto Create() -> Controller*;
             auto getImages() -> Images*;

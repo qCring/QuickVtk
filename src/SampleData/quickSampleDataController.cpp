@@ -8,7 +8,7 @@ namespace quick {
 
         Controller* Controller::instance = nullptr;
 
-        Qml::Register::Class<Controller> Controller::Register;
+        Qml::Register::Type<Controller> Controller::Register;
 
         auto Controller::Create() -> Controller* {
             if (instance) {

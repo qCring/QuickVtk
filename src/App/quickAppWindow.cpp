@@ -12,6 +12,7 @@
 #include <QQmlEngine>
 #include <QDir>
 
+#include <iostream>
 namespace quick {
     namespace App {
         Window* Window::instance = nullptr;
@@ -46,8 +47,10 @@ namespace quick {
             this->m_view = new QQuickView();
             this->m_view->setTitle(QGuiApplication::applicationName());
 
-            auto context = this->m_view->engine()->rootContext();
+            auto engine = this->m_view->engine();
+            auto context = engine->rootContext();
 
+            engine->addImportPath(resourceDir + "Modules");
             context->setContextProperty("App", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
 

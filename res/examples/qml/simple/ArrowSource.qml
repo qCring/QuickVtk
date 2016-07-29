@@ -51,5 +51,9 @@ Item {
             from: arrow; bind: "shaftRadius";
             min: 0.01; max: 0.5; step: 0.01; value: 0.05;
         }
+
+        Utils.CheckBox {
+            from: arrow; bind: "invert";
+        }
     }
 }

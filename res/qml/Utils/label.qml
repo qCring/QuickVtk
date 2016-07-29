@@ -1,12 +1,6 @@
 import QtQuick 2.6
 
-Text {
-    color: enabled ? "#9DA5B4" : "#6E7582"
+import Lib 1.0 as Lib
 
-    font.family: "Roboto"
-    font.pointSize: 13;
-
-    elide: Text.ElideRight;
-    textFormat: Text.PlainText;
-    horizontalAlignment : Text.AlignLeft;
+Lib.Label {
 }

@@ -1,6 +1,6 @@
 import QtQuick 2.6
 
-import "./../Lib" as Lib
+import Lib 1.0 as Lib
 
 Column {
     spacing: 2;

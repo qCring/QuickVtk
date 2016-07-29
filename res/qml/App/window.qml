@@ -1,7 +1,7 @@
 import QtQuick 2.6
 
-import "./lib" as Lib
-import "./typeInfo" as TypeInfo
+import Lib 1.0 as Lib
+import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
     id: root;

@@ -1,0 +1,5 @@
+module App
+ContainerView 1.0 ContainerView.qml
+Footer 1.0 Footer.qml
+Header 1.0 Header.qml
+Notifications 1.0 Notifications.qml

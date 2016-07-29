@@ -50,7 +50,7 @@ namespace quick {
             auto engine = this->m_view->engine();
             auto context = engine->rootContext();
 
-            engine->addImportPath(resourceDir + "Modules");
+            engine->addImportPath(resourceDir + "qml");
             context->setContextProperty("App", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
 

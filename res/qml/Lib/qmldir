@@ -1,0 +1,7 @@
+module Lib
+Button 1.0 Button.qml
+CheckBox 1.0 CheckBox.qml
+Icon 1.0 Icon.qml
+Label 1.0 Label.qml
+TagLabel 1.0 TagLabel.qml
+TextInput 1.0 TextInput.qml

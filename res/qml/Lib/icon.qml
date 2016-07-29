@@ -1,6 +1,6 @@
 import QtQuick 2.6
 
-import "Icons.js" as Icons
+import "icons.js" as Icons
 
 Text
 {

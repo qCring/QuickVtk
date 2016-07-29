@@ -54,7 +54,7 @@ namespace quick {
             context->setContextProperty("App", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
 
-            this->m_view->setSource(QUrl::fromLocalFile(resourceDir + "qml/window.qml"));
+            this->m_view->setSource(QUrl::fromLocalFile(resourceDir + "qml/App/window.qml"));
             this->m_view->setResizeMode(QQuickView::SizeRootObjectToView);
             this->m_view->showMaximized();
         }

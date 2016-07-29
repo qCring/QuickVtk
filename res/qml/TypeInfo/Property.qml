@@ -1,6 +1,6 @@
 import QtQuick 2.6
 
-import "./../lib" as Lib
+import "./../Lib" as Lib
 
 Item {
     id: root;

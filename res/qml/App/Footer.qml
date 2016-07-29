@@ -1,11 +1,11 @@
 import QtQuick 2.6
 
-import "./lib" as Lib
+import "./../Lib" as Lib
 
 Rectangle {
     height: visible ? 24 : 0;
     visible: !App.expanded;
-    
+
     color: "#21252B"
 
     Rectangle {

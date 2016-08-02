@@ -4,8 +4,12 @@ cmake_minimum_required(VERSION 3.0)
 
 include (ExternalProject)
 
+set(PROJECT_NAME "QuickVtkLibs")
+
+project(${PROJECT_NAME})
+
 set(VTK_GIT_TAG "master" CACHE STRING "VTK git tag")
-set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/VTK/install)
+set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/VTK/install)
 
 ExternalProject_Add(
     VTK

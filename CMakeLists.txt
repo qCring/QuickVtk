@@ -52,7 +52,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # project meta information
 # ******************************************************************************
 set(QUICKVTK_VERSION_MAJOR 0)
-set(QUICKVTK_VERSION_MINOR 0)
+set(QUICKVTK_VERSION_MINOR 4)
 set(QUICKVTK_VERSION_PATCH 1)
 set(QUICKVTK_ORG_NAME quickvtk)
 set(QUICKVTK_ORG_DOMAIN org)
@@ -75,7 +75,7 @@ endif()
 
 # Qt
 set(QUICKVTK_QT_VERSION "5.6.1" CACHE STRING "Qt Version")
-set(QUICKVTK_VTK_VERSION "7.0.0" CACHE STRING "VTK Version")
+set(QUICKVTK_VTK_VERSION "7.1.0" CACHE STRING "VTK Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 set(QUICKVTK_INTERNAL_LIBRARY_TARGETS)
 

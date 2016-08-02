@@ -79,7 +79,7 @@ Available types in QuickVtk are outlined in the application's type browser and p
 - Properties
 	- property name
 	- property type
-	- property access (read-only, read-write)
+	- property access [read-only, read-write]
 - Functions
 	- function name
 	- argument types
@@ -88,7 +88,7 @@ Available types in QuickVtk are outlined in the application's type browser and p
 Information of QuickVtk's classes is generated automatically by utilizing the associated static **[QMetaObject](http://doc.qt.io/qt-5/qmetaobject.html)** of a given type, reflecting the API as is.
 
 ###Performance
-QuickVtk is written in C++. **[VTK](http://www.vtk.org)**'s rendering backend uses OpenGL and is rendered in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** using a framebuffer object (FBO). This allows integration of **[VTK](http://www.vtk.org)** content in the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** scene graph for efficient rendering. The following screenshots shows multiple **[VTK](http://www.vtk.org)** viewer instances arranged in a **[Grid](http://doc.qt.io/qt-5/qml-qtquick-grid.html)** component:
+QuickVtk is written in C++. **[VTK](http://www.vtk.org)**'s rendering backend uses OpenGL and is rendered in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** using a framebuffer object (FBO). This allows integration of **[VTK](http://www.vtk.org)** content in the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** scene graph for efficient rendering. The following screenshot shows multiple **[VTK](http://www.vtk.org)** viewer instances arranged in a **[Grid](http://doc.qt.io/qt-5/qml-qtquick-grid.html)** component:
 
 <center>
 	<img src="doc/img/screenshot2.png" width="100%" />
@@ -126,14 +126,14 @@ After successfully installing **[Qt](http://www.qt.io)** and building **[VTK](ht
 	<img src="doc/img/cmake1.png"/>
 </center>
 
-Here you can specify the versions and paths to **[Qt](http://www.qt.io)** and  **[VTK](http://www.vtk.org)**. As before, press configure, generate and then build the project. Tested project generators are:
+Specify the version and path attributes for **[Qt](http://www.qt.io)** and **[VTK](http://www.vtk.org)** and finally configure, generate and build the project. Tested project generators are:
 
 - Unix Makefile (recommended for building VTK on Mac OS X)
 - XCode (recommended for building QuickVtk on Mac OS X)
 - Microsoft Visual Studio 2015 (for Windows)
 
 **Note when building with Visual Studio:**
-Make sure to set the environment. Add the paths for Qt and Vtk to the *Environment* field found in the project properties view under *Debugging*:
+Make sure to set the environment in the IDE. Add the paths for **[Qt](http://www.qt.io)** and **[VTK](http://www.vtk.org)** to the *Environment* field found in the project properties view under *Debugging*:
 
 <center>
 	<img src="doc/img/vs1.png"/>

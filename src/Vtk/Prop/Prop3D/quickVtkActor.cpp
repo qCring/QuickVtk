@@ -58,7 +58,7 @@ namespace quick {
         }
 
         Actor::~Actor() {
-            this->m_vtkActor    = 0;
+            this->m_vtkActor = nullptr;
         }
     }
 }

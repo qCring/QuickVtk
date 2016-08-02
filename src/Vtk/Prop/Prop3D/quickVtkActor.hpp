@@ -1,7 +1,6 @@
 #pragma once
 
 #include "quickVtkProp3D.hpp"
-#include "quickVtkMapper.hpp"
 
 #include <vtkActor.h>
 
@@ -9,6 +8,7 @@ namespace quick {
 
     namespace Vtk {
 
+        class Mapper;
         class Property;
 
         class Actor : public Prop3D {

@@ -9,16 +9,16 @@ namespace quick {
 
         Qml::Register::Class<Images> Images::Register;
 
-        auto Images::makeDataPath(const QString& file) -> QString {
-            return App::Window::instance->getResourceDir() + "examples/data/image/" + file;
-        }
-
         auto Images::Create() -> void {
             if (instance) {
                 throw std::runtime_error("instance already existing");
             }
 
             instance = new Images();
+        }
+
+        auto Images::makeDataPath(const QString& file) -> QString {
+            return App::Window::instance->getResourceDir() + "examples/data/images/" + file;
         }
 
         auto Images::getLena() -> QString {

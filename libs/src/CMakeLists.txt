@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.0)
 include (ExternalProject)
 
 set(VTK_GIT_TAG "master" CACHE STRING "VTK git tag")
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/VTK/install)
 
 ExternalProject_Add(
     VTK
@@ -17,6 +18,6 @@ ExternalProject_Add(
     DOWNLOAD_DIR        VTK/download
     STAMP_DIR           VTK/stamp
     UPDATE_DISCONNECTED 1
-    CMAKE_ARGS          -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/VTK/install
+    CMAKE_ARGS          -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
     CMAKE_CACHE_ARGS    -DVTK_RENDERING_BACKEND:STRING=OpenGL -DBUILD_TESTING:BOOL=OFF
 )

@@ -12,7 +12,6 @@
 #include <QQmlEngine>
 #include <QDir>
 
-#include <iostream>
 namespace quick {
     namespace App {
         Window* Window::instance = nullptr;

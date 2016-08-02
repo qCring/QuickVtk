@@ -10,6 +10,7 @@ namespace quick {
         Volume::Volume() : Prop3D(this) {
             this->m_mapper = nullptr;
             this->m_vtkVolume = vtkSmartPointer<vtkVolume>::New();
+            Prop3D::setVtkProp3D(this->m_vtkVolume);
         }
 
         auto Volume::setMapper(AbstractVolumeMapper* mapper) -> void {

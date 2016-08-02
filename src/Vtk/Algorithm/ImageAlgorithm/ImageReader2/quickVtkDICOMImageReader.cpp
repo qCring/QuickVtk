@@ -14,5 +14,17 @@ namespace quick {
         auto DICOMImageReader::getSuffix() -> QString {
             return ".dcm";
         }
+
+        auto DICOMImageReader::setDirectoryName(const QString& directoryName) -> void {
+            this->m_directoryName = directoryName;
+            emit this->directoryNameChanged();
+            this->m_vtkDICOMImageReader->SetDirectoryName(directoryName.toStdString().c_str());
+            this->m_vtkDICOMImageReader->Update();
+            this->update();
+        }
+
+        auto DICOMImageReader::getDirectoryName() -> QString {
+            return this->m_directoryName;
+        }
     }
 }

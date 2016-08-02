@@ -16,6 +16,9 @@ Item {
 
         Vtk.Actor2D {
             Vtk.ImageMapper {
+                colorWindow: 255;
+                colorLevel: 127.5;
+
                 Vtk.PNGReader {
                     fileName: SampleData.images.lena;
                 }

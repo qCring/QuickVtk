@@ -12,10 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<SmartVolumeMapper> Register;
-            vtkSmartPointer<vtkSmartVolumeMapper> m_vtkSmartVolumeMapper;
         public:
             SmartVolumeMapper();
-            ~SmartVolumeMapper();
         };
     }
 }

@@ -8,18 +8,16 @@ namespace quick {
 
         Qml::Register::Class<Actor> Actor::Register;
 
-        Actor::Actor() : Prop3D(this) {
-            this->setVtkActor(vtkSmartPointer<vtkActor>::New());
-            this->m_mapper = nullptr;
+        Actor::Actor() : Prop3D(vtkSmartPointer<vtkActor>::New()) {
+            this->m_vtkObject = vtkActor::SafeDownCast(Prop::getVtkObject());
         }
 
-        Actor::Actor(Actor* other) : Prop3D(this) {
-            this->m_mapper = nullptr;
+        Actor::Actor(vtkSmartPointer<vtkActor> vtkObject) : Prop3D(vtkObject) {
+            this->m_vtkObject = vtkObject;
         }
 
-        auto Actor::setVtkActor(vtkSmartPointer<vtkActor> vtkActor) -> void {
-            this->m_vtkActor = vtkActor;
-            Prop3D::setVtkProp3D(vtkActor);
+        auto Actor::getVtkObject() -> vtkSmartPointer<vtkActor> {
+            return this->m_vtkObject;
         }
 
         auto Actor::setProperty(Property* property) -> void {
@@ -41,7 +39,7 @@ namespace quick {
 
         auto Actor::setMapper(Mapper* mapper) -> void {
             this->m_mapper = mapper;
-            this->m_vtkActor->SetMapper(mapper->getVtkMapper());
+            this->m_vtkObject->SetMapper(mapper->getVtkObject());
             mapper->setProp(this);
 
             emit this->mapperChanged();
@@ -53,12 +51,8 @@ namespace quick {
             return this->m_mapper;
         }
 
-        auto Actor::getVtkActor() -> vtkSmartPointer<vtkActor> {
-            return this->m_vtkActor;
-        }
-
         Actor::~Actor() {
-            this->m_vtkActor = nullptr;
+            // todo: delete mapper?
         }
     }
 }

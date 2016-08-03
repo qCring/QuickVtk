@@ -12,13 +12,9 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::AbstractClass<Mapper2D> Register;
-            vtkSmartPointer<vtkMapper2D> m_vtkMapper2D;
         public:
-            Mapper2D();
-            Mapper2D(Mapper2D*);
-            auto setVtkMapper2D(vtkSmartPointer<vtkMapper2D>) -> void;
-            auto getVtkMapper2D() -> vtkSmartPointer<vtkMapper2D>;
-            ~Mapper2D();
+            Mapper2D(vtkSmartPointer<vtkMapper2D>);
+            auto getVtkObject() -> vtkSmartPointer<vtkMapper2D>;
         };
     }
 }

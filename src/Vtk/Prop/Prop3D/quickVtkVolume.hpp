@@ -17,13 +17,12 @@ namespace quick {
         private:
             static Qml::Register::Class<Volume> Register;
             AbstractVolumeMapper* m_mapper = nullptr;
-            vtkSmartPointer<vtkVolume> m_vtkVolume;
+            vtkSmartPointer<vtkVolume> m_vtkVolume = nullptr;
         public:
             Volume();
             auto setMapper(AbstractVolumeMapper*) -> void;
             auto getMapper() -> AbstractVolumeMapper*;
-            auto getVtkVolume() -> vtkSmartPointer<vtkVolume>;
-            virtual ~Volume();
+            auto getVtkObject() -> vtkSmartPointer<vtkVolume>;
         signals:
             void mapperChanged();
         };

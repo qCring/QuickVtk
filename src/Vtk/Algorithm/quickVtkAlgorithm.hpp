@@ -23,7 +23,7 @@ namespace quick {
             static Qml::Register::AbstractClass<Algorithm> Register;
             QList<Algorithm*> m_input;
             vtkSmartPointer<vtkAlgorithm> m_vtkObject = nullptr;
-            Prop* m_prop;
+            Prop* m_prop = nullptr;
         public:
             Algorithm();
             Algorithm(Algorithm*);

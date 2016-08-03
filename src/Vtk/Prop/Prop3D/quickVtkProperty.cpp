@@ -11,12 +11,11 @@ namespace quick {
         }
 
         Property::Property(Actor* actor) : m_actor(actor) {
-            this->m_vtkActor = 0;
-            this->m_vtkActor = this->m_actor->getVtkActor();
+            this->m_vtkActor = this->m_actor->getVtkObject();
         }
 
         auto Property::setActor(Actor* actor) -> void {
-            this->m_vtkActor = actor->getVtkActor();
+            this->m_vtkActor = actor->getVtkObject();
         }
 
         auto Property::update() -> void {

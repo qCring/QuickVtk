@@ -22,16 +22,17 @@ namespace quick {
         private:
             static Qml::Register::AbstractClass<Algorithm> Register;
             QList<Algorithm*> m_input;
-            vtkSmartPointer<vtkAlgorithm> m_vtkAlgorithm;
-            Prop* m_prop;
+            vtkSmartPointer<vtkAlgorithm> m_vtkObject = nullptr;
+            Prop* m_prop = nullptr;
         public:
             Algorithm();
             Algorithm(Algorithm*);
+            Algorithm(vtkSmartPointer<vtkAlgorithm>);
             auto setProp(Prop*) -> void;
             auto setVtkAlgorithm(vtkSmartPointer<vtkAlgorithm>) -> void;
             auto getInput() -> QQmlListProperty<Algorithm>;
             auto update() -> void;
-            auto getVtkAlgorithm() -> vtkSmartPointer<vtkAlgorithm>;
+            auto getVtkObject() -> vtkSmartPointer<vtkAlgorithm>;
             virtual auto isValid() -> bool;
             static auto appendInput(QQmlListProperty<Algorithm>*, Algorithm*) -> void;
             static auto inputCount(QQmlListProperty<Algorithm>*) -> int;

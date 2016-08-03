@@ -6,35 +6,20 @@ namespace quick {
 
         Qml::Register::AbstractClass<DataReader> DataReader::Register;
 
-        DataReader::DataReader() : Algorithm(this) {
-            this->m_vtkDataReader    = 0;
-        }
-
-        DataReader::DataReader(DataReader* other) : Algorithm(this) {
-        }
-
-        auto DataReader::setVtkDataReader(vtkSmartPointer<vtkDataReader> vtkDataReader) -> void {
-            this->m_vtkDataReader = vtkDataReader;
-            Algorithm::setVtkAlgorithm(vtkDataReader);
-        }
-
-        auto DataReader::getVtkDataReader() -> vtkSmartPointer<vtkDataReader> {
-            return this->m_vtkDataReader;
+        DataReader::DataReader(vtkSmartPointer<vtkDataReader> vtkObject) : Algorithm(vtkObject) {
+            this->m_vtkObject = vtkObject;
         }
 
         auto DataReader::setFileName(const QString& fileName) -> void {
-            this->m_vtkDataReader->SetFileName(fileName.toStdString().c_str());
-            this->m_vtkDataReader->Update();
+            this->m_vtkObject->SetFileName(fileName.toStdString().c_str());
+            this->m_vtkObject->Update();
             this->update();
 
             emit this->fileNameChanged();
         }
 
         auto DataReader::getFileName() -> QString {
-            return this->m_vtkDataReader->GetFileName();
-        }
-
-        DataReader::~DataReader() {
+            return this->m_vtkObject->GetFileName();
         }
     }
 }

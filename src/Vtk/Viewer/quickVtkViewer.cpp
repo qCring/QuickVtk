@@ -33,7 +33,7 @@ namespace quick {
             this->m_initialized = true;
 
             for (auto prop : this->m_input) {
-                auto vtkprop = prop->getVtkProp();
+                auto vtkprop = prop->getVtkObject();
                 prop->linkViewer(this);
 
                 if (vtkprop.GetPointer()) {
@@ -124,7 +124,7 @@ namespace quick {
                 viewer->m_input.append(prop);
 
                 if (viewer->m_renderer) {
-                    auto vtk_prop = prop->getVtkProp();
+                    auto vtk_prop = prop->getVtkObject();
 
                     if (vtk_prop) {
                         viewer->m_renderer->AddActor(vtk_prop);

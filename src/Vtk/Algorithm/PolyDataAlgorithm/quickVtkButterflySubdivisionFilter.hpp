@@ -12,12 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<ButterflySubdivisionFilter> Register;
-            vtkSmartPointer<vtkButterflySubdivisionFilter> m_vtkButterflySubdivisionFilter;
         public:
             ButterflySubdivisionFilter();
-            auto setVtkButterflySubdivisionFilter(vtkSmartPointer<vtkButterflySubdivisionFilter>) -> void;
-            auto getVtkButterflySubdivisionFilter() -> vtkSmartPointer<vtkButterflySubdivisionFilter>;
-            ~ButterflySubdivisionFilter();
         };
     }
 }

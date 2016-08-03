@@ -20,16 +20,16 @@ namespace quick {
             static Qml::Register::Class<Actor> Register;
             Property* m_property = nullptr;
             Mapper* m_mapper = nullptr;
-            vtkSmartPointer<vtkActor> m_vtkActor;
+            vtkSmartPointer<vtkActor> m_vtkObject;
         public:
             Actor();
-            Actor(Actor* other);
+            Actor(vtkSmartPointer<vtkActor>);
             auto setVtkActor(vtkSmartPointer<vtkActor>) -> void;
             auto setMapper(Mapper*) -> void;
             auto getMapper() -> Mapper*;
             auto setProperty(Property*) -> void;
             auto getProperty() -> Property*;
-            auto getVtkActor() -> vtkSmartPointer<vtkActor>;
+            auto getVtkObject() -> vtkSmartPointer<vtkActor>;
             virtual ~Actor();
         signals:
             void mapperChanged();

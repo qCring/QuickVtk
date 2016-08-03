@@ -7,23 +7,7 @@ namespace quick {
 
         Qml::Register::AbstractClass<AbstractMapper> AbstractMapper::Register;
 
-        AbstractMapper::AbstractMapper() : Algorithm(this) {
-            this->m_vtkAbstractMapper   = 0;
-        }
-
-        AbstractMapper::AbstractMapper(AbstractMapper* other) : Algorithm(this) {
-        }
-
-        auto AbstractMapper::setVtkAbstractMapper(vtkSmartPointer<vtkAbstractMapper> vtkAbstractMapper) -> void {
-            this->m_vtkAbstractMapper = vtkAbstractMapper;
-            this->setVtkAlgorithm(vtkAbstractMapper);
-        }
-
-        auto AbstractMapper::getVtkAbstractMapper() -> vtkSmartPointer<vtkAbstractMapper> {
-            return this->m_vtkAbstractMapper;
-        }
-
-        AbstractMapper::~AbstractMapper() {
+        AbstractMapper::AbstractMapper(vtkSmartPointer<vtkAbstractMapper> vtkObject) : Algorithm(vtkObject) {
         }
     }
 }

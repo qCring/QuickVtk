@@ -6,8 +6,8 @@ namespace quick {
 
         Qml::Register::Class<PerlinNoise> PerlinNoise::Register;
 
-        PerlinNoise::PerlinNoise() : ImplicitFunction(this) {
-            this->setVtkPerlinNoise(vtkSmartPointer<vtkPerlinNoise>::New());
+        PerlinNoise::PerlinNoise() : ImplicitFunction(vtkSmartPointer<vtkPerlinNoise>::New()) {
+            this->m_vtkObject = vtkPerlinNoise::SafeDownCast(ImplicitFunction::getVtkObject());
 
             this->m_frequencyCb = [this] (Math::Vector3&& vector) {
                 this->updateFrequency(std::move(vector));
@@ -18,18 +18,8 @@ namespace quick {
             };
         }
 
-        auto PerlinNoise::setVtkPerlinNoise(vtkSmartPointer<vtkPerlinNoise> vtkPerlinNoise) -> void {
-            this->m_vtkPerlinNoise = vtkPerlinNoise;
-
-            ImplicitFunction::setVtkImplicitFunction(vtkPerlinNoise);
-        }
-
-        auto PerlinNoise::getVtkPerlinNoise() -> vtkSmartPointer<vtkPerlinNoise> {
-            return this->m_vtkPerlinNoise;
-        }
-
         auto PerlinNoise::setAmplitude(float angle) -> void {
-            this->m_vtkPerlinNoise->SetAmplitude(angle);
+            this->m_vtkObject->SetAmplitude(angle);
             emit this->amplitudeChanged();
             this->update();
         }
@@ -39,12 +29,12 @@ namespace quick {
         }
 
         auto PerlinNoise::updateFrequency(Math::Vector3&& vector) -> void {
-            this->m_vtkPerlinNoise->SetFrequency(vector.getValues().data());
+            this->m_vtkObject->SetFrequency(vector.getValues().data());
             this->update();
         }
 
         auto PerlinNoise::updatePhase(Math::Vector3&& vector) -> void {
-            this->m_vtkPerlinNoise->SetPhase(vector.getValues().data());
+            this->m_vtkObject->SetPhase(vector.getValues().data());
             this->update();
         }
 
@@ -65,7 +55,7 @@ namespace quick {
 
         auto PerlinNoise::getFrequency() -> Math::Vector3* {
             if (!this->m_frequency) {
-                auto frequency = this->m_vtkPerlinNoise->GetFrequency();
+                auto frequency = this->m_vtkObject->GetFrequency();
                 this->setFrequency(new Math::Vector3(frequency[0], frequency[1], frequency[2]));
             }
 
@@ -89,7 +79,7 @@ namespace quick {
 
         auto PerlinNoise::getPhase() -> Math::Vector3* {
             if (!this->m_phase) {
-                auto phase = this->m_vtkPerlinNoise->GetPhase();
+                auto phase = this->m_vtkObject->GetPhase();
                 this->setPhase(new Math::Vector3(phase[0], phase[1], phase[2]));
             }
 
@@ -97,8 +87,13 @@ namespace quick {
         }
 
         PerlinNoise::~PerlinNoise() {
-            this->m_vtkPerlinNoise = nullptr;
-        }
+            if (this->m_frequency) {
+                this->m_frequency->removeCallback(std::move(this->m_frequencyCb));
+            }
 
+            if (this->m_phase) {
+                this->m_phase->removeCallback(std::move(this->m_phaseCb));
+            }
+        }
     }
 }

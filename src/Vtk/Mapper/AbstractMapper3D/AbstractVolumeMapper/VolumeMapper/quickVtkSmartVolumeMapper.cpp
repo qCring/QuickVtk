@@ -6,12 +6,7 @@ namespace quick {
 
         Qml::Register::Class<SmartVolumeMapper> SmartVolumeMapper::Register;
 
-        SmartVolumeMapper::SmartVolumeMapper() : VolumeMapper(this) {
-            this->m_vtkSmartVolumeMapper = vtkSmartPointer<vtkSmartVolumeMapper>::New();
-            VolumeMapper::setVtkVolumeMapper(this->m_vtkSmartVolumeMapper);
-        }
-
-        SmartVolumeMapper::~SmartVolumeMapper() {
+        SmartVolumeMapper::SmartVolumeMapper() : VolumeMapper(vtkSmartPointer<vtkSmartVolumeMapper>::New()) {
         }
     }
 }

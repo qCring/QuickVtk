@@ -5,8 +5,8 @@ namespace quick {
     namespace Vtk {
         Qml::Register::Class<Plane> Plane::Register;
 
-        Plane::Plane() : ImplicitFunction(this) {
-            this->setVtkPlane(vtkSmartPointer<vtkPlane>::New());
+        Plane::Plane() : ImplicitFunction(vtkSmartPointer<vtkPlane>::New()) {
+            this->m_vtkObject = vtkPlane::SafeDownCast(ImplicitFunction::getVtkObject());
 
             this->m_originCb = [this] (Math::Vector3&& vector) {
                 this->updateOrigin(std::move(vector));
@@ -17,23 +17,13 @@ namespace quick {
             };
         }
 
-        auto Plane::setVtkPlane(vtkSmartPointer<vtkPlane> vtkPlane) -> void {
-            this->m_vtkPlane = vtkPlane;
-
-            ImplicitFunction::setVtkImplicitFunction(vtkPlane);
-        }
-
-        auto Plane::getVtkPlane() -> vtkSmartPointer<vtkPlane> {
-            return this->m_vtkPlane;
-        }
-
         auto Plane::updateOrigin(Math::Vector3&& vector) -> void {
-            this->m_vtkPlane->SetOrigin(vector.getValues().data());
+            this->m_vtkObject->SetOrigin(vector.getValues().data());
             this->update();
         }
 
         auto Plane::updateNormal(Math::Vector3&& vector) -> void {
-            this->m_vtkPlane->SetNormal(vector.getValues().data());
+            this->m_vtkObject->SetNormal(vector.getValues().data());
             this->update();
         }
 
@@ -54,7 +44,7 @@ namespace quick {
 
         auto Plane::getOrigin() -> Math::Vector3* {
             if (!this->m_origin) {
-                auto origin = this->m_vtkPlane->GetOrigin();
+                auto origin = this->m_vtkObject->GetOrigin();
                 this->setOrigin(new Math::Vector3(origin[0], origin[1], origin[2]));
             }
 
@@ -78,7 +68,7 @@ namespace quick {
 
         auto Plane::getNormal() -> Math::Vector3* {
             if (!this->m_normal) {
-                auto normal = this->m_vtkPlane->GetNormal();
+                auto normal = this->m_vtkObject->GetNormal();
                 this->setNormal(new Math::Vector3(normal[0], normal[1], normal[2]));
             }
             
@@ -86,7 +76,13 @@ namespace quick {
         }
 
         Plane::~Plane() {
-            this->m_vtkPlane = 0;
+            if (this->m_normal) {
+                this->m_normal->removeCallback(std::move(this->m_normalCb));
+            }
+
+            if (this->m_origin) {
+                this->m_origin->removeCallback(std::move(this->m_originCb));
+            }
         }
     }
 }

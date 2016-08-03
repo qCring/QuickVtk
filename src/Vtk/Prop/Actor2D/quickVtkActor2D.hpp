@@ -21,14 +21,13 @@ namespace quick {
             Q_CLASSINFO("DefaultProperty", "mapper2D");
         private:
             static Qml::Register::Class<Actor2D> Register;
-            vtkSmartPointer<vtkActor2D> m_vtkActor2D;
+            vtkSmartPointer<vtkActor2D> m_vtkObject;
             Mapper2D* m_mapper2D = nullptr;
             Property2D* m_property2D = nullptr;
         public:
             Actor2D();
-            Actor2D(Actor2D*);
-            auto setVtkActor2D(vtkSmartPointer<vtkActor2D>) -> void;
-            auto getVtkActor2D() -> vtkSmartPointer<vtkActor2D>;
+            Actor2D(vtkSmartPointer<vtkActor2D>);
+            auto getVtkObject() -> vtkSmartPointer<vtkActor2D>;
             auto setProperty2D(Property2D*) -> void;
             auto getProperty2D() -> Property2D*;
             auto setMapper2D(Mapper2D*) -> void;

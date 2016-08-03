@@ -12,13 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::AbstractClass<ImageAlgorithm> Register;
-            vtkSmartPointer<vtkImageAlgorithm> m_vtkImageAlgorithm;
         public:
-            ImageAlgorithm();
-            ImageAlgorithm(ImageAlgorithm*);
-            auto setVtkImageAlgorithm(vtkSmartPointer<vtkImageAlgorithm>) -> void;
-            auto getVtkImageAlgorithm() -> vtkSmartPointer<vtkImageAlgorithm>;
-            ~ImageAlgorithm();
+            ImageAlgorithm(vtkSmartPointer<vtkImageAlgorithm>);
         };
     }
 }

@@ -7,19 +7,11 @@ namespace quick {
 
         Qml::Register::AbstractClass<Prop> Prop::Register;
 
-        Prop::Prop() {
-            this->m_vtkProp = 0;
+        Prop::Prop(vtkSmartPointer<vtkProp> vtkObject) : m_vtkObject(vtkObject) {
         }
 
-        Prop::Prop(Prop* prop) {
-        }
-
-        auto Prop::setVtkProp(vtkSmartPointer<vtkProp> prop) -> void {
-            this->m_vtkProp = prop;
-        }
-
-        auto Prop::getVtkProp() -> vtkSmartPointer<vtkProp> {
-            return this->m_vtkProp;
+        auto Prop::getVtkObject() -> vtkSmartPointer<vtkProp> {
+            return this->m_vtkObject;
         }
 
         auto Prop::linkViewer(Viewer* viewer) -> void {
@@ -28,9 +20,7 @@ namespace quick {
         }
 
         auto Prop::unlinkViewer(Viewer* viewer) -> void {
-            if (!this->m_viewers.removeOne(viewer)) {
-                throw "leak";
-            }
+            this->m_viewers.removeOne(viewer);
         }
 
         auto Prop::update() -> void {
@@ -44,18 +34,18 @@ namespace quick {
         }
 
         auto Prop::setVisibility(bool visible) -> void {
-            this->m_vtkProp->SetVisibility(visible);
+            this->m_vtkObject->SetVisibility(visible);
             emit this->visibilityChanged();
             update();
         }
 
         auto Prop::getVisibility() -> bool {
-            return this->m_vtkProp->GetVisibility();
+            return this->m_vtkObject->GetVisibility();
         }
         
         Prop::~Prop() {
             this->m_initialized = false;
-            this->m_vtkProp = nullptr;
+            this->m_vtkObject = nullptr;
         }
     }
 }

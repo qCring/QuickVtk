@@ -9,23 +9,7 @@ namespace quick {
 
         Qml::Register::Class<PolyDataMapper> PolyDataMapper::Register;
 
-        PolyDataMapper::PolyDataMapper() : Mapper(this) {
-            this->setVtkPolyDataMapper(vtkSmartPointer<vtkPolyDataMapper>::New());
-        }
-
-        PolyDataMapper::PolyDataMapper(PolyDataMapper* other) : Mapper(this) {
-        }
-
-        auto PolyDataMapper::setVtkPolyDataMapper(vtkSmartPointer<vtkPolyDataMapper> vtkPolyDataMapper) -> void {
-            this->m_vtkPolyDataMapper = vtkPolyDataMapper;
-            Mapper::setVtkMapper(vtkPolyDataMapper);
-        }
-
-        auto PolyDataMapper::getVtkPolyDataMapper() -> vtkSmartPointer<vtkPolyDataMapper> {
-            return this->m_vtkPolyDataMapper;
-        }
-
-        PolyDataMapper::~PolyDataMapper() {
+        PolyDataMapper::PolyDataMapper() : Mapper(vtkSmartPointer<vtkPolyDataMapper>::New()) {
         }
     }
 }

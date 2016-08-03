@@ -13,15 +13,11 @@ namespace quick {
             Q_PROPERTY(QString fileName READ getFileName WRITE setFileName NOTIFY fileNameChanged);
         private:
             static Qml::Register::AbstractClass<DataReader> Register;
-            vtkSmartPointer<vtkDataReader> m_vtkDataReader;
+            vtkSmartPointer<vtkDataReader> m_vtkObject;
         public:
-            DataReader();
-            DataReader(DataReader*);
-            auto setVtkDataReader(vtkSmartPointer<vtkDataReader>) -> void;
-            auto getVtkDataReader() -> vtkSmartPointer<vtkDataReader>;
+            DataReader(vtkSmartPointer<vtkDataReader>);
             auto setFileName(const QString&) -> void;
             auto getFileName() -> QString;
-            ~DataReader();
         signals:
             void fileNameChanged();
         };

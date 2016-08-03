@@ -16,12 +16,15 @@ namespace quick {
             this->m_prop = nullptr;
         }
 
-        auto Algorithm::setVtkAlgorithm(vtkSmartPointer<vtkAlgorithm> vtkAlgorithm) -> void {
-            this->m_vtkAlgorithm = vtkAlgorithm;
+        Algorithm::Algorithm(vtkSmartPointer<vtkAlgorithm> vtkObject) : m_vtkObject(vtkObject) {
         }
 
-        auto Algorithm::getVtkAlgorithm() -> vtkSmartPointer<vtkAlgorithm> {
-            return this->m_vtkAlgorithm;
+        auto Algorithm::setVtkAlgorithm(vtkSmartPointer<vtkAlgorithm> vtkObject) -> void {
+            this->m_vtkObject = vtkObject;
+        }
+
+        auto Algorithm::getVtkObject() -> vtkSmartPointer<vtkAlgorithm> {
+            return this->m_vtkObject;
         }
 
         auto Algorithm::setProp(Prop *prop) -> void {
@@ -59,7 +62,7 @@ namespace quick {
                 parent->m_input.append(algorithm);
                 int count = parent->m_input.count() - 1;
 
-                parent->getVtkAlgorithm()->SetInputConnection(count, algorithm->getVtkAlgorithm()->GetOutputPort());
+                parent->getVtkObject()->SetInputConnection(count, algorithm->getVtkObject()->GetOutputPort());
 
                 emit parent->inputChanged();
 

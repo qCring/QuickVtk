@@ -8,17 +8,8 @@ namespace quick {
 
         Qml::Register::Class<Cutter> Cutter::Register;
 
-        Cutter::Cutter() : PolyDataAlgorithm(this) {
-            this->m_vtkCutter = vtkSmartPointer<vtkCutter>::New();
-
-            this->m_cutFunctionCb = [this] () {
-                this->updateCutFunction();
-            };
-
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkCutter);
-        }
-
-        Cutter::Cutter(Cutter* other) : PolyDataAlgorithm(this) {
+        Cutter::Cutter() : PolyDataAlgorithm(vtkSmartPointer<vtkCutter>::New()) {
+            this->m_vtkObject = vtkCutter::SafeDownCast(Algorithm::getVtkObject());
             this->m_cutFunctionCb = [this] () {
                 this->updateCutFunction();
             };
@@ -38,7 +29,7 @@ namespace quick {
             this->m_cutFunction = cutFunction;
 
             if (cutFunction) {
-                this->m_vtkCutter->SetCutFunction(cutFunction->getVtkImplicitFunction());
+                this->m_vtkObject->SetCutFunction(cutFunction->getVtkObject());
                 cutFunction->addCallback(std::move(this->m_cutFunctionCb));
                 this->updateCutFunction();
             }
@@ -54,8 +45,6 @@ namespace quick {
             if (this->m_cutFunction) {
                 this->m_cutFunction->removeCallback(std::move(this->m_cutFunctionCb));
             }
-            
-            this->m_vtkCutter = nullptr;
         }
     }
 }

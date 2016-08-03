@@ -6,34 +6,18 @@ namespace quick {
 
         Qml::Register::AbstractClass<InterpolatingSubdivisionFilter> InterpolatingSubdivisionFilter::Register;
 
-        InterpolatingSubdivisionFilter::InterpolatingSubdivisionFilter() : PolyDataAlgorithm(this) {
-            this->m_vtkInterpolatingSubdivisionFilter = nullptr;
-        }
-
-        InterpolatingSubdivisionFilter::InterpolatingSubdivisionFilter(InterpolatingSubdivisionFilter* other) : PolyDataAlgorithm(this) {
-        }
-
-        auto InterpolatingSubdivisionFilter::setVtkInterpolatingSubdivisionFilter(vtkSmartPointer<vtkInterpolatingSubdivisionFilter> vtkInterpolatingSubdivisionFilter) -> void {
-            this->m_vtkInterpolatingSubdivisionFilter = vtkInterpolatingSubdivisionFilter;
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(vtkInterpolatingSubdivisionFilter);
+        InterpolatingSubdivisionFilter::InterpolatingSubdivisionFilter(vtkSmartPointer<vtkInterpolatingSubdivisionFilter> vtkObject) : PolyDataAlgorithm(vtkObject) {
+            this->m_vtkObject = vtkObject;
         }
 
         auto InterpolatingSubdivisionFilter::setNumberOfSubdivisions(int value) -> void {
-            this->m_vtkInterpolatingSubdivisionFilter->SetNumberOfSubdivisions(value);
+            this->m_vtkObject->SetNumberOfSubdivisions(value);
             emit this->numberOfSubdivisionsChanged();
             this->update();
         }
 
         auto InterpolatingSubdivisionFilter::getNumberOfSubdivisions() -> int {
-            return this->m_vtkInterpolatingSubdivisionFilter->GetNumberOfSubdivisions();
-        }
-
-        auto InterpolatingSubdivisionFilter::getVtkInterpolatingSubdivisionFilter() -> vtkSmartPointer<vtkInterpolatingSubdivisionFilter> {
-            return this->m_vtkInterpolatingSubdivisionFilter;
-        }
-
-        InterpolatingSubdivisionFilter::~InterpolatingSubdivisionFilter() {
-            this->m_vtkInterpolatingSubdivisionFilter = 0;
+            return this->m_vtkObject->GetNumberOfSubdivisions();
         }
     }
 }

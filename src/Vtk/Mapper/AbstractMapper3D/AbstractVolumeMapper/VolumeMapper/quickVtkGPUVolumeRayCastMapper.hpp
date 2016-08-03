@@ -12,10 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<GPUVolumeRayCastMapper> Register;
-            vtkSmartPointer<vtkGPUVolumeRayCastMapper> m_vtkGPUVolumeRayCastMapper;
         public:
             GPUVolumeRayCastMapper();
-            ~GPUVolumeRayCastMapper();
         };
     }
 }

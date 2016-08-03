@@ -11,11 +11,11 @@ namespace quick {
         }
 
         Property2D::Property2D(Actor2D* actor2D) : m_actor2D(actor2D) {
-            this->m_vtkActor2D = this->m_actor2D->getVtkActor2D();
+            this->m_vtkActor2D = this->m_actor2D->Actor2D::getVtkObject();
         }
 
         auto Property2D::setActor2D(Actor2D* actor2D) -> void {
-            this->m_vtkActor2D = actor2D->getVtkActor2D();
+            this->m_vtkActor2D = actor2D->Actor2D::getVtkObject();
         }
 
         auto Property2D::update() -> void {

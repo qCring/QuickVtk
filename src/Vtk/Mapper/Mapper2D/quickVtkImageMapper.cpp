@@ -6,17 +6,12 @@ namespace quick {
 
         Qml::Register::Class<ImageMapper> ImageMapper::Register;
 
-        ImageMapper::ImageMapper() {
-            this->m_vtkImageMapper = vtkSmartPointer<vtkImageMapper>::New();
-            Mapper2D::setVtkMapper2D(this->m_vtkImageMapper);
-        }
-
-        auto ImageMapper::getVtkImageMapper() -> vtkSmartPointer<vtkImageMapper> {
-            return this->m_vtkImageMapper;
+        ImageMapper::ImageMapper() : Mapper2D(vtkSmartPointer<vtkImageMapper>::New()) {
+            this->m_vtkObject = vtkImageMapper::SafeDownCast(Algorithm::getVtkObject());
         }
 
         auto ImageMapper::setColorWindow(float colorWindow) -> void {
-            this->m_vtkImageMapper->SetColorWindow(colorWindow);
+            this->m_vtkObject->SetColorWindow(colorWindow);
             emit this->colorWindowChanged();
             emit this->colorScaleChanged();
             emit this->colorShiftChanged();
@@ -25,11 +20,11 @@ namespace quick {
         }
 
         auto ImageMapper::getColorWindow() -> float {
-            return this->m_vtkImageMapper->GetColorWindow();
+            return this->m_vtkObject->GetColorWindow();
         }
 
         auto ImageMapper::setColorLevel(float colorLevel) -> void {
-            this->m_vtkImageMapper->SetColorLevel(colorLevel);
+            this->m_vtkObject->SetColorLevel(colorLevel);
             emit this->colorLevelChanged();
             emit this->colorScaleChanged();
             emit this->colorShiftChanged();
@@ -38,15 +33,15 @@ namespace quick {
         }
 
         auto ImageMapper::getColorLevel() -> float {
-            return this->m_vtkImageMapper->GetColorLevel();
+            return this->m_vtkObject->GetColorLevel();
         }
 
         auto ImageMapper::getColorShift() -> float {
-            return this->m_vtkImageMapper->GetColorShift();
+            return this->m_vtkObject->GetColorShift();
         }
 
         auto ImageMapper::getColorScale() -> float {
-            return this->m_vtkImageMapper->GetColorScale();
+            return this->m_vtkObject->GetColorScale();
         }
     }
 }

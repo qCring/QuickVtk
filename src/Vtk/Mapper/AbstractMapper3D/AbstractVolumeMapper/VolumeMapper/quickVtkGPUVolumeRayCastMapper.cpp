@@ -6,12 +6,7 @@ namespace quick {
 
         Qml::Register::Class<GPUVolumeRayCastMapper> GPUVolumeRayCastMapper::Register;
 
-        GPUVolumeRayCastMapper::GPUVolumeRayCastMapper() : VolumeMapper(this) {
-            this->m_vtkGPUVolumeRayCastMapper = vtkSmartPointer<vtkGPUVolumeRayCastMapper>::New();
-            VolumeMapper::setVtkVolumeMapper(this->m_vtkGPUVolumeRayCastMapper);
-        }
-
-        GPUVolumeRayCastMapper::~GPUVolumeRayCastMapper() {
+        GPUVolumeRayCastMapper::GPUVolumeRayCastMapper() : VolumeMapper(vtkSmartPointer<vtkGPUVolumeRayCastMapper>::New()) {
         }
     }
 }

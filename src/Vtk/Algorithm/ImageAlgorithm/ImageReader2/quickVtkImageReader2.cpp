@@ -8,20 +8,8 @@ namespace quick {
 
         Qml::Register::AbstractClass<ImageReader2> ImageReader2::Register;
 
-        ImageReader2::ImageReader2() : ImageAlgorithm(this) {
-            this->m_vtkImageReader2 = nullptr;
-        }
-
-        ImageReader2::ImageReader2(ImageReader2* other) : ImageAlgorithm(this) {
-        }
-
-        auto ImageReader2::setVtkImageReader2(vtkSmartPointer<vtkImageReader2> vtkImageReader2) -> void {
-            this->m_vtkImageReader2 = vtkImageReader2;
-            ImageAlgorithm::setVtkImageAlgorithm(vtkImageReader2);
-        }
-
-        auto ImageReader2::getVtkImageReader2() -> vtkSmartPointer<vtkImageReader2> {
-            return this->m_vtkImageReader2;
+        ImageReader2::ImageReader2(vtkSmartPointer<vtkImageReader2> vtkObject) : ImageAlgorithm(vtkObject) {
+            this->m_vtkObject = vtkObject;
         }
 
         auto ImageReader2::isValid() -> bool {
@@ -45,17 +33,14 @@ namespace quick {
             emit this->fileNameChanged();
 
             if (Util::IO::FileExists(fileName)) {
-                this->m_vtkImageReader2->SetFileName(fileName.toStdString().c_str());
-                this->m_vtkImageReader2->Update();
+                this->m_vtkObject->SetFileName(fileName.toStdString().c_str());
+                this->m_vtkObject->Update();
                 this->update();
             }
         }
 
         auto ImageReader2::getFileName() -> QString {
             return this->m_fileName;
-        }
-
-        ImageReader2::~ImageReader2() {
         }
     }
 }

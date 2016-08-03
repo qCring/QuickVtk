@@ -6,9 +6,8 @@ namespace quick {
 
         Qml::Register::Class<Glyph3D> Glyph3D::Register;
 
-        Glyph3D::Glyph3D() : PolyDataAlgorithm(this) {
-            this->m_vtkGlyph3D = vtkSmartPointer<vtkGlyph3D>::New();
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkGlyph3D);
+        Glyph3D::Glyph3D() : PolyDataAlgorithm(vtkSmartPointer<vtkGlyph3D>::New()) {
+            this->m_vtkObject = vtkGlyph3D::SafeDownCast(Algorithm::getVtkObject());
 
             this->m_rangeCb = [this] (Math::Vector2&& vector) {
                 this->updateRange(std::move(vector));
@@ -16,7 +15,7 @@ namespace quick {
         }
 
         auto Glyph3D::updateRange(Math::Vector2&& vector) -> void {
-            this->m_vtkGlyph3D->SetRange(vector.getValues().data());
+            this->m_vtkObject->SetRange(vector.getValues().data());
             this->update();
         }
 
@@ -37,7 +36,7 @@ namespace quick {
 
         auto Glyph3D::getRange() -> Math::Vector2* {
             if (!this->m_range) {
-                auto range = this->m_vtkGlyph3D->GetRange();
+                auto range = this->m_vtkObject->GetRange();
                 this->setRange(new Math::Vector2(range[0], range[1]));
             }
 
@@ -45,107 +44,109 @@ namespace quick {
         }
 
         auto Glyph3D::setScaleMode(ScaleMode scaleMode) -> void {
-            this->m_vtkGlyph3D->SetScaleMode(scaleMode);
+            this->m_vtkObject->SetScaleMode(scaleMode);
             emit this->scaleModeChanged();
             this->update();
         }
 
         auto Glyph3D::getScaleMode() -> Glyph3D::ScaleMode {
-            return (Glyph3D::ScaleMode) this->m_vtkGlyph3D->GetScaleMode();
+            return (Glyph3D::ScaleMode) this->m_vtkObject->GetScaleMode();
         }
 
         auto Glyph3D::setColorMode(ColorMode colorMode) -> void {
-            this->m_vtkGlyph3D->SetColorMode(colorMode);
+            this->m_vtkObject->SetColorMode(colorMode);
             emit this->colorModeChanged();
             this->update();
         }
 
         auto Glyph3D::getColorMode() -> ColorMode {
-            return (ColorMode) this->m_vtkGlyph3D->GetColorMode();
+            return (ColorMode) this->m_vtkObject->GetColorMode();
         }
 
         auto Glyph3D::setIndexMode(IndexMode indexMode) -> void {
-            this->m_vtkGlyph3D->SetIndexMode(indexMode);
+            this->m_vtkObject->SetIndexMode(indexMode);
             emit this->indexModeChanged();
             this->update();
         }
 
         auto Glyph3D::getIndexMode() -> IndexMode {
-            return (IndexMode) this->m_vtkGlyph3D->GetIndexMode();
+            return (IndexMode) this->m_vtkObject->GetIndexMode();
         }
 
         auto Glyph3D::setVectorMode(VectorMode vectorMode) -> void {
-            this->m_vtkGlyph3D->SetVectorMode(vectorMode);
+            this->m_vtkObject->SetVectorMode(vectorMode);
             emit this->vectorModeChanged();
             this->update();
         }
 
         auto Glyph3D::getVectorMode() -> VectorMode {
-            return (VectorMode) this->m_vtkGlyph3D->GetVectorMode();
+            return (VectorMode) this->m_vtkObject->GetVectorMode();
         }
 
         auto Glyph3D::setScaleFactor(double scaleFactor) -> void {
-            this->m_vtkGlyph3D->SetScaleFactor(scaleFactor);
+            this->m_vtkObject->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
             this->update();
         }
 
         auto Glyph3D::getScaleFactor() -> double {
-            return this->m_vtkGlyph3D->GetScaleFactor();
+            return this->m_vtkObject->GetScaleFactor();
         }
 
         auto Glyph3D::setOrient(bool orient) -> void {
-            this->m_vtkGlyph3D->SetOrient(orient);
+            this->m_vtkObject->SetOrient(orient);
             emit this->orientChanged();
             this->update();
         }
 
         auto Glyph3D::getOrient() -> bool {
-            return this->m_vtkGlyph3D->GetOrient();
+            return this->m_vtkObject->GetOrient();
         }
 
         auto Glyph3D::setClamping(bool clamping) -> void {
-            this->m_vtkGlyph3D->SetClamping(clamping);
+            this->m_vtkObject->SetClamping(clamping);
             emit this->clampingChanged();
             this->update();
         }
 
         auto Glyph3D::getClamping() -> bool {
-            return this->m_vtkGlyph3D->GetClamping();
+            return this->m_vtkObject->GetClamping();
         }
 
         auto Glyph3D::setScaling(bool scaling) -> void {
-            this->m_vtkGlyph3D->SetScaling(scaling);
+            this->m_vtkObject->SetScaling(scaling);
             emit this->scalingChanged();
             this->update();
         }
 
         auto Glyph3D::getScaling() -> bool {
-            return this->m_vtkGlyph3D->GetScaling();
+            return this->m_vtkObject->GetScaling();
         }
 
         auto Glyph3D::setFillCellData(bool fillCellData) -> void {
-            this->m_vtkGlyph3D->SetFillCellData(fillCellData);
+            this->m_vtkObject->SetFillCellData(fillCellData);
             emit this->fillCellDataChanged();
             this->update();
         }
 
         auto Glyph3D::getFillCellData() -> bool {
-            return this->m_vtkGlyph3D->GetFillCellData();
+            return this->m_vtkObject->GetFillCellData();
         }
 
         auto Glyph3D::setGeneratePointIds(bool generatePointIds) -> void {
-            this->m_vtkGlyph3D->SetGeneratePointIds(generatePointIds);
+            this->m_vtkObject->SetGeneratePointIds(generatePointIds);
             emit this->generatePointIdsChanged();
             this->update();
         }
 
         auto Glyph3D::getGeneratePointIds() -> bool {
-            return this->m_vtkGlyph3D->GetGeneratePointIds();
+            return this->m_vtkObject->GetGeneratePointIds();
         }
 
         Glyph3D::~Glyph3D() {
-            this->m_vtkGlyph3D = nullptr;
+            if (this->m_range) {
+                this->m_range->removeCallback(std::move(this->m_rangeCb));
+            }
         }
     }
 }

@@ -12,10 +12,9 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<PNGReader> Register;
-            vtkSmartPointer<vtkPNGReader> m_vtkPNGReader;
         public:
-            auto getSuffix() -> QString override;
             PNGReader();
+            auto getSuffix() -> QString override;
         };
     }
 }

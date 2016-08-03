@@ -12,12 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<LoopSubdivisionFilter> Register;
-            vtkSmartPointer<vtkLoopSubdivisionFilter> m_vtkLoopSubdivisionFilter;
         public:
             LoopSubdivisionFilter();
-            auto setVtkLoopSubdivisionFilter(vtkSmartPointer<vtkLoopSubdivisionFilter>) -> void;
-            auto getVtkLoopSubdivisionFilter() -> vtkSmartPointer<vtkLoopSubdivisionFilter>;
-            ~LoopSubdivisionFilter();
         };
     }
 }

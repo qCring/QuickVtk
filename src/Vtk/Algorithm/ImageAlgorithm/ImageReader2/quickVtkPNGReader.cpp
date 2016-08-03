@@ -6,9 +6,7 @@ namespace quick {
 
         Qml::Register::Class<PNGReader> PNGReader::Register;
 
-        PNGReader::PNGReader() : ImageReader2(this) {
-            this->m_vtkPNGReader = vtkSmartPointer<vtkPNGReader>::New();
-            this->setVtkImageReader2(this->m_vtkPNGReader);
+        PNGReader::PNGReader() : ImageReader2(vtkSmartPointer<vtkPNGReader>::New()) {
         }
 
         auto PNGReader::getSuffix() -> QString {

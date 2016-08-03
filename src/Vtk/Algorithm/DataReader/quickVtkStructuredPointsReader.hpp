@@ -12,10 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<StructuredPointsReader> Register;
-            vtkSmartPointer<vtkStructuredPointsReader> m_vtkStructuredPointsReader;
         public:
             StructuredPointsReader();
-            ~StructuredPointsReader();
         };
     }
 }

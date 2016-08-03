@@ -14,12 +14,12 @@ namespace quick {
         private:
             QString m_directoryName;
             static Qml::Register::Class<DICOMImageReader> Register;
-            vtkSmartPointer<vtkDICOMImageReader> m_vtkDICOMImageReader;
+            vtkSmartPointer<vtkDICOMImageReader> m_vtkObject;
         public:
+            DICOMImageReader();
             auto getSuffix() -> QString override;
             auto setDirectoryName(const QString&) -> void;
             auto getDirectoryName() -> QString;
-            DICOMImageReader();
         signals:
             void directoryNameChanged();
         };

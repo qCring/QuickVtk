@@ -29,7 +29,7 @@ namespace quick {
             this->m_cutFunction = cutFunction;
 
             if (cutFunction) {
-                this->m_vtkObject->SetCutFunction(cutFunction->getVtkImplicitFunction());
+                this->m_vtkObject->SetCutFunction(cutFunction->getVtkObject());
                 cutFunction->addCallback(std::move(this->m_cutFunctionCb));
                 this->updateCutFunction();
             }

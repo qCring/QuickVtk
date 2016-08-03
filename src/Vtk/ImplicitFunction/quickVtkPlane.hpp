@@ -15,18 +15,16 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector3* normal READ getNormal WRITE setNormal NOTIFY normalChanged);
         private:
             static Qml::Register::Class<Plane> Register;
-            vtkSmartPointer<vtkPlane> m_vtkPlane;
+            vtkSmartPointer<vtkPlane> m_vtkObject = nullptr;
             Math::Vector3::cb_t m_originCb;
             Math::Vector3::cb_t m_normalCb;
-            Math::Vector3* m_origin;
-            Math::Vector3* m_normal;
+            Math::Vector3* m_origin = nullptr;
+            Math::Vector3* m_normal = nullptr;
         private:
             auto updateOrigin(Math::Vector3&&) -> void;
             auto updateNormal(Math::Vector3&&) -> void;
         public:
             Plane();
-            auto setVtkPlane(vtkSmartPointer<vtkPlane>) -> void;
-            auto getVtkPlane() -> vtkSmartPointer<vtkPlane> ;
             auto setOrigin(Math::Vector3*) -> void;
             auto getOrigin() -> Math::Vector3*;
             auto setNormal(Math::Vector3*) -> void;

@@ -6,19 +6,18 @@ namespace quick {
 
         Qml::Register::Class<PlatonicSolidSource> PlatonicSolidSource::Register;
 
-        PlatonicSolidSource::PlatonicSolidSource() : PolyDataAlgorithm(this) {
-            this->m_vtkPlatonicSolidSource = vtkSmartPointer<vtkPlatonicSolidSource>::New();
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkPlatonicSolidSource);
+        PlatonicSolidSource::PlatonicSolidSource() : PolyDataAlgorithm(vtkSmartPointer<vtkPlatonicSolidSource>::New()) {
+            this->m_vtkObject = vtkPlatonicSolidSource::SafeDownCast(Algorithm::getVtkObject());
         }
 
         auto PlatonicSolidSource::setSolidType(SolidType solidType) -> void {
-            this->m_vtkPlatonicSolidSource->SetSolidType(solidType);
+            this->m_vtkObject->SetSolidType(solidType);
             this->update();
             emit this->solidTypeChanged();
         }
 
         auto PlatonicSolidSource::getSolidType() -> SolidType {
-            return (SolidType) this->m_vtkPlatonicSolidSource->GetSolidType();
+            return (SolidType) this->m_vtkObject->GetSolidType();
         }
     }
 }

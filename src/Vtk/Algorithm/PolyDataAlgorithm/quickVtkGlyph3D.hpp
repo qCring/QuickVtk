@@ -51,7 +51,7 @@ namespace quick {
             Q_PROPERTY(bool generatePointIds READ getGeneratePointIds WRITE setGeneratePointIds NOTIFY generatePointIdsChanged);
         private:
             static Qml::Register::Class<Glyph3D> Register;
-            vtkSmartPointer<vtkGlyph3D> m_vtkGlyph3D;
+            vtkSmartPointer<vtkGlyph3D> m_vtkObject;
             Math::Vector2::cb_t m_rangeCb;
             Math::Vector2* m_range;
         private:

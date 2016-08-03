@@ -97,8 +97,13 @@ namespace quick {
         }
 
         PerlinNoise::~PerlinNoise() {
-            this->m_vtkPerlinNoise = nullptr;
-        }
+            if (this->m_frequency) {
+                this->m_frequency->removeCallback(std::move(this->m_frequencyCb));
+            }
 
+            if (this->m_phase) {
+                this->m_phase->removeCallback(std::move(this->m_phaseCb));
+            }
+        }
     }
 }

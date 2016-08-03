@@ -6,9 +6,7 @@ namespace quick {
 
         Qml::Register::Class<OBJReader> OBJReader::Register;
 
-        OBJReader::OBJReader() : AbstractPolyDataReader(this) {
-            this->m_vtkOBJReader = vtkSmartPointer<vtkOBJReader>::New();
-            AbstractPolyDataReader::setVtkAbstractPolyDataReader(m_vtkOBJReader);
+        OBJReader::OBJReader() : AbstractPolyDataReader(vtkSmartPointer<vtkOBJReader>::New()) {
         }
 
         auto OBJReader::getSuffix() -> QString {

@@ -19,7 +19,7 @@ namespace quick {
             Q_PROPERTY(int degree READ getDegree WRITE setDegree NOTIFY degreeChanged);
         private:
             static Qml::Register::Class<DecimatePro> Register;
-            vtkSmartPointer<vtkDecimatePro> m_vtkDecimatePro;
+            vtkSmartPointer<vtkDecimatePro> m_vtkObject;
         public:
             DecimatePro();
             auto setDegree(int) -> void;
@@ -36,7 +36,6 @@ namespace quick {
             auto getTargetReduction() -> float;
             auto setPreserveTopology(bool) -> void;
             auto getPreserveTopology() ->bool;
-            ~DecimatePro();
         signals:
             void degreeChanged();
             void splittingChanged();

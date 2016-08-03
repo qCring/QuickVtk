@@ -6,33 +6,28 @@ namespace quick {
 
         Qml::Register::Class<TriangleFilter> TriangleFilter::Register;
 
-        TriangleFilter::TriangleFilter() : PolyDataAlgorithm(this) {
-            this->m_vtkTriangleFilter = vtkSmartPointer<vtkTriangleFilter>::New();
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkTriangleFilter);
+        TriangleFilter::TriangleFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkTriangleFilter>::New()) {
+            this->m_vtkObject = vtkTriangleFilter::SafeDownCast(Algorithm::getVtkObject());
         }
 
         auto TriangleFilter::setPassVerts(bool pass) -> void {
-            this->m_vtkTriangleFilter->SetPassVerts(pass);
+            this->m_vtkObject->SetPassVerts(pass);
             this->update();
             emit this->passVertsChanged();
         }
 
         auto TriangleFilter::setPassLines(bool pass) -> void {
-            this->m_vtkTriangleFilter->SetPassLines(pass);
+            this->m_vtkObject->SetPassLines(pass);
             this->update();
             emit this->passLinesChanged();
         }
 
         auto TriangleFilter::getPassVerts() -> bool {
-            return this->m_vtkTriangleFilter->GetPassVerts();
+            return this->m_vtkObject->GetPassVerts();
         }
 
         auto TriangleFilter::getPassLines() -> bool {
-            return this->m_vtkTriangleFilter->GetPassLines();
-        }
-
-        TriangleFilter::~TriangleFilter() {
-            this->m_vtkTriangleFilter = 0;
+            return this->m_vtkObject->GetPassLines();
         }
     }
 }

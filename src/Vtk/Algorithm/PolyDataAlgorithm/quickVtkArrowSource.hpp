@@ -18,7 +18,7 @@ namespace quick {
             Q_PROPERTY(bool invert READ getInvert WRITE setInvert NOTIFY invertChanged);
         private:
             static Qml::Register::Class<ArrowSource> Register;
-            vtkSmartPointer<vtkArrowSource> m_vtkArrowSource;
+            vtkSmartPointer<vtkArrowSource> m_vtkObject;
         public:
             ArrowSource();
             auto setTipResolution(int) -> void;
@@ -33,7 +33,6 @@ namespace quick {
             auto getShaftRadius() -> double;
             auto setInvert(bool) -> void;
             auto getInvert() -> bool;
-            ~ArrowSource();
         signals:
             void tipResolutionChanged();
             void tipLengthChanged();

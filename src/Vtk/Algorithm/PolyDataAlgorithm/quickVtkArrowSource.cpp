@@ -6,73 +6,68 @@ namespace quick {
 
         Qml::Register::Class<ArrowSource> ArrowSource::Register;
 
-        ArrowSource::ArrowSource() : PolyDataAlgorithm(this) {
-            this->m_vtkArrowSource = vtkSmartPointer<vtkArrowSource>::New();
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkArrowSource);
+        ArrowSource::ArrowSource() : PolyDataAlgorithm(vtkSmartPointer<vtkArrowSource>::New()) {
+            this->m_vtkObject = vtkArrowSource::SafeDownCast(Algorithm::getVtkObject());
         }
 
         auto ArrowSource::setTipResolution(int tipResolution) -> void {
-            this->m_vtkArrowSource->SetTipResolution(tipResolution);
+            this->m_vtkObject->SetTipResolution(tipResolution);
             emit this->tipResolutionChanged();
             this->update();
         }
 
         auto ArrowSource::getTipResolution() -> int {
-            return this->m_vtkArrowSource->GetTipResolution();
+            return this->m_vtkObject->GetTipResolution();
         }
 
         auto ArrowSource::setTipLength(double tipLength) -> void {
-            this->m_vtkArrowSource->SetTipLength(tipLength);
+            this->m_vtkObject->SetTipLength(tipLength);
             emit this->tipLengthChanged();
             this->update();
         }
 
         auto ArrowSource::getTipLength() -> double {
-            return this->m_vtkArrowSource->GetTipLength();
+            return this->m_vtkObject->GetTipLength();
         }
 
         auto ArrowSource::setTipRadius(double tipRadius) -> void {
-            this->m_vtkArrowSource->SetTipRadius(tipRadius);
+            this->m_vtkObject->SetTipRadius(tipRadius);
             emit this->tipRadiusChanged();
             this->update();
         }
 
         auto ArrowSource::getTipRadius() -> double {
-            return this->m_vtkArrowSource->GetTipRadius();
+            return this->m_vtkObject->GetTipRadius();
         }
 
         auto ArrowSource::setShaftResolution(int shaftResolution) -> void {
-            this->m_vtkArrowSource->SetShaftResolution(shaftResolution);
+            this->m_vtkObject->SetShaftResolution(shaftResolution);
             emit this->shaftResolutionChanged();
             this->update();
         }
 
         auto ArrowSource::getShaftResolution() -> int {
-            return this->m_vtkArrowSource->GetShaftResolution();
+            return this->m_vtkObject->GetShaftResolution();
         }
 
         auto ArrowSource::setShaftRadius(double shaftRadius) -> void {
-            this->m_vtkArrowSource->SetShaftRadius(shaftRadius);
+            this->m_vtkObject->SetShaftRadius(shaftRadius);
             emit this->shaftRadiusChanged();
             this->update();
         }
 
         auto ArrowSource::getShaftRadius() -> double {
-            return this->m_vtkArrowSource->GetShaftRadius();
+            return this->m_vtkObject->GetShaftRadius();
         }
 
         auto ArrowSource::setInvert(bool invert) -> void {
-            this->m_vtkArrowSource->SetInvert(invert);
+            this->m_vtkObject->SetInvert(invert);
             emit this->invertChanged();
             this->update();
         }
 
         auto ArrowSource::getInvert() -> bool {
-            return this->m_vtkArrowSource->GetInvert();
-        }
-
-        ArrowSource::~ArrowSource() {
-            this->m_vtkArrowSource = nullptr;
+            return this->m_vtkObject->GetInvert();
         }
     }
 }

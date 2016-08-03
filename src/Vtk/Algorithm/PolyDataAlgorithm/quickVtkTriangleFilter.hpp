@@ -14,14 +14,13 @@ namespace quick {
             Q_PROPERTY(bool passLines READ getPassLines WRITE setPassLines NOTIFY passLinesChanged);
         private:
             static Qml::Register::Class<TriangleFilter> Register;
-            vtkSmartPointer<vtkTriangleFilter> m_vtkTriangleFilter;
+            vtkSmartPointer<vtkTriangleFilter> m_vtkObject;
         public:
             TriangleFilter();
             auto setPassVerts(bool) -> void;
             auto setPassLines(bool) -> void;
             auto getPassVerts() -> bool;
             auto getPassLines() -> bool;
-            ~TriangleFilter();
         signals:
             void passVertsChanged();
             void passLinesChanged();

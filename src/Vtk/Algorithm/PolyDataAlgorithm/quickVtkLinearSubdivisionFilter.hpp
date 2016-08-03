@@ -12,12 +12,8 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<LinearSubdivisionFilter> Register;
-            vtkSmartPointer<vtkLinearSubdivisionFilter> m_vtkLinearSubdivisionFilter;
         public:
             LinearSubdivisionFilter();
-            auto setVtkLinearSubdivisionFilter(vtkSmartPointer<vtkLinearSubdivisionFilter>) -> void;
-            auto getVtkLinearSubdivisionFilter() -> vtkSmartPointer<vtkLinearSubdivisionFilter>;
-            ~LinearSubdivisionFilter();
         };
     }
 }

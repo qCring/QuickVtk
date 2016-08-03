@@ -86,7 +86,13 @@ namespace quick {
         }
 
         Plane::~Plane() {
-            this->m_vtkPlane = 0;
+            if (this->m_normal) {
+                this->m_normal->removeCallback(std::move(this->m_normalCb));
+            }
+
+            if (this->m_origin) {
+                this->m_origin->removeCallback(std::move(this->m_originCb));
+            }
         }
     }
 }

@@ -6,23 +6,18 @@ namespace quick {
 
         Qml::Register::Class<ShrinkPolyData> ShrinkPolyData::Register;
 
-        ShrinkPolyData::ShrinkPolyData() : PolyDataAlgorithm(this) {
-            this->m_vtkShrinkPolyData = vtkSmartPointer<vtkShrinkPolyData>::New();
-            PolyDataAlgorithm::setVtkPolyDataAlgorithm(m_vtkShrinkPolyData);
+        ShrinkPolyData::ShrinkPolyData() : PolyDataAlgorithm(vtkSmartPointer<vtkShrinkPolyData>::New()) {
+            this->m_vtkObject = vtkShrinkPolyData::SafeDownCast(Algorithm::getVtkObject());
         }
 
         auto ShrinkPolyData::setShrinkFactor(float val) -> void {
-            this->m_vtkShrinkPolyData->SetShrinkFactor(val);
+            this->m_vtkObject->SetShrinkFactor(val);
             emit this->shrinkFactorChanged();
             this->update();
         }
 
         auto ShrinkPolyData::getShrinkFactor() -> float {
-            return this->m_vtkShrinkPolyData->GetShrinkFactor();
-        }
-
-        ShrinkPolyData::~ShrinkPolyData() {
-            this->m_vtkShrinkPolyData = 0;
+            return this->m_vtkObject->GetShrinkFactor();
         }
     }
 }

@@ -1,7 +1,5 @@
 #include "quickTypeInfoMethod.hpp"
 
-#include <iostream>
-
 namespace quick {
 
     namespace TypeInfo {

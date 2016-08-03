@@ -12,7 +12,6 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<OBJReader> Register;
-            vtkSmartPointer<vtkOBJReader> m_vtkOBJReader;
         public:
             OBJReader();
             auto getSuffix() -> QString override;

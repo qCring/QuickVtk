@@ -18,6 +18,11 @@ Rectangle {
     default property alias content: column.children;
     property alias title: label.text;
 
+    MouseArea {
+        anchors.fill: parent;
+        propagateComposedEvents: false;
+    }
+
     Column {
         id: column;
 

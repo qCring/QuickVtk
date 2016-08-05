@@ -14,7 +14,6 @@ namespace quick {
             static Qml::Register::Class<PNGReader> Register;
         public:
             PNGReader();
-            auto getSuffix() -> QString override;
         };
     }
 }

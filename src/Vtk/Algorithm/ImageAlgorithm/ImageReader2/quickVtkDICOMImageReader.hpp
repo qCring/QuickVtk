@@ -17,7 +17,6 @@ namespace quick {
             vtkSmartPointer<vtkDICOMImageReader> m_vtkObject;
         public:
             DICOMImageReader();
-            auto getSuffix() -> QString override;
             auto setDirectoryName(const QString&) -> void;
             auto getDirectoryName() -> QString;
         signals:

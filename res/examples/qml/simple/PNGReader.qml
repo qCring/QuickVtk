@@ -20,7 +20,7 @@ Item {
                 colorLevel: 127.5;
 
                 Vtk.PNGReader {
-                    fileName: SampleData.images.lena;
+                    fileName: SampleData.images.lenaPNG;
                 }
             }
         }

@@ -10,10 +10,6 @@ namespace quick {
             this->m_vtkObject = vtkDICOMImageReader::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto DICOMImageReader::getSuffix() -> QString {
-            return ".dcm";
-        }
-
         auto DICOMImageReader::setDirectoryName(const QString& directoryName) -> void {
             this->m_directoryName = directoryName;
             emit this->directoryNameChanged();

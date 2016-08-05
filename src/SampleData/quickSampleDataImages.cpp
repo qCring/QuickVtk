@@ -21,8 +21,12 @@ namespace quick {
             return App::Window::instance->getResourceDir() + "examples/data/images/" + file;
         }
 
-        auto Images::getLena() -> QString {
-            return makeDataPath("lena");
+        auto Images::getLenaPNG() -> QString {
+            return makeDataPath("lena.png");
+        }
+
+        auto Images::getLenaJPG() -> QString {
+            return makeDataPath("lena.jpg");
         }
     }
 }

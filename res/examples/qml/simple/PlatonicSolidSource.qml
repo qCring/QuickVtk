@@ -18,7 +18,7 @@ Item {
         Vtk.Actor {
             Vtk.PolyDataMapper {
                 Vtk.PlatonicSolidSource {
-                    id: platonicSolid;
+                    id: source;
                 }
             }
         }
@@ -32,13 +32,13 @@ Item {
             model: ["Tetrahedron", "Cube", "Octahedron", "Icosahedron", "Dodecahedron"];
             onIndexChanged: {
                 switch (index) {
-                case 0: platonicSolid.solidType = Vtk.PlatonicSolidSource.SolidTetrahedron; break;
-                case 1: platonicSolid.solidType = Vtk.PlatonicSolidSource.SolidCube; break;
-                case 2: platonicSolid.solidType = Vtk.PlatonicSolidSource.SolidOctahedron; break;
-                case 3: platonicSolid.solidType = Vtk.PlatonicSolidSource.SolidIcosahedron; break;
-                case 4: platonicSolid.solidType = Vtk.PlatonicSolidSource.SolidDodecahedron; break;
+                case 0: source.solidType = Vtk.PlatonicSolidSource.SolidTetrahedron; break;
+                case 1: source.solidType = Vtk.PlatonicSolidSource.SolidCube; break;
+                case 2: source.solidType = Vtk.PlatonicSolidSource.SolidOctahedron; break;
+                case 3: source.solidType = Vtk.PlatonicSolidSource.SolidIcosahedron; break;
+                case 4: source.solidType = Vtk.PlatonicSolidSource.SolidDodecahedron; break;
 
-                default: platonicSolid.solidType = Vtk.PlatonicSolidSource.SolidTetrahedron;
+                default: source.solidType = Vtk.PlatonicSolidSource.SolidTetrahedron;
                 }
             }
         }

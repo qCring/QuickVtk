@@ -14,7 +14,6 @@ namespace quick {
             static Qml::Register::Class<STLReader> Register;
         public:
             STLReader();
-            auto getSuffix() -> QString override;
         };
     }
 }

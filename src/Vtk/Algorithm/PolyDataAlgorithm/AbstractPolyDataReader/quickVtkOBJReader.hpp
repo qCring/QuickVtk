@@ -14,7 +14,6 @@ namespace quick {
             static Qml::Register::Class<OBJReader> Register;
         public:
             OBJReader();
-            auto getSuffix() -> QString override;
         };
     }
 }

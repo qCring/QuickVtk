@@ -10,14 +10,16 @@ namespace quick {
 
         class Meshes : public QObject {
             Q_OBJECT
-            Q_PROPERTY(QString suzanne READ getSuzanne CONSTANT);
+            Q_PROPERTY(QString suzanneOBJ READ getSuzanneOBJ CONSTANT);
+            Q_PROPERTY(QString suzanneSTL READ getSuzanneSTL CONSTANT);
         private:
             auto makeDataPath(const QString&) -> QString;
         public:
             static Qml::Register::Class<Meshes> Register;
             static Meshes* instance;
             static auto Create() -> void;
-            auto getSuzanne() -> QString;
+            auto getSuzanneOBJ() -> QString;
+            auto getSuzanneSTL() -> QString;
         };
     }
 }

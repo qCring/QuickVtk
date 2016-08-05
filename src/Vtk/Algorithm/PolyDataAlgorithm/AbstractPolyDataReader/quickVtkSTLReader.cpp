@@ -8,9 +8,5 @@ namespace quick {
 
         STLReader::STLReader() : AbstractPolyDataReader(vtkSmartPointer<vtkSTLReader>::New()) {
         }
-
-        auto STLReader::getSuffix() -> QString {
-            return ".stl";
-        }
     }
 }

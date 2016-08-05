@@ -20,7 +20,7 @@ Item {
                 Vtk.ButterflySubdivisionFilter {
                     id: filter;
                     Vtk.STLReader {
-                        fileName: SampleData.meshes.suzanne;
+                        fileName: SampleData.meshes.suzanneSTL;
                     }
                 }
             }
@@ -32,7 +32,7 @@ Item {
 
         Utils.Slider {
             from: filter; bind: "numberOfSubdivisions";
-            min: 0; max: 4; step: 1; value: filter.numberOfSubdivisions;
+            min: 0; max: 4; step: 1; value: 0;
         }
     }
 }

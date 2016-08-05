@@ -21,7 +21,7 @@ Item {
                     id: filter;
 
                     Vtk.STLReader {
-                        fileName: SampleData.meshes.suzanne;
+                        fileName: SampleData.meshes.suzanneSTL;
                     }
                 }
             }

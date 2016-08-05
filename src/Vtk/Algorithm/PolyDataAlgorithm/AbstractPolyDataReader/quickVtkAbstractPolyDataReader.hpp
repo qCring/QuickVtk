@@ -20,7 +20,6 @@ namespace quick {
             auto isValid() -> bool override;
             auto setFileName(QString&) -> void;
             auto getFileName() -> QString;
-            virtual auto getSuffix() -> QString = 0;
         signals:
             void fileNameChanged();
         };

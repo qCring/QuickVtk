@@ -15,18 +15,11 @@ Item {
         mouseEnabled: true;
 
         Vtk.Actor {
-            id: actor;
-
             Vtk.PolyDataMapper {
                 Vtk.SphereSource {
+                    id: source;
                 }
             }
         }
-    }
-
-    Utils.View {
-        title: "PlatonicSolidSource"
-
-
     }
 }

@@ -24,7 +24,7 @@ Item {
     }
 
     Utils.View {
-        title: "DiskSource"
+        title: "SphereSource"
 
         Utils.Slider {
             from: source; bind: "radius";

@@ -8,9 +8,5 @@ namespace quick {
 
         OBJReader::OBJReader() : AbstractPolyDataReader(vtkSmartPointer<vtkOBJReader>::New()) {
         }
-
-        auto OBJReader::getSuffix() -> QString {
-            return ".obj";
-        }
     }
 }

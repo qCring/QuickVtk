@@ -1,5 +1,4 @@
 import QtQuick 2.6
-import QtQuick.Controls 1.5
 
 import Vtk 1.0 as Vtk
 import Math 1.0 as Math
@@ -17,7 +16,7 @@ Item {
         Vtk.Actor {
             Vtk.PolyDataMapper {
                 Vtk.STLReader {
-                    fileName: SampleData.meshes.suzanne;
+                    fileName: SampleData.meshes.suzanneSTL;
                 }
             }
         }

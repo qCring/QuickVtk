@@ -1,8 +1,8 @@
 import QtQuick 2.6
-import QtQuick.Controls 1.5
 
 import Vtk 1.0 as Vtk
 import Math 1.0 as Math
+import Utils 1.0 as Utils
 
 Item {
     id: root;
@@ -15,31 +15,54 @@ Item {
         mouseEnabled: true;
 
         Vtk.Actor {
-            id: actor;
-
             Vtk.PolyDataMapper {
                 Vtk.SphereSource {
+                    id: source;
                 }
             }
         }
     }
 
-    ComboBox {
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-        anchors.margins: 8;
-        model: ["Points", "Wireframe", "Surface"];
+    Utils.View {
+        title: "SphereSource"
 
-        currentIndex: 2;
+        Utils.Slider {
+            from: source; bind: "radius";
+            min: 0.1; max: 1; step: 0.01; value: 0.5;
+        }
 
-        onCurrentIndexChanged: {
-            switch (currentIndex) {
-            case 0: actor.property.representation = Vtk.Property.Points; break;
-            case 1: actor.property.representation = Vtk.Property.Wireframe; break;
-            case 2: actor.property.representation = Vtk.Property.Surface; break;
+        Utils.Slider {
+            from: source; bind: "startTheta";
+            min: 0; max: 90; step: 1; value: 0;
+        }
 
-            default: actor.property.representation = Vtk.Property.Surface; break;
-            }
+        Utils.Slider {
+            from: source; bind: "endTheta";
+            min: 180; max: 360; step: 1; value: 360;
+        }
+
+        Utils.Slider {
+            from: source; bind: "startPhi";
+            min: 0; max: 90; step: 1; value: 0;
+        }
+
+        Utils.Slider {
+            from: source; bind: "endPhi";
+            min: 90; max: 180; step: 1; value: 180;
+        }
+
+        Utils.Slider {
+            from: source; bind: "thetaResolution";
+            min: 3; max: 64; step: 1; value: 16;
+        }
+
+        Utils.Slider {
+            from: source; bind: "phiResolution";
+            min: 3; max: 64; step: 1; value: 16;
+        }
+
+        Utils.CheckBox {
+            from: source; bind: "latLongTessellation";
         }
     }
 }

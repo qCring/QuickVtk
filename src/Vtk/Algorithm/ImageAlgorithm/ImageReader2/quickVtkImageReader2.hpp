@@ -19,7 +19,6 @@ namespace quick {
             ImageReader2(vtkSmartPointer<vtkImageReader2>);
             auto setFileName(QString&) -> void;
             auto getFileName() -> QString;
-            virtual auto getSuffix() -> QString = 0;
             virtual auto isValid() -> bool;
         signals:
             void fileNameChanged();

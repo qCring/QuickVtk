@@ -16,8 +16,9 @@ Item {
 
         Vtk.Actor {
             Vtk.PolyDataMapper {
-                Vtk.ButterflySubdivisionFilter {
+                Vtk.TriangleFilter {
                     id: filter;
+
                     Vtk.STLReader {
                         fileName: SampleData.meshes.suzanneSTL;
                     }
@@ -27,11 +28,14 @@ Item {
     }
 
     Utils.View {
-        title: "ButterflySubdivisionFilter"
+        title: "TriangleFilter"
 
-        Utils.Slider {
-            from: filter; bind: "numberOfSubdivisions";
-            min: 0; max: 4; step: 1; value: 0;
+        Utils.CheckBox {
+            from: filter; bind: "passVerts";
+        }
+
+        Utils.CheckBox {
+            from: filter; bind: "passLines";
         }
     }
 }

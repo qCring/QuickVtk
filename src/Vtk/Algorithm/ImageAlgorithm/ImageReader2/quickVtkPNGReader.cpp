@@ -8,9 +8,5 @@ namespace quick {
 
         PNGReader::PNGReader() : ImageReader2(vtkSmartPointer<vtkPNGReader>::New()) {
         }
-
-        auto PNGReader::getSuffix() -> QString {
-            return ".png";
-        }
     }
 }

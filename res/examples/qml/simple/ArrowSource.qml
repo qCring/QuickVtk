@@ -1,5 +1,4 @@
 import QtQuick 2.6
-import QtQuick.Controls 1.5
 
 import Vtk 1.0 as Vtk
 import Math 1.0 as Math
@@ -18,7 +17,7 @@ Item {
         Vtk.Actor {
             Vtk.PolyDataMapper {
                 Vtk.ArrowSource {
-                    id: arrow;
+                    id: source;
                 }
             }
         }
@@ -28,32 +27,32 @@ Item {
         title: "ArrowSource"
 
         Utils.Slider {
-            from: arrow; bind: "tipResolution";
+            from: source; bind: "tipResolution";
             min: 1; max: 10; step: 1; value: 1;
         }
 
         Utils.Slider {
-            from: arrow; bind: "tipLength";
+            from: source; bind: "tipLength";
             min: 0.1; max: 1; step: 0.01; value: 0.3;
         }
 
         Utils.Slider {
-            from: arrow; bind: "tipRadius";
+            from: source; bind: "tipRadius";
             min: 0.01; max: 0.5; step: 0.01; value: 0.2;
         }
 
         Utils.Slider {
-            from: arrow; bind: "shaftResolution";
+            from: source; bind: "shaftResolution";
             min: 1; max: 10; step: 1; value: 1;
         }
 
         Utils.Slider {
-            from: arrow; bind: "shaftRadius";
+            from: source; bind: "shaftRadius";
             min: 0.01; max: 0.5; step: 0.01; value: 0.05;
         }
 
         Utils.CheckBox {
-            from: arrow; bind: "invert";
+            from: source; bind: "invert";
         }
     }
 }

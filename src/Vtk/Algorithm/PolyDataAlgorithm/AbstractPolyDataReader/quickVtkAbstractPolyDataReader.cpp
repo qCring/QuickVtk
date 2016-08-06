@@ -21,12 +21,6 @@ namespace quick {
         }
 
         auto AbstractPolyDataReader::setFileName(QString& fileName) -> void {
-            auto suffix = this->getSuffix();
-
-            if (!fileName.endsWith(suffix)) {
-                fileName += suffix;
-            }
-
             this->m_fileName = fileName;
 
             emit this->fileNameChanged();

@@ -21,8 +21,12 @@ namespace quick {
             return App::Window::instance->getResourceDir() + "examples/data/meshes/" + file;
         }
 
-        auto Meshes::getSuzanne() -> QString {
-            return this->makeDataPath("suzanne");
+        auto Meshes::getSuzanneOBJ() -> QString {
+            return this->makeDataPath("suzanne.obj");
+        }
+
+        auto Meshes::getSuzanneSTL() -> QString {
+            return this->makeDataPath("suzanne.stl");
         }
     }
 }

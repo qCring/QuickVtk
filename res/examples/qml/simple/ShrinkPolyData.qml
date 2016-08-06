@@ -16,8 +16,9 @@ Item {
 
         Vtk.Actor {
             Vtk.PolyDataMapper {
-                Vtk.ButterflySubdivisionFilter {
+                Vtk.ShrinkPolyData {
                     id: filter;
+
                     Vtk.STLReader {
                         fileName: SampleData.meshes.suzanneSTL;
                     }
@@ -27,11 +28,11 @@ Item {
     }
 
     Utils.View {
-        title: "ButterflySubdivisionFilter"
+        title: "ShrinkPolyData"
 
         Utils.Slider {
-            from: filter; bind: "numberOfSubdivisions";
-            min: 0; max: 4; step: 1; value: 0;
+            from: filter; bind: "shrinkFactor";
+            min: 0; max: 1; step: 0.01; value: 1;
         }
     }
 }

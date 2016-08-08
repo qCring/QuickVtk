@@ -145,7 +145,7 @@ A list of all sample data files which are located in **res/examples/data/**
 
 - `suzanne`: low-poly mesh *(exported to .obj and .stl)* from [Blender](https://www.blender.org)
 - `lena`: testing image *(exported to .png, .jpg and .tiff)* from [Wikipedia](https://en.wikipedia.org/wiki/File:Lenna.png)
-- `prostate.IMG`: DICOM volume data from [VTK](http://www.vtk.org/Wiki/VTK/Examples/Cxx/IO/ReadDICOM)
+- `brain`: DICOM data from [idoimaging.com](http://idoimaging.com) (special thanks to Andrew Crabb)
 
 Contact
 ----

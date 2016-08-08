@@ -1,5 +1,6 @@
 #include "quickVtkVolume.hpp"
 #include "quickVtkAbstractVolumeMapper.hpp"
+#include "quickVtkVolumeProperty.hpp"
 
 namespace quick {
 
@@ -18,6 +19,7 @@ namespace quick {
         auto Volume::setMapper(AbstractVolumeMapper* mapper) -> void {
             this->m_mapper = mapper;
             this->m_vtkVolume->SetMapper(mapper->getVtkObject());
+            mapper->setProp(this);
 
             emit this->mapperChanged();
 
@@ -26,6 +28,23 @@ namespace quick {
 
         auto Volume::getMapper() -> AbstractVolumeMapper* {
             return this->m_mapper;
+        }
+
+        auto Volume::setProperty(VolumeProperty* property) -> void {
+            if (this->m_property) {
+                delete this->m_property;
+                this->m_property = nullptr;
+            }
+
+            this->m_property = property;
+        }
+
+        auto Volume::getProperty() -> VolumeProperty* {
+            if (!this->m_property) {
+                this->m_property = new VolumeProperty(this);
+            }
+
+            return this->m_property;
         }
     }
 }

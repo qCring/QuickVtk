@@ -19,6 +19,7 @@ namespace quick {
         auto Volume::setMapper(AbstractVolumeMapper* mapper) -> void {
             this->m_mapper = mapper;
             this->m_vtkVolume->SetMapper(mapper->getVtkObject());
+            mapper->setProp(this);
 
             emit this->mapperChanged();
 

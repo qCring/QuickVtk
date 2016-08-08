@@ -1,6 +1,7 @@
 #include "quickSampleDataController.hpp"
 #include "quickSampleDataImages.hpp"
 #include "quickSampleDataMeshes.hpp"
+#include "quickSampleDataVolumes.hpp"
 
 namespace quick {
 
@@ -17,6 +18,7 @@ namespace quick {
 
             Images::Create();
             Meshes::Create();
+            Volumes::Create();
 
             instance = new Controller();
             return instance;
@@ -28,6 +30,10 @@ namespace quick {
 
         auto Controller::getMeshes() -> Meshes* {
             return Meshes::instance;
+        }
+
+        auto Controller::getVolumes() -> Volumes* {
+            return Volumes::instance;
         }
     }
 }

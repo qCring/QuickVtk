@@ -112,5 +112,17 @@ Item {
             from: actor.property; bind: "specularPower";
             min: 0; max: 100; step: 1; value: 50;
         }
+
+        Utils.ColorPicker {
+            from: actor.property; bind: "ambientColor"; color: "#fff"
+        }
+
+        Utils.ColorPicker {
+            from: actor.property; bind: "diffuseColor"; color: "#fff"
+        }
+
+        Utils.ColorPicker {
+            from: actor.property; bind: "specularColor"; color: "#fff"
+        }
     }
 }

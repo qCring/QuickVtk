@@ -10,6 +10,7 @@ Item {
     anchors.fill: parent;
 
     property alias center: source.center;
+    property alias direction: source.direction;
 
     Vtk.Viewer {
         anchors.fill: parent;
@@ -18,7 +19,7 @@ Item {
 
         Vtk.Actor {
             Vtk.PolyDataMapper {
-                Vtk.CylinderSource {
+                Vtk.ConeSource {
                     id: source;
                 }
             }
@@ -26,7 +27,7 @@ Item {
     }
 
     Utils.View {
-        title: "CylinderSource"
+        title: "ConeSource"
 
         Utils.Slider {
             from: source; bind: "height";
@@ -35,12 +36,17 @@ Item {
 
         Utils.Slider {
             from: source; bind: "radius";
-            min: 0.1; max: 0.5; step: 0.01; value: 0.5;
+            min: 0.1; max: 1; step: 0.01; value: 1;
         }
 
         Utils.Slider {
             from: source; bind: "resolution";
             min: 3; max: 64; step: 1; value: 16;
+        }
+
+        Utils.Slider {
+            from: source; bind: "angle";
+            min: 30; max: 45; step: 1; value: 30;
         }
 
         Utils.CheckBox {
@@ -58,6 +64,18 @@ Item {
         Utils.Slider {
             from: center; bind: "z"; label: "center.z";
             min: -1; max: 0; step: 0.01; value: 0;
+        }
+
+        Utils.Slider {
+            from: direction; bind: "x"; label: "direction.x"; min: -1; max: 1; value: 1;
+        }
+
+        Utils.Slider {
+            from: direction; bind: "y"; label: "direction.y"; min: -1; max: 1; value: 1;
+        }
+
+        Utils.Slider {
+            from: direction; bind: "z"; label: "direction.z"; min: -1; max: 1; value: 1;
         }
     }
 }

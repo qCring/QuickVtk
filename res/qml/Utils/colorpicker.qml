@@ -12,6 +12,7 @@ Item {
 
     property alias label: label.text;
     property alias color: picker.color;
+
     property var from;
     property string bind;
 
@@ -45,12 +46,9 @@ Item {
         border.color: "#666";
         color: picker.color;
 
-
         MouseArea {
             anchors.fill: parent;
-            onClicked: {
-                picker.open();
-            }
+            onClicked:  picker.open();
         }
     }
 

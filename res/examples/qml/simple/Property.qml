@@ -18,9 +18,14 @@ Item {
             id: actor;
 
             Vtk.PolyDataMapper {
-                Vtk.SphereSource {
-                    thetaResolution: 32;
-                    phiResolution: 32;
+                Vtk.LoopSubdivisionFilter {
+                    Vtk.PolyDataNormals {
+                        splitting: false;
+
+                        Vtk.STLReader {
+                            fileName: SampleData.meshes.suzanneSTL
+                        }
+                    }
                 }
             }
         }

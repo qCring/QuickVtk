@@ -52,6 +52,15 @@ Rectangle {
             radius: 2;
         }
 
+        Lib.Label {
+            anchors.right: input.right;
+            anchors.rightMargin: 4;
+            anchors.verticalCenter: parent.verticalCenter;
+            text: App.typeList.count + "/" + App.typeList.totalCount;
+            font.pointSize: 11;
+            font.bold: true;
+        }
+
         Rectangle {
             anchors.left: parent.left;
             anchors.right: parent.right;

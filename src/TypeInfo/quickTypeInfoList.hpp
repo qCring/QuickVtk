@@ -14,6 +14,8 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged);
             Q_PROPERTY(QString filter READ getFilter WRITE setFilter NOTIFY filterChanged);
+            Q_PROPERTY(int totalCount READ getTotalCount CONSTANT);
+            Q_PROPERTY(int count READ getCount NOTIFY countChanged);
         public:
             enum Roles {
                 SymbolRole = Qt::UserRole + 1
@@ -33,12 +35,15 @@ namespace quick {
             auto isVisible() -> bool;
             auto setFilter(const QString&) -> void;
             auto getFilter() -> QString;
+            auto getCount() -> int;
+            auto getTotalCount() -> int;
             auto rowCount(const QModelIndex& = QModelIndex()) const -> int;
             auto data(const QModelIndex&, int) const -> QVariant;
             auto roleNames() const -> QHash<int, QByteArray>;
         signals:
             void visibleChanged();
             void filterChanged();
+            void countChanged();
         };
     }
 }

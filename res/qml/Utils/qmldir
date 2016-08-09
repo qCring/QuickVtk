@@ -4,3 +4,4 @@ Label 1.0 label.qml
 Slider 1.0 slider.qml
 CheckBox 1.0 checkbox.qml
 ComboBox 1.0 combobox.qml
+ColorPicker 1.0 colorpicker.qml

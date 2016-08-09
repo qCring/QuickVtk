@@ -16,7 +16,7 @@ Item {
         Vtk.Actor {
             Vtk.PolyDataMapper {
                 Vtk.OBJReader {
-                    fileName: SampleData.meshes.suzanneSTL;
+                    fileName: SampleData.meshes.suzanneOBJ
                 }
             }
         }

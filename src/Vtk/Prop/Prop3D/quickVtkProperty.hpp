@@ -41,7 +41,6 @@ namespace quick {
             Q_PROPERTY(bool edgeVisibility READ getEdgeVisibility WRITE setEdgeVisibility NOTIFY edgeVisibilityChanged);
             Q_PROPERTY(bool backfaceCulling READ getBackfaceCulling WRITE setBackfaceCulling NOTIFY backfaceCullingChanged);
             Q_PROPERTY(bool frontfaceCulling READ getFrontfaceCulling WRITE setFrontfaceCulling NOTIFY frontfaceCullingChanged);
-            Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged);
             Q_PROPERTY(QColor specularColor READ getSpecularColor WRITE setSpecularColor NOTIFY specularColorChanged);
             Q_PROPERTY(QColor diffuseColor READ getDiffuseColor WRITE setDiffuseColor NOTIFY diffuseColorChanged);
             Q_PROPERTY(QColor ambientColor READ getAmbientColor WRITE setAmbientColor NOTIFY ambientColorChanged);
@@ -54,7 +53,6 @@ namespace quick {
             static Qml::Register::Class<Property> Register;
             quick::Vtk::Actor* m_actor = nullptr;
             vtkSmartPointer<vtkActor> m_vtkActor = nullptr;
-            QColor m_color;
             QColor m_specularColor;
             QColor m_diffuseColor;
             QColor m_ambientColor;
@@ -67,7 +65,6 @@ namespace quick {
             auto setActor(Actor*) -> void;
             auto setInterpolation(Interpolation) -> void;
             auto setRepresentation(Representation) -> void;
-            auto setColor(QColor) -> void;
             auto setSpecularColor(QColor) -> void;
             auto setDiffuseColor(QColor) -> void;
             auto setAmbientColor(QColor) -> void;
@@ -84,7 +81,6 @@ namespace quick {
             auto setDiffuse(float) -> void;
             auto setSpecular(float) -> void;
             auto setSpecularPower(float) -> void;
-            auto getColor() -> QColor;
             auto getSpecularColor() -> QColor;
             auto getDiffuseColor() -> QColor;
             auto getAmbientColor() -> QColor;

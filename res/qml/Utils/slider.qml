@@ -10,6 +10,7 @@ Item {
     property var from;
     property string bind;
 
+    property alias label: nameLabel.text;
     property alias value: slider.value;
     property alias step: slider.stepSize;
     property alias min: slider.minimumValue;

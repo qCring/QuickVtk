@@ -12,7 +12,7 @@ Item {
 
     property alias model: combobox.model;
     property alias label: label.text;
-    property bool checked;
+    property alias currentIndex: combobox.currentIndex;
 
     signal indexChanged(var index);
 

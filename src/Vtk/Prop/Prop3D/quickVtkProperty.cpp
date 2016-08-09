@@ -22,15 +22,6 @@ namespace quick {
             this->m_actor->update();
         }
 
-        auto Property::setColor(QColor color) -> void {
-            this->m_color = color;
-
-            this->m_vtkActor->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());
-            this->update();
-
-            emit this->colorChanged();
-        }
-
         auto Property::setDiffuseColor(QColor color) -> void {
             this->m_diffuseColor = color;
 
@@ -157,10 +148,6 @@ namespace quick {
             this->m_vtkActor->GetProperty()->SetSpecularPower(specularPower);
             emit this->specularPowerChanged();
             this->update();
-        }
-
-        auto Property::getColor() -> QColor {
-            return this->m_color;
         }
 
         auto Property::getDiffuseColor() -> QColor {

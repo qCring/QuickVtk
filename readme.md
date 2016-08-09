@@ -19,39 +19,20 @@ QuickVtk allows quick prototyping of **[QML](http://doc.qt.io/qt-5/qtqml-index.h
 Bringing **[VTK](http://www.vtk.org)** to **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** is the real purpose of this project. Having **[VTK](http://www.vtk.org)** objects and their attributes available in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** just as built-in types in combination with high-level functionality provided by the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine makes it possible to develop interactive prototypes in the domain of 2D/3D visualization.
  
 	import QtQuick 2.6
-	import QtQuick.Controls 1.4
+	
 	import Vtk 1.0 as Vtk
-
-	Item {
-		anchors.fill: parent;
 		
-		Vtk.Viewer { 
-			anchors.fill: parent;
-			mouseEnabled: true;
-			
-			Vtk.Actor {
-				Vtk.PolyDataMapper {
-					Vtk.ShrinkPolyData {
-						shrinkFactor: slider.value;
-						
-						Vtk.OBJReader {
-							fileName: "car.obj"
-						}
+	Vtk.Viewer { 
+		anchors.fill: parent;
+					
+		Vtk.Actor {
+			Vtk.PolyDataMapper {
+				Vtk.ShrinkPolyData {
+					Vtk.OBJReader {
+						fileName: "car.obj"
 					}
 				}
 			}
-		}
-		
-		Slider {
-			id: slider;
-			
-			anchors.left: parent.left;
-			anchors.right: parent.right;
-			anchors.bottom: parent.bottom;
-			
-			miminumValue: 0.01;
-			maximumValue: 1;
-			value: 0.5;
 		}
 	}
 

@@ -23,7 +23,7 @@ Item {
 
                     Vtk.ImageDataGeometryFilter {
                         Vtk.PNGReader {
-                            fileName: SampleData.images.lenaPNG;
+                            fileName: SampleData.images.aPNG;
                         }
                     }
                 }
@@ -31,13 +31,12 @@ Item {
         }
     }
 
-
     Utils.View {
         title: "WarpScalar"
 
         Utils.Slider {
             from: filter; bind: "scaleFactor";
-            min: 0; max: 1; step: 0.25; value: 1;
+            min: 0; max: 0.25; step: 0.1; value: 0.25;
         }
     }
 }

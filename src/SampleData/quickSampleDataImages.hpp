@@ -12,6 +12,10 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(QString lenaPNG READ getLenaPNG CONSTANT);
             Q_PROPERTY(QString lenaJPG READ getLenaJPG CONSTANT);
+            Q_PROPERTY(QString aPNG READ getAPNG CONSTANT);
+            Q_PROPERTY(QString aJPG READ getAJPG CONSTANT);
+            Q_PROPERTY(QString bPNG READ getBPNG CONSTANT);
+            Q_PROPERTY(QString bJPG READ getBJPG CONSTANT);
         private:
             auto makeDataPath(const QString&) -> QString;
         public:
@@ -20,6 +24,10 @@ namespace quick {
             static auto Create() -> void;
             auto getLenaPNG() -> QString;
             auto getLenaJPG() -> QString;
+            auto getAPNG() -> QString;
+            auto getAJPG() -> QString;
+            auto getBPNG() -> QString;
+            auto getBJPG() -> QString;
         };
     }
 }

@@ -28,5 +28,21 @@ namespace quick {
         auto Images::getLenaJPG() -> QString {
             return makeDataPath("lena.jpg");
         }
+
+        auto Images::getAPNG() -> QString {
+            return makeDataPath("a.png");
+        }
+
+        auto Images::getAJPG() -> QString {
+            return makeDataPath("a.jpg");
+        }
+
+        auto Images::getBPNG() -> QString {
+            return makeDataPath("b.png");
+        }
+
+        auto Images::getBJPG() -> QString {
+            return makeDataPath("b.jpg");
+        }
     }
 }

@@ -31,7 +31,6 @@ Item {
         }
     }
 
-
     Utils.View {
         title: "WarpScalar"
 

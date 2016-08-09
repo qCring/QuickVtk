@@ -16,13 +16,13 @@ Item {
 
         Vtk.Actor {
             property.edgeVisibility: true;
-            
+
             Vtk.PolyDataMapper {
                 Vtk.ImageDataGeometryFilter {
                     id: filter;
 
                     Vtk.PNGReader {
-                        fileName: SampleData.images.lenaPNG;
+                        fileName: SampleData.images.aPNG;
                     }
                 }
             }

@@ -107,6 +107,7 @@ AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm" "Vtk\\Algorithm\\ImageAl
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm/ImageReader2" "Vtk\\Algorithm\\ImageAlgorithm\\ImageReader2" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Algorithm/PointSetAlgorithm" "Vtk\\Algorithm\\PointSetAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/TypeInfo" "TypeInfo" list_app_src)
 AddSources("${SOURCE_DIR}/Core" "Core" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)

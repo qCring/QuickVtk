@@ -37,6 +37,8 @@ namespace quick {
             }
 
             this->endResetModel();
+
+            emit this->countChanged();
         }
 
         auto List::getFilter() -> QString {
@@ -75,6 +77,14 @@ namespace quick {
         
         auto List::rowCount(const QModelIndex&) const -> int {
             return this->m_symbols.size();
+        }
+
+        auto List::getCount() -> int {
+            return this->m_symbols.count();
+        }
+
+        auto List::getTotalCount() -> int {
+            return this->m_allSymbols.count();
         }
     }
 }

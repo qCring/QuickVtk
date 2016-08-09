@@ -60,5 +60,9 @@ Item {
         Utils.CheckBox {
             from: filter; bind: "flipNormals";
         }
+
+        Utils.CheckBox {
+            from: filter; bind: "nonManifoldTraversal"
+        }
     }
 }

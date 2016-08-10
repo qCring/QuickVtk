@@ -95,6 +95,7 @@ AddSources("${SOURCE_DIR}/Vtk/ImplicitFunction" "Vtk\\ImplicitFunction" list_app
 AddSources("${SOURCE_DIR}/Vtk/Prop" "Vtk\\Prop" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Prop/Actor2D" "Vtk\\Prop\\Actor2D" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Prop/Prop3D" "Vtk\\Prop\\Prop3D" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Prop/Prop3D/Volume" "Vtk\\Prop\\Prop3D\\Volume" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Mapper" "Vtk\\Mapper" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Mapper/Mapper2D" "Vtk\\Mapper\\Mapper2D" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D" "Vtk\\Mapper\\AbstractMapper3D" list_app_src)

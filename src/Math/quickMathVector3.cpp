@@ -43,7 +43,7 @@ namespace quick {
             return this->m_values[2];
         }
 
-        auto Vector3::getValues() -> std::array<double, 3> {
+        auto Vector3::getValues() -> array_t {
             return this->m_values;
         }
     }

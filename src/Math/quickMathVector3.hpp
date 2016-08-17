@@ -5,7 +5,6 @@
 #include <array>
 #include <functional>
 
-#include <QList>
 #include <QObject>
 
 namespace quick {
@@ -33,7 +32,7 @@ namespace quick {
             auto getY() -> double;
             auto setZ(double) -> void;
             auto getZ() -> double;
-            auto getValues() -> std::array<double, 3>;
+            auto getValues() -> array_t;
         signals:
             void xChanged();
             void yChanged();

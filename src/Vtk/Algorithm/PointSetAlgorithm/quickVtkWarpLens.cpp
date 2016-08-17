@@ -9,72 +9,22 @@ namespace quick {
         WarpLens::WarpLens() : PointSetAlgorithm(vtkSmartPointer<vtkWarpLens>::New()) {
             this->m_vtkObject = vtkWarpLens::SafeDownCast(Algorithm::getVtkObject());
 
-            this->m_centerCb = [this] (Math::Vector2&& vector) {
-                this->updateCenter(std::move(vector));
-            };
+            this->m_center = new Math::Vector2([this](){
+                this->m_vtkObject->SetCenter(this->m_center->getX(), this->m_center->getY());
+                this->update();
+            });
 
-            this->m_principalPointCb = [this] (Math::Vector2&& vector) {
-                this->updatePrincipalPoint(std::move(vector));
-            };
-        }
-
-        auto WarpLens::updateCenter(Math::Vector2&& vector) -> void {
-            auto center = vector.getValues();
-            this->m_vtkObject->SetCenter(center.at(0), center.at(1));
-            this->update();
-        }
-
-        auto WarpLens::updatePrincipalPoint(Math::Vector2&& vector) -> void {
-            auto principalPoint = vector.getValues();
-            this->m_vtkObject->SetPrincipalPoint(principalPoint.at(0), principalPoint.at(1));
-            this->update();
-        }
-
-        auto WarpLens::setCenter(Math::Vector2* vector) -> void {
-            if (this->m_center) {
-                this->m_center->removeCallback(std::move(this->m_centerCb));
-            }
-
-            this->m_center = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_centerCb));
-                this->updateCenter(std::move(*vector));
-            }
-
-            emit this->centerChanged();
+            this->m_principalPoint = new Math::Vector2([this](){
+                this->m_vtkObject->SetPrincipalPoint(this->m_principalPoint->getX(), this->m_principalPoint->getY());
+                this->update();
+            });
         }
 
         auto WarpLens::getCenter() -> Math::Vector2* {
-            if (!this->m_center) {
-                auto center = this->m_vtkObject->GetCenter();
-                this->setCenter(new Math::Vector2(center[0], center[1]));
-            }
-
             return this->m_center;
         }
 
-        auto WarpLens::setPrincipalPoint(Math::Vector2* vector) -> void {
-            if (this->m_principalPoint) {
-                this->m_principalPoint->removeCallback(std::move(this->m_principalPointCb));
-            }
-
-            this->m_principalPoint = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_principalPointCb));
-                this->updatePrincipalPoint(std::move(*vector));
-            }
-
-            emit this->principalPointChanged();
-        }
-
         auto WarpLens::getPrincipalPoint() -> Math::Vector2* {
-            if (!this->m_principalPoint) {
-                auto principalPoint = this->m_vtkObject->GetPrincipalPoint();
-                this->setPrincipalPoint(new Math::Vector2(principalPoint[0], principalPoint[1]));
-            }
-
             return this->m_principalPoint;
         }
 

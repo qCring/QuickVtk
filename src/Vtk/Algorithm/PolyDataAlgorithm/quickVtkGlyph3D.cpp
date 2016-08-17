@@ -9,37 +9,13 @@ namespace quick {
         Glyph3D::Glyph3D() : PolyDataAlgorithm(vtkSmartPointer<vtkGlyph3D>::New()) {
             this->m_vtkObject = vtkGlyph3D::SafeDownCast(Algorithm::getVtkObject());
 
-            this->m_rangeCb = [this] (Math::Vector2&& vector) {
-                this->updateRange(std::move(vector));
-            };
-        }
-
-        auto Glyph3D::updateRange(Math::Vector2&& vector) -> void {
-            this->m_vtkObject->SetRange(vector.getValues().data());
-            this->update();
-        }
-
-        auto Glyph3D::setRange(Math::Vector2* vector) -> void {
-            if (this->m_range) {
-                this->m_range->removeCallback(std::move(this->m_rangeCb));
-            }
-
-            this->m_range = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_rangeCb));
-                this->updateRange(std::move(*vector));
-            }
-
-            emit this->rangeChanged();
+            this->m_range = new Math::Vector2([this](){
+                this->m_vtkObject->SetRange(this->m_range->getX(), this->m_range->getY());
+                this->update();
+            });
         }
 
         auto Glyph3D::getRange() -> Math::Vector2* {
-            if (!this->m_range) {
-                auto range = this->m_vtkObject->GetRange();
-                this->setRange(new Math::Vector2(range[0], range[1]));
-            }
-
             return this->m_range;
         }
 
@@ -141,12 +117,6 @@ namespace quick {
 
         auto Glyph3D::getGeneratePointIds() -> bool {
             return this->m_vtkObject->GetGeneratePointIds();
-        }
-
-        Glyph3D::~Glyph3D() {
-            if (this->m_range) {
-                this->m_range->removeCallback(std::move(this->m_rangeCb));
-            }
         }
     }
 }

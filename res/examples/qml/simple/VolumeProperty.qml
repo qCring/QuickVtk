@@ -19,23 +19,24 @@ Rectangle {
 
             Vtk.SmartVolumeMapper {
                 Vtk.DICOMImageReader {
-                    directoryName: SampleData.volumes.brain1DIR;
+                    directoryName: SampleData.volumes.brain2DIR;
                 }
             }
         }
     }
 
     Utils.View {
-        title: "VolumeProperty"
+        title: "VolumeProperty";
+
+        Utils.CheckBox {
+            from: volume.property; bind: "shade";
+        }
     }
 
     Component.onCompleted: {
-        volume.property.scalarOpacity.x[0] = 0;
-        volume.property.scalarOpacity.y[0] = 0;
-        volume.property.scalarOpacity.x[1] = 200;
-        volume.property.scalarOpacity.y[1] = 0;
-        volume.property.scalarOpacity.x[2] = 500;
-        volume.property.scalarOpacity.y[2] = 1;
+        volume.property.scalarOpacityFunction.add(0, 0);
+        volume.property.scalarOpacityFunction.add(100, 0);
+        volume.property.scalarOpacityFunction.add(500, 1);
 
         volume.property.transferFunction.add("#ff00ff",   0);
         volume.property.transferFunction.add("#ff0000", 200);

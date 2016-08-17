@@ -16,6 +16,7 @@ namespace quick {
             emit this->sizeChanged();
 
             this->m_vtkObject->RemoveAllPoints();
+            this->notify();
         }
 
         void ColorTransferFunction::add(QColor color, double value) {

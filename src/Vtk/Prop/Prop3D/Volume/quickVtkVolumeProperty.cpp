@@ -3,9 +3,6 @@
 #include "quickVtkPiecewiseFunction.hpp"
 #include "quickVtkColorTransferFunction.hpp"
 
-#include <vtkPiecewiseFunction.h>
-#include <vtkColorTransferFunction.h>
-
 namespace quick {
 
     namespace Vtk {
@@ -13,19 +10,9 @@ namespace quick {
         Qml::Register::UncreatableClass<VolumeProperty> VolumeProperty::Register;
 
         VolumeProperty::VolumeProperty(Volume* volume) : m_volume(volume), m_vtkVolume(volume->getVtkObject()) {
-            this->m_scalarOpacity = new PiecewiseFunction([this](){
-                auto opacity = this->m_vtkVolume->GetProperty()->GetScalarOpacity();
-                opacity->RemoveAllPoints();
-
-                for (auto i = 0; i < this->m_scalarOpacity->getLength(); ++i) {
-                    opacity->AddPoint(this->m_scalarOpacity->getX(i), this->m_scalarOpacity->getY(i));
-                }
-
-                this->update();
-            });
-
             auto property = this->m_vtkVolume->GetProperty();
 
+            this->m_scalarOpacityFunction = new PiecewiseFunction(property->GetScalarOpacity(), [this](){ this->update(); });
             this->m_transferFunction = new ColorTransferFunction(property->GetRGBTransferFunction(), [this](){ this->update(); });
         }
 
@@ -43,8 +30,8 @@ namespace quick {
             return this->m_vtkVolume->GetProperty()->GetShade();
         }
 
-        auto VolumeProperty::getScalarOpacity() -> PiecewiseFunction* {
-            return this->m_scalarOpacity;
+        auto VolumeProperty::getScalarOpacityFunction() -> PiecewiseFunction* {
+            return this->m_scalarOpacityFunction;
         }
 
         auto VolumeProperty::getTransferFunction() -> ColorTransferFunction* {

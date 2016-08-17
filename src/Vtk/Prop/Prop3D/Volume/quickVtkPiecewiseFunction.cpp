@@ -6,7 +6,29 @@ namespace quick {
 
         Qml::Register::UncreatableClass<PiecewiseFunction> PiecewiseFunction::Register;
 
-        PiecewiseFunction::PiecewiseFunction(cb_t&& callback) : m_callback(callback) {
+        PiecewiseFunction::PiecewiseFunction(vtk_t vtkObject, cb_t&& callback) : m_vtkObject(vtkObject), m_callback(callback) {
+        }
+
+        auto PiecewiseFunction::update() -> void {
+            this->m_callback.operator()();
+        }
+
+        void PiecewiseFunction::clear() {
+            this->m_xValues.clear();
+            this->m_yValues.clear();
+
+            emit this->sizeChanged();
+            this->m_vtkObject->RemoveAllPoints();
+            this->update();
+        }
+
+        void PiecewiseFunction::add(double x, double y) {
+            this->m_xValues.append(x);
+            this->m_yValues.append(y);
+
+            emit this->sizeChanged();
+            this->m_vtkObject->AddPoint(x, y);
+            this->update();
         }
 
         auto PiecewiseFunction::getX(int i) -> double {
@@ -17,32 +39,9 @@ namespace quick {
             return i < this->m_yValues.length() && i >= 0 ? this->m_yValues.at(i) : 0;
         }
 
-        auto PiecewiseFunction::notify() -> void {
-            this->m_callback.operator()();
-        }
 
-        auto PiecewiseFunction::setXValues(QList<double> xValues) -> void {
-            this->m_xValues = xValues;
-            emit this->xValuesChanged();
-            this->notify();
-        }
-
-        auto PiecewiseFunction::getXValues() -> QList<double> {
-            return this->m_xValues;
-        }
-
-        auto PiecewiseFunction::setYValues(QList<double> yValues) -> void {
-            this->m_yValues = yValues;
-            emit this->yValuesChanged();
-            this->notify();
-        }
-
-        auto PiecewiseFunction::getYValues() -> QList<double> {
-            return this->m_yValues;
-        }
-
-        auto PiecewiseFunction::getLength() -> int {
-            return std::min(this->m_xValues.length(), this->m_yValues.length());
+        auto PiecewiseFunction::getSize() -> int {
+            return this->m_xValues.length();
         }
     }
 }

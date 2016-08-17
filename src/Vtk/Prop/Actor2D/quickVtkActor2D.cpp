@@ -10,45 +10,34 @@ namespace quick {
 
         Actor2D::Actor2D() : Prop(vtkSmartPointer<vtkActor2D>::New()) {
             this->m_vtkObject = vtkActor2D::SafeDownCast(Prop::getVtkObject());
+            this->m_property = new Property2D(this);
         }
 
         Actor2D::Actor2D(vtkSmartPointer<vtkActor2D> vtkObject) : Prop(vtkObject) {
             this->m_vtkObject = vtkActor2D::SafeDownCast(vtkObject);
+            this->m_property = new Property2D(this);
         }
 
         auto Actor2D::getVtkObject() -> vtkSmartPointer<vtkActor2D> {
             return vtkActor2D::SafeDownCast(Prop::getVtkObject());
         }
 
-        auto Actor2D::setMapper2D(Mapper2D* mapper2D) -> void {
-            this->m_mapper2D = mapper2D;
-            this->m_vtkObject->SetMapper(mapper2D->getVtkObject());
-            mapper2D->setProp(this);
+        auto Actor2D::setMapper(Mapper2D* mapper) -> void {
+            this->m_mapper = mapper;
+            this->m_vtkObject->SetMapper(mapper->getVtkObject());
+            mapper->setProp(this);
 
-            emit this->mapper2DChanged();
+            emit this->mapperChanged();
 
             this->update();
         }
 
-        auto Actor2D::getMapper2D() -> Mapper2D* {
-            return this->m_mapper2D;
+        auto Actor2D::getMapper() -> Mapper2D* {
+            return this->m_mapper;
         }
 
-        auto Actor2D::setProperty2D(Property2D* property2D) -> void {
-            if (this->m_property2D) {
-                delete this->m_property2D;
-                this->m_property2D = nullptr;
-            }
-
-            this->m_property2D = property2D;
-        }
-
-        auto Actor2D::getProperty2D() -> Property2D* {
-            if (!this->m_property2D) {
-                this->m_property2D = new Property2D(this);
-            }
-
-            return this->m_property2D;
+        auto Actor2D::getProperty() -> Property2D* {
+            return this->m_property;
         }
 
         auto Actor2D::setWidth(double width) -> void {
@@ -72,6 +61,7 @@ namespace quick {
         }
 
         Actor2D::~Actor2D() {
+            delete this->m_property;
         }
     }
 }

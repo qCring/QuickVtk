@@ -5,17 +5,9 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<Property2D> Property2D::Register;
+        Qml::Register::UncreatableClass<Property2D> Property2D::Register;
 
-        Property2D::Property2D() {
-        }
-
-        Property2D::Property2D(Actor2D* actor2D) : m_actor2D(actor2D) {
-            this->m_vtkActor2D = this->m_actor2D->Actor2D::getVtkObject();
-        }
-
-        auto Property2D::setActor2D(Actor2D* actor2D) -> void {
-            this->m_vtkActor2D = actor2D->Actor2D::getVtkObject();
+        Property2D::Property2D(Actor2D* actor2D) : m_actor2D(actor2D), m_vtkActor2D(actor2D->getVtkObject()) {
         }
 
         auto Property2D::update() -> void {
@@ -44,11 +36,6 @@ namespace quick {
 
         auto Property2D::getOpacity() -> double {
             return this->m_vtkActor2D->GetProperty()->GetOpacity();
-        }
-
-        Property2D::~Property2D() {
-            this->m_vtkActor2D = nullptr;
-            this->m_actor2D = nullptr;
         }
     }
 }

@@ -10,11 +10,11 @@ namespace quick {
         }
 
         auto PiecewiseFunction::getX(int i) -> double {
-            return this->m_xValues.at(i);
+            return i < this->m_xValues.length() && i >= 0 ? this->m_xValues.at(i) : 0;
         }
 
         auto PiecewiseFunction::getY(int i) -> double {
-            return this->m_yValues.at(i);
+            return i < this->m_yValues.length() && i >= 0 ? this->m_yValues.at(i) : 0;
         }
 
         auto PiecewiseFunction::notify() -> void {
@@ -42,7 +42,7 @@ namespace quick {
         }
 
         auto PiecewiseFunction::getLength() -> int {
-            return this->m_yValues.length();
+            return std::min(this->m_xValues.length(), this->m_yValues.length());
         }
     }
 }

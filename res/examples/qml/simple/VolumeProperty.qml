@@ -36,5 +36,13 @@ Rectangle {
         volume.property.scalarOpacity.y[1] = 0;
         volume.property.scalarOpacity.x[2] = 500;
         volume.property.scalarOpacity.y[2] = 1;
+
+        volume.property.color.x[0] = 0;
+        volume.property.color.x[1] = 200;
+        volume.property.color.x[2] = 500;
+
+        volume.property.color.colors[0] = "#000";
+        volume.property.color.colors[1] = "#ff0000";
+        volume.property.color.colors[2] = "#0000ff";
     }
 }

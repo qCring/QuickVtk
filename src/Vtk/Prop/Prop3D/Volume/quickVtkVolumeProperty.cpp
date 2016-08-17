@@ -1,8 +1,10 @@
 #include "quickVtkVolumeProperty.hpp"
 #include "quickVtkVolume.hpp"
 #include "quickVtkPiecewiseFunction.hpp"
+#include "quickVtkColorTransferFunction.hpp"
 
 #include <vtkPiecewiseFunction.h>
+#include <vtkColorTransferFunction.h>
 
 namespace quick {
 
@@ -15,8 +17,20 @@ namespace quick {
                 auto opacity = this->m_vtkVolume->GetProperty()->GetScalarOpacity();
                 opacity->RemoveAllPoints();
 
-                for (auto i=0; i < this->m_scalarOpacity->getLength(); ++i) {
+                for (auto i = 0; i < this->m_scalarOpacity->getLength(); ++i) {
                     opacity->AddPoint(this->m_scalarOpacity->getX(i), this->m_scalarOpacity->getY(i));
+                }
+
+                this->update();
+            });
+
+            this->m_color = new ColorTransferFunction([this](){
+                auto color = this->m_vtkVolume->GetProperty()->GetRGBTransferFunction();
+                color->RemoveAllPoints();
+
+                for (auto i = 0; i < this->m_color->getLength(); ++i) {
+                    auto colorValue = this->m_color->getColor(i);
+                    color->AddRGBPoint(this->m_color->getX(i), colorValue.redF(), colorValue.greenF(), colorValue.blueF());
                 }
 
                 this->update();
@@ -39,6 +53,10 @@ namespace quick {
 
         auto VolumeProperty::getScalarOpacity() -> PiecewiseFunction* {
             return this->m_scalarOpacity;
+        }
+
+        auto VolumeProperty::getColor() -> ColorTransferFunction* {
+            return this->m_color;
         }
     }
 }

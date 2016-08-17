@@ -50,7 +50,7 @@ namespace quick {
             Q_PROPERTY(float specular READ getSpecular WRITE setSpecular NOTIFY specularChanged);
             Q_PROPERTY(float specularPower READ getSpecularPower WRITE setSpecularPower NOTIFY specularPowerChanged);
         private:
-            static Qml::Register::Class<Property> Register;
+            static Qml::Register::UncreatableClass<Property> Register;
             quick::Vtk::Actor* m_actor = nullptr;
             vtkSmartPointer<vtkActor> m_vtkActor = nullptr;
             QColor m_specularColor;
@@ -60,9 +60,8 @@ namespace quick {
         private:
             void update();
         public:
-            Property();
+            Property() = delete;
             Property(Actor*);
-            auto setActor(Actor*) -> void;
             auto setInterpolation(Interpolation) -> void;
             auto setRepresentation(Representation) -> void;
             auto setSpecularColor(QColor) -> void;
@@ -99,7 +98,6 @@ namespace quick {
             auto getDiffuse() -> float;
             auto getSpecular() -> float;
             auto getSpecularPower() -> float;
-            ~Property();
         signals:
             void opacityChanged();
             void interpolationChanged();

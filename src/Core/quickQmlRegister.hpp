@@ -78,6 +78,31 @@ namespace quick {
             };
 
             template <class T>
+            struct UncreatableClass {
+                UncreatableClass() {
+                    auto initializer = []() {
+                        QMetaObject metaObject = T::staticMetaObject;
+                        auto name = QString(metaObject.className());
+                        auto prefix = name.section("::", 1, 1);
+                        auto className = name.section("::", 2, 2);
+
+                        qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "\'" + className + "\' can not be instantiated.");
+
+                        for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
+                            MakeSymbol::Enum(metaObject.enumerator(i));
+                        }
+
+                        MakeSymbol::Class(metaObject);
+                    };
+#ifdef _MSC_VER
+                    Queue::GetList().append(initializer);
+#else
+                    initializer();
+#endif
+                }
+            };
+
+            template <class T>
             struct Class {
                 Class() {
                     auto initializer = []() {

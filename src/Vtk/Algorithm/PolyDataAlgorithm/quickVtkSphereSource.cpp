@@ -9,38 +9,14 @@ namespace quick {
         SphereSource::SphereSource() : PolyDataAlgorithm(vtkSmartPointer<vtkSphereSource>::New()) {
             this->m_vtkObject = vtkSphereSource::SafeDownCast(Algorithm::getVtkObject());
 
-            this->m_centerCb = [this](Math::Vector3&& vector) {
-                this->updateCenter(std::move(vector));
-            };
-        }
-
-        auto SphereSource::setCenter(Math::Vector3* vector) -> void {
-            if (this->m_center) {
-                this->m_center->removeCallback(std::move(this->m_centerCb));
-            }
-
-            this->m_center = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_centerCb));
-                this->updateCenter(std::move(*vector));
-            }
-
-            emit this->centerChanged();
+            this->m_center = new Math::Vector3([this](){
+                this->m_vtkObject->SetCenter(this->m_center->getValues().data());
+                this->update();
+            });
         }
 
         auto SphereSource::getCenter() -> Math::Vector3* {
-            if (!this->m_center) {
-                auto center = this->m_vtkObject->GetCenter();
-                this->setCenter(new Math::Vector3(center[0], center[1], center[2]));
-            }
-
             return this->m_center;
-        }
-
-        auto SphereSource::updateCenter(Math::Vector3&& vector) -> void {
-            this->m_vtkObject->SetCenter(vector.getValues().data());
-            this->update();
         }
 
         auto SphereSource::setLatLongTessellation(bool value) -> void {
@@ -121,12 +97,6 @@ namespace quick {
 
         auto SphereSource::getRadius() -> float {
             return this->m_vtkObject->GetRadius();
-        }
-
-        SphereSource::~SphereSource() {
-            if (this->m_center) {
-                this->m_center->removeCallback(std::move(this->m_centerCb));
-            }
         }
     }
 }

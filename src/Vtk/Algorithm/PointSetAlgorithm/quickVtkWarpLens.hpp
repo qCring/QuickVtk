@@ -11,8 +11,8 @@ namespace quick {
 
         class WarpLens : public PointSetAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(quick::Math::Vector2* center READ getCenter WRITE setCenter NOTIFY centerChanged);
-            Q_PROPERTY(quick::Math::Vector2* principalPoint READ getPrincipalPoint WRITE setPrincipalPoint NOTIFY principalPointChanged);
+            Q_PROPERTY(quick::Math::Vector2* center READ getCenter CONSTANT);
+            Q_PROPERTY(quick::Math::Vector2* principalPoint READ getPrincipalPoint CONSTANT);
             Q_PROPERTY(float k1 READ getK1 WRITE setK1 NOTIFY k1Changed);
             Q_PROPERTY(float k2 READ getK2 WRITE setK2 NOTIFY k2Changed);
             Q_PROPERTY(float p1 READ getP1 WRITE setP1 NOTIFY p1Changed);
@@ -22,16 +22,9 @@ namespace quick {
             vtkSmartPointer<vtkWarpLens> m_vtkObject;
             Math::Vector2* m_center = nullptr;
             Math::Vector2* m_principalPoint = nullptr;
-            Math::Vector2::cb_t m_centerCb;
-            Math::Vector2::cb_t m_principalPointCb;
-        private:
-            auto updateCenter(Math::Vector2&&) -> void;
-            auto updatePrincipalPoint(Math::Vector2&&) -> void;
         public:
             WarpLens();
-            auto setCenter(Math::Vector2*) -> void;
             auto getCenter() -> Math::Vector2*;
-            auto setPrincipalPoint(Math::Vector2*) -> void;
             auto getPrincipalPoint() -> Math::Vector2*;
             auto setK1(float) -> void;
             auto getK1() -> float;
@@ -42,8 +35,6 @@ namespace quick {
             auto setP2(float) -> void;
             auto getP2() -> float;
         signals:
-            void centerChanged();
-            void principalPointChanged();
             void k1Changed();
             void k2Changed();
             void p1Changed();

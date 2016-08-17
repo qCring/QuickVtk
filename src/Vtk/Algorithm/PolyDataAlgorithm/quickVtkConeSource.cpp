@@ -9,71 +9,23 @@ namespace quick {
         ConeSource::ConeSource() : PolyDataAlgorithm(vtkSmartPointer<vtkConeSource>::New()) {
             this->m_vtkObject = vtkConeSource::SafeDownCast(Algorithm::getVtkObject());
 
-            this->m_centerCb = [this](Math::Vector3&& vector) {
-                this->updateCenter(std::move(vector));
-            };
+            this->m_center = new Math::Vector3([this](){
+                this->m_vtkObject->SetCenter(this->m_center->getValues().data());
+                this->update();
+            });
 
-            this->m_directionCb = [this](Math::Vector3&& vector) {
-                this->updateDirection(std::move(vector));
-            };
-        }
-
-        auto ConeSource::setCenter(Math::Vector3* vector) -> void {
-            if (this->m_center) {
-                this->m_center->removeCallback(std::move(this->m_centerCb));
-            }
-
-            this->m_center = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_centerCb));
-                this->updateCenter(std::move(*vector));
-            }
-
-            emit this->centerChanged();
+            this->m_direction = new Math::Vector3([this](){
+                this->m_vtkObject->SetDirection(this->m_direction->getValues().data());
+                this->update();
+            });
         }
 
         auto ConeSource::getCenter() -> Math::Vector3* {
-            if (!this->m_center) {
-                auto center = this->m_vtkObject->GetCenter();
-                this->setCenter(new Math::Vector3(center[0], center[1], center[2]));
-            }
-
             return this->m_center;
         }
 
-        auto ConeSource::setDirection(Math::Vector3* vector) -> void {
-            if (this->m_direction) {
-                this->m_direction->removeCallback(std::move(this->m_directionCb));
-            }
-
-            this->m_direction = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_directionCb));
-                this->updateDirection(std::move(*vector));
-            }
-
-            emit this->directionChanged();
-        }
-
         auto ConeSource::getDirection() -> Math::Vector3* {
-            if (!this->m_direction) {
-                auto direction = this->m_vtkObject->GetDirection();
-                this->setDirection(new Math::Vector3(direction[0], direction[1], direction[2]));
-            }
-
             return this->m_direction;
-        }
-
-        auto ConeSource::updateCenter(Math::Vector3&& vector) -> void {
-            this->m_vtkObject->SetCenter(vector.getValues().data());
-            this->update();
-        }
-
-        auto ConeSource::updateDirection(Math::Vector3&& vector) -> void {
-            this->m_vtkObject->SetDirection(vector.getValues().data());
-            this->update();
         }
 
         auto ConeSource::setHeight(float height) -> void {
@@ -126,16 +78,6 @@ namespace quick {
 
         auto ConeSource::getCapping() -> bool {
             return this->m_vtkObject->GetCapping();
-        }
-
-        ConeSource::~ConeSource() {
-            if (this->m_center) {
-                this->m_center->removeCallback(std::move(this->m_centerCb));
-            }
-
-            if (this->m_direction) {
-                this->m_direction->removeCallback(std::move(this->m_directionCb));
-            }
         }
     }
 }

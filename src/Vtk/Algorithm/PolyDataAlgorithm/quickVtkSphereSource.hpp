@@ -11,7 +11,7 @@ namespace quick {
 
         class SphereSource : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(quick::Math::Vector3* center READ getCenter WRITE setCenter NOTIFY centerChanged);
+            Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
             Q_PROPERTY(bool latLongTessellation READ getLatLongTessellation WRITE setLatLongTessellation NOTIFY latLongTessellationChanged);
             Q_PROPERTY(int thetaResolution READ getThetaResolution WRITE setThetaResolution NOTIFY thetaResolutionChanged);
             Q_PROPERTY(int phiResolution READ getPhiResolution WRITE setPhiResolution NOTIFY phiResolutionChanged);
@@ -23,13 +23,10 @@ namespace quick {
         private:
             static Qml::Register::Class<SphereSource> Register;
             vtkSmartPointer<vtkSphereSource> m_vtkObject;
-            Math::Vector3::cb_t m_centerCb;
             Math::Vector3* m_center = nullptr;
         public:
             SphereSource();
-            auto setCenter(Math::Vector3*) -> void;
             auto getCenter() -> Math::Vector3*;
-            auto updateCenter(Math::Vector3&&) -> void;
             auto setLatLongTessellation(bool) -> void;
             auto getLatLongTessellation() -> bool;
             auto setRadius(float) -> void;
@@ -46,7 +43,6 @@ namespace quick {
             auto getEndTheta() -> float;
             auto setEndPhi(float) -> void;
             auto getEndPhi() -> float;
-            ~SphereSource();
         signals:
             void latLongTessellationChanged();
             void thetaResolutionChanged();
@@ -55,7 +51,6 @@ namespace quick {
             void startPhiChanged();
             void endThetaChanged();
             void endPhiChanged();
-            void centerChanged();
             void radiusChanged();
         };
     }

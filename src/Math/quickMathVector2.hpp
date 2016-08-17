@@ -5,7 +5,6 @@
 #include <array>
 #include <functional>
 
-#include <QList>
 #include <QObject>
 
 namespace quick {
@@ -16,24 +15,21 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(double x READ getX WRITE setX NOTIFY xChanged);
             Q_PROPERTY(double y READ getY WRITE setY NOTIFY yChanged);
-        public:
-            using cb_t = std::function<void(Vector2&&)>;
         private:
-            QList<cb_t*> m_callbacks;
-            std::array<double, 2> m_values;
+            using cb_t = std::function<void()>;
+            using array_t = std::array<double, 2>;
+            cb_t m_callback;
+            array_t m_values;
             auto notify() -> void;
         public:
-            static Qml::Register::Class<Vector2> Register;
-            Vector2();
-            Vector2(double, double);
-            Vector2(double*);
-            auto addCallback(cb_t&&) -> void;
+            static Qml::Register::UncreatableClass<Vector2> Register;
+            Vector2() = delete;
+            Vector2(cb_t&&, array_t = {{0,0}});
             auto setX(double) -> void;
             auto getX() -> double;
             auto setY(double) -> void;
             auto getY() -> double;
-            auto getValues() -> std::array<double, 2>;
-            auto removeCallback(cb_t&&) -> void;
+            auto getValues() -> array_t;
         signals:
             void xChanged();
             void yChanged();

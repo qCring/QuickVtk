@@ -5,17 +5,9 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<Property> Property::Register;
+        Qml::Register::UncreatableClass<Property> Property::Register;
 
-        Property::Property() {
-        }
-
-        Property::Property(Actor* actor) : m_actor(actor) {
-            this->m_vtkActor = this->m_actor->getVtkObject();
-        }
-
-        auto Property::setActor(Actor* actor) -> void {
-            this->m_vtkActor = actor->getVtkObject();
+        Property::Property(Actor* actor) : m_actor(actor), m_vtkActor(actor->getVtkObject()) {
         }
 
         auto Property::update() -> void {
@@ -212,11 +204,6 @@ namespace quick {
 
         auto Property::getSpecularPower() -> float {
             return this->m_vtkActor->GetProperty()->GetSpecularPower();
-        }
-
-        Property::~Property() {
-            this->m_vtkActor = 0;
-            this->m_actor = 0;
         }
     }
 }

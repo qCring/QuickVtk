@@ -4,30 +4,13 @@ namespace quick {
 
     namespace Math {
 
-        Qml::Register::Class<Vector3> Vector3::Register;
+        Qml::Register::UncreatableClass<Vector3> Vector3::Register;
 
-        Vector3::Vector3() : m_values({{0,0,0}}) {
-        }
-
-        Vector3::Vector3(double x, double y, double z) : m_values{{x,y,z}} {
+        Vector3::Vector3(cb_t&& cb, array_t values) : m_callback(cb), m_values(values) {
         }
 
         auto Vector3::notify() -> void {
-            for (auto callback : this->m_callbacks) {
-                callback->operator()(std::move(*this));
-            }
-        }
-
-        auto Vector3::addCallback(cb_t&& callback) -> void {
-            if (this->m_callbacks.contains(&callback)) {
-                return;
-            }
-
-            this->m_callbacks.append(&callback);
-        }
-
-        auto Vector3::removeCallback(cb_t&& callback) -> void {
-            this->m_callbacks.removeOne(&callback);
+            this->m_callback.operator()();
         }
 
         auto Vector3::setX(double x) -> void {
@@ -60,7 +43,7 @@ namespace quick {
             return this->m_values[2];
         }
 
-        auto Vector3::getValues() -> std::array<double, 3> {
+        auto Vector3::getValues() -> array_t {
             return this->m_values;
         }
     }

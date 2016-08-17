@@ -38,7 +38,7 @@ namespace quick {
             Q_ENUM(ColorMode);
             Q_ENUM(IndexMode);
             Q_ENUM(VectorMode);
-            Q_PROPERTY(quick::Math::Vector2* range READ getRange WRITE setRange NOTIFY rangeChanged);
+            Q_PROPERTY(quick::Math::Vector2* range READ getRange CONSTANT);
             Q_PROPERTY(ScaleMode scaleMode READ getScaleMode WRITE setScaleMode NOTIFY scaleModeChanged);
             Q_PROPERTY(ColorMode colorMode READ getColorMode WRITE setColorMode NOTIFY colorModeChanged);
             Q_PROPERTY(IndexMode indexMode READ getIndexMode WRITE setIndexMode NOTIFY indexModeChanged);
@@ -52,7 +52,6 @@ namespace quick {
         private:
             static Qml::Register::Class<Glyph3D> Register;
             vtkSmartPointer<vtkGlyph3D> m_vtkObject;
-            Math::Vector2::cb_t m_rangeCb;
             Math::Vector2* m_range;
         private:
             auto updateRange(Math::Vector2&&) -> void;
@@ -68,7 +67,6 @@ namespace quick {
             auto getVectorMode() -> VectorMode;
             auto setScaleFactor(double) -> void;
             auto getScaleFactor() -> double;
-            auto setRange(Math::Vector2*) -> void;
             auto getRange() -> Math::Vector2*;
             auto setOrient(bool) -> void;
             auto getOrient() -> bool;
@@ -80,9 +78,7 @@ namespace quick {
             auto getFillCellData() -> bool;
             auto setGeneratePointIds(bool) -> void;
             auto getGeneratePointIds() -> bool;
-            ~Glyph3D();
         signals:
-            void rangeChanged();
             void scaleModeChanged();
             void colorModeChanged();
             void indexModeChanged();

@@ -4,7 +4,7 @@ import Vtk 1.0 as Vtk
 import Math 1.0 as Math
 import Utils 1.0 as Utils
 
-Item {
+Rectangle {
     id: root;
 
     anchors.fill: parent;
@@ -19,7 +19,7 @@ Item {
 
             Vtk.SmartVolumeMapper {
                 Vtk.DICOMImageReader {
-                    directoryName: SampleData.volumes.brainDIR;
+                    directoryName: SampleData.volumes.brain2DIR;
                 }
             }
         }
@@ -32,9 +32,9 @@ Item {
     Component.onCompleted: {
         volume.property.scalarOpacity.x[0] = 0;
         volume.property.scalarOpacity.y[0] = 0;
-        volume.property.scalarOpacity.x[1] = 100;
+        volume.property.scalarOpacity.x[1] = 200;
         volume.property.scalarOpacity.y[1] = 0;
-        volume.property.scalarOpacity.x[2] = 200;
+        volume.property.scalarOpacity.x[2] = 500;
         volume.property.scalarOpacity.y[2] = 1;
     }
 }

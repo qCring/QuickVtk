@@ -21,8 +21,12 @@ namespace quick {
             return App::Window::instance->getResourceDir() + "examples/data/volumes/" + file;
         }
 
-        auto Volumes::getBrainDIR() -> QString {
-            return this->makeDataPath("brain");
+        auto Volumes::getBrain1DIR() -> QString {
+            return this->makeDataPath("brain1");
+        }
+
+        auto Volumes::getBrain2DIR() -> QString {
+            return this->makeDataPath("brain2");
         }
     }
 }

@@ -16,7 +16,7 @@ Item {
         Vtk.Volume {
             Vtk.SmartVolumeMapper {
                 Vtk.DICOMImageReader {
-                    directoryName: SampleData.volumes.brainDIR;
+                    directoryName: SampleData.volumes.brain1DIR;
                 }
             }
         }

@@ -4,7 +4,7 @@ import Vtk 1.0 as Vtk
 import Math 1.0 as Math
 import Utils 1.0 as Utils
 
-Rectangle {
+Item {
     id: root;
 
     anchors.fill: parent;
@@ -35,11 +35,12 @@ Rectangle {
 
     Component.onCompleted: {
         volume.property.scalarOpacityFunction.add(0, 0);
-        volume.property.scalarOpacityFunction.add(100, 0);
-        volume.property.scalarOpacityFunction.add(500, 1);
+        volume.property.scalarOpacityFunction.add(120, 0);
+        volume.property.scalarOpacityFunction.add(140, 0.08);
+        volume.property.scalarOpacityFunction.add(500, 0);
 
-        volume.property.transferFunction.add("#ff00ff",   0);
-        volume.property.transferFunction.add("#ff0000", 200);
+        volume.property.transferFunction.add("#00ff00",   0);
+        volume.property.transferFunction.add("#ff0000", 100);
         volume.property.transferFunction.add("#0000ff", 500);
     }
 }

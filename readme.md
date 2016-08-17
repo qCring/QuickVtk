@@ -19,23 +19,21 @@ QuickVtk allows quick prototyping of **[QML](http://doc.qt.io/qt-5/qtqml-index.h
 ###VTK in QML
 Bringing **[VTK](http://www.vtk.org)** to **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** is the real purpose of this project. Having **[VTK](http://www.vtk.org)** objects and their attributes available in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** just as built-in types in combination with high-level functionality provided by the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine makes it possible to develop interactive prototypes in the domain of 2D/3D visualization.
  
-	import QtQuick 2.6
-	
-	import Vtk 1.0 as Vtk
+```QML
+import QtQuick 2.6	
+import Vtk 1.0 as Vtk
 		
-	Vtk.Viewer { 
-		anchors.fill: parent;
-					
-		Vtk.Actor {
-			Vtk.PolyDataMapper {
-				Vtk.ShrinkPolyData {
-					Vtk.OBJReader {
-						fileName: "car.obj"
-					}
-				}
+Vtk.Viewer { 
+	anchors.fill: parent;
+	Vtk.Actor {
+		Vtk.PolyDataMapper {
+			Vtk.OBJReader {
+				fileName: "car.obj"
 			}
 		}
 	}
+}
+```
 
 ###Reactive Programming For VTK
 This is probably the coolest thing about bringing **[VTK](http://www.vtk.org)** to **[QML](http://doc.qt.io/qt-5/qtqml-index.html)**. You can bind **[VTK](http://www.vtk.org)** class attributes to pretty much anything using **[Property Bindings](http://doc.qt.io/qt-5/qtqml-syntax-propertybinding.html)** which allow you to control variables directly or indirectly by:
@@ -70,56 +68,28 @@ Available types in QuickVtk are outlined in the application's type browser and p
 Information of QuickVtk's classes is generated automatically by utilizing the associated static **[QMetaObject](http://doc.qt.io/qt-5/qmetaobject.html)** of a given type, reflecting the API as is.
 
 ###Performance
-QuickVtk is written in C++. **[VTK](http://www.vtk.org)**'s rendering backend uses OpenGL and is rendered in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** using a framebuffer object (FBO). This allows integration of **[VTK](http://www.vtk.org)** content in the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** scene graph for efficient rendering. The following screenshot shows multiple **[VTK](http://www.vtk.org)** viewer instances arranged in a **[Grid](http://doc.qt.io/qt-5/qml-qtquick-grid.html)** component:
+QuickVtk is written in C++. **[VTK](http://www.vtk.org)**'s rendering backend uses OpenGL and is rendered in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** using a framebuffer object (FBO). This allows integration of **[VTK](http://www.vtk.org)** content in the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** scene graph for efficient rendering. 
 
+Current State
+----
+Yeah. One day I'll add some super informative text here. Until then: **Screenshots!**
+
+### PolyData Processing
 <center>
-	<img src="doc/img/screenshot2.png" width="100%" />
+	<img src="doc/img/screenshot6.png"/>
+</center>
+### ImageData Processing
+<center>
+	<img src="doc/img/screenshot5.png"/>
+</center>
+### VolumeData Processing
+<center>
+	<img src="doc/img/screenshot4.png"/>
 </center>
 
 Building QuickVtk
 ----
-QuickVtk can be built for Mac OS X and Windows via **[CMake](https://cmake.org)**. Building the project takes three steps:
-
-### Step 1 - Install the Qt binaries
-
-Download and launch the installer from the **[Qt download section](https://www.qt.io/download/)**.
-
-### Step 2 - Build VTK
-
-**[VTK](http://www.vtk.org)** can be built as a separate project from the **libs** folder located in the project directory. Launch **[CMake](https://cmake.org)** and set the paths to src and bin:
-
-- **src**: QuickVtk/libs/src
-- **bin**: QuickVtk/libs/bin
-
-<center>
-	<img src="doc/img/cmake2.png"/>
-</center>
-You can specify a git tag to build a certain version of **[VTK](http://www.vtk.org)**. Configure, generate and build the project.
-
-Alternatively, you can build **[VTK](http://www.vtk.org)** manually or use already built binaries from your system if available. Just make sure to use  **OpenGL** for the **VTK\_RENDERING\_BACKEND** option since QuickVtk's offscreen rendering setup does not yet support OpenGL2 which is the default rendering backend for **[VTK](http://www.vtk.org)** since version 7.
-
-###Step 3 - Build QuickVtk
-After successfully installing **[Qt](http://www.qt.io)** and building **[VTK](http://www.vtk.org)**, launch **[CMake](https://cmake.org)** and set the paths to src and bin:
-
-- **src**: QuickVtk
-- **bin**: QuickVtk/bin
-
-<center>
-	<img src="doc/img/cmake1.png"/>
-</center>
-
-Specify the version and path attributes for **[Qt](http://www.qt.io)** and **[VTK](http://www.vtk.org)** and finally configure, generate and build the project. Tested project generators are:
-
-- Unix Makefile (recommended for building VTK on Mac OS X)
-- XCode (recommended for building QuickVtk on Mac OS X)
-- Microsoft Visual Studio 2015 (for Windows)
-
-**Note when building with Visual Studio:**
-Make sure to set the environment in the IDE. Add the paths for **[Qt](http://www.qt.io)** and **[VTK](http://www.vtk.org)** to the *Environment* field found in the project properties view under *Debugging*:
-
-<center>
-	<img src="doc/img/vs1.png"/>
-</center>
+Since it's really early stage and hence a lot of changes happen, there are no binaries yet. If you're interested in building the application from source, check out the **[build instructions](doc/build.md)**!
 
 Sample Data
 ----

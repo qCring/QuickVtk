@@ -8,38 +8,13 @@ namespace quick {
 
         WarpTo::WarpTo() : PointSetAlgorithm(vtkSmartPointer<vtkWarpTo>::New()) {
             this->m_vtkObject = vtkWarpTo::SafeDownCast(Algorithm::getVtkObject());
-
-            this->m_positionCb = [this] (Math::Vector3&& vector) {
-                this->updatePosition(std::move(vector));
-            };
-        }
-
-        auto WarpTo::updatePosition(Math::Vector3&& vector) -> void {
-            this->m_vtkObject->SetPosition(vector.getValues().data());
-            this->update();
-        }
-
-        auto WarpTo::setPosition(Math::Vector3* vector) -> void {
-            if (this->m_position) {
-                this->m_position->removeCallback(std::move(this->m_positionCb));
-            }
-
-            this->m_position = vector;
-
-            if (vector) {
-                vector->addCallback(std::move(this->m_positionCb));
-                this->updatePosition(std::move(*vector));
-            }
-
-            emit this->positionChanged();
+            this->m_position = new Math::Vector3([this](){
+                this->m_vtkObject->SetPosition(this->m_position->getValues().data());
+                this->update();
+            });
         }
 
         auto WarpTo::getPosition() -> Math::Vector3* {
-            if (!this->m_position) {
-                auto position = this->m_vtkObject->GetPosition();
-                this->setPosition(new Math::Vector3(position[0], position[1], position[2]));
-            }
-
             return this->m_position;
         }
 

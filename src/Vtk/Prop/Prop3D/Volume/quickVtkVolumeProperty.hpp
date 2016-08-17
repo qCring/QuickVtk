@@ -21,12 +21,12 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(bool shade READ getShade WRITE setShade NOTIFY shadeChanged);
             Q_PROPERTY(quick::Vtk::PiecewiseFunction* scalarOpacity READ getScalarOpacity CONSTANT);
-            Q_PROPERTY(quick::Vtk::ColorTransferFunction* color READ getColor CONSTANT);
+            Q_PROPERTY(quick::Vtk::ColorTransferFunction* transferFunction READ getTransferFunction CONSTANT);
         private:
             static Qml::Register::UncreatableClass<VolumeProperty> Register;
             Volume* m_volume = nullptr;
             PiecewiseFunction* m_scalarOpacity = nullptr;
-            ColorTransferFunction* m_color = nullptr;
+            ColorTransferFunction* m_transferFunction = nullptr;
             vtkSmartPointer<vtkVolume> m_vtkVolume = nullptr;
         private:
             void update();
@@ -36,7 +36,7 @@ namespace quick {
             auto setShade(bool) -> void;
             auto getShade() -> bool;
             auto getScalarOpacity() -> PiecewiseFunction*;
-            auto getColor() -> ColorTransferFunction*;
+            auto getTransferFunction() -> ColorTransferFunction*;
         signals:
             void shadeChanged();
         };

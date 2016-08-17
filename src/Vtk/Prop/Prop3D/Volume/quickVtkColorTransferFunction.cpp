@@ -6,43 +6,50 @@ namespace quick {
 
         Qml::Register::UncreatableClass<ColorTransferFunction> ColorTransferFunction::Register;
 
-        ColorTransferFunction::ColorTransferFunction(cb_t&& callback) : m_callback(callback) {
+        ColorTransferFunction::ColorTransferFunction(vtkSmartPointer<vtkColorTransferFunction> vtkObject, cb_t&& callback) : m_vtkObject(vtkObject), m_callback(callback) {
         }
 
-        auto ColorTransferFunction::getX(int i) -> double {
-            return i < this->m_xValues.length() && i >= 0 ? this->m_xValues.at(i) : 0;
+        void ColorTransferFunction::clear() {
+            this->m_colors.clear();
+            this->m_values.clear();
+
+            emit this->sizeChanged();
+
+            this->m_vtkObject->RemoveAllPoints();
         }
 
-        auto ColorTransferFunction::getColor(int i) -> QColor {
+        void ColorTransferFunction::add(double value, QColor color) {
+            this->m_colors.append(color);
+            this->m_values.append(value);
+
+            emit this->sizeChanged();
+
+            this->m_vtkObject->AddRGBPoint(value, color.redF(), color.greenF(), color.blueF());
+            this->notify();
+        }
+
+        double ColorTransferFunction::getValue(int i) {
+            return i < this->m_values.length() && i >= 0 ? this->m_values.at(i) : 0;
+        }
+
+        QColor ColorTransferFunction::getColor(int i) {
             return i < this->m_colors.length() && i >= 0 ? QColor(this->m_colors.at(i)) : QColor("#ff00ff");
         }
 
         auto ColorTransferFunction::notify() -> void {
-            this->m_callback.operator()();
+            this->m_callback();
         }
 
-        auto ColorTransferFunction::setXValues(QList<double> xValues) -> void {
-            this->m_xValues = xValues;
-            emit this->xValuesChanged();
-            this->notify();
+        auto ColorTransferFunction::getValues() -> QList<double> {
+            return this->m_values;
         }
 
-        auto ColorTransferFunction::getXValues() -> QList<double> {
-            return this->m_xValues;
-        }
-
-        auto ColorTransferFunction::setColors(QStringList colors) -> void {
-            this->m_colors = colors;
-            emit this->colorsChanged();
-            this->notify();
-        }
-
-        auto ColorTransferFunction::getColors() -> QStringList {
+        auto ColorTransferFunction::getColors() -> QList<QColor> {
             return this->m_colors;
         }
 
-        auto ColorTransferFunction::getLength() -> int {
-            return std::min(this->m_xValues.length(), this->m_colors.length());
+        auto ColorTransferFunction::getSize() -> int {
+            return this->m_values.length();
         }
     }
 }

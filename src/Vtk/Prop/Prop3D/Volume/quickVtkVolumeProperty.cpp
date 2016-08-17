@@ -24,17 +24,9 @@ namespace quick {
                 this->update();
             });
 
-            this->m_color = new ColorTransferFunction([this](){
-                auto color = this->m_vtkVolume->GetProperty()->GetRGBTransferFunction();
-                color->RemoveAllPoints();
+            auto property = this->m_vtkVolume->GetProperty();
 
-                for (auto i = 0; i < this->m_color->getLength(); ++i) {
-                    auto colorValue = this->m_color->getColor(i);
-                    color->AddRGBPoint(this->m_color->getX(i), colorValue.redF(), colorValue.greenF(), colorValue.blueF());
-                }
-
-                this->update();
-            });
+            this->m_transferFunction = new ColorTransferFunction(property->GetRGBTransferFunction(), [this](){ this->update(); });
         }
 
         auto VolumeProperty::update() -> void {
@@ -55,8 +47,8 @@ namespace quick {
             return this->m_scalarOpacity;
         }
 
-        auto VolumeProperty::getColor() -> ColorTransferFunction* {
-            return this->m_color;
+        auto VolumeProperty::getTransferFunction() -> ColorTransferFunction* {
+            return this->m_transferFunction;
         }
     }
 }

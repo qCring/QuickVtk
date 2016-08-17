@@ -6,33 +6,37 @@
 #include <QColor>
 #include <QList>
 
+#include <vtkSmartPointer.h>
+#include <vtkColorTransferFunction.h>
+
 namespace quick {
 
     namespace Vtk {
 
         class ColorTransferFunction : public QObject {
             Q_OBJECT
-            Q_PROPERTY(QList<double> x READ getXValues WRITE setXValues NOTIFY xValuesChanged);
-            Q_PROPERTY(QStringList colors READ getColors WRITE setColors NOTIFY colorsChanged);
+            Q_PROPERTY(int size READ getSize NOTIFY sizeChanged);
         private:
             using cb_t = std::function<void()>;
+            using vtk_t = vtkSmartPointer<vtkColorTransferFunction>;
+            vtk_t m_vtkObject;
             cb_t m_callback;
-            QList<double> m_xValues;
-            QStringList m_colors;
+            QList<double> m_values;
+            QList<QColor> m_colors;
         public:
             static Qml::Register::UncreatableClass<ColorTransferFunction> Register;
-            ColorTransferFunction(cb_t&&);
+            ColorTransferFunction(vtk_t, cb_t&&);
             auto notify() -> void;
-            auto getX(int) -> double;
-            auto getColor(int) -> QColor;
-            auto setXValues(QList<double>) -> void;
-            auto getXValues() -> QList<double>;
-            auto setColors(QStringList) -> void;
-            auto getColors() -> QStringList;
-            auto getLength() -> int;
+            auto getSize() -> int;
+            auto getValues() -> QList<double>;
+            auto getColors() -> QList<QColor>;
+        public slots:
+            void clear();
+            void add(double, QColor);
+            double getValue(int);
+            QColor getColor(int);
         signals:
-            void xValuesChanged();
-            void colorsChanged();
+            void sizeChanged();
         };
     }
 }

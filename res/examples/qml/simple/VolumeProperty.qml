@@ -19,7 +19,7 @@ Rectangle {
 
             Vtk.SmartVolumeMapper {
                 Vtk.DICOMImageReader {
-                    directoryName: SampleData.volumes.brain2DIR;
+                    directoryName: SampleData.volumes.brain1DIR;
                 }
             }
         }
@@ -37,12 +37,8 @@ Rectangle {
         volume.property.scalarOpacity.x[2] = 500;
         volume.property.scalarOpacity.y[2] = 1;
 
-        volume.property.color.x[0] = 0;
-        volume.property.color.x[1] = 200;
-        volume.property.color.x[2] = 500;
-
-        volume.property.color.colors[0] = "#000";
-        volume.property.color.colors[1] = "#ff0000";
-        volume.property.color.colors[2] = "#0000ff";
+        volume.property.transferFunction.add(0, "#ff00ff");
+        volume.property.transferFunction.add(200, "#ff0000");
+        volume.property.transferFunction.add(500, "#0000ff");
     }
 }

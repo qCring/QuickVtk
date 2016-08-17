@@ -2,7 +2,7 @@ QuickVtk
 ===
 
 ![Version](https://img.shields.io/badge/version-0.4.2-blue.svg)
-![VTK](https://img.shields.io/badge/VTK-tag 5f52c1a-red.svg)
+![VTK](https://img.shields.io/badge/VTK-tag 8e6245e-red.svg)
 
 A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedded **[VTK](http://www.vtk.org)** support
 
@@ -94,7 +94,7 @@ Download and launch the installer from the **[Qt download section](https://www.q
 <center>
 	<img src="doc/img/cmake2.png"/>
 </center>
-You can specify a git tag to build a certain version of **[VTK](http://www.vtk.org)**. By default the latest commit from master will be used. Configure, generate and build the project.
+You can specify a git tag to build a certain version of **[VTK](http://www.vtk.org)**. Configure, generate and build the project.
 
 Alternatively, you can build **[VTK](http://www.vtk.org)** manually or use already built binaries from your system if available. Just make sure to use  **OpenGL** for the **VTK\_RENDERING\_BACKEND** option since QuickVtk's offscreen rendering setup does not yet support OpenGL2 which is the default rendering backend for **[VTK](http://www.vtk.org)** since version 7.
 

@@ -18,7 +18,7 @@ namespace quick {
             this->m_vtkObject->RemoveAllPoints();
         }
 
-        void ColorTransferFunction::add(double value, QColor color) {
+        void ColorTransferFunction::add(QColor color, double value) {
             this->m_colors.append(color);
             this->m_values.append(value);
 

@@ -32,7 +32,7 @@ namespace quick {
             auto getColors() -> QList<QColor>;
         public slots:
             void clear();
-            void add(double, QColor);
+            void add(QColor, double);
             double getValue(int);
             QColor getColor(int);
         signals:

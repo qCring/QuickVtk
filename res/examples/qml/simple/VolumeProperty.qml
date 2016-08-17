@@ -37,8 +37,8 @@ Rectangle {
         volume.property.scalarOpacity.x[2] = 500;
         volume.property.scalarOpacity.y[2] = 1;
 
-        volume.property.transferFunction.add(0, "#ff00ff");
-        volume.property.transferFunction.add(200, "#ff0000");
-        volume.property.transferFunction.add(500, "#0000ff");
+        volume.property.transferFunction.add("#ff00ff",   0);
+        volume.property.transferFunction.add("#ff0000", 200);
+        volume.property.transferFunction.add("#0000ff", 500);
     }
 }

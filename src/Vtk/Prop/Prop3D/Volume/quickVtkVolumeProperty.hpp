@@ -19,7 +19,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(bool shade READ getShade WRITE setShade NOTIFY shadeChanged);
         private:
-            static Qml::Register::Class<VolumeProperty> Register;
+            static Qml::Register::UncreatableClass<VolumeProperty> Register;
             quick::Vtk::Volume* m_volume = nullptr;
             vtkSmartPointer<vtkVolume> m_vtkVolume = nullptr;
         private:
@@ -27,10 +27,8 @@ namespace quick {
             auto setShade(bool) -> void;
             auto getShade() -> bool;
         public:
-            VolumeProperty();
+            VolumeProperty() = delete;
             VolumeProperty(Volume*);
-            auto setVolume(Volume*) -> void;
-            ~VolumeProperty();
         signals:
             void shadeChanged();
         };

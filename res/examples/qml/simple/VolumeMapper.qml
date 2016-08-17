@@ -19,7 +19,7 @@ Item {
                 id: mapper;
 
                 Vtk.DICOMImageReader {
-                    directoryName: SampleData.volumes.brainDIR;
+                    directoryName: SampleData.volumes.brain1DIR;
                 }
             }
         }

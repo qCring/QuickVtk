@@ -24,13 +24,6 @@ Row {
         text: item.name + ": ";
     }
 
-    Lib.Label {
-        anchors.verticalCenter: parent.verticalCenter;
-
-        text: "(";
-        color: "#fff"
-    }
-
     Lib.TagLabel {
         anchors.verticalCenter: parent.verticalCenter;
 
@@ -41,10 +34,10 @@ Row {
         color: "#00000000"
     }
 
-    Lib.Label {
+    Lib.Icon {
         anchors.verticalCenter: parent.verticalCenter;
 
-        text: ") ->";
+        type: types.fa_long_arrow_right;
         color: "#fff"
     }
 

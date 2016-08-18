@@ -18,13 +18,14 @@ namespace quick {
             auto returnType = QString(metaMethod.typeName()).remove("*").remove("quick::").replace("::", ".");
 
             auto paramTypeList = metaMethod.parameterTypes();
+            auto separator = QString(", ");
 
             for (auto paramType : paramTypeList) {
-                paramTypes.append(paramType).append(" x ");
+                paramTypes.append(paramType).append(separator);
             }
 
             if (paramTypeList.count() > 0) {
-                paramTypes.remove(paramTypes.length() - 3, paramTypes.length());
+                paramTypes.remove(paramTypes.length() - separator.length(), paramTypes.length());
             }
 
             if (paramTypeList.count() == 0) {

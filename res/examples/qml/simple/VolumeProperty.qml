@@ -36,8 +36,13 @@ Item {
     Component.onCompleted: {
         volume.property.scalarOpacityFunction.add(0, 0);
         volume.property.scalarOpacityFunction.add(120, 0);
-        volume.property.scalarOpacityFunction.add(140, 0.08);
+        volume.property.scalarOpacityFunction.add(140, 0.4);
         volume.property.scalarOpacityFunction.add(500, 0);
+
+        volume.property.gradientOpacityFunction.add(0, 0);
+        volume.property.gradientOpacityFunction.add(120, 0);
+        volume.property.gradientOpacityFunction.add(140, 0.8);
+        volume.property.gradientOpacityFunction.add(500, 0);
 
         volume.property.transferFunction.add("#00ff00",   0);
         volume.property.transferFunction.add("#ff0000", 100);

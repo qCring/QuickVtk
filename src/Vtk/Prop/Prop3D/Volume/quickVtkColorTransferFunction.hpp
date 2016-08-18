@@ -16,6 +16,7 @@ namespace quick {
         class ColorTransferFunction : public QObject {
             Q_OBJECT
             Q_PROPERTY(int size READ getSize NOTIFY sizeChanged);
+            Q_PROPERTY(bool clamping READ getClamping WRITE setClamping NOTIFY clampingChanged);
         private:
             using cb_t = std::function<void()>;
             using vtk_t = vtkSmartPointer<vtkColorTransferFunction>;
@@ -26,8 +27,10 @@ namespace quick {
         public:
             static Qml::Register::UncreatableClass<ColorTransferFunction> Register;
             ColorTransferFunction(vtk_t, cb_t&&);
-            auto notify() -> void;
+            auto update() -> void;
             auto getSize() -> int;
+            auto setClamping(bool) -> void;
+            auto getClamping() -> bool;
             auto getValues() -> QList<double>;
             auto getColors() -> QList<QColor>;
         public slots:
@@ -37,6 +40,7 @@ namespace quick {
             QColor getColor(int);
         signals:
             void sizeChanged();
+            void clampingChanged();
         };
     }
 }

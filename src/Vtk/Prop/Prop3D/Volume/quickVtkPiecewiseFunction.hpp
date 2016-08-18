@@ -27,6 +27,8 @@ namespace quick {
             PiecewiseFunction(vtk_t, cb_t&&);
             auto update() -> void;
             auto getSize() -> int;
+            auto setClamping(bool) -> void;
+            auto getClamping() -> bool;
         public slots:
             void clear();
             void add(double, double);
@@ -34,6 +36,7 @@ namespace quick {
             double getY(int);
         signals:
             void sizeChanged();
+            void clampingChanged();
         };
     }
 }

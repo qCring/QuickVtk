@@ -39,7 +39,15 @@ namespace quick {
             return i < this->m_yValues.length() && i >= 0 ? this->m_yValues.at(i) : 0;
         }
 
+        auto PiecewiseFunction::setClamping(bool clamping) -> void {
+            this->m_vtkObject->SetClamping(clamping);
+            this->update();
+        }
 
+        auto PiecewiseFunction::getClamping() -> bool {
+            return this->m_vtkObject->GetClamping();
+        }
+        
         auto PiecewiseFunction::getSize() -> int {
             return this->m_xValues.length();
         }

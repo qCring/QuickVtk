@@ -72,7 +72,7 @@ QuickVtk is written in C++. **[VTK](http://www.vtk.org)**'s rendering backend us
 
 Current State
 ----
-Yeah. One day I'll add some super informative text here. Until then: **Screenshots!**
+Until some informative text appears here: **Screenshots!**
 
 ### PolyData Processing
 <center>
@@ -89,7 +89,7 @@ Yeah. One day I'll add some super informative text here. Until then: **Screensho
 
 Building QuickVtk
 ----
-Since it's really early stage and hence a lot of changes happen, there are no binaries yet. If you're interested in building the application from source, check out the **[build instructions](doc/build.md)**!
+Since the project's in it's early stage, there are no binaries provided yet. If you're interested in building the application from source, check out the **[build instructions](doc/build.md)**!
 
 Sample Data
 ----

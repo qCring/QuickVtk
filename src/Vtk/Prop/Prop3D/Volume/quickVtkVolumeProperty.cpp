@@ -30,6 +30,46 @@ namespace quick {
             return this->m_vtkVolume->GetProperty()->GetShade();
         }
 
+        auto VolumeProperty::setAmbient(float ambient) -> void {
+            this->m_vtkVolume->GetProperty()->SetAmbient(ambient);
+            emit this->ambientChanged();
+            this->update();
+        }
+
+        auto VolumeProperty::getAmbient() -> float {
+            return this->m_vtkVolume->GetProperty()->GetAmbient();
+        }
+
+        auto VolumeProperty::setDiffuse(float diffuse) -> void {
+            this->m_vtkVolume->GetProperty()->SetDiffuse(diffuse);
+            emit this->diffuseChanged();
+            this->update();
+        }
+
+        auto VolumeProperty::getDiffuse() -> float {
+            return this->m_vtkVolume->GetProperty()->GetDiffuse();
+        }
+
+        auto VolumeProperty::setSpecular(float specular) -> void {
+            this->m_vtkVolume->GetProperty()->SetSpecular(specular);
+            emit this->specularChanged();
+            this->update();
+        }
+
+        auto VolumeProperty::getSpecular() -> float {
+            return this->m_vtkVolume->GetProperty()->GetSpecular();
+        }
+
+        auto VolumeProperty::setSpecularPower(float specularPower) -> void {
+            this->m_vtkVolume->GetProperty()->SetSpecularPower(specularPower);
+            emit this->specularPowerChanged();
+            this->update();
+        }
+
+        auto VolumeProperty::getSpecularPower() -> float {
+            return this->m_vtkVolume->GetProperty()->GetSpecularPower();
+        }
+
         auto VolumeProperty::getScalarOpacityFunction() -> PiecewiseFunction* {
             return this->m_scalarOpacityFunction;
         }

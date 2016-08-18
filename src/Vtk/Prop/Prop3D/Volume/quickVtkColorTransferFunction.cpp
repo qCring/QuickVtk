@@ -16,7 +16,7 @@ namespace quick {
             emit this->sizeChanged();
 
             this->m_vtkObject->RemoveAllPoints();
-            this->notify();
+            this->update();
         }
 
         void ColorTransferFunction::add(QColor color, double value) {
@@ -26,7 +26,7 @@ namespace quick {
             emit this->sizeChanged();
 
             this->m_vtkObject->AddRGBPoint(value, color.redF(), color.greenF(), color.blueF());
-            this->notify();
+            this->update();
         }
 
         double ColorTransferFunction::getValue(int i) {
@@ -37,7 +37,7 @@ namespace quick {
             return i < this->m_colors.length() && i >= 0 ? QColor(this->m_colors.at(i)) : QColor("#ff00ff");
         }
 
-        auto ColorTransferFunction::notify() -> void {
+        auto ColorTransferFunction::update() -> void {
             this->m_callback();
         }
 
@@ -47,6 +47,15 @@ namespace quick {
 
         auto ColorTransferFunction::getColors() -> QList<QColor> {
             return this->m_colors;
+        }
+
+        auto ColorTransferFunction::setClamping(bool clamping) -> void {
+            this->m_vtkObject->SetClamping(clamping);
+            this->update();
+        }
+
+        auto ColorTransferFunction::getClamping() -> bool {
+            return this->m_vtkObject->GetClamping();
         }
 
         auto ColorTransferFunction::getSize() -> int {

@@ -105,6 +105,7 @@ AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper/Volum
 AddSources("${SOURCE_DIR}/Vtk/Algorithm" "Vtk\\Algorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/DataReader" "Vtk\\Algorithm\\DataReader" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm/ThreadedImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm\\ThreadedImageAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm/ImageReader2" "Vtk\\Algorithm\\ImageAlgorithm\\ImageReader2" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_app_src)

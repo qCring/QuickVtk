@@ -12,6 +12,7 @@ namespace quick {
         VolumeProperty::VolumeProperty(Volume* volume) : m_volume(volume), m_vtkVolume(volume->getVtkObject()) {
             auto property = this->m_vtkVolume->GetProperty();
 
+            this->m_gradientOpacityFunction = new PiecewiseFunction(property->GetGradientOpacity(), [this](){ this->update(); });
             this->m_scalarOpacityFunction = new PiecewiseFunction(property->GetScalarOpacity(), [this](){ this->update(); });
             this->m_transferFunction = new ColorTransferFunction(property->GetRGBTransferFunction(), [this](){ this->update(); });
         }
@@ -68,6 +69,10 @@ namespace quick {
 
         auto VolumeProperty::getSpecularPower() -> float {
             return this->m_vtkVolume->GetProperty()->GetSpecularPower();
+        }
+
+        auto VolumeProperty::getGradientOpacityFunction() -> PiecewiseFunction* {
+            return this->m_gradientOpacityFunction;
         }
 
         auto VolumeProperty::getScalarOpacityFunction() -> PiecewiseFunction* {

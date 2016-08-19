@@ -22,7 +22,8 @@ Item {
                 Vtk.LinearExtrusionFilter {
                     id: filter;
 
-                    Vtk.DiskSource {
+                    Vtk.PointSource {
+                        numberOfPoints: 50
                     }
                 }
             }
@@ -35,6 +36,7 @@ Item {
         Utils.ComboBox {
             label: "Type";
             model: ["Vector", "Normal", "Point"];
+            currentIndex: 2;
             onIndexChanged: {
                 switch (index) {
                 case 0: filter.extrusionType = Vtk.LinearExtrusionFilter.VectorExtrusion; break;
@@ -82,7 +84,7 @@ Item {
         }
 
         Utils.CheckBox {
-            from: filter; bind "capping";
+            from: filter; bind: "capping";
         }
     }
 }

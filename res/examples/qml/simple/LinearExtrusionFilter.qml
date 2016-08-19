@@ -80,5 +80,9 @@ Item {
             from: vector; bind: "z"; label: "vector.z";
             min: -1; max: 1; step: 0.01; value: 0;
         }
+
+        Utils.CheckBox {
+            from: filter; bind "capping";
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace quick {
                 Intersection = vtkBooleanOperationPolyDataFilter::VTK_INTERSECTION,
                 Difference = vtkBooleanOperationPolyDataFilter::VTK_DIFFERENCE
             };
+        private:
             Q_ENUM(Operation);
             Q_PROPERTY(Operation operation READ getOperation WRITE setOperation NOTIFY operationChanged);
             Q_PROPERTY(float tolerance READ getTolerance WRITE setTolerance NOTIFY toleranceChanged);

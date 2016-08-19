@@ -28,5 +28,21 @@ namespace quick {
         auto Meshes::getSuzanneSTL() -> QString {
             return this->makeDataPath("suzanne.stl");
         }
+
+        auto Meshes::getAOBJ() -> QString {
+            return this->makeDataPath("a.obj");
+        }
+
+        auto Meshes::getASTL() -> QString {
+            return this->makeDataPath("a.stl");
+        }
+
+        auto Meshes::getBOBJ() -> QString {
+            return this->makeDataPath("b.obj");
+        }
+
+        auto Meshes::getBSTL() -> QString {
+            return this->makeDataPath("b.stl");
+        }
     }
 }

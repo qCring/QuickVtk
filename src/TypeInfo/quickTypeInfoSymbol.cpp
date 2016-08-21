@@ -111,6 +111,10 @@ namespace quick {
             return true;
         }
 
+        auto Symbol::operator < (const Symbol& other) -> const bool {
+            return this->m_name < other.m_name;
+        }
+
         auto Symbol::getName() -> QString {
             return this->m_name;
         }

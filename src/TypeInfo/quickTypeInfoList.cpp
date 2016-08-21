@@ -52,7 +52,6 @@ namespace quick {
 
             auto instance = GetInstance();
 
-            instance->m_symbols.append(symbol);
             instance->m_allSymbols.append(symbol);
         }
 
@@ -74,7 +73,15 @@ namespace quick {
             
             return var;
         }
-        
+
+        auto List::init() -> void {
+            std::sort(this->m_allSymbols.begin(), this->m_allSymbols.end(), [](Symbol* a, Symbol* b) -> const bool {
+                return a->operator<(*b);
+            });
+
+            this->m_symbols = this->m_allSymbols;
+        }
+
         auto List::rowCount(const QModelIndex&) const -> int {
             return this->m_symbols.size();
         }

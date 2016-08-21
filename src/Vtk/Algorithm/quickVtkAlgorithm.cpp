@@ -97,9 +97,8 @@ namespace quick {
             if (parent) {
                 parent->m_input.clear();
                 emit parent->inputChanged();
+                parent->update();
             }
-
-            parent->update();
         }
 
         Algorithm::~Algorithm() {

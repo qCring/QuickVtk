@@ -132,9 +132,8 @@ namespace quick {
                 }
 
                 viewer->update();
+                emit viewer->inputChanged();
             }
-
-            emit viewer->inputChanged();
         }
 
         auto Viewer::inputCount(QQmlListProperty<Prop>* list) -> int {

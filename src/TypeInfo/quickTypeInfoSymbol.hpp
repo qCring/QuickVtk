@@ -35,6 +35,7 @@ namespace quick {
             static auto MakeEnum(QMetaEnum) -> void;
             static auto MakeClass(QMetaObject) -> void;
             static auto MakeAbstractClass(QMetaObject) -> void;
+            auto operator < (const Symbol&) -> const bool;
             auto getColor() -> QColor;
             auto getType() -> QString;
             auto getName() -> QString;

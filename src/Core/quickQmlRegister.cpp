@@ -1,6 +1,7 @@
 #include "quickQmlRegister.hpp"
 
 #include "quickTypeInfoSymbol.hpp"
+#include "quickTypeInfoList.hpp"
 
 namespace quick {
 
@@ -28,6 +29,8 @@ namespace quick {
                     func();
                 }
 #endif
+
+                TypeInfo::List::GetInstance()->init();
             }
 
 #ifdef _MSC_VER

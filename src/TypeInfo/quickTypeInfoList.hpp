@@ -31,6 +31,7 @@ namespace quick {
         public:
             static Qml::Register::Type<List> Register;
             static auto GetInstance() -> List*;
+            auto init() -> void;
             auto setVisible(bool) -> void;
             auto isVisible() -> bool;
             auto setFilter(const QString&) -> void;

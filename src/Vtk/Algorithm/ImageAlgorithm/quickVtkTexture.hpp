@@ -2,6 +2,7 @@
 
 #include "quickVtkImageAlgorithm.hpp"
 
+#include <functional>
 #include <vtkTexture.h>
 
 namespace quick {
@@ -34,10 +35,13 @@ namespace quick {
             Q_PROPERTY(bool edgeClamp READ getEdgeClamp WRITE setEdgeClamp NOTIFY edgeClampChanged);
             Q_PROPERTY(bool interpolate READ getInterpolate WRITE setInterpolate NOTIFY interpolateChanged);
         private:
-            static Qml::Register::Class<Texture> Register;
+            using cb_t = std::function<void()>;
+            static Qml::Register::UncreatableClass<Texture> Register;
             vtkSmartPointer<vtkTexture> m_vtkObject;
+            cb_t m_callback;
         public:
-            Texture();
+            Texture() = delete;
+            Texture(vtkSmartPointer<vtkTexture>, cb_t&&);
             auto setQuality(Quality) -> void;
             auto getQuality() -> Quality;
             auto setBlendingMode(BlendingMode) -> void;

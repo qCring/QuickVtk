@@ -4,10 +4,9 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<Texture> Texture::Register;
+        Qml::Register::UncreatableClass<Texture> Texture::Register;
 
-        Texture::Texture() : ImageAlgorithm(vtkSmartPointer<vtkTexture>::New()) {
-            this->m_vtkObject = vtkTexture::SafeDownCast(this->getVtkObject());
+        Texture::Texture(vtkSmartPointer<vtkTexture> vtkObject, cb_t&& callback) : ImageAlgorithm(vtkObject), m_vtkObject(vtkObject), m_callback(callback) {
         }
 
         auto Texture::setQuality(Quality quality) -> void {

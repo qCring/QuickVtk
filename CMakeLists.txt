@@ -112,6 +112,7 @@ AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\Poly
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PointSetAlgorithm" "Vtk\\Algorithm\\PointSetAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/TypeInfo" "TypeInfo" list_app_src)
+AddSources("${SOURCE_DIR}/Code" "Code" list_app_src)
 AddSources("${SOURCE_DIR}/Core" "Core" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
 
@@ -150,8 +151,7 @@ if(APPLE)
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${MACOSX_BUNDLE_RESOURCES})
     execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${MACOSX_BUNDLE_ICON} ${MACOSX_BUNDLE_RESOURCES})
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${ROOT_DIR}/res" ${BUILD_DIR}/${PROJECT_NAME}.app/Contents/Resources)
-endif()
-if(WIN32)
+else()
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${ROOT_DIR}/res" ${BUILD_DIR}/Resources)
 endif()
 

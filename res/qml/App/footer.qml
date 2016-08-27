@@ -19,6 +19,8 @@ Rectangle {
     }
 
     Row {
+        id: fileNameRow;
+
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
         anchors.left: parent.left;
@@ -39,8 +41,17 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             text: App.editor.filePath.length > 0 ? App.editor.filePath : "untitled"
-            font.pointSize: 11;
+            font.pointSize: 12;
         }
+    }
+
+    Lib.Label {
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.left: fileNameRow.right;
+        anchors.leftMargin: 20;
+
+        text: App.editor.line + ":" + App.editor.column;
+        font.pointSize: 12;
     }
 
     Row {

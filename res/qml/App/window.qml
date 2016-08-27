@@ -44,10 +44,9 @@ Rectangle {
     TypeInfo.List {
         id: typeList;
 
-        anchors.left: parent.left;
-        anchors.right: editor.right;
+        anchors.right: parent.right;
+        anchors.top: header.bottom;
         anchors.bottom: footer.top;
-        height: 200;
     }
 
     Notifications {

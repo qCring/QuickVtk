@@ -33,7 +33,7 @@ namespace quick {
             int m_selectionStart = 0;
             int m_selectionEnd = 0;
             int m_editorCursor = 0;
-            int m_fontSize = 11;
+            int m_fontSize = 12;
             int m_column = 0;
             int m_line = 0;
         public:

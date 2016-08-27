@@ -1,6 +1,7 @@
 import QtQuick 2.6
 
 import Lib 1.0 as Lib
+import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
     height: visible ? 32 : 0;
@@ -55,13 +56,8 @@ Rectangle {
 
         spacing: 4;
 
-        Lib.CheckBox {
+        TypeInfo.Search {
             anchors.verticalCenter: parent.verticalCenter;
-
-            label.text: "TypeList"
-            checked: App.typeList.visible;
-
-            onClicked: App.typeList.visible = !App.typeList.visible;
         }
 
         Lib.Button {

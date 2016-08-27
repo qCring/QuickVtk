@@ -237,6 +237,19 @@ namespace quick {
                 return true;
             }
 
+            if (string == "}") {
+                auto cursor = this->getCurrentCursor();
+                auto text = cursor.block().text();
+
+                auto spaces = text.right(4).count(" ");
+                auto newText = text.left(text.length() - spaces);
+
+                cursor.select(QTextCursor::BlockUnderCursor);
+                cursor.removeSelectedText();
+                cursor.insertText("\n" + newText + "}");
+                return true;
+            }
+
             if (QRegularExpression("(\\w+)|(\\W+)").match(string).hasMatch())
             {
                 this->setModified(true);

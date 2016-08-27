@@ -6,6 +6,7 @@
 #include <QTextOption>
 #include <QApplication>
 #include <QClipboard>
+#include <QRegularExpression>
 #include <iostream>
 
 namespace quick {
@@ -173,18 +174,22 @@ namespace quick {
                     this->saveFile();
                     return true;
                 }
+
                 if (key == Qt::Key_R) {
                     this->run();
                     return true;
                 }
+
                 if (key == Qt::Key_O) {
                     this->openFile();
                     return true;
                 }
+
                 if (key == Qt::Key_N) {
                     this->newFile();
                     return true;
                 }
+
                 if (key == Qt::Key_V) {
                     auto text = QApplication::clipboard()->text();
 
@@ -199,6 +204,37 @@ namespace quick {
                     }
                     return true;
                 }
+            }
+
+            if (key == Qt::Key_Return || key == Qt::Key_Enter) {
+                auto cursor = this->getCurrentCursor();
+                auto text = cursor.block().text();
+
+                auto open = text.count("{");
+                auto close = text.count("}");
+
+                auto regex = QRegularExpression("\\w");
+                auto index = regex.match(text).capturedStart();
+                auto spaces = 0;
+
+                if (index < 0) {
+                    spaces = this->m_column;
+                } else {
+                    spaces = index;
+                }
+
+                spaces += open * 4;
+                spaces -= close * 5;
+                spaces = std::max(0, spaces);
+
+                cursor.insertText("\n");
+
+                for (auto i = 0; i < spaces; ++i) {
+                    cursor.insertText(" ");
+                }
+
+                this->setModified(true);
+                return true;
             }
 
             if (QRegularExpression("(\\w+)|(\\W+)").match(string).hasMatch())

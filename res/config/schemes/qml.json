@@ -1,0 +1,41 @@
+{
+	"scheme": {
+		"name": "QML",
+		"suffixes": ["qml"],
+		"highlight": [{
+			"name": "numbers",
+			"pattern": "\\d[.]?[f]?",
+			"color": "#D19A66",
+			"bold": true
+		}, {
+			"name": "objects",
+			"pattern": "\\b[A-Z]\\w*",
+			"color": "#E2BE7A",
+			"bold": true
+		}, {
+			"name": "keywords",
+			"pattern": "\\bimport\\b|\\bas\\b|\\bid\\b|\\bfor\\b|\\bproperty\\b|\\balias\\b|\\bif\\b|\\belse\\b|\\btry\\b|\\bcatch\\b|\\bswitch\\b|\\bcase\\b|\\bdefault\\b|\\bbreak\\b|\\breturn\\b|\\bcontinue\\b|\\bfunction\\b",
+			"color": "#C678DD",
+			"bold": true
+		}, {
+			"name": "keywords 2",
+			"pattern": "\\btrue\\b|\\bfalse\\b|\\bid\\b|\\bfor\\b|\\bproperty\\b|\\balias\\b|\\bif\\b|\\belse\\b|\\btry\\b|\\bcatch\\b|\\bswitch\\b|\\bcase\\b|\\bdefault\\b|\\bbreak\\b|\\breturn\\b|\\bcontinue\\b|\\bfunction\\b",
+			"color": "#C678DD",
+			"bold": true
+		}, {
+			"name": "functions",
+			"pattern": "\\b\\w*\\(\\)",
+			"color": "#61AFEF",
+			"bold": true
+		}, {
+			"name": "strings",
+			"pattern": "\".*\"",
+			"color": "#98C379"
+		}, {
+			"name": "inline comments",
+			"pattern": "//[^\n]*",
+			"color": "#888",
+			"italic": true
+		}]
+	}
+}

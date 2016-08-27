@@ -28,6 +28,9 @@ namespace quick {
         beginInsertRows(QModelIndex(), index, index);
         this->m_notifications.append(notification);
         endInsertRows();
+
+        ++this->m_errorCount;
+        emit this->errorCountChanged();
     }
 
     void Notifications::addWarning(const QString& message) {
@@ -40,6 +43,9 @@ namespace quick {
         beginInsertRows(QModelIndex(), index, index);
         this->m_notifications.append(notification);
         endInsertRows();
+
+        ++this->m_warningCount;
+        emit this->warningCountChanged();
     }
 
     void Notifications::addInfo(const QString& message) {
@@ -58,6 +64,11 @@ namespace quick {
         beginResetModel();
         this->m_notifications.clear();
         endResetModel();
+
+        this->m_errorCount = this->m_warningCount = 0;
+
+        emit this->errorCountChanged();
+        emit this->warningCountChanged();
     }
 
     auto Notifications::roleNames() const -> QHash<int, QByteArray> {
@@ -96,5 +107,13 @@ namespace quick {
 
     auto Notifications::rowCount(const QModelIndex&) const -> int {
         return this->m_notifications.size();
+    }
+
+    auto Notifications::getErrorCount() -> int {
+        return this->m_errorCount;
+    }
+
+    auto Notifications::getWarningCount() -> int {
+        return this->m_warningCount;
     }
 }

@@ -5,3 +5,5 @@ Icon 1.0 icon.qml
 Label 1.0 label.qml
 TagLabel 1.0 taglabel.qml
 TextInput 1.0 textinput.qml
+TextEdit 1.0 textedit.qml
+ScrollView 1.0 scrollview.qml

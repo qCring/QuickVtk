@@ -1,6 +1,7 @@
 import QtQuick 2.6
 
 import Lib 1.0 as Lib
+import Code 1.0 as Code
 import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
@@ -16,13 +17,6 @@ Rectangle {
         }
     }
 
-    ContainerView {
-        anchors.left: parent.left;
-        anchors.right: typeList.left;
-        anchors.top: header.bottom;
-        anchors.bottom: footer.top;
-    }
-
     Header {
         id: header;
 
@@ -31,12 +25,29 @@ Rectangle {
         anchors.top: parent.top;
     }
 
-    TypeInfo.List {
-        id: typeList;
+    Code.Editor {
+        id: editor;
 
+        anchors.left: parent.left;
+        anchors.top: header.bottom;
+        anchors.bottom: footer.top;
+        width: parent.width/2;
+    }
+
+    ContainerView {
+        anchors.left: editor.right;
         anchors.right: parent.right;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
+    }
+
+    TypeInfo.List {
+        id: typeList;
+
+        anchors.left: parent.left;
+        anchors.right: editor.right;
+        anchors.bottom: footer.top;
+        height: 200;
     }
 
     Notifications {

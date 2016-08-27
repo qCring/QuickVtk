@@ -22,25 +22,67 @@ Rectangle {
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
         anchors.left: parent.left;
-        anchors.leftMargin: 4;
+        anchors.leftMargin: 8;
 
-        spacing: 8;
+        spacing: 4;
 
         Lib.Icon {
             anchors.verticalCenter: parent.verticalCenter;
 
-            type: App.compiler.failed ? types.fa_exclamation_circle : types.fa_check_circle;
-            color: App.compiler.ready ? App.compiler.failed ? "#ff0000" : "#00ff00" : "#6E7582";
+            type: types.fa_circle;
+            color: "#ff8800";
+            visible: App.editor.filePath.length > 0 && App.editor.modified;
+            pointSize: 6;
         }
 
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            text: App.compiler.ready ? App.compiler.failed ? "compilation failed" : "compilation successful" : "no file to compile";
+            text: App.editor.filePath.length > 0 ? App.editor.filePath : "untitled"
+            font.pointSize: 11;
         }
     }
 
     Row {
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
+        anchors.right: dbgRow.left;
+        anchors.rightMargin: 12;
+
+        spacing: 4;
+
+        Lib.Icon {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            type: types.fa_exclamation_circle;
+            color: App.notifications.errorCount > 0 ? "#ff0000" : "#9DA5B4"
+        }
+
+        Lib.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            text: App.notifications.errorCount;
+            font.pointSize: 11;
+        }
+
+        Lib.Icon {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            type: types.fa_exclamation_triangle;
+            color: App.notifications.warningCount > 0 ? "#ff9900" : "#9DA5B4"
+        }
+
+        Lib.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            text: App.notifications.warningCount;
+            font.pointSize: 11;
+        }
+    }
+
+    Row {
+        id: dbgRow;
+
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
         anchors.right: parent.right;

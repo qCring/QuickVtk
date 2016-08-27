@@ -13,6 +13,10 @@ namespace quick {
         class List;
     }
 
+    namespace Code {
+        class Editor;
+    }
+
     namespace App {
 
         class Controller : public QObject {
@@ -23,6 +27,7 @@ namespace quick {
             Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
             Q_PROPERTY(quick::Compiler* compiler READ getCompiler CONSTANT);
             Q_PROPERTY(quick::Notifications* notifications READ getNotifications CONSTANT);
+            Q_PROPERTY(quick::Code::Editor* editor READ getEditor CONSTANT);
         private:
             bool m_showList = false;
             bool m_expanded = false;
@@ -39,6 +44,7 @@ namespace quick {
             auto isDebugBuild() -> bool;
             auto getTypeList() -> TypeInfo::List*;
             auto getCompiler() -> Compiler*;
+            auto getEditor() -> Code::Editor*;
             auto getNotifications() -> Notifications*;
         signals:
             void expandedChanged();

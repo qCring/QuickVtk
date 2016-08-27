@@ -53,7 +53,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # ******************************************************************************
 set(QUICKVTK_VERSION_MAJOR 0)
 set(QUICKVTK_VERSION_MINOR 4)
-set(QUICKVTK_VERSION_PATCH 2)
+set(QUICKVTK_VERSION_PATCH 3)
 set(QUICKVTK_ORG_NAME quickvtk)
 set(QUICKVTK_ORG_DOMAIN org)
 
@@ -127,8 +127,7 @@ if(APPLE)
     set(MACOSX_BUNDLE_ICON ${ROOT_DIR}/res/icons/develop/${MACOSX_BUNDLE_ICON_FILE})
 
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${list_app_src} ${MACOSX_BUNDLE_ICON})
-endif()
-if(WIN32)
+else()
     add_executable(${PROJECT_NAME} ${list_app_src})
 endif()
 

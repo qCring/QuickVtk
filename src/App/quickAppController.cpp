@@ -5,6 +5,7 @@
 #include "quickCompiler.hpp"
 #include "quickNotifications.hpp"
 #include "quickTypeInfoList.hpp"
+#include "quickCodeEditor.hpp"
 
 namespace quick {
     namespace App {
@@ -57,6 +58,10 @@ namespace quick {
 
         auto Controller::getTypeList() -> TypeInfo::List* {
             return TypeInfo::List::GetInstance();
+        }
+
+        auto Controller::getEditor() -> Code::Editor* {
+            return Code::Editor::GetInstance();
         }
 
         auto Controller::isDebugBuild() -> bool {

@@ -41,6 +41,7 @@ namespace quick {
             resourceDir = path.absolutePath() + "/Resources/";
 
             AddFontDir(resourceDir + "fonts/roboto/");
+            AddFontDir(resourceDir + "fonts/vera/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
             this->m_view = new QQuickView();
@@ -68,10 +69,10 @@ namespace quick {
         }
 
         auto Window::AddFontDir(const QString& directory) -> void {
-            auto fontList = Util::IO::FilesFromDir(directory, {"*.ttf", "*.otf"});
+            auto fontUrls = Util::IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"});
 
-            for (auto font : fontList) {
-                QFontDatabase::addApplicationFont(font);
+            for (auto fontUrl : fontUrls) {
+                QFontDatabase::addApplicationFont(fontUrl);
             }
         }
 

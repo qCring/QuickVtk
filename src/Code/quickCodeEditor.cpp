@@ -84,17 +84,17 @@ namespace quick {
             this->m_selectionStart = pos;
 
             emit this->selectionStartChanged();
-
-            auto cursor = getCurrentCursor();
-            cursor.setPosition(pos);
-            this->setLine(cursor.blockNumber());
-            this->setColumn(cursor.columnNumber());
         }
 
         auto Editor::setSelectionEnd(int pos) -> void {
             this->m_selectionEnd = pos;
 
             emit this->selectionEndChanged();
+
+            auto cursor = getCurrentCursor();
+            cursor.setPosition(pos);
+            this->setLine(cursor.blockNumber());
+            this->setColumn(cursor.columnNumber());
         }
 
         auto Editor::setFilePath(const QString& filePath) -> void {

@@ -1,7 +1,6 @@
 QuickVtk
 ===
-
-![Version](https://img.shields.io/badge/version-0.4.2-blue.svg)
+![Version](https://img.shields.io/badge/version-0.5.0-blue.svg)
 ![VTK](https://img.shields.io/badge/VTK-tag 8e6245e-red.svg)
 
 A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedded **[VTK](http://www.vtk.org)** support
@@ -10,105 +9,39 @@ A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedd
 	<img src="doc/img/screenshot1.png" width="100%" />
 </center>
 
-Overview
-----
+##1. Overview
+QuickVtk is a live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpeter with built-in support for functionality provided by **[VTK](http://www.vtk.org)**. You can simply learn or test *qml* code and develop prototypes in the domain of 2D/3D visualization by accessing **[VTK](http://www.vtk.org)** in a declarative way. In one sentence: reactive programming to **[VTK](http://www.vtk.org)** by using the mechanics of the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine.
 
-###Rapid QML Prototyping
-QuickVtk allows quick prototyping of **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code. Load a *.qml* file, edit the code in an external editor and save the file (an embedded editor will be available somewhere in the future). QuickVtk then automatically reloads and compiles the modified file, informs you about eventual errors during compilation and finally shows the generated content. A simple way to learn, test or prototype **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code on the fly.
+The workflow is simple. An embedded editor on the left allows you to load, edit and compile **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code which will be shown in the content view on the right. Eventual compilation errors are forwarded to the UI, telling you where and why something went wrong. And there's also a type browser available to quickly get an overview of all properties, methods and other useful meta information for a given type available in QuickVtk.
 
-###VTK in QML
-Bringing **[VTK](http://www.vtk.org)** to **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** is the real purpose of this project. Having **[VTK](http://www.vtk.org)** objects and their attributes available in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** just as built-in types in combination with high-level functionality provided by the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine makes it possible to develop interactive prototypes in the domain of 2D/3D visualization.
- 
-```QML
-import QtQuick 2.6	
-import Vtk 1.0 as Vtk
-		
-Vtk.Viewer { 
-	anchors.fill: parent;
-	Vtk.Actor {
-		Vtk.PolyDataMapper {
-			Vtk.OBJReader {
-				fileName: "car.obj"
-			}
-		}
-	}
-}
-```
+##2. Docs
+- check out the **[user docs](doc/userdoc.md)** for some guides / notes / tutorials on how to use  QuickVtk
+- or if you're interested in under-the-hood stuff, check out the **[nerd section](doc/devdoc.md)** where some topics will be discussed from a more technical perspective
 
-###Reactive Programming For VTK
-This is probably the coolest thing about bringing **[VTK](http://www.vtk.org)** to **[QML](http://doc.qt.io/qt-5/qtqml-index.html)**. You can bind **[VTK](http://www.vtk.org)** class attributes to pretty much anything using **[Property Bindings](http://doc.qt.io/qt-5/qtqml-syntax-propertybinding.html)** which allow you to control variables directly or indirectly by:
-
-- other properties
-- user interaction with UI elements
-- inline or included **[JavaScript](http://doc.qt.io/qt-5/qtqml-javascript-expressions.html)** code
-- **[QML Animations](http://doc.qt.io/qt-5/qml-qtquick-animation.html)**
-- **[QML Behaviors](http://doc.qt.io/qt-5/qml-qtquick-behavior.html)**
+##3. Random Screenshots
+I'm lazy and use screenshots to show some of QuickVtk's visualization features. They showcase volume rendering and some basic mesh and image operations. 
 
 <center>
-	<img src="doc/img/screenshot3.png" width="100%" />
+	<img src="doc/img/screenshot2.png" width="100%" />
 </center>
 
-The above screenshots shows how an interactive slider component controls the 'lineThickness' property of an underlying vtkProperty object. All changes are applied and rendered immediately.
+##4. Building
+Since the project is in an early stage of development, there are no binaries provided. If you're interested in the application, go ahead and check out the **[build instructions](doc/build.md)** to compile QuickVtk from source!
 
-###Type Information
-Available types in QuickVtk are outlined in the application's type browser and provide a detailed overview of important information:
-
-- Type information
-	- type name
-	- category [abstract, class, enum]
-- Properties
-	- property name
-	- property type
-	- property access [read-only, read-write]
-- Functions
-	- function name
-	- argument types
-	- return type
-
-Information of QuickVtk's classes is generated automatically by utilizing the associated static **[QMetaObject](http://doc.qt.io/qt-5/qmetaobject.html)** of a given type, reflecting the API as is.
-
-###Performance
-QuickVtk is written in C++. **[VTK](http://www.vtk.org)**'s rendering backend uses OpenGL and is rendered in **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** using a framebuffer object (FBO). This allows integration of **[VTK](http://www.vtk.org)** content in the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** scene graph for efficient rendering. 
-
-Current State
-----
-Until some informative text appears here: **Screenshots!**
-
-### PolyData Processing
-<center>
-	<img src="doc/img/screenshot6.png"/>
-</center>
-### ImageData Processing
-<center>
-	<img src="doc/img/screenshot5.png"/>
-</center>
-### VolumeData Processing
-<center>
-	<img src="doc/img/screenshot4.png"/>
-</center>
-
-Building QuickVtk
-----
-Since the project's in it's early stage, there are no binaries provided yet. If you're interested in building the application from source, check out the **[build instructions](doc/build.md)**!
-
-Sample Data
-----
-A list of all sample data files which are located in **res/examples/data/**
+##5. Sample Data Sources
+In order to provide working code examples, I redistribute some sample data files. Here's a list of all files located at **res/examples/data/** together with their individual origins:
 
 - `suzanne`: low-poly mesh *(exported to .obj and .stl)* from [Blender](https://www.blender.org)
 - `lena`: testing image *(exported to .png, .jpg and .tiff)* from [Wikipedia](https://en.wikipedia.org/wiki/File:Lenna.png)
 - `imageA` and `imageB`: self-made test images
 - `brain1` and `brain2`: DICOM data from [idoimaging.com](http://idoimaging.com) (special thanks to Andrew Crabb)
 
-Contact
-----
-
+##6. Contact
 If you're interested in the project, want to give some feedback or just have some questions or suggestions
 
 feel free to write a <a href="mailto:qCring@gmail.com">mail</a> :)
 
-License
-----
+##7. License
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Copyright (c) 2016, Alexander Eduard Szalo

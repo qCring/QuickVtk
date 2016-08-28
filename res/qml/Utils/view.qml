@@ -1,6 +1,7 @@
 import QtQuick 2.6
 
 import Utils 1.0 as Utils
+import Lib 1.0 as Lib
 
 Rectangle {
     id: root;
@@ -12,10 +13,11 @@ Rectangle {
     width: 300;
     height: column.height;
 
-    color: "#111";
-    border.color: "#666";
+    color: "#21252B";
+    border.color: "#3C424F";
 
-    default property alias content: column.children;
+default property alias content: contentColumn.children;
+    property bool expanded: true;
     property alias title: label.text;
 
     MouseArea {
@@ -37,12 +39,50 @@ Rectangle {
 
         spacing: 2;
 
-        Utils.Label {
-            id: label;
+        Item {
+            anchors.left: parent.left;
+            anchors.right: parent.right;
 
-            text: "Properties"
-            color: "#fff"
-            font.bold: true;
+            height: label.height;
+
+            Lib.Icon {
+                id: icon;
+
+                anchors.left: parent.left;
+                anchors.verticalCenter: parent.verticalCenter;
+                type: root.expanded ? types.fa_caret_down : types.fa_caret_up;
+                color: ma.containsMouse ? "#fff" : "#9DA5B4";
+            }
+
+            Utils.Label {
+                id: label;
+
+                anchors.left: icon.right;
+                anchors.leftMargin: 8;
+
+                text: "Properties"
+                color: "#fff"
+                font.bold: true;
+            }
+
+            MouseArea {
+                id: ma;
+
+                anchors.fill: parent;
+                onClicked: root.expanded = !root.expanded;
+                hoverEnabled: true;
+            }
+        }
+
+        Column {
+            id: contentColumn;
+
+            visible: root.expanded;
+
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+
+            spacing: 2;
         }
     }
 }

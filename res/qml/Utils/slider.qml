@@ -69,7 +69,7 @@ Item {
             groove: Rectangle {
                 implicitWidth: 200
                 implicitHeight: 8
-                color: "#111"
+                color: "#21252B"
                 border.color: "#666"
                 radius: 8
 

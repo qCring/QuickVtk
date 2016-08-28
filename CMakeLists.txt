@@ -52,8 +52,8 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # project meta information
 # ******************************************************************************
 set(QUICKVTK_VERSION_MAJOR 0)
-set(QUICKVTK_VERSION_MINOR 4)
-set(QUICKVTK_VERSION_PATCH 3)
+set(QUICKVTK_VERSION_MINOR 5)
+set(QUICKVTK_VERSION_PATCH 0)
 set(QUICKVTK_ORG_NAME quickvtk)
 set(QUICKVTK_ORG_DOMAIN org)
 

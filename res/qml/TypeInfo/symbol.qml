@@ -8,7 +8,7 @@ Rectangle {
     anchors.left: parent ? parent.left : undefined;
     anchors.right: parent ? parent.right : undefined;
 
-    height: col.height;
+    height: col.height + 4;
     color: "#dd21252B";
     border.color: "#181A1F"
 

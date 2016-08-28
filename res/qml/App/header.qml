@@ -1,6 +1,7 @@
 import QtQuick 2.6
 
 import Lib 1.0 as Lib
+import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
     height: visible ? 32 : 0;
@@ -29,32 +30,21 @@ Rectangle {
         Lib.Button {
             anchors.verticalCenter: parent.verticalCenter;
 
-            label.text: "Link File";
+            label.text: "Open";
             icon.type: icon.types.fa_folder_open;
 
-            onClicked: App.compiler.linkFile();
+            onClicked: App.editor.openFile();
         }
 
         Lib.Button {
             anchors.verticalCenter: parent.verticalCenter;
 
-            label.text: "Compile";
+            label.text: "Run";
             icon.type: icon.types.fa_play_circle;
-            enabled: App.compiler.modified;
 
             onClicked: {
-                App.compiler.updateSource();
-                App.compiler.compile();
+                App.editor.run();
             }
-        }
-
-        Lib.CheckBox {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            label.text: "Auto-Compile";
-            checked: App.compiler.autocompile;
-
-            onClicked: App.compiler.autocompile = !App.compiler.autocompile;
         }
     }
 
@@ -66,27 +56,8 @@ Rectangle {
 
         spacing: 4;
 
-        Lib.TagLabel {
+        TypeInfo.Search {
             anchors.verticalCenter: parent.verticalCenter;
-            visible: App.compiler.source.length > 0;
-            color: App.compiler.modified ? "#aa5511" : "#008800";
-            label.text: App.compiler.modified ? "modified" : "up-to-date";
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            font.pointSize: 11;
-            text: App.compiler.filePath;
-        }
-
-        Lib.CheckBox {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            label.text: "TypeList"
-            checked: App.typeList.visible;
-
-            onClicked: App.typeList.visible = !App.typeList.visible;
         }
 
         Lib.Button {

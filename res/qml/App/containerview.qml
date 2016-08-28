@@ -56,7 +56,6 @@ Item {
 
             previousObject = qmlObject;
             App.compiler.failed = false;
-            App.compiler.finished();
         }
         catch (exc) {
             var errors = exc.qmlErrors;
@@ -68,12 +67,11 @@ Item {
             }
 
             App.compiler.failed = true;
-            App.compiler.finished();
         }
     }
 
     Connections {
 		target: App.compiler;
-		onCompile: { root.compile(); }
+		onSourceChanged: { root.compile(); }
 	}
 }

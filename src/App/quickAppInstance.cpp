@@ -1,4 +1,4 @@
-#include "quickAppWindow.hpp"
+#include "quickAppInstance.hpp"
 
 #include "quickUtilIO.hpp"
 #include "meta_quickvtk.hpp"
@@ -13,18 +13,15 @@
 #include <QDir>
 
 namespace quick {
+
     namespace App {
-        Window* Window::instance = nullptr;
 
-        Window::Window() {
-            if (instance) {
-                throw std::runtime_error("instance already existing");
-            }
+        Instance* Instance::instance = nullptr;
 
-            instance = this;
+        Instance::Instance() {
         }
 
-        auto Window::init() -> void {
+        auto Instance::init() -> void {
             QApplication::setOrganizationName(Meta::orgName);
             QApplication::setOrganizationDomain(Meta::orgDomain);
             QApplication::setApplicationName(Meta::appName);
@@ -37,10 +34,10 @@ namespace quick {
 #ifndef _MSC_VER
             path.cdUp();
 #endif
-
             resourceDir = path.absolutePath() + "/Resources/";
 
             AddFontDir(resourceDir + "fonts/roboto/");
+            AddFontDir(resourceDir + "fonts/vera/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
             this->m_view = new QQuickView();
@@ -58,25 +55,29 @@ namespace quick {
             this->m_view->showMaximized();
         }
         
-        auto Window::start(int argc, char** argv) -> int {
+        auto Instance::Execute(int argc, char** argv) -> int {
             QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
             QApplication application(argc, argv);
 
-            this->init();
+            if (!instance) {
+                instance = new Instance();
+                instance->init();
+                return application.exec();
+            }
 
-            return application.exec();
+            return -1;
         }
 
-        auto Window::AddFontDir(const QString& directory) -> void {
-            auto fontList = Util::IO::FilesFromDir(directory, {"*.ttf", "*.otf"});
+        auto Instance::AddFontDir(const QString& directory) -> void {
+            auto fontUrls = Util::IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"});
 
-            for (auto font : fontList) {
-                QFontDatabase::addApplicationFont(font);
+            for (auto fontUrl : fontUrls) {
+                QFontDatabase::addApplicationFont(fontUrl);
             }
         }
 
-        auto Window::getResourceDir() -> QString {
-            return this->resourceDir;
+        auto Instance::GetResourceDir() -> QString {
+            return instance->resourceDir;
         }
     }
 }

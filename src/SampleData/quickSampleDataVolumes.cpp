@@ -1,5 +1,5 @@
 #include "quickSampleDataVolumes.hpp"
-#include "quickAppWindow.hpp"
+#include "quickAppInstance.hpp""
 
 namespace quick {
 
@@ -18,7 +18,7 @@ namespace quick {
         }
 
         auto Volumes::makeDataPath(const QString& file) -> QString {
-            return App::Window::instance->getResourceDir() + "examples/data/volumes/" + file;
+            return App::Instance::GetResourceDir() + "examples/data/volumes/" + file;
         }
 
         auto Volumes::getBrain1DIR() -> QString {

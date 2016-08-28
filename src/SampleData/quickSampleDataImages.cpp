@@ -1,5 +1,5 @@
 #include "quickSampleDataImages.hpp"
-#include "quickAppWindow.hpp"
+#include "quickAppInstance.hpp"
 
 namespace quick {
 
@@ -18,7 +18,7 @@ namespace quick {
         }
 
         auto Images::makeDataPath(const QString& file) -> QString {
-            return App::Window::instance->getResourceDir() + "examples/data/images/" + file;
+            return App::Instance::GetResourceDir() + "examples/data/images/" + file;
         }
 
         auto Images::getLenaPNG() -> QString {

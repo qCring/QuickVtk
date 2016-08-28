@@ -1,5 +1,5 @@
 #include "quickSampleDataMeshes.hpp"
-#include "quickAppWindow.hpp"
+#include "quickAppInstance.hpp"
 
 namespace quick {
 
@@ -18,7 +18,7 @@ namespace quick {
         }
 
         auto Meshes::makeDataPath(const QString& file) -> QString {
-            return App::Window::instance->getResourceDir() + "examples/data/meshes/" + file;
+            return App::Instance::GetResourceDir() + "examples/data/meshes/" + file;
         }
 
         auto Meshes::getSuzanneOBJ() -> QString {

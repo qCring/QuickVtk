@@ -1,7 +1,7 @@
 #include "quickCodeEditor.hpp"
 #include "quickCodeHighlighter.hpp"
 #include "quickUtilIO.hpp"
-#include "quickCompiler.hpp"
+#include "quickCodeCompiler.hpp"
 
 #include <QTextOption>
 #include <QApplication>
@@ -259,7 +259,7 @@ namespace quick {
         }
 
         void Editor::run() {
-            Compiler::instance->setSource(this->getText());
+            Code::Compiler::instance->setSource(this->getText());
         }
 
         void Editor::saveFile() {

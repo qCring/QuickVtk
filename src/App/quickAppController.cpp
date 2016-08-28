@@ -2,7 +2,7 @@
 
 #include "meta_quickvtk.hpp"
 
-#include "quickCompiler.hpp"
+#include "quickCodeCompiler.hpp"
 #include "quickNotifications.hpp"
 #include "quickTypeInfoList.hpp"
 #include "quickCodeEditor.hpp"
@@ -48,8 +48,8 @@ namespace quick {
             return Meta::versionString;
         }
 
-        auto Controller::getCompiler() -> Compiler* {
-            return Compiler::instance;
+        auto Controller::getCompiler() -> Code::Compiler* {
+            return Code::Compiler::instance;
         }
 
         auto Controller::getNotifications() -> Notifications* {

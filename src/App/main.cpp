@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "quickAppWindow.hpp"
+#include "quickAppInstance.hpp"
 
 auto main(int argc, char *argv[]) -> int {
 
@@ -13,6 +13,5 @@ auto main(int argc, char *argv[]) -> int {
     _putenv("QT_AUTO_SCREEN_SCALE_FACTOR=1");
 #endif
 
-    auto appWindow = new quick::App::Window();
-    return appWindow->start(argc, argv);
+    return quick::App::Instance::Execute(argc, argv);
 }

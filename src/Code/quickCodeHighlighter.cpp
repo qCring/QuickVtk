@@ -1,6 +1,6 @@
 #include "quickCodeHighlighter.hpp"
 #include "quickCodeEditor.hpp"
-#include "quickAppWindow.hpp"
+#include "quickAppInstance.hpp"
 #include "quickUtilIO.hpp"
 
 #include <QTextBlock>
@@ -17,7 +17,7 @@ namespace quick {
         }
 
         auto Highlighter::init() -> void {
-            auto json       = Util::IO::Read::JsonFromUrl(App::Window::instance->getResourceDir() + "/config/schemes/qml.json");
+            auto json       = Util::IO::Read::JsonFromUrl(App::Instance::GetResourceDir() + "/config/schemes/qml.json");
             auto schemeObj  = json["scheme"].toObject();
             auto hlArray    = schemeObj["highlight"].toArray();
 

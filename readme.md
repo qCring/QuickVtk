@@ -10,11 +10,11 @@ A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedd
 </center>
 
 ##1. Overview
-QuickVtk is a live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpeter with built-in support for functionality provided by **[VTK](http://www.vtk.org)**. You can simply learn or test *qml* code and develop prototypes in the domain of 2D/3D visualization by accessing **[VTK](http://www.vtk.org)** in a declarative way. In one sentence: QuickVtk enables reactive programming to **[VTK](http://www.vtk.org)** by using the mechanics of the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine.
+QuickVtk is a live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpeter with built-in support for functionality provided by **[VTK](http://www.vtk.org)**. You can simply learn or test *qml* code and develop prototypes in the domain of 2D/3D visualization by accessing **[VTK](http://www.vtk.org)** in a declarative way. In one sentence: QuickVtk enables reactive programming for **[VTK](http://www.vtk.org)** by using mechanics of the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine.
 
 The workflow is simple. An embedded editor on the left allows you to load, edit and compile **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code which will be shown in the content view on the right. Eventual compilation errors are forwarded to the UI, telling you where and why something went wrong. And there's also a type browser available to quickly get an overview of all properties, methods and other useful meta information for a given type available in QuickVtk.
 
-##2. Docs
+##2. Documentation
 - check out the **[user docs](doc/userdoc.md)** for some guides / notes / tutorials on how to use  QuickVtk
 - or if you're interested in under-the-hood stuff, check out the **[nerd section](doc/devdoc.md)** where some topics will be discussed from a more technical perspective
 

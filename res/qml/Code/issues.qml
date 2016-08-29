@@ -8,7 +8,7 @@ Column {
     width: 100;
 
     Repeater {
-        model: App.notifications;
+        model: App.editor.issues;
         delegate: Rectangle {
             height: 20;
             width: row.width;

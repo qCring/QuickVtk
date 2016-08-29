@@ -91,8 +91,13 @@ Item {
         color: "#3C424F"
     }
 
-    Component.onCompleted:
-    {
+    Issues {
+        anchors.left: parent.left;
+        anchors.bottom: parent.bottom;
+        anchors.margins: 4;
+    }
+
+    Component.onCompleted: {
         editor.document       = textEdit.textDocument;
         editor.selectionStart = Qt.binding(function() { return textEdit.selectionStart; });
         editor.selectionEnd   = Qt.binding(function() { return textEdit.selectionEnd; });

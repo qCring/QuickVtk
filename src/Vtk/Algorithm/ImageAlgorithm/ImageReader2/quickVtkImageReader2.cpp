@@ -1,6 +1,5 @@
 #include "quickVtkImageReader2.hpp"
-#include "quickUtilIO.hpp"
-#include "quickNotifications.hpp"
+#include "quickIO.hpp"
 
 namespace quick {
 
@@ -13,8 +12,7 @@ namespace quick {
         }
 
         auto ImageReader2::isValid() -> bool {
-            if (!Util::IO::FileExists(this->m_fileName)) {
-                Notifications::instance->addWarning("No fileName specified for ImageReader2!");
+            if (!IO::FileExists(this->m_fileName)) {
                 return false;
             }
 
@@ -26,7 +24,7 @@ namespace quick {
 
             emit this->fileNameChanged();
 
-            if (Util::IO::FileExists(fileName)) {
+            if (IO::FileExists(fileName)) {
                 this->m_vtkObject->SetFileName(fileName.toStdString().c_str());
                 this->m_vtkObject->Update();
                 this->update();

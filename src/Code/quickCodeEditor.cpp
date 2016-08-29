@@ -1,7 +1,8 @@
 #include "quickCodeEditor.hpp"
 #include "quickCodeHighlighter.hpp"
-#include "quickUtilIO.hpp"
 #include "quickCodeCompiler.hpp"
+#include "quickCodeIssues.hpp"
+#include "quickIO.hpp"
 
 #include <QTextOption>
 #include <QApplication>
@@ -47,12 +48,10 @@ namespace quick {
 
         auto Editor::setDocument(QQuickTextDocument* document) -> void {
             this->m_document = document;
-            this->m_document->textDocument()->setIndentWidth(2);
 
-            auto options = this->m_document->textDocument()->defaultTextOption();
+            auto options = document->textDocument()->defaultTextOption();
             options.setTabStop(20);
-            options.setFlags(QTextOption::ShowTabsAndSpaces | QTextOption::ShowLineAndParagraphSeparators);
-            this->m_document->textDocument()->setDefaultTextOption(options);
+            document->textDocument()->setDefaultTextOption(options);
 
             emit this->documentChanged();
 
@@ -156,6 +155,10 @@ namespace quick {
 
         auto Editor::getModified() -> bool {
             return this->m_modified;
+        }
+
+        auto Editor::getIssues() -> Issues* {
+            return Issues::instance;
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
@@ -263,28 +266,28 @@ namespace quick {
         }
 
         void Editor::saveFile() {
-            if (this->m_filePath.length() > 0 && Util::IO::FileExists(this->m_filePath)) {
-                Util::IO::Write::TextToFile(this->getText(), this->m_filePath);
+            if (this->m_filePath.length() > 0 && IO::FileExists(this->m_filePath)) {
+                IO::Write::TextToFile(this->getText(), this->m_filePath);
                 this->setModified(false);
             } else {
-                this->m_filePath = Util::IO::FromDialog::SelectSaveFileUrl("*.qml");
+                this->m_filePath = IO::FromDialog::SelectSaveFileUrl("*.qml");
                 emit this->filePathChanged();
 
-                if (Util::IO::FileExists(this->m_filePath)) {
-                    Util::IO::Write::TextToFile(this->getText(), this->m_filePath);
+                if (IO::FileExists(this->m_filePath)) {
+                    IO::Write::TextToFile(this->getText(), this->m_filePath);
                     this->setModified(false);
                 }
             }
         }
 
         void Editor::openFile() {
-            auto newFilePath = Util::IO::FromDialog::SelectOpenFileUrl("*.qml");
+            auto newFilePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
 
-            if (Util::IO::FileExists(newFilePath)) {
+            if (IO::FileExists(newFilePath)) {
                 this->m_filePath = newFilePath;
                 emit this->filePathChanged();
 
-                this->setText(Util::IO::Read::TextFromUrl(this->m_filePath));
+                this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
 
                 this->run();

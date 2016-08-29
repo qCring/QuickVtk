@@ -48,12 +48,10 @@ namespace quick {
 
         auto Editor::setDocument(QQuickTextDocument* document) -> void {
             this->m_document = document;
-            this->m_document->textDocument()->setIndentWidth(2);
 
-            auto options = this->m_document->textDocument()->defaultTextOption();
+            auto options = document->textDocument()->defaultTextOption();
             options.setTabStop(20);
-            options.setFlags(QTextOption::ShowTabsAndSpaces | QTextOption::ShowLineAndParagraphSeparators);
-            this->m_document->textDocument()->setDefaultTextOption(options);
+            document->textDocument()->setDefaultTextOption(options);
 
             emit this->documentChanged();
 

@@ -97,8 +97,7 @@ Item {
         anchors.margins: 4;
     }
 
-    Component.onCompleted:
-    {
+    Component.onCompleted: {
         editor.document       = textEdit.textDocument;
         editor.selectionStart = Qt.binding(function() { return textEdit.selectionStart; });
         editor.selectionEnd   = Qt.binding(function() { return textEdit.selectionEnd; });

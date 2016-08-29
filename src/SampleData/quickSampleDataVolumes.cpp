@@ -1,5 +1,5 @@
 #include "quickSampleDataVolumes.hpp"
-#include "quickAppInstance.hpp""
+#include "quickAppInstance.hpp"
 
 namespace quick {
 

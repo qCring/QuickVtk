@@ -91,6 +91,12 @@ Item {
         color: "#3C424F"
     }
 
+    Issues {
+        anchors.left: parent.left;
+        anchors.bottom: parent.bottom;
+        anchors.margins: 4;
+    }
+
     Component.onCompleted:
     {
         editor.document       = textEdit.textDocument;

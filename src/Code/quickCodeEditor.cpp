@@ -1,7 +1,8 @@
 #include "quickCodeEditor.hpp"
 #include "quickCodeHighlighter.hpp"
-#include "quickUtilIO.hpp"
 #include "quickCodeCompiler.hpp"
+#include "quickCodeIssues.hpp"
+#include "quickIO.hpp"
 
 #include <QTextOption>
 #include <QApplication>
@@ -158,6 +159,10 @@ namespace quick {
             return this->m_modified;
         }
 
+        auto Editor::getIssues() -> Issues* {
+            return Issues::instance;
+        }
+
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
             if (modifiers == Qt::ControlModifier) {
                 if (key == Qt::Key_Plus) {
@@ -263,28 +268,28 @@ namespace quick {
         }
 
         void Editor::saveFile() {
-            if (this->m_filePath.length() > 0 && Util::IO::FileExists(this->m_filePath)) {
-                Util::IO::Write::TextToFile(this->getText(), this->m_filePath);
+            if (this->m_filePath.length() > 0 && IO::FileExists(this->m_filePath)) {
+                IO::Write::TextToFile(this->getText(), this->m_filePath);
                 this->setModified(false);
             } else {
-                this->m_filePath = Util::IO::FromDialog::SelectSaveFileUrl("*.qml");
+                this->m_filePath = IO::FromDialog::SelectSaveFileUrl("*.qml");
                 emit this->filePathChanged();
 
-                if (Util::IO::FileExists(this->m_filePath)) {
-                    Util::IO::Write::TextToFile(this->getText(), this->m_filePath);
+                if (IO::FileExists(this->m_filePath)) {
+                    IO::Write::TextToFile(this->getText(), this->m_filePath);
                     this->setModified(false);
                 }
             }
         }
 
         void Editor::openFile() {
-            auto newFilePath = Util::IO::FromDialog::SelectOpenFileUrl("*.qml");
+            auto newFilePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
 
-            if (Util::IO::FileExists(newFilePath)) {
+            if (IO::FileExists(newFilePath)) {
                 this->m_filePath = newFilePath;
                 emit this->filePathChanged();
 
-                this->setText(Util::IO::Read::TextFromUrl(this->m_filePath));
+                this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
 
                 this->run();

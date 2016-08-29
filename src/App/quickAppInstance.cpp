@@ -1,6 +1,6 @@
 #include "quickAppInstance.hpp"
 
-#include "quickUtilIO.hpp"
+#include "quickIO.hpp"
 #include "meta_quickvtk.hpp"
 #include "quickQmlRegister.hpp"
 #include "quickAppController.hpp"
@@ -69,7 +69,7 @@ namespace quick {
         }
 
         auto Instance::AddFontDir(const QString& directory) -> void {
-            auto fontUrls = Util::IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"});
+            auto fontUrls = IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"});
 
             for (auto fontUrl : fontUrls) {
                 QFontDatabase::addApplicationFont(fontUrl);

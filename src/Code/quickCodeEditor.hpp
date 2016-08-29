@@ -11,9 +11,11 @@ namespace quick {
     namespace Code {
 
         class Highlighter;
+        class Issues;
 
         class Editor : public QObject {
             Q_OBJECT
+            Q_PROPERTY(quick::Code::Issues* issues READ getIssues CONSTANT);
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(int selectionStart READ getSelectionStart WRITE setSelectionStart NOTIFY selectionStartChanged);
@@ -58,6 +60,7 @@ namespace quick {
             auto getSelectionEnd() -> int;
             auto setEditorCursor(int) -> void;
             auto getEditorCursor() -> int;
+            auto getIssues() -> Issues*;
             auto setLine(int) -> void;
             auto getLine() -> int;
             auto setColumn(int) -> void;

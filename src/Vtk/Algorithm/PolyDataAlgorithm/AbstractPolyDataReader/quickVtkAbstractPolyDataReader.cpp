@@ -1,10 +1,10 @@
 #include "quickVtkAbstractPolyDataReader.hpp"
-#include "quickNotifications.hpp"
-#include "quickUtilIO.hpp"
+#include "quickIO.hpp"
 
 namespace quick {
 
     namespace Vtk {
+
         Qml::Register::AbstractClass<AbstractPolyDataReader> AbstractPolyDataReader::Register;
 
         AbstractPolyDataReader::AbstractPolyDataReader(vtkSmartPointer<vtkAbstractPolyDataReader> vtkObject) : PolyDataAlgorithm(vtkObject) {
@@ -12,8 +12,7 @@ namespace quick {
         }
         
         auto AbstractPolyDataReader::isValid() -> bool {
-            if (!Util::IO::FileExists(this->m_fileName)) {
-                Notifications::instance->addWarning("No fileName specified for AbstractPolyDataReader!");
+            if (!IO::FileExists(this->m_fileName)) {
                 return false;
             }
 
@@ -25,8 +24,7 @@ namespace quick {
 
             emit this->fileNameChanged();
 
-            if (Util::IO::FileExists(fileName))
-            {
+            if (IO::FileExists(fileName)) {
                 this->m_vtkObject->SetFileName(fileName.toStdString().c_str());
                 this->m_vtkObject->Update();
                 this->update();

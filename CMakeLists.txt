@@ -87,7 +87,7 @@ find_package(VTK ${QUICKVTK_VTK_VERSION} EXACT CONFIG REQUIRED)
 include(${VTK_USE_FILE})
 
 # sources
-AddSources("${SOURCE_DIR}/Util" "Util" list_app_src)
+AddSources("${SOURCE_DIR}/Utils" "Utils" list_app_src)
 AddSources("${SOURCE_DIR}/SampleData" "SampleData" list_app_src)
 AddSources("${SOURCE_DIR}/Math" "Math" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Viewer" "Vtk\\Viewer" list_app_src)
@@ -113,7 +113,6 @@ AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader
 AddSources("${SOURCE_DIR}/Vtk/Algorithm/PointSetAlgorithm" "Vtk\\Algorithm\\PointSetAlgorithm" list_app_src)
 AddSources("${SOURCE_DIR}/TypeInfo" "TypeInfo" list_app_src)
 AddSources("${SOURCE_DIR}/Code" "Code" list_app_src)
-AddSources("${SOURCE_DIR}/Core" "Core" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
 
 # target

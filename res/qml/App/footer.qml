@@ -66,13 +66,13 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             type: types.fa_exclamation_circle;
-            color: App.notifications.errorCount > 0 ? "#ff0000" : "#9DA5B4"
+            color: App.editor.issues.errorCount > 0 ? "#ff0000" : "#9DA5B4"
         }
 
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            text: App.notifications.errorCount;
+            text: App.editor.issues.errorCount;
             font.pointSize: 11;
         }
 
@@ -80,13 +80,13 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             type: types.fa_exclamation_triangle;
-            color: App.notifications.warningCount > 0 ? "#ff9900" : "#9DA5B4"
+            color: App.editor.issues.warningCount > 0 ? "#ff9900" : "#9DA5B4"
         }
 
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            text: App.notifications.warningCount;
+            text: App.editor.issues.warningCount;
             font.pointSize: 11;
         }
     }

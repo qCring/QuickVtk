@@ -49,12 +49,6 @@ Rectangle {
         anchors.bottom: footer.top;
     }
 
-    Notifications {
-        anchors.left: parent.left;
-        anchors.bottom: footer.top;
-        anchors.margins: 4;
-    }
-
     Footer {
         id: footer;
 

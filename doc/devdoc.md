@@ -2,4 +2,6 @@ QuickVtk
 ===
 Developer Documentation
 ----
-more to come
+
+1. **QML Type Registration**   
+	asdf

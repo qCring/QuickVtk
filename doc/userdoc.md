@@ -9,7 +9,7 @@ Just some helpful notes until I have time to provide more detailed tutorials / g
 	There are a bunch of *.qml* files located at **res/examples/qml** to showcase and test functionality of some **[VTK](http://www.vtk.org)** classes. You can load a file, edit stuff in the editor and recompile your changes to get a feeling for how things work.
 	
 - **Editor Shortcuts**    
-	The code editor is ~garbage~ very alpha. You'll notice when opening or closing brackets. But whatever, you can at least use shortcuts:
+	The code editor is <del>garbage</del> very alpha. You'll notice when opening or closing brackets. But whatever, you can at least use shortcuts:
 	- `cmd` + `N`: new file
 	- `cmd` + `O`: open file
 	- `cmd` + `S`: save file

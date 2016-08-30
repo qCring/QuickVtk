@@ -211,45 +211,80 @@ namespace quick {
 
             if (key == Qt::Key_Return || key == Qt::Key_Enter) {
                 auto cursor = this->getCurrentCursor();
-                auto text = cursor.block().text();
+                cursor.beginEditBlock();
 
-                auto open = text.count("{");
-                auto close = text.count("}");
+                auto block = cursor.block();
+                auto line = block.text();
+                auto left = line.left(cursor.positionInBlock());
+                auto right = line.right(line.length() - cursor.positionInBlock());
 
-                auto regex = QRegularExpression("\\w");
-                auto index = regex.match(text).capturedStart();
-                auto spaces = 0;
+                auto currentLevel = 0;
+                auto newLevel = 0;
+                auto open = left.contains("{");
+                auto close = left.contains("}");
 
-                if (index < 0) {
-                    spaces = this->m_column;
-                } else {
-                    spaces = index;
+                if (open || !close) {
+
+                    if (block.blockNumber() > 0) {
+                        auto prevLevel = block.previous().userState();
+                        prevLevel += prevLevel % 2;
+                        currentLevel = prevLevel;
+                    }
+
+                    currentLevel += open;
+                    newLevel = currentLevel + open;
+
+                    cursor.block().setUserState(currentLevel);
+                    cursor.insertBlock();
+
+                    cursor.block().setUserState(newLevel);
+
+                    for (auto i = 0; i < newLevel / 2; i++) {
+                        cursor.insertText("\t");
+                    }
                 }
 
-                spaces += open * 4;
-                spaces -= close * 5;
-                spaces = std::max(0, spaces);
+                else {
+                    cursor.insertBlock();
+                    auto level = block.userState();
 
-                cursor.insertText("\n");
-
-                for (auto i = 0; i < spaces; ++i) {
-                    cursor.insertText(" ");
+                    for (auto i = 0; i < level / 2; i++) {
+                        cursor.insertText("\t");
+                    }
                 }
 
+                cursor.endEditBlock();
                 this->setModified(true);
+
                 return true;
             }
 
             if (string == "}") {
                 auto cursor = this->getCurrentCursor();
                 auto text = cursor.block().text();
+                auto block = cursor.block();
+                auto line = block.text();
+                auto left = line.left(cursor.positionInBlock());
+                auto right = line.right(line.length() - cursor.positionInBlock());
 
-                auto spaces = text.right(4).count(" ");
-                auto newText = text.left(text.length() - spaces);
+                auto level = 0;
 
-                cursor.select(QTextCursor::BlockUnderCursor);
-                cursor.removeSelectedText();
-                cursor.insertText("\n" + newText + "}");
+                if (QRegularExpression("\\w+").match(left).hasMatch()) {
+                    cursor.insertText("}");
+                    return true;
+                } else {
+                    level = std::max(block.userState() - 2, 0);
+                    block.setUserState(level);
+                }
+
+                cursor.select(QTextCursor::LineUnderCursor);
+
+                for (auto i = 0; i < level/2; ++i) {
+                    cursor.insertText("\t");
+                }
+
+                cursor.insertText("}" + right);
+
                 return true;
             }
 
@@ -259,6 +294,9 @@ namespace quick {
             }
 
             return false;
+        }
+
+        void Editor::format() {
         }
 
         void Editor::run() {

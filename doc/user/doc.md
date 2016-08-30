@@ -19,4 +19,4 @@ Just some helpful notes until I have time to provide more detailed tutorials / g
 	The search bar in the application's upper-right corner allows you to search for types available in QuickVtk. You can quickly get an overview of all properties, methods and some other useful meta information of any type this way.
 
 - **Knowing VTK can be helpful**    
-	There are some concepts in **[VTK](http://www.vtk.org)** that take some getting used to. You can familiarize by either looking at some examples located at **res/examples/qml** or examples and documentation on the **[VTK](http://www.vtk.org)** website.
+	There are some concepts in **[VTK](http://www.vtk.org)** that take some getting used to. You can familiarize by either looking at the examples located at **res/examples/qml** or examples and documentation on the **[VTK](http://www.vtk.org)** website.

@@ -72,9 +72,7 @@ endif()
 
 # libraries
 # ******************************************************************************
-
-# Qt
-set(QUICKVTK_QT_VERSION "5.6.1" CACHE STRING "Qt Version")
+set(QUICKVTK_QT_VERSION "5.7.0" CACHE STRING "Qt Version")
 set(QUICKVTK_VTK_VERSION "7.1.0" CACHE STRING "VTK Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 set(QUICKVTK_INTERNAL_LIBRARY_TARGETS)

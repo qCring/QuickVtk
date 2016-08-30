@@ -72,6 +72,7 @@ namespace quick {
             void saveFile();
             void newFile();
             void run();
+            void format();
         signals:
             void selectionStartChanged();
             void selectionEndChanged();

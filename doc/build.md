@@ -21,7 +21,7 @@ Download and launch the installer from the **[Qt download section](https://www.q
 </center>
 You can specify a git tag to build a certain version of **[VTK](http://www.vtk.org)**. Configure, generate and build the project.
 
-Alternatively, you can build **[VTK](http://www.vtk.org)** manually or use already built binaries from your system if available. Just make sure to use  **OpenGL** for the **VTK\_RENDERING\_BACKEND** option since QuickVtk's offscreen rendering setup does not yet support OpenGL2 which is the default rendering backend for **[VTK](http://www.vtk.org)** since version 7.
+Alternatively, you can build **[VTK](http://www.vtk.org)** manually or use already built binaries from your system if available. Just make sure to use  **OpenGL2** for the **VTK\_RENDERING\_BACKEND** option and enable **Module\_vtkRenderingExternal**. 
 
 ###Step 3 - Build QuickVtk
 After successfully installing **[Qt](http://www.qt.io)** and building **[VTK](http://www.vtk.org)**, launch **[CMake](https://cmake.org)** and set the paths to src and bin:
@@ -45,3 +45,13 @@ Make sure to set the environment in the IDE. Add the paths for **[Qt](http://www
 <center>
 	<img src="img/vs1.png"/>
 </center>
+
+Copy-Paste-Helpers:
+
+path-to-vtk: **C:\Dev\QuickVtk\libs\bin\Vtk\bin\bin\Debug**   
+path-to-qt: **C:\Qt\5.7\msvc2015_64\bin**
+
+Those paths vary depending on the project location, Qt install dir, build type, MSVC version and compiler type. But in the end, the value for *Environment* should look like this: 
+
+**PATH=**\<path-to-vtk\>**;**\<path-to-qt\>**;%PATH%;**
+

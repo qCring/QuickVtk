@@ -50,6 +50,15 @@ namespace quick {
             context->setContextProperty("App", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
 
+
+            QSurfaceFormat format;
+            format.setMajorVersion(3);
+            format.setMinorVersion(2);
+            format.setDepthBufferSize(1);
+            format.setStencilBufferSize(1);
+            format.setProfile(QSurfaceFormat::CoreProfile);
+
+            this->m_view->setFormat(format);
             this->m_view->setSource(QUrl::fromLocalFile(resourceDir + "qml/App/window.qml"));
             this->m_view->setResizeMode(QQuickView::SizeRootObjectToView);
             this->m_view->showMaximized();

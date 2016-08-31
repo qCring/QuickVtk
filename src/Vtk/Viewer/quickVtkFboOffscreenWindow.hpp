@@ -3,7 +3,7 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLFramebufferObject>
 
-#include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkExternalOpenGLRenderWindow.h>
 
 namespace quick {
 
@@ -11,7 +11,7 @@ namespace quick {
 
         class FboRenderer;
 
-        class FboOffscreenWindow : public vtkGenericOpenGLRenderWindow, protected QOpenGLFunctions {
+        class FboOffscreenWindow : public vtkExternalOpenGLRenderWindow, protected QOpenGLFunctions {
         public:
             FboRenderer* QtParentRenderer;
             static auto New() -> FboOffscreenWindow*;

@@ -20,6 +20,7 @@ namespace quick {
         private:
             Q_ENUM(BlendMode);
             Q_PROPERTY(BlendMode blendMode READ getBlendMode WRITE setBlendMode NOTIFY blendModeChanged);
+            Q_PROPERTY(bool cropping READ getCropping WRITE setCropping NOTIFY croppingChanged);
         private:
             static Qml::Register::AbstractClass<VolumeMapper> Register;
             vtkSmartPointer<vtkVolumeMapper> m_vtkObject = nullptr;
@@ -27,8 +28,11 @@ namespace quick {
             VolumeMapper(vtkSmartPointer<vtkVolumeMapper>);
             auto setBlendMode(BlendMode) -> void;
             auto getBlendMode() -> BlendMode;
+            auto setCropping(bool) -> void;
+            auto getCropping() -> bool;
         signals:
             void blendModeChanged();
+            void croppingChanged();
         };
     }
 }

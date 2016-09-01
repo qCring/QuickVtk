@@ -19,5 +19,15 @@ namespace quick {
         auto VolumeMapper::getBlendMode() -> BlendMode {
             return (BlendMode) this->m_vtkObject->GetBlendMode();
         }
+
+        auto VolumeMapper::setCropping(bool cropping) -> void {
+            this->m_vtkObject->SetCropping(cropping);
+            emit this->croppingChanged();
+            this->update();
+        }
+
+        auto VolumeMapper::getCropping() -> bool {
+            return this->m_vtkObject->GetCropping();
+        }
     }
 }

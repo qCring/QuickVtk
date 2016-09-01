@@ -42,7 +42,7 @@ If you're interested in the project, want to give some feedback or just have som
 feel free to write a <a href="mailto:qCring@gmail.com">mail</a> :)
 
 ##7. License
-[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)
 
 Copyright (c) 2016, Alexander Eduard Szalo
 All rights reserved.

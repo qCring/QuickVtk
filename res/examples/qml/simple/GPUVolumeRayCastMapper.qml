@@ -18,6 +18,8 @@ Item {
             id: volume;
 
             Vtk.GPUVolumeRayCastMapper {
+                id: mapper;
+
                 Vtk.DICOMImageReader {
                     directoryName: SampleData.volumes.brain2DIR;
                 }
@@ -26,10 +28,37 @@ Item {
     }
 
     Utils.View {
-        title: "VolumeProperty";
+        title: "GPUVolumeRayCastMapper";
 
         Utils.CheckBox {
             from: volume.property; bind: "shade";
+        }
+
+        Utils.CheckBox {
+            from: mapper; bind: "autoAdjustSampleDistances";
+        }
+
+        Utils.CheckBox {
+            from: mapper; bind: "useJittering";
+        }
+
+        Utils.CheckBox {
+            from: mapper; bind: "useDepthPass";
+        }
+
+        Utils.Slider {
+            from: mapper; bind: "sampleDistance";
+            min: 0.5; max: 20; step: 0.5; value: 2;
+        }
+
+        Utils.Slider {
+            from: mapper; bind: "finalColorWindow";
+            min: 0.01; max: 1; step: 0.01; value: 1;
+        }
+
+        Utils.Slider {
+            from: mapper; bind: "finalColorLevel";
+            min: 0.01; max: 1; step: 0.01; value: 0.5;
         }
     }
 

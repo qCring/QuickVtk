@@ -11,5 +11,7 @@ Some random notes, helpful to anyone trying to build QuickVtk.
 2. **Changing resources**   
 	This is an issue exclusive to Visual Studio (or non-XCode IDEs probably). When changing content located in the **res** directory, those changes won't be copied to the build directory **unless** visual studio compiles something. So in case you're editing *qml* files and don't see anything, the problem is that the post-build step configured via CMake will not be performed by Visual Studio if no changes appear in the project source. Visual Studio argues, that running an unmodified project is no actual build (which technically is correct...)
 	
+	**Note:** As a workaround, you can build the **CopyResources** target. This target is provided on all non-Mac platforms and will invoke copying files to **build/Resources**, where the application expects resources to be.
+	
 3. **Deleting QuickVtk/bin/ can help sometimes**    
 	The **bin** directory is where all generated moc files, some other stuff and the project file are stored. If there are weird things going on with QuickVtk, try deleting the **bin/** directory and generate a fresh and clean one via CMake.

@@ -32,6 +32,8 @@ namespace quick {
             Highlighter* m_highlighter = nullptr;
             QString m_filePath;
             bool m_modified = false;
+            int minFontSize = 6;
+            int maxFontSize = 20;
             int m_selectionStart = 0;
             int m_selectionEnd = 0;
             int m_editorCursor = 0;

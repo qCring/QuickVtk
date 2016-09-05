@@ -7,3 +7,4 @@ TagLabel 1.0 taglabel.qml
 TextInput 1.0 textinput.qml
 TextEdit 1.0 textedit.qml
 ScrollView 1.0 scrollview.qml
+SplitView 1.0 splitview.qml

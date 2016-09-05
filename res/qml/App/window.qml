@@ -25,20 +25,19 @@ Rectangle {
         anchors.top: parent.top;
     }
 
-    Code.Editor {
-        id: editor;
-
+    Lib.SplitView {
         anchors.left: parent.left;
-        anchors.top: header.bottom;
-        anchors.bottom: footer.top;
-        width: parent.width/2;
-    }
-
-    ContainerView {
-        anchors.left: editor.right;
         anchors.right: parent.right;
         anchors.top: header.bottom;
         anchors.bottom: footer.top;
+
+        leftItem: Code.Editor {
+            anchors.fill: parent;
+        }
+
+        rightItem: ContainerView {
+            anchors.fill: parent;
+        }
     }
 
     TypeInfo.List {

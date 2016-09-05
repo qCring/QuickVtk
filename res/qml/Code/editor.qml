@@ -25,8 +25,7 @@ Item {
 
         MouseArea {
             anchors.fill: parent;
-            onClicked:
-            {
+            onClicked: {
                 root.activate();
             }
         }
@@ -37,6 +36,15 @@ Item {
             anchors.bottom: parent.bottom;
             width: editor.fontSize * 3;
             color: "#21252B";
+
+            Rectangle {
+                anchors.top: parent.top;
+                anchors.bottom: parent.bottom;
+                anchors.right: parent.right;
+                width:1;
+
+                color: "#181A1F"
+            }
         }
 
         Lib.TextEdit {
@@ -80,15 +88,6 @@ Item {
                 }
             }
         }
-    }
-
-    Rectangle
-    {
-        anchors.top: parent.top;
-        anchors.bottom: parent.bottom;
-        anchors.right: parent.right;
-        width: 1;
-        color: "#3C424F"
     }
 
     Issues {

@@ -51,7 +51,7 @@ Copy-Paste-Helpers:
 path-to-vtk: **C:\Dev\QuickVtk\libs\bin\Vtk\bin\bin\Debug**   
 path-to-qt: **C:\Qt\5.7\msvc2015_64\bin**
 
-Those paths vary depending on the project location, Qt install dir, build type, MSVC version and compiler type. But in the end, the value for *Environment* should look like this: 
+Those paths vary depending on the project location, Qt installation, build type, MSVC version, compiler type, etc. In the end, the value for *Environment* should look like this: 
 
 **PATH=**\<path-to-vtk\>**;**\<path-to-qt\>**;%PATH%;**
 

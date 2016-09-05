@@ -163,12 +163,12 @@ namespace quick {
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
             if (modifiers == Qt::ControlModifier) {
-                if (key == Qt::Key_Plus) {
+                if (key == Qt::Key_Plus && this->m_fontSize < this->maxFontSize) {
                     this->setFontSize(this->m_fontSize + 2);
                     return true;
                 }
 
-                if (key == Qt::Key_Minus) {
+                if (key == Qt::Key_Minus && this->m_fontSize > this->minFontSize) {
                     this->setFontSize(this->m_fontSize - 2);
                     return true;
                 }

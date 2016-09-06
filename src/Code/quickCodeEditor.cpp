@@ -193,6 +193,11 @@ namespace quick {
                     return true;
                 }
 
+                if (key == Qt::Key_I) {
+                    this->format();
+                    return true;
+                }
+
                 if (key == Qt::Key_V) {
                     auto text = QApplication::clipboard()->text();
 
@@ -297,6 +302,34 @@ namespace quick {
         }
 
         void Editor::format() {
+            auto block = this->m_document->textDocument()->firstBlock();
+
+            do {
+                auto line = block.text().simplified();
+                auto open = line.contains("{");
+                auto close = line.contains("}");
+                auto state = 0;
+
+                if (block.blockNumber() > 0) {
+                    auto prevLevel = block.previous().userState();
+                    state = prevLevel;
+                    state += prevLevel % 2;
+                }
+
+                state = state + open;
+                state = state - 2*close;
+
+                QTextCursor cursor = QTextCursor(block);
+                cursor.select(QTextCursor::LineUnderCursor);
+
+                for (auto i = 0; i < state/2; ++i) {
+                    cursor.insertText("\t");
+                }
+
+                cursor.insertText(line);
+                block.setUserState(state);
+                block = block.next();
+            } while (block.isValid());
         }
 
         void Editor::run() {
@@ -327,6 +360,7 @@ namespace quick {
 
                 this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
+                this->format();
 
                 this->run();
             }

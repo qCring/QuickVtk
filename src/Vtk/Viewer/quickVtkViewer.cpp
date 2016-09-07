@@ -32,16 +32,11 @@ namespace quick {
             rw->AddRenderer(m_renderer);
             this->m_initialized = true;
 
-            for (auto prop : this->m_input) {
-                auto vtkprop = prop->getVtkObject();
-                prop->linkViewer(this);
-
-                if (vtkprop.GetPointer()) {
-                    if (!this->m_renderer) {
-                        return;
-                    }
-
-                    this->m_renderer->AddActor(vtkprop);
+            for (auto object : this->m_input) {
+                if (object->getType() == Object::Type::Prop) {
+                    auto prop = reinterpret_cast<Prop*>(object);
+                    prop->linkViewer(this);
+                    this->m_renderer->AddActor(prop->getVtkObject());
                 }
             }
 
@@ -58,7 +53,7 @@ namespace quick {
             }
         }
 
-        auto Viewer::removeData(quick::Vtk::Prop* prop) -> void {
+        auto Viewer::removeData(quick::Vtk::Object* object) -> void {
         }
 
         auto Viewer::setHoverEnabled(bool hoverEnabled) -> void {
@@ -113,30 +108,27 @@ namespace quick {
             return m_win;
         }
 
-        auto Viewer::getInput() -> QQmlListProperty<quick::Vtk::Prop> {
-            return QQmlListProperty<quick::Vtk::Prop>(this, 0, &appendInput, &inputCount, &inputAt, &clearInputs);
+        auto Viewer::getInput() -> QQmlListProperty<quick::Vtk::Object> {
+            return QQmlListProperty<quick::Vtk::Object>(this, 0, &appendInput, &inputCount, &inputAt, &clearInputs);
         }
 
-        auto Viewer::appendInput(QQmlListProperty<quick::Vtk::Prop>* list, quick::Vtk::Prop* prop) -> void {
+        auto Viewer::appendInput(QQmlListProperty<quick::Vtk::Object>* list, quick::Vtk::Object* object) -> void {
             auto viewer = qobject_cast<Viewer*>(list->object);
 
-            if(viewer && prop) {
-                viewer->m_input.append(prop);
+            if(viewer && object) {
+                viewer->m_input.append(object);
 
-                if (viewer->m_renderer) {
-                    auto vtk_prop = prop->getVtkObject();
-
-                    if (vtk_prop) {
-                        viewer->m_renderer->AddActor(vtk_prop);
-                    }
+                if (viewer->m_renderer && object->getType() == Object::Type::Prop) {
+                    auto prop = reinterpret_cast<Prop*>(object);
+                    viewer->m_renderer->AddActor(prop->getVtkObject());
                 }
 
-                viewer->update();
                 emit viewer->inputChanged();
+                viewer->update();
             }
         }
 
-        auto Viewer::inputCount(QQmlListProperty<Prop>* list) -> int {
+        auto Viewer::inputCount(QQmlListProperty<Object>* list) -> int {
             auto viewer = qobject_cast<Viewer*>(list->object);
 
             if (viewer) {
@@ -146,7 +138,7 @@ namespace quick {
             return 0;
         }
 
-        auto Viewer::inputAt(QQmlListProperty<Prop>* list, int i) -> quick::Vtk::Prop* {
+        auto Viewer::inputAt(QQmlListProperty<Object>* list, int i) -> quick::Vtk::Object* {
             auto viewer = qobject_cast<Viewer*>(list->object);
 
             if (viewer) {
@@ -156,12 +148,20 @@ namespace quick {
             return 0;
         }
 
-        auto Viewer::clearInputs(QQmlListProperty<Prop>*list) -> void {
+        auto Viewer::clearInputs(QQmlListProperty<Object>*list) -> void {
             auto viewer = qobject_cast<Viewer*>(list->object);
 
             if (viewer) {
+                for (auto object : viewer->m_input) {
+                    if (object->getType() == Object::Type::Prop) {
+                        auto prop = reinterpret_cast<Prop*>(object);
+                        viewer->m_renderer->RemoveActor(prop->getVtkObject());
+                    }
+                }
+
                 viewer->m_input.clear();
                 emit viewer->inputChanged();
+                viewer->update();
             }
         }
 

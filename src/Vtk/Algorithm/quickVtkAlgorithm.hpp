@@ -1,8 +1,8 @@
 #pragma once
 
 #include "quickQmlRegister.hpp"
+#include "quickVtkObject.hpp"
 
-#include <QObject>
 #include <QQmlListProperty>
 
 #include <vtkSmartPointer.h>
@@ -15,7 +15,7 @@ namespace quick {
         class Prop;
         class DataObject;
 
-        class Algorithm : public QObject {
+        class Algorithm : public Object {
             Q_OBJECT
             Q_PROPERTY(QQmlListProperty<quick::Vtk::Algorithm> input READ getInput NOTIFY inputChanged);
             Q_CLASSINFO("DefaultProperty", "input");
@@ -25,8 +25,7 @@ namespace quick {
             vtkSmartPointer<vtkAlgorithm> m_vtkObject = nullptr;
             Prop* m_prop = nullptr;
         public:
-            Algorithm();
-            Algorithm(Algorithm*);
+            Algorithm() = delete;
             Algorithm(vtkSmartPointer<vtkAlgorithm>);
             auto setProp(Prop*) -> void;
             auto setVtkAlgorithm(vtkSmartPointer<vtkAlgorithm>) -> void;

@@ -36,14 +36,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${BUILD_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${BUILD_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${BUILD_DIR})
 
-# c++1y
-# ******************************************************************************
-if(APPLE)
-    list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -stdlib=libc++")
-endif()
-
-add_definitions(-DUSE_INSTALL_TARGET)
-
 # moc
 # ******************************************************************************
 set(CMAKE_AUTOMOC true)
@@ -78,16 +70,23 @@ set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus Print
 set(QUICKVTK_INTERNAL_LIBRARY_TARGETS)
 
 find_package(Qt5 ${QUICKVTK_QT_VERSION} EXACT CONFIG REQUIRED ${QUICKVTK_QT_MODULES})
+
+# definitions
+# ******************************************************************************
 add_definitions(${QT_DEFINITIONS})
+add_definitions(-DUSE_INSTALL_TARGET)
 
 # Vtk
+# ******************************************************************************
 find_package(VTK ${QUICKVTK_VTK_VERSION} EXACT CONFIG REQUIRED)
 include(${VTK_USE_FILE})
 
 # sources
+# ******************************************************************************
 AddSources("${SOURCE_DIR}/Utils" "Utils" list_app_src)
 AddSources("${SOURCE_DIR}/SampleData" "SampleData" list_app_src)
 AddSources("${SOURCE_DIR}/Math" "Math" list_app_src)
+AddSources("${SOURCE_DIR}/Vtk" "Vtk" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Viewer" "Vtk\\Viewer" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/ImplicitFunction" "Vtk\\ImplicitFunction" list_app_src)
 AddSources("${SOURCE_DIR}/Vtk/Prop" "Vtk\\Prop" list_app_src)
@@ -113,7 +112,8 @@ AddSources("${SOURCE_DIR}/TypeInfo" "TypeInfo" list_app_src)
 AddSources("${SOURCE_DIR}/Code" "Code" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
 
-# target
+# setup target
+# ******************************************************************************
 if(APPLE)
     set(MACOSX_BUNDLE_BUNDLE_VERSION 1)
     set(MACOSX_BUNDLE_LONG_VERSION_STRING ${QUICKVTK_VERSION_MAJOR}.${QUICKVTK_VERSION_MINOR}.${QUICKVTK_VERSION_PATCH})
@@ -128,10 +128,27 @@ else()
     add_executable(${PROJECT_NAME} ${list_app_src})
 endif()
 
-# application
+# c++11
+# ******************************************************************************
+if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER 3.0)
+    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
+    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
+else()
+    if(APPLE)
+        list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -stdlib=libc++")
+    endif()
+    if(UNIX AND NOT APPLE)
+        list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    endif()
+endif()
+
+# configure files
 # ******************************************************************************
 configure_file(${ROOT_DIR}/cmake/meta_quickvtk.hpp.in ${BINARY_DIR}/meta_quickvtk.hpp)
-configure_file(${ROOT_DIR}/cmake/info.plist.in ${BINARY_DIR}/info.plist)
+
+if(APPLE)
+    configure_file(${ROOT_DIR}/cmake/info.plist.in ${BINARY_DIR}/info.plist)
+endif()
 
 # target properties
 # ******************************************************************************
@@ -139,10 +156,12 @@ if(APPLE)
   set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${BINARY_DIR}/info.plist)
 endif()
 
-#include binary dir
+# includes
+# ******************************************************************************
 target_include_directories(${PROJECT_NAME} PUBLIC ${BINARY_DIR})
 
-# resources
+# copy resources
+# ******************************************************************************
 if(APPLE)
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${MACOSX_BUNDLE_RESOURCES})
     execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${MACOSX_BUNDLE_ICON} ${MACOSX_BUNDLE_RESOURCES})
@@ -153,4 +172,5 @@ else()
 endif()
 
 # link
+# ******************************************************************************
 target_link_libraries(${PROJECT_NAME} PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)

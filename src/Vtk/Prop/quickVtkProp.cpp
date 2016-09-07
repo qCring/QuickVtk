@@ -7,7 +7,7 @@ namespace quick {
 
         Qml::Register::AbstractClass<Prop> Prop::Register;
 
-        Prop::Prop(vtkSmartPointer<vtkProp> vtkObject) : m_vtkObject(vtkObject) {
+        Prop::Prop(vtkSmartPointer<vtkProp> vtkObject) : Object(Object::Type::Prop), m_vtkObject(vtkObject) {
         }
 
         auto Prop::getVtkObject() -> vtkSmartPointer<vtkProp> {

@@ -8,15 +8,7 @@ namespace quick {
 
         Qml::Register::AbstractClass<Algorithm> Algorithm::Register;
 
-        Algorithm::Algorithm() {
-            this->m_prop = nullptr;
-        }
-
-        Algorithm::Algorithm(Algorithm* other) {
-            this->m_prop = nullptr;
-        }
-
-        Algorithm::Algorithm(vtkSmartPointer<vtkAlgorithm> vtkObject) : m_vtkObject(vtkObject) {
+        Algorithm::Algorithm(vtkSmartPointer<vtkAlgorithm> vtkObject) : quick::Vtk::Object(Object::Type::Algorithm), m_vtkObject(vtkObject) {
         }
 
         auto Algorithm::setVtkAlgorithm(vtkSmartPointer<vtkAlgorithm> vtkObject) -> void {

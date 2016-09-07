@@ -1,8 +1,7 @@
 #pragma once
 
 #include "quickQmlRegister.hpp"
-
-#include <QObject>
+#include "quickVtkObject.hpp"
 
 #include <vtkSmartPointer.h>
 #include <vtkProp.h>
@@ -13,7 +12,7 @@ namespace quick {
 
         class Viewer;
 
-        class Prop : public QObject {
+        class Prop : public Object {
             Q_OBJECT
             Q_PROPERTY(bool visibility READ getVisibility WRITE setVisibility NOTIFY visibilityChanged);
         private:
@@ -22,6 +21,7 @@ namespace quick {
             QList<Viewer*> m_viewers;
             static Qml::Register::AbstractClass<Prop> Register;
         public:
+            Prop() = delete;
             Prop(vtkSmartPointer<vtkProp>);
             auto update() -> void;
             auto setVisibility(bool) -> void;

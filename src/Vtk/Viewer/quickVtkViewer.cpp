@@ -1,6 +1,8 @@
-#include "quickVtkProp.hpp"
 #include "quickVtkViewer.hpp"
+
+#include "quickVtkProp.hpp"
 #include "quickVtkFboRenderer.hpp"
+#include "quickVtkAbstractWidget.hpp"
 #include "quickVtkFboOffscreenWindow.hpp"
 
 #include <QOpenGLFunctions>
@@ -37,6 +39,13 @@ namespace quick {
                     auto prop = reinterpret_cast<Prop*>(object);
                     prop->linkViewer(this);
                     this->m_renderer->AddActor(prop->getVtkObject());
+                }
+                else if (object->getType() == Object::Type::Widget) {
+                    auto widget = reinterpret_cast<AbstractWidget*>(object);
+                    auto vtkWidget = widget->getVtkObject();
+                    vtkWidget->CreateDefaultRepresentation();
+                    vtkWidget->SetInteractor(this->GetRenderWindow()->GetInteractor());
+                    vtkWidget->On();
                 }
             }
 
@@ -115,12 +124,23 @@ namespace quick {
         auto Viewer::appendInput(QQmlListProperty<quick::Vtk::Object>* list, quick::Vtk::Object* object) -> void {
             auto viewer = qobject_cast<Viewer*>(list->object);
 
-            if(viewer && object) {
+            if (object && viewer) {
                 viewer->m_input.append(object);
+            }
 
-                if (viewer->m_renderer && object->getType() == Object::Type::Prop) {
+            if(viewer && viewer->m_renderer && object) {
+
+                if (object->getType() == Object::Type::Prop) {
                     auto prop = reinterpret_cast<Prop*>(object);
                     viewer->m_renderer->AddActor(prop->getVtkObject());
+                }
+                else if (object->getType() == Object::Type::Widget) {
+                    auto widget = reinterpret_cast<AbstractWidget*>(object);
+                    auto vtkWidget = widget->getVtkObject();
+                    vtkWidget->SetInteractor(viewer->GetRenderWindow()->GetInteractor());
+                    vtkWidget->CreateDefaultRepresentation();
+                    vtkWidget->On();
+                    //widget->getVtkObject()->SetInteractor(<#vtkRenderWindowInteractor *iren#>)
                 }
 
                 emit viewer->inputChanged();

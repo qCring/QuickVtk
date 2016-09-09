@@ -1,7 +1,6 @@
 #pragma once
 
 #include "quickQmlRegister.hpp"
-#include "quickVtkObject.hpp"
 
 #include <QQuickFramebufferObject>
 #include <vtkSmartPointer.h>
@@ -14,7 +13,7 @@ namespace quick {
 
     namespace Vtk {
 
-        //class Object;
+        class Object;
         class FboRenderer;
 
         class Viewer : public QQuickFramebufferObject {

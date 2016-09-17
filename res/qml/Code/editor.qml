@@ -96,6 +96,14 @@ Item {
         anchors.margins: 4;
     }
 
+    Search {
+        anchors.left: parent.left;
+        anchors.bottom: parent.bottom;
+        anchors.right: parent.right;
+
+        refocus: textEdit;
+    }
+
     Component.onCompleted: {
         editor.document       = textEdit.textDocument;
         editor.selectionStart = Qt.binding(function() { return textEdit.selectionStart; });

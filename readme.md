@@ -52,7 +52,7 @@ If you want to patch a bug or add a feature yourself, that's awesome! Just clone
 	- **bug/**\<some_bug\>
 	- **feature/**\<some_feature\>
 
-	There are no real rules in terms of coding style and such. Taking a look at some lines of code from QuickVtk should be enough to discover some recurring formatting patterns which keep to code (more or less) consistent.
+	There are no real rules in terms of coding style and such. Taking a look at some lines of code from QuickVtk should be enough to discover some recurring formatting patterns which keep the code (more or less) consistent.
 	
 ##7. Contact
 If you're interested in the project, want to give some feedback or just have some questions or suggestions

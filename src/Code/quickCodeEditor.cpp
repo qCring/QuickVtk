@@ -2,6 +2,7 @@
 #include "quickCodeHighlighter.hpp"
 #include "quickCodeCompiler.hpp"
 #include "quickCodeIssues.hpp"
+#include "quickCodeSearch.hpp"
 #include "quickIO.hpp"
 
 #include <QTextOption>
@@ -170,6 +171,11 @@ namespace quick {
 
                 if (key == Qt::Key_Minus && this->m_fontSize > this->minFontSize) {
                     this->setFontSize(this->m_fontSize - 2);
+                    return true;
+                }
+
+                if (key == Qt::Key_F) {
+                    Search::GetInstance()->setVisible(true);
                     return true;
                 }
 

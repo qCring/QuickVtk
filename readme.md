@@ -42,7 +42,7 @@ In order to provide working code examples, I redistribute some sample data files
 Any contribution is helpful and awesome! There are basically three forms of how you can contribute to this project and get involved with development: 
 
 - **Report Bugs**   
-Open an issue on GithHub, tag it with the **bug** label and provide a simple description of the problem and the steps to reproduce the problem if possible.
+Open an issue on GithHub, tag it with the **bug** label and provide a simple description and the steps to reproduce the problem if possible.
 
 - **Request Features/Enhancements**   
 Open an issue on GitHub, tag it with the **enhancement** label and provide a simple description of what should be done.

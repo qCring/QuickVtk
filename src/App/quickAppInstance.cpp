@@ -31,7 +31,7 @@ namespace quick {
 
             auto path = QDir(QGuiApplication::applicationDirPath());
 
-#ifndef _MSC_VER
+#ifdef __APPLE__
             path.cdUp();
 #endif
             resourceDir = path.absolutePath() + "/Resources/";
@@ -74,7 +74,7 @@ namespace quick {
                 return application.exec();
             }
 
-            return -1;
+            return 1;
         }
 
         auto Instance::AddFontDir(const QString& directory) -> void {

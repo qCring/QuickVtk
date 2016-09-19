@@ -1,5 +1,6 @@
 #include "quickCodeSearch.hpp"
 
+#include <iostream>
 namespace quick {
 
     namespace Code {
@@ -21,13 +22,14 @@ namespace quick {
             return instance ? instance : new Search();
         }
         
-        auto Search::setSearchString(const QString& searchString) -> void {
-            this->m_searchString = searchString;
-            emit this->searchStringChanged();
+        auto Search::setFindString(const QString& findString) -> void {
+            std::cout << "find: " << findString.toStdString() << std::endl;
+            this->m_findString = findString;
+            emit this->findStringChanged();
         }
 
-        auto Search::getSearchString() -> QString {
-            return this->m_searchString;
+        auto Search::getFindString() -> QString {
+            return this->m_findString;
         }
 
         auto Search::setVisible(bool visible) -> void {

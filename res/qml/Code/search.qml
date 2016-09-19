@@ -52,26 +52,18 @@ Rectangle {
                 anchors.left: parent.left;
                 anchors.verticalCenter: parent.verticalCenter;
 
-                text: "Search";
+                text: "Find";
             }
 
-            Lib.TextInput {
+            SearchInput {
                 id: searchInput;
 
                 refocus: root.refocus;
-                from: App.search; bind: "searchString";
-                clearFocusOnEnter: false;
 
                 anchors.left: searchLabel.right;
                 anchors.right: parent.right;
                 anchors.leftMargin: 8;
                 anchors.verticalCenter: parent.verticalCenter;
-
-                onActiveFocusChanged: {
-                    if (!activeFocus) {
-                        App.search.visible = false;
-                    }
-                }
             }
         }
     }

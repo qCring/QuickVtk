@@ -2,3 +2,4 @@ module Code
 Editor 1.0 editor.qml
 Issues 1.0 issues.qml
 Search 1.0 search.qml
+SearchInput 1.0 searchinput.qml

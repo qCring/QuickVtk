@@ -12,6 +12,7 @@ TextInput {
 
     property bool immediate: false;
     property bool resetInput: false;
+    property bool clearFocusOnEnter: true;
 
     property alias radius: rect.radius;
     property alias background: rect.color;
@@ -86,11 +87,16 @@ TextInput {
 
         if (key == Qt.Key_Escape) {
             newInput = root.resetInput ? lastInput : text;
+            event.accepted = true;
             clearFocus();
         }
         else if (key == Qt.Key_Enter || key == Qt.Key_Return) {
             newInput = text;
-            clearFocus();
+            event.accepted = true;
+
+            if (clearFocusOnEnter) {
+                clearFocus();
+            }
         }
     }
 }

@@ -19,26 +19,58 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        height: 1;
+        color: "#181A1F";
+    }
+
     Column {
         id: column;
 
         anchors.left: parent.left;
         anchors.right: parent.right;
-        anchors.margins: 8;
+        anchors.leftMargin: 8;
+        anchors.rightMargin: 8;
 
-        Lib.TextInput {
-            id: searchInput;
+        topPadding: 4;
+        spacing: 4;
 
-            refocus: root.refocus;
-            immediate: true;
-            from: App.search; bind: "searchString";
+        Lib.Label {
+            text: "Find & Replace"
+        }
 
+        Item {
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            onActiveFocusChanged: {
-                if (!activeFocus) {
-                    App.search.visible = false;
+            height: searchInput.height + 4;
+
+            Lib.Label {
+                id: searchLabel;
+                anchors.left: parent.left;
+                anchors.verticalCenter: parent.verticalCenter;
+
+                text: "Search";
+            }
+
+            Lib.TextInput {
+                id: searchInput;
+
+                refocus: root.refocus;
+                from: App.search; bind: "searchString";
+                clearFocusOnEnter: false;
+
+                anchors.left: searchLabel.right;
+                anchors.right: parent.right;
+                anchors.leftMargin: 8;
+                anchors.verticalCenter: parent.verticalCenter;
+
+                onActiveFocusChanged: {
+                    if (!activeFocus) {
+                        App.search.visible = false;
+                    }
                 }
             }
         }

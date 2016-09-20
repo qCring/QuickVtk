@@ -49,6 +49,7 @@ TextInput {
             root.lastInput = text;
             App.search.visible = true;
         } else {
+            App.search.clear();
             App.search.visible = false;
         }
     }

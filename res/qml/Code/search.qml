@@ -37,8 +37,27 @@ Rectangle {
         topPadding: 4;
         spacing: 4;
 
-        Lib.Label {
-            text: "Find & Replace"
+        Item {
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+
+            height: titleLabel.height + 4;
+
+            Lib.Label {
+                id: titleLabel;
+
+                anchors.left: parent.left;
+                anchors.verticalCenter: parent.verticalCenter;
+
+                text: "Find & Replace"
+            }
+
+            Lib.Label {
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter;
+
+                text: App.search.matchCount > 0 ? (App.search.currentMatch + 1) + "/" + App.search.matchCount : "";
+            }
         }
 
         Item {

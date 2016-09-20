@@ -185,7 +185,7 @@ namespace quick {
                 }
 
                 if (key == Qt::Key_F) {
-                    Search::GetInstance()->setVisible(true);
+                    emit Search::GetInstance()->show();
                     return true;
                 }
 

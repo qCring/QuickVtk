@@ -11,13 +11,7 @@ Rectangle {
     height: column.height;
     color: "#21252B"
 
-    visible: App.search.visible;
-
-    onVisibleChanged: {
-        if (visible) {
-            findInput.forceActiveFocus();
-        }
-    }
+    visible: false;
 
     Rectangle {
         anchors.left: parent.left;
@@ -104,5 +98,14 @@ Rectangle {
                 }
             }
         }
+    }
+
+    Connections {
+        target: App.search;
+        onShow: {
+            root.visible = true;
+            findInput.forceActiveFocus();
+        }
+        onHide: { root.visible = false; }
     }
 }

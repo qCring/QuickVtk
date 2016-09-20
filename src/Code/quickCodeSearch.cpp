@@ -40,17 +40,6 @@ namespace quick {
             return this->m_findString;
         }
 
-        auto Search::setVisible(bool visible) -> void {
-            if (this->m_visible != visible) {
-                this->m_visible = visible;
-                emit this->visibleChanged();
-            }
-        }
-
-        auto Search::getVisible() -> bool {
-            return this->m_visible;
-        }
-
         auto Search::setCurrentMatch(int currentMatch) -> void {
             if (this->m_currentMatch != currentMatch) {
                 this->m_currentMatch = currentMatch;

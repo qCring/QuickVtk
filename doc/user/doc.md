@@ -10,11 +10,12 @@ Just some helpful notes until I have time to provide more detailed tutorials / g
 	
 - **Editor Shortcuts**    
 	The code editor <del>is garbage</del> <del>very alpha</del> does an okay job for basic text editing, syntax highlighting and formatting. The editor supports some helpful shortcuts:
-	- `cmd/ctrl` + `N`: new file
-	- `cmd/ctrl` + `O`: open file
-	- `cmd/ctrl` + `S`: save file
-	- `cmd/ctrl` + `I`: format file
-	- `cmd/ctrl` + `R`: compile and run
+	- `cmd/ctrl` + `N`: New File
+	- `cmd/ctrl` + `O`: Open File
+	- `cmd/ctrl` + `S`: Save File
+	- `cmd/ctrl` + `I`: Format File
+	- `cmd/ctrl` + `R`: Compile & Run
+	- `cmd/ctrl` + `F`: Find & Replace
 	
 - **Use the type browser**   
 	The search bar in the application's upper-right corner allows you to search for types available in QuickVtk. You can quickly get an overview of all properties, methods and some other useful meta information of any type this way.

@@ -18,6 +18,7 @@ namespace quick {
         private:
             QList<QTextCursor> m_matches;
             QString m_findString;
+            bool m_valid = false;
             bool m_visible = false;
             int m_currentMatch = -1;
         private:
@@ -35,8 +36,8 @@ namespace quick {
             auto getMatchCount() -> int;
             auto setVisible(bool) -> void;
             auto getVisible() -> bool;
+            auto invalidate() -> void;
         public slots:
-            void clear();
             void findNext();
             void findPrevious();
         signals:

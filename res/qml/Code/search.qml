@@ -34,6 +34,7 @@ Rectangle {
         anchors.leftMargin: 8;
         anchors.rightMargin: 8;
 
+        bottomPadding: 4;
         topPadding: 4;
         spacing: 4;
 
@@ -84,6 +85,10 @@ Rectangle {
                 anchors.leftMargin: 8;
                 anchors.rightMargin: 8;
                 anchors.verticalCenter: parent.verticalCenter;
+
+                onInputFinished: {
+                    App.search.findString = input;
+                }
             }
 
             Lib.Button {
@@ -91,9 +96,12 @@ Rectangle {
 
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
-                label.text: "Find";
+                label.text: App.search.matchCount > 0 ? "Next" : "Find";
 
-                onClicked: App.search.findString = findInput.text;
+                onClicked: {
+                    App.search.findString = findInput.text;
+                    findInput.forceActiveFocus();
+                }
             }
         }
     }

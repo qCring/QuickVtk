@@ -15,7 +15,7 @@ Rectangle {
 
     onVisibleChanged: {
         if (visible) {
-            searchInput.forceActiveFocus();
+            findInput.forceActiveFocus();
         }
     }
 
@@ -64,10 +64,10 @@ Rectangle {
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            height: searchInput.height + 4;
+            height: findInput.height + 4;
 
             Lib.Label {
-                id: searchLabel;
+                id: findLabel;
                 anchors.left: parent.left;
                 anchors.verticalCenter: parent.verticalCenter;
 
@@ -75,14 +75,25 @@ Rectangle {
             }
 
             SearchInput {
-                id: searchInput;
+                id: findInput;
 
                 refocus: root.refocus;
 
-                anchors.left: searchLabel.right;
-                anchors.right: parent.right;
+                anchors.left: findLabel.right;
+                anchors.right: findButton.left;
                 anchors.leftMargin: 8;
+                anchors.rightMargin: 8;
                 anchors.verticalCenter: parent.verticalCenter;
+            }
+
+            Lib.Button {
+                id: findButton;
+
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter;
+                label.text: "Find";
+
+                onClicked: App.search.findString = findInput.text;
             }
         }
     }

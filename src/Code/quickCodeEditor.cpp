@@ -201,11 +201,13 @@ namespace quick {
 
                 if (key == Qt::Key_O) {
                     this->openFile();
+                    Search::GetInstance()->invalidate();
                     return true;
                 }
 
                 if (key == Qt::Key_N) {
                     this->newFile();
+                    Search::GetInstance()->invalidate();
                     return true;
                 }
 
@@ -311,6 +313,8 @@ namespace quick {
                 }
 
                 cursor.insertText("}" + right);
+
+                this->setModified(true);
 
                 return true;
             }

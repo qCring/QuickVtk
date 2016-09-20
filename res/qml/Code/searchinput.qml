@@ -1,18 +1,13 @@
 import QtQuick 2.6
 
+import App 1.0 as App
+
 TextInput {
     id: root;
 
-    property var refocus;
-    property var from;
-
-    property string bind;
     property string lastInput;
     property string newInput;
-
-    property bool immediate: false;
-    property bool resetInput: false;
-    property bool clearFocusOnEnter: true;
+    property var refocus;
 
     property alias radius: rect.radius;
     property alias background: rect.color;
@@ -52,26 +47,15 @@ TextInput {
     onActiveFocusChanged: {
         if (activeFocus) {
             root.lastInput = text;
+            App.search.visible = true;
         } else {
-            if (root.resetInput) {
-                applyText(newInput);
-            } else {
-                applyText(text);
-            }
-        }
-    }
-
-    onTextChanged: {
-        if (root.immediate) {
-            applyText(text);
+            App.search.clear();
+            App.search.visible = false;
         }
     }
 
     function applyText(newText) {
-        if (root.from) {
-            text = newText;
-            root.from[root.bind] = newText;
-        }
+        App.search.findString = newText;
     }
 
     function clearFocus() {
@@ -86,17 +70,14 @@ TextInput {
         var key = event.key;
 
         if (key == Qt.Key_Escape) {
-            newInput = root.resetInput ? lastInput : text;
+            newInput = lastInput;
             event.accepted = true;
             clearFocus();
         }
         else if (key == Qt.Key_Enter || key == Qt.Key_Return) {
             newInput = text;
+            applyText(newInput);
             event.accepted = true;
-
-            if (clearFocusOnEnter) {
-                clearFocus();
-            }
         }
     }
 }

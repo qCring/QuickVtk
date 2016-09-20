@@ -5,6 +5,7 @@
 #include "quickCodeCompiler.hpp"
 #include "quickTypeInfoList.hpp"
 #include "quickCodeEditor.hpp"
+#include "quickCodeSearch.hpp"
 
 namespace quick {
     namespace App {
@@ -59,6 +60,10 @@ namespace quick {
             return Code::Editor::GetInstance();
         }
 
+        auto Controller::getSearch() -> Code::Search* {
+            return Code::Search::GetInstance();
+        }
+        
         auto Controller::isDebugBuild() -> bool {
 #ifdef NDEBUG
             return false;

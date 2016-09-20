@@ -50,7 +50,7 @@ Rectangle {
         anchors.left: fileNameRow.right;
         anchors.leftMargin: 20;
 
-        text: App.editor.line + ":" + App.editor.column;
+        text: (App.editor.line + 1) + ":" + (App.editor.column + 1);
         font.pointSize: 12;
     }
 

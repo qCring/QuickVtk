@@ -12,13 +12,12 @@ namespace quick {
         class Search : public QObject {
             Q_OBJECT
             Q_PROPERTY(QString findString READ getFindString WRITE setFindString NOTIFY findStringChanged);
-            Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged);
             Q_PROPERTY(int currentMatch READ getCurrentMatch NOTIFY currentMatchChanged);
             Q_PROPERTY(int matchCount READ getMatchCount NOTIFY matchCountChanged);
         private:
             QList<QTextCursor> m_matches;
             QString m_findString;
-            bool m_visible = false;
+            bool m_valid = false;
             int m_currentMatch = -1;
         private:
             static Qml::Register::Controller<Search> Register;
@@ -33,17 +32,16 @@ namespace quick {
             auto setCurrentMatch(int) -> void;
             auto getCurrentMatch() -> int;
             auto getMatchCount() -> int;
-            auto setVisible(bool) -> void;
-            auto getVisible() -> bool;
+            auto invalidate() -> void;
         public slots:
-            void clear();
             void findNext();
             void findPrevious();
         signals:
+            void show();
+            void hide();
             void findStringChanged();
             void currentMatchChanged();
             void matchCountChanged();
-            void visibleChanged();
         };
     }
 }

@@ -148,6 +148,10 @@ namespace quick {
         }
 
         auto Editor::setModified(bool modified) -> void {
+            if (modified) {
+                Search::GetInstance()->invalidate();
+            }
+
             if (this->m_modified != modified) {
                 this->m_modified = modified;
                 emit this->modifiedChanged();
@@ -163,6 +167,12 @@ namespace quick {
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
+            if (modifiers & Qt::ControlModifier && modifiers & Qt::ShiftModifier && key == Qt::Key_Z) {
+                this->m_document->textDocument()->redo();
+                this->setModified(true);
+                return true;
+            }
+
             if (modifiers == Qt::ControlModifier) {
                 if (key == Qt::Key_Plus && this->m_fontSize < this->maxFontSize) {
                     this->setFontSize(this->m_fontSize + 2);
@@ -175,7 +185,7 @@ namespace quick {
                 }
 
                 if (key == Qt::Key_F) {
-                    Search::GetInstance()->setVisible(true);
+                    emit Search::GetInstance()->show();
                     return true;
                 }
 
@@ -201,6 +211,12 @@ namespace quick {
 
                 if (key == Qt::Key_I) {
                     this->format();
+                    return true;
+                }
+
+                if (key == Qt::Key_Z) {
+                    this->m_document->textDocument()->undo();
+                    this->setModified(true);
                     return true;
                 }
 

@@ -11,13 +11,7 @@ Rectangle {
     height: column.height;
     color: "#21252B"
 
-    visible: App.search.visible;
-
-    onVisibleChanged: {
-        if (visible) {
-            searchInput.forceActiveFocus();
-        }
-    }
+    visible: false;
 
     Rectangle {
         anchors.left: parent.left;
@@ -34,6 +28,7 @@ Rectangle {
         anchors.leftMargin: 8;
         anchors.rightMargin: 8;
 
+        bottomPadding: 4;
         topPadding: 4;
         spacing: 4;
 
@@ -64,10 +59,10 @@ Rectangle {
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            height: searchInput.height + 4;
+            height: findInput.height + 4;
 
             Lib.Label {
-                id: searchLabel;
+                id: findLabel;
                 anchors.left: parent.left;
                 anchors.verticalCenter: parent.verticalCenter;
 
@@ -75,15 +70,42 @@ Rectangle {
             }
 
             SearchInput {
-                id: searchInput;
+                id: findInput;
 
                 refocus: root.refocus;
 
-                anchors.left: searchLabel.right;
-                anchors.right: parent.right;
+                anchors.left: findLabel.right;
+                anchors.right: findButton.left;
                 anchors.leftMargin: 8;
+                anchors.rightMargin: 8;
                 anchors.verticalCenter: parent.verticalCenter;
+
+                onInputFinished: {
+                    App.search.findString = input;
+                }
+            }
+
+            Lib.Button {
+                id: findButton;
+
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter;
+                label.text: App.search.matchCount > 0 ? "Next" : "Find";
+
+                onClicked: {
+                    App.search.findString = findInput.text;
+                    findInput.forceActiveFocus();
+                }
             }
         }
+    }
+
+    Connections {
+        target: App.search;
+        onShow: {
+            root.visible = true;
+            findInput.forceActiveFocus();
+        }
+        onHide: { root.visible = false; }
     }
 }

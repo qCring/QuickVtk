@@ -21,31 +21,23 @@ namespace quick {
         auto Search::GetInstance() -> Search* {
             return instance ? instance : new Search();
         }
-        
+
+        auto Search::invalidate() -> void {
+            this->m_valid = false;
+        }
+
         auto Search::setFindString(const QString& findString) -> void {
-            if (this->m_findString.compare(findString) != 0) {
+            if (this->m_findString.compare(findString) != 0 || !this->m_valid) {
                 this->m_findString = findString;
                 emit this->findStringChanged();
-
                 this->processSearch();
+            } else {
+                this->findNext();
             }
-
-            this->findNext();
         }
 
         auto Search::getFindString() -> QString {
             return this->m_findString;
-        }
-
-        auto Search::setVisible(bool visible) -> void {
-            if (this->m_visible != visible) {
-                this->m_visible = visible;
-                emit this->visibleChanged();
-            }
-        }
-
-        auto Search::getVisible() -> bool {
-            return this->m_visible;
         }
 
         auto Search::setCurrentMatch(int currentMatch) -> void {
@@ -80,10 +72,18 @@ namespace quick {
                 }
             }
 
+            this->m_valid = true;
             emit this->matchCountChanged();
+
+            this->findNext();
         }
 
         auto Search::findNext() -> void {
+            if (!this->m_valid) {
+                this->processSearch();
+                return;
+            }
+
             if (this->m_matches.count() < 1) {
                 return;
             }
@@ -93,20 +93,17 @@ namespace quick {
         }
 
         auto Search::findPrevious() -> void {
+            if (!this->m_valid) {
+                this->processSearch();
+                return;
+            }
+
             if (this->m_matches.count() < 1) {
                 return;
             }
 
             this->setCurrentMatch((this->m_currentMatch - 1) % this->m_matches.count());
-
-            auto cursor = Editor::GetInstance()->getCurrentCursor();
-        }
-
-        void Search::clear() {
-            this->m_findString = "";
-            this->setCurrentMatch(-1);
-            this->m_matches.clear();
-            emit this->matchCountChanged();
+            Editor::GetInstance()->select(this->m_matches.at(this->m_currentMatch));
         }
     }
 }

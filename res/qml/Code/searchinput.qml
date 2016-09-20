@@ -5,8 +5,6 @@ import App 1.0 as App
 TextInput {
     id: root;
 
-    property string lastInput;
-    property string newInput;
     property var refocus;
 
     property alias radius: rect.radius;
@@ -30,6 +28,8 @@ TextInput {
     selectByMouse: true;
     clip: true;
 
+    signal inputFinished(var input);
+
     Rectangle {
         id: rect;
 
@@ -44,39 +44,16 @@ TextInput {
         border.color: root.activeFocus ? root.borderActive : root.borderDefault;
     }
 
-    onActiveFocusChanged: {
-        if (activeFocus) {
-            root.lastInput = text;
-            App.search.visible = true;
-        } else {
-            App.search.clear();
-            App.search.visible = false;
-        }
-    }
-
-    function applyText(newText) {
-        App.search.findString = newText;
-    }
-
-    function clearFocus() {
-        if (refocus) {
-            refocus.forceActiveFocus();
-        } else {
-            root.parent.forceActiveFocus();
-        }
-    }
-
     Keys.onPressed: {
         var key = event.key;
 
         if (key == Qt.Key_Escape) {
-            newInput = lastInput;
+            App.search.hide();
             event.accepted = true;
-            clearFocus();
+            refocus.forceActiveFocus();
         }
         else if (key == Qt.Key_Enter || key == Qt.Key_Return) {
-            newInput = text;
-            applyText(newInput);
+            inputFinished(text);
             event.accepted = true;
         }
     }

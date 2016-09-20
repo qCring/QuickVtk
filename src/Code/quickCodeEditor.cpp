@@ -372,6 +372,12 @@ namespace quick {
             }
         }
 
+        auto Editor::select(QTextCursor cursor) -> void {
+            this->setSelectionStart(cursor.position() - cursor.selectedText().length());
+            this->setSelectionEnd(cursor.position());
+            emit this->updateSelection();
+        }
+
         void Editor::newFile() {
             this->m_filePath = "";
             emit this->filePathChanged();

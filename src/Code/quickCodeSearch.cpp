@@ -23,14 +23,14 @@ namespace quick {
         }
         
         auto Search::setFindString(const QString& findString) -> void {
-            if (this->m_findString.compare(findString) == 0) {
-                this->findNext();
-            } else {
+            if (this->m_findString.compare(findString) != 0) {
                 this->m_findString = findString;
                 emit this->findStringChanged();
 
                 this->processSearch();
             }
+
+            this->findNext();
         }
 
         auto Search::getFindString() -> QString {
@@ -64,7 +64,7 @@ namespace quick {
         }
 
         auto Search::processSearch() -> void {
-            this->setCurrentMatch(0);
+            this->setCurrentMatch(-1);
             this->m_matches.clear();
 
             auto cursor = Editor::GetInstance()->getCurrentCursor();
@@ -89,8 +89,7 @@ namespace quick {
             }
 
             this->setCurrentMatch((this->m_currentMatch + 1) % this->m_matches.count());
-
-            auto cursor = Editor::GetInstance()->getCurrentCursor();
+            Editor::GetInstance()->select(this->m_matches.at(this->m_currentMatch));
         }
 
         auto Search::findPrevious() -> void {
@@ -105,7 +104,7 @@ namespace quick {
 
         void Search::clear() {
             this->m_findString = "";
-            this->setCurrentMatch(0);
+            this->setCurrentMatch(-1);
             this->m_matches.clear();
             emit this->matchCountChanged();
         }

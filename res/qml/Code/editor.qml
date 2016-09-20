@@ -77,7 +77,7 @@ Item {
                         width: lines.width;
                         textFormat:             Text.PlainText;
                         style:                  Text.Normal;
-                        color:                  textEdit.line - 1 == index ? "#939CAA" : "#4B5363"
+                        color:                  index == editor.line ? "#fff" : "#4B5363"
                         font.family:            textEdit.font.family;
                         font.pixelSize:         editor.fontSize;
                         verticalAlignment:      Text.AlignVCenter;
@@ -103,6 +103,11 @@ Item {
 
         refocus: textEdit;
     }
+
+    Connections {
+		target: editor;
+		onUpdateSelection: textEdit.select(editor.selectionStart, editor.selectionEnd);
+	}
 
     Component.onCompleted: {
         editor.document       = textEdit.textDocument;

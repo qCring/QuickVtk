@@ -67,6 +67,7 @@ namespace quick {
             auto getLine() -> int;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
+            auto select(QTextCursor) -> void;
             ~Editor();
         public slots:
             bool onKeyPressed(int, int, const QString&);
@@ -85,6 +86,7 @@ namespace quick {
             void fontSizeChanged();
             void columnChanged();
             void lineChanged();
+            void updateSelection();
         };
     }
 }

@@ -19,7 +19,7 @@ namespace quick {
             QList<QTextCursor> m_matches;
             QString m_findString;
             bool m_visible = false;
-            int m_currentMatch = 0;
+            int m_currentMatch = -1;
         private:
             static Qml::Register::Controller<Search> Register;
             static Search* instance;

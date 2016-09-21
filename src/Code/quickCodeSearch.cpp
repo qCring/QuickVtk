@@ -1,8 +1,6 @@
 #include "quickCodeSearch.hpp"
 #include "quickCodeEditor.hpp"
 
-#include <iostream>
-
 namespace quick {
 
     namespace Code {
@@ -38,12 +36,17 @@ namespace quick {
                 return;
             }
 
-            if (this->m_currentMatch <= this->m_matches.count() - 2) {
+            if (this->m_currentMatch == this->m_matches.count() - 1) {
                 auto cursor = this->m_matches.at(this->m_currentMatch);
                 cursor.insertText(this->m_replaceString);
-
-                this->findNext();
+                this->processSearch();
+                return;
             }
+
+            auto cursor = this->m_matches.at(this->m_currentMatch);
+            cursor.insertText(this->m_replaceString);
+
+            this->findNext();
         }
 
         void Search::replaceAll() {

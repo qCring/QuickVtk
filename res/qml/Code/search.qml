@@ -61,27 +61,22 @@ Rectangle {
 
             height: findInput.height + 4;
 
-            Lib.Label {
-                id: findLabel;
-                anchors.left: parent.left;
-                anchors.verticalCenter: parent.verticalCenter;
-
-                text: "Find";
-            }
-
             SearchInput {
                 id: findInput;
 
-                refocus: root.refocus;
-
-                anchors.left: findLabel.right;
+                anchors.left: parent.left;
                 anchors.right: findButton.left;
-                anchors.leftMargin: 8;
                 anchors.rightMargin: 8;
                 anchors.verticalCenter: parent.verticalCenter;
 
-                onInputFinished: {
-                    App.search.findString = input;
+                KeyNavigation.tab: replaceInput;
+                KeyNavigation.backtab: replaceInput;
+
+                refocus: root.refocus;
+                onTextChanged: App.search.findString = text;
+
+                onEnterPressed: {
+                    App.search.findNext();
                 }
             }
 
@@ -95,6 +90,46 @@ Rectangle {
                 onClicked: {
                     App.search.findString = findInput.text;
                     findInput.forceActiveFocus();
+                }
+            }
+        }
+
+        Item {
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+
+            height: replaceInput.height + 4;
+
+            SearchInput {
+                id: replaceInput;
+
+                anchors.left: parent.left;
+                anchors.right: replaceButton.left;
+                anchors.rightMargin: 8;
+                anchors.verticalCenter: parent.verticalCenter;
+
+                KeyNavigation.tab: findInput;
+                KeyNavigation.backtab: findInput;
+
+                refocus: root.refocus;
+
+                onTextChanged: App.search.replaceString = text;
+
+                onEnterPressed: {
+                    App.search.replaceNext();
+                }
+            }
+
+            Lib.Button {
+                id: replaceButton;
+
+                anchors.right: parent.right;
+                anchors.verticalCenter: parent.verticalCenter;
+                label.text: App.search.matchCount > 0 ? "Replace" : "Replace";
+
+                onClicked: {
+                    App.search.replaceNext();
+                    replaceInput.forceActiveFocus();
                 }
             }
         }

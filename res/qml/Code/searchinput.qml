@@ -28,7 +28,7 @@ TextInput {
     selectByMouse: true;
     clip: true;
 
-    signal inputFinished(var input);
+    signal enterPressed();
 
     Rectangle {
         id: rect;
@@ -53,7 +53,7 @@ TextInput {
             refocus.forceActiveFocus();
         }
         else if (key == Qt.Key_Enter || key == Qt.Key_Return) {
-            inputFinished(text);
+            enterPressed();
             event.accepted = true;
         }
     }

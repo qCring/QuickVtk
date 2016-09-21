@@ -16,6 +16,7 @@ namespace quick {
             Instance();
             auto init() -> void;
             auto AddFontDir(const QString&) -> void;
+            static auto HandleMessage(QtMsgType, const QMessageLogContext&, const QString&) -> void;
         public:
             static auto GetResourceDir() -> QString;
             static auto Execute(int, char**) -> int;

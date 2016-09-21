@@ -70,6 +70,19 @@ Item {
         }
     }
 
+    Column {
+        anchors.fill: parent;
+
+        Repeater {
+            model: App.logger.entries;
+            delegate: Lib.Label {
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                text: modelData;
+            }
+        }
+    }
+
     Connections {
 		target: App.compiler;
 		onSourceChanged: { root.compile(); }

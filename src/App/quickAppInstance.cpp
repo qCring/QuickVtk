@@ -5,12 +5,15 @@
 #include "quickQmlRegister.hpp"
 #include "quickAppController.hpp"
 #include "quickSampleDataController.hpp"
+#include "quickAppLogger.hpp"
 
 #include <QFontDatabase>
 #include <QApplication>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QDir>
+
+#include <iostream>
 
 namespace quick {
 
@@ -19,6 +22,12 @@ namespace quick {
         Instance* Instance::instance = nullptr;
 
         Instance::Instance() {
+        }
+
+        auto Instance::HandleMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg) -> void {
+            std::cout << "handle message: " << msg.toStdString() << std::endl;
+
+            Logger::GetInstance()->addEntry(msg);
         }
 
         auto Instance::init() -> void {
@@ -65,6 +74,8 @@ namespace quick {
         }
         
         auto Instance::Execute(int argc, char** argv) -> int {
+            qInstallMessageHandler(HandleMessage);
+
             QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
             QApplication application(argc, argv);
 

@@ -22,7 +22,8 @@ namespace quick {
 
         auto Logger::addEntry(const QString& entry) -> void {
             this->m_entries.append(entry);
-            emit this->entriesChanged();
+
+            QMetaObject::invokeMethod(this, "entriesChanged", Qt::QueuedConnection);
         }
 
         auto Logger::getEntries() -> QStringList {

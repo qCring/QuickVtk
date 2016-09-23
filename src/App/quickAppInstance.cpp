@@ -27,6 +27,12 @@ namespace quick {
         auto Instance::HandleMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg) -> void {
             std::cout << "handle message: " << msg.toStdString() << std::endl;
 
+            if (instance->m_messageHandled.localData()) {
+                return;
+            }
+
+            QScopedValueRollback<bool> roll(instance->m_messageHandled.localData(), true);
+
             Logger::GetInstance()->addEntry(msg);
         }
 

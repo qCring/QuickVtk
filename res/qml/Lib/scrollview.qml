@@ -5,7 +5,7 @@ import QtQuick.Controls.Styles 1.4
 ScrollView {
 
     style: ScrollViewStyle {
-        transientScrollBars: false;
+        transientScrollBars: true;
         handleOverlap: 0
 
         handle: Rectangle {

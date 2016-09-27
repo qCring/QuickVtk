@@ -58,6 +58,17 @@ Item {
             font.pointSize: editor.fontSize;
 
             Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
+
+            Rectangle {
+                id: cursorBg;
+
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                y: height * editor.line;
+                height: textEdit.cursorRectangle.height;
+
+                color: "#11ddddff"
+            }
         }
 
         Lib.ScrollView {
@@ -113,5 +124,6 @@ Item {
         editor.document       = textEdit.textDocument;
         editor.selectionStart = Qt.binding(function() { return textEdit.selectionStart; });
         editor.selectionEnd   = Qt.binding(function() { return textEdit.selectionEnd; });
+        textEdit.forceActiveFocus();
     }
 }

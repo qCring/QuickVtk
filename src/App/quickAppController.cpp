@@ -6,6 +6,7 @@
 #include "quickTypeInfoList.hpp"
 #include "quickCodeEditor.hpp"
 #include "quickCodeSearch.hpp"
+#include "quickAppLogger.hpp"
 
 namespace quick {
     namespace App {
@@ -62,6 +63,10 @@ namespace quick {
 
         auto Controller::getSearch() -> Code::Search* {
             return Code::Search::GetInstance();
+        }
+
+        auto Controller::getLogger() -> Logger* {
+            return Logger::GetInstance();
         }
         
         auto Controller::isDebugBuild() -> bool {

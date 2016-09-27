@@ -35,8 +35,16 @@ Rectangle {
             anchors.fill: parent;
         }
 
-        rightItem: ContainerView {
+        rightItem: Lib.TabView {
             anchors.fill: parent;
+
+            Preview {
+                anchors.fill: parent;
+            }
+
+            LogView {
+                anchors.fill: parent;
+            }
         }
     }
 

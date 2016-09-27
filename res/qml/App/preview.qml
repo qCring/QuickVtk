@@ -5,6 +5,8 @@ import Lib 1.0 as Lib
 Item {
     id: root;
 
+    property string tabTitle: "Preview"
+
     property var previousObject: undefined;
 
     clip: true;

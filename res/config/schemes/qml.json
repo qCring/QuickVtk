@@ -4,13 +4,13 @@
 		"suffixes": ["qml"],
 		"highlight": [{
 			"name": "numbers",
-			"pattern": "\\d[.]?[f]?",
-			"color": "#D19A66",
+			"pattern": "\\b\\d+(\\.\\d*)?\\b",
+			"color": "#E6713E",
 			"bold": true
 		}, {
 			"name": "objects",
 			"pattern": "\\b[A-Z]\\w*",
-			"color": "#E2BE7A",
+			"color": "#319CD3",
 			"bold": true
 		}, {
 			"name": "keywords",
@@ -25,12 +25,12 @@
 		}, {
 			"name": "functions",
 			"pattern": "\\b\\w*\\(\\)",
-			"color": "#61AFEF",
+			"color": "#319CD3",
 			"bold": true
 		}, {
 			"name": "strings",
 			"pattern": "\".*\"",
-			"color": "#98C379"
+			"color": "#9DA5B4"
 		}, {
 			"name": "inline comments",
 			"pattern": "//[^\n]*",

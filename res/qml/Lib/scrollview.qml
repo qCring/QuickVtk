@@ -5,14 +5,14 @@ import QtQuick.Controls.Styles 1.4
 ScrollView {
 
     style: ScrollViewStyle {
-        transientScrollBars: false;
+        transientScrollBars: true;
         handleOverlap: 0
 
         handle: Rectangle {
             Rectangle {
                 width: 7;
                 height: control.viewport.height * control.viewport.height / control.contentItem.height - 4;
-                color: "#353B45";
+                color: "#21252B";
                 radius: 4;
             }
         }

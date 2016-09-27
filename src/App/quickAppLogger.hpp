@@ -26,6 +26,8 @@ namespace quick {
             auto getEntries() -> QStringList;
             auto setVisible(bool) -> void;
             auto getVisible() -> bool;
+        public slots:
+            void clear();
         signals:
             void entriesChanged();
             void visibleChanged();

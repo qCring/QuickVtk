@@ -113,5 +113,6 @@ Item {
         editor.document       = textEdit.textDocument;
         editor.selectionStart = Qt.binding(function() { return textEdit.selectionStart; });
         editor.selectionEnd   = Qt.binding(function() { return textEdit.selectionEnd; });
+        textEdit.forceActiveFocus();
     }
 }

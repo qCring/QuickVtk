@@ -1,4 +1,5 @@
 module App
-ContainerView 1.0 containerview.qml
+Preview 1.0 preview.qml
 Footer 1.0 footer.qml
 Header 1.0 header.qml
+LogView 1.0 logview.qml

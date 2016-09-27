@@ -20,6 +20,11 @@ namespace quick {
             return instance;
         }
 
+        void Logger::clear() {
+            this->m_entries.clear();
+            emit this->entriesChanged();
+        }
+
         auto Logger::addEntry(const QString& entry) -> void {
             this->m_entries.append(entry);
 

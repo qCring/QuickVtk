@@ -5,6 +5,8 @@ import Lib 1.0 as Lib
 Item {
     id: root;
 
+    property string tabTitle: "Preview"
+
     property var previousObject: undefined;
 
     clip: true;
@@ -67,19 +69,6 @@ Item {
             }
 
             App.compiler.failed = true;
-        }
-    }
-
-    Column {
-        anchors.fill: parent;
-
-        Repeater {
-            model: App.logger.entries;
-            delegate: Lib.Label {
-                anchors.left: parent.left;
-                anchors.right: parent.right;
-                text: modelData;
-            }
         }
     }
 

@@ -12,7 +12,7 @@ ScrollView {
             Rectangle {
                 width: 7;
                 height: control.viewport.height * control.viewport.height / control.contentItem.height - 4;
-                color: "#353B45";
+                color: "#21252B";
                 radius: 4;
             }
         }

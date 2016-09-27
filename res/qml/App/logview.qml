@@ -8,7 +8,7 @@ Rectangle {
 
     color: "#282C34";
 
-    property string tabTitle: "Log {" + App.logger.entries.length + "}";
+    property string tabTitle: "Log [" + App.logger.entries.length + "]";
 
     ListView {
         anchors.left: parent.left;

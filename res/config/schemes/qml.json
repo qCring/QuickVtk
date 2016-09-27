@@ -4,7 +4,7 @@
 		"suffixes": ["qml"],
 		"highlight": [{
 			"name": "numbers",
-			"pattern": "\\b\\d[.]?[f]?",
+			"pattern": "\\b\\d+(\\.\\d*)?\\b",
 			"color": "#E6713E",
 			"bold": true
 		}, {
@@ -30,7 +30,7 @@
 		}, {
 			"name": "strings",
 			"pattern": "\".*\"",
-			"color": "#E6713E"
+			"color": "#9DA5B4"
 		}, {
 			"name": "inline comments",
 			"pattern": "//[^\n]*",

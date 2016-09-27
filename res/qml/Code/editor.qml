@@ -58,6 +58,17 @@ Item {
             font.pointSize: editor.fontSize;
 
             Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
+
+            Rectangle {
+                id: cursorBg;
+
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                y: height * editor.line;
+                height: textEdit.cursorRectangle.height;
+
+                color: "#11ddddff"
+            }
         }
 
         Lib.ScrollView {

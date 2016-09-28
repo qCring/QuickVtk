@@ -8,7 +8,7 @@ set(PROJECT_NAME "QuickVtkLibs")
 
 project(${PROJECT_NAME})
 
-set(VTK_GIT_TAG "a8b6746" CACHE STRING "VTK git tag")
+set(VTK_GIT_TAG "37e0495" CACHE STRING "VTK git tag")
 set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/VTK/install)
 
 ExternalProject_Add(

@@ -1,7 +1,7 @@
 QuickVtk
 ===
 ![Version](https://img.shields.io/badge/version-0.5.2-blue.svg)
-![VTK](https://img.shields.io/badge/VTK-tag a8b6746-red.svg)
+![VTK](https://img.shields.io/badge/VTK-tag 37e0495-red.svg)
 
 A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedded **[VTK](http://www.vtk.org)** support
 

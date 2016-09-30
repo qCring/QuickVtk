@@ -67,7 +67,7 @@ namespace quick {
                 return;
             }
 
-            this->m_interactor->SetEventInformationFlipY(event->x(), event->y(), (event->modifiers() & Qt::ControlModifier) > 0 ? 1 : 0, (event->modifiers() & Qt::ShiftModifier ) > 0 ? 1 : 0, 0, event->type() == QEvent::MouseButtonDblClick ? 1 : 0);
+            this->m_interactor->SetEventInformationFlipY(event->x(), event->y(), (event->modifiers() & Qt::ControlModifier), (event->modifiers() & Qt::ShiftModifier));
 
             auto command = vtkCommand::NoEvent;
 

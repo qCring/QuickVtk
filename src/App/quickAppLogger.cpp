@@ -1,7 +1,5 @@
 #include "quickAppLogger.hpp"
 
-#include <iostream>
-
 namespace quick {
 
     namespace App {

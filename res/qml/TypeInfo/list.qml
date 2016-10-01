@@ -5,8 +5,7 @@ import Lib 1.0 as Lib
 ListView {
     visible: App.typeList.visible;
     clip: true;
-    spacing: 2;
-    width: 320;
+    width: 420;
 
     boundsBehavior: Flickable.StopAtBounds;
 

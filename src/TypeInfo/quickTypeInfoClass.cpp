@@ -17,6 +17,14 @@ namespace quick {
             return this->m_abstract;
         }
 
+        auto Class::setBase(const QString& base) -> void {
+            this->m_base = base;
+        }
+
+        auto Class::getBase() -> QString {
+            return this->m_base;
+        }
+
         auto Class::getPropertyList() -> QQmlListProperty<Property> {
             return QQmlListProperty<Property>(this, this->m_properties);
         }

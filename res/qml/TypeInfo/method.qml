@@ -8,7 +8,7 @@ Row {
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    height: nameLabel.height;
+    height: nameLabel.height + 2;
 
     property var item;
     property color typeColor: "#9DA5B4"
@@ -30,7 +30,7 @@ Row {
         label.text: item.paramTypes;
         label.font.pointSize: 9;
         label.color: "#9DA5B4";
-        border.color: "#333842"
+        border.color: "#3D424B"
         color: "#00000000"
     }
 
@@ -47,7 +47,7 @@ Row {
         label.text: item.returnType;
         label.font.pointSize: 9;
         label.color: "#9DA5B4";
-        border.color: "#333842"
+        border.color: "#3D424B"
         color: "#00000000"
     }
 }

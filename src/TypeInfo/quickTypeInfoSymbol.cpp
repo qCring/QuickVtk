@@ -26,6 +26,22 @@ namespace quick {
             return QString(metaEnum.scope()).section("::", 1, 1);
         }
 
+        auto Symbol::Get::BaseString(QMetaObject metaObject) -> QString {
+            auto base = *metaObject.superClass();
+            auto baseName = Get::ClassName(base);
+            auto retVal = QString();
+
+            if (!baseName.isEmpty()) {
+                auto basePrefix = Get::ClassPrefix(base);
+
+                if (!basePrefix.isEmpty()) {
+                    retVal = basePrefix + "." + baseName;
+                }
+            }
+
+            return retVal;
+        }
+
         Qml::Register::Type<Symbol> Symbol::Register;
 
         auto Symbol::GetEnums() -> QStringList& {
@@ -59,6 +75,7 @@ namespace quick {
         auto Symbol::MakeClass(QMetaObject metaObject) -> void {
             auto symbol = new Class();
 
+            symbol->setBase(Get::BaseString(metaObject));
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "class";
@@ -81,6 +98,7 @@ namespace quick {
         auto Symbol::MakeAbstractClass(QMetaObject metaObject) -> void {
             auto symbol = new Class();
 
+            symbol->setBase(Get::BaseString(metaObject));
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "abstract";

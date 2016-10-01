@@ -9,7 +9,6 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QRegularExpression>
-#include <iostream>
 
 namespace quick {
 

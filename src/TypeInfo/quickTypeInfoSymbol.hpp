@@ -22,6 +22,7 @@ namespace quick {
                 static auto ClassPrefix(QMetaObject) -> QString;
                 static auto EnumName(QMetaEnum) -> QString;
                 static auto EnumPrefix(QMetaEnum) -> QString;
+                static auto BaseString(QMetaObject) -> QString;
             };
         private:
             QColor m_color;

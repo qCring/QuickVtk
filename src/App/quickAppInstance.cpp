@@ -12,7 +12,6 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QDir>
-
 #include <iostream>
 
 namespace quick {
@@ -25,7 +24,7 @@ namespace quick {
         }
 
         auto Instance::HandleMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg) -> void {
-            std::cout << "handle message: " << msg.toStdString() << std::endl;
+            std::cout << msg.toStdString() << std::endl;
 
             if (instance->m_messageHandled.localData()) {
                 return;

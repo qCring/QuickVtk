@@ -8,9 +8,8 @@ Rectangle {
     anchors.left: parent ? parent.left : undefined;
     anchors.right: parent ? parent.right : undefined;
 
-    height: col.height + 4;
-    color: "#dd21252B";
-    border.color: "#181A1F"
+    height: col.height;
+    color: "#dd2C313A";
 
     Column {
         id: col;
@@ -18,57 +17,61 @@ Rectangle {
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.leftMargin: 4;
+        topPadding: 4;
 
-        spacing: 2;
-
-        Item {
+        Rectangle {
             anchors.left: parent.left;
             anchors.right: parent.right;
+            anchors.leftMargin: -4;
 
-            height: nameLabel.height + 4;
+            height: nameLabel.height + 2;
+            color: "#21252B"
 
-            Lib.Label {
-                id: prefixLabel;
+            Row {
+                id: row;
 
-                anchors.verticalCenter: parent.verticalCenter;
-                anchors.left: parent.left;
-                anchors.leftMargin: 4;
+                anchors.fill: parent;
 
-                text: symbol.prefix + ".";
-                color: "#6E7582"
-                font.bold: true;
-                font.pointSize: 12;
-            }
+                Lib.Label {
+                    anchors.verticalCenter: parent.verticalCenter;
+                    rightPadding: 4;
+                    leftPadding: 4;
 
-            Lib.Label {
-                id: nameLabel;
+                    text: symbol.type;
+                    color: symbol.color
+                    font.bold: true;
+                    font.pointSize: 10;
+                }
 
-                anchors.verticalCenter: parent.verticalCenter;
-                anchors.left: prefixLabel.right;
-                anchors.right: typeLabel.left;
-                anchors.rightMargin: 4;
+                Lib.Label {
+                    anchors.verticalCenter: parent.verticalCenter;
 
-                text: symbol.name;
-                color: "#fff"
-                font.bold: true;
-                font.pointSize: 12;
-            }
+                    text: symbol.prefix + ".";
+                    color: "#6E7582"
+                    font.bold: true;
+                    font.pointSize: 12;
+                }
 
-            Lib.TagLabel {
-                id: typeLabel;
+                Lib.Label {
+                    id: nameLabel;
 
-                anchors.verticalCenter: parent.verticalCenter;
-                anchors.right: parent.right;
-                anchors.rightMargin: 4;
-                height: nameLabel.height;
+                    anchors.verticalCenter: parent.verticalCenter;
 
-                label.text: symbol.type;
-                color: "#181A1F"
-                radius: 0;
-                border.color: "#181A1F";
-                label.color: symbol.color;
-                label.font.weight: Font.Bold;
-                label.font.pointSize: 10;
+                    text: symbol.name;
+                    color: "#fff"
+                    font.bold: true;
+                    font.pointSize: 12;
+                }
+
+                Lib.Label {
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    visible: symbol.base != undefined && symbol.base;
+                    text: "  :  " + symbol.base;
+                    color: "#6E7582"
+                    font.bold: true;
+                    font.pointSize: 10;
+                }
             }
         }
 

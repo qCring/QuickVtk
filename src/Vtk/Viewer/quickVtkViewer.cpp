@@ -45,6 +45,8 @@ namespace quick {
                     auto vtkWidget = widget->getVtkObject();
                     vtkWidget->CreateDefaultRepresentation();
                     vtkWidget->SetInteractor(this->GetRenderWindow()->GetInteractor());
+                    vtkWidget->SetManagesCursor(true);
+                    vtkWidget->SetPickingManaged(true);
                     vtkWidget->On();
                 }
             }

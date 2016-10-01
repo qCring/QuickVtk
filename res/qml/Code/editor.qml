@@ -118,6 +118,11 @@ Item {
     Connections {
 		target: editor;
 		onUpdateSelection: textEdit.select(editor.selectionStart, editor.selectionEnd);
+        onFontSizeChanged: {
+            cursorBg.y = textEdit.positionToRectangle(textEdit.position).y;
+            cursorBg.height = textEdit.cursorRectangle.height;
+            cursorBg.y = Qt.binding(function() { return textEdit.cursorRectangle.y; });
+        }
 	}
 
     Component.onCompleted: {

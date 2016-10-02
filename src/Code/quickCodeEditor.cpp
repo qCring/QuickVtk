@@ -1,7 +1,7 @@
 #include "quickCodeEditor.hpp"
 #include "quickCodeHighlighter.hpp"
 #include "quickCodeCompiler.hpp"
-#include "quickCodeIssues.hpp"
+#include "quickCodeErrors.hpp"
 #include "quickCodeSearch.hpp"
 #include "quickIO.hpp"
 
@@ -148,7 +148,7 @@ namespace quick {
 
         auto Editor::setModified(bool modified) -> void {
             if (modified) {
-                Search::GetInstance()->invalidate();
+                Search::instance->invalidate();
             }
 
             if (this->m_modified != modified) {
@@ -161,8 +161,8 @@ namespace quick {
             return this->m_modified;
         }
 
-        auto Editor::getIssues() -> Issues* {
-            return Issues::instance;
+        auto Editor::getErrors() -> Errors* {
+            return Errors::instance;
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
@@ -184,7 +184,7 @@ namespace quick {
                 }
 
                 if (key == Qt::Key_F) {
-                    emit Search::GetInstance()->show();
+                    emit Search::instance->show();
                     return true;
                 }
 
@@ -200,13 +200,14 @@ namespace quick {
 
                 if (key == Qt::Key_O) {
                     this->openFile();
-                    Search::GetInstance()->invalidate();
+                    Search::instance->invalidate();
                     return true;
                 }
 
                 if (key == Qt::Key_N) {
                     this->newFile();
-                    Search::GetInstance()->invalidate();
+                    Errors::instance->clear();
+                    Search::instance->invalidate();
                     return true;
                 }
 
@@ -401,6 +402,10 @@ namespace quick {
             this->m_filePath = "";
             emit this->filePathChanged();
 
+            auto cursor = this->getCurrentCursor();
+            cursor.setPosition(0);
+            this->select(cursor);
+            
             this->setText("");
             this->setModified(false);
         }

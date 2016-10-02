@@ -18,10 +18,6 @@ namespace quick {
             instance = new Search();
         }
 
-        auto Search::GetInstance() -> Search* {
-            return instance ? instance : new Search();
-        }
-
         auto Search::invalidate() -> void {
             this->m_valid = false;
         }

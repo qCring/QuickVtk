@@ -3,8 +3,8 @@ import QtQuick 2.6
 Rectangle {
     id: root;
 
-    width: label.width + 8;
-    height: label.height + 4;
+    width: label.width;
+    height: label.height;
 
     property alias label: label;
 
@@ -19,6 +19,8 @@ Rectangle {
         anchors.centerIn: parent;
         font.weight: Font.Medium;
         font.pointSize: 11;
+
+        padding: 1;
         color: "#fff"
     }
 }

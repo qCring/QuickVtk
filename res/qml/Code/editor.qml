@@ -43,6 +43,27 @@ Item {
                 anchors.right: parent.right;
                 width:1;
 
+                color: "#282C34"
+            }
+        }
+
+        Rectangle {
+            id: stripe;
+
+            anchors.left: parent.left;
+            anchors.top: parent.top;
+            anchors.bottom: parent.bottom;
+            anchors.leftMargin: lines.width;
+
+            width: 12;
+            color: "#21252B"
+
+            Rectangle {
+                anchors.top: parent.top;
+                anchors.bottom: parent.bottom;
+                anchors.right: parent.right;
+                width:1;
+
                 color: "#181A1F"
             }
         }
@@ -52,11 +73,12 @@ Item {
 
             y: -scrollView.flickableItem.contentY;
 
-            anchors.leftMargin: lines.width + 4;
+            anchors.leftMargin: lines.width + stripe.width;
             anchors.left: parent.left;
             anchors.right: parent.right;
-            font.pointSize: editor.fontSize;
 
+            font.pointSize: editor.fontSize;
+            leftPadding: 4;
             Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
 
             Rectangle {
@@ -68,6 +90,20 @@ Item {
                 height: textEdit.cursorRectangle.height;
 
                 color: "#11ddddff"
+            }
+
+            Repeater {
+                model: App.editor.errors;
+
+                delegate: Error {
+                    anchors.left: parent.left;
+                    anchors.right: parent.right;
+
+                    height: cursorBg.height;
+                    y: (model.line - 1) * height;
+
+                    error: model;
+                }
             }
         }
 
@@ -88,7 +124,7 @@ Item {
                         width: lines.width;
                         textFormat:             Text.PlainText;
                         style:                  Text.Normal;
-                        color:                  index == editor.line ? "#fff" : "#4B5363"
+                        color:                  index == editor.line ? "#fff" : "#6E7582"
                         font.family:            textEdit.font.family;
                         font.pixelSize:         editor.fontSize;
                         verticalAlignment:      Text.AlignVCenter;
@@ -99,12 +135,6 @@ Item {
                 }
             }
         }
-    }
-
-    Issues {
-        anchors.left: parent.left;
-        anchors.bottom: parent.bottom;
-        anchors.margins: 4;
     }
 
     Search {

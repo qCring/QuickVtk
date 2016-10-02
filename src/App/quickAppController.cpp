@@ -62,7 +62,7 @@ namespace quick {
         }
 
         auto Controller::getSearch() -> Code::Search* {
-            return Code::Search::GetInstance();
+            return Code::Search::instance;
         }
 
         auto Controller::getLogger() -> Logger* {

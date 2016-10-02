@@ -55,43 +55,6 @@ Rectangle {
     }
 
     Row {
-        anchors.top: parent.top;
-        anchors.bottom: parent.bottom;
-        anchors.right: dbgRow.left;
-        anchors.rightMargin: 12;
-
-        spacing: 4;
-
-        Lib.Icon {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            type: types.fa_exclamation_circle;
-            color: App.editor.issues.errorCount > 0 ? "#ff0000" : "#9DA5B4"
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            text: App.editor.issues.errorCount;
-            font.pointSize: 11;
-        }
-
-        Lib.Icon {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            type: types.fa_exclamation_triangle;
-            color: App.editor.issues.warningCount > 0 ? "#ff9900" : "#9DA5B4"
-        }
-
-        Lib.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            text: App.editor.issues.warningCount;
-            font.pointSize: 11;
-        }
-    }
-
-    Row {
         id: dbgRow;
 
         anchors.top: parent.top;

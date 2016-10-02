@@ -47,7 +47,7 @@ Item {
 
     function compile() {
         var qmlObject = undefined;
-        App.editor.issues.clear();
+        App.editor.errors.clear();
 
         try {
             qmlObject = Qt.createQmlObject(App.compiler.source, container, "root");
@@ -65,8 +65,10 @@ Item {
             for (var i = 0; i < errors.length; i++) {
                 var error = errors[i];
 
-                App.editor.issues.addError(error.lineNumber, error.columnNumber, error.message);
+                App.editor.errors.add(error.lineNumber, error.columnNumber, error.message);
             }
+
+            App.editor.errors.update();
 
             App.compiler.failed = true;
         }

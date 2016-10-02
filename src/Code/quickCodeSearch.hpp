@@ -23,11 +23,10 @@ namespace quick {
             int m_currentMatch = -1;
         private:
             static Qml::Register::Controller<Search> Register;
-            static Search* instance;
         public:
             Search();
+            static Search* instance;
             static auto Create() -> void;
-            static auto GetInstance() -> Search*;
             auto processSearch() -> void;
             auto setFindString(const QString&) -> void;
             auto getFindString() -> QString;

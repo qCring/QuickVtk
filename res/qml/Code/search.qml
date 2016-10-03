@@ -44,14 +44,24 @@ Rectangle {
                 anchors.left: parent.left;
                 anchors.verticalCenter: parent.verticalCenter;
 
+                font.bold: true;
+
                 text: "Find & Replace"
             }
 
-            Lib.Label {
+            Lib.TagLabel {
+                id: matchLabel;
+
                 anchors.right: parent.right;
                 anchors.verticalCenter: parent.verticalCenter;
 
-                text: App.search.matchCount > 0 ? (App.search.currentMatch + 1) + "/" + App.search.matchCount : "";
+                label.leftPadding: 4;
+                label.rightPadding: 4;
+
+                color: "#2B68A4"
+                visible: App.search.matchCount;
+
+                label.text: App.search.matchCount > 0 ? (App.search.currentMatch + 1) + " of " + App.search.matchCount : "";
             }
         }
 
@@ -66,7 +76,7 @@ Rectangle {
 
                 anchors.left: parent.left;
                 anchors.right: findButton.left;
-                anchors.rightMargin: 8;
+                anchors.rightMargin: 4;
                 anchors.verticalCenter: parent.verticalCenter;
 
                 KeyNavigation.tab: replaceInput;
@@ -78,18 +88,68 @@ Rectangle {
                 onEnterPressed: {
                     App.search.findNext();
                 }
+
+                Lib.Label {
+                    anchors.right: parent.right;
+                    anchors.rightMargin: 4;
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    font.pointSize: 10;
+                    text: App.search.regexError;
+                }
             }
 
             Lib.Button {
                 id: findButton;
 
-                anchors.right: parent.right;
+                anchors.right: findOptions.left;
+                anchors.rightMargin: 4;
                 anchors.verticalCenter: parent.verticalCenter;
-                label.text: App.search.matchCount > 0 ? "Next" : "Find";
+
+                label.text: "Find";
+
+                icon.type: icon.types.fa_search;
+                width: replaceButton.width;
 
                 onClicked: {
                     App.search.findString = findInput.text;
                     findInput.forceActiveFocus();
+                }
+            }
+
+            Row {
+                id: findOptions;
+
+                anchors.right: parent.right;
+                anchors.top: parent.top;
+                anchors.bottom: parent.bottom;
+
+                Lib.Button {
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    highlight: App.search.caseSensitive;
+                    width: replaceAllButton.width/2;
+
+                    label.text: "Aa";
+
+                    onClicked: {
+                        App.search.caseSensitive = !App.search.caseSensitive;
+                        findInput.forceActiveFocus();
+                    }
+                }
+
+                Lib.Button {
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    highlight: App.search.useRegex;
+                    width: replaceAllButton.width/2;
+
+                    label.text: ".*";
+
+                    onClicked: {
+                        App.search.useRegex = !App.search.useRegex;
+                        findInput.forceActiveFocus();
+                    }
                 }
             }
         }
@@ -104,8 +164,8 @@ Rectangle {
                 id: replaceInput;
 
                 anchors.left: parent.left;
-                anchors.right: replaceButton.left;
-                anchors.rightMargin: 8;
+                anchors.right: replaceButtons.left;
+                anchors.rightMargin: 4;
                 anchors.verticalCenter: parent.verticalCenter;
 
                 KeyNavigation.tab: findInput;
@@ -120,16 +180,43 @@ Rectangle {
                 }
             }
 
-            Lib.Button {
-                id: replaceButton;
+            Row {
+                id: replaceButtons;
 
+                anchors.top: parent.top;
+                anchors.bottom: parent.bottom;
                 anchors.right: parent.right;
-                anchors.verticalCenter: parent.verticalCenter;
-                label.text: App.search.matchCount > 0 ? "Replace" : "Replace";
 
-                onClicked: {
-                    App.search.replaceNext();
-                    replaceInput.forceActiveFocus();
+                spacing: 4;
+
+                Lib.Button {
+                    id: replaceButton;
+
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    label.text: "Replace";
+                    icon.type: icon.types.fa_refresh;
+
+                    onClicked: {
+                        App.search.replaceNext();
+                        replaceInput.forceActiveFocus();
+                    }
+                }
+
+                Lib.Button {
+                    id: replaceAllButton;
+
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    label.text: "Replace All";
+                    icon.type: icon.types.fa_refresh;
+
+                    enabled: false;
+
+                    onClicked: {
+                        App.search.replaceAll();
+                        replaceInput.forceActiveFocus();
+                    }
                 }
             }
         }

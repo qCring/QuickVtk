@@ -8,8 +8,9 @@ Rectangle {
 
     property alias label: label;
     property alias icon: icon;
+    property bool highlight: false;
 
-    color: ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
+    color: highlight ? "#2B68A4" : ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
     border.color: "#181A1F"
 
     radius: 2;
@@ -37,7 +38,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             font.weight: Font.Medium;
-            color: enabled ? ma.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
+            color: enabled ? highlight || ma.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
         }
     }
 

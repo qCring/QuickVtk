@@ -126,7 +126,7 @@ Item {
                         style:                  Text.Normal;
                         color:                  index == editor.line ? "#fff" : "#6E7582"
                         font.family:            textEdit.font.family;
-                        font.pixelSize:         editor.fontSize;
+                        font.pointSize:         editor.fontSize;
                         verticalAlignment:      Text.AlignVCenter;
                         horizontalAlignment:    Text.AlignHCenter;
 

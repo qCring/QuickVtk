@@ -1,4 +1,5 @@
 import QtQuick 2.6
+import QtQuick.Controls 1.4
 
 import App 1.0 as App
 import Lib 1.0 as Lib
@@ -14,130 +15,99 @@ Item {
         textEdit.forceActiveFocus();
     }
 
-    onVisibleChanged: {
-        if (visible) {
-            activate();
-        }
-    }
+    Flickable {
+        id: scrollView;
 
-    Item {
-        anchors.fill: parent;
+        anchors.left: lines.right;
+        anchors.top: parent.top;
+        anchors.bottom: search.visible ? search.top : parent.bottom;
+        anchors.right: parent.right;
 
-        MouseArea {
-            anchors.fill: parent;
-            onClicked: {
-                root.activate();
-            }
-        }
+        contentWidth: textEdit.width;
+        contentHeight: textEdit.height;
 
         Rectangle {
+            id: cursorBg;
+
             anchors.left: parent.left;
-            anchors.top: parent.top;
-            anchors.bottom: parent.bottom;
-            width: editor.fontSize * 3;
-            color: "#21252B";
+            anchors.right: parent.right;
+            y: height * editor.line;
+            height: textEdit.cursorRectangle.height;
 
-            Rectangle {
-                anchors.top: parent.top;
-                anchors.bottom: parent.bottom;
-                anchors.right: parent.right;
-                width:1;
-
-                color: "#282C34"
-            }
+            color: "#11ddddff"
         }
+        
+        Repeater {
+            model: App.editor.errors;
 
-        Rectangle {
-            id: stripe;
-
-            anchors.left: parent.left;
-            anchors.top: parent.top;
-            anchors.bottom: parent.bottom;
-            anchors.leftMargin: lines.width;
-
-            width: 12;
-            color: "#21252B"
-
-            Rectangle {
-                anchors.top: parent.top;
-                anchors.bottom: parent.bottom;
+            delegate: Error {
+                anchors.left: parent.left;
                 anchors.right: parent.right;
-                width:1;
 
-                color: "#181A1F"
+                height: cursorBg.height;
+                y: (model.line - 1) * height;
+
+                error: model;
             }
         }
 
         Lib.TextEdit {
             id: textEdit
 
-            y: -scrollView.flickableItem.contentY;
-
-            anchors.leftMargin: lines.width + stripe.width;
-            anchors.left: parent.left;
-            anchors.right: parent.right;
+            width: Math.max(implicitWidth, root.width - lines.width);
+            leftPadding: 4;
 
             font.pointSize: editor.fontSize;
-            leftPadding: 4;
             Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
+        }
+    }
 
-            Rectangle {
-                id: cursorBg;
+    Rectangle {
+        id: lines;
 
-                anchors.left: parent.left;
-                anchors.right: parent.right;
-                y: height * editor.line;
-                height: textEdit.cursorRectangle.height;
+        anchors.left: parent.left;
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
 
-                color: "#11ddddff"
-            }
+        width: linesCol.width;
+        color: "#21252B"
+
+        Column {
+            id: linesCol;
+
+            y: -scrollView.contentY;
 
             Repeater {
-                model: App.editor.errors;
+                model: textEdit.lineCount;
 
-                delegate: Error {
-                    anchors.left: parent.left;
+                delegate: Text {
                     anchors.right: parent.right;
+                    rightPadding: 8;
+                    leftPadding: 8;
 
-                    height: cursorBg.height;
-                    y: (model.line - 1) * height;
+                    font.family: textEdit.font.family;
+                    font.pointSize: editor.fontSize;
+                    verticalAlignment: Text.AlignVCenter;
 
-                    error: model;
+                    color: index == editor.line ? "#fff" : "#6E7582"
+                    text: index + 1;
                 }
             }
         }
 
-        Lib.ScrollView {
-            id: scrollView;
+        Rectangle {
+            anchors.top: parent.top;
+            anchors.bottom: parent.bottom;
+            anchors.right: parent.right;
 
-            anchors.fill: parent;
-
-            Column {
-                id: lines;
-
-                width: editor.fontSize * 3;
-
-                Repeater {
-                    model: textEdit.lineCount;
-
-                    delegate: Text {
-                        width: lines.width;
-                        textFormat:             Text.PlainText;
-                        style:                  Text.Normal;
-                        color:                  index == editor.line ? "#fff" : "#6E7582"
-                        font.family:            textEdit.font.family;
-                        font.pointSize:         editor.fontSize;
-                        verticalAlignment:      Text.AlignVCenter;
-                        horizontalAlignment:    Text.AlignHCenter;
-
-                        text: index + 1;
-                    }
-                }
-            }
+            width: 1;
+            color: "#343842"
         }
     }
 
     Search {
+        id: search;
+
         anchors.left: parent.left;
         anchors.bottom: parent.bottom;
         anchors.right: parent.right;
@@ -148,11 +118,6 @@ Item {
     Connections {
 		target: editor;
 		onUpdateSelection: textEdit.select(editor.selectionStart, editor.selectionEnd);
-        onFontSizeChanged: {
-            cursorBg.y = textEdit.positionToRectangle(textEdit.position).y;
-            cursorBg.height = textEdit.cursorRectangle.height;
-            cursorBg.y = Qt.binding(function() { return textEdit.cursorRectangle.y; });
-        }
 	}
 
     Component.onCompleted: {

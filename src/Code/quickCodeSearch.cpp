@@ -174,6 +174,7 @@ namespace quick {
                 if (this->m_useRegex) {
                     auto newCursor = Editor::GetInstance()->getDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
                     if (newCursor.position() == cursor.position()) {
+                        //TODO: this is a quick hack to prevent the app from getting stuck for certain expressions (for example "^^")
                         return;
                     }
 

@@ -26,6 +26,8 @@ Item {
         contentWidth: textEdit.width;
         contentHeight: textEdit.height;
 
+        boundsBehavior: Flickable.StopAtBounds
+
         Rectangle {
             id: cursorBg;
 
@@ -36,7 +38,7 @@ Item {
 
             color: "#11ddddff"
         }
-        
+
         Repeater {
             model: App.editor.errors;
 

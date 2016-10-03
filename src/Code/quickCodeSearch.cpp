@@ -49,6 +49,53 @@ namespace quick {
 
         }
 
+        auto Search::setRegexError(const QString& regexError) -> void {
+            this->m_regexError = regexError;
+            emit this->regexErrorChanged();
+        }
+
+        auto Search::getRegexError() -> QString {
+            return this->m_regexError;
+        }
+
+        auto Search::setRegexValid(bool regexValid) -> void {
+            if (this->m_regexValid != regexValid) {
+                this->m_regexValid = regexValid;
+                emit this->regexValidChanged();
+            }
+        }
+
+        auto Search::getRegexValid() -> bool {
+            return this->m_regexValid;
+        }
+
+        auto Search::setUseRegex(bool useRegex) -> void {
+            if (this->m_useRegex != useRegex) {
+                this->m_useRegex = useRegex;
+                emit this->useRegexChanged();
+
+                this->checkRegex();
+                this->processSearch();
+            }
+        }
+
+        auto Search::getUseRegex() -> bool {
+            return this->m_useRegex;
+        }
+
+        auto Search::setCaseSensitive(bool caseSensitive) -> void {
+            if (this->m_caseSensitive != caseSensitive) {
+                this->m_caseSensitive = caseSensitive;
+                emit this->caseSensitiveChanged();
+
+                this->processSearch();
+            }
+        }
+
+        auto Search::getCaseSensitive() -> bool {
+            return this->m_caseSensitive;
+        }
+
         auto Search::setReplaceString(const QString& replaceString) -> void {
             this->m_replaceString = replaceString;
             emit this->replaceStringChanged();
@@ -58,10 +105,34 @@ namespace quick {
             return this->m_replaceString;
         }
 
+        auto Search::checkRegex() -> void {
+            if (this->m_useRegex) {
+                if (this->m_findString.isEmpty()) {
+                    this->setRegexValid(false);
+                    this->setRegexError("regex is empty");
+                } else {
+                    auto regex = QRegularExpression(this->m_findString);
+                    auto valid = regex.isValid();
+
+                    if (!valid) {
+                        this->setRegexError(regex.errorString());
+                    } else {
+                        this->setRegexError("");
+                    }
+
+                    this->setRegexValid(valid);
+                }
+            } else {
+                this->setRegexValid(true);
+                this->setRegexError("");
+            }
+        }
+
         auto Search::setFindString(const QString& findString) -> void {
             if (this->m_findString.compare(findString) != 0 || !this->m_valid) {
                 this->m_findString = findString;
                 emit this->findStringChanged();
+                this->checkRegex();
                 this->processSearch();
             } else {
                 this->findNext();
@@ -88,6 +159,11 @@ namespace quick {
         }
 
         auto Search::processSearch() -> void {
+
+            if (this->m_useRegex && !this->m_regexValid) {
+                return;
+            }
+
             this->setCurrentMatch(-1);
             this->m_matches.clear();
 
@@ -95,7 +171,20 @@ namespace quick {
             cursor.setPosition(0);
 
             while (true) {
-                cursor = Editor::GetInstance()->getDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
+                if (this->m_useRegex) {
+                    auto newCursor = Editor::GetInstance()->getDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
+                    if (newCursor.position() == cursor.position()) {
+                        return;
+                    }
+
+                    cursor = newCursor;
+                } else {
+                    if (this->m_caseSensitive) {
+                        cursor = Editor::GetInstance()->getDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
+                    } else {
+                        cursor = Editor::GetInstance()->getDocument()->textDocument()->find(this->m_findString, cursor);
+                    }
+                }
 
                 if (cursor.position() > -1) {
                     this->m_matches.append(cursor);

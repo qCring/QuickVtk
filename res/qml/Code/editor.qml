@@ -1,4 +1,5 @@
 import QtQuick 2.6
+import QtQuick.Controls 1.4
 
 import App 1.0 as App
 import Lib 1.0 as Lib
@@ -30,114 +31,100 @@ Item {
             }
         }
 
-        Rectangle {
-            anchors.left: parent.left;
+        Flickable {
+            id: scrollView;
+
+            anchors.left: lines.right;
             anchors.top: parent.top;
             anchors.bottom: parent.bottom;
-            width: editor.fontSize * 3;
-            color: "#21252B";
-
-            Rectangle {
-                anchors.top: parent.top;
-                anchors.bottom: parent.bottom;
-                anchors.right: parent.right;
-                width:1;
-
-                color: "#282C34"
-            }
-        }
-
-        Rectangle {
-            id: stripe;
-
-            anchors.left: parent.left;
-            anchors.top: parent.top;
-            anchors.bottom: parent.bottom;
-            anchors.leftMargin: lines.width;
-
-            width: 12;
-            color: "#21252B"
-
-            Rectangle {
-                anchors.top: parent.top;
-                anchors.bottom: parent.bottom;
-                anchors.right: parent.right;
-                width:1;
-
-                color: "#181A1F"
-            }
-        }
-
-        Lib.TextEdit {
-            id: textEdit
-
-            y: -scrollView.flickableItem.contentY;
-
-            anchors.leftMargin: lines.width + stripe.width;
-            anchors.left: parent.left;
             anchors.right: parent.right;
 
-            font.pointSize: editor.fontSize;
-            leftPadding: 4;
-            Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
+            contentWidth: textEdit.width;
+            contentHeight: textEdit.height;
 
-            Rectangle {
-                id: cursorBg;
+            Lib.TextEdit {
+                id: textEdit
 
-                anchors.left: parent.left;
-                anchors.right: parent.right;
-                y: height * editor.line;
-                height: textEdit.cursorRectangle.height;
+                width: Math.max(implicitWidth, root.width - lines.width);
+                leftPadding: 2;
 
-                color: "#11ddddff"
-            }
+                font.pointSize: editor.fontSize;
+                Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
 
-            Repeater {
-                model: App.editor.errors;
+                Rectangle {
+                    id: cursorBg;
 
-                delegate: Error {
                     anchors.left: parent.left;
                     anchors.right: parent.right;
+                    y: height * editor.line;
+                    height: textEdit.cursorRectangle.height;
 
-                    height: cursorBg.height;
-                    y: (model.line - 1) * height;
+                    color: "#11ddddff"
+                }
 
-                    error: model;
+                Repeater {
+                    model: App.editor.errors;
+
+                    delegate: Error {
+                        anchors.left: parent.left;
+                        anchors.right: parent.right;
+
+                        height: cursorBg.height;
+                        y: (model.line - 1) * height;
+
+                        error: model;
+                    }
                 }
             }
         }
 
-        Lib.ScrollView {
-            id: scrollView;
+        Rectangle {
+            id: lines;
 
-            anchors.fill: parent;
+            anchors.left: parent.left;
+            anchors.top: parent.top;
+            anchors.bottom: parent.bottom;
+
+            width: linesCol.width;
+            color: "#21252B"
 
             Column {
-                id: lines;
+                id: linesCol;
 
-                width: editor.fontSize * 3;
+                y: -scrollView.contentY;
 
                 Repeater {
                     model: textEdit.lineCount;
 
                     delegate: Text {
-                        width: lines.width;
-                        textFormat:             Text.PlainText;
-                        style:                  Text.Normal;
-                        color:                  index == editor.line ? "#fff" : "#6E7582"
-                        font.family:            textEdit.font.family;
-                        font.pointSize:         editor.fontSize;
-                        verticalAlignment:      Text.AlignVCenter;
-                        horizontalAlignment:    Text.AlignHCenter;
+                        anchors.right: parent.right;
+                        rightPadding: 8;
+                        leftPadding: 8;
 
+                        font.family: textEdit.font.family;
+                        font.pointSize: editor.fontSize;
+                        verticalAlignment: Text.AlignVCenter;
+
+                        color: index == editor.line ? "#fff" : "#6E7582"
                         text: index + 1;
                     }
                 }
+            }
+
+            Rectangle {
+                anchors.top: parent.top;
+                anchors.bottom: parent.bottom;
+                anchors.right: parent.right;
+
+                width: 1;
+                color: "#343842"
             }
         }
     }
 
     Search {
+        id: search;
+
         anchors.left: parent.left;
         anchors.bottom: parent.bottom;
         anchors.right: parent.right;

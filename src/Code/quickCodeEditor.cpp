@@ -137,6 +137,18 @@ namespace quick {
             return this->m_editorCursor;
         }
 
+        void Editor::incrementFontSize() {
+            if (this->m_fontSize < this->maxFontSize) {
+                this->setFontSize(this->m_fontSize + 2);
+            }
+        }
+
+        void Editor::decrementFontSize() {
+            if (this->m_fontSize > this->minFontSize) {
+                this->setFontSize(this->m_fontSize - 2);
+            }
+        }
+
         auto Editor::setFontSize(int fontSize) -> void {
             this->m_fontSize = fontSize;
             emit this->fontSizeChanged();
@@ -173,13 +185,13 @@ namespace quick {
             }
 
             if (modifiers == Qt::ControlModifier) {
-                if (key == Qt::Key_Plus && this->m_fontSize < this->maxFontSize) {
-                    this->setFontSize(this->m_fontSize + 2);
+                if (key == Qt::Key_Plus) {
+                    this->incrementFontSize();
                     return true;
                 }
 
-                if (key == Qt::Key_Minus && this->m_fontSize > this->minFontSize) {
-                    this->setFontSize(this->m_fontSize - 2);
+                if (key == Qt::Key_Minus) {
+                    this->decrementFontSize();
                     return true;
                 }
 

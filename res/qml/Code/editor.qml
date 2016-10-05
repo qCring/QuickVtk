@@ -20,7 +20,7 @@ Item {
 
         anchors.left: lines.right;
         anchors.top: parent.top;
-        anchors.bottom: search.visible ? search.top : parent.bottom;
+        anchors.bottom: search.visible ? search.top : footer.top;
         anchors.right: parent.right;
 
         contentWidth: textEdit.width;
@@ -69,7 +69,7 @@ Item {
 
         anchors.left: parent.left;
         anchors.top: parent.top;
-        anchors.bottom: parent.bottom;
+        anchors.bottom: footer.top;
 
         width: linesCol.width;
         color: "#21252B"
@@ -111,10 +111,18 @@ Item {
         id: search;
 
         anchors.left: parent.left;
-        anchors.bottom: parent.bottom;
+        anchors.bottom: footer.top;
         anchors.right: parent.right;
 
         refocus: textEdit;
+    }
+
+    Footer {
+        id: footer;
+
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.bottom: parent.bottom;
     }
 
     Connections {

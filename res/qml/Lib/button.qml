@@ -3,15 +3,16 @@ import QtQuick 2.6
 Rectangle {
     id: root;
 
-    width: row.width + 24;
+    width: frameless ? row.width + 6 : row.width + 24;
     height: label.height + 6;
 
     property alias label: label;
     property alias icon: icon;
     property bool highlight: false;
+    property bool frameless: false;
 
-    color: highlight ? "#2B68A4" : ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
-    border.color: "#181A1F"
+    color: frameless ? "#00000000" : highlight ? "#2B68A4" : ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
+    border.color: frameless ? "#00000000" : "#181A1F"
 
     radius: 2;
 

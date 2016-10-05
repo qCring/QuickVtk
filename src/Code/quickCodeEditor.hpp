@@ -21,7 +21,7 @@ namespace quick {
             Q_PROPERTY(int selectionStart READ getSelectionStart WRITE setSelectionStart NOTIFY selectionStartChanged);
             Q_PROPERTY(int selectionEnd READ getSelectionEnd WRITE setSelectionEnd NOTIFY selectionEndChanged);
             Q_PROPERTY(int editorCursor READ getEditorCursor WRITE setEditorCursor NOTIFY editorCursorChanged);
-            Q_PROPERTY(int fontSize READ getFontSize WRITE setFontSize NOTIFY fontSizeChanged);
+            Q_PROPERTY(int fontSize READ getFontSize NOTIFY fontSizeChanged);
             Q_PROPERTY(int line READ getLine NOTIFY lineChanged);
             Q_PROPERTY(int column READ getColumn NOTIFY columnChanged);
             Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
@@ -74,6 +74,8 @@ namespace quick {
             void openFile();
             void saveFile();
             void newFile();
+            void incrementFontSize();
+            void decrementFontSize();
             void run();
             void format();
         signals:

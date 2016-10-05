@@ -379,12 +379,17 @@ namespace quick {
                 IO::Write::TextToFile(this->getText(), this->m_filePath);
                 this->setModified(false);
             } else {
-                this->m_filePath = IO::FromDialog::SelectSaveFileUrl("*.qml");
-                emit this->filePathChanged();
+                auto newPath = IO::FromDialog::SelectSaveFileUrl();
 
-                if (IO::FileExists(this->m_filePath)) {
-                    IO::Write::TextToFile(this->getText(), this->m_filePath);
+                if (newPath.isNull() || newPath.isEmpty()) {
+                    return;
+                }
+
+                if (IO::Write::TextToFile(this->getText(), newPath)) {
                     this->setModified(false);
+
+                    this->m_filePath = newPath;
+                    emit this->filePathChanged();
                 }
             }
         }

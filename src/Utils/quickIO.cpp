@@ -10,8 +10,9 @@ namespace quick {
 
         namespace FromDialog {
 
-            auto SelectSaveFileUrl(const QString& filter, const QString& title) -> const QString {
-                return QFileDialog::getSaveFileName(0, title, 0, filter);
+            auto SelectSaveFileUrl(const QString& title) -> const QString {
+                auto ret = QFileDialog::getSaveFileName(0, title, 0);
+                return ret;
             }
 
             auto SelectOpenFileUrl(const QString& filter, const QString& title) -> const QString {
@@ -47,14 +48,18 @@ namespace quick {
 
         namespace Write {
 
-            auto TextToFile(const QString& text, const QString& url) -> void {
+            auto TextToFile(const QString& text, const QString& url) -> bool {
                 QFile file(url);
 
-                if (file.exists() && file.open(QIODevice::WriteOnly)) {
+                if (file.open(QIODevice::WriteOnly)) {
                     QTextStream stream (&file);
                     stream << text;
                     file.close();
+
+                    return true;
                 }
+
+                return false;
             }
         }
 

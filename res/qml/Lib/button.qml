@@ -39,7 +39,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             font.weight: Font.Medium;
-            color: enabled ? highlight || ma.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
+            color: enabled ? ma.pressed ? "#1D9FF2" : highlight || ma.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
         }
     }
 

@@ -33,10 +33,11 @@ Since the project is in an early stage of development, there are no binaries pro
 ##5. Sample Data Sources
 In order to provide working code examples, I redistribute some sample data files. Here's a list of all files located at **res/examples/data/** together with their individual origins:
 
-- `suzanne`: low-poly mesh *(exported to .obj and .stl)* from [Blender](https://www.blender.org)
-- `lena`: testing image *(exported to .png, .jpg and .tiff)* from [Wikipedia](https://en.wikipedia.org/wiki/File:Lenna.png)
-- `imageA` and `imageB`: self-made test images
-- `brain1` and `brain2`: DICOM data from [idoimaging.com](http://idoimaging.com) (special thanks to Andrew Crabb)
+- `Suzanne`: low-poly mesh *(exported to .obj and .stl)* from [Blender](https://www.blender.org)
+- `Stanford Bunny`: high-poly mesh from the [Stanford 3D Scanning Repository](http://graphics.stanford.edu/data/3Dscanrep/) *(.ply, .obj and .stl)*
+- `Brain1` and `Brain2`: DICOM data from [idoimaging.com](http://idoimaging.com) (special thanks to Andrew Crabb)
+- `Lena`: famous testing image *(exported to .png, .jpg and .tiff)* from [Wikipedia](https://en.wikipedia.org/wiki/File:Lenna.png)
+- `ImageA` and `ImageB`: self-made test images
 
 ##6. Contributing
 Any contribution is helpful and awesome! There are basically three forms of how you can contribute to this project and get involved with development: 

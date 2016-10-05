@@ -30,6 +30,7 @@ Rectangle {
         Lib.Button {
             anchors.verticalCenter: parent.verticalCenter;
 
+            frameless: true;
             label.text: "Open";
             icon.type: icon.types.fa_folder_open;
 
@@ -39,6 +40,7 @@ Rectangle {
         Lib.Button {
             anchors.verticalCenter: parent.verticalCenter;
 
+            frameless: true;
             label.text: "Run";
             icon.type: icon.types.fa_play_circle;
 

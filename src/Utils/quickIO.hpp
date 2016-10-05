@@ -10,7 +10,7 @@ namespace quick {
     namespace IO {
 
         namespace FromDialog {
-            auto SelectSaveFileUrl(const QString& filter, const QString& title = "Save File") -> const QString;
+            auto SelectSaveFileUrl(const QString& title = "Save File") -> const QString;
             auto SelectOpenFileUrl(const QString& filter, const QString& title = "Open File") -> const QString;
         }
 
@@ -20,7 +20,7 @@ namespace quick {
         }
 
         namespace Write {
-            auto TextToFile(const QString& text, const QString& url) -> void;
+            auto TextToFile(const QString& text, const QString& url) -> bool;
         }
 
         auto FileUrlsFromDir(const QString& dir, QStringList filters) -> QStringList;

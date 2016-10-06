@@ -27,7 +27,6 @@ namespace quick {
             Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
         private:
             static Qml::Register::Controller<Editor> Register;
-            static Editor* instance;
             QQuickTextDocument* m_document = nullptr;
             Highlighter* m_highlighter = nullptr;
             QString m_filePath;
@@ -42,8 +41,8 @@ namespace quick {
             int m_line = 0;
         public:
             Editor();
+            static Editor* instance;
             static auto Create() -> void;
-            static auto GetInstance() -> Editor*;
             auto init() -> void;
             auto getCurrentCursor() -> QTextCursor;
             auto setText(const QString&) -> void;
@@ -74,8 +73,8 @@ namespace quick {
             void openFile();
             void saveFile();
             void newFile();
-            void incrementFontSize();
-            void decrementFontSize();
+            void increaseFontSize();
+            void decreaseFontSize();
             void run();
             void format();
         signals:

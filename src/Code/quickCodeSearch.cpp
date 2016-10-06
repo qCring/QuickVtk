@@ -167,12 +167,12 @@ namespace quick {
             this->setCurrentMatch(-1);
             this->m_matches.clear();
 
-            auto cursor = Editor::GetInstance()->getCurrentCursor();
+            auto cursor = Editor::instance->getCurrentCursor();
             cursor.setPosition(0);
 
             while (true) {
                 if (this->m_useRegex) {
-                    auto newCursor = Editor::GetInstance()->getDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
+                    auto newCursor = Editor::instance->getDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
                     if (newCursor.position() == cursor.position()) {
                         //TODO: this is a quick hack to prevent the app from getting stuck for certain expressions (for example "^^")
                         return;
@@ -181,9 +181,9 @@ namespace quick {
                     cursor = newCursor;
                 } else {
                     if (this->m_caseSensitive) {
-                        cursor = Editor::GetInstance()->getDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
+                        cursor = Editor::instance->getDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
                     } else {
-                        cursor = Editor::GetInstance()->getDocument()->textDocument()->find(this->m_findString, cursor);
+                        cursor = Editor::instance->getDocument()->textDocument()->find(this->m_findString, cursor);
                     }
                 }
 
@@ -211,7 +211,7 @@ namespace quick {
             }
 
             this->setCurrentMatch((this->m_currentMatch + 1) % this->m_matches.count());
-            Editor::GetInstance()->select(this->m_matches.at(this->m_currentMatch));
+            Editor::instance->select(this->m_matches.at(this->m_currentMatch));
         }
 
         auto Search::findPrevious() -> void {
@@ -225,7 +225,7 @@ namespace quick {
             }
 
             this->setCurrentMatch((this->m_currentMatch - 1) % this->m_matches.count());
-            Editor::GetInstance()->select(this->m_matches.at(this->m_currentMatch));
+            Editor::instance->select(this->m_matches.at(this->m_currentMatch));
         }
     }
 }

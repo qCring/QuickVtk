@@ -34,10 +34,6 @@ namespace quick {
             instance = new Editor();
         }
 
-        auto Editor::GetInstance() -> Editor* {
-            return instance;
-        }
-
         auto Editor::setText(const QString& text) -> void {
             this->m_document->textDocument()->setPlainText(text);
         }
@@ -137,13 +133,13 @@ namespace quick {
             return this->m_editorCursor;
         }
 
-        void Editor::incrementFontSize() {
+        void Editor::increaseFontSize() {
             if (this->m_fontSize < this->maxFontSize) {
                 this->setFontSize(this->m_fontSize + 2);
             }
         }
 
-        void Editor::decrementFontSize() {
+        void Editor::decreaseFontSize() {
             if (this->m_fontSize > this->minFontSize) {
                 this->setFontSize(this->m_fontSize - 2);
             }
@@ -185,46 +181,8 @@ namespace quick {
             }
 
             if (modifiers == Qt::ControlModifier) {
-                if (key == Qt::Key_Plus) {
-                    this->incrementFontSize();
-                    return true;
-                }
-
-                if (key == Qt::Key_Minus) {
-                    this->decrementFontSize();
-                    return true;
-                }
-
                 if (key == Qt::Key_F) {
                     emit Search::instance->show();
-                    return true;
-                }
-
-                if (key == Qt::Key_S) {
-                    this->saveFile();
-                    return true;
-                }
-
-                if (key == Qt::Key_R) {
-                    this->run();
-                    return true;
-                }
-
-                if (key == Qt::Key_O) {
-                    this->openFile();
-                    Search::instance->invalidate();
-                    return true;
-                }
-
-                if (key == Qt::Key_N) {
-                    this->newFile();
-                    Errors::instance->clear();
-                    Search::instance->invalidate();
-                    return true;
-                }
-
-                if (key == Qt::Key_I) {
-                    this->format();
                     return true;
                 }
 
@@ -397,10 +355,12 @@ namespace quick {
         void Editor::openFile() {
             auto newFilePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
 
+
             if (IO::FileExists(newFilePath)) {
                 this->m_filePath = newFilePath;
                 emit this->filePathChanged();
 
+                Search::instance->invalidate();
                 this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
                 this->format();
@@ -425,6 +385,9 @@ namespace quick {
             
             this->setText("");
             this->setModified(false);
+
+            Errors::instance->clear();
+            Search::instance->invalidate();
         }
 
         Editor::~Editor() {

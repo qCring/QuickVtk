@@ -6,6 +6,7 @@
 #include "quickAppController.hpp"
 #include "quickSampleDataController.hpp"
 #include "quickAppLogger.hpp"
+#include "quickAppMenu.hpp"
 
 #include <QFontDatabase>
 #include <QApplication>
@@ -54,6 +55,8 @@ namespace quick {
             AddFontDir(resourceDir + "fonts/vera/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
+            Menu::Create();
+            
             this->m_view = new QQuickView();
             this->m_view->setTitle(QGuiApplication::applicationName());
 
@@ -63,7 +66,6 @@ namespace quick {
             engine->addImportPath(resourceDir + "qml");
             context->setContextProperty("App", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
-
 
             QSurfaceFormat format;
             format.setMajorVersion(3);

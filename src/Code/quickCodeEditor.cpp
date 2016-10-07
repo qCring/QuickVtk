@@ -299,6 +299,7 @@ namespace quick {
 
         void Editor::format() {
             auto block = this->m_document->textDocument()->firstBlock();
+            this->m_lines.clear();
 
             do {
                 auto line = block.text().simplified();
@@ -322,10 +323,13 @@ namespace quick {
                     cursor.insertText("\t");
                 }
 
+                this->m_lines.append(state);
                 cursor.insertText(line);
                 block.setUserState(state);
                 block = block.next();
             } while (block.isValid());
+
+            emit this->linesChanged();
         }
 
         void Editor::run() {
@@ -387,8 +391,15 @@ namespace quick {
             this->setText("");
             this->setModified(false);
 
+            this->m_lines.clear();
+            emit this->linesChanged();
+
             Errors::instance->clear();
             Search::instance->invalidate();
+        }
+
+        auto Editor::getLines() -> QList<int> {
+            return this->m_lines;
         }
 
         Editor::~Editor() {

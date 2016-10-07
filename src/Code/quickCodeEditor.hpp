@@ -18,6 +18,7 @@ namespace quick {
             Q_PROPERTY(quick::Code::Errors* errors READ getErrors CONSTANT);
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
+            Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
             Q_PROPERTY(int selectionStart READ getSelectionStart WRITE setSelectionStart NOTIFY selectionStartChanged);
             Q_PROPERTY(int selectionEnd READ getSelectionEnd WRITE setSelectionEnd NOTIFY selectionEndChanged);
             Q_PROPERTY(int editorCursor READ getEditorCursor WRITE setEditorCursor NOTIFY editorCursorChanged);
@@ -30,6 +31,7 @@ namespace quick {
             QQuickTextDocument* m_document = nullptr;
             Highlighter* m_highlighter = nullptr;
             QString m_filePath;
+            QList<int> m_lines;
             bool m_modified = false;
             int minFontSize = 6;
             int maxFontSize = 20;
@@ -64,6 +66,7 @@ namespace quick {
             auto getErrors() -> Errors*;
             auto setLine(int) -> void;
             auto getLine() -> int;
+            auto getLines() -> QList<int>;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
             auto open(const QString&) -> void;
@@ -87,6 +90,7 @@ namespace quick {
             void documentChanged();
             void fontSizeChanged();
             void columnChanged();
+            void linesChanged();
             void lineChanged();
             void updateSelection();
         };

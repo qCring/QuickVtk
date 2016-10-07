@@ -71,7 +71,7 @@ Item {
         anchors.top: parent.top;
         anchors.bottom: footer.top;
 
-        width: linesCol.width;
+        width: linesCol.width + lineBar.width;
         color: "#21252B"
 
         Column {
@@ -97,10 +97,52 @@ Item {
             }
         }
 
+        Item {
+            id: lineBar;
+
+            anchors.top: linesCol.top;
+            anchors.bottom: parent.bottom;
+            anchors.left: linesCol.right;
+
+            width: 14;
+
+            Column {
+                Repeater {
+                    model: editor.lines.length;
+                    delegate: Item {
+                        width: 14;
+                        height: cursorBg.height;
+
+                        Rectangle {
+                            anchors.fill: parent;
+                            color: "#9DA5B4"
+                            opacity: Math.round(editor.lines[index] / 2)/20;
+                        }
+                        
+                        Lib.Label {
+                            anchors.centerIn: parent;
+                            font.pointSize: 8;
+                            color: "#fff";
+                            text: editor.lines[index];
+                        }
+                    }
+                }
+            }
+        }
+
         Rectangle {
             anchors.top: parent.top;
             anchors.bottom: parent.bottom;
             anchors.right: parent.right;
+
+            width: 1;
+            color: "#343842"
+        }
+
+        Rectangle {
+            anchors.top: parent.top;
+            anchors.bottom: parent.bottom;
+            anchors.right: lineBar.left;
 
             width: 1;
             color: "#343842"

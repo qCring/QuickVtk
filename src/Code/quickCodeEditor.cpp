@@ -5,9 +5,10 @@
 #include "quickCodeSearch.hpp"
 #include "quickIO.hpp"
 
+#include <QClipboard>
 #include <QTextOption>
 #include <QApplication>
-#include <QClipboard>
+#include <QElapsedTimer>
 #include <QRegularExpression>
 
 namespace quick {
@@ -32,10 +33,6 @@ namespace quick {
 
         auto Editor::Create() -> void {
             instance = new Editor();
-        }
-
-        auto Editor::GetInstance() -> Editor* {
-            return instance;
         }
 
         auto Editor::setText(const QString& text) -> void {
@@ -137,13 +134,13 @@ namespace quick {
             return this->m_editorCursor;
         }
 
-        void Editor::incrementFontSize() {
+        void Editor::increaseFontSize() {
             if (this->m_fontSize < this->maxFontSize) {
                 this->setFontSize(this->m_fontSize + 2);
             }
         }
 
-        void Editor::decrementFontSize() {
+        void Editor::decreaseFontSize() {
             if (this->m_fontSize > this->minFontSize) {
                 this->setFontSize(this->m_fontSize - 2);
             }
@@ -185,46 +182,8 @@ namespace quick {
             }
 
             if (modifiers == Qt::ControlModifier) {
-                if (key == Qt::Key_Plus) {
-                    this->incrementFontSize();
-                    return true;
-                }
-
-                if (key == Qt::Key_Minus) {
-                    this->decrementFontSize();
-                    return true;
-                }
-
                 if (key == Qt::Key_F) {
                     emit Search::instance->show();
-                    return true;
-                }
-
-                if (key == Qt::Key_S) {
-                    this->saveFile();
-                    return true;
-                }
-
-                if (key == Qt::Key_R) {
-                    this->run();
-                    return true;
-                }
-
-                if (key == Qt::Key_O) {
-                    this->openFile();
-                    Search::instance->invalidate();
-                    return true;
-                }
-
-                if (key == Qt::Key_N) {
-                    this->newFile();
-                    Errors::instance->clear();
-                    Search::instance->invalidate();
-                    return true;
-                }
-
-                if (key == Qt::Key_I) {
-                    this->format();
                     return true;
                 }
 
@@ -340,7 +299,11 @@ namespace quick {
         }
 
         void Editor::format() {
+            QElapsedTimer timer;
+            timer.start();
+
             auto block = this->m_document->textDocument()->firstBlock();
+            this->m_lines.clear();
 
             do {
                 auto line = block.text().simplified();
@@ -364,10 +327,20 @@ namespace quick {
                     cursor.insertText("\t");
                 }
 
+                this->m_lines.append(state);
                 cursor.insertText(line);
                 block.setUserState(state);
                 block = block.next();
             } while (block.isValid());
+
+            emit this->linesChanged();
+
+            this->m_formatTime = timer.elapsed();
+            emit this->formatTimeChanged();
+        }
+
+        auto Editor::getFormatTime() -> int {
+            return this->m_formatTime;
         }
 
         void Editor::run() {
@@ -394,19 +367,22 @@ namespace quick {
             }
         }
 
-        void Editor::openFile() {
-            auto newFilePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
-
-            if (IO::FileExists(newFilePath)) {
-                this->m_filePath = newFilePath;
+        auto Editor::open(const QString& filePath) -> void {
+            if (IO::FileExists(filePath)) {
+                this->m_filePath = filePath;
                 emit this->filePathChanged();
 
+                Search::instance->invalidate();
                 this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
                 this->format();
-
+                
                 this->run();
             }
+        }
+
+        void Editor::openFile() {
+            this->open(IO::FromDialog::SelectOpenFileUrl("*.qml"));
         }
 
         auto Editor::select(QTextCursor cursor) -> void {
@@ -425,6 +401,16 @@ namespace quick {
             
             this->setText("");
             this->setModified(false);
+
+            this->m_lines.clear();
+            emit this->linesChanged();
+
+            Errors::instance->clear();
+            Search::instance->invalidate();
+        }
+
+        auto Editor::getLines() -> QList<int> {
+            return this->m_lines;
         }
 
         Editor::~Editor() {

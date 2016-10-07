@@ -10,6 +10,16 @@ Rectangle {
 
     color: "#21252B"
 
+    Lib.Label {
+        anchors.left: parent.left;
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.leftMargin: 4;
+        visible: App.editor.formatTime > 0;
+        text: App.editor.formatTime < 1000 ? "time needed for formatting: " + App.editor.formatTime + " ms" : "time needed for formatting: " + App.editor.formatTime/1000 + " sec";
+        color: "orange"
+        font.pointSize: 10;
+    }
+
     Row {
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;

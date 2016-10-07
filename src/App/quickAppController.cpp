@@ -58,7 +58,7 @@ namespace quick {
         }
 
         auto Controller::getEditor() -> Code::Editor* {
-            return Code::Editor::GetInstance();
+            return Code::Editor::instance;
         }
 
         auto Controller::getSearch() -> Code::Search* {

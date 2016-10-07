@@ -63,20 +63,43 @@ namespace quick {
             }
         }
 
-        auto FileUrlsFromDir(const QString& dir, QStringList filters) -> QStringList {
-
+        auto FileNamesFromDir(const QString& dir, QStringList filters, FileSuffix option) -> QStringList {
             QDirIterator it(dir, filters, QDir::Files);
-            QStringList fileList;
+            QStringList names;
 
-            while (it.hasNext())
-            {
-                auto path = it.next();
-                auto file = it.fileName();
-
-                fileList.append(path);
+            if (option == FileSuffix::On) {
+                while (it.hasNext()) {
+                    it.next();
+                    names.append(it.fileInfo().fileName());
+                }
+            } else {
+                while (it.hasNext()) {
+                    it.next();
+                    names.append(it.fileInfo().baseName());
+                }
             }
 
-            return fileList;
+            return names;
+        }
+
+        auto FileUrlsFromDir(const QString& dir, QStringList filters, FileSuffix option) -> QStringList {
+
+            QDirIterator it(dir, filters, QDir::Files);
+            QStringList urls;
+            QString path = dir + "/";
+
+            if (option == FileSuffix::On) {
+                while (it.hasNext()) {
+                    urls.append(it.next());
+                }
+            } else {
+                while (it.hasNext()) {
+                    it.next();
+                    urls.append(path + it.fileInfo().baseName());
+                }
+            }
+
+            return urls;
         }
 
         auto FileExists(const QString& filePath) -> bool {

@@ -18,6 +18,7 @@ namespace quick {
             Q_PROPERTY(quick::Code::Errors* errors READ getErrors CONSTANT);
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
+            Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
             Q_PROPERTY(int selectionStart READ getSelectionStart WRITE setSelectionStart NOTIFY selectionStartChanged);
             Q_PROPERTY(int selectionEnd READ getSelectionEnd WRITE setSelectionEnd NOTIFY selectionEndChanged);
             Q_PROPERTY(int editorCursor READ getEditorCursor WRITE setEditorCursor NOTIFY editorCursorChanged);
@@ -25,12 +26,14 @@ namespace quick {
             Q_PROPERTY(int line READ getLine NOTIFY lineChanged);
             Q_PROPERTY(int column READ getColumn NOTIFY columnChanged);
             Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
+            Q_PROPERTY(int formatTime READ getFormatTime NOTIFY formatTimeChanged);
         private:
             static Qml::Register::Controller<Editor> Register;
-            static Editor* instance;
             QQuickTextDocument* m_document = nullptr;
             Highlighter* m_highlighter = nullptr;
             QString m_filePath;
+            QList<int> m_lines;
+            int m_formatTime = 0;
             bool m_modified = false;
             int minFontSize = 6;
             int maxFontSize = 20;
@@ -42,8 +45,8 @@ namespace quick {
             int m_line = 0;
         public:
             Editor();
+            static Editor* instance;
             static auto Create() -> void;
-            static auto GetInstance() -> Editor*;
             auto init() -> void;
             auto getCurrentCursor() -> QTextCursor;
             auto setText(const QString&) -> void;
@@ -56,6 +59,7 @@ namespace quick {
             auto getModified() -> bool;
             auto setFontSize(int) -> void;
             auto getFontSize() -> int;
+            auto getFormatTime() -> int;
             auto setSelectionStart(int) -> void;
             auto getSelectionStart() -> int;
             auto setSelectionEnd(int) -> void;
@@ -65,8 +69,10 @@ namespace quick {
             auto getErrors() -> Errors*;
             auto setLine(int) -> void;
             auto getLine() -> int;
+            auto getLines() -> QList<int>;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
+            auto open(const QString&) -> void;
             auto select(QTextCursor) -> void;
             ~Editor();
         public slots:
@@ -74,8 +80,8 @@ namespace quick {
             void openFile();
             void saveFile();
             void newFile();
-            void incrementFontSize();
-            void decrementFontSize();
+            void increaseFontSize();
+            void decreaseFontSize();
             void run();
             void format();
         signals:
@@ -87,8 +93,10 @@ namespace quick {
             void documentChanged();
             void fontSizeChanged();
             void columnChanged();
+            void linesChanged();
             void lineChanged();
             void updateSelection();
+            void formatTimeChanged();
         };
     }
 }

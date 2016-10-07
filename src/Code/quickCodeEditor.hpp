@@ -66,6 +66,7 @@ namespace quick {
             auto getLine() -> int;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
+            auto open(const QString&) -> void;
             auto select(QTextCursor) -> void;
             ~Editor();
         public slots:

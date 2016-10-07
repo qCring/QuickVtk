@@ -96,7 +96,7 @@ namespace quick {
         }
 
         auto Instance::AddFontDir(const QString& directory) -> void {
-            auto fontUrls = IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"});
+            auto fontUrls = IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"}, IO::FileSuffix::On);
 
             for (auto fontUrl : fontUrls) {
                 QFontDatabase::addApplicationFont(fontUrl);

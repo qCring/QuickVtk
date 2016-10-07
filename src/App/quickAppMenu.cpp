@@ -1,9 +1,10 @@
 #include "quickAppMenu.hpp"
 
 #include "quickCodeEditor.hpp"
+#include "quickAppInstance.hpp"
+#include "quickIO.hpp"
 
 #include <QMenuBar>
-#include <iostream>
 
 namespace quick {
 
@@ -32,6 +33,7 @@ namespace quick {
             auto viewMenu = new QMenu(tr("View"), menuBar);
             auto codeMenu = new QMenu(tr("Code"), menuBar);
             auto helpMenu = new QMenu(tr("Help"), menuBar);
+            auto helpExamples = new QMenu(tr("Examples"), helpMenu);
 
             add(fileMenu, FileNewFile, "New File", "Ctrl+N");
             add(fileMenu, FileOpenFile, "Open File", "Ctrl+O");
@@ -46,6 +48,14 @@ namespace quick {
             add(helpMenu, HelpAbout, "About");
             add(helpMenu, HelpDocs, "Documentation");
             add(helpMenu, HelpPrefs, "Preferences...");
+
+            auto examples = IO::FileNamesFromDir(Instance::GetResourceDir() + "examples/qml/simple", {"*.qml"}, IO::FileSuffix::Off);
+
+            for (auto example : examples) {
+                add (helpExamples, HelpExample, example);
+            }
+
+            helpMenu->addMenu(helpExamples);
 
             menuBar->addMenu(fileMenu);
             menuBar->addMenu(viewMenu);
@@ -68,6 +78,11 @@ namespace quick {
                 case HelpAbout: break;
                 case HelpDocs: break;
                 case HelpPrefs: break;
+
+                case HelpExample: {
+                    Code::Editor::instance->open(Instance::GetResourceDir() + "examples/qml/simple/" + title + ".qml");
+                    break;
+                }
 
                 default: break;
             }

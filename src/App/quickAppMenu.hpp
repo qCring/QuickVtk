@@ -19,6 +19,7 @@ namespace quick {
                 CodeRun,
                 CodeFormat,
                 HelpAbout,
+                HelpExample,
                 HelpDocs,
                 HelpPrefs
             };

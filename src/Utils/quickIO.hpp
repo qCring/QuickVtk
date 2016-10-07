@@ -9,6 +9,11 @@ namespace quick {
 
     namespace IO {
 
+        enum class FileSuffix {
+            On,
+            Off
+        };
+
         namespace FromDialog {
             auto SelectSaveFileUrl(const QString& title = "Save File") -> const QString;
             auto SelectOpenFileUrl(const QString& filter, const QString& title = "Open File") -> const QString;
@@ -23,7 +28,8 @@ namespace quick {
             auto TextToFile(const QString& text, const QString& url) -> bool;
         }
 
-        auto FileUrlsFromDir(const QString& dir, QStringList filters) -> QStringList;
+        auto FileUrlsFromDir(const QString& dir, QStringList filters, FileSuffix) -> QStringList;
+        auto FileNamesFromDir(const QString& dir, QStringList filters, FileSuffix) -> QStringList;
         auto FileExists(const QString& filePath) -> bool;
     }
 }

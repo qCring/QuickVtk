@@ -352,21 +352,22 @@ namespace quick {
             }
         }
 
-        void Editor::openFile() {
-            auto newFilePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
-
-
-            if (IO::FileExists(newFilePath)) {
-                this->m_filePath = newFilePath;
+        auto Editor::open(const QString& filePath) -> void {
+            if (IO::FileExists(filePath)) {
+                this->m_filePath = filePath;
                 emit this->filePathChanged();
 
                 Search::instance->invalidate();
                 this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
                 this->format();
-
+                
                 this->run();
             }
+        }
+
+        void Editor::openFile() {
+            this->open(IO::FromDialog::SelectOpenFileUrl("*.qml"));
         }
 
         auto Editor::select(QTextCursor cursor) -> void {

@@ -5,9 +5,10 @@
 #include "quickCodeSearch.hpp"
 #include "quickIO.hpp"
 
+#include <QClipboard>
 #include <QTextOption>
 #include <QApplication>
-#include <QClipboard>
+#include <QElapsedTimer>
 #include <QRegularExpression>
 
 namespace quick {
@@ -298,6 +299,9 @@ namespace quick {
         }
 
         void Editor::format() {
+            QElapsedTimer timer;
+            timer.start();
+
             auto block = this->m_document->textDocument()->firstBlock();
             this->m_lines.clear();
 
@@ -330,6 +334,13 @@ namespace quick {
             } while (block.isValid());
 
             emit this->linesChanged();
+
+            this->m_formatTime = timer.elapsed();
+            emit this->formatTimeChanged();
+        }
+
+        auto Editor::getFormatTime() -> int {
+            return this->m_formatTime;
         }
 
         void Editor::run() {

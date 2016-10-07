@@ -26,12 +26,14 @@ namespace quick {
             Q_PROPERTY(int line READ getLine NOTIFY lineChanged);
             Q_PROPERTY(int column READ getColumn NOTIFY columnChanged);
             Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
+            Q_PROPERTY(int formatTime READ getFormatTime NOTIFY formatTimeChanged);
         private:
             static Qml::Register::Controller<Editor> Register;
             QQuickTextDocument* m_document = nullptr;
             Highlighter* m_highlighter = nullptr;
             QString m_filePath;
             QList<int> m_lines;
+            int m_formatTime = 0;
             bool m_modified = false;
             int minFontSize = 6;
             int maxFontSize = 20;
@@ -57,6 +59,7 @@ namespace quick {
             auto getModified() -> bool;
             auto setFontSize(int) -> void;
             auto getFontSize() -> int;
+            auto getFormatTime() -> int;
             auto setSelectionStart(int) -> void;
             auto getSelectionStart() -> int;
             auto setSelectionEnd(int) -> void;
@@ -93,6 +96,7 @@ namespace quick {
             void linesChanged();
             void lineChanged();
             void updateSelection();
+            void formatTimeChanged();
         };
     }
 }

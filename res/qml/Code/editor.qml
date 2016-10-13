@@ -28,6 +28,20 @@ Item {
 
         boundsBehavior: Flickable.StopAtBounds
 
+        function updateScroll(r) {
+            if (contentX >= r.x) {
+                contentX = r.x;
+            } else if (contentX+width <= r.x+r.width) {
+                contentX = r.x+r.width-width;
+            }
+
+            if (contentY >= r.y) {
+                contentY = r.y;
+            } else if (contentY+height <= r.y+r.height) {
+                contentY = r.y+r.height-height;
+            }
+        }
+
         Rectangle {
             id: cursorBg;
 
@@ -61,6 +75,8 @@ Item {
 
             font.pointSize: editor.fontSize;
             Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
+
+            onCursorRectangleChanged: scrollView.updateScroll(cursorRectangle);
         }
     }
 
@@ -91,7 +107,7 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index == editor.line ? "#fff" : "#6E7582"
+                    color: index >= editor.regionStart && index <= editor.regionEnd ? "#fff" : "#6E7582"
                     text: index + 1;
                 }
             }
@@ -118,7 +134,7 @@ Item {
                             color: "#9DA5B4"
                             opacity: Math.round(editor.lines[index] / 2)/20;
                         }
-                        
+
                         Lib.Label {
                             anchors.centerIn: parent;
                             font.pointSize: 8;

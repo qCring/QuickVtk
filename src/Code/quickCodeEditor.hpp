@@ -19,6 +19,8 @@ namespace quick {
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
+            Q_PROPERTY(int regionStart READ getRegionStart NOTIFY regionStartChanged);
+            Q_PROPERTY(int regionEnd READ getRegionEnd NOTIFY regionEndChanged);
             Q_PROPERTY(int selectionStart READ getSelectionStart WRITE setSelectionStart NOTIFY selectionStartChanged);
             Q_PROPERTY(int selectionEnd READ getSelectionEnd WRITE setSelectionEnd NOTIFY selectionEndChanged);
             Q_PROPERTY(int editorCursor READ getEditorCursor WRITE setEditorCursor NOTIFY editorCursorChanged);
@@ -33,6 +35,8 @@ namespace quick {
             Highlighter* m_highlighter = nullptr;
             QString m_filePath;
             QList<int> m_lines;
+            int m_regionStart = 0;
+            int m_regionEnd = 0;
             int m_formatTime = 0;
             bool m_modified = false;
             int minFontSize = 6;
@@ -72,6 +76,10 @@ namespace quick {
             auto getLines() -> QList<int>;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
+            auto setRegionStart(int) -> void;
+            auto getRegionStart() -> int;
+            auto setRegionEnd(int) -> void;
+            auto getRegionEnd() -> int;
             auto open(const QString&) -> void;
             auto select(QTextCursor) -> void;
             ~Editor();
@@ -88,6 +96,8 @@ namespace quick {
             void selectionStartChanged();
             void selectionEndChanged();
             void editorCursorChanged();
+            void regionStartChanged();
+            void regionEndChanged();
             void filePathChanged();
             void modifiedChanged();
             void documentChanged();

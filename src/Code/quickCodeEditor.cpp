@@ -81,6 +81,11 @@ namespace quick {
             this->m_selectionStart = pos;
 
             emit this->selectionStartChanged();
+
+            auto cursor = this->getCurrentCursor();
+            cursor.setPosition(pos);
+
+            this->setRegionStart(cursor.blockNumber());
         }
 
         auto Editor::setSelectionEnd(int pos) -> void {
@@ -92,6 +97,8 @@ namespace quick {
             cursor.setPosition(pos);
             this->setLine(cursor.blockNumber());
             this->setColumn(cursor.columnNumber());
+
+            this->setRegionEnd(cursor.blockNumber());
         }
 
         auto Editor::setFilePath(const QString& filePath) -> void {
@@ -172,6 +179,28 @@ namespace quick {
 
         auto Editor::getErrors() -> Errors* {
             return Errors::instance;
+        }
+
+        auto Editor::setRegionStart(int regionStart) -> void {
+            if (this->m_regionStart != regionStart) {
+                this->m_regionStart = regionStart;
+                emit this->regionStartChanged();
+            }
+        }
+
+        auto Editor::getRegionStart() -> int {
+            return this->m_regionStart;
+        }
+
+        auto Editor::setRegionEnd(int regionEnd) -> void {
+            if (this->m_regionEnd != regionEnd) {
+                this->m_regionEnd = regionEnd;
+                emit this->regionEndChanged();
+            }
+        }
+
+        auto Editor::getRegionEnd() -> int {
+            return this->m_regionEnd;
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {

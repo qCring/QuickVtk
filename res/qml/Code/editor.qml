@@ -91,7 +91,7 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index == editor.line ? "#fff" : "#6E7582"
+                    color: index >= editor.regionStart && index <= editor.regionEnd ? "#fff" : "#6E7582"
                     text: index + 1;
                 }
             }
@@ -118,7 +118,7 @@ Item {
                             color: "#9DA5B4"
                             opacity: Math.round(editor.lines[index] / 2)/20;
                         }
-                        
+
                         Lib.Label {
                             anchors.centerIn: parent;
                             font.pointSize: 8;

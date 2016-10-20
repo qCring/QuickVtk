@@ -11,7 +11,7 @@ namespace quick {
         class PNGReader : public ImageReader2 {
             Q_OBJECT
         private:
-            static Qml::Register::Class<PNGReader> Register;
+            static Qml::Register::Symbol::Class<PNGReader> Register;
         public:
             PNGReader();
         };

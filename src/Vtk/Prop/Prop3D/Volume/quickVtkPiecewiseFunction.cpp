@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::UncreatableClass<PiecewiseFunction> PiecewiseFunction::Register;
+        Qml::Register::Symbol::UncreatableClass<PiecewiseFunction> PiecewiseFunction::Register;
 
         PiecewiseFunction::PiecewiseFunction(vtk_t vtkObject, cb_t&& callback) : m_vtkObject(vtkObject), m_callback(callback) {
         }

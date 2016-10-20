@@ -16,7 +16,7 @@ namespace quick
             Q_OBJECT
             Q_PROPERTY(quick::Vtk::ImplicitFunction* cutFunction READ getCutFunction WRITE setCutFunction NOTIFY cutFunctionChanged);
         private:
-            static Qml::Register::Class<Cutter> Register;
+            static Qml::Register::Symbol::Class<Cutter> Register;
             ImplicitFunction::cb_t m_cutFunctionCb;
             ImplicitFunction* m_cutFunction = nullptr;
             vtkSmartPointer<vtkCutter> m_vtkObject;

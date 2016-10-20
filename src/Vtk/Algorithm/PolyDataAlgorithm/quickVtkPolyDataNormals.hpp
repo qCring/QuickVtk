@@ -19,7 +19,7 @@ namespace quick {
             Q_PROPERTY(bool flipNormals READ getFlipNormals WRITE setFlipNormals NOTIFY flipNormalsChanged);
             Q_PROPERTY(bool nonManifoldTraversal READ getNonManifoldTraversal WRITE setNonManifoldTraversal NOTIFY nonManifoldTraversalChanged);
         private:
-            static Qml::Register::Class<PolyDataNormals> Register;
+            static Qml::Register::Symbol::Class<PolyDataNormals> Register;
             vtkSmartPointer<vtkPolyDataNormals> m_vtkObject;
         public:
             PolyDataNormals();

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<PLYReader> PLYReader::Register;
+        Qml::Register::Symbol::Class<PLYReader> PLYReader::Register;
 
         PLYReader::PLYReader() : AbstractPolyDataReader(vtkSmartPointer<vtkPLYReader>::New()) {
         }

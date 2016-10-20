@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::Class<AdaptiveSubdivisionFilter> AdaptiveSubdivisionFilter::Register;
+        Qml::Register::Symbol::Class<AdaptiveSubdivisionFilter> AdaptiveSubdivisionFilter::Register;
 
         AdaptiveSubdivisionFilter::AdaptiveSubdivisionFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkAdaptiveSubdivisionFilter>::New()) {
             this->m_vtkObject = vtkAdaptiveSubdivisionFilter::SafeDownCast(this->Algorithm::getVtkObject());

@@ -15,7 +15,7 @@ namespace quick {
             Q_PROPERTY(int radialResolution READ getRadialResolution WRITE setRadialResolution NOTIFY radialResolutionChanged);
             Q_PROPERTY(int circumferentialResolution READ getCircumferentialResolution WRITE setCircumferentialResolution NOTIFY circumferentialResolutionChanged);
         private:
-            static Qml::Register::Class<DiskSource> Register;
+            static Qml::Register::Symbol::Class<DiskSource> Register;
             vtkSmartPointer<vtkDiskSource> m_vtkObject;
         public:
             DiskSource();

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Math {
 
-        Qml::Register::UncreatableClass<Vector3> Vector3::Register;
+        Qml::Register::Symbol::UncreatableClass<Vector3> Vector3::Register;
 
         Vector3::Vector3(cb_t&& cb, array_t values) : m_callback(cb), m_values(values) {
         }

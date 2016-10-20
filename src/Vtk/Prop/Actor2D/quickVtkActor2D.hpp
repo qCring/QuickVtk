@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(double height READ getHeight WRITE setHeight NOTIFY heightChanged);
             Q_CLASSINFO("DefaultProperty", "mapper");
         private:
-            static Qml::Register::Class<Actor2D> Register;
+            static Qml::Register::Symbol::Class<Actor2D> Register;
             vtkSmartPointer<vtkActor2D> m_vtkObject;
             Mapper2D* m_mapper = nullptr;
             Property2D* m_property = nullptr;

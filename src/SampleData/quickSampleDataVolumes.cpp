@@ -7,7 +7,7 @@ namespace quick {
 
         Volumes* Volumes::instance = nullptr;
 
-        Qml::Register::Class<Volumes> Volumes::Register;
+        Qml::Register::Symbol::Class<Volumes> Volumes::Register;
 
         auto Volumes::Create() -> void {
             if (instance) {

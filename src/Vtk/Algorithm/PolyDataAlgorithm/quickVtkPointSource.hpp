@@ -24,7 +24,7 @@ namespace quick {
             Q_PROPERTY(int numberOfPoints READ getNumberOfPoints WRITE setNumberOfPoints NOTIFY numberOfPointsChanged);
             Q_PROPERTY(double radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
         private:
-            static Qml::Register::Class<PointSource> Register;
+            static Qml::Register::Symbol::Class<PointSource> Register;
             vtkSmartPointer<vtkPointSource> m_vtkObject;
             Math::Vector3* m_center;
         public:

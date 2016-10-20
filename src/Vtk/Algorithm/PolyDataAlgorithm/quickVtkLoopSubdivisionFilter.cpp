@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::Class<LoopSubdivisionFilter> LoopSubdivisionFilter::Register;
+        Qml::Register::Symbol::Class<LoopSubdivisionFilter> LoopSubdivisionFilter::Register;
 
         LoopSubdivisionFilter::LoopSubdivisionFilter() : ApproximatingSubdivisionFilter(vtkSmartPointer<vtkLoopSubdivisionFilter>::New()) {
         }

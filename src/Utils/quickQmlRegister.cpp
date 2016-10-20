@@ -9,17 +9,21 @@ namespace quick {
 
         namespace Register {
 
-            namespace MakeSymbol {
-                auto Enum(QMetaEnum metaEnum) -> void {
-                    TypeInfo::Symbol::MakeEnum(metaEnum);
-                }
+            namespace Symbol {
 
-                auto Class(QMetaObject metaObject) -> void {
-                    TypeInfo::Symbol::MakeClass(metaObject);
-                }
+                namespace Make {
 
-                auto AbstractClass(QMetaObject metaObject) -> void {
-                    TypeInfo::Symbol::MakeAbstractClass(metaObject);
+                    auto Enum(QMetaEnum metaEnum) -> void {
+                        TypeInfo::Symbol::MakeEnum(metaEnum);
+                    }
+
+                    auto Class(QMetaObject metaObject) -> void {
+                        TypeInfo::Symbol::MakeClass(metaObject);
+                    }
+
+                    auto AbstractClass(QMetaObject metaObject) -> void {
+                        TypeInfo::Symbol::MakeAbstractClass(metaObject);
+                    }
                 }
             }
 

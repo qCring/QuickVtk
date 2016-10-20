@@ -7,7 +7,7 @@ namespace quick {
 
         Meshes* Meshes::instance = nullptr;
 
-        Qml::Register::Class<Meshes> Meshes::Register;
+        Qml::Register::Symbol::Class<Meshes> Meshes::Register;
 
         auto Meshes::Create() -> void {
             if (instance) {

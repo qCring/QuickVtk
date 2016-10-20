@@ -19,7 +19,7 @@ namespace quick {
             Q_PROPERTY(int resolution READ getResolution WRITE setResolution NOTIFY resolutionChanged)
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
-            static Qml::Register::Class<ConeSource> Register;
+            static Qml::Register::Symbol::Class<ConeSource> Register;
             vtkSmartPointer<vtkConeSource> m_vtkObject;
             Math::Vector3* m_center = nullptr;
             Math::Vector3* m_direction = nullptr;

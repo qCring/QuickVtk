@@ -5,7 +5,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::AbstractClass<ImageReader2> ImageReader2::Register;
+        Qml::Register::Symbol::AbstractClass<ImageReader2> ImageReader2::Register;
 
         ImageReader2::ImageReader2(vtkSmartPointer<vtkImageReader2> vtkObject) : ImageAlgorithm(vtkObject) {
             this->m_vtkObject = vtkObject;

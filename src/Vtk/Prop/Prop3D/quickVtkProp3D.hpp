@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector3* position READ getPosition CONSTANT);
             Q_PROPERTY(quick::Math::Vector3* orientation READ getOrientation CONSTANT);
         private:
-            static Qml::Register::AbstractClass<Prop3D> Register;
+            static Qml::Register::Symbol::AbstractClass<Prop3D> Register;
             Math::Vector3* m_scale = nullptr;
             Math::Vector3* m_origin = nullptr;
             Math::Vector3* m_position = nullptr;

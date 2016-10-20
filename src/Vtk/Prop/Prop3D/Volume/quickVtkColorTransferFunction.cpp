@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::UncreatableClass<ColorTransferFunction> ColorTransferFunction::Register;
+        Qml::Register::Symbol::UncreatableClass<ColorTransferFunction> ColorTransferFunction::Register;
 
         ColorTransferFunction::ColorTransferFunction(vtkSmartPointer<vtkColorTransferFunction> vtkObject, cb_t&& callback) : m_vtkObject(vtkObject), m_callback(callback) {
         }

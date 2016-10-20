@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<PolyDataNormals> PolyDataNormals::Register;
+        Qml::Register::Symbol::Class<PolyDataNormals> PolyDataNormals::Register;
 
         PolyDataNormals::PolyDataNormals() : PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataNormals>::New()) {
             this->m_vtkObject = vtkPolyDataNormals::SafeDownCast(Algorithm::getVtkObject());

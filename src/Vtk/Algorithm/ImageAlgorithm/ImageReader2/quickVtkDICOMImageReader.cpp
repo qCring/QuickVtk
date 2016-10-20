@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<DICOMImageReader> DICOMImageReader::Register;
+        Qml::Register::Symbol::Class<DICOMImageReader> DICOMImageReader::Register;
 
         DICOMImageReader::DICOMImageReader() : ImageReader2(vtkSmartPointer<vtkDICOMImageReader>::New()) {
             this->m_vtkObject = vtkDICOMImageReader::SafeDownCast(Algorithm::getVtkObject());

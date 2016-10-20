@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::AbstractClass<InterpolatingSubdivisionFilter> InterpolatingSubdivisionFilter::Register;
+        Qml::Register::Symbol::AbstractClass<InterpolatingSubdivisionFilter> InterpolatingSubdivisionFilter::Register;
 
         InterpolatingSubdivisionFilter::InterpolatingSubdivisionFilter(vtkSmartPointer<vtkInterpolatingSubdivisionFilter> vtkObject) : PolyDataAlgorithm(vtkObject) {
             this->m_vtkObject = vtkObject;

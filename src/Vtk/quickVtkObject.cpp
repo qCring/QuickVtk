@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::AbstractClass<Object> Object::Register;
+        Qml::Register::Symbol::AbstractClass<Object> Object::Register;
 
         Object::Object(Type type) : m_type(type) {
         }

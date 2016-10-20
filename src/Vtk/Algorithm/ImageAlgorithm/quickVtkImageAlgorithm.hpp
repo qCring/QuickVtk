@@ -11,7 +11,7 @@ namespace quick {
         class ImageAlgorithm : public Algorithm {
             Q_OBJECT
         private:
-            static Qml::Register::AbstractClass<ImageAlgorithm> Register;
+            static Qml::Register::Symbol::AbstractClass<ImageAlgorithm> Register;
         public:
             ImageAlgorithm(vtkSmartPointer<vtkImageAlgorithm>);
         };

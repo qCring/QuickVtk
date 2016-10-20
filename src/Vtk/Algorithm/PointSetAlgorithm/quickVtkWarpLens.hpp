@@ -18,7 +18,7 @@ namespace quick {
             Q_PROPERTY(float p1 READ getP1 WRITE setP1 NOTIFY p1Changed);
             Q_PROPERTY(float p2 READ getP2 WRITE setP2 NOTIFY p2Changed);
         private:
-            static Qml::Register::Class<WarpLens> Register;
+            static Qml::Register::Symbol::Class<WarpLens> Register;
             vtkSmartPointer<vtkWarpLens> m_vtkObject;
             Math::Vector2* m_center = nullptr;
             Math::Vector2* m_principalPoint = nullptr;

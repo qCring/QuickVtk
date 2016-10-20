@@ -22,7 +22,7 @@ namespace quick {
         private:
             auto makeDataPath(const QString&) -> QString;
         public:
-            static Qml::Register::Class<Meshes> Register;
+            static Qml::Register::Symbol::Class<Meshes> Register;
             static Meshes* instance;
             static auto Create() -> void;
             auto getSuzanneOBJ() -> QString;

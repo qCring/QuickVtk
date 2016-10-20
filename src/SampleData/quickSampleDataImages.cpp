@@ -7,7 +7,7 @@ namespace quick {
 
         Images* Images::instance = nullptr;
 
-        Qml::Register::Class<Images> Images::Register;
+        Qml::Register::Symbol::Class<Images> Images::Register;
 
         auto Images::Create() -> void {
             if (instance) {

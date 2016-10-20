@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<DiskSource> DiskSource::Register;
+        Qml::Register::Symbol::Class<DiskSource> DiskSource::Register;
 
         DiskSource::DiskSource() : PolyDataAlgorithm(vtkSmartPointer<vtkDiskSource>::New()) {
             this->m_vtkObject = vtkDiskSource::SafeDownCast(Algorithm::getVtkObject());

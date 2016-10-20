@@ -23,7 +23,7 @@ namespace quick {
             QList<double> m_xValues;
             QList<double> m_yValues;
         public:
-            static Qml::Register::UncreatableClass<PiecewiseFunction> Register;
+            static Qml::Register::Symbol::UncreatableClass<PiecewiseFunction> Register;
             PiecewiseFunction(vtk_t, cb_t&&);
             auto update() -> void;
             auto getSize() -> int;

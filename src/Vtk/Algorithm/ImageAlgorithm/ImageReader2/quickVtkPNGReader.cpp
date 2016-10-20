@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<PNGReader> PNGReader::Register;
+        Qml::Register::Symbol::Class<PNGReader> PNGReader::Register;
 
         PNGReader::PNGReader() : ImageReader2(vtkSmartPointer<vtkPNGReader>::New()) {
         }

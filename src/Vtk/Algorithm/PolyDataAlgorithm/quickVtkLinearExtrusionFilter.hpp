@@ -26,7 +26,7 @@ namespace quick {
             Q_PROPERTY(float scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
-            static Qml::Register::Class<LinearExtrusionFilter> Register;
+            static Qml::Register::Symbol::Class<LinearExtrusionFilter> Register;
             vtkSmartPointer<vtkLinearExtrusionFilter> m_vtkObject;
             Math::Vector3* m_extrusionPoint;
             Math::Vector3* m_vector;

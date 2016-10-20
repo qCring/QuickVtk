@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(float translation READ getTranslation WRITE setTranslation NOTIFY translationChanged);
             Q_PROPERTY(float deltaRadius READ getDeltaRadius WRITE setDeltaRadius NOTIFY deltaRadiusChanged);
         private:
-            static Qml::Register::Class<RotationalExtrusionFilter> Register;
+            static Qml::Register::Symbol::Class<RotationalExtrusionFilter> Register;
             vtkSmartPointer<vtkRotationalExtrusionFilter> m_vtkObject;
         public:
             RotationalExtrusionFilter();

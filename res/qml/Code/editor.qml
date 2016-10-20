@@ -16,7 +16,7 @@ Item {
     }
 
     Flickable {
-        id: scrollView;
+        id: flickable;
 
         anchors.left: lines.right;
         anchors.top: parent.top;
@@ -28,29 +28,20 @@ Item {
 
         boundsBehavior: Flickable.StopAtBounds
 
-        function updateScroll(r) {
-            if (contentX >= r.x) {
-                contentX = r.x;
-            } else if (contentX+width <= r.x+r.width) {
-                contentX = r.x+r.width-width;
-            }
-
-            if (contentY >= r.y) {
-                contentY = r.y;
-            } else if (contentY+height <= r.y+r.height) {
-                contentY = r.y+r.height-height;
+        function updateScrollX(x) {
+            if (contentX >= x) {
+                contentX = x;
+            } else if (contentX + width <= x) {
+                contentX = x + 1 - width;
             }
         }
 
-        Rectangle {
-            id: cursorBg;
-
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-            y: height * editor.line;
-            height: textEdit.cursorRectangle.height;
-
-            color: "#11ddddff"
+        function updateScrollY(y) {
+            if (contentY >= y) {
+                contentY = y;
+            } else if (contentY + height <= y + textEdit.cursorHeight) {
+                contentY = y + textEdit.cursorHeight - height;
+            }
         }
 
         Repeater {
@@ -60,11 +51,23 @@ Item {
                 anchors.left: parent.left;
                 anchors.right: parent.right;
 
-                height: cursorBg.height;
+                height: textEdit.cursorHeight;
                 y: (model.line - 1) * height;
 
                 error: model;
             }
+        }
+
+        Rectangle {
+            id: cursorBg;
+
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+
+            y: textEdit.cursorY;
+            height: textEdit.cursorHeight;
+
+            color: "#2C303A"
         }
 
         Lib.TextEdit {
@@ -73,10 +76,60 @@ Item {
             width: Math.max(implicitWidth, root.width - lines.width);
             leftPadding: 4;
 
+            property int cursorX: cursorRectangle.x;
+            property int cursorY: cursorRectangle.y;
+            property int cursorHeight: cursorRectangle.height;
+            property bool showCursor: true;
+
+            onActiveFocusChanged: {
+                if (activeFocus) {
+                    activateCursor();
+                } else {
+                    deactivateCursor();
+                }
+            }
+
+            onCursorXChanged: {
+                activateCursor();
+                flickable.updateScrollX(cursorX);
+            }
+
+            onCursorYChanged: {
+                activateCursor();
+                flickable.updateScrollY(cursorY);
+            }
+
             font.pointSize: editor.fontSize;
+
             Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
 
-            onCursorRectangleChanged: scrollView.updateScroll(cursorRectangle);
+            cursorDelegate: Rectangle {
+                id: cursorDel;
+
+                width: 1;
+                color: "#fff";
+                visible: textEdit.showCursor;
+            }
+
+            function activateCursor() {
+                textEdit.showCursor = true;
+                cursorTimer.restart();
+            }
+
+            function deactivateCursor() {
+                textEdit.showCursor = false;
+                cursorTimer.stop();
+            }
+
+            Timer {
+                id: cursorTimer;
+
+                interval: App.settings.cursorFlashTime;
+                running: true;
+                repeat: true;
+
+                onTriggered: textEdit.showCursor = !textEdit.showCursor;
+            }
         }
     }
 
@@ -93,7 +146,7 @@ Item {
         Column {
             id: linesCol;
 
-            y: -scrollView.contentY;
+            y: -flickable.contentY;
 
             Repeater {
                 model: textEdit.lineCount;
@@ -127,7 +180,7 @@ Item {
                     model: editor.lines.length;
                     delegate: Item {
                         width: 14;
-                        height: cursorBg.height;
+                        height: textEdit.cursorHeight;
 
                         Rectangle {
                             anchors.fill: parent;

@@ -19,12 +19,14 @@ namespace quick {
     namespace App {
 
         class Logger;
+        class Settings;
 
         class Controller : public QObject {
             Q_OBJECT
             Q_PROPERTY(bool expanded READ isExpanded WRITE setExpanded NOTIFY expandedChanged);
             Q_PROPERTY(bool debugBuild READ isDebugBuild CONSTANT);
             Q_PROPERTY(QString version READ getVersion CONSTANT);
+            Q_PROPERTY(quick::App::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
             Q_PROPERTY(quick::Code::Compiler* compiler READ getCompiler CONSTANT);
             Q_PROPERTY(quick::Code::Editor* editor READ getEditor CONSTANT);
@@ -48,6 +50,7 @@ namespace quick {
             auto getCompiler() -> Code::Compiler*;
             auto getEditor() -> Code::Editor*;
             auto getSearch() -> Code::Search*;
+            auto getSettings() -> Settings*;
             auto getLogger() -> Logger*;
         signals:
             void expandedChanged();

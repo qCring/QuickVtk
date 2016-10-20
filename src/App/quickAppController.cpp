@@ -2,10 +2,13 @@
 
 #include "meta_quickvtk.hpp"
 
-#include "quickCodeCompiler.hpp"
 #include "quickTypeInfoList.hpp"
+
+#include "quickCodeCompiler.hpp"
 #include "quickCodeEditor.hpp"
 #include "quickCodeSearch.hpp"
+
+#include "quickAppSettings.hpp"
 #include "quickAppLogger.hpp"
 
 namespace quick {
@@ -67,6 +70,10 @@ namespace quick {
 
         auto Controller::getLogger() -> Logger* {
             return Logger::GetInstance();
+        }
+
+        auto Controller::getSettings() -> Settings* {
+            return Settings::instance;
         }
         
         auto Controller::isDebugBuild() -> bool {

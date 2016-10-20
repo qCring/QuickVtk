@@ -33,7 +33,7 @@ Rectangle {
             icon.font.pointSize: 12;
             icon.type: icon.types.fa_search_plus;
 
-            onClicked: App.editor.incrementFontSize();
+            onClicked: App.editor.increaseFontSize();
         }
 
         Lib.Button {
@@ -43,7 +43,7 @@ Rectangle {
             icon.font.pointSize: 12;
             icon.type: icon.types.fa_search_minus;
 
-            onClicked: App.editor.decrementFontSize();
+            onClicked: App.editor.decreaseFontSize();
         }
     }
 

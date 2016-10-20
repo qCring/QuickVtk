@@ -44,6 +44,18 @@ Item {
             }
         }
 
+        Rectangle {
+            id: cursorBg;
+
+            anchors.left: parent.left;
+            anchors.right: parent.right;
+
+            y: textEdit.cursorY;
+            height: textEdit.cursorHeight;
+
+            color: "#2C303A"
+        }
+
         Repeater {
             model: App.editor.errors;
 
@@ -56,18 +68,6 @@ Item {
 
                 error: model;
             }
-        }
-
-        Rectangle {
-            id: cursorBg;
-
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-
-            y: textEdit.cursorY;
-            height: textEdit.cursorHeight;
-
-            color: "#2C303A"
         }
 
         Lib.TextEdit {

@@ -15,7 +15,7 @@ namespace quick {
             Q_PROPERTY(float colorShift READ getColorShift NOTIFY colorShiftChanged);
             Q_PROPERTY(float colorScale READ getColorScale NOTIFY colorScaleChanged);
         private:
-            static Qml::Register::Class<ImageMapper> Register;
+            static Qml::Register::Symbol::Class<ImageMapper> Register;
             vtkSmartPointer<vtkImageMapper> m_vtkObject;
         public:
             ImageMapper();

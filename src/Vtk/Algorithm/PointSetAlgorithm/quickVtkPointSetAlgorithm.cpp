@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::AbstractClass<PointSetAlgorithm> PointSetAlgorithm::Register;
+        Qml::Register::Symbol::AbstractClass<PointSetAlgorithm> PointSetAlgorithm::Register;
 
         PointSetAlgorithm::PointSetAlgorithm(vtkSmartPointer<vtkPointSetAlgorithm> vtkObject) : Algorithm(vtkObject) {
         }

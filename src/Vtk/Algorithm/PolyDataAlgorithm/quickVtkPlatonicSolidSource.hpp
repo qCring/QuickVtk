@@ -22,7 +22,7 @@ namespace quick {
             Q_ENUM(SolidType);
             Q_PROPERTY(SolidType solidType READ getSolidType WRITE setSolidType NOTIFY solidTypeChanged);
         private:
-            static Qml::Register::Class<PlatonicSolidSource> Register;
+            static Qml::Register::Symbol::Class<PlatonicSolidSource> Register;
             vtkSmartPointer<vtkPlatonicSolidSource> m_vtkObject;
         public:
             PlatonicSolidSource();

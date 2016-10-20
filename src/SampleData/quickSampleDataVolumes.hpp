@@ -15,7 +15,7 @@ namespace quick {
         private:
             auto makeDataPath(const QString&) -> QString;
         public:
-            static Qml::Register::Class<Volumes> Register;
+            static Qml::Register::Symbol::Class<Volumes> Register;
             static Volumes* instance;
             static auto Create() -> void;
             auto getBrain1DIR() -> QString;

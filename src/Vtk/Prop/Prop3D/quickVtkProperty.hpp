@@ -50,7 +50,7 @@ namespace quick {
             Q_PROPERTY(float specular READ getSpecular WRITE setSpecular NOTIFY specularChanged);
             Q_PROPERTY(float specularPower READ getSpecularPower WRITE setSpecularPower NOTIFY specularPowerChanged);
         private:
-            static Qml::Register::UncreatableClass<Property> Register;
+            static Qml::Register::Symbol::UncreatableClass<Property> Register;
             quick::Vtk::Actor* m_actor = nullptr;
             vtkSmartPointer<vtkActor> m_vtkActor = nullptr;
             QColor m_specularColor;

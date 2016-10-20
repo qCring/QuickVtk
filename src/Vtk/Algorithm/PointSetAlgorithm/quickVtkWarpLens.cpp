@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<WarpLens> WarpLens::Register;
+        Qml::Register::Symbol::Class<WarpLens> WarpLens::Register;
 
         WarpLens::WarpLens() : PointSetAlgorithm(vtkSmartPointer<vtkWarpLens>::New()) {
             this->m_vtkObject = vtkWarpLens::SafeDownCast(Algorithm::getVtkObject());

@@ -13,7 +13,7 @@ namespace quick {
             Q_PROPERTY(QString directoryName READ getDirectoryName WRITE setDirectoryName NOTIFY directoryNameChanged);
         private:
             QString m_directoryName;
-            static Qml::Register::Class<DICOMImageReader> Register;
+            static Qml::Register::Symbol::Class<DICOMImageReader> Register;
             vtkSmartPointer<vtkDICOMImageReader> m_vtkObject;
         public:
             DICOMImageReader();

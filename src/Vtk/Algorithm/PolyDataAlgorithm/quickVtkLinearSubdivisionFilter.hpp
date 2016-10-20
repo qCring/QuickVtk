@@ -11,7 +11,7 @@ namespace quick {
         class LinearSubdivisionFilter : public InterpolatingSubdivisionFilter {
             Q_OBJECT
         private:
-            static Qml::Register::Class<LinearSubdivisionFilter> Register;
+            static Qml::Register::Symbol::Class<LinearSubdivisionFilter> Register;
         public:
             LinearSubdivisionFilter();
         };

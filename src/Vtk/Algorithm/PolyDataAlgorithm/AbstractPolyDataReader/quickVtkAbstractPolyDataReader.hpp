@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(QString fileName READ getFileName WRITE setFileName NOTIFY fileNameChanged);
         private:
-            static Qml::Register::AbstractClass<AbstractPolyDataReader> Register;
+            static Qml::Register::Symbol::AbstractClass<AbstractPolyDataReader> Register;
             vtkSmartPointer<vtkAbstractPolyDataReader> m_vtkObject;
             QString m_fileName;
         public:

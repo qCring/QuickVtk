@@ -14,7 +14,7 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector3* origin READ getOrigin CONSTANT);
             Q_PROPERTY(quick::Math::Vector3* normal READ getNormal CONSTANT);
         private:
-            static Qml::Register::Class<Plane> Register;
+            static Qml::Register::Symbol::Class<Plane> Register;
             vtkSmartPointer<vtkPlane> m_vtkObject = nullptr;
             Math::Vector3* m_origin = nullptr;
             Math::Vector3* m_normal = nullptr;

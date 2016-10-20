@@ -25,7 +25,7 @@ namespace quick {
             QList<double> m_values;
             QList<QColor> m_colors;
         public:
-            static Qml::Register::UncreatableClass<ColorTransferFunction> Register;
+            static Qml::Register::Symbol::UncreatableClass<ColorTransferFunction> Register;
             ColorTransferFunction(vtk_t, cb_t&&);
             auto update() -> void;
             auto getSize() -> int;

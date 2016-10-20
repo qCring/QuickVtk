@@ -11,7 +11,7 @@ namespace quick {
         class Mapper2D : public AbstractMapper {
             Q_OBJECT
         private:
-            static Qml::Register::AbstractClass<Mapper2D> Register;
+            static Qml::Register::Symbol::AbstractClass<Mapper2D> Register;
         public:
             Mapper2D(vtkSmartPointer<vtkMapper2D>);
             auto getVtkObject() -> vtkSmartPointer<vtkMapper2D>;

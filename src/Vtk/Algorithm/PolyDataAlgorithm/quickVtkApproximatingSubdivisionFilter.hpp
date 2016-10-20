@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(int numberOfSubdivisions READ getNumberOfSubdivisions WRITE setNumberOfSubdivisions NOTIFY numberOfSubdivisionsChanged);
         private:
-            static Qml::Register::AbstractClass<ApproximatingSubdivisionFilter> Register;
+            static Qml::Register::Symbol::AbstractClass<ApproximatingSubdivisionFilter> Register;
             vtkSmartPointer<vtkApproximatingSubdivisionFilter> m_vtkObject;
         public:
             ApproximatingSubdivisionFilter(vtkSmartPointer<vtkApproximatingSubdivisionFilter>);

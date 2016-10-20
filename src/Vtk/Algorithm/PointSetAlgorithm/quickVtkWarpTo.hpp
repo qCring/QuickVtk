@@ -15,7 +15,7 @@ namespace quick {
             Q_PROPERTY(float scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
             Q_PROPERTY(bool absolute READ getAbsolute WRITE setAbsolute NOTIFY absoluteChanged);
         private:
-            static Qml::Register::Class<WarpTo> Register;
+            static Qml::Register::Symbol::Class<WarpTo> Register;
             vtkSmartPointer<vtkWarpTo> m_vtkObject;
             Math::Vector3* m_position = nullptr;
         public:

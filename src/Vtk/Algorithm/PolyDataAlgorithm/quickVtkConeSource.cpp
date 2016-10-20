@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<ConeSource> ConeSource::Register;
+        Qml::Register::Symbol::Class<ConeSource> ConeSource::Register;
 
         ConeSource::ConeSource() : PolyDataAlgorithm(vtkSmartPointer<vtkConeSource>::New()) {
             this->m_vtkObject = vtkConeSource::SafeDownCast(Algorithm::getVtkObject());

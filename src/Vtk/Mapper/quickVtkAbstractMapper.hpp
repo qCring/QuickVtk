@@ -14,7 +14,7 @@ namespace quick {
         class AbstractMapper : public Algorithm {
             Q_OBJECT
         private:
-            static Qml::Register::AbstractClass<AbstractMapper> Register;
+            static Qml::Register::Symbol::AbstractClass<AbstractMapper> Register;
         public:
             AbstractMapper(vtkSmartPointer<vtkAbstractMapper>);
         };

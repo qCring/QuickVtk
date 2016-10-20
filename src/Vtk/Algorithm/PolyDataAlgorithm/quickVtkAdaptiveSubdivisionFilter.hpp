@@ -15,7 +15,7 @@ namespace quick {
             Q_PROPERTY(int maximumNumberOfTriangles READ getMaximumNumberOfTriangles WRITE setMaximumNumberOfTriangles NOTIFY maximumNumberOfTrianglesChanged);
             Q_PROPERTY(int maximumNumberOfPasses READ getMaximumNumberOfPasses WRITE setMaximumNumberOfPasses NOTIFY maximumNumberOfPassesChanged);
         private:
-            static Qml::Register::Class<AdaptiveSubdivisionFilter> Register;
+            static Qml::Register::Symbol::Class<AdaptiveSubdivisionFilter> Register;
             vtkSmartPointer<vtkAdaptiveSubdivisionFilter> m_vtkObject;
         public:
             AdaptiveSubdivisionFilter();

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<BooleanOperationPolyDataFilter> BooleanOperationPolyDataFilter::Register;
+        Qml::Register::Symbol::Class<BooleanOperationPolyDataFilter> BooleanOperationPolyDataFilter::Register;
 
         BooleanOperationPolyDataFilter::BooleanOperationPolyDataFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkBooleanOperationPolyDataFilter>::New()) {
             this->m_vtkObject = vtkBooleanOperationPolyDataFilter::SafeDownCast(Algorithm::getVtkObject());

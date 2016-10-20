@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::AbstractClass<ApproximatingSubdivisionFilter> ApproximatingSubdivisionFilter::Register;
+        Qml::Register::Symbol::AbstractClass<ApproximatingSubdivisionFilter> ApproximatingSubdivisionFilter::Register;
 
 
         ApproximatingSubdivisionFilter::ApproximatingSubdivisionFilter(vtkSmartPointer<vtkApproximatingSubdivisionFilter> vtkObject) : PolyDataAlgorithm(vtkObject), m_vtkObject(vtkObject) {

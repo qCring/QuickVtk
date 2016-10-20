@@ -11,7 +11,7 @@ namespace quick {
         class ButterflySubdivisionFilter : public InterpolatingSubdivisionFilter {
             Q_OBJECT
         private:
-            static Qml::Register::Class<ButterflySubdivisionFilter> Register;
+            static Qml::Register::Symbol::Class<ButterflySubdivisionFilter> Register;
         public:
             ButterflySubdivisionFilter();
         };

@@ -13,7 +13,7 @@ namespace quick {
             Q_PROPERTY(float finalColorWindow READ getFinalColorWindow WRITE setFinalColorWindow NOTIFY finalColorWindowChanged);
             Q_PROPERTY(float finalColorLevel READ getFinalColorLevel WRITE setFinalColorLevel NOTIFY finalColorLevelChanged);
         private:
-            static Qml::Register::Class<SmartVolumeMapper> Register;
+            static Qml::Register::Symbol::Class<SmartVolumeMapper> Register;
             vtkSmartPointer<vtkSmartVolumeMapper> m_vtkObject;
         public:
             SmartVolumeMapper();

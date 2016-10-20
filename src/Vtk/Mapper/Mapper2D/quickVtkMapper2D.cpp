@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::AbstractClass<Mapper2D> Mapper2D::Register;
+        Qml::Register::Symbol::AbstractClass<Mapper2D> Mapper2D::Register;
 
         Mapper2D::Mapper2D(vtkSmartPointer<vtkMapper2D> vtkObject) : AbstractMapper(vtkObject) {
         }

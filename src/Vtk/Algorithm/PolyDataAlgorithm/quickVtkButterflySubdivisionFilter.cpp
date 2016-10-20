@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::Class<ButterflySubdivisionFilter> ButterflySubdivisionFilter::Register;
+        Qml::Register::Symbol::Class<ButterflySubdivisionFilter> ButterflySubdivisionFilter::Register;
 
         ButterflySubdivisionFilter::ButterflySubdivisionFilter() : InterpolatingSubdivisionFilter(vtkSmartPointer<vtkButterflySubdivisionFilter>::New()) {
         }

@@ -3,7 +3,7 @@
 namespace quick {
 
     namespace Vtk {
-        Qml::Register::Class<Plane> Plane::Register;
+        Qml::Register::Symbol::Class<Plane> Plane::Register;
 
         Plane::Plane() : ImplicitFunction(vtkSmartPointer<vtkPlane>::New()) {
             this->m_vtkObject = vtkPlane::SafeDownCast(ImplicitFunction::getVtkObject());

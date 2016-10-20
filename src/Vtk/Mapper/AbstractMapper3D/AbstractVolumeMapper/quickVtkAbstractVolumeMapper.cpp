@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::AbstractClass<AbstractVolumeMapper> AbstractVolumeMapper::Register;
+        Qml::Register::Symbol::AbstractClass<AbstractVolumeMapper> AbstractVolumeMapper::Register;
 
         AbstractVolumeMapper::AbstractVolumeMapper(vtkSmartPointer<vtkAbstractVolumeMapper> vtkObject) : AbstractMapper3D(vtkObject) {
         }

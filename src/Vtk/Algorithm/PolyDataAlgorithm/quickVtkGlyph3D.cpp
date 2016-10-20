@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Class<Glyph3D> Glyph3D::Register;
+        Qml::Register::Symbol::Class<Glyph3D> Glyph3D::Register;
 
         Glyph3D::Glyph3D() : PolyDataAlgorithm(vtkSmartPointer<vtkGlyph3D>::New()) {
             this->m_vtkObject = vtkGlyph3D::SafeDownCast(Algorithm::getVtkObject());

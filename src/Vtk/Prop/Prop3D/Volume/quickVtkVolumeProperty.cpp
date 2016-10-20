@@ -7,7 +7,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::UncreatableClass<VolumeProperty> VolumeProperty::Register;
+        Qml::Register::Symbol::UncreatableClass<VolumeProperty> VolumeProperty::Register;
 
         VolumeProperty::VolumeProperty(Volume* volume) : m_volume(volume), m_vtkVolume(volume->getVtkObject()) {
             auto property = this->m_vtkVolume->GetProperty();

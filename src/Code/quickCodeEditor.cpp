@@ -26,6 +26,7 @@ namespace quick {
                 throw std::runtime_error("instance already existing");
             }
 
+            this->m_search = new Search();
             this->m_selection = new Selection();
         }
 
@@ -131,7 +132,7 @@ namespace quick {
 
         auto Editor::setModified(bool modified) -> void {
             if (modified) {
-                Search::instance->invalidate();
+                this->m_search->invalidate();
             }
 
             if (this->m_modified != modified) {
@@ -148,6 +149,10 @@ namespace quick {
             return Errors::instance;
         }
 
+        auto Editor::getSearch() -> Search* {
+            return this->m_search;
+        }
+
         auto Editor::getSelection() -> Selection* {
             return this->m_selection;
         }
@@ -161,7 +166,7 @@ namespace quick {
 
             if (modifiers == Qt::ControlModifier) {
                 if (key == Qt::Key_F) {
-                    emit Search::instance->show();
+                    emit this->m_search->show();
                     return true;
                 }
 
@@ -350,7 +355,7 @@ namespace quick {
                 this->m_filePath = filePath;
                 emit this->filePathChanged();
 
-                Search::instance->invalidate();
+                this->m_search->invalidate();
                 this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
                 this->format();
@@ -382,7 +387,7 @@ namespace quick {
             emit this->linesChanged();
 
             Errors::instance->clear();
-            Search::instance->invalidate();
+            this->m_search->invalidate();
         }
 
         auto Editor::getLines() -> QList<int> {

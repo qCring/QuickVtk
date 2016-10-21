@@ -5,18 +5,7 @@ namespace quick {
 
     namespace Code {
 
-        Search* Search::instance = nullptr;
-        Qml::Register::Controller<Search> Search::Register;
-
-        Search::Search() {
-            if (instance) {
-                throw std::runtime_error("instance already existing");
-            }
-        }
-
-        auto Search::Create() -> void {
-            instance = new Search();
-        }
+        Qml::Register::Type<Search> Search::Register;
 
         auto Search::invalidate() -> void {
             this->m_valid = false;

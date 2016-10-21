@@ -13,7 +13,6 @@ namespace quick {
     namespace Code {
         class Editor;
         class Compiler;
-        class Search;
     }
 
     namespace App {
@@ -30,7 +29,6 @@ namespace quick {
             Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
             Q_PROPERTY(quick::Code::Compiler* compiler READ getCompiler CONSTANT);
             Q_PROPERTY(quick::Code::Editor* editor READ getEditor CONSTANT);
-            Q_PROPERTY(quick::Code::Search* search READ getSearch CONSTANT);
             Q_PROPERTY(quick::App::Logger* logger READ getLogger CONSTANT);
         private:
             bool m_showList = false;
@@ -49,7 +47,6 @@ namespace quick {
             auto getTypeList() -> TypeInfo::List*;
             auto getCompiler() -> Code::Compiler*;
             auto getEditor() -> Code::Editor*;
-            auto getSearch() -> Code::Search*;
             auto getSettings() -> Settings*;
             auto getLogger() -> Logger*;
         signals:

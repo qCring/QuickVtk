@@ -1,8 +1,11 @@
 #include "quickCodeEditor.hpp"
+
 #include "quickCodeHighlighter.hpp"
+#include "quickCodeSelection.hpp"
 #include "quickCodeCompiler.hpp"
 #include "quickCodeErrors.hpp"
 #include "quickCodeSearch.hpp"
+
 #include "quickIO.hpp"
 
 #include <QClipboard>
@@ -23,12 +26,7 @@ namespace quick {
                 throw std::runtime_error("instance already existing");
             }
 
-            this->m_highlighter     = nullptr;
-            this->m_selectionStart  = 0;
-            this->m_selectionEnd    = 0;
-            this->m_editorCursor    = 0;
-            this->m_line            = 0;
-            this->m_column          = 0;
+            this->m_selection = new Selection();
         }
 
         auto Editor::Create() -> void {
@@ -53,6 +51,7 @@ namespace quick {
             emit this->documentChanged();
 
             this->m_highlighter = new Highlighter(this);
+            this->m_selection->setDocument(this->m_document->textDocument());
         }
 
         auto Editor::setLine(int line) -> void {
@@ -77,30 +76,6 @@ namespace quick {
             return this->m_column;
         }
 
-        auto Editor::setSelectionStart(int pos) -> void {
-            this->m_selectionStart = pos;
-
-            emit this->selectionStartChanged();
-
-            auto cursor = this->getCurrentCursor();
-            cursor.setPosition(pos);
-
-            this->setRegionStart(cursor.blockNumber());
-        }
-
-        auto Editor::setSelectionEnd(int pos) -> void {
-            this->m_selectionEnd = pos;
-
-            emit this->selectionEndChanged();
-
-            auto cursor = getCurrentCursor();
-            cursor.setPosition(pos);
-            this->setLine(cursor.blockNumber());
-            this->setColumn(cursor.columnNumber());
-
-            this->setRegionEnd(cursor.blockNumber());
-        }
-
         auto Editor::setFilePath(const QString& filePath) -> void {
             this->m_filePath = filePath;
             emit this->filePathChanged();
@@ -114,19 +89,11 @@ namespace quick {
             return this->m_document;
         }
 
-        auto Editor::getSelectionStart() -> int {
-            return this->m_selectionStart;
-        }
-
-        auto Editor::getSelectionEnd() -> int {
-            return this->m_selectionEnd;
-        }
-
         auto Editor::getCurrentCursor() -> QTextCursor {
             auto c = QTextCursor(this->m_document->textDocument());
 
-            c.setPosition(this->m_selectionEnd, QTextCursor::MoveAnchor);
-            c.setPosition(this->m_selectionStart, QTextCursor::KeepAnchor);
+            c.setPosition(this->m_selection->getStartPosition(), QTextCursor::MoveAnchor);
+            c.setPosition(this->m_selection->getEndPosition(), QTextCursor::KeepAnchor);
 
             return c;
         }
@@ -181,26 +148,8 @@ namespace quick {
             return Errors::instance;
         }
 
-        auto Editor::setRegionStart(int regionStart) -> void {
-            if (this->m_regionStart != regionStart) {
-                this->m_regionStart = regionStart;
-                emit this->regionStartChanged();
-            }
-        }
-
-        auto Editor::getRegionStart() -> int {
-            return this->m_regionStart;
-        }
-
-        auto Editor::setRegionEnd(int regionEnd) -> void {
-            if (this->m_regionEnd != regionEnd) {
-                this->m_regionEnd = regionEnd;
-                emit this->regionEndChanged();
-            }
-        }
-
-        auto Editor::getRegionEnd() -> int {
-            return this->m_regionEnd;
+        auto Editor::getSelection() -> Selection* {
+            return this->m_selection;
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
@@ -415,8 +364,6 @@ namespace quick {
         }
 
         auto Editor::select(QTextCursor cursor) -> void {
-            this->setSelectionStart(cursor.position() - cursor.selectedText().length());
-            this->setSelectionEnd(cursor.position());
             emit this->updateSelection();
         }
 

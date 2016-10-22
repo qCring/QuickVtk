@@ -8,6 +8,15 @@ namespace quick {
     namespace Code {
 
         class Rules {
+        private:
+            struct Key {
+                static const QString highlight;
+                static const QString scheme;
+                static const QString italic;
+                static const QString color;
+                static const QString match;
+                static const QString bold;
+            };
         public:
             struct HighlightRule {
                 QRegExp pattern;

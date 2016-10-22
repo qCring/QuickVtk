@@ -1,44 +1,44 @@
 {
 	"scheme": {
-		"name": "QML",
+		"comment": "QML",
 		"suffixes": ["qml"],
 		"highlight": [{
-			"name": "numbers",
-			"pattern": "\\b\\d+(\\.\\d*)?\\b",
+			"comment": "numbers",
+			"match": "\\b\\d+(\\.\\d*)?\\b",
 			"color": "#E6713E",
 			"bold": true
 		}, {
-			"name": "objects",
-			"pattern": "\\b[A-Z]\\w*\\b",
+			"comment": "objects",
+			"match": "\\b[A-Z]\\w*\\b",
 			"color": "#319CD3",
 			"bold": true
 		}, {
-			"name": "functions",
-			"pattern": "\\b[\\w_]+\\s*(?=\\()",
+			"comment": "functions",
+			"match": "\\b[\\w_]+\\s*(?=\\()",
 			"color": "#319CD3",
 			"bold": true
 		}, {
-			"name": "handlers",
-			"pattern": "(((^|\\{)\\s*)|\\b)on[A-Z]\\w*\\b",
+			"comment": "handlers",
+			"match": "(((^|\\{)\\s*)|\\b)on[A-Z]\\w*\\b",
 			"color": "#C678DD",
 			"bold": true
 		}, {
-			"name": "keywords",
-			"pattern": "(?:\\b|\\s+)(?:(true|false|null|property|function|import|undefined)|(var|void)|(on|as|alias|enum|connect|break|case|catch|continue|debugger|default|delete|do|else|finally|for|if|in|instanceof|new|readonly|return|signal|switch|this|throw|try|typeof|while|with))\\b",
+			"comment": "keywords",
+			"match": "(?:\\b|\\s+)(?:(true|false|null|property|function|import|undefined)|(var|void)|(on|as|alias|enum|connect|break|case|catch|continue|debugger|default|delete|do|else|finally|for|if|in|instanceof|new|readonly|return|signal|switch|this|throw|try|typeof|while|with))\\b",
 			"color": "#C678DD",
 			"bold": true
 		}, {
-			"name": "properties",
-			"pattern": "(?:^|\\{|;)\\s*[a-z][\\w\\.]*\\s*(?=\\:)",
+			"comment": "properties",
+			"match": "(?:^|\\{|;)\\s*[a-z][\\w\\.]*\\s*(?=\\:)",
 			"color": "#9DA5B4",
 			"bold": true
 		}, {
-			"name": "strings",
-			"pattern": "\".*\"",
+			"comment": "strings",
+			"match": "\".*\"",
 			"color": "#9DA5B4"
 		}, {
-			"name": "inline comments",
-			"pattern": "//.*$",
+			"comment": "inline comments",
+			"match": "//.*$",
 			"color": "#888",
 			"italic": true
 		}]

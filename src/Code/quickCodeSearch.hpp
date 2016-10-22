@@ -30,11 +30,9 @@ namespace quick {
             bool m_valid = false;
             int m_currentMatch = -1;
         private:
-            static Qml::Register::Controller<Search> Register;
+            static Qml::Register::Type<Search> Register;
         public:
-            Search();
-            static Search* instance;
-            static auto Create() -> void;
+            Search() = default;
             auto processSearch() -> void;
             auto setCaseSensitive(bool) -> void;
             auto getCaseSensitive() -> bool;

@@ -6,7 +6,6 @@
 
 #include "quickCodeCompiler.hpp"
 #include "quickCodeEditor.hpp"
-#include "quickCodeSearch.hpp"
 
 #include "quickAppSettings.hpp"
 #include "quickAppLogger.hpp"
@@ -62,10 +61,6 @@ namespace quick {
 
         auto Controller::getEditor() -> Code::Editor* {
             return Code::Editor::instance;
-        }
-
-        auto Controller::getSearch() -> Code::Search* {
-            return Code::Search::instance;
         }
 
         auto Controller::getLogger() -> Logger* {

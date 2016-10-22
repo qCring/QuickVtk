@@ -1,39 +1,44 @@
 {
 	"scheme": {
-		"name": "QML",
+		"comment": "QML",
 		"suffixes": ["qml"],
 		"highlight": [{
-			"name": "numbers",
-			"pattern": "\\b\\d+(\\.\\d*)?\\b",
+			"comment": "numbers",
+			"match": "\\b\\d+(\\.\\d*)?\\b",
 			"color": "#E6713E",
 			"bold": true
 		}, {
-			"name": "objects",
-			"pattern": "\\b[A-Z]\\w*",
+			"comment": "objects",
+			"match": "\\b[A-Z]\\w*\\b",
 			"color": "#319CD3",
 			"bold": true
 		}, {
-			"name": "keywords",
-			"pattern": "\\bimport\\b|\\bas\\b|\\bid\\b|\\bfor\\b|\\bproperty\\b|\\balias\\b|\\bif\\b|\\belse\\b|\\btry\\b|\\bcatch\\b|\\bswitch\\b|\\bcase\\b|\\bdefault\\b|\\bbreak\\b|\\breturn\\b|\\bcontinue\\b|\\bfunction\\b",
-			"color": "#C678DD",
-			"bold": true
-		}, {
-			"name": "keywords 2",
-			"pattern": "\\btrue\\b|\\bfalse\\b|\\bid\\b|\\bfor\\b|\\bproperty\\b|\\balias\\b|\\bif\\b|\\belse\\b|\\btry\\b|\\bcatch\\b|\\bswitch\\b|\\bcase\\b|\\bdefault\\b|\\bbreak\\b|\\breturn\\b|\\bcontinue\\b|\\bfunction\\b",
-			"color": "#C678DD",
-			"bold": true
-		}, {
-			"name": "functions",
-			"pattern": "\\b\\w*\\(\\)",
+			"comment": "functions",
+			"match": "\\b[\\w_]+\\s*(?=\\()",
 			"color": "#319CD3",
 			"bold": true
 		}, {
-			"name": "strings",
-			"pattern": "\".*\"",
+			"comment": "handlers",
+			"match": "(((^|\\{)\\s*)|\\b)on[A-Z]\\w*\\b",
+			"color": "#C678DD",
+			"bold": true
+		}, {
+			"comment": "keywords",
+			"match": "(?:\\b|\\s+)(?:(true|false|null|property|function|import|undefined)|(var|void)|(on|as|alias|enum|connect|break|case|catch|continue|debugger|default|delete|do|else|finally|for|if|in|instanceof|new|readonly|return|signal|switch|this|throw|try|typeof|while|with))\\b",
+			"color": "#C678DD",
+			"bold": true
+		}, {
+			"comment": "properties",
+			"match": "(?:^|\\{|;)\\s*[a-z][\\w\\.]*\\s*(?=\\:)",
+			"color": "#9DA5B4",
+			"bold": true
+		}, {
+			"comment": "strings",
+			"match": "\".*\"",
 			"color": "#9DA5B4"
 		}, {
-			"name": "inline comments",
-			"pattern": "//[^\n]*",
+			"comment": "inline comments",
+			"match": "//.*$",
 			"color": "#888",
 			"italic": true
 		}]

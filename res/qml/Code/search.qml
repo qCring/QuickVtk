@@ -7,6 +7,7 @@ Rectangle {
     id: root;
 
     property var refocus;
+    property var controller: App.editor.search;
 
     height: column.height;
     color: "#21252B"
@@ -59,9 +60,9 @@ Rectangle {
                 label.rightPadding: 4;
 
                 color: "#2B68A4"
-                visible: App.search.matchCount;
+                visible: controller.matchCount;
 
-                label.text: App.search.matchCount > 0 ? (App.search.currentMatch + 1) + " of " + App.search.matchCount : "";
+                label.text: controller.matchCount > 0 ? (controller.currentMatch + 1) + " of " + controller.matchCount : "";
             }
         }
 
@@ -83,10 +84,10 @@ Rectangle {
                 KeyNavigation.backtab: replaceInput;
 
                 refocus: root.refocus;
-                onTextChanged: App.search.findString = text;
+                onTextChanged: controller.findString = text;
 
                 onEnterPressed: {
-                    App.search.findNext();
+                    controller.findNext();
                 }
 
                 Lib.Label {
@@ -95,7 +96,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter;
 
                     font.pointSize: 10;
-                    text: App.search.regexError;
+                    text: controller.regexError;
                 }
             }
 
@@ -112,7 +113,7 @@ Rectangle {
                 width: replaceButton.width;
 
                 onClicked: {
-                    App.search.findString = findInput.text;
+                    controller.findString = findInput.text;
                     findInput.forceActiveFocus();
                 }
             }
@@ -127,13 +128,13 @@ Rectangle {
                 Lib.Button {
                     anchors.verticalCenter: parent.verticalCenter;
 
-                    highlight: App.search.caseSensitive;
+                    highlight: controller.caseSensitive;
                     width: replaceAllButton.width/2;
 
                     label.text: "Aa";
 
                     onClicked: {
-                        App.search.caseSensitive = !App.search.caseSensitive;
+                        controller.caseSensitive = !controller.caseSensitive;
                         findInput.forceActiveFocus();
                     }
                 }
@@ -141,13 +142,13 @@ Rectangle {
                 Lib.Button {
                     anchors.verticalCenter: parent.verticalCenter;
 
-                    highlight: App.search.useRegex;
+                    highlight: controller.useRegex;
                     width: replaceAllButton.width/2;
 
                     label.text: ".*";
 
                     onClicked: {
-                        App.search.useRegex = !App.search.useRegex;
+                        controller.useRegex = !controller.useRegex;
                         findInput.forceActiveFocus();
                     }
                 }
@@ -173,10 +174,10 @@ Rectangle {
 
                 refocus: root.refocus;
 
-                onTextChanged: App.search.replaceString = text;
+                onTextChanged: controller.replaceString = text;
 
                 onEnterPressed: {
-                    App.search.replaceNext();
+                    controller.replaceNext();
                 }
             }
 
@@ -198,7 +199,7 @@ Rectangle {
                     icon.type: icon.types.fa_refresh;
 
                     onClicked: {
-                        App.search.replaceNext();
+                        controller.replaceNext();
                         replaceInput.forceActiveFocus();
                     }
                 }
@@ -214,7 +215,7 @@ Rectangle {
                     enabled: false;
 
                     onClicked: {
-                        App.search.replaceAll();
+                        controller.replaceAll();
                         replaceInput.forceActiveFocus();
                     }
                 }
@@ -223,7 +224,7 @@ Rectangle {
     }
 
     Connections {
-        target: App.search;
+        target: controller;
         onShow: {
             root.visible = true;
             findInput.forceActiveFocus();

@@ -8,6 +8,7 @@ Item {
     id: root;
 
     property var editor: App.editor;
+    property var selection: editor.selection;
 
     clip: true;
 
@@ -160,7 +161,7 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index >= editor.regionStart && index <= editor.regionEnd ? "#fff" : "#6E7582"
+                    color: index  >= selection.startLine && index <= selection.endLine ? "#fff" : "#6E7582"
                     text: index + 1;
                 }
             }
@@ -237,14 +238,14 @@ Item {
     }
 
     Connections {
-		target: editor;
-		onUpdateSelection: textEdit.select(editor.selectionStart, editor.selectionEnd);
+		target: selection;
+		onUpdateEditorSelection: textEdit.select(selection.startPosition, selection.endPosition);
 	}
 
     Component.onCompleted: {
-        editor.document       = textEdit.textDocument;
-        editor.selectionStart = Qt.binding(function() { return textEdit.selectionStart; });
-        editor.selectionEnd   = Qt.binding(function() { return textEdit.selectionEnd; });
+        editor.document = textEdit.textDocument;
+        selection.startPosition = Qt.binding(function() { return textEdit.selectionStart; });
+        selection.endPosition = Qt.binding(function() { return textEdit.selectionEnd; });
         textEdit.forceActiveFocus();
     }
 }

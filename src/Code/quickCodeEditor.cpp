@@ -158,7 +158,7 @@ namespace quick {
         auto Editor::getSettings() -> Settings* {
             return this->m_settings;
         }
-        
+
         auto Editor::getSelection() -> Selection* {
             return this->m_selection;
         }

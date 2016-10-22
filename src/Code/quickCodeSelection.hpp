@@ -39,6 +39,7 @@ namespace quick {
             auto setEndLine(int) -> void;
             auto getEndLine() -> int;
         signals:
+            void updateEditorSelection();
             void startPositionChanged();
             void endPositionChanged();
             void startLineChanged();

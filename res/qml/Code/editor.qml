@@ -238,8 +238,8 @@ Item {
     }
 
     Connections {
-		target: editor;
-		onUpdateSelection: textEdit.select(editor.selectionStart, editor.selectionEnd);
+		target: selection;
+		onUpdateEditorSelection: textEdit.select(selection.startPosition, selection.endPosition);
 	}
 
     Component.onCompleted: {

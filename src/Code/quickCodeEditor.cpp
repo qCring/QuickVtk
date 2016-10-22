@@ -369,7 +369,10 @@ namespace quick {
         }
 
         auto Editor::select(QTextCursor cursor) -> void {
-            emit this->updateSelection();
+            this->m_selection->setStartPosition(cursor.selectionStart());
+            this->m_selection->setEndPosition(cursor.selectionEnd());
+
+            emit this->m_selection->updateEditorSelection();
         }
 
         void Editor::newFile() {

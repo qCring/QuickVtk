@@ -3,6 +3,7 @@
 #include "quickCodeHighlighter.hpp"
 #include "quickCodeSelection.hpp"
 #include "quickCodeCompiler.hpp"
+#include "quickCodeSettings.hpp"
 #include "quickCodeErrors.hpp"
 #include "quickCodeSearch.hpp"
 
@@ -28,6 +29,7 @@ namespace quick {
 
             this->m_search = new Search();
             this->m_selection = new Selection();
+            this->m_settings = new Settings();
         }
 
         auto Editor::Create() -> void {
@@ -153,6 +155,10 @@ namespace quick {
             return this->m_search;
         }
 
+        auto Editor::getSettings() -> Settings* {
+            return this->m_settings;
+        }
+        
         auto Editor::getSelection() -> Selection* {
             return this->m_selection;
         }

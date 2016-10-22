@@ -12,14 +12,16 @@ namespace quick {
 
         class Errors;
         class Search;
+        class Settings;
         class Selection;
         class Highlighter;
 
         class Editor : public QObject {
             Q_OBJECT
             Q_PROPERTY(quick::Code::Errors* errors READ getErrors CONSTANT);
-            Q_PROPERTY(quick::Code::Selection* selection READ getSelection CONSTANT);
             Q_PROPERTY(quick::Code::Search* search READ getSearch CONSTANT);
+            Q_PROPERTY(quick::Code::Settings* settings READ getSettings CONSTANT);
+            Q_PROPERTY(quick::Code::Selection* selection READ getSelection CONSTANT);
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
@@ -34,6 +36,7 @@ namespace quick {
             QQuickTextDocument* m_document = nullptr;
             Highlighter* m_highlighter = nullptr;
             Selection* m_selection = nullptr;
+            Settings* m_settings = nullptr;
             Search* m_search = nullptr;
             QString m_filePath;
             QList<int> m_lines;
@@ -66,6 +69,7 @@ namespace quick {
             auto getEditorCursor() -> int;
             auto getErrors() -> Errors*;
             auto getSearch() -> Search*;
+            auto getSettings() -> Settings*;
             auto getSelection() -> Selection*;
             auto setLine(int) -> void;
             auto getLine() -> int;

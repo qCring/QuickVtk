@@ -179,39 +179,7 @@ namespace quick {
             QElapsedTimer timer;
             timer.start();
 
-            auto block = this->m_document->textDocument()->firstBlock();
-            this->m_lines.clear();
-
-            do {
-                auto line = block.text().simplified();
-                auto open = line.contains("{");
-                auto close = line.contains("}");
-                auto state = 0;
-
-                if (block.blockNumber() > 0) {
-                    auto prevLevel = block.previous().userState();
-                    state = prevLevel;
-                    state += prevLevel % 2;
-                }
-
-                state = state + open;
-                state = state - 2*close;
-
-                /*
-                QTextCursor cursor = QTextCursor(block);
-                cursor.select(QTextCursor::LineUnderCursor);
-
-                for (auto i = 0; i < state/2; ++i) {
-                    cursor.insertText("\t");
-                }*/
-
-                this->m_lines.append(state);
-                // cursor.insertText(line);
-                block.setUserState(state);
-                block = block.next();
-            } while (block.isValid());
-
-            emit this->linesChanged();
+            this->m_formatter->format();
 
             this->m_formatTime = timer.elapsed();
             emit this->formatTimeChanged();
@@ -292,7 +260,7 @@ namespace quick {
             this->m_lines = lines;
             emit this->linesChanged();
         }
-        
+
         auto Editor::getLines() -> QList<int> {
             return this->m_lines;
         }

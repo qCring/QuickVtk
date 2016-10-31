@@ -18,6 +18,7 @@ namespace quick {
             auto handleShowSearch() -> bool;
             auto handleCloseBraces() -> bool;
         public:
+            auto format() -> void;
             auto setTextDocument(QTextDocument*) -> void;
             auto onKeyPressed(int, int, const QString&) -> bool;
         };

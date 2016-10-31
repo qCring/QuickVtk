@@ -53,6 +53,43 @@ namespace quick {
             return true;
         }
 
+        auto Formatter::format() -> void {
+            auto block = this->m_document->firstBlock();
+            auto lines = Editor::instance->getLines();
+            lines.clear();
+
+            do {
+                auto line = block.text().simplified();
+                auto open = line.contains("{");
+                auto close = line.contains("}");
+                auto state = 0;
+
+                if (block.blockNumber() > 0) {
+                    auto prevLevel = block.previous().userState();
+                    state = prevLevel;
+                    state += prevLevel % 2;
+                }
+
+                state = state + open;
+                state = state - 2*close;
+
+                /*
+                 QTextCursor cursor = QTextCursor(block);
+                 cursor.select(QTextCursor::LineUnderCursor);
+
+                 for (auto i = 0; i < state/2; ++i) {
+                 cursor.insertText("\t");
+                 }*/
+
+                lines.append(state);
+                // cursor.insertText(line);
+                block.setUserState(state);
+                block = block.next();
+            } while (block.isValid());
+
+            Editor::instance->setLines(lines);
+        }
+
         auto Formatter::handleEnter() -> bool {
             auto cursor = Editor::instance->getCurrentCursor();
             cursor.beginEditBlock();

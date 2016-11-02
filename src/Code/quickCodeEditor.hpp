@@ -13,6 +13,7 @@ namespace quick {
         class Errors;
         class Search;
         class Settings;
+        class Formatter;
         class Selection;
         class Highlighter;
 
@@ -35,6 +36,7 @@ namespace quick {
             static Qml::Register::Controller<Editor> Register;
             QQuickTextDocument* m_document = nullptr;
             Highlighter* m_highlighter = nullptr;
+            Formatter* m_formatter = nullptr;
             Selection* m_selection = nullptr;
             Settings* m_settings = nullptr;
             Search* m_search = nullptr;
@@ -74,10 +76,12 @@ namespace quick {
             auto setLine(int) -> void;
             auto getLine() -> int;
             auto getLines() -> QList<int>;
+            auto setLines(QList<int>) -> void;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
             auto open(const QString&) -> void;
             auto select(QTextCursor) -> void;
+            auto showSearch() -> void;
             ~Editor();
         public slots:
             bool onKeyPressed(int, int, const QString&);

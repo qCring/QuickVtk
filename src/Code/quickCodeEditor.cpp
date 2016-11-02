@@ -176,13 +176,16 @@ namespace quick {
         }
 
         void Editor::format() {
+            //TODO: text-formatting logic is bypassed atm
+
+            /*
             QElapsedTimer timer;
             timer.start();
 
             this->m_formatter->format();
 
             this->m_formatTime = timer.elapsed();
-            emit this->formatTimeChanged();
+            emit this->formatTimeChanged();*/
         }
 
         auto Editor::getFormatTime() -> int {

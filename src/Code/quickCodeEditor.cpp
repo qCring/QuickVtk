@@ -62,6 +62,7 @@ namespace quick {
             emit this->documentChanged();
 
             this->m_highlighter = new Highlighter(this);
+            this->m_formatter->setTextDocument(this->m_document->textDocument());
             this->m_selection->setDocument(this->m_document->textDocument());
         }
 

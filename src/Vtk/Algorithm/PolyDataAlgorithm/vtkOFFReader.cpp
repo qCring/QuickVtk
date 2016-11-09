@@ -45,6 +45,10 @@ int vtkOFFReader::RequestData(vtkInformation* vtkNotUsed(request), vtkInformatio
 
     auto points = vtkPoints::New();
     auto polys = vtkCellArray::New();
+    auto colors = vtkSmartPointer<vtkUnsignedCharArray>::New();
+
+    colors->SetNumberOfComponents(3);
+    colors->SetName ("Colors");
 
     QFile inputFile(FileName);
 
@@ -96,6 +100,16 @@ int vtkOFFReader::RequestData(vtkInformation* vtkNotUsed(request), vtkInformatio
                 auto y = values[1].toFloat();
                 auto z = values[2].toFloat();
 
+                if (useColors) {
+                    unsigned char color[3] = {
+                        static_cast<unsigned char>(values [3].toInt()),
+                        static_cast<unsigned char>(values [4].toInt()),
+                        static_cast<unsigned char>(values [5].toInt())
+                    };
+
+                    colors->InsertNextTypedTuple(color);
+                }
+
                 points->InsertNextPoint(x,y,z);
 
                 ++numberOfProcessedVerts;
@@ -116,6 +130,10 @@ int vtkOFFReader::RequestData(vtkInformation* vtkNotUsed(request), vtkInformatio
 
         output->SetPoints(points);
         output->SetPolys(polys);
+
+        if (useColors) {
+            output->GetPointData()->SetScalars(colors);
+        }
 
         points->Delete();
         polys->Delete();

@@ -29,6 +29,10 @@ namespace quick {
             return this->makeDataPath("suzanne.stl");
         }
 
+        auto Meshes::getTeapotOFF() -> QString {
+            return this->makeDataPath("teapot.off");
+        }
+
         auto Meshes::getBunnyPLY() -> QString {
             return this->makeDataPath("bunny.ply");
         }

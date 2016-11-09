@@ -12,6 +12,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(QString suzanneOBJ READ getSuzanneOBJ CONSTANT);
             Q_PROPERTY(QString suzanneSTL READ getSuzanneSTL CONSTANT);
+            Q_PROPERTY(QString teapotOFF READ getTeapotOFF CONSTANT);
             Q_PROPERTY(QString bunnyPLY READ getBunnyPLY CONSTANT);
             Q_PROPERTY(QString bunnyOBJ READ getBunnyOBJ CONSTANT);
             Q_PROPERTY(QString bunnySTL READ getBunnySTL CONSTANT);
@@ -27,6 +28,7 @@ namespace quick {
             static auto Create() -> void;
             auto getSuzanneOBJ() -> QString;
             auto getSuzanneSTL() -> QString;
+            auto getTeapotOFF() -> QString;
             auto getBunnyPLY() -> QString;
             auto getBunnyOBJ() -> QString;
             auto getBunnySTL() -> QString;

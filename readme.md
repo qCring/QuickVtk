@@ -35,6 +35,7 @@ In order to provide working code examples, I redistribute some sample data files
 
 - `Suzanne`: low-poly mesh *(exported to .obj and .stl)* from [Blender](https://www.blender.org)
 - `Stanford Bunny`: high-poly mesh from the [Stanford 3D Scanning Repository](http://graphics.stanford.edu/data/3Dscanrep/) *(.ply, .obj and .stl)*
+- `Teapot`: low-poly mesh *(currently only .off to demonstrate [OFF format](http://segeval.cs.princeton.edu/public/off_format.html) support)*
 - `Brain1` and `Brain2`: DICOM data from [idoimaging.com](http://idoimaging.com) (special thanks to Andrew Crabb)
 - `Lena`: famous testing image *(exported to .png, .jpg and .tiff)* from [Wikipedia](https://en.wikipedia.org/wiki/File:Lenna.png)
 - `ImageA` and `ImageB`: self-made test images

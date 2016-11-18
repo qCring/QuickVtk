@@ -122,8 +122,8 @@ namespace quick {
                 auto blockNumber = block.blockNumber();
 
                 auto lines = Editor::instance->getLines();
-                std::cout << "lines: " << lines.count() << std::endl;
-                std::cout << "block: " << blockNumber << std::endl;
+                //std::cout << "lines: " << lines.count() << std::endl;
+                //std::cout << "block: " << blockNumber << std::endl;
 
                 if (blockNumber >= lines.count()) {
                     lines.append(newLevel);

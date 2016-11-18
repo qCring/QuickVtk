@@ -189,12 +189,12 @@ Item {
                             opacity: Math.round(editor.lines[index] / 2)/20;
                         }
 
-                        Lib.Label {
+                        /*Lib.Label {
                             anchors.centerIn: parent;
                             font.pointSize: 8;
                             color: "#fff";
                             text: editor.lines[index];
-                        }
+                        }*/
                     }
                 }
             }

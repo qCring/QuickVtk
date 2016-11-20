@@ -32,16 +32,16 @@ Item {
         function updateScrollX(x) {
             if (contentX >= x) {
                 contentX = x;
-            } else if (contentX + implicitWidth <= x) {
-                contentX = x + 1 - implicitWidth;
+            } else if (contentX + width <= x) {
+                contentX = x + 1 - width;
             }
         }
 
         function updateScrollY(y) {
             if (contentY >= y) {
                 contentY = y;
-            } else if (contentY + implicitHeight <= y + textEdit.cursorHeight) {
-                contentY = y + textEdit.cursorHeight - implicitHeight;
+            } else if (contentY + height <= y + textEdit.cursorHeight) {
+                contentY = y + textEdit.cursorHeight - height;
             }
         }
 
@@ -237,7 +237,6 @@ Item {
 
         onClicked: {
             root.activate();
-            mouse.accepted = false;
         }
     }
 

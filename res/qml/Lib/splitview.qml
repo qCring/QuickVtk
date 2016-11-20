@@ -28,6 +28,8 @@ Item {
         anchor.anchors.leftMargin = 0;
         leftContainer.minimized = true;
         rightContainer.minimized = false;
+
+        rightContainer.forceActiveFocus();
     }
 
     function collapseRight() {
@@ -38,6 +40,8 @@ Item {
         anchor.anchors.rightMargin = 0;
         leftContainer.minimized = false;
         rightContainer.minimized = true;
+
+        leftContainer.forceActiveFocus();
     }
 
     function expandLeft(margin) {

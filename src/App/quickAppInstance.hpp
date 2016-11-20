@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QString>
-#include <QQuickView>
 #include <QThreadStorage>
 
 namespace quick {
@@ -10,7 +9,6 @@ namespace quick {
 
         class Instance {
         private:
-            QQuickView* m_view = nullptr;
             QString resourceDir;
         private:
             static Instance* instance;

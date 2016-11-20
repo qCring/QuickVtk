@@ -226,13 +226,20 @@ namespace quick {
                 this->setText(IO::Read::TextFromUrl(this->m_filePath));
                 this->setModified(false);
                 this->format();
-                
+                this->resetSelection();
+
                 this->run();
             }
         }
 
         void Editor::openFile() {
             this->open(IO::FromDialog::SelectOpenFileUrl("*.qml"));
+        }
+
+        auto Editor::resetSelection() -> void {
+            auto cursor = getCurrentCursor();
+            cursor.setPosition(0);
+            this->select(cursor);
         }
 
         auto Editor::select(QTextCursor cursor) -> void {

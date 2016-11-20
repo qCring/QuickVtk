@@ -81,6 +81,7 @@ namespace quick {
             auto getColumn() -> int;
             auto open(const QString&) -> void;
             auto select(QTextCursor) -> void;
+            auto resetSelection() -> void;
             auto showSearch() -> void;
             ~Editor();
         public slots:

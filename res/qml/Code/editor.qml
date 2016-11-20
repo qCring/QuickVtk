@@ -32,16 +32,16 @@ Item {
         function updateScrollX(x) {
             if (contentX >= x) {
                 contentX = x;
-            } else if (contentX + width <= x) {
-                contentX = x + 1 - width;
+            } else if (contentX + implicitWidth <= x) {
+                contentX = x + 1 - implicitWidth;
             }
         }
 
         function updateScrollY(y) {
             if (contentY >= y) {
                 contentY = y;
-            } else if (contentY + height <= y + textEdit.cursorHeight) {
-                contentY = y + textEdit.cursorHeight - height;
+            } else if (contentY + implicitHeight <= y + textEdit.cursorHeight) {
+                contentY = y + textEdit.cursorHeight - implicitHeight;
             }
         }
 
@@ -75,6 +75,8 @@ Item {
             id: textEdit
 
             width: Math.max(implicitWidth, root.width - lines.width);
+            height: Math.max(implicitHeight, root.height - footer.height);
+
             leftPadding: 4;
 
             property int cursorX: cursorRectangle.x;
@@ -227,6 +229,16 @@ Item {
         anchors.right: parent.right;
 
         refocus: textEdit;
+    }
+
+    MouseArea {
+        anchors.fill: parent;
+        enabled: !textEdit.activeFocus;
+
+        onClicked: {
+            root.activate();
+            mouse.accepted = false;
+        }
     }
 
     Footer {

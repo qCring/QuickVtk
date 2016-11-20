@@ -1,21 +1,15 @@
 import QtQuick 2.6
+import QtQuick.Window 2.2
 
 import Lib 1.0 as Lib
 import Code 1.0 as Code
 import TypeInfo 1.0 as TypeInfo
 
-Rectangle {
+Window {
+
     id: root;
 
     color: "#282C34"
-
-    MouseArea {
-        anchors.fill: parent;
-
-        onClicked: {
-            root.forceActiveFocus();
-        }
-    }
 
     Header {
         id: header;

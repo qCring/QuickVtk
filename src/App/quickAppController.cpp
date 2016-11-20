@@ -9,6 +9,7 @@
 
 #include "quickAppSettings.hpp"
 #include "quickAppLogger.hpp"
+#include "quickAppMenu.hpp"
 
 namespace quick {
     namespace App {
@@ -69,6 +70,10 @@ namespace quick {
 
         auto Controller::getSettings() -> Settings* {
             return Settings::instance;
+        }
+
+        auto Controller::getMenu() -> Menu* {
+            return Menu::GetInstance();
         }
         
         auto Controller::isDebugBuild() -> bool {

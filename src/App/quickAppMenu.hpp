@@ -1,7 +1,8 @@
 #pragma once
 
+#include "quickQmlRegister.hpp"
+
 #include <QObject>
-#include <QMenu>
 
 namespace quick {
 
@@ -9,29 +10,37 @@ namespace quick {
 
         class Menu : public QObject {
             Q_OBJECT
+            Q_PROPERTY(QStringList examples READ getExamples CONSTANT);
         private:
-            enum Type {
-                FileNewFile,
-                FileOpenFile,
-                FileSaveFile,
-                ViewIncreaseFontSize,
-                ViewDecreaseFontSize,
-                CodeRun,
-                CodeFormat,
-                HelpAbout,
-                HelpExample,
-                HelpDocs,
-                HelpPrefs
-            };
-        private:
-            auto add(QMenu*, Type type, const QString&, QString = nullptr) -> void;
+            static Menu* instance;
+            QStringList m_examples;
+            static Qml::Register::Type<Menu> Register;
             auto init() -> void;
             Menu();
         public:
-            static Menu* instance;
-            static auto Create() -> Menu*;
+            static auto GetInstance() -> Menu*;
+            auto getExamples() -> QStringList;
         public slots:
-            void onAction(Type, const QString&);
+            void OnFileNew();
+            void OnFileOpen();
+            void OnFileSave();
+            void OnFileSaveAs();
+            void OnFindFind();
+
+            void OnCodeRun();
+            void OnCodeFormat();
+
+            void OnViewIncreaseFontSize();
+            void OnViewDecreaseFontSize();
+            void OnViewResetFontSize();
+            void OnViewToggleEditor();
+
+            void OnHelpDocumentation();
+            void OnHelpAbout();
+            void OnHelpPreferences();
+            void OnHelpVisitOnGitHub();
+            void OnHelpSendFeedback();
+            void OnHelpExample(const QString&);
         };
     }
 }

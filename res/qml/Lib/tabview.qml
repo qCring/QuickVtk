@@ -37,7 +37,7 @@ Item {
 
         color: "#21252B";
 
-        height: 20;
+        height: 22;
         clip: true;
 
         Row {
@@ -84,8 +84,9 @@ Item {
             anchors.left: parent.left;
             anchors.right: parent.right;
             anchors.top: parent.top;
+
             height: 1;
-            color: "#21252B"
+            color: "#181A1F"
         }
     }
 

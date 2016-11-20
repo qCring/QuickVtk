@@ -26,11 +26,12 @@ namespace quick {
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
+            Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
+            Q_PROPERTY(bool expanded READ getExpanded NOTIFY expandedChanged);
             Q_PROPERTY(int editorCursor READ getEditorCursor WRITE setEditorCursor NOTIFY editorCursorChanged);
             Q_PROPERTY(int fontSize READ getFontSize NOTIFY fontSizeChanged);
             Q_PROPERTY(int line READ getLine NOTIFY lineChanged);
             Q_PROPERTY(int column READ getColumn NOTIFY columnChanged);
-            Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
             Q_PROPERTY(int formatTime READ getFormatTime NOTIFY formatTimeChanged);
         private:
             static Qml::Register::Controller<Editor> Register;
@@ -42,8 +43,9 @@ namespace quick {
             Search* m_search = nullptr;
             QString m_filePath;
             QList<int> m_lines;
-            int m_formatTime = 0;
             bool m_modified = false;
+            bool m_expanded = true;
+            int m_formatTime = 0;
             int minFontSize = 6;
             int maxFontSize = 20;
             int m_editorCursor = 0;
@@ -64,6 +66,7 @@ namespace quick {
             auto getDocument() -> QQuickTextDocument*;
             auto setModified(bool) -> void;
             auto getModified() -> bool;
+            auto getExpanded() -> bool;
             auto setFontSize(int) -> void;
             auto getFontSize() -> int;
             auto getFormatTime() -> int;
@@ -83,14 +86,16 @@ namespace quick {
             auto select(QTextCursor) -> void;
             auto resetSelection() -> void;
             auto showSearch() -> void;
+            auto resetFontSize() -> void;
+            auto increaseFontSize() -> void;
+            auto decreaseFontSize() -> void;
+            auto toggleExpanded() -> void;
             ~Editor();
         public slots:
             bool onKeyPressed(int, int, const QString&);
             void openFile();
             void saveFile();
             void newFile();
-            void increaseFontSize();
-            void decreaseFontSize();
             void run();
             void format();
         signals:
@@ -104,6 +109,7 @@ namespace quick {
             void lineChanged();
             void updateSelection();
             void formatTimeChanged();
+            void expandedChanged();
         };
     }
 }

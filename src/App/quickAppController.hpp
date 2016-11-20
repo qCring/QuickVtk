@@ -19,6 +19,7 @@ namespace quick {
 
         class Logger;
         class Settings;
+        class Menu;
 
         class Controller : public QObject {
             Q_OBJECT
@@ -30,6 +31,7 @@ namespace quick {
             Q_PROPERTY(quick::Code::Compiler* compiler READ getCompiler CONSTANT);
             Q_PROPERTY(quick::Code::Editor* editor READ getEditor CONSTANT);
             Q_PROPERTY(quick::App::Logger* logger READ getLogger CONSTANT);
+            Q_PROPERTY(quick::App::Menu* menu READ getMenu CONSTANT);
         private:
             bool m_showList = false;
             bool m_expanded = false;
@@ -49,6 +51,7 @@ namespace quick {
             auto getEditor() -> Code::Editor*;
             auto getSettings() -> Settings*;
             auto getLogger() -> Logger*;
+            auto getMenu() -> Menu*;
         signals:
             void expandedChanged();
         };

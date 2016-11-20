@@ -6,10 +6,12 @@ import Code 1.0 as Code
 import TypeInfo 1.0 as TypeInfo
 
 Window {
-
     id: root;
 
     color: "#282C34"
+
+    Menu {
+    }
 
     Header {
         id: header;
@@ -20,6 +22,8 @@ Window {
     }
 
     Lib.SplitView {
+        id: splitView;
+
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.top: header.bottom;
@@ -56,5 +60,17 @@ Window {
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.bottom: parent.bottom;
+    }
+
+    Connections {
+        target: App.editor;
+
+        onExpandedChanged: {
+            if (App.editor.expanded) {
+                splitView.expandLeft(width/2);
+            } else {
+                splitView.collapseLeft();
+            }
+        }
     }
 }

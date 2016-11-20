@@ -6,7 +6,7 @@ import App 1.0 as App
 Rectangle {
     id: root;
 
-    height: 20;
+    height: 22;
 
     color: "#21252B"
 
@@ -47,4 +47,12 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: parent.top;
+
+        height: 1;
+        color: "#181A1F"
+    }
 }

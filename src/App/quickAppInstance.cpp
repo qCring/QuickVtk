@@ -6,7 +6,6 @@
 #include "quickAppController.hpp"
 #include "quickSampleDataController.hpp"
 #include "quickAppLogger.hpp"
-#include "quickAppMenu.hpp"
 
 #include <QWindow>
 #include <QFontDatabase>
@@ -55,8 +54,6 @@ namespace quick {
             AddFontDir(resourceDir + "fonts/roboto/");
             AddFontDir(resourceDir + "fonts/vera/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
-            
-            Menu::Create();
 
             auto engine = new QQmlApplicationEngine ();
 

@@ -120,13 +120,17 @@ namespace quick {
             return this->m_editorCursor;
         }
 
-        void Editor::increaseFontSize() {
+        auto Editor::resetFontSize() -> void {
+            this->setFontSize(12);
+        }
+
+        auto Editor::increaseFontSize() -> void {
             if (this->m_fontSize < this->maxFontSize) {
                 this->setFontSize(this->m_fontSize + 2);
             }
         }
 
-        void Editor::decreaseFontSize() {
+        auto Editor::decreaseFontSize() -> void {
             if (this->m_fontSize > this->minFontSize) {
                 this->setFontSize(this->m_fontSize - 2);
             }
@@ -230,6 +234,15 @@ namespace quick {
 
                 this->run();
             }
+        }
+
+        void Editor::toggleExpanded() {
+            this->m_expanded =! this->m_expanded;
+            emit this->expandedChanged();
+        }
+
+        auto Editor::getExpanded() -> bool {
+            return this->m_expanded;
         }
 
         void Editor::openFile() {

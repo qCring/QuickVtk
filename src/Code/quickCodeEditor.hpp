@@ -25,6 +25,7 @@ namespace quick {
             Q_PROPERTY(quick::Code::Search* search READ getSearch CONSTANT);
             Q_PROPERTY(quick::Code::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::Code::Selection* selection READ getSelection CONSTANT);
+            Q_PROPERTY(quick::Code::Document* document READ getDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
             Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
@@ -68,6 +69,7 @@ namespace quick {
             auto getFilePath() -> QString;
             auto setEditorDocument(QQuickTextDocument*) -> void;
             auto getEditorDocument() -> QQuickTextDocument*;
+            auto getDocument() -> Document*;
             auto setModified(bool) -> void;
             auto getModified() -> bool;
             auto getExpanded() -> bool;
@@ -103,6 +105,7 @@ namespace quick {
         signals:
             void editorDocumentChanged();
             void editorCursorChanged();
+            void documentChanged();
             void filePathChanged();
             void modifiedChanged();
             void fontSizeChanged();

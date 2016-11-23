@@ -53,6 +53,10 @@ namespace quick {
             return this->m_editorDocument->textDocument()->toPlainText();
         }
 
+        auto Editor::getDocument() -> Document* {
+            return this->m_document;
+        }
+
         auto Editor::setEditorDocument(QQuickTextDocument* editorDocument) -> void {
             this->m_editorDocument = editorDocument;
 
@@ -208,22 +212,8 @@ namespace quick {
         }
 
         void Editor::saveFile() {
-            if (this->m_filePath.length() > 0 && IO::FileExists(this->m_filePath)) {
-                IO::Write::TextToFile(this->getText(), this->m_filePath);
-                this->setModified(false);
-            } else {
-                auto newPath = IO::FromDialog::SelectSaveFileUrl();
-
-                if (newPath.isNull() || newPath.isEmpty()) {
-                    return;
-                }
-
-                if (IO::Write::TextToFile(this->getText(), newPath)) {
-                    this->setModified(false);
-
-                    this->m_filePath = newPath;
-                    emit this->filePathChanged();
-                }
+            if (this->m_document) {
+                this->m_document->save();
             }
         }
 

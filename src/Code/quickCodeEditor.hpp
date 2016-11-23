@@ -42,7 +42,6 @@ namespace quick {
             Settings* m_settings = nullptr;
             Search* m_search = nullptr;
             QString m_filePath;
-            QList<int> m_lines;
             bool m_modified = false;
             bool m_expanded = true;
             int m_formatTime = 0;
@@ -52,6 +51,9 @@ namespace quick {
             int m_fontSize = 12;
             int m_column = 0;
             int m_line = 0;
+        private:
+            auto getLines() -> QList<int>;
+            auto setEditorCursor(int) -> void;
         public:
             Editor();
             static Editor* instance;
@@ -70,7 +72,6 @@ namespace quick {
             auto setFontSize(int) -> void;
             auto getFontSize() -> int;
             auto getFormatTime() -> int;
-            auto setEditorCursor(int) -> void;
             auto getEditorCursor() -> int;
             auto getErrors() -> Errors*;
             auto getSearch() -> Search*;
@@ -78,8 +79,6 @@ namespace quick {
             auto getSelection() -> Selection*;
             auto setLine(int) -> void;
             auto getLine() -> int;
-            auto getLines() -> QList<int>;
-            auto setLines(QList<int>) -> void;
             auto setColumn(int) -> void;
             auto getColumn() -> int;
             auto open(const QString&) -> void;
@@ -87,6 +86,7 @@ namespace quick {
             auto resetSelection() -> void;
             auto showSearch() -> void;
             auto resetFontSize() -> void;
+            auto reset() -> void;
             auto increaseFontSize() -> void;
             auto decreaseFontSize() -> void;
             auto toggleExpanded() -> void;

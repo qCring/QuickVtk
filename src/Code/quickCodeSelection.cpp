@@ -3,6 +3,7 @@
 #include "quickCodeEditor.hpp"
 
 #include <QTextBlock>
+#include <iostream>
 
 namespace quick {
 
@@ -23,6 +24,12 @@ namespace quick {
             }
         }
 
+        auto Selection::clear() -> void {
+            auto cursor = this->getCursor();
+            cursor.setPosition(Editor::instance->getEditorCursor());
+            Editor::instance->select(cursor);
+        }
+
         auto Selection::getStartPosition() -> int {
             return this->m_startPosition;
         }
@@ -34,6 +41,10 @@ namespace quick {
 
                 this->updateEndLine();
             }
+        }
+
+        auto Selection::isEmpty() -> bool {
+            return this->m_endPosition == this->m_startPosition;
         }
 
         auto Selection::getEndPosition() -> int {

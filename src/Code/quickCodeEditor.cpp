@@ -33,7 +33,6 @@ namespace quick {
             this->m_formatter = new Formatter();
             this->m_selection = new Selection();
             this->m_settings = new Settings();
-            this->m_lines.append(0);
         }
 
         auto Editor::Create() -> void {
@@ -102,12 +101,16 @@ namespace quick {
         }
 
         auto Editor::getCurrentCursor() -> QTextCursor {
-            auto c = QTextCursor(this->m_document->textDocument());
+            auto cursor = QTextCursor(this->m_document->textDocument());
 
-            c.setPosition(this->m_selection->getStartPosition(), QTextCursor::MoveAnchor);
-            c.setPosition(this->m_selection->getEndPosition(), QTextCursor::KeepAnchor);
+            if (this->m_selection->m_startPosition != this->m_selection->m_endPosition) {
+                cursor.setPosition(this->m_selection->getStartPosition(), QTextCursor::MoveAnchor);
+                cursor.setPosition(this->m_selection->getEndPosition(), QTextCursor::KeepAnchor);
+            } else {
+                cursor.setPosition(this->m_selection->m_startPosition);
+            }
 
-            return c;
+            return cursor;
         }
 
         auto Editor::setEditorCursor(int position) -> void {
@@ -262,31 +265,29 @@ namespace quick {
             emit this->m_selection->updateEditorSelection();
         }
 
-        void Editor::newFile() {
-            this->m_filePath = "";
-            emit this->filePathChanged();
+        auto Editor::reset() -> void {
+            this->m_formatter->reset();
 
             auto cursor = this->getCurrentCursor();
             cursor.setPosition(0);
             this->select(cursor);
-            
+
             this->setText("");
             this->setModified(false);
-
-            this->m_lines.clear();
-            emit this->linesChanged();
 
             Errors::instance->clear();
             this->m_search->invalidate();
         }
 
-        auto Editor::setLines(QList<int> lines) -> void {
-            this->m_lines = lines;
-            emit this->linesChanged();
+        void Editor::newFile() {
+            this->m_filePath = "";
+            emit this->filePathChanged();
+
+            this->reset();
         }
 
         auto Editor::getLines() -> QList<int> {
-            return this->m_lines;
+            return this->m_formatter->m_lines;
         }
 
         Editor::~Editor() {

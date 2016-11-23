@@ -18,6 +18,7 @@ namespace quick {
             Q_PROPERTY(int startLine READ getStartLine NOTIFY startLineChanged);
             Q_PROPERTY(int endLine READ getEndLine NOTIFY endLineChanged);
         private:
+            friend class Editor;
             QTextDocument* m_document = nullptr;
             int m_startPosition = 0;
             int m_endPosition = 0;
@@ -38,6 +39,8 @@ namespace quick {
             auto getStartLine() -> int;
             auto setEndLine(int) -> void;
             auto getEndLine() -> int;
+            auto isEmpty() -> bool;
+            auto clear() -> void;
         signals:
             void updateEditorSelection();
             void startPositionChanged();

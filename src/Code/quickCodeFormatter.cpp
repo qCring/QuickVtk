@@ -1,6 +1,8 @@
 #include "quickCodeFormatter.hpp"
 
+#include "quickCodeAction.hpp"
 #include "quickCodeEditor.hpp"
+#include "quickCodeSelection.hpp"
 
 #include <QApplication>
 #include <QTextCursor>
@@ -13,6 +15,10 @@ namespace quick {
 
     namespace Code {
 
+        Formatter::Formatter() {
+            this->m_lines.append(0);
+        }
+
         auto Formatter::setTextDocument(QTextDocument* document) -> void {
             this->m_document = document;
         }
@@ -21,15 +27,107 @@ namespace quick {
             Editor::instance->setModified(true);
         }
 
-        auto Formatter::handleRedo() -> bool {
-            this->m_document->redo();
+        auto Formatter::reset() -> void {
+            this->m_lines.clear();
+            this->m_lines.append(0);
+
+            emit Editor::instance->linesChanged();
+        }
+
+        auto Formatter::handleBacktab() -> bool {
+            this->insertText("<backtab>");
+            return true;
+        }
+
+        auto Formatter::handleBackspace() -> bool {
+            auto selection = Editor::instance->getSelection();
+            auto cursor = Editor::instance->getCurrentCursor();
+            auto startLine = selection->getStartLine();
+            auto endLine = selection->getEndLine();
+
+            if (cursor.position() < 1) {
+                return true;
+            }
+
+            std::cout << "backspace [" << startLine << ":" << endLine << "]" << std::endl;
+
+            if (selection->isEmpty()) {
+                if (cursor.atBlockStart()) {
+                    this->m_lines.removeAt(startLine);
+                }
+
+                //undoStack.push(Action::Deletion(this->m_document->characterAt(cursor.position()-1), cursor.position() - 1));
+                undoStack.push(Action::Deletion(this->m_document->characterAt(cursor.position()-1), cursor.position()));
+                cursor.deletePreviousChar();
+            } else {
+                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart()));
+                cursor.insertBlock();
+
+                for (auto i = startLine; i < endLine; i++) {
+                    this->m_lines.removeAt(startLine);
+                }
+            }
+
+            emit Editor::instance->linesChanged();
+            
             this->invalidateText();
+            
             return true;
         }
 
         auto Formatter::handleUndo() -> bool {
-            this->m_document->undo();
-            this->invalidateText();
+            auto cursor = Editor::instance->getCurrentCursor();
+
+            std::cout << "handle undo - stack: " << this->undoStack.count() << " at cursor " << cursor.position() << std::endl;
+
+            if (this->undoStack.count() > 0) {
+
+                auto action = this->undoStack.pop()->getLast();
+                this->redoStack.push(action);
+
+                do {
+                    if (action->type == Action::Type::Addition) {
+                        std::cout << " undo prev addition by removing text at position: " << action->position << std::endl;
+                        cursor.setPosition(action->position);
+                        cursor.setPosition(action->position + action->text.length(), QTextCursor::KeepAnchor);
+                        cursor.removeSelectedText();
+                    } else {
+                        std::cout << " undo prev deletion by adding text at position: " << action->position << std::endl;
+                        cursor.setPosition(action->position);
+                        cursor.insertText(action->text);
+                    }
+
+                    action = action->prev;
+                } while (action);
+            }
+
+            return true;
+        }
+
+        auto Formatter::handleRedo() -> bool {
+            auto cursor = Editor::instance->getCurrentCursor();
+
+            std::cout << "handle redo - stack: " << this->redoStack.count() << " at cursor " << cursor.position() << std::endl;
+
+            if (this->redoStack.count() > 0) {
+
+                auto action = this->redoStack.pop();
+                this->undoStack.push(action);
+
+                do {
+                    if (action->type == Action::Type::Addition) {
+                        cursor.setPosition(action->position);
+                        cursor.insertText(action->text);
+                    } else {
+                        cursor.setPosition(action->position);
+                        cursor.setPosition(action->position + action->text.length(), QTextCursor::KeepAnchor);
+                        cursor.removeSelectedText();
+                    }
+
+                    action = action->next;
+                } while (action);
+            }
+            
             return true;
         }
 
@@ -41,150 +139,81 @@ namespace quick {
         auto Formatter::handlePaste() -> bool {
             auto text = QApplication::clipboard()->text();
 
-            if (!text.isEmpty())
-            {
-                auto cursor = Editor::instance->getCurrentCursor();
-                cursor.beginEditBlock();
-                cursor.insertText(text);
-                cursor.endEditBlock();
-
-                this->invalidateText();
-            }
+            insertText(text);
             return true;
         }
 
         auto Formatter::format() -> void {
-            auto block = this->m_document->firstBlock();
-            auto lines = Editor::instance->getLines();
-            lines.clear();
+        }
 
-            do {
-                auto line = block.text().simplified();
-                auto open = line.contains("{");
-                auto close = line.contains("}");
-                auto state = 0;
+        auto Formatter::handleEscape() -> bool {
+            auto selection = Editor::instance->getSelection();
 
-                if (block.blockNumber() > 0) {
-                    auto prevLevel = block.previous().userState();
-                    state = prevLevel;
-                    state += prevLevel % 2;
+            if (!selection->isEmpty()) {
+                selection->clear();
+            }
+
+            return true;
+        }
+
+        auto Formatter::insertText(const QString& text) -> void {
+            auto selection = Editor::instance->getSelection();
+            auto cursor = Editor::instance->getCurrentCursor();
+            auto startLine = selection->getStartLine();
+            auto endLine = selection->getEndLine();
+
+            if (selection->isEmpty()) {
+                undoStack.push(Action::Addition(text, cursor.position()));
+                cursor.insertText(text);
+            } else {
+                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart())->setNext(Action::Addition(text, selection->getStartPosition())));
+                cursor.insertText(text);
+
+                for (auto i = startLine; i < endLine; i++) {
+                    this->m_lines.removeAt(startLine);
                 }
+            }
 
-                state = state + open;
-                state = state - 2*close;
-
-                /*
-                 QTextCursor cursor = QTextCursor(block);
-                 cursor.select(QTextCursor::LineUnderCursor);
-
-                 for (auto i = 0; i < state/2; ++i) {
-                 cursor.insertText("\t");
-                 }*/
-
-                lines.append(state);
-                // cursor.insertText(line);
-                block.setUserState(state);
-                block = block.next();
-            } while (block.isValid());
-
-            Editor::instance->setLines(lines);
+            emit Editor::instance->linesChanged();
+            this->invalidateText();
         }
 
         auto Formatter::handleEnter() -> bool {
+            auto selection = Editor::instance->getSelection();
             auto cursor = Editor::instance->getCurrentCursor();
-            cursor.beginEditBlock();
+            auto startLine = selection->getStartLine();
+            auto endLine = selection->getEndLine();
 
-            auto block = cursor.block();
-            auto line = block.text();
-            auto left = line.left(cursor.positionInBlock());
-            auto right = line.right(line.length() - cursor.positionInBlock());
+            std::cout << "enter [" << startLine << ":" << endLine << "]" << std::endl;
 
-            auto currentLevel = 0;
-            auto newLevel = 0;
-            auto open = left.contains("{");
-            auto close = left.contains("}");
-
-            if (open || !close) {
-
-                if (block.blockNumber() > 0) {
-                    auto prevLevel = block.previous().userState();
-                    prevLevel += prevLevel % 2;
-                    currentLevel = prevLevel;
-                }
-
-                currentLevel += open;
-                newLevel = currentLevel + open;
-
-                cursor.block().setUserState(currentLevel);
+            if (selection->isEmpty()) {
+                undoStack.push(Action::Addition("\n", cursor.position()));
+                cursor.insertBlock();
+                this->m_lines.insert(startLine + 1, this->m_lines.at(startLine) + 1);
+            } else {
+                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart())->setNext(Action::Addition(QString("\n").repeated(endLine - startLine + 1), selection->getStartPosition())));
                 cursor.insertBlock();
 
-                cursor.block().setUserState(newLevel);
-                auto blockNumber = block.blockNumber();
-
-                auto lines = Editor::instance->getLines();
-                //std::cout << "lines: " << lines.count() << std::endl;
-                //std::cout << "block: " << blockNumber << std::endl;
-
-                if (blockNumber >= lines.count()) {
-                    lines.append(newLevel);
-                } else {
-                    lines.insert(blockNumber, newLevel);
+                for (auto i = startLine; i < endLine; i++) {
+                    this->m_lines.removeAt(startLine);
                 }
 
-                for (auto i = 0; i < newLevel / 2; i++) {
-                    cursor.insertText("\t");
-                }
-
-                Editor::instance->setLines(lines);
+                this->m_lines.insert(startLine + 1, this->m_lines.at(startLine) + 1);
             }
 
-            else {
-                cursor.insertBlock();
-                auto level = block.userState();
+            emit Editor::instance->linesChanged();
 
-                for (auto i = 0; i < level / 2; i++) {
-                    cursor.insertText("\t");
-                }
-            }
-
-            cursor.endEditBlock();
             this->invalidateText();
-                
+
             return true;
         }
 
         auto Formatter::handleCloseBraces() -> bool {
-            auto cursor = Editor::instance->getCurrentCursor();
-            auto text = cursor.block().text();
-            auto block = cursor.block();
-            auto line = block.text();
-            auto left = line.left(cursor.positionInBlock());
-            auto right = line.right(line.length() - cursor.positionInBlock());
-
-            auto level = 0;
-
-            if (QRegularExpression("\\w+").match(left).hasMatch()) {
-                cursor.insertText("}");
-                return true;
-            } else {
-                level = std::max(block.userState() - 2, 0);
-                block.setUserState(level);
-            }
-
-            cursor.select(QTextCursor::LineUnderCursor);
-
-            for (auto i = 0; i < level/2; ++i) {
-                cursor.insertText("\t");
-            }
-
-            cursor.insertText("}" + right);
-
-            this->invalidateText();
-
+            insertText("{");
             return true;
         }
 
-        auto Formatter::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
+        auto Formatter::onKeyPressed(int key, int modifiers, const QString& input) -> bool {
             if (modifiers & Qt::ControlModifier && modifiers & Qt::ShiftModifier && key == Qt::Key_Z) {
                 return handleRedo();
             }
@@ -207,12 +236,26 @@ namespace quick {
                 return handleEnter();
             }
 
-            if (string == "}") {
+            if (input == "}") {
                 return handleCloseBraces();
             }
 
-            if (QRegularExpression("(\\w+)|(\\W+)").match(string).hasMatch()) {
+            if (key == Qt::Key_Escape) {
+                return this->handleEscape();
+            }
+
+            if (key == Qt::Key_Backspace) {
+                return this->handleBackspace();
+            }
+
+            if (key == Qt::Key_Backtab) {
+                return this->handleBacktab();
+            }
+
+            if (QRegularExpression("(\\w+)|(\\W+)").match(input).hasMatch()) {
+                this->insertText(input);
                 this->invalidateText();
+                return true;
             }
 
             return false;

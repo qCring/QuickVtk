@@ -254,7 +254,7 @@ Item {
 	}
 
     Component.onCompleted: {
-        editor.document = textEdit.textDocument;
+        editor.editorDocument = textEdit.textDocument;
         editor.editorCursor = Qt.binding(function() { return textEdit.cursorPosition; });
         selection.startPosition = Qt.binding(function() { return textEdit.selectionStart; });
         selection.endPosition = Qt.binding(function() { return textEdit.selectionEnd; });

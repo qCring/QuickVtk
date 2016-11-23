@@ -12,6 +12,7 @@ namespace quick {
 
         class Errors;
         class Search;
+        class Document;
         class Settings;
         class Formatter;
         class Selection;
@@ -19,11 +20,11 @@ namespace quick {
 
         class Editor : public QObject {
             Q_OBJECT
+            Q_PROPERTY(QQuickTextDocument* editorDocument READ getEditorDocument WRITE setEditorDocument NOTIFY editorDocumentChanged);
             Q_PROPERTY(quick::Code::Errors* errors READ getErrors CONSTANT);
             Q_PROPERTY(quick::Code::Search* search READ getSearch CONSTANT);
             Q_PROPERTY(quick::Code::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::Code::Selection* selection READ getSelection CONSTANT);
-            Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
             Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
@@ -35,13 +36,14 @@ namespace quick {
             Q_PROPERTY(int formatTime READ getFormatTime NOTIFY formatTimeChanged);
         private:
             static Qml::Register::Controller<Editor> Register;
-            QQuickTextDocument* m_document = nullptr;
+            QQuickTextDocument* m_editorDocument = nullptr;
             Highlighter* m_highlighter = nullptr;
             Formatter* m_formatter = nullptr;
             Selection* m_selection = nullptr;
             Settings* m_settings = nullptr;
             Search* m_search = nullptr;
             QString m_filePath;
+            Document* m_document = nullptr;
             bool m_modified = false;
             bool m_expanded = true;
             int m_formatTime = 0;
@@ -64,8 +66,8 @@ namespace quick {
             auto getText() -> QString;
             auto setFilePath(const QString&) -> void;
             auto getFilePath() -> QString;
-            auto setDocument(QQuickTextDocument*) -> void;
-            auto getDocument() -> QQuickTextDocument*;
+            auto setEditorDocument(QQuickTextDocument*) -> void;
+            auto getEditorDocument() -> QQuickTextDocument*;
             auto setModified(bool) -> void;
             auto getModified() -> bool;
             auto getExpanded() -> bool;
@@ -99,10 +101,10 @@ namespace quick {
             void run();
             void format();
         signals:
+            void editorDocumentChanged();
             void editorCursorChanged();
             void filePathChanged();
             void modifiedChanged();
-            void documentChanged();
             void fontSizeChanged();
             void columnChanged();
             void linesChanged();

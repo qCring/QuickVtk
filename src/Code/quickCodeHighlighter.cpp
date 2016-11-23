@@ -8,8 +8,8 @@ namespace quick {
 
     namespace Code {
 
-        Highlighter::Highlighter(Editor* editor) : QSyntaxHighlighter(editor->getDocument()->textDocument()) {
-            this->m_doc = editor->getDocument()->textDocument();
+        Highlighter::Highlighter(Editor* editor) : QSyntaxHighlighter(editor->getEditorDocument()->textDocument()) {
+            this->m_doc = editor->getEditorDocument()->textDocument();
             this->m_editor = editor;
 
             Scheme::Init();

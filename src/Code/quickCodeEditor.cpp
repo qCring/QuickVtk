@@ -5,6 +5,7 @@
 #include "quickCodeFormatter.hpp"
 #include "quickCodeCompiler.hpp"
 #include "quickCodeSettings.hpp"
+#include "quickCodeDocument.hpp"
 #include "quickCodeErrors.hpp"
 #include "quickCodeSearch.hpp"
 
@@ -30,6 +31,7 @@ namespace quick {
             }
 
             this->m_search = new Search();
+            this->m_document = new Document();
             this->m_formatter = new Formatter();
             this->m_selection = new Selection();
             this->m_settings = new Settings();
@@ -44,25 +46,26 @@ namespace quick {
         }
 
         auto Editor::setText(const QString& text) -> void {
-            this->m_document->textDocument()->setPlainText(text);
+            this->m_editorDocument->textDocument()->setPlainText(text);
         }
 
         auto Editor::getText() -> QString {
-            return this->m_document->textDocument()->toPlainText();
+            return this->m_editorDocument->textDocument()->toPlainText();
         }
 
-        auto Editor::setDocument(QQuickTextDocument* document) -> void {
-            this->m_document = document;
+        auto Editor::setEditorDocument(QQuickTextDocument* editorDocument) -> void {
+            this->m_editorDocument = editorDocument;
 
-            auto options = document->textDocument()->defaultTextOption();
+            auto options = editorDocument->textDocument()->defaultTextOption();
             options.setTabStop(20);
-            document->textDocument()->setDefaultTextOption(options);
+            editorDocument->textDocument()->setDefaultTextOption(options);
 
-            emit this->documentChanged();
+            emit this->editorDocumentChanged();
 
             this->m_highlighter = new Highlighter(this);
-            this->m_formatter->setTextDocument(this->m_document->textDocument());
-            this->m_selection->setDocument(this->m_document->textDocument());
+            this->m_document->bindQTextDocument(editorDocument->textDocument());
+            this->m_formatter->setTextDocument(editorDocument->textDocument());
+            this->m_selection->setDocument(editorDocument->textDocument());
         }
 
         auto Editor::setLine(int line) -> void {
@@ -96,12 +99,12 @@ namespace quick {
             return this->m_filePath;
         }
 
-        auto Editor::getDocument() -> QQuickTextDocument* {
-            return this->m_document;
+        auto Editor::getEditorDocument() -> QQuickTextDocument* {
+            return this->m_editorDocument;
         }
 
         auto Editor::getCurrentCursor() -> QTextCursor {
-            auto cursor = QTextCursor(this->m_document->textDocument());
+            auto cursor = QTextCursor(this->m_editorDocument->textDocument());
 
             if (this->m_selection->m_startPosition != this->m_selection->m_endPosition) {
                 cursor.setPosition(this->m_selection->getStartPosition(), QTextCursor::MoveAnchor);

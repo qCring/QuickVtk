@@ -161,7 +161,7 @@ namespace quick {
 
             while (true) {
                 if (this->m_useRegex) {
-                    auto newCursor = Editor::instance->getDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
+                    auto newCursor = Editor::instance->getEditorDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
                     if (newCursor.position() == cursor.position()) {
                         //TODO: this is a quick hack to prevent the app from getting stuck for certain expressions (for example "^^")
                         return;
@@ -170,9 +170,9 @@ namespace quick {
                     cursor = newCursor;
                 } else {
                     if (this->m_caseSensitive) {
-                        cursor = Editor::instance->getDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
+                        cursor = Editor::instance->getEditorDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
                     } else {
-                        cursor = Editor::instance->getDocument()->textDocument()->find(this->m_findString, cursor);
+                        cursor = Editor::instance->getEditorDocument()->textDocument()->find(this->m_findString, cursor);
                     }
                 }
 

@@ -37,6 +37,7 @@ namespace quick {
         signals:
             void modifiedChanged();
             void fileUrlChanged();
+            void select(int selectStart, int selectEnd);
         };
     }
 }

@@ -249,6 +249,7 @@ namespace quick {
             this->m_filePath = "";
             emit this->filePathChanged();
 
+            emit this->m_document->select(0, 0);
             this->reset();
         }
 

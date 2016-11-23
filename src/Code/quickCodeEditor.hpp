@@ -26,7 +26,6 @@ namespace quick {
             Q_PROPERTY(quick::Code::Document* document READ getDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
-            Q_PROPERTY(bool modified READ getModified WRITE setModified NOTIFY modifiedChanged);
             Q_PROPERTY(bool expanded READ getExpanded NOTIFY expandedChanged);
             Q_PROPERTY(int fontSize READ getFontSize NOTIFY fontSizeChanged);
             Q_PROPERTY(int line READ getLine NOTIFY lineChanged);

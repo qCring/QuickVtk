@@ -248,12 +248,10 @@ Item {
         anchors.bottom: parent.bottom;
     }
 
-/*
     Connections {
-		target: selection;
-		onUpdateEditorSelection: textEdit.select(selection.startPosition, selection.endPosition);
+		target: editor.document;
+		onSelect: textEdit.select(selectStart, selectEnd);
 	}
-    */
 
     Component.onCompleted: {
         editor.editorDocument = textEdit.textDocument;

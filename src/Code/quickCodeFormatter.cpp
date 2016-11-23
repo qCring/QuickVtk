@@ -3,6 +3,7 @@
 #include "quickCodeAction.hpp"
 #include "quickCodeEditor.hpp"
 #include "quickCodeSelection.hpp"
+#include "quickCodeDocument.hpp"
 
 #include <QApplication>
 #include <QTextCursor>
@@ -40,8 +41,8 @@ namespace quick {
         }
 
         auto Formatter::handleBackspace() -> bool {
-            auto selection = Editor::instance->getSelection();
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto selection = Document::current->getSelection();
+            auto cursor = selection->getCursor();
             auto startLine = selection->getStartLine();
             auto endLine = selection->getEndLine();
 
@@ -76,7 +77,7 @@ namespace quick {
         }
 
         auto Formatter::handleUndo() -> bool {
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto cursor = Document::current->getSelection()->getCursor();
 
             std::cout << "handle undo - stack: " << this->undoStack.count() << " at cursor " << cursor.position() << std::endl;
 
@@ -105,7 +106,7 @@ namespace quick {
         }
 
         auto Formatter::handleRedo() -> bool {
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto cursor = Document::current->getSelection()->getCursor();
 
             std::cout << "handle redo - stack: " << this->redoStack.count() << " at cursor " << cursor.position() << std::endl;
 
@@ -147,7 +148,7 @@ namespace quick {
         }
 
         auto Formatter::handleEscape() -> bool {
-            auto selection = Editor::instance->getSelection();
+            auto selection = Document::current->getSelection();
 
             if (!selection->isEmpty()) {
                 selection->clear();
@@ -157,8 +158,8 @@ namespace quick {
         }
 
         auto Formatter::insertText(const QString& text) -> void {
-            auto selection = Editor::instance->getSelection();
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto selection = Document::current->getSelection();
+            auto cursor = selection->getCursor();
             auto startLine = selection->getStartLine();
             auto endLine = selection->getEndLine();
 
@@ -166,7 +167,7 @@ namespace quick {
                 undoStack.push(Action::Addition(text, cursor.position()));
                 cursor.insertText(text);
             } else {
-                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart())->setNext(Action::Addition(text, selection->getStartPosition())));
+                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart())->setNext(Action::Addition(text, selection->getStart())));
                 cursor.insertText(text);
 
                 for (auto i = startLine; i < endLine; i++) {
@@ -179,8 +180,8 @@ namespace quick {
         }
 
         auto Formatter::handleEnter() -> bool {
-            auto selection = Editor::instance->getSelection();
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto selection = Document::current->getSelection();
+            auto cursor = selection->getCursor();
             auto startLine = selection->getStartLine();
             auto endLine = selection->getEndLine();
 
@@ -191,7 +192,7 @@ namespace quick {
                 cursor.insertBlock();
                 this->m_lines.insert(startLine + 1, this->m_lines.at(startLine) + 1);
             } else {
-                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart())->setNext(Action::Addition(QString("\n").repeated(endLine - startLine + 1), selection->getStartPosition())));
+                undoStack.push(Action::Deletion(cursor.selectedText(), cursor.selectionStart())->setNext(Action::Addition(QString("\n").repeated(endLine - startLine + 1), selection->getStart())));
                 cursor.insertBlock();
 
                 for (auto i = startLine; i < endLine; i++) {

@@ -33,7 +33,6 @@ namespace quick {
             this->m_search = new Search();
             this->m_document = new Document();
             this->m_formatter = new Formatter();
-            this->m_selection = new Selection();
             this->m_settings = new Settings();
         }
 
@@ -69,7 +68,6 @@ namespace quick {
             this->m_highlighter = new Highlighter(this);
             this->m_document->bindQTextDocument(editorDocument->textDocument());
             this->m_formatter->setTextDocument(editorDocument->textDocument());
-            this->m_selection->setDocument(editorDocument->textDocument());
         }
 
         auto Editor::setLine(int line) -> void {
@@ -105,29 +103,6 @@ namespace quick {
 
         auto Editor::getEditorDocument() -> QQuickTextDocument* {
             return this->m_editorDocument;
-        }
-
-        auto Editor::getCurrentCursor() -> QTextCursor {
-            auto cursor = QTextCursor(this->m_editorDocument->textDocument());
-
-            if (this->m_selection->m_startPosition != this->m_selection->m_endPosition) {
-                cursor.setPosition(this->m_selection->getStartPosition(), QTextCursor::MoveAnchor);
-                cursor.setPosition(this->m_selection->getEndPosition(), QTextCursor::KeepAnchor);
-            } else {
-                cursor.setPosition(this->m_selection->m_startPosition);
-            }
-
-            return cursor;
-        }
-
-        auto Editor::setEditorCursor(int position) -> void {
-            this->m_editorCursor = position;
-
-            emit this->editorCursorChanged();
-        }
-
-        auto Editor::getEditorCursor() -> int {
-            return this->m_editorCursor;
         }
 
         auto Editor::resetFontSize() -> void {
@@ -180,10 +155,6 @@ namespace quick {
 
         auto Editor::getSettings() -> Settings* {
             return this->m_settings;
-        }
-
-        auto Editor::getSelection() -> Selection* {
-            return this->m_selection;
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
@@ -246,24 +217,26 @@ namespace quick {
         }
 
         auto Editor::resetSelection() -> void {
+            /*
             auto cursor = getCurrentCursor();
             cursor.setPosition(0);
-            this->select(cursor);
+            this->select(cursor);*/
         }
 
         auto Editor::select(QTextCursor cursor) -> void {
+            /*
             this->m_selection->setStartPosition(cursor.selectionStart());
             this->m_selection->setEndPosition(cursor.selectionEnd());
 
-            emit this->m_selection->updateEditorSelection();
+            emit this->m_selection->updateEditorSelection();*/
         }
 
         auto Editor::reset() -> void {
             this->m_formatter->reset();
 
-            auto cursor = this->getCurrentCursor();
-            cursor.setPosition(0);
-            this->select(cursor);
+            // auto cursor = this->getCurrentCursor();
+            // cursor.setPosition(0);
+            // this->select(cursor);
 
             this->setText("");
             this->setModified(false);

@@ -1,6 +1,7 @@
 #include "quickCodeDocument.hpp"
 
 #include "quickCodeEditor.hpp"
+#include "quickCodeSelection.hpp"
 
 #include "quickIO.hpp"
 
@@ -14,9 +15,15 @@ namespace quick {
         Document* Document::current = nullptr;
         Qml::Register::Type<Document> Document::Register;
 
+        Document::Document() {
+            this->m_selection = new Selection();
+        }
+
         auto Document::bindQTextDocument(QTextDocument* document) -> void {
             this->m_document = document;
             Document::current = this;
+
+            this->m_selection->setTextDocument(document);
 
             this->connect(document, &QTextDocument::modificationChanged, this, &Document::onModified);
         }
@@ -24,17 +31,14 @@ namespace quick {
         void Document::onModified(bool modified) {
             if (this->m_modified != modified) {
                 this->m_modified = modified;
-
-
-                // forward modification state to editor if this is the currently opened document
-
-                /*
-                 if (modified && Document::current == this) {
-                 this->m_modified = true;
-                 }*/
+                emit this->modifiedChanged();
             }
         }
 
+        auto Document::getSelection() -> Selection* {
+            return this->m_selection;
+        }
+        
         auto Document::getModified() -> bool {
             return this->m_modified;
         }
@@ -57,6 +61,7 @@ namespace quick {
             if (IO::Write::TextToFile(this->m_text, newPath)) {
                 this->m_document->setModified(false);
                 this->m_fileUrl = newPath;
+                emit this->fileUrlChanged();
             }
         }
 

@@ -148,7 +148,7 @@ namespace quick {
         }
 
         auto Search::processSearch() -> void {
-
+/*
             if (this->m_useRegex && !this->m_regexValid) {
                 return;
             }
@@ -187,6 +187,7 @@ namespace quick {
             emit this->matchCountChanged();
 
             this->findNext();
+ */
         }
 
         auto Search::findNext() -> void {

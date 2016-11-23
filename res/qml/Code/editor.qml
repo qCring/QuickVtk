@@ -163,7 +163,7 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index  >= selection.startLine && index <= selection.endLine ? "#fff" : "#6E7582"
+                    color: index  >= editor.document.selection.startLine && index <= editor.document.selection.endLine ? "#fff" : "#6E7582"
                     text: index + 1;
                 }
             }
@@ -248,16 +248,17 @@ Item {
         anchors.bottom: parent.bottom;
     }
 
+/*
     Connections {
 		target: selection;
 		onUpdateEditorSelection: textEdit.select(selection.startPosition, selection.endPosition);
 	}
+    */
 
     Component.onCompleted: {
         editor.editorDocument = textEdit.textDocument;
-        editor.editorCursor = Qt.binding(function() { return textEdit.cursorPosition; });
-        selection.startPosition = Qt.binding(function() { return textEdit.selectionStart; });
-        selection.endPosition = Qt.binding(function() { return textEdit.selectionEnd; });
+        editor.document.selection.start = Qt.binding(function() { return textEdit.selectionStart; });
+        editor.document.selection.end = Qt.binding(function() { return textEdit.selectionEnd; });
         textEdit.forceActiveFocus();
     }
 }

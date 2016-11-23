@@ -11,73 +11,76 @@ namespace quick {
 
         Qml::Register::Type<Selection> Selection::Register;
 
-        auto Selection::setDocument(QTextDocument* document) -> void {
-            this->m_document = document;
+        auto Selection::setTextDocument(QTextDocument* textDocument) -> void {
+            this->m_textDocument = textDocument;
         }
 
-        auto Selection::setStartPosition(int startPosition) -> void {
-            if (this->m_startPosition != startPosition) {
-                this->m_startPosition = startPosition;
-                emit this->startLineChanged();
+        auto Selection::clear() -> void {
+            /*
+            auto cursor = this->getCursor();
+            cursor.setPosition(Editor::instance->getEditorCursor());
+            Editor::instance->select(cursor);*/
+        }
+
+        auto Selection::setStart(int start) -> void {
+            std::cout << "Selection::setStart: " << start << std::endl;
+
+            if (this->m_start != start) {
+                this->m_start = start;
+                emit this->startChanged();
 
                 this->updateStartLine();
             }
         }
 
-        auto Selection::clear() -> void {
-            auto cursor = this->getCursor();
-            cursor.setPosition(Editor::instance->getEditorCursor());
-            Editor::instance->select(cursor);
+        auto Selection::getStart() -> int {
+            return this->m_start;
         }
 
-        auto Selection::getStartPosition() -> int {
-            return this->m_startPosition;
-        }
-
-        auto Selection::setEndPosition(int endPosition) -> void {
-            if (this->m_endPosition != endPosition) {
-                this->m_endPosition = endPosition;
-                emit this->endPositionChanged();
+        auto Selection::setEnd(int end) -> void {
+            if (this->m_end != end) {
+                this->m_end = end;
+                emit this->endChanged();
 
                 this->updateEndLine();
             }
         }
 
-        auto Selection::isEmpty() -> bool {
-            return this->m_endPosition == this->m_startPosition;
+        auto Selection::getEnd() -> int {
+            return this->m_end;
         }
 
-        auto Selection::getEndPosition() -> int {
-            return this->m_endPosition;
+        auto Selection::isEmpty() -> bool {
+            return this->m_end == this->m_start;
         }
 
         auto Selection::getCursor() -> QTextCursor {
-            if (!this->m_document) {
+            if (!this->m_textDocument) {
                 return QTextCursor();
             }
 
-            auto cursor = QTextCursor(this->m_document);
+            auto cursor = QTextCursor(this->m_textDocument);
 
-            cursor.setPosition(this->m_startPosition, QTextCursor::MoveAnchor);
-            cursor.setPosition(this->m_endPosition, QTextCursor::KeepAnchor);
+            cursor.setPosition(this->m_start, QTextCursor::MoveAnchor);
+            cursor.setPosition(this->m_end, QTextCursor::KeepAnchor);
 
             return cursor;
         }
 
         auto Selection::updateStartLine() -> void {
-            if (!this->m_document) {
+            if (!this->m_textDocument) {
                 return;
             }
 
-            this->setStartLine(this->m_document->findBlock(this->m_startPosition).blockNumber());
+            this->setStartLine(this->m_textDocument->findBlock(this->m_start).blockNumber());
         }
 
         auto Selection::updateEndLine() -> void {
-            if (!this->m_document) {
+            if (!this->m_textDocument) {
                 return;
             }
 
-            this->setEndLine(this->m_document->findBlock(this->m_endPosition).blockNumber());
+            this->setEndLine(this->m_textDocument->findBlock(this->m_end).blockNumber());
         }
 
         auto Selection::setStartLine(int startLine) -> void {

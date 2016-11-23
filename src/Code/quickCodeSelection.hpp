@@ -13,28 +13,28 @@ namespace quick {
 
         class Selection : public QObject {
             Q_OBJECT
-            Q_PROPERTY(int startPosition READ getStartPosition WRITE setStartPosition NOTIFY startPositionChanged);
-            Q_PROPERTY(int endPosition READ getEndPosition WRITE setEndPosition NOTIFY endPositionChanged);
+            Q_PROPERTY(int start READ getStart WRITE setStart NOTIFY startChanged);
+            Q_PROPERTY(int end READ getEnd WRITE setEnd NOTIFY endChanged);
             Q_PROPERTY(int startLine READ getStartLine NOTIFY startLineChanged);
             Q_PROPERTY(int endLine READ getEndLine NOTIFY endLineChanged);
         private:
             friend class Editor;
-            QTextDocument* m_document = nullptr;
-            int m_startPosition = 0;
-            int m_endPosition = 0;
+            QTextDocument* m_textDocument = nullptr;
+            int m_start = 0;
+            int m_end = 0;
             int m_startLine = 0;
             int m_endLine = 0;
         private:
             auto updateStartLine() -> void;
             auto updateEndLine() -> void;
-            auto getCursor() -> QTextCursor;
         public:
             static Qml::Register::Type<Selection> Register;
-            auto setDocument(QTextDocument*) -> void;
-            auto setStartPosition(int) -> void;
-            auto getStartPosition() -> int;
-            auto setEndPosition(int) -> void;
-            auto getEndPosition() -> int;
+            auto setTextDocument(QTextDocument*) -> void;
+            auto getCursor() -> QTextCursor;
+            auto setStart(int) -> void;
+            auto getStart() -> int;
+            auto setEnd(int) -> void;
+            auto getEnd() -> int;
             auto setStartLine(int) -> void;
             auto getStartLine() -> int;
             auto setEndLine(int) -> void;
@@ -43,10 +43,10 @@ namespace quick {
             auto clear() -> void;
         signals:
             void updateEditorSelection();
-            void startPositionChanged();
-            void endPositionChanged();
             void startLineChanged();
             void endLineChanged();
+            void startChanged();
+            void endChanged();
         };
     }
 }

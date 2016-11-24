@@ -32,6 +32,9 @@ namespace quick {
             auto saveAs() -> void;
             auto getModified() -> bool;
             auto getFileUrl() -> const QString;
+            auto undo() -> void;
+            auto redo() -> void;
+            auto clear() -> void;
         private slots:
             void onModified(bool);
         signals:

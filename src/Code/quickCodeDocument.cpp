@@ -21,11 +21,21 @@ namespace quick {
 
         auto Document::bindQTextDocument(QTextDocument* document) -> void {
             this->m_document = document;
-            Document::current = this;
-
             this->m_selection->setTextDocument(document);
 
-            this->connect(document, &QTextDocument::modificationChanged, this, &Document::onModified);
+            if (document == nullptr) {
+                this->disconnect(document, &QTextDocument::modificationChanged, this, &Document::onModified);
+            } else {
+                Document::current = this;
+                this->connect(document, &QTextDocument::modificationChanged, this, &Document::onModified);
+            }
+        }
+
+        auto Document::clear() -> void {
+            if (this->m_document) {
+                emit this->select(0, 0);
+                this->m_document->setPlainText("");
+            }
         }
 
         void Document::onModified(bool modified) {

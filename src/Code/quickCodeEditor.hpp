@@ -14,7 +14,6 @@ namespace quick {
         class Search;
         class Document;
         class Settings;
-        class Formatter;
         class Highlighter;
 
         class Editor : public QObject {
@@ -34,7 +33,6 @@ namespace quick {
             static Qml::Register::Controller<Editor> Register;
             QQuickTextDocument* m_editorDocument = nullptr;
             Highlighter* m_highlighter = nullptr;
-            Formatter* m_formatter = nullptr;
             Settings* m_settings = nullptr;
             Search* m_search = nullptr;
             QString m_filePath;
@@ -73,7 +71,6 @@ namespace quick {
             auto setColumn(int) -> void;
             auto getColumn() -> int;
             auto open(const QString&) -> void;
-            auto select(QTextCursor) -> void;
             auto resetSelection() -> void;
             auto showSearch() -> void;
             auto resetFontSize() -> void;

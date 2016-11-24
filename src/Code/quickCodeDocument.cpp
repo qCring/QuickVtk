@@ -6,7 +6,8 @@
 
 #include "quickIO.hpp"
 
-
+#include <QApplication>
+#include <QClipboard>
 #include <iostream>
 
 namespace quick {
@@ -32,6 +33,10 @@ namespace quick {
                 Document::current = this;
                 this->connect(document, &QTextDocument::modificationChanged, this, &Document::onModified);
             }
+        }
+
+        auto Document::format() -> void {
+            return;
         }
 
         auto Document::clear() -> void {
@@ -104,7 +109,20 @@ namespace quick {
             return this->m_lines;
         }
 
-        auto Document::handleEnter() -> void {
+        auto Document::onCut() -> void {
+            return;
+        }
+
+        auto Document::onPaste() -> void {
+            auto text = QApplication::clipboard()->text();
+            auto selection = this->m_selection->getData();
+
+            selection.cursor.insertText(text);
+            
+            return;
+        }
+
+        auto Document::onEnter() -> void {
             auto selection = this->m_selection->getData();
             auto cursor = selection.cursor;
 
@@ -128,7 +146,15 @@ namespace quick {
             }
         }
 
-        auto Document::handleBackspace() -> void {
+        auto Document::onEscape() -> void {
+            return;
+        }
+
+        auto Document::onBacktab() -> void {
+            return;
+        }
+
+        auto Document::onBackspace() -> void {
             auto selection = this->m_selection->getData();
 
             if (selection.empty) {
@@ -155,7 +181,7 @@ namespace quick {
             }
         }
 
-        auto Document::insertText(const QString& text) -> void {
+        auto Document::onCharacter(const QString& text) -> bool {
             auto selection = this->m_selection->getData();
 
             if (selection.empty) {
@@ -171,9 +197,11 @@ namespace quick {
 
                 emit this->linesChanged();
             }
+
+            return true;
         }
 
-        auto Document::undo() -> void {
+        auto Document::onUndo() -> void {
             auto selection = this->m_selection->getData();
             auto cursor = selection.cursor;
 
@@ -197,7 +225,7 @@ namespace quick {
             }
         }
 
-        auto Document::redo() -> void {
+        auto Document::onRedo() -> void {
             auto selection = this->m_selection->getData();
             auto cursor = selection.cursor;
 

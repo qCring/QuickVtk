@@ -31,8 +31,6 @@ namespace quick {
             bool m_modified = true;
         private:
             auto characterAt(int) -> QString;
-            auto handleBackspace() -> void;
-            auto handleEnter() -> void;
             auto getLines() -> QList<int>;
         public:
             static Document* current;
@@ -43,10 +41,17 @@ namespace quick {
             auto saveAs() -> void;
             auto getModified() -> bool;
             auto getFileUrl() -> const QString;
-            auto undo() -> void;
-            auto redo() -> void;
             auto clear() -> void;
-            auto insertText(const QString&) -> void;
+            auto format() -> void;
+            auto onUndo() -> void;
+            auto onRedo() -> void;
+            auto onCut() -> void;
+            auto onPaste() -> void;
+            auto onEnter() -> void;
+            auto onEscape() -> void;
+            auto onBacktab() -> void;
+            auto onBackspace() -> void;
+            auto onCharacter(const QString&) -> bool;
         private slots:
             void onModified(bool);
         signals:

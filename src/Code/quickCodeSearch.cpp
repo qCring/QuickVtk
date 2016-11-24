@@ -1,5 +1,8 @@
 #include "quickCodeSearch.hpp"
+
 #include "quickCodeEditor.hpp"
+#include "quickCodeDocument.hpp"
+#include "quickCodeSelection.hpp"
 
 namespace quick {
 
@@ -148,15 +151,16 @@ namespace quick {
         }
 
         auto Search::processSearch() -> void {
-/*
-            if (this->m_useRegex && !this->m_regexValid) {
+            if (!Document::current || (this->m_useRegex && !this->m_regexValid)) {
                 return;
             }
 
             this->setCurrentMatch(-1);
             this->m_matches.clear();
 
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto selection = Document::current->getSelection()->getData();
+            auto cursor = selection.cursor;
+
             cursor.setPosition(0);
 
             while (true) {
@@ -187,7 +191,7 @@ namespace quick {
             emit this->matchCountChanged();
 
             this->findNext();
- */
+
         }
 
         auto Search::findNext() -> void {
@@ -201,7 +205,11 @@ namespace quick {
             }
 
             this->setCurrentMatch((this->m_currentMatch + 1) % this->m_matches.count());
-            Editor::instance->select(this->m_matches.at(this->m_currentMatch));
+
+            if (Document::current) {
+                auto match = this->m_matches.at(this->m_currentMatch);
+                emit Document::current->select(match.selectionStart(), match.selectionEnd());
+            }
         }
 
         auto Search::findPrevious() -> void {
@@ -215,7 +223,11 @@ namespace quick {
             }
 
             this->setCurrentMatch((this->m_currentMatch - 1) % this->m_matches.count());
-            Editor::instance->select(this->m_matches.at(this->m_currentMatch));
+
+            if (Document::current) {
+                auto match = this->m_matches.at(this->m_currentMatch);
+                emit Document::current->select(match.selectionStart(), match.selectionEnd());
+            }
         }
     }
 }

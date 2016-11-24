@@ -2,7 +2,6 @@
 
 #include "quickCodeHighlighter.hpp"
 #include "quickCodeSelection.hpp"
-#include "quickCodeFormatter.hpp"
 #include "quickCodeCompiler.hpp"
 #include "quickCodeSettings.hpp"
 #include "quickCodeDocument.hpp"
@@ -32,7 +31,6 @@ namespace quick {
 
             this->m_search = new Search();
             this->m_document = new Document();
-            this->m_formatter = new Formatter();
             this->m_settings = new Settings();
         }
 
@@ -67,7 +65,6 @@ namespace quick {
 
             this->m_highlighter = new Highlighter(this);
             this->m_document->bindQTextDocument(editorDocument->textDocument());
-            this->m_formatter->setTextDocument(editorDocument->textDocument());
         }
 
         auto Editor::setLine(int line) -> void {
@@ -157,21 +154,62 @@ namespace quick {
             return this->m_settings;
         }
 
-        auto Editor::onKeyPressed(int key, int modifiers, const QString& string) -> bool {
-            return this->m_formatter->onKeyPressed(key, modifiers, string);
+        auto Editor::onKeyPressed(int key, int modifiers, const QString& input) -> bool {
+            if (modifiers & Qt::ControlModifier && modifiers & Qt::ShiftModifier && key == Qt::Key_Z) {
+                this->m_document->onRedo();
+                return true;
+            }
+
+            if (modifiers == Qt::ControlModifier) {
+                if (key == Qt::Key_F) {
+                    this->showSearch();
+                    return true;
+                }
+
+                if (key == Qt::Key_Z) {
+                    this->m_document->onUndo();
+                    return true;
+                }
+
+                if (key == Qt::Key_V) {
+                    this->m_document->onPaste();
+                    return true;
+                }
+            }
+
+            if (key == Qt::Key_Return || key == Qt::Key_Enter) {
+                this->m_document->onEnter();
+                return true;
+            }
+
+            if (key == Qt::Key_Escape) {
+                this->m_document->onEscape();
+                return true;
+            }
+
+            if (key == Qt::Key_Backspace) {
+                this->m_document->onBackspace();
+                return true;
+            }
+
+            if (key == Qt::Key_Backtab) {
+                this->m_document->onBacktab();
+                return true;
+            }
+
+            return this->m_document->onCharacter(input);
         }
 
         void Editor::format() {
-            //TODO: text-formatting logic is bypassed atm
+            if (this->m_document) {
+                QElapsedTimer timer;
+                timer.start();
 
-            /*
-            QElapsedTimer timer;
-            timer.start();
+                this->m_document->format();
 
-            this->m_formatter->format();
-
-            this->m_formatTime = timer.elapsed();
-            emit this->formatTimeChanged();*/
+                this->m_formatTime = timer.elapsed();
+                emit this->formatTimeChanged();
+            }
         }
 
         auto Editor::getFormatTime() -> int {
@@ -223,16 +261,7 @@ namespace quick {
             this->select(cursor);*/
         }
 
-        auto Editor::select(QTextCursor cursor) -> void {
-            /*
-            this->m_selection->setStartPosition(cursor.selectionStart());
-            this->m_selection->setEndPosition(cursor.selectionEnd());
-
-            emit this->m_selection->updateEditorSelection();*/
-        }
-
         auto Editor::reset() -> void {
-            this->m_formatter->reset();
 
             // auto cursor = this->getCurrentCursor();
             // cursor.setPosition(0);

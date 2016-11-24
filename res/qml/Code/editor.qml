@@ -180,7 +180,7 @@ Item {
 
             Column {
                 Repeater {
-                    model: editor.lines.length;
+                    model: editor.document.lines.length;
                     delegate: Item {
                         width: 14;
                         height: textEdit.cursorHeight;
@@ -188,14 +188,14 @@ Item {
                         Rectangle {
                             anchors.fill: parent;
                             color: "#9DA5B4"
-                            opacity: Math.round(editor.lines[index] / 2)/20;
+                            opacity: Math.round(modelData / 2)/20;
                         }
 
                         Lib.Label {
                             anchors.centerIn: parent;
                             font.pointSize: 8;
                             color: "#fff";
-                            text: editor.lines[index];
+                            text: modelData
                         }
                     }
                 }

@@ -253,10 +253,6 @@ namespace quick {
             this->reset();
         }
 
-        auto Editor::getLines() -> QList<int> {
-            return this->m_formatter->m_lines;
-        }
-
         Editor::~Editor() {
             delete this->m_highlighter;
         }

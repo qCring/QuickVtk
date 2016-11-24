@@ -29,10 +29,11 @@ namespace quick {
         }
 
         auto Formatter::reset() -> void {
+            /*
             this->m_lines.clear();
             this->m_lines.append(0);
 
-            emit Editor::instance->linesChanged();
+            emit Editor::instance->linesChanged();*/
         }
 
         auto Formatter::handleBacktab() -> bool {
@@ -41,7 +42,7 @@ namespace quick {
         }
 
         auto Formatter::handleBackspace() -> bool {
-            auto selection = Document::current->getSelection();
+            /*auto selection = Document::current->getSelection();
             auto cursor = selection->getCursor();
             auto startLine = selection->getStartLine();
             auto endLine = selection->getEndLine();
@@ -74,9 +75,11 @@ namespace quick {
             this->invalidateText();
             
             return true;
+             */
         }
 
         auto Formatter::handleUndo() -> bool {
+            /*
             auto cursor = Document::current->getSelection()->getCursor();
 
             std::cout << "handle undo - stack: " << this->undoStack.count() << " at cursor " << cursor.position() << std::endl;
@@ -102,11 +105,11 @@ namespace quick {
                 } while (action);
             }
 
-            return true;
+            return true;*/
         }
 
         auto Formatter::handleRedo() -> bool {
-            auto cursor = Document::current->getSelection()->getCursor();
+           /* auto cursor = Document::current->getSelection()->getCursor();
 
             std::cout << "handle redo - stack: " << this->redoStack.count() << " at cursor " << cursor.position() << std::endl;
 
@@ -129,7 +132,7 @@ namespace quick {
                 } while (action);
             }
             
-            return true;
+            return true;*/
         }
 
         auto Formatter::handleShowSearch() -> bool {
@@ -158,7 +161,7 @@ namespace quick {
         }
 
         auto Formatter::insertText(const QString& text) -> void {
-            auto selection = Document::current->getSelection();
+            /*auto selection = Document::current->getSelection();
             auto cursor = selection->getCursor();
             auto startLine = selection->getStartLine();
             auto endLine = selection->getEndLine();
@@ -176,11 +179,11 @@ namespace quick {
             }
 
             emit Editor::instance->linesChanged();
-            this->invalidateText();
+            this->invalidateText();*/
         }
 
         auto Formatter::handleEnter() -> bool {
-            auto selection = Document::current->getSelection();
+            /*auto selection = Document::current->getSelection();
             auto cursor = selection->getCursor();
             auto startLine = selection->getStartLine();
             auto endLine = selection->getEndLine();
@@ -206,7 +209,7 @@ namespace quick {
 
             this->invalidateText();
 
-            return true;
+            return true;*/
         }
 
         auto Formatter::handleCloseBraces() -> bool {

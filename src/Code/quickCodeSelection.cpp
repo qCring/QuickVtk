@@ -15,6 +15,19 @@ namespace quick {
             this->m_textDocument = textDocument;
         }
 
+        auto Selection::getData() -> Data {
+            auto data = Data();
+            data.cursor = getCursor();
+            data.start = this->m_start;
+            data.end = this->m_end;
+            data.startLine = this->m_endLine;
+            data.endLine = this->m_endLine;
+            data.empty = isEmpty();
+            data.text = data.cursor.selectedText();
+
+            return data;
+        }
+
         auto Selection::clear() -> void {
             /*
             auto cursor = this->getCursor();

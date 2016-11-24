@@ -25,7 +25,6 @@ namespace quick {
             Q_PROPERTY(quick::Code::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::Code::Document* document READ getDocument NOTIFY documentChanged);
             Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
-            Q_PROPERTY(QList<int> lines READ getLines NOTIFY linesChanged);
             Q_PROPERTY(bool expanded READ getExpanded NOTIFY expandedChanged);
             Q_PROPERTY(int fontSize READ getFontSize NOTIFY fontSizeChanged);
             Q_PROPERTY(int line READ getLine NOTIFY lineChanged);
@@ -48,8 +47,6 @@ namespace quick {
             int m_fontSize = 12;
             int m_column = 0;
             int m_line = 0;
-        private:
-            auto getLines() -> QList<int>;
         public:
             Editor();
             static Editor* instance;
@@ -99,7 +96,6 @@ namespace quick {
             void modifiedChanged();
             void fontSizeChanged();
             void columnChanged();
-            void linesChanged();
             void lineChanged();
             void updateSelection();
             void formatTimeChanged();

@@ -67,37 +67,6 @@ namespace quick {
             this->m_document->bindQTextDocument(editorDocument->textDocument());
         }
 
-        auto Editor::setLine(int line) -> void {
-            if (this->m_line != line) {
-                this->m_line = line;
-                emit this->lineChanged();
-            }
-        }
-
-        auto Editor::getLine() -> int {
-            return this->m_line;
-        }
-
-        auto Editor::setColumn(int column) -> void {
-            if (this->m_column != column) {
-                this->m_column = column;
-                emit this->columnChanged();
-            }
-        }
-
-        auto Editor::getColumn() -> int {
-            return this->m_column;
-        }
-
-        auto Editor::setFilePath(const QString& filePath) -> void {
-            this->m_filePath = filePath;
-            emit this->filePathChanged();
-        }
-
-        auto Editor::getFilePath() -> QString {
-            return this->m_filePath;
-        }
-
         auto Editor::getEditorDocument() -> QQuickTextDocument* {
             return this->m_editorDocument;
         }
@@ -227,12 +196,15 @@ namespace quick {
         }
 
         auto Editor::open(const QString& filePath) -> void {
-            if (IO::FileExists(filePath)) {
-                this->m_filePath = filePath;
-                emit this->filePathChanged();
+            /*if (this->m_document) {
+                // check modified, save dialog then load new file
+            } else {
+                // if theres document, create a new one..
+            }*/
 
+            if (IO::FileExists(filePath)) {
                 this->m_search->invalidate();
-                this->setText(IO::Read::TextFromUrl(this->m_filePath));
+                this->setText(IO::Read::TextFromUrl(filePath));
                 this->setModified(false);
                 this->format();
                 this->resetSelection();
@@ -275,10 +247,7 @@ namespace quick {
         }
 
         void Editor::newFile() {
-            this->m_filePath = "";
-            emit this->filePathChanged();
-
-            emit this->m_document->select(0, 0);
+            this->m_document->clear();
             this->reset();
         }
 

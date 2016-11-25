@@ -20,9 +20,9 @@ namespace quick {
             data.cursor = getCursor();
             data.start = this->m_start;
             data.end = this->m_end;
-            data.startLine = this->m_endLine;
-            data.endLine = this->m_endLine;
-            data.empty = isEmpty();
+            data.line = this->m_line;
+            data.lines = this->m_lines;
+            data.empty = this->m_empty;
             data.text = data.cursor.selectedText();
 
             return data;
@@ -42,7 +42,7 @@ namespace quick {
                 this->m_start = start;
                 emit this->startChanged();
 
-                this->updateStartLine();
+                this->updateLine();
             }
         }
 
@@ -55,7 +55,7 @@ namespace quick {
                 this->m_end = end;
                 emit this->endChanged();
 
-                this->updateEndLine();
+                this->updateLines();
             }
         }
 
@@ -63,7 +63,14 @@ namespace quick {
             return this->m_end;
         }
 
-        auto Selection::isEmpty() -> bool {
+        auto Selection::setEmpty(bool empty) -> void {
+            if (this->m_empty != empty) {
+                this->m_empty = empty;
+                emit this->emptyChanged();
+            }
+        }
+
+        auto Selection::getEmpty() -> bool {
             return this->m_end == this->m_start;
         }
 
@@ -80,42 +87,64 @@ namespace quick {
             return cursor;
         }
 
-        auto Selection::updateStartLine() -> void {
+        auto Selection::updateLine() -> void {
             if (!this->m_textDocument) {
                 return;
             }
 
-            this->setStartLine(this->m_textDocument->findBlock(this->m_start).blockNumber());
+            this->setLine(this->m_textDocument->findBlock(this->m_start).blockNumber());
         }
 
-        auto Selection::updateEndLine() -> void {
+        auto Selection::updateLines() -> void {
             if (!this->m_textDocument) {
                 return;
             }
 
-            this->setEndLine(this->m_textDocument->findBlock(this->m_end).blockNumber());
+            this->setLines(this->m_line - this->m_textDocument->findBlock(this->m_end).blockNumber());
         }
 
-        auto Selection::setStartLine(int startLine) -> void {
-            if (this->m_startLine != startLine) {
-                this->m_startLine = startLine;
-                emit this->startLineChanged();
+        auto Selection::setLine(int line) -> void {
+            if (this->m_line != line) {
+                this->m_line = line;
+                emit this->lineChanged();
             }
         }
 
-        auto Selection::getStartLine() -> int {
-            return this->m_startLine;
+        auto Selection::getLine() -> int {
+            return this->m_line;
         }
 
-        auto Selection::setEndLine(int endLine) -> void {
-            if (this->m_endLine != endLine) {
-                this->m_endLine = endLine;
-                emit this->endLineChanged();
+        auto Selection::setColumn(int column) -> void {
+            if (this->m_column != column) {
+                this->m_column = column;
+                emit this->columnChanged();
             }
         }
 
-        auto Selection::getEndLine() -> int {
-            return this->m_endLine;
+        auto Selection::getColumn() -> int {
+            return this->m_column;
+        }
+
+        auto Selection::setColumns(int columns) -> void {
+            if (this->m_columns != columns) {
+                this->m_columns = columns;
+                emit this->columnsChanged();
+            }
+        }
+
+        auto Selection::getColumns() -> int {
+            return this->m_columns;
+        }
+            
+        auto Selection::setLines(int lines) -> void {
+            if (this->m_lines != lines) {
+                this->m_lines = lines;
+                emit this->linesChanged();
+            }
+        }
+
+        auto Selection::getLines() -> int {
+            return this->m_lines;
         }
     }
 }

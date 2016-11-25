@@ -129,18 +129,18 @@ namespace quick {
             if (selection.empty) {
                 this->m_undoStack.push(Action::Addition("\n", selection.start));
                 cursor.insertBlock();
-                this->m_lines.insert(selection.startLine + 1, this->m_lines.at(selection.startLine) + 1);
+                this->m_lines.insert(selection.line + 1, this->m_lines.at(selection.line) + 1);
                 emit this->linesChanged();
             } else {
-                this->m_undoStack.push(Action::Deletion(selection.text, selection.start)->setNext(Action::Addition(QString("\n").repeated(selection.endLine - selection.startLine + 1), selection.start)));
+                this->m_undoStack.push(Action::Deletion(selection.text, selection.start)->setNext(Action::Addition(QString("\n").repeated(selection.lines + 1), selection.start)));
 
                 cursor.insertBlock();
 
-                for (auto i = selection.startLine; i < selection.endLine; i++) {
-                    this->m_lines.removeAt(selection.startLine);
+                for (auto i = 0; i < selection.lines; i++) {
+                    this->m_lines.removeAt(selection.line);
                 }
 
-                this->m_lines.insert(selection.startLine + 1, this->m_lines.at(selection.startLine) + 1);
+                this->m_lines.insert(selection.line + 1, this->m_lines.at(selection.line) + 1);
 
                 emit this->linesChanged();
             }
@@ -163,7 +163,7 @@ namespace quick {
                 }
 
                 if (selection.cursor.atBlockStart()) {
-                    this->m_lines.removeAt(selection.startLine);
+                    this->m_lines.removeAt(selection.line);
                     emit this->linesChanged();
                 }
 
@@ -173,8 +173,8 @@ namespace quick {
                 this->m_undoStack.push(Action::Deletion(selection.text, selection.start));
                 selection.cursor.insertBlock();
 
-                for (auto i = selection.startLine; i < selection.endLine; i++) {
-                    this->m_lines.removeAt(selection.startLine);
+                for (auto i = 0; i < selection.lines; i++) {
+                    this->m_lines.removeAt(selection.line);
                 }
 
                 emit this->linesChanged();
@@ -191,8 +191,8 @@ namespace quick {
                 this->m_undoStack.push(Action::Deletion(selection.text, selection.start)->setNext(Action::Addition(text, selection.start)));
                 selection.cursor.insertText(text);
 
-                for (auto i = selection.startLine; i < selection.endLine; i++) {
-                    this->m_lines.removeAt(selection.startLine);
+                for (auto i = 0; i < selection.lines; i++) {
+                    this->m_lines.removeAt(selection.line);
                 }
 
                 emit this->linesChanged();

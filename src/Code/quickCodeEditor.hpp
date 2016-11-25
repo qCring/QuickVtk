@@ -23,11 +23,8 @@ namespace quick {
             Q_PROPERTY(quick::Code::Search* search READ getSearch CONSTANT);
             Q_PROPERTY(quick::Code::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::Code::Document* document READ getDocument NOTIFY documentChanged);
-            Q_PROPERTY(QString filePath READ getFilePath NOTIFY filePathChanged);
             Q_PROPERTY(bool expanded READ getExpanded NOTIFY expandedChanged);
             Q_PROPERTY(int fontSize READ getFontSize NOTIFY fontSizeChanged);
-            Q_PROPERTY(int line READ getLine NOTIFY lineChanged);
-            Q_PROPERTY(int column READ getColumn NOTIFY columnChanged);
             Q_PROPERTY(int formatTime READ getFormatTime NOTIFY formatTimeChanged);
         private:
             static Qml::Register::Controller<Editor> Register;
@@ -35,7 +32,6 @@ namespace quick {
             Highlighter* m_highlighter = nullptr;
             Settings* m_settings = nullptr;
             Search* m_search = nullptr;
-            QString m_filePath;
             Document* m_document = nullptr;
             bool m_modified = false;
             bool m_expanded = true;
@@ -43,8 +39,6 @@ namespace quick {
             int minFontSize = 6;
             int maxFontSize = 20;
             int m_fontSize = 12;
-            int m_column = 0;
-            int m_line = 0;
         public:
             Editor();
             static Editor* instance;
@@ -52,8 +46,6 @@ namespace quick {
             auto init() -> void;
             auto setText(const QString&) -> void;
             auto getText() -> QString;
-            auto setFilePath(const QString&) -> void;
-            auto getFilePath() -> QString;
             auto setEditorDocument(QQuickTextDocument*) -> void;
             auto getEditorDocument() -> QQuickTextDocument*;
             auto getDocument() -> Document*;
@@ -66,10 +58,6 @@ namespace quick {
             auto getErrors() -> Errors*;
             auto getSearch() -> Search*;
             auto getSettings() -> Settings*;
-            auto setLine(int) -> void;
-            auto getLine() -> int;
-            auto setColumn(int) -> void;
-            auto getColumn() -> int;
             auto open(const QString&) -> void;
             auto resetSelection() -> void;
             auto showSearch() -> void;
@@ -89,12 +77,8 @@ namespace quick {
         signals:
             void editorDocumentChanged();
             void documentChanged();
-            void filePathChanged();
             void modifiedChanged();
             void fontSizeChanged();
-            void columnChanged();
-            void lineChanged();
-            void updateSelection();
             void formatTimeChanged();
             void expandedChanged();
         };

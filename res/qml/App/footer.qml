@@ -33,14 +33,14 @@ Rectangle {
 
             type: types.fa_circle;
             color: "#ff8800";
-            visible: App.editor.filePath.length > 0 && App.editor.modified;
+            visible: App.editor.document.fileUrl > 0 && App.editor.modified;
             pointSize: 6;
         }
 
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            text: App.editor.filePath.length > 0 ? App.editor.filePath : "untitled"
+            text: App.editor.document.fileUrl.length > 0 ? App.editor.filePath : "untitled"
             font.pointSize: 12;
         }
     }
@@ -50,7 +50,7 @@ Rectangle {
         anchors.left: fileNameRow.right;
         anchors.leftMargin: 20;
 
-        text: (App.editor.line + 1) + ":" + (App.editor.column + 1);
+        text: (App.editor.document.selection.line + 1) + ":" + (App.editor.document.selection.column + 1);
         font.pointSize: 12;
     }
 

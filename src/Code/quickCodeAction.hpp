@@ -17,10 +17,13 @@ namespace quick {
             ~Action();
         public:
             enum class Type {
-                Addition,
-                Deletion
+                InsertChar,
+                InsertNewline,
+                DeleteSelection,
+                DeletePreviousChar
             } type;
 
+            QChar character;
             QString text;
             QString typeStr;
             int start = 0;
@@ -30,8 +33,10 @@ namespace quick {
             Action* next = nullptr;
             Action* prev = nullptr;
 
-            static auto Addition(const Selection::Data&, QString = nullptr) -> Action*;
-            static auto Deletion(const Selection::Data&, QString = nullptr) -> Action*;
+            static auto InsertChar(const Selection::Data&, const QChar&) -> Action*;
+            static auto InsertNewline(const Selection::Data&) -> Action*;
+            static auto DeleteSelection(const Selection::Data&) -> Action*;
+            static auto DeletePreviousChar(const Selection::Data&, const QChar&) -> Action*;
 
             auto toString() -> std::string;
             auto getLast() -> Action*;

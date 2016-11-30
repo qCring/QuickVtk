@@ -87,20 +87,27 @@ namespace quick {
             }
 
             auto selection = this->m_selection->getData();
-            Action* removeAction = nullptr;
+            Action* deleteAction = nullptr;
 
             if (!selection.empty) {
-                removeAction = Action::Deletion(selection);
+                deleteAction = Action::DeleteSelection(selection);
             }
 
             if (isBackspace) {
+                if (selection.start < 1) {
+                    return true;
+                }
+
+                Action::DeletePreviousChar(selection, characterAt(selection.start - 1));
                 selection.cursor.deletePreviousChar();
             } else if (isDelete) {
                 selection.cursor.deleteChar();
             } else if (isNewline) {
+                Action::InsertNewline(selection);
                 selection.cursor.insertBlock();
             } else {
                 std::cout << "handle char: " + input.toStdString() + "\n";
+                Action::InsertChar(selection, input.at(0));
                 selection.cursor.insertText(input);
             }
 
@@ -172,7 +179,7 @@ namespace quick {
             }
         }
 
-        auto Document::characterAt(int position) -> QString {
+        auto Document::characterAt(int position) -> QChar {
             return this->m_document->characterAt(position);
         }
 

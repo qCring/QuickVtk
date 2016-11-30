@@ -16,63 +16,61 @@ namespace quick {
             
         }
 
-        auto Action::Addition(const Selection::Data& selection, QString text) -> Action* {
+        auto Action::InsertChar(const Selection::Data& selection, const QChar& c) -> Action* {
             auto action = new Action();
 
-            if (text == nullptr) {
-                action->text = selection.text;
-            } else {
-                action->text = text;
-            }
-
-            action->type = Type::Addition;
+            action->type = Type::InsertChar;
             action->start = selection.start;
-            action->end = selection.end;
-            action->line = selection.line;
-            action->lines = selection.lines;
+            action->character = c;
 
-            action->typeStr = "add";
-
-            if (selection.start == selection.end) {
-                action->end += action->text.length();
-            }
-
-            if (action->text.length() < 1) {
-                std::cout << "action.text is empty!\n";
-            }
+            action->typeStr = "insert char";
 
             std::cout << action->toString() << std::endl;
 
             return action;
         }
 
-            auto Action::Deletion(const Selection::Data& selection, QString text) -> Action* {
+        auto Action::InsertNewline(const Selection::Data& selection) -> Action* {
             auto action = new Action();
 
-            if (text == nullptr) {
-                action->text = selection.text;
-            } else {
-                action->text = text;
-            }
+            action->type = Type::InsertNewline;
+            action->start = selection.start;
 
-            action->type = Type::Deletion;
+            action->typeStr = "insert nl";
+
+            std::cout << action->toString() << std::endl;
+
+            return action;
+        }
+
+        auto Action::DeletePreviousChar(const Selection::Data& selection, const QChar& c) -> Action* {
+            auto action = new Action();
+
+            action->type = Type::DeletePreviousChar;
+            action->start = selection.start;
+            action->character = c;
+
+            action->typeStr = "del prev char";
+
+            std::cout << action->toString() << std::endl;
+            std::cout << "char: " << c.toLatin1() << std::endl;
+            
+            return action;
+        }
+
+        auto Action::DeleteSelection(const Selection::Data& selection) -> Action* {
+            auto action = new Action();
+
+            action->type = Type::DeleteSelection;
             action->start = selection.start;
             action->end = selection.end;
             action->line = selection.line;
             action->lines = selection.lines;
 
-            if (selection.start == selection.end) {
-                action->end += action->text.length();
-            }
-
-            if (action->text.length() < 1) {
-                   std::cout << "action.text is empty!\n";
-            }
-
-            action->typeStr = "del";
+            action->typeStr = "del selection";
 
             std::cout << action->toString() << std::endl;
-
+            
             return action;
         }
 

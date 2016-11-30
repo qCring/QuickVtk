@@ -30,7 +30,7 @@ namespace quick {
             QStack<Action*> m_redoStack;
             bool m_modified = true;
         private:
-            auto characterAt(int) -> QString;
+            auto characterAt(int) -> QChar;
             auto getLines() -> QList<int>;
             auto onUndo() -> void;
             auto onRedo() -> void;

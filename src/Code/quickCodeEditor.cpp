@@ -144,6 +144,10 @@ namespace quick {
                     this->m_document->onPaste();
                     return true;
                 }
+
+                if (key == Qt::Key_A) {
+                    return false;
+                }
             }
 
             if (key == Qt::Key_Return || key == Qt::Key_Enter) {
@@ -164,6 +168,10 @@ namespace quick {
             if (key == Qt::Key_Backtab) {
                 this->m_document->onBacktab();
                 return true;
+            }
+
+            if (key == Qt::Key_Left || key == Qt::Key_Right || key == Qt::Key_Up || key == Qt::Key_Down) {
+                return false;
             }
 
             return this->m_document->onCharacter(input);

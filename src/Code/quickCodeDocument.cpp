@@ -45,6 +45,7 @@ namespace quick {
                 this->m_document->setPlainText("");
                 this->m_lines.clear();
                 this->m_lines.append(0);
+                emit this->linesChanged();
             }
         }
 
@@ -171,7 +172,7 @@ namespace quick {
                 selection.cursor.deletePreviousChar();
             } else {
                 this->m_undoStack.push(Action::Deletion(selection.text, selection.start));
-                selection.cursor.insertBlock();
+                selection.cursor.removeSelectedText();
 
                 for (auto i = 0; i < selection.lines; i++) {
                     this->m_lines.removeAt(selection.line);

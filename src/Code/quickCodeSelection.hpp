@@ -42,8 +42,7 @@ namespace quick {
             int m_column = 0;
             int m_columns = 0;
         private:
-            auto updateLine() -> void;
-            auto updateLines() -> void;
+            auto update() -> void;
         private:
             auto getCursor() -> QTextCursor;
             auto setStart(int) -> void;

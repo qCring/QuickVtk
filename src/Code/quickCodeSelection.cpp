@@ -42,7 +42,7 @@ namespace quick {
                 this->m_start = start;
                 emit this->startChanged();
 
-                this->updateLine();
+                this->update();
             }
         }
 
@@ -51,11 +51,12 @@ namespace quick {
         }
 
         auto Selection::setEnd(int end) -> void {
+            std::cout << "setEnd> " << end << std::endl;
             if (this->m_end != end) {
                 this->m_end = end;
                 emit this->endChanged();
 
-                this->updateLines();
+                this->update();
             }
         }
 
@@ -87,20 +88,14 @@ namespace quick {
             return cursor;
         }
 
-        auto Selection::updateLine() -> void {
+        auto Selection::update() -> void {
             if (!this->m_textDocument) {
                 return;
             }
 
             this->setLine(this->m_textDocument->findBlock(this->m_start).blockNumber());
-        }
-
-        auto Selection::updateLines() -> void {
-            if (!this->m_textDocument) {
-                return;
-            }
-
-            this->setLines(this->m_line - this->m_textDocument->findBlock(this->m_end).blockNumber());
+            this->setLines(this->m_textDocument->findBlock(this->m_end).blockNumber() - this->m_line);
+            this->setEmpty(this->m_lines == 0);
         }
 
         auto Selection::setLine(int line) -> void {
@@ -137,6 +132,7 @@ namespace quick {
         }
             
         auto Selection::setLines(int lines) -> void {
+            std::cout << "****** lines: " << lines << std::endl;
             if (this->m_lines != lines) {
                 this->m_lines = lines;
                 emit this->linesChanged();

@@ -163,7 +163,7 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index  >= editor.document.selection.startLine && index <= editor.document.selection.endLine ? "#fff" : "#6E7582"
+                    color: index  >= editor.document.selection.line && index <= editor.document.selection.line + editor.document.selection.lines ? "#fff" : "#6E7582"
                     text: index + 1;
                 }
             }

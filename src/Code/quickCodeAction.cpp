@@ -16,8 +16,10 @@ namespace quick {
             
         }
 
-        auto Action::InsertChar(const Selection::Data& selection, const QChar& c) -> Action* {
+        auto Action::InsertChar(const Selection::Data& selection, const QChar& c, Action* prev) -> Action* {
             auto action = new Action();
+
+            action->setPrev(prev);
 
             action->type = Type::InsertChar;
             action->start = selection.start;
@@ -30,8 +32,10 @@ namespace quick {
             return action;
         }
 
-        auto Action::InsertNewline(const Selection::Data& selection) -> Action* {
+        auto Action::InsertNewline(const Selection::Data& selection, Action* prev) -> Action* {
             auto action = new Action();
+
+            action->setPrev(prev);
 
             action->type = Type::InsertNewline;
             action->start = selection.start;
@@ -43,8 +47,25 @@ namespace quick {
             return action;
         }
 
-        auto Action::DeletePreviousChar(const Selection::Data& selection, const QChar& c) -> Action* {
+        auto Action::DeleteNextChar(int start, const QChar& c, Action* prev) -> Action* {
             auto action = new Action();
+
+            action->setPrev(prev);
+
+            action->type = Type::DeleteNextChar;
+            action->start = start;
+            action->character = c;
+
+            std::cout << action->toString() << std::endl;
+            std::cout << "char: " << c.toLatin1() << std::endl;
+
+            return action;
+        }
+
+        auto Action::DeletePreviousChar(const Selection::Data& selection, const QChar& c, Action* prev) -> Action* {
+            auto action = new Action();
+
+            action->setPrev(prev);
 
             action->type = Type::DeletePreviousChar;
             action->start = selection.start;
@@ -79,7 +100,6 @@ namespace quick {
             QString s;
             s += "action: ";
             s += " type: " + typeStr;
-            s += " text: " + text;
             s += " start: ";
             s += QString::number(start);
             s += " end: ";
@@ -99,10 +119,12 @@ namespace quick {
             return current;
         }
 
-        auto Action::setNext(Action* action) -> Action* {
-            this->next = action;
-            action->prev = this;
-            return this;
+        auto Action::setPrev(Action* action) -> void {
+            this->prev = action;
+
+            if (action != nullptr) {
+                action->next = this;
+            }
         }
     }
 }

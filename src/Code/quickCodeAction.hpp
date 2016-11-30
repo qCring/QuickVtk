@@ -15,10 +15,13 @@ namespace quick {
             static QList<Action*> pool;
             Action();
             ~Action();
+        private:
+            auto setPrev(Action* action) -> void;
         public:
             enum class Type {
                 InsertChar,
                 InsertNewline,
+                DeleteNextChar,
                 DeleteSelection,
                 DeletePreviousChar
             } type;
@@ -33,14 +36,14 @@ namespace quick {
             Action* next = nullptr;
             Action* prev = nullptr;
 
-            static auto InsertChar(const Selection::Data&, const QChar&) -> Action*;
-            static auto InsertNewline(const Selection::Data&) -> Action*;
+            static auto InsertChar(const Selection::Data&, const QChar&, Action*) -> Action*;
+            static auto InsertNewline(const Selection::Data&, Action*) -> Action*;
             static auto DeleteSelection(const Selection::Data&) -> Action*;
-            static auto DeletePreviousChar(const Selection::Data&, const QChar&) -> Action*;
+            static auto DeleteNextChar(int, const QChar&, Action*) -> Action*;
+            static auto DeletePreviousChar(const Selection::Data&, const QChar&, Action*) -> Action*;
 
             auto toString() -> std::string;
             auto getLast() -> Action*;
-            auto setNext(Action* action) -> Action*;
         };
     }
 }

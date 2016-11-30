@@ -8,6 +8,8 @@
 
 #include <QApplication>
 #include <QClipboard>
+#include <QTextBlock>
+
 #include <iostream>
 
 namespace quick {
@@ -98,16 +100,24 @@ namespace quick {
                     return true;
                 }
 
-                Action::DeletePreviousChar(selection, characterAt(selection.start - 1));
+                Action::DeletePreviousChar(selection, characterAt(selection.start - 1), deleteAction);
                 selection.cursor.deletePreviousChar();
             } else if (isDelete) {
+                auto endCursor = selection.cursor;
+                endCursor.select(QTextCursor::Document);
+
+                if (selection.start >= endCursor.selectionEnd()) {
+                    return true;
+                }
+
+                Action::DeleteNextChar(selection.start, characterAt(selection.start), deleteAction);
                 selection.cursor.deleteChar();
             } else if (isNewline) {
-                Action::InsertNewline(selection);
+                Action::InsertNewline(selection, deleteAction);
                 selection.cursor.insertBlock();
             } else {
                 std::cout << "handle char: " + input.toStdString() + "\n";
-                Action::InsertChar(selection, input.at(0));
+                Action::InsertChar(selection, input.at(0), deleteAction);
                 selection.cursor.insertText(input);
             }
 

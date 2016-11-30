@@ -124,57 +124,11 @@ namespace quick {
         }
 
         auto Editor::onKeyPressed(int key, int modifiers, const QString& input) -> bool {
-            if (modifiers & Qt::ControlModifier && modifiers & Qt::ShiftModifier && key == Qt::Key_Z) {
-                this->m_document->onRedo();
-                return true;
+            if (this->m_document) {
+                return this->m_document->onKey(key, modifiers, input);
             }
 
-            if (modifiers == Qt::ControlModifier) {
-                if (key == Qt::Key_F) {
-                    this->showSearch();
-                    return true;
-                }
-
-                if (key == Qt::Key_Z) {
-                    this->m_document->onUndo();
-                    return true;
-                }
-
-                if (key == Qt::Key_V) {
-                    this->m_document->onPaste();
-                    return true;
-                }
-
-                if (key == Qt::Key_A) {
-                    return false;
-                }
-            }
-
-            if (key == Qt::Key_Return || key == Qt::Key_Enter) {
-                this->m_document->onEnter();
-                return true;
-            }
-
-            if (key == Qt::Key_Escape) {
-                this->m_document->onEscape();
-                return true;
-            }
-
-            if (key == Qt::Key_Backspace) {
-                this->m_document->onBackspace();
-                return true;
-            }
-
-            if (key == Qt::Key_Backtab) {
-                this->m_document->onBacktab();
-                return true;
-            }
-
-            if (key == Qt::Key_Left || key == Qt::Key_Right || key == Qt::Key_Up || key == Qt::Key_Down) {
-                return false;
-            }
-
-            return this->m_document->onCharacter(input);
+            return false;
         }
 
         void Editor::format() {
@@ -243,11 +197,6 @@ namespace quick {
 
         auto Editor::reset() -> void {
 
-            // auto cursor = this->getCurrentCursor();
-            // cursor.setPosition(0);
-            // this->select(cursor);
-
-            this->setText("");
             this->setModified(false);
 
             Errors::instance->clear();

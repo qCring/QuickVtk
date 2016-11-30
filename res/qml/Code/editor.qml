@@ -79,6 +79,7 @@ Item {
 
             leftPadding: 4;
 
+            property bool multiSelection: editor.document.selection.lines > 0;
             property int cursorX: cursorRectangle.x;
             property int cursorY: cursorRectangle.y;
             property int cursorHeight: cursorRectangle.height;
@@ -110,8 +111,8 @@ Item {
                 id: cursorDel;
 
                 width: 1;
-                color: "#fff";
-                visible: textEdit.showCursor;
+                color: "orange";
+                visible: textEdit.showCursor && !textEdit.multiSelection;
             }
 
             function activateCursor() {

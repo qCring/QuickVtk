@@ -16,26 +16,58 @@ namespace quick {
             
         }
 
-        auto Action::Addition(const QString& text, int position) -> Action* {
+        auto Action::Addition(const Selection::Data& selection, QString text) -> Action* {
             auto action = new Action();
 
-            action->text = text;
+            if (text == nullptr) {
+                action->text = selection.text;
+            } else {
+                action->text = text;
+            }
+
             action->type = Type::Addition;
-            action->position = position;
+            action->start = selection.start;
+            action->end = selection.end;
+            action->line = selection.line;
+            action->lines = selection.lines;
 
             action->typeStr = "add";
+
+            if (selection.start == selection.end) {
+                action->end += action->text.length();
+            }
+
+            if (action->text.length() < 1) {
+                std::cout << "action.text is empty!\n";
+            }
 
             std::cout << action->toString() << std::endl;
 
             return action;
         }
 
-        auto Action::Deletion(const QString& text, int position) -> Action* {
+            auto Action::Deletion(const Selection::Data& selection, QString text) -> Action* {
             auto action = new Action();
 
-            action->text = text;
+            if (text == nullptr) {
+                action->text = selection.text;
+            } else {
+                action->text = text;
+            }
+
             action->type = Type::Deletion;
-            action->position = position;
+            action->start = selection.start;
+            action->end = selection.end;
+            action->line = selection.line;
+            action->lines = selection.lines;
+
+            if (selection.start == selection.end) {
+                action->end += action->text.length();
+            }
+
+            if (action->text.length() < 1) {
+                   std::cout << "action.text is empty!\n";
+            }
 
             action->typeStr = "del";
 
@@ -50,8 +82,10 @@ namespace quick {
             s += "action: ";
             s += " type: " + typeStr;
             s += " text: " + text;
-            s += " pos: ";
-            s += QString::number(position);
+            s += " start: ";
+            s += QString::number(start);
+            s += " end: ";
+            s += QString::number(end);
 
             return s.toStdString();
         }

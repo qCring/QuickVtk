@@ -1,5 +1,7 @@
 #pragma once
 
+#include "quickCodeSelection.hpp"
+
 #include <QTextCursor>
 #include <QString>
 #include <QList>
@@ -21,12 +23,15 @@ namespace quick {
 
             QString text;
             QString typeStr;
-            int position;
+            int start = 0;
+            int end = 0;
+            int line = 0;
+            int lines = 0;
             Action* next = nullptr;
             Action* prev = nullptr;
 
-            static auto Addition(const QString& text, int position) -> Action*;
-            static auto Deletion(const QString& text, int position) -> Action*;
+            static auto Addition(const Selection::Data&, QString = nullptr) -> Action*;
+            static auto Deletion(const Selection::Data&, QString = nullptr) -> Action*;
 
             auto toString() -> std::string;
             auto getLast() -> Action*;

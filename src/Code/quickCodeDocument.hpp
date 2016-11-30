@@ -32,6 +32,16 @@ namespace quick {
         private:
             auto characterAt(int) -> QString;
             auto getLines() -> QList<int>;
+            auto onUndo() -> void;
+            auto onRedo() -> void;
+            auto onCopy() -> void;
+            auto onCut() -> void;
+            auto onPaste() -> void;
+            auto onEnter() -> void;
+            auto onEscape() -> void;
+            auto onBacktab() -> void;
+            auto onBackspace() -> void;
+            auto onCharacter(const QString&) -> bool;
         public:
             static Document* current;
             Document();
@@ -43,15 +53,8 @@ namespace quick {
             auto getFileUrl() -> const QString;
             auto clear() -> void;
             auto format() -> void;
-            auto onUndo() -> void;
-            auto onRedo() -> void;
-            auto onCut() -> void;
-            auto onPaste() -> void;
-            auto onEnter() -> void;
-            auto onEscape() -> void;
-            auto onBacktab() -> void;
-            auto onBackspace() -> void;
-            auto onCharacter(const QString&) -> bool;
+        public:
+            auto onKey(int key, int modifiers, const QString&) -> bool;
         private slots:
             void onModified(bool);
         signals:

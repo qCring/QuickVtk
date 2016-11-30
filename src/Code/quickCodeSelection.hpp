@@ -27,7 +27,7 @@ namespace quick {
                 int end = 0;
                 int line = 0;
                 int lines = 0;
-                bool empty = false;
+                bool empty = true;
                 QString text;
                 QTextCursor cursor;
             };

@@ -22,7 +22,7 @@ namespace quick {
             data.end = this->m_end;
             data.line = this->m_line;
             data.lines = this->m_lines;
-            data.empty = this->m_empty;
+            data.empty = data.start == data.end;
             data.text = data.cursor.selectedText();
 
             return data;
@@ -36,8 +36,6 @@ namespace quick {
         }
 
         auto Selection::setStart(int start) -> void {
-            std::cout << "Selection::setStart: " << start << std::endl;
-
             if (this->m_start != start) {
                 this->m_start = start;
                 emit this->startChanged();
@@ -51,7 +49,6 @@ namespace quick {
         }
 
         auto Selection::setEnd(int end) -> void {
-            std::cout << "setEnd> " << end << std::endl;
             if (this->m_end != end) {
                 this->m_end = end;
                 emit this->endChanged();
@@ -132,7 +129,6 @@ namespace quick {
         }
             
         auto Selection::setLines(int lines) -> void {
-            std::cout << "****** lines: " << lines << std::endl;
             if (this->m_lines != lines) {
                 this->m_lines = lines;
                 emit this->linesChanged();

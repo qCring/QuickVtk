@@ -268,8 +268,11 @@ namespace quick {
 
             do {
                 this->select(action->start, action->end);
-                
+
                 if (action->type == Action::Type::InsertChar) {
+                    selection.cursor.setPosition(action->start);
+                    selection.cursor.deleteChar();
+                } else if (action->type == Action::Type::InsertNewline) {
                     selection.cursor.setPosition(action->start);
                     selection.cursor.deleteChar();
                 } else if (action->type == Action::Type::DeleteSelection) {

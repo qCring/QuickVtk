@@ -264,32 +264,58 @@ namespace quick {
                 return;
             }
 
-            auto selection = this->m_selection->getData();
+            this->m_undoStack->PushRedo(action);
 
             do {
                 this->select(action->start, action->end);
+                auto selection = this->m_selection->getData();
 
                 if (action->type == Action::Type::InsertChar) {
-                    selection.cursor.setPosition(action->start);
                     selection.cursor.deleteChar();
                 } else if (action->type == Action::Type::InsertNewline) {
-                    selection.cursor.setPosition(action->start);
                     selection.cursor.deleteChar();
                 } else if (action->type == Action::Type::DeleteSelection) {
-                    selection.cursor.setPosition(action->start);
                     selection.cursor.insertText(action->text);
                 } else if (action->type == Action::Type::DeleteNextChar) {
-                    selection.cursor.setPosition(action->start);
+                    selection.cursor.insertText(action->character);
+                } else if (action->type == Action::Type::DeletePreviousChar) {
                     selection.cursor.insertText(action->character);
                 }
                 action = action->prev;
             } while (action);
-
-            this->m_undoStack->PushRedo(action);
         }
 
         auto Document::onRedo() -> void {
-            std::cout << "redo\n";
+            auto action = this->m_undoStack->PopRedo();
+
+            if (action == nullptr) {
+                return;
+            }
+
+            this->m_undoStack->PushUndo(action);
+
+            while (action->prev) {
+                action = action->prev;
+            }
+
+            do {
+                this->select(action->start, action->end);
+                auto selection = this->m_selection->getData();
+
+                if (action->type == Action::Type::InsertChar) {
+                    selection.cursor.insertText(action->character);
+                } else if (action->type == Action::Type::InsertNewline) {
+                    selection.cursor.insertBlock();
+                } else if (action->type == Action::Type::DeleteSelection) {
+                    selection.cursor.removeSelectedText();
+                } else if (action->type == Action::Type::DeleteNextChar) {
+                    selection.cursor.deleteChar();
+                } else if (action->type == Action::Type::DeletePreviousChar) {
+                    selection.cursor.deletePreviousChar();
+                }
+
+                action = action->next;
+            } while (action);
         }
 
         Document::~Document() {

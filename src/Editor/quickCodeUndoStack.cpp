@@ -31,7 +31,7 @@ namespace quick {
         }
 
         auto UndoStack::PopRedo() -> Action* {
-            if (this->m_undoStack.count() > 0) {
+            if (this->m_redoStack.count() > 0) {
                 return this->m_redoStack.takeLast();
             }
 

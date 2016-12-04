@@ -23,6 +23,23 @@ namespace quick {
             return action;
         }
 
+        auto Action::InsertText(const Selection::Data& selection, const QString& text, Action* prev) -> Action* {
+            auto action = new Action();
+
+            action->setPrev(prev);
+
+            action->type = Type::InsertText;
+            action->start = selection.start;
+            action->end = selection.start + text.length();
+            action->text = text;
+
+            action->typeStr = "insert text";
+
+            std::cout << action->toString() << std::endl;
+
+            return action;
+        }
+
         auto Action::InsertNewline(const Selection::Data& selection, Action* prev) -> Action* {
             auto action = new Action();
 

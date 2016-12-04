@@ -45,6 +45,11 @@ namespace quick {
                 return true;
             }
 
+            bool isNewline = false;
+            bool isBackspace = false;
+            bool isDelete = false;
+            bool isPaste = false;
+
             if (modifiers == Qt::ControlModifier) {
                 if (key == Qt::Key_F) {
                     Editor::instance->showSearch();
@@ -57,8 +62,7 @@ namespace quick {
                 }
 
                 if (key == Qt::Key_V) {
-                    this->onPaste();
-                    return true;
+                    isPaste = true;
                 }
 
                 if (key == Qt::Key_A) {
@@ -74,10 +78,6 @@ namespace quick {
                 return false;
             }
 
-            bool isNewline = false;
-            bool isBackspace = false;
-            bool isDelete = false;
-
             if (key == Qt::Key_Return || key == Qt::Key_Enter) {
                 isNewline = true;
             } else if (key == Qt::Key_Backspace) {
@@ -86,7 +86,7 @@ namespace quick {
                 isDelete = true;
             }
 
-            if (!isBackspace && !isDelete && !isNewline && input.isEmpty()) {
+            if (!isPaste && !isBackspace && !isDelete && !isNewline && input.isEmpty()) {
                 return true;
             }
 
@@ -109,6 +109,14 @@ namespace quick {
                 this->m_undoStack->PushUndo(Action::DeletePreviousChar(selection, characterAt(selection.start - 1), deleteAction));
 
                 selection.cursor.deletePreviousChar();
+            } else if (isPaste) {
+                if (isPaste) {
+                    auto text = QApplication::clipboard()->text();
+
+                    this->m_undoStack->PushUndo(Action::InsertText(selection, text, deleteAction));
+
+                    selection.cursor.insertText(text);
+                }
             } else if (isDelete) {
                 auto endCursor = selection.cursor;
                 endCursor.select(QTextCursor::Document);
@@ -125,7 +133,6 @@ namespace quick {
 
                 selection.cursor.insertBlock();
             } else {
-                std::cout << "handle char: " + input.toStdString() + "\n";
                 this->m_undoStack->PushUndo(Action::InsertChar(selection, input.at(0), deleteAction));
 
                 selection.cursor.insertText(input);
@@ -143,6 +150,11 @@ namespace quick {
             std::cout << "clear\n";
             auto selection = this->m_selection->getData();
             selection.cursor.select(QTextCursor::Document);
+            //selection.cursor.setPosition(0, QTextCursor::KeepAnchor);
+
+
+            this->m_undoStack->PushUndo(Action::DeleteSelection(selection));
+
             selection.cursor.removeSelectedText();
         }
 
@@ -224,16 +236,6 @@ namespace quick {
             return;
         }
 
-        auto Document::onPaste() -> void {
-            std::cout << "paste\n";
-
-            auto text = QApplication::clipboard()->text();
-            auto selection = this->m_selection->getData();
-
-            selection.cursor.insertText(text);
-            return;
-        }
-
         auto Document::onEnter() -> void {
             std::cout << "enter\n";
         }
@@ -272,6 +274,8 @@ namespace quick {
 
                 if (action->type == Action::Type::InsertChar) {
                     selection.cursor.deleteChar();
+                } else if (action->type == Action::Type::InsertText) {
+                    selection.cursor.removeSelectedText();
                 } else if (action->type == Action::Type::InsertNewline) {
                     selection.cursor.deleteChar();
                 } else if (action->type == Action::Type::DeleteSelection) {
@@ -281,6 +285,7 @@ namespace quick {
                 } else if (action->type == Action::Type::DeletePreviousChar) {
                     selection.cursor.insertText(action->character);
                 }
+
                 action = action->prev;
             } while (action);
         }
@@ -312,6 +317,8 @@ namespace quick {
                     selection.cursor.deleteChar();
                 } else if (action->type == Action::Type::DeletePreviousChar) {
                     selection.cursor.deletePreviousChar();
+                } else if (action->type == Action::Type::InsertText) {
+                    selection.cursor.insertText(action->text);
                 }
 
                 action = action->next;

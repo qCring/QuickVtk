@@ -15,6 +15,7 @@ namespace quick {
             auto setPrev(Action* action) -> void;
         public:
             enum class Type {
+                InsertText,
                 InsertChar,
                 InsertNewline,
                 DeleteNextChar,
@@ -33,6 +34,7 @@ namespace quick {
             Action* prev = nullptr;
 
             static auto InsertChar(const Selection::Data&, const QChar&, Action*) -> Action*;
+            static auto InsertText(const Selection::Data&, const QString&, Action*) -> Action*;
             static auto InsertNewline(const Selection::Data&, Action*) -> Action*;
             static auto DeleteSelection(const Selection::Data&) -> Action*;
             static auto DeleteNextChar(int, const QChar&, Action*) -> Action*;

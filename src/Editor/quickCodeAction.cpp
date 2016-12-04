@@ -6,16 +6,6 @@ namespace quick {
 
     namespace Code {
 
-        QList<Action*> Action::pool = QList<Action*>();
-
-        Action::Action() {
-
-        }
-
-        Action::~Action() {
-            
-        }
-
         auto Action::InsertChar(const Selection::Data& selection, const QChar& c, Action* prev) -> Action* {
             auto action = new Action();
 
@@ -23,6 +13,7 @@ namespace quick {
 
             action->type = Type::InsertChar;
             action->start = selection.start;
+            action->end = selection.start;
             action->character = c;
 
             action->typeStr = "insert char";
@@ -39,6 +30,7 @@ namespace quick {
 
             action->type = Type::InsertNewline;
             action->start = selection.start;
+            action->end = selection.start;
 
             action->typeStr = "insert nl";
 
@@ -54,6 +46,7 @@ namespace quick {
 
             action->type = Type::DeleteNextChar;
             action->start = start;
+            action->end = start;
             action->character = c;
 
             std::cout << action->toString() << std::endl;
@@ -69,6 +62,7 @@ namespace quick {
 
             action->type = Type::DeletePreviousChar;
             action->start = selection.start;
+            action->end = selection.start;
             action->character = c;
 
             action->typeStr = "del prev char";
@@ -87,6 +81,7 @@ namespace quick {
             action->end = selection.end;
             action->line = selection.line;
             action->lines = selection.lines;
+            action->text = selection.text;
 
             action->typeStr = "del selection";
 
@@ -104,6 +99,7 @@ namespace quick {
             s += QString::number(start);
             s += " end: ";
             s += QString::number(end);
+            s += " text: " + text;
 
             return s.toStdString();
         }

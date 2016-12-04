@@ -3,6 +3,7 @@
 #include "quickCodeEditor.hpp"
 #include "quickCodeAction.hpp"
 #include "quickCodeSelection.hpp"
+#include "quickCodeUndoStack.hpp"
 
 #include "quickIO.hpp"
 
@@ -23,6 +24,7 @@ namespace quick {
             this->m_selection = new Selection();
             this->m_lines.clear();
             this->m_lines.append(0);
+            this->m_undoStack = new UndoStack();
         }
 
         auto Document::bindQTextDocument(QTextDocument* document) -> void {
@@ -97,10 +99,15 @@ namespace quick {
 
             if (isBackspace) {
                 if (selection.start < 1) {
-                    return true;
+                    if (selection.empty) {
+                        return true;
+                    } else {
+                        selection.cursor.removeSelectedText();
+                    }
                 }
 
-                Action::DeletePreviousChar(selection, characterAt(selection.start - 1), deleteAction);
+                this->m_undoStack->PushUndo(Action::DeletePreviousChar(selection, characterAt(selection.start - 1), deleteAction));
+
                 selection.cursor.deletePreviousChar();
             } else if (isDelete) {
                 auto endCursor = selection.cursor;
@@ -110,14 +117,17 @@ namespace quick {
                     return true;
                 }
 
-                Action::DeleteNextChar(selection.start, characterAt(selection.start), deleteAction);
+                this->m_undoStack->PushUndo(Action::DeleteNextChar(selection.start, characterAt(selection.start), deleteAction));
+
                 selection.cursor.deleteChar();
             } else if (isNewline) {
-                Action::InsertNewline(selection, deleteAction);
+                this->m_undoStack->PushUndo(Action::InsertNewline(selection, deleteAction));
+
                 selection.cursor.insertBlock();
             } else {
                 std::cout << "handle char: " + input.toStdString() + "\n";
-                Action::InsertChar(selection, input.at(0), deleteAction);
+                this->m_undoStack->PushUndo(Action::InsertChar(selection, input.at(0), deleteAction));
+
                 selection.cursor.insertText(input);
             }
 
@@ -248,11 +258,40 @@ namespace quick {
         }
 
         auto Document::onUndo() -> void {
-            std::cout << "undo\n";
+            auto action = this->m_undoStack->PopUndo();
+
+            if (action == nullptr) {
+                return;
+            }
+
+            auto selection = this->m_selection->getData();
+
+            do {
+                this->select(action->start, action->end);
+                
+                if (action->type == Action::Type::InsertChar) {
+                    selection.cursor.setPosition(action->start);
+                    selection.cursor.deleteChar();
+                } else if (action->type == Action::Type::DeleteSelection) {
+                    selection.cursor.setPosition(action->start);
+                    selection.cursor.insertText(action->text);
+                } else if (action->type == Action::Type::DeleteNextChar) {
+                    selection.cursor.setPosition(action->start);
+                    selection.cursor.insertText(action->character);
+                }
+                action = action->prev;
+            } while (action);
+
+            this->m_undoStack->PushRedo(action);
         }
 
         auto Document::onRedo() -> void {
             std::cout << "redo\n";
+        }
+
+        Document::~Document() {
+            delete this->m_undoStack;
+            this->m_undoStack = nullptr;
         }
     }
 }

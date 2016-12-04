@@ -2,7 +2,6 @@
 
 #include "quickQmlRegister.hpp"
 
-#include <QStack>
 #include <QObject>
 #include <QTextDocument>
 
@@ -10,8 +9,8 @@ namespace quick {
 
     namespace Code {
 
+        class UndoStack;
         class Selection;
-        class Action;
 
         class Document : public QObject {
             Q_OBJECT
@@ -22,12 +21,11 @@ namespace quick {
         private:
             static Qml::Register::Type<Document> Register;
             Selection* m_selection = nullptr;
+            UndoStack* m_undoStack = nullptr;
             QTextDocument* m_document = nullptr;
             QString m_fileUrl;
             QString m_text;
             QList<int> m_lines;
-            QStack<Action*> m_undoStack;
-            QStack<Action*> m_redoStack;
             bool m_modified = true;
         private:
             auto characterAt(int) -> QChar;
@@ -53,6 +51,7 @@ namespace quick {
             auto getFileUrl() -> const QString;
             auto clear() -> void;
             auto format() -> void;
+            ~Document();
         public:
             auto onKey(int key, int modifiers, const QString&) -> bool;
         private slots:

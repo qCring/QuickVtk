@@ -4,7 +4,6 @@
 
 #include <QTextCursor>
 #include <QString>
-#include <QList>
 
 namespace quick {
 
@@ -12,9 +11,6 @@ namespace quick {
 
         class Action {
         private:
-            static QList<Action*> pool;
-            Action();
-            ~Action();
         private:
             auto setPrev(Action* action) -> void;
         public:

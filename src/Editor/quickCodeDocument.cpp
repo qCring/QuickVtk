@@ -298,19 +298,22 @@ namespace quick {
 
             std::cout << "redo: " << change.toString() << "\n";
 
-            auto selection = this->m_selection->getData();
-
             if (change.type == Change::Type::InsertText) {
                 std::cout << "redo insert text\n";
-                selection.cursor.setPosition(change.start);
-                selection.cursor.setPosition(change.start + change.selection.length(), QTextCursor::KeepAnchor);
-                selection.cursor.insertText(change.text);
 
-                this->select(change.start + change.text.length(), change.start + change.text.length());
+                this->select(change.start, change.start + change.selection.length());
+
+                auto selection = this->m_selection->getData();
+                selection.cursor.insertText(change.text);
             } else if (change.type == Change::Type::DeleteNextChar || change.type == Change::Type::DeletePrevChar) {
                 std::cout << "redo delete char\n";
             } else if (change.type == Change::Type::DeleteText) {
                 std::cout << "redo delete text\n";
+
+                this->select(change.start, change.start + change.selection.length());
+
+                auto selection = this->m_selection->getData();
+                selection.cursor.removeSelectedText();
             }
 
             this->m_undoStack->pushUndo(change);

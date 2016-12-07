@@ -67,7 +67,20 @@ namespace quick {
             action->character = c;
 
             std::cout << action->toString() << std::endl;
-            std::cout << "char: " << c.toLatin1() << std::endl;
+
+            return action;
+        }
+
+        auto Action::DeleteText(const Selection::Data& selection, const QString& text) -> Action* {
+            auto action = new Action();
+
+            action->type = Type::DeleteText;
+
+            action->start = selection.start;
+            action->end = text.length();
+            action->text = text;
+
+            std::cout << action->toString() << std::endl;
 
             return action;
         }
@@ -116,7 +129,12 @@ namespace quick {
             s += QString::number(start);
             s += " end: ";
             s += QString::number(end);
-            s += " text: " + text;
+
+            if (text.length() > 0) {
+                s += " text: " + text;
+            } else {
+                s += " char: " + QString(character);
+            }
 
             return s.toStdString();
         }

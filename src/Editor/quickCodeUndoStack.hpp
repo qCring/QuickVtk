@@ -14,6 +14,8 @@ namespace quick {
             QList<Action*> m_redoStack;
             int m_stackSize = 10;
         public:
+            bool chainActions = true;
+        public:
             auto PushUndo(Action*) -> void;
             auto PopUndo() -> Action*;
             auto PushRedo(Action*) -> void;

@@ -33,7 +33,6 @@ namespace quick {
             auto onUndo() -> void;
             auto onRedo() -> void;
             auto onCopy() -> void;
-            auto onCut() -> void;
             auto onEnter() -> void;
             auto onEscape() -> void;
             auto onBacktab() -> void;

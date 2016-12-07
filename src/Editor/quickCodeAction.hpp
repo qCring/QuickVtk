@@ -18,6 +18,7 @@ namespace quick {
                 InsertText,
                 InsertChar,
                 InsertNewline,
+                DeleteText,
                 DeleteNextChar,
                 DeleteSelection,
                 DeletePreviousChar
@@ -38,6 +39,7 @@ namespace quick {
             static auto InsertNewline(const Selection::Data&, Action*) -> Action*;
             static auto DeleteSelection(const Selection::Data&) -> Action*;
             static auto DeleteNextChar(int, const QChar&, Action*) -> Action*;
+            static auto DeleteText(const Selection::Data&, const QString&) -> Action*;
             static auto DeletePreviousChar(const Selection::Data&, const QChar&, Action*) -> Action*;
 
             auto toString() -> std::string;

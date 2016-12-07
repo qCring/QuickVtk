@@ -111,7 +111,7 @@ Item {
                 id: cursorDel;
 
                 width: 1;
-                color: "orange";
+                color: textEdit.inputMethodComposing ? "blue" : "orange";
                 visible: textEdit.showCursor && !textEdit.multiSelection;
             }
 

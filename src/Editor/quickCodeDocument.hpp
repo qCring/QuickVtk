@@ -35,6 +35,7 @@ namespace quick {
             auto onUndo() -> bool;
             auto onRedo() -> bool;
             auto onCopy() -> bool;
+            auto onEnter() -> bool;
             auto onPaste() -> bool;
             auto onDelete() -> bool;
             auto onBackspace() -> bool;

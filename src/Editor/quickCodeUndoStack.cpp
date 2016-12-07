@@ -76,6 +76,8 @@ namespace quick {
             if (this->m_redoStack.count() >= m_stackSize) {
                 this->m_redoStack.removeAt(0);
             }
+
+            this->m_redoStack.append(change);
         }
 
         auto UndoStack::popRedo() -> Change {

@@ -62,6 +62,8 @@ namespace quick {
             switch (key) {
                 case Qt::Key_Backspace: return this->onBackspace();
                 case Qt::Key_Delete: return this->onDelete();
+                case Qt::Key_Enter:
+                case Qt::Key_Return: return this->onEnter();
                 default: return this->onChar(input);
             }
         }
@@ -181,6 +183,17 @@ namespace quick {
             return true;
         }
 
+        auto Document::onEnter() -> bool {
+            auto selection = this->m_selection->getData();
+
+            std::cout << "onEnter\n";
+
+            this->m_undoStack->pushUndo(Change::Insert(selection, "\n"));
+            selection.cursor.insertBlock();
+
+            return true;
+        }
+
         auto Document::onBackspace() -> bool {
             std::cout << "backspace\n";
 
@@ -271,25 +284,36 @@ namespace quick {
                 this->select(change.start, change.start + change.selection.length());
             }
 
+            this->m_undoStack->pushRedo(change);
+
             return true;
         }
 
         auto Document::onRedo() -> bool {
-            std::cout << "redo\n";
-
             auto change = this->m_undoStack->popRedo();
 
             if (change.empty) {
                 return true;
             }
 
+            std::cout << "redo: " << change.toString() << "\n";
+
+            auto selection = this->m_selection->getData();
+
             if (change.type == Change::Type::InsertText) {
                 std::cout << "redo insert text\n";
+                selection.cursor.setPosition(change.start);
+                selection.cursor.setPosition(change.start + change.selection.length(), QTextCursor::KeepAnchor);
+                selection.cursor.insertText(change.text);
+
+                this->select(change.start + change.text.length(), change.start + change.text.length());
             } else if (change.type == Change::Type::DeleteNextChar || change.type == Change::Type::DeletePrevChar) {
                 std::cout << "redo delete char\n";
             } else if (change.type == Change::Type::DeleteText) {
                 std::cout << "redo delete text\n";
             }
+
+            this->m_undoStack->pushUndo(change);
 
             return true;
         }

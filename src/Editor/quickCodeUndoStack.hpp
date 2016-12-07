@@ -9,18 +9,28 @@ namespace quick {
     namespace Code {
 
         class Change {
+        public:
+            enum Type {
+                None,
+                InsertText,
+                DeleteText,
+                DeleteNextChar,
+                DeletePrevChar
+            };
         private:
             Change() = default;
         public:
+            Type type = Type::None;
             bool empty = true;
             int start = 0;
             int end = 0;
             QString text;
             QString selection;
         public:
-            Change(int, int, const QString&, const QString&);
+            Change(Type, int, int, const QString&, const QString&);
             static auto Empty() -> Change;
             static auto Insert(const Selection::Data&, const QString&) -> Change;
+            static auto Delete(const Selection::Data&) -> Change;
             auto toString() -> std::string;
         };
 

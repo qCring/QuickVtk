@@ -14,7 +14,8 @@ namespace quick {
             return change;
         }
         
-        Change::Change(int start, int end, const QString& selection, const QString& text) {
+        Change::Change(Type type, int start, int end, const QString& selection, const QString& text) {
+            this->type = type;
             this->empty = false;
             this->start = start;
             this->end = end;
@@ -25,11 +26,24 @@ namespace quick {
         auto Change::Insert(const Selection::Data& selection, const QString& text) -> Change {
             auto change = Change();
 
+            change.type = Type::InsertText;
             change.empty = false;
             change.start = selection.start;
             change.end = selection.end;
             change.selection = selection.text;
             change.text = text;
+
+            return change;
+        }
+
+        auto Change::Delete(const Selection::Data& selection) -> Change {
+            auto change = Change();
+
+            change.type = Type::DeleteText;
+            change.empty = false;
+            change.start = selection.start;
+            change.end = selection.end;
+            change.selection = selection.text;
 
             return change;
         }

@@ -71,11 +71,22 @@ namespace quick {
 
                     std::cout << "undo: " << change.toString() << "\n";
 
-                    selection.cursor.setPosition(change.start);
-                    selection.cursor.setPosition(change.start + change.text.length(), QTextCursor::KeepAnchor);
-                    selection.cursor.insertText(change.selection);
+                    if (change.type == Change::Type::InsertText) {
+                        selection.cursor.setPosition(change.start);
+                        selection.cursor.setPosition(change.start + change.text.length(), QTextCursor::KeepAnchor);
+                        selection.cursor.insertText(change.selection);
 
-                    this->select(change.start, change.start + change.selection.length());
+                        this->select(change.start, change.start + change.selection.length());
+                    } else if (change.type == Change::Type::DeletePrevChar || change.type == Change::Type::DeleteNextChar) {
+                        selection.cursor.setPosition(change.start);
+                        selection.cursor.insertText(change.text);
+
+                        if (change.type == Change::Type::DeletePrevChar) {
+                            this->select(change.start + 1, change.start + 1);
+                        } else {
+                            this->select(change.start, change.start);
+                        }
+                    }
 
                     return true;
                 }
@@ -85,13 +96,50 @@ namespace quick {
                     auto text = QApplication::clipboard()->text();
                     this->m_undoStack->pushUndo(Change::Insert(selection, text));
                     selection.cursor.insertText(text);
-                    
+
                     return true;
                 }
             }
 
             if (key == Qt::Key_Backspace) {
-                return false;
+                std::cout << "backspace\n";
+
+                if (selection.start != selection.end) {
+                    std::cout << "backspace: selection\n";
+
+                    this->m_undoStack->pushUndo(Change::Delete(selection));
+                    selection.cursor.deletePreviousChar();
+                } else {
+                    if (selection.start > 0) {
+                        std::cout << "backspace: prev character\n";
+
+                        this->m_undoStack->pushUndo(Change(Change::Type::DeletePrevChar, selection.start - 1, selection.start - 1, "", characterAt(selection.start - 1)));
+                        selection.cursor.deletePreviousChar();
+                    }
+                }
+
+                return true;
+            } else if (key == Qt::Key_Delete) {
+
+                if (selection.start != selection.end) {
+                    std::cout << "delete: selection\n";
+
+                    this->m_undoStack->pushUndo(Change::Delete(selection));
+                    selection.cursor.deleteChar();
+                } else {
+                    auto endCursor = selection.cursor;
+                    endCursor.select(QTextCursor::Document);
+
+                    if (selection.start < endCursor.selectionEnd()) {
+                        std::cout << "delete: next character\n";
+
+                        this->m_undoStack->pushUndo(Change(Change::Type::DeleteNextChar, selection.start, selection.start, "", characterAt(selection.start)));
+                        endCursor.select(QTextCursor::Document);
+                        selection.cursor.deleteChar();
+                    }
+                }
+
+                return true;
             }
 
             if (input.isEmpty()) {

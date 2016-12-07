@@ -1,7 +1,6 @@
 #include "quickCodeDocument.hpp"
 
 #include "quickCodeEditor.hpp"
-#include "quickCodeAction.hpp"
 #include "quickCodeSelection.hpp"
 #include "quickCodeUndoStack.hpp"
 
@@ -45,11 +44,9 @@ namespace quick {
                 return true;
             }
 
-            bool isNewline = false;
-            bool isBackspace = false;
-            bool isDelete = false;
-            bool isPaste = false;
-            bool isCut = false;
+            if (key == Qt::Key_Escape || key == Qt::Key_Left || key == Qt::Key_Right || key == Qt::Key_Up || key == Qt::Key_Down) {
+                return false;
+            }
 
             if (modifiers == Qt::ControlModifier) {
                 if (key == Qt::Key_F) {
@@ -57,91 +54,53 @@ namespace quick {
                     return true;
                 }
 
-                if (key == Qt::Key_Z) {
-                    this->onUndo();
-                    return true;
-                }
-
-                if (key == Qt::Key_V) {
-                    isPaste = true;
-                }
-
-                if (key == Qt::Key_X) {
-                    isCut = true;
-                }
-
                 if (key == Qt::Key_A) {
                     return false;
                 }
             }
 
-            if (key == Qt::Key_Escape) {
-                return false;
-            }
-
-            if (key == Qt::Key_Left || key == Qt::Key_Right || key == Qt::Key_Up || key == Qt::Key_Down) {
-                return false;
-            }
-
-            if (key == Qt::Key_Return || key == Qt::Key_Enter) {
-                isNewline = true;
-            } else if (key == Qt::Key_Backspace) {
-                isBackspace = true;
-            } else if (key == Qt::Key_Delete) {
-                isDelete = true;
-            }
-
-            if (!isCut && !isPaste && !isBackspace && !isDelete && !isNewline && input.isEmpty()) {
-                return true;
-            }
-
             auto selection = this->m_selection->getData();
-            Action* deleteAction = nullptr;
 
-            if (!selection.empty) {
-                deleteAction = Action::DeleteSelection(selection);
-            }
+            if (modifiers == Qt::ControlModifier) {
+                if (key == Qt::Key_Z) {
+                    auto change = this->m_undoStack->popUndo();
 
-            if (isBackspace) {
-                if (selection.start < 1) {
-                    if (selection.empty) {
+                    if (change.empty) {
                         return true;
-                    } else {
-                        selection.cursor.removeSelectedText();
                     }
-                }
 
-                this->m_undoStack->PushUndo(Action::DeletePreviousChar(selection, characterAt(selection.start - 1), deleteAction));
+                    std::cout << "undo: " << change.toString() << "\n";
 
-                selection.cursor.deletePreviousChar();
-            } else if (isCut) {
-                this->m_undoStack->PushUndo(Action::DeleteText(selection, selection.text));
-                QApplication::clipboard()->setText(selection.text);
-                selection.cursor.removeSelectedText();
-            } else if (isPaste) {
-                auto text = QApplication::clipboard()->text();
-                this->m_undoStack->PushUndo(Action::InsertText(selection, text, deleteAction));
-                selection.cursor.insertText(text);
-            } else if (isDelete) {
-                auto endCursor = selection.cursor;
-                endCursor.select(QTextCursor::Document);
+                    selection.cursor.setPosition(change.start);
+                    selection.cursor.setPosition(change.start + change.text.length(), QTextCursor::KeepAnchor);
+                    selection.cursor.insertText(change.selection);
 
-                if (selection.start >= endCursor.selectionEnd()) {
+                    this->select(change.start, change.start + change.selection.length());
+
                     return true;
                 }
 
-                this->m_undoStack->PushUndo(Action::DeleteNextChar(selection.start, characterAt(selection.start), deleteAction));
-
-                selection.cursor.deleteChar();
-            } else if (isNewline) {
-                this->m_undoStack->PushUndo(Action::InsertNewline(selection, deleteAction));
-
-                selection.cursor.insertBlock();
-            } else {
-                this->m_undoStack->PushUndo(Action::InsertChar(selection, input.at(0), deleteAction));
-
-                selection.cursor.insertText(input);
+                if (key == Qt::Key_V) {
+                    std::cout << "paste\n";
+                    auto text = QApplication::clipboard()->text();
+                    this->m_undoStack->pushUndo(Change::Insert(selection, text));
+                    selection.cursor.insertText(text);
+                    
+                    return true;
+                }
             }
+
+            if (key == Qt::Key_Backspace) {
+                return false;
+            }
+
+            if (input.isEmpty()) {
+                return true;
+            }
+
+            this->m_undoStack->pushUndo(Change::Insert(selection, input));
+
+            selection.cursor.insertText(input);
 
             return true;
         }
@@ -157,9 +116,6 @@ namespace quick {
             selection.cursor.select(QTextCursor::Document);
             //selection.cursor.setPosition(0, QTextCursor::KeepAnchor);
 
-
-            this->m_undoStack->PushUndo(Action::DeleteSelection(selection));
-
             selection.cursor.removeSelectedText();
         }
 
@@ -173,7 +129,7 @@ namespace quick {
         auto Document::getSelection() -> Selection* {
             return this->m_selection;
         }
-        
+
         auto Document::getModified() -> bool {
             return this->m_modified;
         }
@@ -231,100 +187,12 @@ namespace quick {
             QApplication::clipboard()->setText(selection.text);
         }
 
-        auto Document::onEnter() -> void {
-            std::cout << "enter\n";
-        }
-
-        auto Document::onEscape() -> void {
-            std::cout << "escape\n";
-            return;
-        }
-
-        auto Document::onBacktab() -> void {
-            std::cout << "backtab\n";
-            return;
-        }
-
-        auto Document::onBackspace() -> void {
-            std::cout << "backspace\n";
-        }
-
-        auto Document::onCharacter(const QString& text) -> bool {
-            std::cout << "char\n";
-            return true;
-        }
-
         auto Document::onUndo() -> void {
-            auto action = this->m_undoStack->PopUndo();
-
-            if (action == nullptr) {
-                return;
-            }
-
-            this->m_undoStack->PushRedo(action);
-
-            do {
-                this->select(action->start, action->end);
-                auto selection = this->m_selection->getData();
-
-                if (action->type == Action::Type::InsertChar) {
-                    selection.cursor.clearSelection();
-                    selection.cursor.deleteChar();
-                } else if (action->type == Action::Type::InsertText) {
-                    selection.cursor.clearSelection();
-                    selection.cursor.removeSelectedText();
-                } else if (action->type == Action::Type::InsertNewline) {
-                    selection.cursor.clearSelection();
-                    selection.cursor.deleteChar();
-                } else if (action->type == Action::Type::DeleteSelection) {
-                    selection.cursor.insertText(action->text);
-                } else if (action->type == Action::Type::DeleteText) {
-                    selection.cursor.insertText(action->text);
-                } else if (action->type == Action::Type::DeleteNextChar) {
-                    selection.cursor.insertText(action->character);
-                } else if (action->type == Action::Type::DeletePreviousChar) {
-                    selection.cursor.insertText(action->character);
-                }
-
-                action = action->prev;
-            } while (action);
+            std::cout << "undo\n";
         }
 
         auto Document::onRedo() -> void {
-            auto action = this->m_undoStack->PopRedo();
-
-            if (action == nullptr) {
-                return;
-            }
-
-            this->m_undoStack->PushUndo(action);
-
-            while (action->prev) {
-                action = action->prev;
-            }
-
-            do {
-                this->select(action->start, action->end);
-                auto selection = this->m_selection->getData();
-
-                if (action->type == Action::Type::InsertChar) {
-                    selection.cursor.insertText(action->character);
-                } else if (action->type == Action::Type::InsertNewline) {
-                    selection.cursor.insertBlock();
-                } else if (action->type == Action::Type::DeleteSelection) {
-                    selection.cursor.removeSelectedText();
-                } else if (action->type == Action::Type::DeleteText) {
-                    selection.cursor.removeSelectedText();
-                } else if (action->type == Action::Type::DeleteNextChar) {
-                    selection.cursor.deleteChar();
-                } else if (action->type == Action::Type::DeletePreviousChar) {
-                    selection.cursor.deletePreviousChar();
-                } else if (action->type == Action::Type::InsertText) {
-                    selection.cursor.insertText(action->text);
-                }
-
-                action = action->next;
-            } while (action);
+            std::cout << "redo\n";
         }
 
         Document::~Document() {

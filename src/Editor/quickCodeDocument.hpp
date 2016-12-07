@@ -33,11 +33,6 @@ namespace quick {
             auto onUndo() -> void;
             auto onRedo() -> void;
             auto onCopy() -> void;
-            auto onEnter() -> void;
-            auto onEscape() -> void;
-            auto onBacktab() -> void;
-            auto onBackspace() -> void;
-            auto onCharacter(const QString&) -> bool;
         public:
             static Document* current;
             Document();

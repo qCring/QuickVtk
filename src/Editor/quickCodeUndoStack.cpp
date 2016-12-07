@@ -1,41 +1,75 @@
 #include "quickCodeUndoStack.hpp"
 
-#include "quickCodeAction.hpp"
+#include <iostream>
 
 namespace quick {
 
     namespace Code {
 
-        auto UndoStack::PushUndo(Action* action) -> void {
-            if (this->m_undoStack.count() >= m_stackSize) {
-                delete this->m_undoStack.takeFirst();
-            }
+        auto Change::Empty() -> Change {
+            auto change = Change();
 
-            this->m_undoStack.append(action);
+            change.empty = true;
+
+            return change;
+        }
+        
+        Change::Change(int start, int end, const QString& selection, const QString& text) {
+            this->empty = false;
+            this->start = start;
+            this->end = end;
+            this->selection = selection;
+            this->text = text;
         }
 
-        auto UndoStack::PopUndo() -> Action* {
+        auto Change::Insert(const Selection::Data& selection, const QString& text) -> Change {
+            auto change = Change();
+
+            change.empty = false;
+            change.start = selection.start;
+            change.end = selection.end;
+            change.selection = selection.text;
+            change.text = text;
+
+            return change;
+        }
+
+        auto Change::toString() -> std::string {
+            return QString(" s: " + QString::number(start) + " e: " + QString::number(end) + " sel: " + selection + " text: " + text).toStdString();
+        }
+
+        auto UndoStack::pushUndo(Change change) -> void {
+            std::cout << "push undo: " << change.toString() << std::endl;
+
+            if (this->m_undoStack.count() >= m_stackSize) {
+                this->m_undoStack.removeAt(0);
+            }
+
+            this->m_undoStack.append(change);
+        }
+
+        auto UndoStack::popUndo() -> Change {
+            std::cout << "pop undo\n";
+
             if (this->m_undoStack.count() > 0) {
                 return this->m_undoStack.takeLast();
             }
 
-            return nullptr;
+            return Change::Empty();
         }
 
-        auto UndoStack::PushRedo(Action* action) -> void {
+        auto UndoStack::pushRedo(Change change) -> void {
             if (this->m_redoStack.count() >= m_stackSize) {
-                delete this->m_redoStack.takeFirst();
+                this->m_redoStack.removeAt(0);
             }
-
-            this->m_redoStack.append(action);
         }
 
-        auto UndoStack::PopRedo() -> Action* {
+        auto UndoStack::popRedo() -> Change {
             if (this->m_redoStack.count() > 0) {
                 return this->m_redoStack.takeLast();
             }
 
-            return nullptr;
+            return Change::Empty();
         }
 
         auto UndoStack::setStackSize(int stackSize) -> void {
@@ -44,19 +78,6 @@ namespace quick {
 
         auto UndoStack::getStackSize() -> int {
             return this->m_stackSize;
-        }
-
-        UndoStack::~UndoStack() {
-            for (auto action : this->m_undoStack) {
-                delete action;
-            }
-
-            for (auto action : this->m_redoStack) {
-                delete action;
-            }
-
-            this->m_undoStack.clear();
-            this->m_redoStack.clear();
         }
     }
 }

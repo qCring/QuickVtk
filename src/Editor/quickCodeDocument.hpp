@@ -30,9 +30,14 @@ namespace quick {
         private:
             auto characterAt(int) -> QChar;
             auto getLines() -> QList<int>;
-            auto onUndo() -> void;
-            auto onRedo() -> void;
-            auto onCopy() -> void;
+            auto onChar(const QString&) -> bool;
+            auto onCut() -> bool;
+            auto onUndo() -> bool;
+            auto onRedo() -> bool;
+            auto onCopy() -> bool;
+            auto onPaste() -> bool;
+            auto onDelete() -> bool;
+            auto onBackspace() -> bool;
         public:
             static Document* current;
             Document();

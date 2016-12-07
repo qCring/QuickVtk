@@ -86,6 +86,11 @@ namespace quick {
                         } else {
                             this->select(change.start, change.start);
                         }
+                    } else if (change.type == Change::Type::DeleteText) {
+                        selection.cursor.setPosition(change.start);
+                        selection.cursor.insertText(change.selection);
+
+                        this->select(change.start, change.start + change.selection.length());
                     }
 
                     return true;
@@ -96,6 +101,15 @@ namespace quick {
                     auto text = QApplication::clipboard()->text();
                     this->m_undoStack->pushUndo(Change::Insert(selection, text));
                     selection.cursor.insertText(text);
+
+                    return true;
+                }
+
+                if (key == Qt::Key_X) {
+                    std::cout << "cut\n";
+                    QApplication::clipboard()->setText(selection.text);
+                    this->m_undoStack->pushUndo(Change::Delete(selection));
+                    selection.cursor.removeSelectedText();
 
                     return true;
                 }

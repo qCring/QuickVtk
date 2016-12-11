@@ -1,6 +1,6 @@
 #include "quickAppMenu.hpp"
 
-#include "quickCodeEditor.hpp"
+#include "quickEditorController.hpp"
 #include "quickAppInstance.hpp"
 #include "quickIO.hpp"
 
@@ -37,47 +37,47 @@ namespace quick {
         }
 
         void Menu::OnFileNew() {
-            Code::Editor::instance->newFile();
+            Editor::Controller::instance->newFile();
         }
 
         void Menu::OnFileOpen() {
-            Code::Editor::instance->openFile();
+            Editor::Controller::instance->openFile();
         }
 
         void Menu::OnFileSave() {
-            Code::Editor::instance->saveFile();
+            Editor::Controller::instance->saveFile();
         }
 
         void Menu::OnFileSaveAs() {
-            Code::Editor::instance->saveFile();
+            Editor::Controller::instance->saveFileAs();
         }
 
         void Menu::OnFindFind() {
-            Code::Editor::instance->showSearch();
+            Editor::Controller::instance->showSearch();
         }
 
         void Menu::OnCodeRun() {
-            Code::Editor::instance->run();
+            Editor::Controller::instance->run();
         }
 
         void Menu::OnCodeFormat() {
-            Code::Editor::instance->format();
+            Editor::Controller::instance->format();
         }
 
         void Menu::OnViewIncreaseFontSize() {
-            Code::Editor::instance->increaseFontSize();
+            Editor::Controller::instance->increaseFontSize();
         }
 
         void Menu::OnViewDecreaseFontSize() {
-            Code::Editor::instance->decreaseFontSize();
+            Editor::Controller::instance->decreaseFontSize();
         }
 
         void Menu::OnViewResetFontSize() {
-            Code::Editor::instance->resetFontSize();
+            Editor::Controller::instance->resetFontSize();
         }
 
         void Menu::OnViewToggleEditor() {
-            Code::Editor::instance->toggleExpanded();
+            Editor::Controller::instance->toggleExpanded();
         }
 
         void Menu::OnHelpAbout() {
@@ -101,7 +101,7 @@ namespace quick {
         }
 
         void Menu::OnHelpExample(const QString& exampleName) {
-            Code::Editor::instance->open(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
+            Editor::Controller::instance->openFile(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
         }
     }
 }

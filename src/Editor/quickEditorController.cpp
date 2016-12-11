@@ -21,12 +21,14 @@ namespace quick {
         auto Controller::setDocument(QQuickTextDocument* document) -> void {
             this->m_document = document;
 
-            auto options = document->textDocument()->defaultTextOption();
+            auto textDocument = document->textDocument();
+            auto options = textDocument->defaultTextOption();
             options.setTabStop(20);
-            document->textDocument()->setDefaultTextOption(options);
+            textDocument->setDefaultTextOption(options);
 
-            Selection::instance->setDocument(document->textDocument());
-            this->m_highlighter = new Highlighter(document->textDocument());
+            Selection::instance->setDocument(textDocument);
+            this->m_highlighter = new Highlighter(textDocument);
+            Search::instance->setDocument(textDocument);
 
             emit this->documentChanged();
         }
@@ -83,6 +85,7 @@ namespace quick {
 
         auto Controller::openFile(const QString& fileUrl) -> void {
             if (IO::FileExists(fileUrl)) {
+                Search::instance->invalidate();
                 this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
                 this->setModified(false);
                 this->setFileUrl(fileUrl);
@@ -121,6 +124,7 @@ namespace quick {
         }
 
         auto Controller::newFile() -> void {
+            Search::instance->invalidate();
             emit this->clear();
             this->setModified(false);
             this->setFileUrl("");
@@ -131,7 +135,7 @@ namespace quick {
         }
 
         auto Controller::showSearch() -> void {
-            Search::instance->show();
+            Search::instance->setVisible(true);
         }
 
         auto Controller::resetFontSize() -> void {

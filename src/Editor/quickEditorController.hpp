@@ -66,6 +66,7 @@ namespace quick {
             auto getFontSize() -> int;
             ~Controller();
         signals:
+            void select(int start, int end);
             void fileNameChanged();
             void fontSizeChanged();
             void documentChanged();

@@ -208,6 +208,12 @@ Item {
         onClear: textEdit.clear();
     }
 
+    Connections {
+        target: editor;
+        onSelect: textEdit.select(start, end);
+    }
+
+
     Component.onCompleted: {
         editor.document = textEdit.textDocument;
         editor.selection.startPosition = Qt.binding (function() { return textEdit.selectionStart; });

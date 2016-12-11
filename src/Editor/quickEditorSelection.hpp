@@ -15,11 +15,15 @@ namespace quick {
             Q_PROPERTY(int endPosition READ getEndPosition WRITE setEndPosition NOTIFY endPositionChanged);
             Q_PROPERTY(int startLine READ getStartLine NOTIFY startLineChanged);
             Q_PROPERTY(int endLine READ getEndLine NOTIFY endLineChanged);
+            Q_PROPERTY(int startColumn READ getStartColumn NOTIFY startColumnChanged);
+            Q_PROPERTY(int endColumn READ getEndColumn NOTIFY endColumnChanged);
             Q_PROPERTY(bool empty READ isEmpty NOTIFY emptyChanged);
         private:
             QTextDocument* m_document = nullptr;
             int m_startPosition = 0;
             int m_endPosition = 0;
+            int m_startColumn = 0;
+            int m_endColumn = 0;
             int m_startLine = 0;
             int m_endLine = 0;
             bool m_empty = true;
@@ -32,19 +36,24 @@ namespace quick {
             auto setEmpty(bool) -> void;
             auto setEndLine(int) -> void;
             auto setStartLine(int) -> void;
-            auto update() -> void;
+            auto setStartColumn(int) -> void;
+            auto setEndColumn(int) -> void;
         public:
             auto setDocument(QTextDocument*) -> void;
             auto setStartPosition(int) -> void;
             auto getStartPosition() -> int;
             auto setEndPosition(int) -> void;
             auto getEndPosition() -> int;
+            auto getStartColumn() -> int;
+            auto getEndColumn() -> int;
             auto getStartLine() -> int;
             auto getEndLine() -> int;
             auto isEmpty() -> bool;
         signals:
             void startPositionChanged();
             void endPositionChanged();
+            void startColumnChanged();
+            void endColumnChanged();
             void startLineChanged();
             void endLineChanged();
             void emptyChanged();

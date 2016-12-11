@@ -1,6 +1,6 @@
 #include "quickEditorSelection.hpp"
 
-#include <QTextBlock>
+#include <QTextCursor>
 
 namespace quick {
 
@@ -28,7 +28,14 @@ namespace quick {
                 this->m_startPosition = startPosition;
                 emit this->startPositionChanged();
 
-                this->update();
+                auto cursor = QTextCursor(this->m_document);
+
+                cursor.setPosition(this->m_startPosition);
+
+                this->setStartColumn(cursor.columnNumber());
+                this->setStartLine(cursor.blockNumber());
+
+                this->setEmpty(this->m_startPosition == this->m_endPosition);
             }
         }
 
@@ -41,7 +48,14 @@ namespace quick {
                 this->m_endPosition = endPosition;
                 emit this->endPositionChanged();
 
-                this->update();
+                auto cursor = QTextCursor(this->m_document);
+
+                cursor.setPosition(this->m_endPosition);
+
+                this->setEndColumn(cursor.columnNumber());
+                this->setEndLine(cursor.blockNumber());
+
+                this->setEmpty(this->m_startPosition == this->m_endPosition);
             }
         }
 
@@ -49,10 +63,26 @@ namespace quick {
             return this->m_endPosition;
         }
 
-        auto Selection::update() -> void {
-            this->setEmpty(this->m_startPosition == this->m_endPosition);
-            this->setStartLine(this->m_document->findBlock(this->m_startPosition).blockNumber());
-            this->setEndLine(this->m_document->findBlock(this->m_endPosition).blockNumber());
+        auto Selection::setStartColumn(int startColumn) -> void {
+            if (this->m_startColumn != startColumn) {
+                this->m_startColumn = startColumn;
+                emit this->startColumnChanged();
+            }
+        }
+
+        auto Selection::getStartColumn() -> int {
+            return this->m_startColumn;
+        }
+
+        auto Selection::setEndColumn(int endColumn) -> void {
+            if (this->m_endColumn != endColumn) {
+                this->m_endColumn = endColumn;
+                emit this->endColumnChanged();
+            }
+        }
+
+        auto Selection::getEndColumn() -> int {
+            return this->m_endColumn;
         }
 
         auto Selection::setStartLine(int startLine) -> void {

@@ -1,5 +1,6 @@
 #include "quickEditorController.hpp"
 
+#include "quickIO.hpp"
 #include "quickEditorSelection.hpp"
 #include "quickEditorSearch.hpp"
 
@@ -25,9 +26,40 @@ namespace quick {
 
             Selection::instance->setDocument(document->textDocument());
 
+            this->connect(document->textDocument(), &QTextDocument::modificationChanged, this, &Controller::setModified);
+
             emit this->documentChanged();
         }
 
+        auto Controller::setModified(bool modified) -> void {
+            if (this->m_modified != modified) {
+                this->m_modified = modified;
+                emit this->modifiedChanged();
+            }
+        }
+
+        auto Controller::getModified() -> bool {
+            return this->m_modified;
+        }
+
+        auto Controller::setFileName(const QString& fileName) -> void {
+            this->m_fileName = fileName;
+            emit this->fileNameChanged();
+        }
+
+        auto Controller::getFileName() -> QString {
+            return this->m_fileName;
+        }
+
+        auto Controller::setFileUrl(const QString& fileUrl) -> void {
+            this->m_fileUrl = fileUrl;
+            emit this->fileUrlChanged();
+        }
+
+        auto Controller::getFileUrl() -> QString {
+            return this->m_fileUrl;
+        }
+        
         auto Controller::getExpanded() -> bool {
             return this->m_expanded;
         }
@@ -49,8 +81,14 @@ namespace quick {
             return Selection::instance;
         }
 
-        auto Controller::openFile(const QString&) -> void {
-            
+        auto Controller::openFile(const QString& fileUrl) -> void {
+            if (IO::FileExists(fileUrl)) {
+                this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
+                this->setModified(false);
+                this->setFileUrl(fileUrl);
+
+                this->run();
+            }
         }
 
         auto Controller::run() -> void {
@@ -58,7 +96,11 @@ namespace quick {
         }
 
         auto Controller::saveFile() -> void {
-
+            if (this->m_fileUrl.length() < 1 || !IO::FileExists(this->m_fileUrl)) {
+                this->saveFileAs();
+            } else {
+                IO::Write::TextToFile(this->m_document->textDocument()->toPlainText(), this->m_fileUrl);
+            }
         }
 
         auto Controller::format() -> void {
@@ -66,15 +108,25 @@ namespace quick {
         }
 
         auto Controller::saveFileAs() -> void {
+            auto newUrl = IO::FromDialog::SelectSaveFileUrl();
 
+            if (newUrl.isNull() || newUrl.isEmpty()) {
+                return;
+            }
+
+            if (IO::Write::TextToFile(this->m_document->textDocument()->toPlainText(), newUrl)) {
+                this->setModified(false);
+                this->setFileUrl(newUrl);
+            }
         }
 
         auto Controller::newFile() -> void {
-
+            this->m_document->textDocument()->setPlainText("");
+            this->setModified(false);
+            this->setFileUrl("");
         }
 
         auto Controller::openFile() -> void {
-
         }
 
         auto Controller::showSearch() -> void {

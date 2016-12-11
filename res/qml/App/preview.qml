@@ -50,14 +50,13 @@ Item {
         App.editor.errors.clear();
 
         try {
-            qmlObject = Qt.createQmlObject(App.compiler.source, container, "root");
+            qmlObject = Qt.createQmlObject(App.editor.getText(), container, "root");
 
             if (previousObject) {
                 previousObject.destroy();
             }
 
             previousObject = qmlObject;
-            App.compiler.failed = false;
         }
         catch (exc) {
             var errors = exc.qmlErrors;
@@ -69,8 +68,6 @@ Item {
             }
 
             App.editor.errors.update();
-
-            App.compiler.failed = true;
         }
     }
 

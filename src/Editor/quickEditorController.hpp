@@ -10,6 +10,7 @@ namespace quick {
     namespace Editor {
 
         class Search;
+        class Errors;
         class Selection;
         class Highlighter;
 
@@ -21,6 +22,7 @@ namespace quick {
             Q_PROPERTY(QString fileUrl READ getFileUrl NOTIFY fileUrlChanged);
             Q_PROPERTY(QString fileName READ getFileName NOTIFY fileNameChanged);
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
+            Q_PROPERTY(quick::Editor::Errors* errors READ getErrors CONSTANT);
             Q_PROPERTY(quick::Editor::Search* search READ getSearch CONSTANT);
             Q_PROPERTY(quick::Editor::Selection* selection READ getSelection CONSTANT);
         public:
@@ -42,10 +44,12 @@ namespace quick {
             auto setFileName(const QString&) -> void;
         public slots:
             void setModified(bool);
+            QString getText();
         public:
             auto setDocument(QQuickTextDocument*) -> void;
             auto getDocument() -> QQuickTextDocument*;
             auto getSelection() -> Selection*;
+            auto getErrors() -> Errors*;
             auto getSearch() -> Search*;
             auto openFile(const QString&) -> void;
             auto getExpanded() -> bool;

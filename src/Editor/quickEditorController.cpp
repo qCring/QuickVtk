@@ -3,6 +3,7 @@
 #include "quickIO.hpp"
 #include "quickEditorHighlighter.hpp"
 #include "quickEditorSelection.hpp"
+#include "quickEditorErrors.hpp"
 #include "quickEditorSearch.hpp"
 
 #include <QTextOption>
@@ -73,6 +74,10 @@ namespace quick {
 
         auto Controller::getDocument() -> QQuickTextDocument* {
             return this->m_document;
+        }
+
+        auto Controller::getErrors() -> Errors* {
+            return Errors::instance;
         }
 
         auto Controller::getSearch() -> Search* {
@@ -159,6 +164,10 @@ namespace quick {
 
         auto Controller::getFontSize() -> int {
             return this->m_fontSize;
+        }
+
+        auto Controller::getText() -> QString {
+            return this->m_document->textDocument()->toPlainText();
         }
 
         Controller::~Controller() {

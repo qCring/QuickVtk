@@ -170,6 +170,10 @@ namespace quick {
             return this->m_matches.count();
         }
 
+        auto Search::invalidate() -> void {
+            this->m_valid = false;
+        }
+
         auto Search::processSearch() -> void {
             if (this->m_useRegex && !this->m_regexValid) {
                 return;

@@ -91,6 +91,7 @@ namespace quick {
         auto Controller::openFile(const QString& fileUrl) -> void {
             if (IO::FileExists(fileUrl)) {
                 Search::instance->invalidate();
+                Errors::instance->clear();
                 this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
                 this->setModified(false);
                 this->setFileUrl(fileUrl);
@@ -130,6 +131,7 @@ namespace quick {
 
         auto Controller::newFile() -> void {
             Search::instance->invalidate();
+            Errors::instance->clear();
             emit this->clear();
             this->setModified(false);
             this->setFileUrl("");

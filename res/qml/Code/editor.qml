@@ -107,8 +107,8 @@ Item {
             cursorDelegate: Rectangle {
                 id: cursorDel;
 
-                width: 1;
-                color: textEdit.inputMethodComposing ? "blue" : "orange";
+                width: 1.5;
+                color: "orange";
                 visible: textEdit.showCursor && !textEdit.multiSelection;
             }
 

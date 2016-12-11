@@ -8,7 +8,6 @@ Item {
     id: root;
 
     property var editor: App.editor;
-    property var selection: editor.selection;
 
     clip: true;
 
@@ -79,7 +78,7 @@ Item {
 
             leftPadding: 4;
 
-            property bool multiSelection: editor.document.selection.lines > 0;
+            property bool multiSelection: editor.selection.startLine != editor.selection.endLine;
             property int cursorX: cursorRectangle.x;
             property int cursorY: cursorRectangle.y;
             property int cursorHeight: cursorRectangle.height;
@@ -104,8 +103,6 @@ Item {
             }
 
             font.pointSize: editor.fontSize;
-
-            Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
 
             cursorDelegate: Rectangle {
                 id: cursorDel;
@@ -137,15 +134,14 @@ Item {
         }
     }
 
-    Rectangle {
+    Item {
         id: lines;
 
         anchors.left: parent.left;
         anchors.top: parent.top;
         anchors.bottom: footer.top;
 
-        width: linesCol.width + lineBar.width;
-        color: "#21252B"
+        width: linesCol.width;
 
         Column {
             id: linesCol;
@@ -164,41 +160,8 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index  >= editor.document.selection.line && index <= editor.document.selection.line + editor.document.selection.lines ? "#fff" : "#6E7582"
+                    color: index  >= editor.selection.startLine && index <= editor.selection.endLine ? "#fff" : "#6E7582"
                     text: index + 1;
-                }
-            }
-        }
-
-        Item {
-            id: lineBar;
-
-            anchors.top: linesCol.top;
-            anchors.bottom: parent.bottom;
-            anchors.left: linesCol.right;
-
-            width: 14;
-
-            Column {
-                Repeater {
-                    model: editor.document.lines.length;
-                    delegate: Item {
-                        width: 14;
-                        height: textEdit.cursorHeight;
-
-                        Rectangle {
-                            anchors.fill: parent;
-                            color: "#9DA5B4"
-                            opacity: Math.round(modelData / 2)/20;
-                        }
-
-                        Lib.Label {
-                            anchors.centerIn: parent;
-                            font.pointSize: 8;
-                            color: "#fff";
-                            text: modelData
-                        }
-                    }
                 }
             }
         }
@@ -207,15 +170,6 @@ Item {
             anchors.top: parent.top;
             anchors.bottom: parent.bottom;
             anchors.right: parent.right;
-
-            width: 1;
-            color: "#343842"
-        }
-
-        Rectangle {
-            anchors.top: parent.top;
-            anchors.bottom: parent.bottom;
-            anchors.right: lineBar.left;
 
             width: 1;
             color: "#343842"
@@ -249,15 +203,10 @@ Item {
         anchors.bottom: parent.bottom;
     }
 
-    Connections {
-		target: editor.document;
-		onSelect: textEdit.select(selectStart, selectEnd);
-	}
-
     Component.onCompleted: {
-        editor.editorDocument = textEdit.textDocument;
-        editor.document.selection.start = Qt.binding(function() { return textEdit.selectionStart; });
-        editor.document.selection.end = Qt.binding(function() { return textEdit.selectionEnd; });
+        editor.document = textEdit.textDocument;
+        editor.selection.startPosition = Qt.binding (function() { return textEdit.selectionStart; });
+        editor.selection.endPosition = Qt.binding (function() { return textEdit.selectionEnd; });
         textEdit.forceActiveFocus();
     }
 }

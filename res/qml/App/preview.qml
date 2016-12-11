@@ -75,7 +75,7 @@ Item {
     }
 
     Connections {
-		target: App.compiler;
-		onSourceChanged: { root.compile(); }
+		target: App.editor;
+		onCompile: root.compile();
 	}
 }

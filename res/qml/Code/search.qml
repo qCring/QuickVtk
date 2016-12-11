@@ -225,10 +225,12 @@ Rectangle {
 
     Connections {
         target: controller;
-        onShow: {
-            root.visible = true;
-            findInput.forceActiveFocus();
+        onVisibleChanged: {
+            root.visible = visible;
+
+            if (visible) {
+                findInput.forceActiveFocus();
+            }
         }
-        onHide: { root.visible = false; }
     }
 }

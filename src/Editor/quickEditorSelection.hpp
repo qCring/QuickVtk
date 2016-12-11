@@ -1,0 +1,53 @@
+#pragma once
+
+#include "quickQmlRegister.hpp"
+
+#include <QObject>
+#include <QTextDocument>
+
+namespace quick {
+
+    namespace Editor {
+
+        class Selection : public QObject {
+            Q_OBJECT
+            Q_PROPERTY(int startPosition READ getStartPosition WRITE setStartPosition NOTIFY startPositionChanged);
+            Q_PROPERTY(int endPosition READ getEndPosition WRITE setEndPosition NOTIFY endPositionChanged);
+            Q_PROPERTY(int startLine READ getStartLine NOTIFY startLineChanged);
+            Q_PROPERTY(int endLine READ getEndLine NOTIFY endLineChanged);
+            Q_PROPERTY(bool empty READ isEmpty NOTIFY emptyChanged);
+        private:
+            QTextDocument* m_document = nullptr;
+            int m_startPosition = 0;
+            int m_endPosition = 0;
+            int m_startLine = 0;
+            int m_endLine = 0;
+            bool m_empty = true;
+        public:
+            static Qml::Register::Controller<Selection> Register;
+            static auto Create() -> void;
+            static Selection* instance;
+        private:
+            Selection();
+            auto setEmpty(bool) -> void;
+            auto setEndLine(int) -> void;
+            auto setStartLine(int) -> void;
+            auto update() -> void;
+        public:
+            auto setDocument(QTextDocument*) -> void;
+            auto setStartPosition(int) -> void;
+            auto getStartPosition() -> int;
+            auto setEndPosition(int) -> void;
+            auto getEndPosition() -> int;
+            auto getStartLine() -> int;
+            auto getEndLine() -> int;
+            auto isEmpty() -> bool;
+        signals:
+            void startPositionChanged();
+            void endPositionChanged();
+            void startLineChanged();
+            void endLineChanged();
+            void emptyChanged();
+        };
+    }
+}

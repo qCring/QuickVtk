@@ -1,6 +1,7 @@
 #include "quickEditorController.hpp"
 
 #include "quickIO.hpp"
+#include "quickEditorHighlighter.hpp"
 #include "quickEditorSelection.hpp"
 #include "quickEditorSearch.hpp"
 
@@ -25,6 +26,7 @@ namespace quick {
             document->textDocument()->setDefaultTextOption(options);
 
             Selection::instance->setDocument(document->textDocument());
+            this->m_highlighter = new Highlighter(document->textDocument());
 
             emit this->documentChanged();
         }
@@ -153,6 +155,11 @@ namespace quick {
 
         auto Controller::getFontSize() -> int {
             return this->m_fontSize;
+        }
+
+        Controller::~Controller() {
+            delete this->m_highlighter;
+            this->m_highlighter = nullptr;
         }
     }
 }

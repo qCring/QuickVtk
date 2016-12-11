@@ -11,6 +11,7 @@ namespace quick {
 
         class Search;
         class Selection;
+        class Highlighter;
 
         class Controller : public QObject {
             Q_OBJECT
@@ -34,6 +35,7 @@ namespace quick {
             int m_fontSizeMax = 20;
             bool m_expanded = true;
             bool m_modified = false;
+            Highlighter* m_highlighter = nullptr;
             QQuickTextDocument* m_document;
         private:
             auto setFileUrl(const QString&) -> void;
@@ -62,6 +64,7 @@ namespace quick {
             auto increaseFontSize() -> void;
             auto decreaseFontSize() -> void;
             auto getFontSize() -> int;
+            ~Controller();
         signals:
             void fileNameChanged();
             void fontSizeChanged();

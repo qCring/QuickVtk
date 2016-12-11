@@ -26,8 +26,6 @@ namespace quick {
 
             Selection::instance->setDocument(document->textDocument());
 
-            this->connect(document->textDocument(), &QTextDocument::modificationChanged, this, &Controller::setModified);
-
             emit this->documentChanged();
         }
 
@@ -121,12 +119,13 @@ namespace quick {
         }
 
         auto Controller::newFile() -> void {
-            this->m_document->textDocument()->setPlainText("");
+            emit this->clear();
             this->setModified(false);
             this->setFileUrl("");
         }
 
         auto Controller::openFile() -> void {
+            this->openFile(IO::FromDialog::SelectOpenFileUrl("*.qml"));
         }
 
         auto Controller::showSearch() -> void {

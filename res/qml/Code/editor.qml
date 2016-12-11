@@ -203,6 +203,11 @@ Item {
         anchors.bottom: parent.bottom;
     }
 
+    Connections {
+        target: App.editor;
+        onClear: textEdit.clear();
+    }
+
     Component.onCompleted: {
         editor.document = textEdit.textDocument;
         editor.selection.startPosition = Qt.binding (function() { return textEdit.selectionStart; });

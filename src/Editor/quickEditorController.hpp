@@ -70,6 +70,7 @@ namespace quick {
             void modifiedChanged();
             void fileUrlChanged();
             void compile();
+            void clear();
         };
     }
 }

@@ -9,16 +9,19 @@ namespace quick {
 
     namespace Editor {
 
+        class Format;
+
         class Selection : public QObject {
             Q_OBJECT
             Q_PROPERTY(int startPosition READ getStartPosition WRITE setStartPosition NOTIFY startPositionChanged);
             Q_PROPERTY(int endPosition READ getEndPosition WRITE setEndPosition NOTIFY endPositionChanged);
-            Q_PROPERTY(int startLine READ getStartLine NOTIFY startLineChanged);
-            Q_PROPERTY(int endLine READ getEndLine NOTIFY endLineChanged);
             Q_PROPERTY(int startColumn READ getStartColumn NOTIFY startColumnChanged);
             Q_PROPERTY(int endColumn READ getEndColumn NOTIFY endColumnChanged);
+            Q_PROPERTY(int startLine READ getStartLine NOTIFY startLineChanged);
+            Q_PROPERTY(int endLine READ getEndLine NOTIFY endLineChanged);
             Q_PROPERTY(bool empty READ isEmpty NOTIFY emptyChanged);
         private:
+            friend class Format;
             QTextDocument* m_document = nullptr;
             int m_startPosition = 0;
             int m_endPosition = 0;
@@ -38,6 +41,7 @@ namespace quick {
             auto setStartLine(int) -> void;
             auto setStartColumn(int) -> void;
             auto setEndColumn(int) -> void;
+            auto getCursor(int) -> QTextCursor;
         public:
             auto setDocument(QTextDocument*) -> void;
             auto setStartPosition(int) -> void;

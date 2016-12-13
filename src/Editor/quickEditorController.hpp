@@ -11,6 +11,7 @@ namespace quick {
 
         class Search;
         class Errors;
+        class Format;
         class Selection;
         class Highlighter;
 
@@ -24,6 +25,7 @@ namespace quick {
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
             Q_PROPERTY(quick::Editor::Errors* errors READ getErrors CONSTANT);
             Q_PROPERTY(quick::Editor::Search* search READ getSearch CONSTANT);
+            Q_PROPERTY(quick::Editor::Format* format READ getFormat CONSTANT);
             Q_PROPERTY(quick::Editor::Selection* selection READ getSelection CONSTANT);
         public:
             static Controller* instance;
@@ -37,6 +39,7 @@ namespace quick {
             int m_fontSizeMax = 20;
             bool m_expanded = true;
             bool m_modified = false;
+            Format* m_format = nullptr;
             Highlighter* m_highlighter = nullptr;
             QQuickTextDocument* m_document;
         private:
@@ -49,6 +52,7 @@ namespace quick {
             auto setDocument(QQuickTextDocument*) -> void;
             auto getDocument() -> QQuickTextDocument*;
             auto getSelection() -> Selection*;
+            auto getFormat() -> Format*;
             auto getErrors() -> Errors*;
             auto getSearch() -> Search*;
             auto openFile(const QString&) -> void;

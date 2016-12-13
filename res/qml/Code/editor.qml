@@ -84,6 +84,18 @@ Item {
             property int cursorHeight: cursorRectangle.height;
             property bool showCursor: true;
 
+            font.pointSize: editor.fontSize;
+
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
+                    editor.format.onNewline();
+                } else if (event.key == Qt.Key_Backspace) {
+                    editor.format.onBackspace();
+                } else if (event.key == Qt.Key_Delete) {
+                    editor.format.onDelete();
+                }
+            }
+
             onActiveFocusChanged: {
                 if (activeFocus) {
                     activateCursor();
@@ -101,8 +113,6 @@ Item {
                 activateCursor();
                 flickable.updateScrollY(cursorY);
             }
-
-            font.pointSize: editor.fontSize;
 
             cursorDelegate: Rectangle {
                 id: cursorDel;
@@ -141,7 +151,7 @@ Item {
         anchors.top: parent.top;
         anchors.bottom: footer.top;
 
-        width: linesCol.width;
+        width: linesCol.width + lineBar.width;
 
         Column {
             id: linesCol;
@@ -162,6 +172,39 @@ Item {
 
                     color: index  >= editor.selection.startLine && index <= editor.selection.endLine ? "#fff" : "#6E7582"
                     text: index + 1;
+                }
+            }
+        }
+
+        Item {
+            id: lineBar;
+
+            anchors.top: linesCol.top;
+            anchors.bottom: parent.bottom;
+            anchors.left: linesCol.right;
+
+            width: 14;
+
+            Column {
+                Repeater {
+                    model: editor.format.indents.length;
+                    delegate: Item {
+                        width: 14;
+                        height: textEdit.cursorHeight;
+
+                        Rectangle {
+                            anchors.fill: parent;
+                            color: "#9DA5B4"
+                            opacity: Math.round(modelData / 2)/20;
+                        }
+
+                        Lib.Label {
+                            anchors.centerIn: parent;
+                            font.pointSize: 8;
+                            color: "#fff";
+                            text: modelData
+                        }
+                    }
                 }
             }
         }

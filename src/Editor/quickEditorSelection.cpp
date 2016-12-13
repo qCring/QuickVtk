@@ -117,5 +117,12 @@ namespace quick {
         auto Selection::isEmpty() -> bool {
             return this->m_empty;
         }
+
+        auto Selection::getCursor(int position) -> QTextCursor {
+            auto cursor = QTextCursor(this->m_document);
+
+            cursor.setPosition(position);
+            return cursor;
+        }
     }
 }

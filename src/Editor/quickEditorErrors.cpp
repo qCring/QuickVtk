@@ -1,8 +1,8 @@
-#include "quickCodeErrors.hpp"
+#include "quickEditorErrors.hpp"
 
 namespace quick {
 
-    namespace Code {
+    namespace Editor {
 
         Errors* Errors::instance = nullptr;
 
@@ -77,10 +77,10 @@ namespace quick {
                     var.setValue(this->m_errors.at(index.row()).message);
                 }
             }
-            
+
             return var;
         }
-        
+
         auto Errors::rowCount(const QModelIndex&) const -> int {
             return this->m_errors.size();
         }

@@ -64,6 +64,8 @@ Item {
 
                         anchors.centerIn: parent;
                         anchors.verticalCenterOffset: panel.radius/2;
+                        textFormat: Text.RichText;
+
                         enabled: index == root.selectedIndex;
 
                         text: container.children[index].tabTitle;

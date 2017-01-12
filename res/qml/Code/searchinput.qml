@@ -48,7 +48,7 @@ TextInput {
         var key = event.key;
 
         if (key == Qt.Key_Escape) {
-            App.editor.search.hide();
+            App.editor.search.visible = false;
             event.accepted = true;
             refocus.forceActiveFocus();
         }

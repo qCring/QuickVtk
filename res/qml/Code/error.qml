@@ -19,7 +19,7 @@ Rectangle {
         color: "#ff0000"
     }
 
-    Lib.TagLabel {
+    Lib.TagLabel {        
         anchors.right: parent.right;
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;

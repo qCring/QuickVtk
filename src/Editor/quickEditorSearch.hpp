@@ -1,13 +1,14 @@
 #pragma once
 
-#include <QObject>
-#include <QTextCursor>
-
 #include "quickQmlRegister.hpp"
+
+#include <QTextDocument>
+#include <QTextCursor>
+#include <QObject>
 
 namespace quick {
 
-    namespace Code {
+    namespace Editor {
 
         class Search : public QObject {
             Q_OBJECT
@@ -19,7 +20,10 @@ namespace quick {
             Q_PROPERTY(bool caseSensitive READ getCaseSensitive WRITE setCaseSensitive NOTIFY caseSensitiveChanged);
             Q_PROPERTY(bool useRegex READ getUseRegex WRITE setUseRegex NOTIFY useRegexChanged);
             Q_PROPERTY(bool regexValid READ getRegexValid NOTIFY regexValidChanged);
+            Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged);
         private:
+            bool m_visible = false;
+            QTextDocument* m_document = nullptr;
             QList<QTextCursor> m_matches;
             QString m_findString;
             QString m_replaceString;
@@ -30,9 +34,14 @@ namespace quick {
             bool m_valid = false;
             int m_currentMatch = -1;
         private:
-            static Qml::Register::Type<Search> Register;
+            Search();
         public:
-            Search() = default;
+            static Qml::Register::Controller<Search> Register;
+            static auto Create() -> void;
+            static Search* instance;
+            auto setDocument(QTextDocument*) -> void;
+            auto setVisible(bool) -> void;
+            auto getVisible() -> bool;
             auto processSearch() -> void;
             auto setCaseSensitive(bool) -> void;
             auto getCaseSensitive() -> bool;
@@ -57,8 +66,7 @@ namespace quick {
             void replaceNext();
             void replaceAll();
         signals:
-            void show();
-            void hide();
+            void visibleChanged();
             void useRegexChanged();
             void regexErrorChanged();
             void regexValidChanged();
@@ -67,6 +75,7 @@ namespace quick {
             void caseSensitiveChanged();
             void replaceStringChanged();
             void matchCountChanged();
+
         };
     }
 }

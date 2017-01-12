@@ -9,7 +9,7 @@ Rectangle {
     anchors.right: parent ? parent.right : undefined;
 
     height: col.height;
-    color: "#dd2C313A";
+    color: "#ee21252B";
 
     Column {
         id: col;
@@ -25,15 +25,25 @@ Rectangle {
             anchors.leftMargin: -4;
 
             height: nameLabel.height + 2;
-            color: "#21252B"
+            color: "#181A1F"
 
             Row {
-                id: row;
+                anchors.right: parent.right;
+                anchors.rightMargin: 2;
+                anchors.top: parent.top;
+                anchors.bottom: parent.bottom;
 
-                anchors.fill: parent;
+                Lib.Icon {
+                    type: types.fa_tag;
+
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    color: symbol.color;
+                }
 
                 Lib.Label {
                     anchors.verticalCenter: parent.verticalCenter;
+
                     rightPadding: 4;
                     leftPadding: 4;
 
@@ -42,6 +52,24 @@ Rectangle {
                     font.bold: true;
                     font.pointSize: 10;
                 }
+            }
+
+            Rectangle {
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                anchors.bottom: parent.bottom;
+
+                height: 1;
+
+                color: symbol.color
+                opacity: 0.3;
+            }
+
+            Row {
+                id: row;
+
+                anchors.fill: parent;
+                anchors.leftMargin: 4;
 
                 Lib.Label {
                     anchors.verticalCenter: parent.verticalCenter;

@@ -6,8 +6,8 @@
 #include "quickAppController.hpp"
 #include "quickSampleDataController.hpp"
 #include "quickAppLogger.hpp"
-#include "quickAppMenu.hpp"
 
+#include <QWindow>
 #include <QFontDatabase>
 #include <QApplication>
 #include <QQmlContext>
@@ -55,17 +55,17 @@ namespace quick {
             AddFontDir(resourceDir + "fonts/vera/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
-            Menu::Create();
-            
-            this->m_view = new QQuickView();
-            this->m_view->setTitle(QGuiApplication::applicationName());
+            auto engine = new QQmlApplicationEngine ();
 
-            auto engine = this->m_view->engine();
             auto context = engine->rootContext();
-
-            engine->addImportPath(resourceDir + "qml");
             context->setContextProperty("App", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
+
+            engine->addImportPath(resourceDir + "qml");
+            engine->load(QUrl::fromLocalFile(resourceDir + "qml/App/window.qml"));
+
+            auto rootObject = engine->rootObjects().at(0);
+            auto window = static_cast<QWindow*>(rootObject);
 
             QSurfaceFormat format;
             format.setMajorVersion(3);
@@ -74,12 +74,10 @@ namespace quick {
             format.setStencilBufferSize(1);
             format.setProfile(QSurfaceFormat::CoreProfile);
 
-            this->m_view->setFormat(format);
-            this->m_view->setSource(QUrl::fromLocalFile(resourceDir + "qml/App/window.qml"));
-            this->m_view->setResizeMode(QQuickView::SizeRootObjectToView);
-            this->m_view->showMaximized();
+            window->setFormat(format);
+            window->showMaximized();
         }
-        
+
         auto Instance::Execute(int argc, char** argv) -> int {
             qInstallMessageHandler(HandleMessage);
 

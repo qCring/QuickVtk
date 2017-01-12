@@ -4,11 +4,11 @@
 
 #include "quickTypeInfoList.hpp"
 
-#include "quickCodeCompiler.hpp"
-#include "quickCodeEditor.hpp"
+#include "quickEditorController.hpp"
 
 #include "quickAppSettings.hpp"
 #include "quickAppLogger.hpp"
+#include "quickAppMenu.hpp"
 
 namespace quick {
     namespace App {
@@ -51,16 +51,12 @@ namespace quick {
             return Meta::versionString;
         }
 
-        auto Controller::getCompiler() -> Code::Compiler* {
-            return Code::Compiler::instance;
-        }
-
         auto Controller::getTypeList() -> TypeInfo::List* {
             return TypeInfo::List::GetInstance();
         }
 
-        auto Controller::getEditor() -> Code::Editor* {
-            return Code::Editor::instance;
+        auto Controller::getEditor() -> Editor::Controller* {
+            return Editor::Controller::instance;
         }
 
         auto Controller::getLogger() -> Logger* {
@@ -69,6 +65,10 @@ namespace quick {
 
         auto Controller::getSettings() -> Settings* {
             return Settings::instance;
+        }
+
+        auto Controller::getMenu() -> Menu* {
+            return Menu::GetInstance();
         }
         
         auto Controller::isDebugBuild() -> bool {

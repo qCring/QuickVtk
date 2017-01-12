@@ -1,98 +1,103 @@
 #include "quickAppMenu.hpp"
 
-#include "quickCodeEditor.hpp"
+#include "quickEditorController.hpp"
 #include "quickAppInstance.hpp"
 #include "quickIO.hpp"
 
 #include <QMenuBar>
+#include <QDesktopServices>
 
 namespace quick {
 
     namespace App {
 
         Menu* Menu::instance = nullptr;
+        Qml::Register::Type<Menu> Menu::Register;
 
         Menu::Menu() {
             if (instance) {
                 throw std::runtime_error("instance already existing");
             }
 
+            this->init();
+
             instance = this;
         }
 
-        auto Menu::add(QMenu* menu, Type type, const QString& title, QString shortcut) -> void {
-            auto item = menu->addAction(title);
-            item->setShortcut(shortcut);
-            QObject::connect(item, &QAction::triggered, [=](void) { this->onAction(type, title); });
+        auto Menu::GetInstance() -> Menu* {
+            return instance ? instance : new Menu();
         }
 
         auto Menu::init() -> void {
-            auto menuBar = new QMenuBar(nullptr);
-
-            auto fileMenu = new QMenu(tr("File"), menuBar);
-            auto viewMenu = new QMenu(tr("View"), menuBar);
-            auto codeMenu = new QMenu(tr("Code"), menuBar);
-            auto helpMenu = new QMenu(tr("Help"), menuBar);
-            auto helpExamples = new QMenu(tr("Examples"), helpMenu);
-
-            add(fileMenu, FileNewFile, "New File", "Ctrl+N");
-            add(fileMenu, FileOpenFile, "Open File", "Ctrl+O");
-            add(fileMenu, FileSaveFile, "Save File", "Ctrl+S");
-
-            add(viewMenu, ViewIncreaseFontSize, "Increase Font Size", "Ctrl++");
-            add(viewMenu, ViewDecreaseFontSize, "Decrease Font Size", "Ctrl+-");
-
-            add(codeMenu, CodeRun, "Run", "Ctrl+R");
-            add(codeMenu, CodeFormat, "Format", "Ctrl+I");
-
-            add(helpMenu, HelpAbout, "About");
-            add(helpMenu, HelpDocs, "Documentation");
-            add(helpMenu, HelpPrefs, "Preferences...");
-
-            auto examples = IO::FileNamesFromDir(Instance::GetResourceDir() + "examples/qml/simple", {"*.qml"}, IO::FileSuffix::Off);
-
-            for (auto example : examples) {
-                add (helpExamples, HelpExample, example);
-            }
-
-            helpMenu->addMenu(helpExamples);
-
-            menuBar->addMenu(fileMenu);
-            menuBar->addMenu(viewMenu);
-            menuBar->addMenu(codeMenu);
-            menuBar->addMenu(helpMenu);
+            this->m_examples = IO::FileNamesFromDir(Instance::GetResourceDir() + "examples/qml/simple", {"*.qml"}, IO::FileSuffix::Off);
         }
 
-        void Menu::onAction(Type type, const QString& title) {
-            switch (type) {
-                case FileNewFile: Code::Editor::instance->newFile(); break;
-                case FileOpenFile: Code::Editor::instance->openFile(); break;
-                case FileSaveFile: Code::Editor::instance->saveFile(); break;
-
-                case ViewIncreaseFontSize: Code::Editor::instance->increaseFontSize(); break;
-                case ViewDecreaseFontSize: Code::Editor::instance->decreaseFontSize(); break;
-
-                case CodeRun: Code::Editor::instance->run(); break;
-                case CodeFormat: Code::Editor::instance->format(); break;
-
-                case HelpAbout: break;
-                case HelpDocs: break;
-                case HelpPrefs: break;
-
-                case HelpExample: {
-                    Code::Editor::instance->open(Instance::GetResourceDir() + "examples/qml/simple/" + title + ".qml");
-                    break;
-                }
-
-                default: break;
-            }
+        auto Menu::getExamples() -> QStringList {
+            return this->m_examples;
         }
 
-        auto Menu::Create() -> Menu* {
-            auto menu = new Menu();
+        void Menu::OnFileNew() {
+            Editor::Controller::instance->newFile();
+        }
 
-            menu->init();
-            return menu;
+        void Menu::OnFileOpen() {
+            Editor::Controller::instance->openFile();
+        }
+
+        void Menu::OnFileSave() {
+            Editor::Controller::instance->saveFile();
+        }
+
+        void Menu::OnFileSaveAs() {
+            Editor::Controller::instance->saveFileAs();
+        }
+
+        void Menu::OnFindFind() {
+            Editor::Controller::instance->showSearch();
+        }
+
+        void Menu::OnCodeRun() {
+            Editor::Controller::instance->run();
+        }
+
+        void Menu::OnViewIncreaseFontSize() {
+            Editor::Controller::instance->increaseFontSize();
+        }
+
+        void Menu::OnViewDecreaseFontSize() {
+            Editor::Controller::instance->decreaseFontSize();
+        }
+
+        void Menu::OnViewResetFontSize() {
+            Editor::Controller::instance->resetFontSize();
+        }
+
+        void Menu::OnViewToggleEditor() {
+            Editor::Controller::instance->toggleExpanded();
+        }
+
+        void Menu::OnHelpAbout() {
+            //
+        }
+
+        void Menu::OnHelpDocumentation() {
+            //
+        }
+
+        void Menu::OnHelpPreferences() {
+            //
+        }
+
+        void Menu::OnHelpVisitOnGitHub() {
+            QDesktopServices::openUrl(QUrl("https://github.com/qCring/QuickVtk", QUrl::TolerantMode));
+        }
+
+        void Menu::OnHelpSendFeedback() {
+            QDesktopServices::openUrl(QUrl("mailto:qCring@gmail.com?subject=QuickVtk Feedback", QUrl::TolerantMode));
+        }
+
+        void Menu::OnHelpExample(const QString& exampleName) {
+            Editor::Controller::instance->openFile(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
         }
     }
 }

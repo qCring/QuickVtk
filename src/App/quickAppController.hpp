@@ -10,15 +10,15 @@ namespace quick {
         class List;
     }
 
-    namespace Code {
-        class Editor;
-        class Compiler;
+    namespace Editor {
+        class Controller;
     }
 
     namespace App {
 
         class Logger;
         class Settings;
+        class Menu;
 
         class Controller : public QObject {
             Q_OBJECT
@@ -27,9 +27,9 @@ namespace quick {
             Q_PROPERTY(QString version READ getVersion CONSTANT);
             Q_PROPERTY(quick::App::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
-            Q_PROPERTY(quick::Code::Compiler* compiler READ getCompiler CONSTANT);
-            Q_PROPERTY(quick::Code::Editor* editor READ getEditor CONSTANT);
+            Q_PROPERTY(quick::Editor::Controller* editor READ getEditor CONSTANT);
             Q_PROPERTY(quick::App::Logger* logger READ getLogger CONSTANT);
+            Q_PROPERTY(quick::App::Menu* menu READ getMenu CONSTANT);
         private:
             bool m_showList = false;
             bool m_expanded = false;
@@ -45,10 +45,10 @@ namespace quick {
             auto getVersion() -> QString;
             auto isDebugBuild() -> bool;
             auto getTypeList() -> TypeInfo::List*;
-            auto getCompiler() -> Code::Compiler*;
-            auto getEditor() -> Code::Editor*;
+            auto getEditor() -> Editor::Controller*;
             auto getSettings() -> Settings*;
             auto getLogger() -> Logger*;
+            auto getMenu() -> Menu*;
         signals:
             void expandedChanged();
         };

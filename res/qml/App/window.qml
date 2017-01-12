@@ -1,20 +1,16 @@
 import QtQuick 2.6
+import QtQuick.Window 2.2
 
 import Lib 1.0 as Lib
 import Code 1.0 as Code
 import TypeInfo 1.0 as TypeInfo
 
-Rectangle {
+Window {
     id: root;
 
     color: "#282C34"
 
-    MouseArea {
-        anchors.fill: parent;
-
-        onClicked: {
-            root.forceActiveFocus();
-        }
+    Menu {
     }
 
     Header {
@@ -26,6 +22,8 @@ Rectangle {
     }
 
     Lib.SplitView {
+        id: splitView;
+
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.top: header.bottom;
@@ -62,5 +60,17 @@ Rectangle {
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.bottom: parent.bottom;
+    }
+
+    Connections {
+        target: App.editor;
+
+        onExpandedChanged: {
+            if (App.editor.expanded) {
+                splitView.expandLeft(width/2);
+            } else {
+                splitView.collapseLeft();
+            }
+        }
     }
 }

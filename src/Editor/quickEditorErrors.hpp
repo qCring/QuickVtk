@@ -6,7 +6,7 @@
 
 namespace quick {
 
-    namespace Code {
+    namespace Editor {
 
         struct Error {
             unsigned int line;
@@ -35,7 +35,7 @@ namespace quick {
             auto data(const QModelIndex&, int) const -> QVariant;
             auto roleNames() const -> QHash<int, QByteArray>;
             auto getCount() -> int;
-        public slots:
+            public slots:
             void update();
             void add(int, int, const QString&);
             void clear();

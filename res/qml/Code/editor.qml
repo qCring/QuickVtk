@@ -4,13 +4,14 @@ import QtQuick.Controls 1.4
 import App 1.0 as App
 import Lib 1.0 as Lib
 
-Item {
+Rectangle {
     id: root;
 
     property var editor: App.editor;
-    property var selection: editor.selection;
 
     clip: true;
+
+    color: "#181A1F"
 
     function activate() {
         textEdit.forceActiveFocus();
@@ -54,7 +55,7 @@ Item {
             y: textEdit.cursorY;
             height: textEdit.cursorHeight;
 
-            color: "#2C303A"
+            color: "#21252B"
         }
 
         Repeater {
@@ -75,12 +76,17 @@ Item {
             id: textEdit
 
             width: Math.max(implicitWidth, root.width - lines.width);
+            height: Math.max(implicitHeight, root.height - footer.height);
+
             leftPadding: 4;
 
+            property bool multiSelection: editor.selection.startLine != editor.selection.endLine;
             property int cursorX: cursorRectangle.x;
             property int cursorY: cursorRectangle.y;
             property int cursorHeight: cursorRectangle.height;
             property bool showCursor: true;
+
+            font.pointSize: editor.fontSize;
 
             onActiveFocusChanged: {
                 if (activeFocus) {
@@ -100,16 +106,12 @@ Item {
                 flickable.updateScrollY(cursorY);
             }
 
-            font.pointSize: editor.fontSize;
-
-            Keys.onPressed: event.accepted = editor.onKeyPressed(event.key, event.modifiers, event.text);
-
             cursorDelegate: Rectangle {
                 id: cursorDel;
 
-                width: 1;
-                color: "#fff";
-                visible: textEdit.showCursor;
+                width: 1.5;
+                color: "orange";
+                visible: textEdit.showCursor && !textEdit.multiSelection;
             }
 
             function activateCursor() {
@@ -130,6 +132,7 @@ Item {
                 repeat: true;
 
                 onTriggered: textEdit.showCursor = !textEdit.showCursor;
+
             }
         }
     }
@@ -141,8 +144,9 @@ Item {
         anchors.top: parent.top;
         anchors.bottom: footer.top;
 
-        width: linesCol.width + lineBar.width;
-        color: "#21252B"
+        color: "#181A1F"
+
+        width: linesCol.width + 4;
 
         Column {
             id: linesCol;
@@ -161,41 +165,8 @@ Item {
                     font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index  >= selection.startLine && index <= selection.endLine ? "#fff" : "#6E7582"
+                    color: index  >= editor.selection.startLine && index <= editor.selection.endLine ? "#fff" : "#6E7582"
                     text: index + 1;
-                }
-            }
-        }
-
-        Item {
-            id: lineBar;
-
-            anchors.top: linesCol.top;
-            anchors.bottom: parent.bottom;
-            anchors.left: linesCol.right;
-
-            width: 14;
-
-            Column {
-                Repeater {
-                    model: editor.lines.length;
-                    delegate: Item {
-                        width: 14;
-                        height: textEdit.cursorHeight;
-
-                        Rectangle {
-                            anchors.fill: parent;
-                            color: "#9DA5B4"
-                            opacity: Math.round(editor.lines[index] / 2)/20;
-                        }
-
-                        /*Lib.Label {
-                            anchors.centerIn: parent;
-                            font.pointSize: 8;
-                            color: "#fff";
-                            text: editor.lines[index];
-                        }*/
-                    }
                 }
             }
         }
@@ -206,16 +177,7 @@ Item {
             anchors.right: parent.right;
 
             width: 1;
-            color: "#343842"
-        }
-
-        Rectangle {
-            anchors.top: parent.top;
-            anchors.bottom: parent.bottom;
-            anchors.right: lineBar.left;
-
-            width: 1;
-            color: "#343842"
+            color: "#21252B"
         }
     }
 
@@ -229,6 +191,15 @@ Item {
         refocus: textEdit;
     }
 
+    MouseArea {
+        anchors.fill: parent;
+        enabled: !textEdit.activeFocus;
+
+        onClicked: {
+            root.activate();
+        }
+    }
+
     Footer {
         id: footer;
 
@@ -238,14 +209,20 @@ Item {
     }
 
     Connections {
-		target: selection;
-		onUpdateEditorSelection: textEdit.select(selection.startPosition, selection.endPosition);
-	}
+        target: App.editor;
+        onClear: textEdit.clear();
+    }
+
+    Connections {
+        target: editor;
+        onSelect: textEdit.select(start, end);
+    }
+
 
     Component.onCompleted: {
         editor.document = textEdit.textDocument;
-        selection.startPosition = Qt.binding(function() { return textEdit.selectionStart; });
-        selection.endPosition = Qt.binding(function() { return textEdit.selectionEnd; });
+        editor.selection.startPosition = Qt.binding (function() { return textEdit.selectionStart; });
+        editor.selection.endPosition = Qt.binding (function() { return textEdit.selectionEnd; });
         textEdit.forceActiveFocus();
     }
 }

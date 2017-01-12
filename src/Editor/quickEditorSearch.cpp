@@ -1,14 +1,37 @@
-#include "quickCodeSearch.hpp"
-#include "quickCodeEditor.hpp"
+#include "quickEditorSearch.hpp"
+
+#include "quickEditorController.hpp"
 
 namespace quick {
 
-    namespace Code {
+    namespace Editor {
 
-        Qml::Register::Type<Search> Search::Register;
+        Search* Search::instance = nullptr;
+        Qml::Register::Controller<Search> Search::Register;
 
-        auto Search::invalidate() -> void {
-            this->m_valid = false;
+        Search::Search() {
+            if (instance) {
+                throw "instance already existing";
+            }
+        }
+
+        auto Search::setDocument(QTextDocument* document) -> void {
+            this->m_document = document;
+        }
+
+        auto Search::Create() -> void {
+            instance = new Search();
+        }
+
+        auto Search::setVisible(bool visible) -> void {
+            if (this->m_visible != visible) {
+                this->m_visible = visible;
+                emit this->visibleChanged();
+            }
+        }
+
+        auto Search::getVisible() -> bool {
+            return this->m_visible;
         }
 
         void Search::replaceNext() {
@@ -147,8 +170,11 @@ namespace quick {
             return this->m_matches.count();
         }
 
-        auto Search::processSearch() -> void {
+        auto Search::invalidate() -> void {
+            this->m_valid = false;
+        }
 
+        auto Search::processSearch() -> void {
             if (this->m_useRegex && !this->m_regexValid) {
                 return;
             }
@@ -156,12 +182,13 @@ namespace quick {
             this->setCurrentMatch(-1);
             this->m_matches.clear();
 
-            auto cursor = Editor::instance->getCurrentCursor();
+            auto cursor = QTextCursor(this->m_document);
+
             cursor.setPosition(0);
 
             while (true) {
                 if (this->m_useRegex) {
-                    auto newCursor = Editor::instance->getDocument()->textDocument()->find(QRegularExpression(this->m_findString), cursor);
+                    auto newCursor = this->m_document->find(QRegularExpression(this->m_findString), cursor);
                     if (newCursor.position() == cursor.position()) {
                         //TODO: this is a quick hack to prevent the app from getting stuck for certain expressions (for example "^^")
                         return;
@@ -170,9 +197,9 @@ namespace quick {
                     cursor = newCursor;
                 } else {
                     if (this->m_caseSensitive) {
-                        cursor = Editor::instance->getDocument()->textDocument()->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
+                        cursor = this->m_document->find(this->m_findString, cursor, QTextDocument::FindCaseSensitively);
                     } else {
-                        cursor = Editor::instance->getDocument()->textDocument()->find(this->m_findString, cursor);
+                        cursor = this->m_document->find(this->m_findString, cursor);
                     }
                 }
 
@@ -187,6 +214,7 @@ namespace quick {
             emit this->matchCountChanged();
 
             this->findNext();
+
         }
 
         auto Search::findNext() -> void {
@@ -194,27 +222,31 @@ namespace quick {
                 this->processSearch();
                 return;
             }
-
+            
             if (this->m_matches.count() < 1) {
                 return;
             }
-
+            
             this->setCurrentMatch((this->m_currentMatch + 1) % this->m_matches.count());
-            Editor::instance->select(this->m_matches.at(this->m_currentMatch));
-        }
 
+            auto match = this->m_matches.at(this->m_currentMatch);
+            emit Editor::Controller::instance->select(match.selectionStart(), match.selectionEnd());
+        }
+        
         auto Search::findPrevious() -> void {
             if (!this->m_valid) {
                 this->processSearch();
                 return;
             }
-
+            
             if (this->m_matches.count() < 1) {
                 return;
             }
-
+            
             this->setCurrentMatch((this->m_currentMatch - 1) % this->m_matches.count());
-            Editor::instance->select(this->m_matches.at(this->m_currentMatch));
+
+            auto match = this->m_matches.at(this->m_currentMatch);
+            emit Editor::Controller::instance->select(match.selectionStart(), match.selectionEnd());
         }
     }
 }

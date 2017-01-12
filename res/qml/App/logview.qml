@@ -8,7 +8,7 @@ Rectangle {
 
     color: "#282C34";
 
-    property string tabTitle: "Log [" + App.logger.entries.length + "]";
+    property string tabTitle: App.logger.entries.length > 0 ? "Log <b>" + App.logger.entries.length + "</b>" : "Log"
 
     ListView {
         anchors.left: parent.left;
@@ -18,6 +18,7 @@ Rectangle {
 
         model: App.logger.entries;
         delegate: Lib.Label {
+            anchors.leftMargin: 4;
             anchors.left: parent.left;
             anchors.right: parent.right;
             text: modelData;

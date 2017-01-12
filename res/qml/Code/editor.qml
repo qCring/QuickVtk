@@ -4,12 +4,14 @@ import QtQuick.Controls 1.4
 import App 1.0 as App
 import Lib 1.0 as Lib
 
-Item {
+Rectangle {
     id: root;
 
     property var editor: App.editor;
 
     clip: true;
+
+    color: "#181A1F"
 
     function activate() {
         textEdit.forceActiveFocus();
@@ -53,7 +55,7 @@ Item {
             y: textEdit.cursorY;
             height: textEdit.cursorHeight;
 
-            color: "#2C303A"
+            color: "#21252B"
         }
 
         Repeater {
@@ -85,16 +87,6 @@ Item {
             property bool showCursor: true;
 
             font.pointSize: editor.fontSize;
-
-            Keys.onPressed: {
-                if (event.key == Qt.Key_Enter || event.key == Qt.Key_Return) {
-                    editor.format.onNewline();
-                } else if (event.key == Qt.Key_Backspace) {
-                    editor.format.onBackspace();
-                } else if (event.key == Qt.Key_Delete) {
-                    editor.format.onDelete();
-                }
-            }
 
             onActiveFocusChanged: {
                 if (activeFocus) {
@@ -140,18 +132,21 @@ Item {
                 repeat: true;
 
                 onTriggered: textEdit.showCursor = !textEdit.showCursor;
+
             }
         }
     }
 
-    Item {
+    Rectangle {
         id: lines;
 
         anchors.left: parent.left;
         anchors.top: parent.top;
         anchors.bottom: footer.top;
 
-        width: linesCol.width + lineBar.width;
+        color: "#181A1F"
+
+        width: linesCol.width + 4;
 
         Column {
             id: linesCol;
@@ -176,46 +171,13 @@ Item {
             }
         }
 
-        Item {
-            id: lineBar;
-
-            anchors.top: linesCol.top;
-            anchors.bottom: parent.bottom;
-            anchors.left: linesCol.right;
-
-            width: 14;
-
-            Column {
-                Repeater {
-                    model: editor.format.indents.length;
-                    delegate: Item {
-                        width: 14;
-                        height: textEdit.cursorHeight;
-
-                        Rectangle {
-                            anchors.fill: parent;
-                            color: "#9DA5B4"
-                            opacity: Math.round(modelData / 2)/20;
-                        }
-
-                        Lib.Label {
-                            anchors.centerIn: parent;
-                            font.pointSize: 8;
-                            color: "#fff";
-                            text: modelData
-                        }
-                    }
-                }
-            }
-        }
-
         Rectangle {
             anchors.top: parent.top;
             anchors.bottom: parent.bottom;
             anchors.right: parent.right;
 
             width: 1;
-            color: "#343842"
+            color: "#21252B"
         }
     }
 

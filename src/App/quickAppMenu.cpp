@@ -60,10 +60,6 @@ namespace quick {
             Editor::Controller::instance->run();
         }
 
-        void Menu::OnCodeFormat() {
-            Editor::Controller::instance->format();
-        }
-
         void Menu::OnViewIncreaseFontSize() {
             Editor::Controller::instance->increaseFontSize();
         }

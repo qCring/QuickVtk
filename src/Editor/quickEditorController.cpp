@@ -5,7 +5,7 @@
 #include "quickEditorSelection.hpp"
 #include "quickEditorErrors.hpp"
 #include "quickEditorSearch.hpp"
-#include "quickEditorFormat.hpp"
+#include "quickEditorUtil.hpp"
 
 #include <QTextOption>
 
@@ -18,7 +18,6 @@ namespace quick {
 
         auto Controller::Create() -> void {
             instance = new Controller();
-            instance->m_format = new Format();
         }
 
         auto Controller::setDocument(QQuickTextDocument* document) -> void {
@@ -31,6 +30,7 @@ namespace quick {
 
             this->m_highlighter = new Highlighter(textDocument);
 
+            Util::document = textDocument;
             Selection::instance->setDocument(textDocument);
             Search::instance->setDocument(textDocument);
 
@@ -91,10 +91,6 @@ namespace quick {
             return Selection::instance;
         }
 
-        auto Controller::getFormat() -> Format* {
-            return this->m_format;
-        }
-
         auto Controller::openFile(const QString& fileUrl) -> void {
             if (IO::FileExists(fileUrl)) {
                 Search::instance->invalidate();
@@ -119,10 +115,6 @@ namespace quick {
             }
         }
 
-        auto Controller::format() -> void {
-
-        }
-
         auto Controller::saveFileAs() -> void {
             auto newUrl = IO::FromDialog::SelectSaveFileUrl();
 
@@ -142,7 +134,6 @@ namespace quick {
             emit this->clear();
             this->setModified(false);
             this->setFileUrl("");
-            this->m_format->clear();
         }
 
         auto Controller::openFile() -> void {

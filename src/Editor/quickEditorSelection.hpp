@@ -41,7 +41,6 @@ namespace quick {
             auto setStartLine(int) -> void;
             auto setStartColumn(int) -> void;
             auto setEndColumn(int) -> void;
-            auto getCursor(int) -> QTextCursor;
         public:
             auto setDocument(QTextDocument*) -> void;
             auto setStartPosition(int) -> void;

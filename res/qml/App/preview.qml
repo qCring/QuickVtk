@@ -2,7 +2,7 @@ import QtQuick 2.6
 
 import Lib 1.0 as Lib
 
-Item {
+Rectangle {
     id: root;
 
     property string tabTitle: "Preview"
@@ -10,6 +10,8 @@ Item {
     property var previousObject: undefined;
 
     clip: true;
+
+    color: "#181A1F"
 
     Item {
         id: container;

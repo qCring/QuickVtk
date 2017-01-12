@@ -45,15 +45,6 @@ Rectangle {
         }
     }
 
-    Lib.Label {
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: fileNameRow.right;
-        anchors.leftMargin: 20;
-
-        text: (App.editor.selection.startLine + 1) + ":" + (App.editor.selection.startColumn + 1);
-        font.pointSize: 12;
-    }
-
     Row {
         id: dbgRow;
 

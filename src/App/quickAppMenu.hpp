@@ -28,7 +28,6 @@ namespace quick {
             void OnFindFind();
 
             void OnCodeRun();
-            void OnCodeFormat();
 
             void OnViewIncreaseFontSize();
             void OnViewDecreaseFontSize();

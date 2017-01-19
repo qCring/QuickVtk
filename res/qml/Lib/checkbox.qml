@@ -33,7 +33,7 @@ Item {
 
                 color: label.color;
                 visible: root.checked;
-                type: types.fa_check;
+                icon: icons.fa_check;
             }
         }
 

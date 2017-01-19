@@ -34,7 +34,7 @@ Rectangle {
                 anchors.bottom: parent.bottom;
 
                 Lib.Icon {
-                    type: types.fa_tag;
+                    icon: icons.fa_tag;
 
                     anchors.verticalCenter: parent.verticalCenter;
 

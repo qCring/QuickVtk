@@ -25,7 +25,7 @@ Column {
         Lib.Icon {
             anchors.verticalCenter: parent.verticalCenter;
 
-            type: types.fa_caret_down;
+            icon: icons.fa_caret_down;
             pointSize: 12;
         }
 

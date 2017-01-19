@@ -115,7 +115,7 @@ Rectangle {
 
                 label.text: "Find";
 
-                icon.type: icon.types.fa_search;
+                icon: icons.fa_search;
                 width: replaceButton.width;
 
                 onClicked: {
@@ -202,7 +202,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter;
 
                     label.text: "Replace";
-                    icon.type: icon.types.fa_refresh;
+                    icon: icons.fa_refresh;
 
                     onClicked: {
                         controller.replaceNext();
@@ -216,7 +216,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter;
 
                     label.text: "Replace All";
-                    icon.type: icon.types.fa_refresh;
+                    icon: icons.fa_refresh;
 
                     enabled: false;
 

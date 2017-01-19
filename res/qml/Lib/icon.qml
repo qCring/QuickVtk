@@ -1,13 +1,12 @@
 import QtQuick 2.6
 
-import "icons.js" as Icons
+import "fontawesome.js" as FA
 
-Text
-{
+Text {
     id: root;
 
-    property var types: Icons.Types;
-    property alias type: root.text;
+    property var icons: FA.Icons;
+    property alias icon: root.text;
     property alias pointSize: root.font.pointSize;
 
     font.family: "FontAwesome";
@@ -16,5 +15,4 @@ Text
     color: enabled ? "#9DA5B4" : "#6E7582"
     textFormat: Text.PlainText;
     verticalAlignment: Text.AlignVCenter;
-    text: type;
 }

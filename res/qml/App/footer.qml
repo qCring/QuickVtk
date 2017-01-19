@@ -31,7 +31,7 @@ Rectangle {
         Lib.Icon {
             anchors.verticalCenter: parent.verticalCenter;
 
-            type: types.fa_circle;
+            icon: icons.fa_circle;
             color: App.editor.modified ? "#ff8800" : "#00ff00";
             // visible: App.editor.document.fileName > 0 && App.editor.modified;
             pointSize: 6;
@@ -57,7 +57,7 @@ Rectangle {
 
         Lib.Icon {
             anchors.verticalCenter: parent.verticalCenter;
-            type: types.fa_bug;
+            icon: icons.fa_bug;
             visible: App.debugBuild;
         }
 

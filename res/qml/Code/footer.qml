@@ -29,8 +29,8 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             frameless: true;
-            icon.font.pointSize: 12;
-            icon.type: icon.types.fa_search_plus;
+            iconSize: 12;
+            icon: icons.fa_search_plus;
 
             onClicked: App.editor.increaseFontSize();
         }
@@ -39,8 +39,8 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             frameless: true;
-            icon.font.pointSize: 12;
-            icon.type: icon.types.fa_search_minus;
+            iconSize: 12;
+            icon: icons.fa_search_minus;
 
             onClicked: App.editor.decreaseFontSize();
         }

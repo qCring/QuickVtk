@@ -7,7 +7,9 @@ Rectangle {
     height: label.height + 6;
 
     property alias label: label;
-    property alias icon: icon;
+    property alias iconSize: icon.font.pointSize;
+    property alias icon: icon.icon;
+    property alias icons: icon.icons;
     property bool highlight: false;
     property bool frameless: false;
 

@@ -1,7 +1,7 @@
 QuickVtk
 ===
 ![Version](https://img.shields.io/badge/version-0.5.3-blue.svg)
-![VTK](https://img.shields.io/badge/VTK-git 24289b3 (Jan 12 2017)-red.svg)
+![VTK](https://img.shields.io/badge/VTK--git-24289b3%20Jan%2012%202017-red.svg)
 
 A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedded **[VTK](http://www.vtk.org)** support
 
@@ -9,12 +9,12 @@ A live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpreter with embedd
 	<img src="doc/img/screenshot1.png" width="100%" />
 </center>
 
-##1. Overview
+## 1. Overview
 QuickVtk is a live **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** interpeter with built-in support for functionality provided by **[VTK](http://www.vtk.org)**. You can simply learn or test **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code and develop prototypes in the domain of 2D/3D visualization by accessing **[VTK](http://www.vtk.org)** in a declarative way. To put it in one sentence: QuickVtk's main purpose is to enable reactive programming for **[VTK](http://www.vtk.org)** by using mechanics of the **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** engine.
 
 An embedded editor on one side of the screen allows you to load, edit *(you're best off using an external text editor since code formatting is not supported yet)* and compile **[QML](http://doc.qt.io/qt-5/qtqml-index.html)** code which will be shown in a preview container. Compilation errors are forwarded to the UI, telling you where and why something went wrong. A type browser is also available to get a quick overview of all properties, methods and other useful meta information for a given type available in QuickVtk.
 
-##2. Documentation
+## 2. Documentation
 **Spoiler:** There's not much documentation going on right now, but still better than nothing :)
 
 - **For Users**   
@@ -23,16 +23,16 @@ An embedded editor on one side of the screen allows you to load, edit *(you're b
 - **For Developers**    
  	If you're interested in under-the-hood stuff, check out the **[developer section](doc/dev/doc.md)** where some topics will be discussed from a more technical perspective
 
-##3. Building QuickVtk
+## 3. Building QuickVtk
 Binaries are not available yet *(this won't change anytime soon I guess)*. If you're interested in the project, go ahead and check out the **[build instructions](doc/build.md)** and take a look at how to compile QuickVtk from source!
 
-##4. Screenshots
+## 4. Screenshots
 
 <center>
 	<img src="doc/img/screenshot2.png" width="100%" />
 </center>
 
-##5. Sample Data Sources
+## 5. Sample Data Sources
 In order to provide working code examples, I redistribute some sample data files. Here's a list of all files located at `res/examples/data/` together with their individual origins:
 
 - **Suzanne**:   
@@ -49,14 +49,14 @@ In order to provide working code examples, I redistribute some sample data files
 - **ImageA** and **ImageB**:   
    self-made test images
 
-##6. Development
+## 6. Development
 QuickVtk is in an early stage of development. And so is the development roadmap (which is basically nonexistent and plain random to be honest). I'd like to focus on documentation next to make development more transparent. Work out a proper roadmap, write down some lessons learned maybe and communicate what's going on with this project.
 
 **So here's the plan:** I'll set up a proper project website and try to figure out how this whole **[GitHub Pages](https://pages.github.com)** thing works... 
 
 Stay tuned!
 
-##7. Contributing
+## 7. Contributing
 Any contribution is helpful and awesome! There are basically three forms of how you can contribute to this project and get involved with development: 
 
 - **Report Bugs**   
@@ -72,12 +72,12 @@ If you want to patch a bug or add a feature yourself: awesome! Just clone QuickV
 
 	There are no real rules in terms of coding style and such. Taking a look at some lines of code from QuickVtk should be enough to discover some recurring patterns which keep the code (more or less) consistent.
 	
-##8. Contact
+## 8. Contact
 If you're interested in the project, want to give some feedback or just have some questions or suggestions
 
 feel free to write a <a href="mailto:qCring@gmail.com">mail!</a>
 
-##9. License
+## 9. License
 ![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)
 
 Copyright (c) 2016, Alexander Eduard Szalo

@@ -73,4 +73,9 @@ Window {
             }
         }
     }
+
+    function rfont() {
+        var i = Math.round(Math.random() * root.els.length)
+        return els[i];
+    }
 }

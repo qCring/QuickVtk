@@ -37,7 +37,7 @@ Row {
     Lib.Icon {
         anchors.verticalCenter: parent.verticalCenter;
 
-        type: types.fa_long_arrow_right;
+        icon: icons.fa_long_arrow_right;
         color: "#fff"
     }
 

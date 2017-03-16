@@ -54,7 +54,7 @@ Rectangle {
             Lib.Button {
                 anchors.right: parent.right;
                 anchors.rightMargin: 4;
-                icon.type: icon.types.fa_trash_o;
+                icon: icons.fa_trash_o;
                 label.text: "Clear"
 
                 onClicked: App.logger.clear();

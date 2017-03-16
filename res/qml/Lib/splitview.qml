@@ -145,7 +145,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter;
             anchors.right: parent.right;
             anchors.rightMargin: 4;
-            type: types.fa_chevron_right;
+            icon: icons.fa_chevron_right;
             pointSize: 16;
             color: Qt.lighter(root.handleBorder);
         }
@@ -181,7 +181,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter;
             anchors.left: parent.left;
             anchors.leftMargin: 4;
-            type: types.fa_chevron_left;
+            icon: icons.fa_chevron_left;
             pointSize: 16;
             color: Qt.lighter(root.handleBorder);
         }

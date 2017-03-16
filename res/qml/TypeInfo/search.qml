@@ -15,7 +15,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter;
         anchors.leftMargin: 4;
 
-        type: types.fa_search;
+        icon: icons.fa_search;
         color: input.activeFocus ? "#fff" : "#6E7582"
     }
 

@@ -35,7 +35,7 @@ Rectangle {
         Lib.Icon {
             anchors.centerIn: parent;
 
-            type: types.fa_navicon;
+            icon: icons.fa_navicon;
             color: ma.containsMouse ? "#fff" : "#9DA5B4";
         }
 

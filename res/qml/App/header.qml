@@ -32,7 +32,7 @@ Rectangle {
 
             frameless: true;
             label.text: "Open";
-            icon.type: icon.types.fa_folder_open;
+            icon: icons.fa_folder_open;
 
             onClicked: App.editor.openFile();
         }
@@ -42,7 +42,7 @@ Rectangle {
 
             frameless: true;
             label.text: "Run";
-            icon.type: icon.types.fa_play_circle;
+            icon: icons.fa_play_circle;
 
             onClicked: {
                 App.editor.run();
@@ -65,7 +65,7 @@ Rectangle {
         Lib.Button {
             anchors.verticalCenter: parent.verticalCenter;
 
-            icon.type: icon.types.fa_expand;
+            icon: icons.fa_expand;
             onClicked: App.expanded = true;
 
             color: "#00000000"

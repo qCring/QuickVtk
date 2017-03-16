@@ -50,7 +50,7 @@ default property alias content: contentColumn.children;
 
                 anchors.left: parent.left;
                 anchors.verticalCenter: parent.verticalCenter;
-                type: root.expanded ? types.fa_caret_down : types.fa_caret_up;
+                icon: root.expanded ? icons.fa_caret_down : icons.fa_caret_up;
                 color: ma.containsMouse ? "#fff" : "#9DA5B4";
             }
 

@@ -19,6 +19,7 @@ Download and launch the installer from the [**Qt download section**](https://www
 <center>
 	<img src="img/cmake2.png"/>
 </center>
+
 You can specify a git tag to build a certain version of [**VTK**](http://www.vtk.org). Configure, generate and build the project.
 
 Alternatively, you can build [**VTK**](http://www.vtk.org) manually or use already built binaries from your system if available. Just make sure to use  **OpenGL2** for the **VTK\_RENDERING\_BACKEND** option and enable **Module\_vtkRenderingExternal**. 

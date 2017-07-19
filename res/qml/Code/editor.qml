@@ -7,7 +7,7 @@ import Lib 1.0 as Lib
 Rectangle {
     id: root;
 
-    property var editor: App.editor;
+    property var editor: Controllers.editor;
 
     clip: true;
 
@@ -59,7 +59,7 @@ Rectangle {
         }
 
         Repeater {
-            model: App.editor.errors;
+            model: Controllers.editor.errors;
 
             delegate: Error {
                 anchors.left: parent.left;
@@ -127,7 +127,7 @@ Rectangle {
             Timer {
                 id: cursorTimer;
 
-                interval: App.settings.cursorFlashTime;
+                interval: Controllers.settings.cursorFlashTime;
                 running: true;
                 repeat: true;
 
@@ -209,7 +209,7 @@ Rectangle {
     }
 
     Connections {
-        target: App.editor;
+        target: editor;
         onClear: textEdit.clear();
     }
 
@@ -217,7 +217,6 @@ Rectangle {
         target: editor;
         onSelect: textEdit.select(start, end);
     }
-
 
     Component.onCompleted: {
         editor.document = textEdit.textDocument;

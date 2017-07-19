@@ -30,7 +30,7 @@ Rectangle {
         radius: 4;
         opacity: ma.containsMouse ? 1 : 0.3;
 
-        visible: App.expanded;
+        visible: Controllers.expanded;
 
         Lib.Icon {
             anchors.centerIn: parent;
@@ -43,16 +43,16 @@ Rectangle {
             id: ma;
             anchors.fill: parent;
             hoverEnabled: true;
-            onClicked: App.expanded = false;
+            onClicked: Controllers.expanded = false;
         }
     }
 
     function compile() {
         var qmlObject = undefined;
-        App.editor.errors.clear();
+        Controllers.editor.errors.clear();
 
         try {
-            qmlObject = Qt.createQmlObject(App.editor.getText(), container, "root");
+            qmlObject = Qt.createQmlObject(Controllers.editor.getText(), container, "root");
 
             if (previousObject) {
                 previousObject.destroy();
@@ -66,15 +66,15 @@ Rectangle {
             for (var i = 0; i < errors.length; i++) {
                 var error = errors[i];
 
-                App.editor.errors.add(error.lineNumber, error.columnNumber, error.message);
+                Controllers.editor.errors.add(error.lineNumber, error.columnNumber, error.message);
             }
 
-            App.editor.errors.update();
+            Controllers.editor.errors.update();
         }
     }
 
     Connections {
-		target: App.editor;
+		target: Controllers.editor;
 		onCompile: root.compile();
 	}
 }

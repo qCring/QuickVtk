@@ -28,14 +28,14 @@ Item {
         anchors.bottom: parent.bottom;
         anchors.margins: 4;
 
-        from: App.typeList;
+        from: Controllers.typeList;
         bind: "filter";
 
         immediate: true;
         radius: 2;
 
         onActiveFocusChanged: {
-            App.typeList.visible = activeFocus;
+            Controllers.typeList.visible = activeFocus;
         }
     }
 
@@ -43,7 +43,7 @@ Item {
         anchors.right: input.right;
         anchors.rightMargin: 4;
         anchors.verticalCenter: parent.verticalCenter;
-        text: App.typeList.count + "/" + App.typeList.totalCount;
+        text: Controllers.typeList.count + "/" + Controllers.typeList.totalCount;
         font.pointSize: 11;
         font.bold: true;
         visible: input.activeFocus;

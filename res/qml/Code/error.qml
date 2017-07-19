@@ -19,13 +19,13 @@ Rectangle {
         color: "#ff0000"
     }
 
-    Lib.TagLabel {        
+    Lib.TagLabel {
         anchors.right: parent.right;
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
 
         label.text: error.message;
-        label.font.pointSize: App.editor.fontSize - 2;
+        label.font.pointSize: Controllers.editor.fontSize - 2;
         label.leftPadding: 4;
         label.rightPadding: 4;
 

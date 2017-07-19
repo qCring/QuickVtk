@@ -58,7 +58,7 @@ namespace quick {
             auto engine = new QQmlApplicationEngine ();
 
             auto context = engine->rootContext();
-            context->setContextProperty("App", Controller::instance);
+            context->setContextProperty("Controllers", Controller::instance);
             context->setContextProperty("SampleData", SampleData::Controller::Create());
 
             engine->addImportPath(resourceDir + "qml");

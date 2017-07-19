@@ -62,20 +62,5 @@ Window {
         anchors.bottom: parent.bottom;
     }
 
-    Connections {
-        target: App.editor;
-
-        onExpandedChanged: {
-            if (App.editor.expanded) {
-                splitView.expandLeft(width/2);
-            } else {
-                splitView.collapseLeft();
-            }
-        }
-    }
-
-    function rfont() {
-        var i = Math.round(Math.random() * root.els.length)
-        return els[i];
-    }
+    
 }

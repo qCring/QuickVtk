@@ -8,7 +8,7 @@ Rectangle {
 
     color: "#282C34";
 
-    property string tabTitle: App.logger.entries.length > 0 ? "Log <b>" + App.logger.entries.length + "</b>" : "Log"
+    property string tabTitle: Controllers.logger.entries.length > 0 ? "Log <b>" + Controllers.logger.entries.length + "</b>" : "Log"
 
     ListView {
         anchors.left: parent.left;
@@ -16,7 +16,7 @@ Rectangle {
         anchors.top: parent.top;
         anchors.bottom: footer.top;
 
-        model: App.logger.entries;
+        model: Controllers.logger.entries;
         delegate: Lib.Label {
             anchors.leftMargin: 4;
             anchors.left: parent.left;
@@ -57,7 +57,7 @@ Rectangle {
                 icon: icons.fa_trash_o;
                 label.text: "Clear"
 
-                onClicked: App.logger.clear();
+                onClicked: Controllers.logger.clear();
             }
         }
     }

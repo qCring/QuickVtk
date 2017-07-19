@@ -2,7 +2,7 @@ import QtQuick 2.6
 import QtQuick.Controls 1.4
 
 MenuBar {
-    property var controller: App.menu;
+    property var controller: Controllers.menu;
 
     Menu {
         title: "File"
@@ -84,7 +84,7 @@ MenuBar {
         MenuSeparator {}
 
         MenuItem {
-            text: App.editor.expanded ? "Hide Code Editor" : "Show Code Editor"
+            text: controller.expanded ? "Hide Code Editor" : "Show Code Editor"
             shortcut: "Ctrl+1"
             onTriggered: controller.OnViewToggleEditor();
         }

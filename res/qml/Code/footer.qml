@@ -15,7 +15,7 @@ Rectangle {
         anchors.left: parent.left;
         anchors.leftMargin: 4;
 
-        text: (App.editor.selection.startLine + 1) + ":" + (App.editor.selection.startColumn + 1);
+        text: (Controllers.editor.selection.startLine + 1) + ":" + (Controllers.editor.selection.startColumn + 1);
         font.pointSize: 12;
     }
 
@@ -32,7 +32,7 @@ Rectangle {
             iconSize: 12;
             icon: icons.fa_search_plus;
 
-            onClicked: App.editor.increaseFontSize();
+            onClicked: Controllers.editor.increaseFontSize();
         }
 
         Lib.Button {
@@ -42,7 +42,7 @@ Rectangle {
             iconSize: 12;
             icon: icons.fa_search_minus;
 
-            onClicked: App.editor.decreaseFontSize();
+            onClicked: Controllers.editor.decreaseFontSize();
         }
     }
 

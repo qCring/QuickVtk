@@ -7,12 +7,12 @@ Rectangle {
     id: root;
 
     property var refocus;
-    property var controller: App.editor.search;
+    property var controller: Controllers.editor.search;
 
     height: column.height;
     color: "#21252B"
 
-    visible: App.editor.search.visible;
+    visible: controller.visible;
 
     onVisibleChanged: {
         if (visible) {

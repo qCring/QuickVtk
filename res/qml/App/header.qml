@@ -5,7 +5,7 @@ import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
     height: visible ? 32 : 0;
-    visible: !App.expanded;
+    visible: !Controllers.expanded;
 
     color: "#21252B"
 
@@ -34,7 +34,7 @@ Rectangle {
             label.text: "Open";
             icon: icons.fa_folder_open;
 
-            onClicked: App.editor.openFile();
+            onClicked: Controllers.editor.openFile();
         }
 
         Lib.Button {
@@ -45,7 +45,7 @@ Rectangle {
             icon: icons.fa_play_circle;
 
             onClicked: {
-                App.editor.run();
+                Controllers.editor.run();
             }
         }
     }
@@ -66,7 +66,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             icon: icons.fa_expand;
-            onClicked: App.expanded = true;
+            onClicked: Controllers.expanded = true;
 
             color: "#00000000"
             border.color: "#00000000"

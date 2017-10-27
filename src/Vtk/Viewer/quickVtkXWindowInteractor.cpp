@@ -30,7 +30,6 @@ namespace quick {
             ren->Start();
             size = ren->GetSize();
             ren->GetPosition();
-            this->WindowId = 0;
             this->Enable();
             this->Size[0] = size[0];
             this->Size[1] = size[1];

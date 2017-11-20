@@ -1,18 +1,18 @@
-#include "quickVtkXWindowInteractor.hpp"
+#include "quickVtkGenericInteractor.hpp"
 
 #ifdef __linux__
 
-#include <vtkXOpenGLRenderWindow.h>
+#include <vtkRenderWindow.h>
 #include <vtkObjectFactory.h>
 
 namespace quick {
     
     namespace Vtk {
         
-        vtkStandardNewMacro(XWindowInteractor);
+        vtkStandardNewMacro(GenericInteractor);
         
-        void XWindowInteractor::Initialize() {
-            vtkXOpenGLRenderWindow* ren;
+        void GenericInteractor::Initialize() {
+            vtkRenderWindow* ren;
             int *size;
             
             if (!this->RenderWindow) {
@@ -26,7 +26,7 @@ namespace quick {
             
             this->Initialized = 1;
             
-            ren = (vtkXOpenGLRenderWindow*)(this->RenderWindow);
+            ren = (vtkRenderWindow*)(this->RenderWindow);
             ren->Start();
             size = ren->GetSize();
             ren->GetPosition();

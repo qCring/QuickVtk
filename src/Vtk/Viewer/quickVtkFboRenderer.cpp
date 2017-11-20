@@ -27,7 +27,7 @@ namespace quick {
 #endif
             
 #ifdef __linux__
-            m_interactor = vtkSmartPointer<quick::Vtk::XWindowInteractor>::New();
+            m_interactor = vtkSmartPointer<quick::Vtk::GenericInteractor>::New();
 #endif
             
 #ifdef _MSC_VER

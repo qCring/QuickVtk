@@ -6,6 +6,10 @@
 #include "quickVtkWin32Interactor.hpp"
 #endif
 
+#ifdef __linux__
+#include "quickVtkXWindowInteractor.hpp"
+#endif
+
 #include <vtkRendererCollection.h>
 #include <vtkCamera.h>
 #include <vtkCommand.h>
@@ -18,21 +22,23 @@ namespace quick {
             m_fboOffscreenWindow->Register(NULL);
             m_fboOffscreenWindow->QtParentRenderer = this;
 
-#ifndef _MSC_VER
+#ifdef __APPLE__
             m_interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
-            m_interactorStyle = vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
-
-            m_interactor->SetRenderWindow(offscreenWindow);
-            m_interactor->Initialize();
-            m_interactor->SetInteractorStyle(m_interactorStyle);
-#else
+#endif
+            
+#ifdef __linux__
+            m_interactor = vtkSmartPointer<quick::Vtk::GenericInteractor>::New();
+#endif
+            
+#ifdef _MSC_VER
             m_interactor = vtkSmartPointer<quick::Vtk::Win32Interactor>::New();
+#endif
+            
             m_interactorStyle = vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
-
+            
             m_interactor->SetRenderWindow(offscreenWindow);
             m_interactor->Initialize();
             m_interactor->SetInteractorStyle(m_interactorStyle);
-#endif        
         }
 
         auto FboRenderer::synchronize(QQuickFramebufferObject* fbo) -> void {

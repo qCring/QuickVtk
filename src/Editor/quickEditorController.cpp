@@ -70,7 +70,7 @@ namespace quick {
             return this->m_expanded;
         }
 
-        auto Controller::toggleExpanded() -> void {
+        void Controller::toggleExpanded() {
             this->m_expanded = !this->m_expanded;
             emit this->expandedChanged();
         }
@@ -103,11 +103,11 @@ namespace quick {
             }
         }
 
-        auto Controller::run() -> void {
+        void Controller::run() {
             emit this->compile();
         }
 
-        auto Controller::saveFile() -> void {
+        void Controller::saveFile() {
             if (this->m_fileUrl.length() < 1 || !IO::FileExists(this->m_fileUrl)) {
                 this->saveFileAs();
             } else {
@@ -115,7 +115,7 @@ namespace quick {
             }
         }
 
-        auto Controller::saveFileAs() -> void {
+        void Controller::saveFileAs() {
             auto newUrl = IO::FromDialog::SelectSaveFileUrl();
 
             if (newUrl.isNull() || newUrl.isEmpty()) {
@@ -128,7 +128,7 @@ namespace quick {
             }
         }
 
-        auto Controller::newFile() -> void {
+        void Controller::newFile() {
             Search::instance->invalidate();
             Errors::instance->clear();
             emit this->clear();
@@ -136,27 +136,27 @@ namespace quick {
             this->setFileUrl("");
         }
 
-        auto Controller::openFile() -> void {
+        void Controller::openFile() {
             this->openFile(IO::FromDialog::SelectOpenFileUrl("*.qml"));
         }
 
-        auto Controller::showSearch() -> void {
+        void Controller::showSearch() {
             Search::instance->setVisible(true);
         }
 
-        auto Controller::resetFontSize() -> void {
+        void Controller::resetFontSize() {
             this->m_fontSize = 11;
             emit this->fontSizeChanged();
         }
 
-        auto Controller::increaseFontSize() -> void {
+        void Controller::increaseFontSize() {
             if (this->m_fontSize < this->m_fontSizeMax) {
                 this->m_fontSize += 2;
                 emit this->fontSizeChanged();
             }
         }
 
-        auto Controller::decreaseFontSize() -> void {
+        void Controller::decreaseFontSize() {
             if (this->m_fontSize > this->m_fontSizeMin) {
                 this->m_fontSize -= 2;
                 emit this->fontSizeChanged();

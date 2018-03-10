@@ -46,6 +46,15 @@ namespace quick {
             auto setFileName(const QString&) -> void;
         public slots:
             void setModified(bool);
+            void run();
+            void newFile();
+            void openFile();
+            void saveFile();
+            void saveFileAs();
+            void showSearch();
+            void resetFontSize();
+            void increaseFontSize();
+            void decreaseFontSize();
             QString getText();
         public:
             auto setDocument(QQuickTextDocument*) -> void;
@@ -58,16 +67,7 @@ namespace quick {
             auto getFileUrl() -> QString;
             auto getFileName() -> QString;
             auto getModified() -> bool;
-            auto run() -> void;
-            auto newFile() -> void;
-            auto openFile() -> void;
-            auto saveFile() -> void;
-            auto saveFileAs() -> void;
-            auto showSearch() -> void;
-            auto resetFontSize() -> void;
             auto toggleExpanded() -> void;
-            auto increaseFontSize() -> void;
-            auto decreaseFontSize() -> void;
             auto getFontSize() -> int;
             ~Controller();
         signals:

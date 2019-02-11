@@ -66,6 +66,9 @@ endif()
 # ******************************************************************************
 set(QUICKVTK_QT_VERSION "5.10.1" CACHE STRING "Qt Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
+if(UNIX AND NOT APPLE)
+    set(QUICKVTK_QT_MODULES ${QUICKVTK_QT_MODULES} X11Extras)
+endif()
 set(QUICKVTK_INTERNAL_LIBRARY_TARGETS)
 
 find_package(Qt5 ${QUICKVTK_QT_VERSION} EXACT CONFIG REQUIRED ${QUICKVTK_QT_MODULES})
@@ -173,4 +176,9 @@ endif()
 
 # link
 # ******************************************************************************
-target_link_libraries(${PROJECT_NAME} PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
+set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
+if(UNIX AND NOT APPLE)
+    set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)
+endif()
+
+target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES})

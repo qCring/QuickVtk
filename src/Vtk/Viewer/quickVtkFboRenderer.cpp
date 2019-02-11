@@ -7,7 +7,7 @@
 #endif
 
 #ifdef __linux__
-#include "quickVtkXWindowInteractor.hpp"
+#include "quickVtkGenericInteractor.hpp"
 #endif
 
 #include <vtkRendererCollection.h>

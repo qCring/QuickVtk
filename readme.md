@@ -1,14 +1,29 @@
 QuickVtk
 ===
-![Version](https://img.shields.io/badge/version-0.5.4-blue.svg)
-![VTK](https://img.shields.io/badge/VTK-8.1.0-red.svg)
-![Qt](https://img.shields.io/badge/Qt-5.10.1-green.svg)
+![Version](https://img.shields.io/badge/version-0.5.5-blue.svg)
+![VTK](https://img.shields.io/badge/VTK-8.2.0-red.svg)
+![Qt](https://img.shields.io/badge/Qt-5.12.1-green.svg)
 
 A live [**QML**](http://doc.qt.io/qt-5/qtqml-index.html) interpreter with embedded [**VTK**](http://www.vtk.org) support
 
 <center>
 	<img src="doc/img/screenshot1.png" width="100%" />
 </center>
+
+## 0. Pseudo-news
+- First off, thanks to [haampie](https://github.com/haampie) for contributing ([#33](https://github.com/qCring/QuickVtk/pull/33) and [#34](https://github.com/qCring/QuickVtk/pull/34)) ✌️
+- I planned to start working on QuickVtk again since the last years were pretty busy and I didn't have much time left for that. For now I've updated the dependencies for Qt (now 5.12.1) and VTK (now 8.2.0). Next up on the roadmap: things like fixing the buggy code editor ([#32](https://github.com/qCring/QuickVtk/issues/32)) and providing a library version of the VTK/Qml integration ([#29](https://github.com/qCring/QuickVtk/issues/29))
+- Also, the build documentation needs to be updated. git-lfs must now be installed on the system in order to build VTK  
+- **And finally, Apple strikes again:** `[default] Unable to load Info.plist exceptions (eGPUOverrides)`  
+Which means QuickVtk is broken on macOS 10.14 and I'm stalled... Seems to be an OS issue and there's not much you can do. Nicely done, 🍏...   
+   
+   Ironically, the error looks like a bluescreen. So I took the opportunity:
+   
+   <center>
+	<img src="doc/img/macOS-egpu.png" width="100%" />
+</center>   
+   
+ Google results showed that there's no known fix or workaround yet...
 
 ## 1. Overview
 QuickVtk is a live [**QML**](http://doc.qt.io/qt-5/qtqml-index.html) interpeter with built-in support for functionality provided by [**VTK**](http://www.vtk.org). You can simply learn or test [**QML**](http://doc.qt.io/qt-5/qtqml-index.html) code and develop prototypes in the domain of 2D/3D visualization by accessing [**VTK**](http://www.vtk.org) in a declarative way. To put it in one sentence: QuickVtk's main purpose is to enable reactive programming for [**VTK**](http://www.vtk.org) by using mechanics of the [**QML**](http://doc.qt.io/qt-5/qtqml-index.html) engine.
@@ -72,7 +87,7 @@ If you want to patch a bug or add a feature yourself: awesome! Just clone QuickV
 	- **feature/**\<some_feature\>
 
 	There are no real rules in terms of coding style and such. Taking a look at some lines of code from QuickVtk should be enough to discover some recurring patterns which keep the code (more or less) consistent.
-	
+
 ## 8. Contact
 If you're interested in the project, want to give some feedback or just have some questions or suggestions
 
@@ -81,7 +96,7 @@ feel free to write a <a href="mailto:qCring@gmail.com">**mail!**</a>
 ## 9. License
 ![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)
 
-Copyright (c) 2016, Alexander Eduard Szalo
+Copyright (c) 2016-2019, Alexander Eduard Szalo
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:

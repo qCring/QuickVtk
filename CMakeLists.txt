@@ -45,7 +45,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # ******************************************************************************
 set(QUICKVTK_VERSION_MAJOR 0)
 set(QUICKVTK_VERSION_MINOR 5)
-set(QUICKVTK_VERSION_PATCH 4)
+set(QUICKVTK_VERSION_PATCH 5)
 set(QUICKVTK_ORG_NAME quickvtk)
 set(QUICKVTK_ORG_DOMAIN org)
 
@@ -64,7 +64,7 @@ endif()
 
 # libraries
 # ******************************************************************************
-set(QUICKVTK_QT_VERSION "5.10.1" CACHE STRING "Qt Version")
+set(QUICKVTK_QT_VERSION "5.12.1" CACHE STRING "Qt Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 if(UNIX AND NOT APPLE)
     set(QUICKVTK_QT_MODULES ${QUICKVTK_QT_MODULES} X11Extras)

@@ -18,12 +18,12 @@ project(${PROJECT_NAME})
 
 # project directories
 # ******************************************************************************
-set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/install)
+#set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/install)
 set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(PROJECT_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
-set(BUILD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build)
+set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 
 message(STATUS "  Project directories:")
 message(STATUS "   - project source dir: " ${SOURCE_DIR})

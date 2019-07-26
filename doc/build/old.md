@@ -17,7 +17,7 @@ Download and launch the installer from the [**Qt download section**](https://www
 - **bin**: QuickVtk/libs/bin
 
 <center>
-	<img src="img/cmake2.png"/>
+	<img src="./../img/cmake2.png"/>
 </center>
 
 You can specify a git tag to build a certain version of [**VTK**](http://www.vtk.org). Configure, generate and build the project.
@@ -31,7 +31,7 @@ After successfully installing [**Qt**](http://www.qt.io) and building [**VTK**](
 - **bin**: QuickVtk/bin
 
 <center>
-	<img src="img/cmake1.png"/>
+	<img src="./../img/cmake1.png"/>
 </center>
 
 Specify the version and path attributes for [**Qt**](http://www.qt.io) and [**VTK**](http://www.vtk.org) and finally configure, generate and build the project. Tested project generators are:
@@ -44,7 +44,7 @@ Specify the version and path attributes for [**Qt**](http://www.qt.io) and [**VT
 Make sure to set the environment in the IDE. Add the paths for [**Qt**](http://www.qt.io) and [**VTK**](http://www.vtk.org) to the *Environment* field found in the project properties view under *Debugging*:
 
 <center>
-	<img src="img/vs1.png"/>
+	<img src="./../img/vs1.png"/>
 </center>
 
 Copy-Paste-Helpers:

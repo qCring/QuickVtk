@@ -1,5 +1,5 @@
 #include "quickSampleDataImages.hpp"
-#include "quickAppInstance.hpp"
+#include <QGuiApplication>
 
 namespace quick {
 
@@ -18,7 +18,13 @@ namespace quick {
         }
 
         auto Images::makeDataPath(const QString& file) -> QString {
-            return App::Instance::GetResourceDir() + "examples/data/images/" + file;
+            auto path = QDir(QGuiApplication::applicationDirPath());
+
+            #ifdef __APPLE__
+            path.cdUp();
+            #endif
+            QString resourceDir = path.absolutePath() + "/Resources/";
+            return resourceDir + "examples/data/images/" + file;
         }
 
         auto Images::getLenaPNG() -> QString {

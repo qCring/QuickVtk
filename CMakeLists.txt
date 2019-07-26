@@ -7,16 +7,23 @@ include(Functions)
 
 set(PROJECT_NAME "QuickVtk")
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(CMAKE_DEBUG_POSTFIX "d")
+
 project(${PROJECT_NAME})
 
 # project directories
 # ******************************************************************************
-set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/install)
+#set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/install)
 set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(PROJECT_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
-set(BUILD_DIR ${CMAKE_CURRENT_SOURCE_DIR}/build)
+set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 
 message(STATUS "  Project directories:")
 message(STATUS "   - project source dir: " ${SOURCE_DIR})
@@ -64,7 +71,7 @@ endif()
 
 # libraries
 # ******************************************************************************
-set(QUICKVTK_QT_VERSION "5.12.1" CACHE STRING "Qt Version")
+set(QUICKVTK_QT_VERSION "5.13.0" CACHE STRING "Qt Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 if(UNIX AND NOT APPLE)
     set(QUICKVTK_QT_MODULES ${QUICKVTK_QT_MODULES} X11Extras)
@@ -85,35 +92,55 @@ include(${VTK_USE_FILE})
 
 # sources
 # ******************************************************************************
-AddSources("${SOURCE_DIR}/Utils" "Utils" list_app_src)
-AddSources("${SOURCE_DIR}/SampleData" "SampleData" list_app_src)
-AddSources("${SOURCE_DIR}/Math" "Math" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk" "Vtk" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Widget" "Vtk\\Widget" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Viewer" "Vtk\\Viewer" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/ImplicitFunction" "Vtk\\ImplicitFunction" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Prop" "Vtk\\Prop" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Prop/Actor2D" "Vtk\\Prop\\Actor2D" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Prop/Prop3D" "Vtk\\Prop\\Prop3D" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Prop/Prop3D/Volume" "Vtk\\Prop\\Prop3D\\Volume" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Mapper" "Vtk\\Mapper" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Mapper/Mapper2D" "Vtk\\Mapper\\Mapper2D" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D" "Vtk\\Mapper\\AbstractMapper3D" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D/Mapper" "Vtk\\Mapper\\AbstractMapper3D\\Mapper" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper" "Vtk\\Mapper\\AbstractMapper3D\\AbstractVolumeMapper" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper/VolumeMapper" "Vtk\\Mapper\\AbstractMapper3D\\AbstractVolumeMapper\\VolumeMapper" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm" "Vtk\\Algorithm" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/DataSetAlgorithm" "Vtk\\Algorithm\\DataSetAlgorithm" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/DataReader" "Vtk\\Algorithm\\DataReader" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm/ThreadedImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm\\ThreadedImageAlgorithm" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/ImageAlgorithm/ImageReader2" "Vtk\\Algorithm\\ImageAlgorithm\\ImageReader2" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_app_src)
-AddSources("${SOURCE_DIR}/Vtk/Algorithm/PointSetAlgorithm" "Vtk\\Algorithm\\PointSetAlgorithm" list_app_src)
-AddSources("${SOURCE_DIR}/TypeInfo" "TypeInfo" list_app_src)
-AddSources("${SOURCE_DIR}/Editor" "Editor" list_app_src)
 AddSources("${SOURCE_DIR}/App" "App" list_app_src)
+AddSources("${SOURCE_DIR}/Editor" "Editor" list_app_src)
+
+AddSources2("${SOURCE_DIR}/Lib/Math" "Math" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/SampleData" "SampleData" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/TypeInfo" "TypeInfo" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Utils" "Utils" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk" "Vtk" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Widget" "Vtk\\Widget" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Viewer" "Vtk\\Viewer" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/ImplicitFunction" "Vtk\\ImplicitFunction" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Prop" "Vtk\\Prop" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Prop/Actor2D" "Vtk\\Prop\\Actor2D" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Prop/Prop3D" "Vtk\\Prop\\Prop3D" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Prop/Prop3D/Volume" "Vtk\\Prop\\Prop3D\\Volume" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Mapper" "Vtk\\Mapper" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Mapper/Mapper2D" "Vtk\\Mapper\\Mapper2D" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D" "Vtk\\Mapper\\AbstractMapper3D" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D/Mapper" "Vtk\\Mapper\\AbstractMapper3D\\Mapper" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper" "Vtk\\Mapper\\AbstractMapper3D\\AbstractVolumeMapper" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper/VolumeMapper" "Vtk\\Mapper\\AbstractMapper3D\\AbstractVolumeMapper\\VolumeMapper" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm" "Vtk\\Algorithm" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/DataSetAlgorithm" "Vtk\\Algorithm\\DataSetAlgorithm" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/DataReader" "Vtk\\Algorithm\\DataReader" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/ImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/ImageAlgorithm/ThreadedImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm\\ThreadedImageAlgorithm" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/ImageAlgorithm/ImageReader2" "Vtk\\Algorithm\\ImageAlgorithm\\ImageReader2" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_lib_src list_lib_hdr)
+AddSources2("${SOURCE_DIR}/Lib/Vtk/Algorithm/PointSetAlgorithm" "Vtk\\Algorithm\\PointSetAlgorithm" list_lib_src list_lib_hdr)
+
+
+#configure directories
+set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/Lib")
+
+#setup library
+# ******************************************************************************
+set (LIB_NAME "${PROJECT_NAME}Lib")
+add_library (${LIB_NAME} SHARED ${list_lib_src} ${list_lib_hdr})
+set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "${list_lib_hdr}")
+
+set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
+if(UNIX AND NOT APPLE)
+    set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)
+endif()
+
+# link
+target_link_libraries(${LIB_NAME} ${LINK_LIBRARIES})
+
 
 # setup target
 # ******************************************************************************
@@ -176,9 +203,34 @@ endif()
 
 # link
 # ******************************************************************************
-set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
-if(UNIX AND NOT APPLE)
-    set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)
-endif()
+#set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
+#if(UNIX AND NOT APPLE)
+#    set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)
+#endif()
 
-target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES} ${LIB_NAME})
+target_include_directories(${PROJECT_NAME} PRIVATE ${list_lib_hdr})
+
+if(NOT APPLE)
+  install(
+      TARGETS QuickVtkLib
+        EXPORT QuickVtkLib-targets
+        ARCHIVE DESTINATION "lib"
+        RUNTIME DESTINATION "bin"
+        PUBLIC_HEADER DESTINATION "include"
+        FRAMEWORK DESTINATION Library/Frameworks
+        COMPONENT libraries)
+        
+  install(
+   EXPORT QuickVtkLib-targets
+    DESTINATION lib/cmake/QuickVtkLib
+    FILE QuickVtkLib-config.cmake
+    COMPONENT headers)
+    
+  install(
+    TARGETS QuickVtk
+      EXPORT QuickVtk-targets
+      RUNTIME DESTINATION "bin/"
+      FRAMEWORK DESTINATION Library/Frameworks
+      COMPONENT libraries)
+endif()

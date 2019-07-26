@@ -211,25 +211,26 @@ endif()
 target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES} ${LIB_NAME})
 target_include_directories(${PROJECT_NAME} PRIVATE ${list_lib_hdr})
 
-install(
-    TARGETS QuickVtkLib
-      EXPORT QuickVtkLib-targets
-      ARCHIVE DESTINATION "lib"
-      RUNTIME DESTINATION "bin"
-      PUBLIC_HEADER DESTINATION "include"
+if(NOT APPLE)
+  install(
+      TARGETS QuickVtkLib
+        EXPORT QuickVtkLib-targets
+        ARCHIVE DESTINATION "lib"
+        RUNTIME DESTINATION "bin"
+        PUBLIC_HEADER DESTINATION "include"
+        FRAMEWORK DESTINATION Library/Frameworks
+        COMPONENT libraries)
+        
+  install(
+   EXPORT QuickVtkLib-targets
+    DESTINATION lib/cmake/QuickVtkLib
+    FILE QuickVtkLib-config.cmake
+    COMPONENT headers)
+    
+  install(
+    TARGETS QuickVtk
+      EXPORT QuickVtk-targets
+      RUNTIME DESTINATION "bin/"
       FRAMEWORK DESTINATION Library/Frameworks
       COMPONENT libraries)
-      
-install(
- EXPORT QuickVtkLib-targets
-  DESTINATION lib/cmake/QuickVtkLib
-  FILE QuickVtkLib-config.cmake
-  COMPONENT headers)
-  
-install(
-  TARGETS QuickVtk
-    EXPORT QuickVtk-targets
-    RUNTIME DESTINATION "bin/"
-    FRAMEWORK DESTINATION Library/Frameworks
-    COMPONENT libraries)
-
+endif()

@@ -71,7 +71,7 @@ endif()
 
 # libraries
 # ******************************************************************************
-set(QUICKVTK_QT_VERSION "5.12.1" CACHE STRING "Qt Version")
+set(QUICKVTK_QT_VERSION "5.13.0" CACHE STRING "Qt Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 if(UNIX AND NOT APPLE)
     set(QUICKVTK_QT_MODULES ${QUICKVTK_QT_MODULES} X11Extras)

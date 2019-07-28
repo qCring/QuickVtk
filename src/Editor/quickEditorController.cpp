@@ -25,7 +25,7 @@ namespace quick {
 
             auto textDocument = document->textDocument();
             auto options = textDocument->defaultTextOption();
-            options.setTabStop(20);
+            options.setTabStopDistance(20);
             textDocument->setDefaultTextOption(options);
 
             this->m_highlighter = new Highlighter(textDocument);

@@ -1,4 +1,5 @@
 import QtQuick 2.6
+import QtQuick.Layouts 1.12
 
 import Vtk 1.0 as Vtk
 import Math 1.0 as Math
@@ -7,9 +8,6 @@ Item {
     id: root;
     
     anchors.fill: parent;
-
-    property real cellWidth: width/2;
-    property real cellHeight: height/2;
     
     Vtk.Actor {
         id: sharedActor;
@@ -24,46 +22,36 @@ Item {
         }
     }
 
-    Vtk.Viewer {
-        input: sharedActor;
+    GridLayout {
+        anchors.fill: parent;
+        columns: 2;
 
-        width: root.cellWidth;
-        height: root.cellHeight;
+        Vtk.Viewer {
+            input: sharedActor;
+            Layout.fillWidth: true;
+            Layout.fillHeight: true;
+            mouseEnabled: true;
+        }
 
-        mouseEnabled: true;
-    }
+        Vtk.Viewer {
+            input: sharedActor;
+            Layout.fillWidth: true;
+            Layout.fillHeight: true;
+            mouseEnabled: true;
+        }
 
-    Vtk.Viewer {
-        input: sharedActor;
+        Vtk.Viewer {
+            input: sharedActor;
+            Layout.fillWidth: true;
+            Layout.fillHeight: true;
+            mouseEnabled: true;
+        }
 
-        x: root.cellWidth;
-
-        width: root.cellWidth;
-        height: root.cellHeight;
-
-        mouseEnabled: true;
-    }
-
-    Vtk.Viewer {
-        input: sharedActor;
-
-        y: root.cellHeight;
-        
-        width: root.cellWidth;
-        height: root.cellHeight;
-
-        mouseEnabled: true;
-    }
-
-    Vtk.Viewer {
-        input: sharedActor;
-
-        x: root.cellWidth;
-        y: root.cellHeight;
-        
-        width: root.cellWidth;
-        height: root.cellHeight;
-
-        mouseEnabled: true;
+        Vtk.Viewer {
+            input: sharedActor;
+            Layout.fillWidth: true;
+            Layout.fillHeight: true;
+            mouseEnabled: true;
+        }
     }
 }

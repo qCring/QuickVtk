@@ -46,6 +46,7 @@ namespace quick {
             auto setFileName(const QString&) -> void;
         public slots:
             void setModified(bool);
+            void copyToClipboard(QString);
             void run();
             void newFile();
             void openFile();

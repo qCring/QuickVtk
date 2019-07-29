@@ -7,6 +7,8 @@
 #include "quickEditorSearch.hpp"
 #include "quickEditorUtil.hpp"
 
+#include <QGuiApplication>
+#include <QClipboard>
 #include <QTextOption>
 
 namespace quick {
@@ -42,6 +44,10 @@ namespace quick {
                 this->m_modified = modified;
                 emit this->modifiedChanged();
             }
+        }
+        
+        auto Controller::copyToClipboard(QString text) -> void {
+            QGuiApplication::clipboard()->setText(text);
         }
 
         auto Controller::getModified() -> bool {

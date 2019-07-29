@@ -33,14 +33,6 @@ Rectangle {
                 anchors.top: parent.top;
                 anchors.bottom: parent.bottom;
 
-                Lib.Icon {
-                    icon: icons.fa_tag;
-
-                    anchors.verticalCenter: parent.verticalCenter;
-
-                    color: symbol.color;
-                }
-
                 Lib.Label {
                     anchors.verticalCenter: parent.verticalCenter;
 
@@ -51,6 +43,16 @@ Rectangle {
                     color: symbol.color
                     font.bold: true;
                     font.pointSize: 10;
+                }
+
+                Lib.Icon {
+                    icon: icons.fa_paste;
+
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    color: symbol.color;
+
+                    ColorAnimation on color { id: iconColorAnim; running: false; from: "#fff"; to: symbol.color; duration: 1000; }
                 }
             }
 
@@ -99,6 +101,15 @@ Rectangle {
                     color: "#6E7582"
                     font.bold: true;
                     font.pointSize: 10;
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent;
+                
+                onClicked: function() {
+                    Controllers.editor.copyToClipboard(symbol.prefix + "." + symbol.name);
+                    iconColorAnim.start();
                 }
             }
         }

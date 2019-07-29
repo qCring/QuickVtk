@@ -4,15 +4,15 @@ import Vtk 1.0 as Vtk
 import Math 1.0 as Math
 
 Item {
-	id: root;
-	
-	anchors.fill: parent;
+    id: root;
+    
+    anchors.fill: parent;
 
-	property real cellWidth: width/2;
-	property real cellHeight: height/2;
-	
-	Vtk.Actor {
-		id: sharedActor;
+    property real cellWidth: width/2;
+    property real cellHeight: height/2;
+    
+    Vtk.Actor {
+        id: sharedActor;
 
         Vtk.PolyDataMapper {
             Vtk.LoopSubdivisionFilter {
@@ -24,46 +24,46 @@ Item {
         }
     }
 
-	Vtk.Viewer {
-		input: sharedActor;
+    Vtk.Viewer {
+        input: sharedActor;
 
-		width: root.cellWidth;
-		height: root.cellHeight;
+        width: root.cellWidth;
+        height: root.cellHeight;
 
-		mouseEnabled: true;
-	}
+        mouseEnabled: true;
+    }
 
-	Vtk.Viewer {
-		input: sharedActor;
+    Vtk.Viewer {
+        input: sharedActor;
 
-		x: root.cellWidth;
+        x: root.cellWidth;
 
-		width: root.cellWidth;
-		height: root.cellHeight;
+        width: root.cellWidth;
+        height: root.cellHeight;
 
-		mouseEnabled: true;
-	}
+        mouseEnabled: true;
+    }
 
-	Vtk.Viewer {
-		input: sharedActor;
+    Vtk.Viewer {
+        input: sharedActor;
 
-		y: root.cellHeight;
-		
-		width: root.cellWidth;
-		height: root.cellHeight;
+        y: root.cellHeight;
+        
+        width: root.cellWidth;
+        height: root.cellHeight;
 
-		mouseEnabled: true;
-	}
+        mouseEnabled: true;
+    }
 
-	Vtk.Viewer {
-		input: sharedActor;
+    Vtk.Viewer {
+        input: sharedActor;
 
-		x: root.cellWidth;
-		y: root.cellHeight;
-		
-		width: root.cellWidth;
-		height: root.cellHeight;
+        x: root.cellWidth;
+        y: root.cellHeight;
+        
+        width: root.cellWidth;
+        height: root.cellHeight;
 
-		mouseEnabled: true;
-	}
+        mouseEnabled: true;
+    }
 }

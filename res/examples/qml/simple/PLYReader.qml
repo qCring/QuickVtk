@@ -4,21 +4,21 @@ import Vtk 1.0 as Vtk
 import Math 1.0 as Math
 
 Item {
-	id: root;
+    id: root;
 
-	anchors.fill: parent;
-	
-	Vtk.Viewer {
-		anchors.fill: parent;
+    anchors.fill: parent;
+    
+    Vtk.Viewer {
+        anchors.fill: parent;
 
-		mouseEnabled: true;
+        mouseEnabled: true;
 
-		Vtk.Actor {
-			Vtk.PolyDataMapper {
-				Vtk.PLYReader {
-					fileName: SampleData.meshes.bunnyPLY
-				}
-			}
-		}
-	}
+        Vtk.Actor {
+            Vtk.PolyDataMapper {
+                Vtk.PLYReader {
+                    fileName: SampleData.meshes.bunnyPLY
+                }
+            }
+        }
+    }
 }

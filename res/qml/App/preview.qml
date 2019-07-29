@@ -74,7 +74,7 @@ Rectangle {
     }
 
     Connections {
-		target: Controllers.editor;
-		onCompile: root.compile();
-	}
+        target: Controllers.editor;
+        onCompile: root.compile();
+    }
 }

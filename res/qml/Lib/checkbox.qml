@@ -1,49 +1,48 @@
 import QtQuick 2.6
 
+import Lib 1.0 as Lib
+
 Item {
     id: root;
 
-    width: row.width + 24;
+    width: row.width + 4;
     height: label.height + 6;
 
-    property alias label: label;
-    property bool checked: false;
+    property var from;
+    property string bind;
+    property bool checked;
 
-    signal clicked;
+    property alias label: label;
 
     Row {
         id: row;
 
         anchors.centerIn: parent;
-
         spacing: 4;
 
         Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
-            width: 16;
-            height: 16;
+            width: 14;
+            height: 14;
 
             color: ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
-            border.color: "#181A1F";
+            border.color: "#666";
             radius: 2;
 
-            Icon {
+            Lib.Icon {
                 anchors.centerIn: parent;
 
-                color: label.color;
+                color: "#fff";
                 visible: root.checked;
                 icon: icons.fa_check;
             }
         }
 
-        Label {
+        Lib.Label {
             id: label;
 
             anchors.verticalCenter: parent.verticalCenter;
-
-            font.weight: Font.Medium;
-            color: enabled ? ma.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
         }
     }
 
@@ -51,13 +50,18 @@ Item {
         id: ma;
 
         anchors.fill: parent;
-
-        propagateComposedEvents: true;
         hoverEnabled: true;
 
         onClicked: {
             root.forceActiveFocus();
-            root.clicked();
+
+            if (root.from) {
+                root.from[root.bind] = !root.from[root.bind];
+            }
         }
+    }
+
+    Component.onCompleted: {
+        root.checked = Qt.binding(function() { return root.from[root.bind]; });
     }
 }

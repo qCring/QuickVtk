@@ -75,6 +75,8 @@ Rectangle {
         Lib.TextEdit {
             id: textEdit
 
+            readOnly: true;
+
             width: Math.max(implicitWidth, root.width - lines.width);
             height: Math.max(implicitHeight, root.height - footer.height);
 

@@ -21,10 +21,8 @@ namespace quick {
             static auto GetInstance() -> Menu*;
             auto getExamples() -> QStringList;
         public slots:
-            void OnFileNew();
-            void OnFileOpen();
-            void OnFileSave();
-            void OnFileSaveAs();
+            void OnFileLoad();
+            
             void OnFindFind();
 
             void OnCodeRun();
@@ -34,9 +32,6 @@ namespace quick {
             void OnViewResetFontSize();
             void OnViewToggleEditor();
 
-            void OnHelpDocumentation();
-            void OnHelpAbout();
-            void OnHelpPreferences();
             void OnHelpVisitOnGitHub();
             void OnHelpSendFeedback();
             void OnHelpExample(const QString&);

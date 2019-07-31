@@ -113,35 +113,6 @@ namespace quick {
             emit this->compile();
         }
 
-        void Controller::saveFile() {
-            if (this->m_fileUrl.length() < 1 || !IO::FileExists(this->m_fileUrl)) {
-                this->saveFileAs();
-            } else {
-                IO::Write::TextToFile(this->m_document->textDocument()->toPlainText(), this->m_fileUrl);
-            }
-        }
-
-        void Controller::saveFileAs() {
-            auto newUrl = IO::FromDialog::SelectSaveFileUrl();
-
-            if (newUrl.isNull() || newUrl.isEmpty()) {
-                return;
-            }
-
-            if (IO::Write::TextToFile(this->m_document->textDocument()->toPlainText(), newUrl)) {
-                this->setModified(false);
-                this->setFileUrl(newUrl);
-            }
-        }
-
-        void Controller::newFile() {
-            Search::instance->invalidate();
-            Errors::instance->clear();
-            emit this->clear();
-            this->setModified(false);
-            this->setFileUrl("");
-        }
-
         void Controller::openFile() {
             this->openFile(IO::FromDialog::SelectOpenFileUrl("*.qml"));
         }

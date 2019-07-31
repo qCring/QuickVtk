@@ -48,10 +48,7 @@ namespace quick {
             void setModified(bool);
             void copyToClipboard(QString);
             void run();
-            void newFile();
             void openFile();
-            void saveFile();
-            void saveFileAs();
             void showSearch();
             void resetFontSize();
             void increaseFontSize();

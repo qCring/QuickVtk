@@ -36,20 +36,8 @@ namespace quick {
             return this->m_examples;
         }
 
-        void Menu::OnFileNew() {
-            Editor::Controller::instance->newFile();
-        }
-
         void Menu::OnFileOpen() {
             Editor::Controller::instance->openFile();
-        }
-
-        void Menu::OnFileSave() {
-            Editor::Controller::instance->saveFile();
-        }
-
-        void Menu::OnFileSaveAs() {
-            Editor::Controller::instance->saveFileAs();
         }
 
         void Menu::OnFindFind() {
@@ -74,18 +62,6 @@ namespace quick {
 
         void Menu::OnViewToggleEditor() {
             Editor::Controller::instance->toggleExpanded();
-        }
-
-        void Menu::OnHelpAbout() {
-            //
-        }
-
-        void Menu::OnHelpDocumentation() {
-            //
-        }
-
-        void Menu::OnHelpPreferences() {
-            //
         }
 
         void Menu::OnHelpVisitOnGitHub() {

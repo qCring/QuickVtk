@@ -17,29 +17,9 @@ ApplicationWindow {
             title: "File"
 
             MenuItem {
-                text: "New"
-                shortcut: "Ctrl+N"
-                onTriggered: Controllers.menu.OnFileNew();
-            }
-
-            MenuItem {
-                text: "Open..."
+                text: "Load..."
                 shortcut: "Ctrl+O"
-                onTriggered: Controllers.menu.OnFileOpen();
-            }
-
-            MenuSeparator { }
-
-            MenuItem {
-                text: "Save"
-                shortcut: "Ctrl+S"
-                onTriggered: Controllers.menu.OnFileSave();
-            }
-
-            MenuItem {
-                text: "Save As..."
-                shortcut: "Shift+Ctrl+S"
-                onTriggered: Controllers.menu.OnFileSaveAs();
+                onTriggered: Controllers.menu.OnFileLoad();
             }
         }
 
@@ -60,13 +40,6 @@ ApplicationWindow {
                 text: "Run"
                 shortcut: "Ctrl+R"
                 onTriggered: Controllers.menu.OnCodeRun();
-            }
-
-            MenuItem {
-                text: "Format"
-                shortcut: "Ctrl+I"
-                onTriggered: Controllers.menu.OnCodeFormat();
-                enabled: false;
             }
         }
 
@@ -93,7 +66,7 @@ ApplicationWindow {
             MenuSeparator {}
 
             MenuItem {
-                text: Controllers.menu.expanded ? "Hide Code Editor" : "Show Code Editor"
+                text: Controllers.menu.expanded ? "Hide Editor" : "Show Editor"
                 shortcut: "Ctrl+1"
                 onTriggered: Controllers.menu.OnViewToggleEditor();
             }
@@ -120,13 +93,6 @@ ApplicationWindow {
 
             MenuSeparator {}
 
-        /*
-        MenuItem {
-            text: "Documentation"
-            onTriggered: controller.OnHelpDocumentation();
-            enabled: false;
-            }*/
-
             MenuItem {
                 text: "Visit on GitHub"
                 onTriggered: Controllers.menu.OnHelpVisitOnGitHub();
@@ -136,12 +102,6 @@ ApplicationWindow {
                 text: "Send Feedback"
                 onTriggered: Controllers.menu.OnHelpSendFeedback();
             }
-
-        /*
-        MenuItem {
-            text: "About"
-            enabled: false;
-            }*/
         }
     }
 

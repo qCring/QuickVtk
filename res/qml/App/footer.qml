@@ -31,17 +31,32 @@ Rectangle {
         Lib.Icon {
             anchors.verticalCenter: parent.verticalCenter;
 
-            icon: icons.fa_circle;
-            color: Controllers.editor.modified ? "#ff8800" : "#00ff00";
-            // visible: App.editor.document.fileName > 0 && App.editor.modified;
-            pointSize: 6;
+            visible: Controllers.editor.fileUrl.length > 0;
+            icon: icons.fa_file;
         }
 
         Lib.Label {
             anchors.verticalCenter: parent.verticalCenter;
 
-            text: Controllers.editor.fileUrl.length > 0 ? Controllers.editor.fileUrl : "untitled"
-            font.pointSize: 12;
+            text: Controllers.editor.fileUrl.length > 0 ? Controllers.editor.fileUrl + " -" : ""
+            font.pointSize: 10;
+        }
+
+        Lib.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            visible: Controllers.editor.buildTimestamp.length > 0;
+            text: "built at " + Controllers.editor.buildTimestamp + " -";
+            font.pointSize: 10;
+        }
+
+          Lib.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            text: Controllers.editor.modified ? "modified" : "up-to-date";
+            color: Controllers.editor.modified ? "#ffa500" : "#319CD3";
+
+            font.pointSize: 10;
         }
     }
 

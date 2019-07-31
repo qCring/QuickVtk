@@ -36,20 +36,8 @@ namespace quick {
             return this->m_examples;
         }
 
-        void Menu::OnFileNew() {
-            Editor::Controller::instance->newFile();
-        }
-
-        void Menu::OnFileOpen() {
-            Editor::Controller::instance->openFile();
-        }
-
-        void Menu::OnFileSave() {
-            Editor::Controller::instance->saveFile();
-        }
-
-        void Menu::OnFileSaveAs() {
-            Editor::Controller::instance->saveFileAs();
+        void Menu::OnFileLoad() {
+            Editor::Controller::instance->loadFile();
         }
 
         void Menu::OnFindFind() {
@@ -76,18 +64,6 @@ namespace quick {
             Editor::Controller::instance->toggleExpanded();
         }
 
-        void Menu::OnHelpAbout() {
-            //
-        }
-
-        void Menu::OnHelpDocumentation() {
-            //
-        }
-
-        void Menu::OnHelpPreferences() {
-            //
-        }
-
         void Menu::OnHelpVisitOnGitHub() {
             QDesktopServices::openUrl(QUrl("https://github.com/qCring/QuickVtk", QUrl::TolerantMode));
         }
@@ -97,7 +73,7 @@ namespace quick {
         }
 
         void Menu::OnHelpExample(const QString& exampleName) {
-            Editor::Controller::instance->openFile(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
+            Editor::Controller::instance->loadExample(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
         }
     }
 }

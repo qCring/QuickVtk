@@ -42,6 +42,15 @@ namespace quick {
             emit this->documentChanged();
         }
 
+        auto Controller::setBuildTimestamp(const QString& buildTimestamp) -> void {
+            this->m_buildTimestamp = buildTimestamp;
+            emit this->buildTimestampChanged();
+        }
+    
+        auto Controller::getBuildTimestamp() -> QString {
+            return this->m_buildTimestamp;
+        }
+        
         auto Controller::setModified(bool modified) -> void {
             if (this->m_modified != modified) {
                 this->m_modified = modified;
@@ -53,6 +62,10 @@ namespace quick {
             if (this->m_autorun != value) {
                 this->m_autorun = value;
                 emit this->autorunChanged();
+                
+                if (value) {
+                    this->run();
+                }
             }
         }
         
@@ -134,7 +147,6 @@ namespace quick {
                 Errors::instance->clear();
                 
                 this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
-                this->setModified(false);
                 this->setFileUrl(nullptr);
                 
                 this->run();
@@ -155,6 +167,7 @@ namespace quick {
         void Controller::run() {
             this->setModified(false);
             emit this->compile();
+            this->setBuildTimestamp(QDateTime::currentDateTime().toString("hh:mm:ss"));
         }
 
         void Controller::loadFile() {

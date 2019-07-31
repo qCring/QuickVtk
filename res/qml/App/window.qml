@@ -17,9 +17,9 @@ ApplicationWindow {
             title: "File"
 
             MenuItem {
-                text: "Open..."
+                text: "Load..."
                 shortcut: "Ctrl+O"
-                onTriggered: Controllers.menu.OnFileOpen();
+                onTriggered: Controllers.menu.OnFileLoad();
             }
         }
 

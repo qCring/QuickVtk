@@ -31,10 +31,10 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             frameless: true;
-            label.text: "Open";
+            label.text: "Load";
             icon: icons.fa_folder_open;
 
-            onClicked: Controllers.editor.openFile();
+            onClicked: Controllers.editor.loadFile();
         }
 
         Lib.Button {
@@ -47,6 +47,13 @@ Rectangle {
             onClicked: {
                 Controllers.editor.run();
             }
+        }
+
+        Lib.CheckBox {
+            anchors.verticalCenter: parent.verticalCenter;
+
+            label.text: "autorun";
+            from: Controllers.editor; bind: "autorun";
         }
     }
 

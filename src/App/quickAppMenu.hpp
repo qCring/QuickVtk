@@ -21,7 +21,8 @@ namespace quick {
             static auto GetInstance() -> Menu*;
             auto getExamples() -> QStringList;
         public slots:
-            void OnFileOpen();
+            void OnFileLoad();
+            
             void OnFindFind();
 
             void OnCodeRun();

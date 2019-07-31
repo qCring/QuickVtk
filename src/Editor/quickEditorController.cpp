@@ -20,6 +20,9 @@ namespace quick {
 
         auto Controller::Create() -> void {
             instance = new Controller();
+            
+            instance->m_fileWatcher = new QFileSystemWatcher();
+            QObject::connect(instance->m_fileWatcher, SIGNAL(fileChanged(const QString&)), instance, SLOT(observedFileChanged(const QString&)));
         }
 
         auto Controller::setDocument(QQuickTextDocument* document) -> void {
@@ -46,21 +49,23 @@ namespace quick {
             }
         }
         
-        auto Controller::copyToClipboard(QString text) -> void {
+        auto Controller::setAutorun(bool value) -> void {
+            if (this->m_autorun != value) {
+                this->m_autorun = value;
+                emit this->autorunChanged();
+            }
+        }
+        
+        auto Controller::getAutorun() -> bool {
+            return this->m_autorun;
+        }
+        
+        auto Controller::copyToClipboard(const QString& text) -> void {
             QGuiApplication::clipboard()->setText(text);
         }
 
         auto Controller::getModified() -> bool {
             return this->m_modified;
-        }
-
-        auto Controller::setFileName(const QString& fileName) -> void {
-            this->m_fileName = fileName;
-            emit this->fileNameChanged();
-        }
-
-        auto Controller::getFileName() -> QString {
-            return this->m_fileName;
         }
 
         auto Controller::setFileUrl(const QString& fileUrl) -> void {
@@ -97,24 +102,63 @@ namespace quick {
             return Selection::instance;
         }
 
-        auto Controller::openFile(const QString& fileUrl) -> void {
+        auto Controller::observeFile(const QString& fileUrl) -> void {
+            
             if (IO::FileExists(fileUrl)) {
-                Search::instance->invalidate();
-                Errors::instance->clear();
-                this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
-                this->setModified(false);
+                
+                if (this->m_fileUrl.length() > 0) {
+                    this->m_fileWatcher->removePath(this->m_fileUrl);
+                }
+                
+                this->m_fileWatcher->addPath(fileUrl);
                 this->setFileUrl(fileUrl);
+                this->loadSourceFromFile();
 
                 this->run();
             }
         }
+        
+        auto Controller::loadSourceFromFile() -> void {
+            if (IO::FileExists(this->m_fileUrl)) {
+                Search::instance->invalidate();
+                Errors::instance->clear();
+                
+                this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(this->m_fileUrl));
+                this->setModified(false);
+            }
+        }
+                
+        auto Controller::loadExample(const QString& fileUrl) -> void {
+            if (IO::FileExists(fileUrl)) {
+                Search::instance->invalidate();
+                Errors::instance->clear();
+                
+                this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
+                this->setModified(false);
+                this->setFileUrl(nullptr);
+                
+                this->run();
+            }
+        }
+        
+        void Controller::observedFileChanged(const QString& fileUrl) {
+            
+            loadSourceFromFile();
+            
+            if (this->m_autorun) {
+                this->run();
+            } else {
+                this->setModified(true);
+            }
+        }
 
         void Controller::run() {
+            this->setModified(false);
             emit this->compile();
         }
 
-        void Controller::openFile() {
-            this->openFile(IO::FromDialog::SelectOpenFileUrl("*.qml"));
+        void Controller::loadFile() {
+            this->observeFile(IO::FromDialog::SelectOpenFileUrl("*.qml"));
         }
 
         void Controller::showSearch() {

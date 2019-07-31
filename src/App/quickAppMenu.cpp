@@ -36,8 +36,8 @@ namespace quick {
             return this->m_examples;
         }
 
-        void Menu::OnFileOpen() {
-            Editor::Controller::instance->openFile();
+        void Menu::OnFileLoad() {
+            Editor::Controller::instance->loadFile();
         }
 
         void Menu::OnFindFind() {
@@ -73,7 +73,7 @@ namespace quick {
         }
 
         void Menu::OnHelpExample(const QString& exampleName) {
-            Editor::Controller::instance->openFile(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
+            Editor::Controller::instance->loadExample(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
         }
     }
 }

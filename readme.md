@@ -26,8 +26,8 @@ Different screenshots demonstrate some of QuickVtk's main features like 3D volum
 
 The 'old' build instructions are [**available here**](./doc/build/old.md) but will be replaced in order to provide specific documentation for the different platforms:
 
+- [**macOS**](./doc/build/macos/build.md)
 - [**Windows**](./doc/build/windows.md)
-- [**macOS**](./doc/build/macos.md)
 - [**Linux**](./doc/build/linux.md)
 
 ## 4. Current Development

@@ -1,6 +1,7 @@
 QuickVtk
 ===
-Build Instructions - macOS
+##### Build Instructions
+macOS
 ----
 
 ### 1. Download and install [CMake](https://cmake.org)
@@ -55,7 +56,7 @@ Build Instructions - macOS
 
 - Press **Configure** and then **Generate**
 
-### 4.1 Building via XCode
+### 4.1 Building via Xcode
 
 - Open the generated `.xcodeproj` file from the `bin` folder
 
@@ -65,4 +66,4 @@ Build Instructions - macOS
 	<img src="./quickvtk-xcode.png"/>
 </center>
 
-- Hit <kbd>⌘</kbd> + `R` to build and run QuickVtk
+- Hit <kbd>⌘ Command</kbd> + `R` to build and run QuickVtk

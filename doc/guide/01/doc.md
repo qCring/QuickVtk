@@ -11,7 +11,7 @@ The built-in code editor still needs a lot of work and is currently deactivated.
 
 Create a new file in the editor of your choice, paste the following Hello, World snippet and save the file as `.qml` on your system
 
-```
+```QML
 import QtQuick 2.3
 
 Text {

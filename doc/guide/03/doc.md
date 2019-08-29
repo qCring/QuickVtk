@@ -17,7 +17,7 @@ For a comprehensive documentation on the visualization pipeline see the official
 #### 1. A practical approach
 Let's start with a simple QML file instead of diving right into the many different concepts used in the [**VTK**](https://vtk.org/) framework. To access types from [**VTK**](https://vtk.org/), we first have to `import` the `Vtk` namespace. The following code snippet shows how a [**vtkCylinderSource**](https://vtk.org/doc/nightly/html/classvtkCylinderSource.html) is created in QuickVtk
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk
@@ -32,7 +32,7 @@ Rectangle {
 
 The code is valid but we will not be able to see anything yet. To make sure that the cylinder actually exists, we need some proof. One option is to simply print the object to the console
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk
@@ -50,7 +50,7 @@ We can switch to the **Log** panel and see that `this` is resolved to `quick::Vt
 
 We can go one step further and convert the object to the JavaScript object notation (JSON)
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk
@@ -68,7 +68,7 @@ Again, this might not seem very useful. But to point out the seamless integratio
 
 Another advantage of the JSON representation is simpler debugging. You will get a snapshot of the object with all related properties in a structured and readable notation
 
-```
+```JSON
 {
 	"objectName": "",
 	"input": {},
@@ -88,7 +88,7 @@ Another advantage of the JSON representation is simpler debugging. You will get 
 #### 2. The VTK visualization pipeline
 While visual QML elements are rendered directly by the QML engine, objects from [**VTK**](https://vtk.org/) must be assigned to a `Vtk.Viewer` instance in order to appear on screen
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk
@@ -114,7 +114,7 @@ The first step in the visualization process is to provide some kind of data. Eve
 
 We connected the first and the last step of the visualization pipeline by assigning a data source to the `input` of the viewer using the `id` property. In order to display something on the screen there are two more steps necessary. First, we have to specify **how** the data provided by `CylinderSource` should be interpreted. Do we want to visualize the cylinder as a volumetric object or polygonal geometry? This processing step is done by converting or **mapping** the underlying dataset accordingly. While volumes consist of many voxels, polygons are built from vertices, lines, and faces. We will use a `PolyDataMapper` to construct a polygon from the connected `CylinderSource` and connect the resulting output to the viewer by assigning the mapper to the viewer's `input` property
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk
@@ -141,7 +141,7 @@ Rectangle {
 
 The `PolyDataMapper` simply provides the **mesh** for our cylinder. We still need to specify how we want to render it. Do we want to visualize a wireframe or shaded solid geometry? Also, we probably want to position the cylinder somewhere in the scene and apply basic transformations like rotation and scale. It wouldn't really make sense for the mapper to be responsible for this functionality. Instead, [**VTK**](https://vtk.org/) introduces **actors** to represent rendered 3D geometry in a more generic and abstract way. We will add an actor and change the connections in order to configure a working visualization pipeline. To enable basic camera controls using the mouse, we will also set the viewer's `mouseEnabled` property to `true`
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk
@@ -184,7 +184,7 @@ If you are familiar with [**VTK**](https://vtk.org/) you'll notice that the same
 
 With the declarative nature of QML you can design the visualization pipeline using the object hierarchy. The following code demonstrates the different notation and also the access to the `resolution` property to generate a smoother cylinder shape
 
-```
+```QML
 import QtQuick 2.3
 
 import Vtk 1.0 as Vtk

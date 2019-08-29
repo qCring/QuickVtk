@@ -13,7 +13,7 @@ As mentioned in article [**01 - Getting Started**](./../01/doc.md), it is recomm
 
 Let's start off by creating a new file in the editor of your choice and paste the following snippet which creates a rectangle element, the starting point of our stop watch implementation
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {
@@ -48,7 +48,7 @@ Instead of using constant values for the Rectangle's `width`, `height` and `radi
 #### 4. Object hierarchy
 Next, we'll add a child to the `Rectangle` to display the second hand of our stopwatch. The `anchors` property is used for [**item positioning**](https://doc.qt.io/qt-5/qtquick-positioning-topic.html). The `width` property of the inner `Rectangle` scales with the `parent` object which in this case points to the outer `Rectangle`. As you can see, the `parent` is always relative to the current object scope
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {
@@ -81,7 +81,7 @@ In order to rotate the inner `Rectangle` each time a second passes, we need to a
 
 The [**Timer**](https://doc.qt.io/qt-5/qml-qtqml-timer.html) is initialized with the properties `running` and `repeat` set to `true` and an `interval` of `1000`. In this case, the expression assigned to `onTriggered` will be invoked every second
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {
@@ -120,7 +120,7 @@ You can inspect output from `console.log` by switching to the **Log** tab on the
 #### 6. Adding Custom Properties and Functions
 To keep track of how many seconds passed, we define a custom [**Object Attribute**](https://doc.qt.io/qt-5/qtqml-syntax-objectattributes.html). In this case a simple `int` property. Instead of just printing constant text to the console, the new `second` property should be incremented and capped at `60` every time the timer is triggered. The following snippet shows how the `second` property and a function named `timeChanged` are defined in the outer object scope. Note that the timer's `onTriggered` property now calls the function instead of executing inline JavaScript code
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {
@@ -167,7 +167,7 @@ A classic approach to animate the second hand would be to rotate the `Rectangle`
 
 We can rely on [**Property Bindings**](https://doc.qt.io/qt-5/qtqml-syntax-propertybinding.html) to calculate the correct angle. Every time the `second` property is changed in the `timeChanged` function, the `angle` property will be re-evaluated. The calculation is simple: A full rotation equals 360° and there are 60 seconds. So each second we want to apply a rotation of `n` times 360°/60, where `n` equals the current second. For any value of `clock.second` the expression `clock.second * 6` returns the correct angle. Since the hand is pointing up, we also have to subtract a constant 90°
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {
@@ -219,7 +219,7 @@ Rectangle {
 #### 8. Property Behaviours
 To further improve the visual quality of our second hand animation, we are going to add a [**Behavior**](https://doc.qt.io/qt-5/qml-qtquick-behavior.html) to the `angle` property. Let's recap. The effective value of the `angle` property changes every 1000 milliseconds, starting at 0 and increasing by 6 each time a second passes. By adding a [**Behavior**](https://doc.qt.io/qt-5/qml-qtquick-behavior.html) to this property, we can specify a transition that should be applied when the raw property data changes. Since  `angle` is a `float` property, we can interpolate between two values. For demonstration purposes we use a [**SpringAnimation**](https://doc.qt.io/qt-5/qml-qtquick-springanimation.html) to achieve a more realistic animation
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {
@@ -292,7 +292,7 @@ Each [**Text**](https://doc.qt.io/qt-5/qml-qtquick-text.html) element contains a
 
 A new `minute` property stores the value for elapsed minutes simply to make the stop watch a bit more useful. The `timeChanged` function of course has to be extended to track the current minute
 
-```
+```QML
 function timeChanged () {
     ++clock.second;
 
@@ -312,7 +312,7 @@ function timeChanged () {
 #### 9. Final version of the QML code
 With these last additions we have a basic working stop watch implementation. We covered some of QML's major features but of course there's much more. For a basic understanding, however, it should be enough
 
-```
+```QML
 import QtQuick 2.3
 
 Rectangle {

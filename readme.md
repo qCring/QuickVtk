@@ -23,19 +23,21 @@ Different screenshots demonstrate some of QuickVtk's main features like 3D volum
 </center>
 
 ## 3. Build Instruction
-
-The 'old' build instructions are [**available here**](./doc/build/old.md) but will be replaced in order to provide specific documentation for the different platforms:
+Documentation on how to build QuickVtk on the supported target platforms. Currently, you'll find only build instructions for macOS. The appropriate documentations for windows and linux will be comming soon. 
 
 - [**macOS**](./doc/build/macos/build.md)
-- [**Windows**](./doc/build/windows.md)
-- [**Linux**](./doc/build/linux.md)
+- [**Windows**](./doc/build/windows/build.md)
+- [**Linux**](./doc/build/linux/build.md)
 
-## 4. Current Development
+## 4. User Guide
+See the first three articles on how to use QuickVtk in the [**user guide**](./doc/guide/overview.md) section. 
+
+## 5. Current Development
 Check out the [**Issues section**](https://github.com/qCring/QuickVtk/issues) which basically serves the purpose of tracking the next steps along the development roadmap. 
 
-The documentation needs better structuring and I'll spend some time to clean up and rearrange different contents. Stay tuned!
+Currently, some documentation needs to be written and I'm focusing on that until the most important basics are covered. Stay tuned!
 
-## 5. Contributing
+## 6. Contributing
 Any contribution is helpful and welcome! There are different ways of how you can contribute to this project and get involved with development: 
 
 - **Report an Issue** simply by [**opening an issue**](https://github.com/qCring/QuickVtk/issues/new) here on GitHub with a detailed description if possible
@@ -44,10 +46,10 @@ Any contribution is helpful and welcome! There are different ways of how you can
 
 There are no hard rules in terms of coding style and such. Just take a look at some lines of code and that should be enough to discover some recurring patterns which keep the code more or less consistent.
 
-## 6. Contact
+## 7. Contact
 If you're interested in the project, want to give some feedback or simply get in touch feel free to write a <a href="mailto:qCring@gmail.com">**mail!**</a>
 
-## 7. License
+## 8. License
 ![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)
 
 Copyright (c) 2016-2019, Alexander Eduard Szalo

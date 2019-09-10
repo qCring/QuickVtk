@@ -19,7 +19,7 @@ namespace quick {
             return true;
         }
 
-        auto AbstractPolyDataReader::setFileName(QString& fileName) -> void {
+        auto AbstractPolyDataReader::setFileName(const QString& fileName) -> void {
             this->m_fileName = fileName;
 
             emit this->fileNameChanged();

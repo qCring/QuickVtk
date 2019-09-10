@@ -19,7 +19,7 @@ namespace quick {
             return true;
         }
 
-        auto ImageReader2::setFileName(QString& fileName) -> void {
+        auto ImageReader2::setFileName(const QString& fileName) -> void {
             this->m_fileName = fileName;
 
             emit this->fileNameChanged();

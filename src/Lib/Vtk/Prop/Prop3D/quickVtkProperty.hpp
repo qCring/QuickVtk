@@ -64,10 +64,10 @@ namespace quick {
             Property(Actor*);
             auto setInterpolation(Interpolation) -> void;
             auto setRepresentation(Representation) -> void;
-            auto setSpecularColor(QColor) -> void;
-            auto setDiffuseColor(QColor) -> void;
-            auto setAmbientColor(QColor) -> void;
-            auto setEdgeColor(QColor) -> void;
+            auto setSpecularColor(const QColor&) -> void;
+            auto setDiffuseColor(const QColor&) -> void;
+            auto setAmbientColor(const QColor&) -> void;
+            auto setEdgeColor(const QColor&) -> void;
             auto setFrontfaceCulling(bool) -> void;
             auto setBackfaceCulling(bool) -> void;
             auto setEdgeVisibility(bool) -> void;

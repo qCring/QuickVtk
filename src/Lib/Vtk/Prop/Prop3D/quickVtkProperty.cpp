@@ -14,7 +14,7 @@ namespace quick {
             this->m_actor->update();
         }
 
-        auto Property::setDiffuseColor(QColor color) -> void {
+        auto Property::setDiffuseColor(const QColor& color) -> void {
             this->m_diffuseColor = color;
 
             this->m_vtkActor->GetProperty()->SetDiffuseColor(color.redF(), color.greenF(), color.blueF());
@@ -23,7 +23,7 @@ namespace quick {
             emit this->diffuseColorChanged();
         }
 
-        auto Property::setSpecularColor(QColor color) -> void {
+        auto Property::setSpecularColor(const QColor& color) -> void {
             this->m_specularColor = color;
 
             this->m_vtkActor->GetProperty()->SetSpecularColor(color.redF(), color.greenF(), color.blueF());
@@ -32,7 +32,7 @@ namespace quick {
             emit this->specularColorChanged();
         }
 
-        auto Property::setAmbientColor(QColor color) -> void {
+        auto Property::setAmbientColor(const QColor& color) -> void {
             this->m_ambientColor = color;
 
             this->m_vtkActor->GetProperty()->SetAmbientColor(color.redF(), color.greenF(), color.blueF());
@@ -41,7 +41,7 @@ namespace quick {
             emit this->ambientColorChanged();
         }
 
-        auto Property::setEdgeColor(QColor color) -> void {
+        auto Property::setEdgeColor(const QColor& color) -> void {
             this->m_edgeColor = color;
 
             this->m_vtkActor->GetProperty()->SetEdgeColor(color.redF(), color.greenF(), color.blueF());

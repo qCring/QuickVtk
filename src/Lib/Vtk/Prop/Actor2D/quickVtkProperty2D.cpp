@@ -14,7 +14,7 @@ namespace quick {
             this->m_actor2D->update();
         }
 
-        auto Property2D::setColor(QColor color) -> void {
+        auto Property2D::setColor(const QColor& color) -> void {
             this->m_color = color;
 
             this->m_vtkActor2D->GetProperty()->SetColor(color.redF(), color.greenF(), color.blueF());

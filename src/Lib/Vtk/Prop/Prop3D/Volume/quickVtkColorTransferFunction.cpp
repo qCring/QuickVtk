@@ -19,7 +19,7 @@ namespace quick {
             this->update();
         }
 
-        void ColorTransferFunction::add(QColor color, double value) {
+        void ColorTransferFunction::add(const QColor& color, double value) {
             this->m_colors.append(color);
             this->m_values.append(value);
 

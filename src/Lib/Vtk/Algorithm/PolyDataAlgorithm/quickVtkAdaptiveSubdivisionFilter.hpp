@@ -10,8 +10,8 @@ namespace quick {
 
         class AdaptiveSubdivisionFilter : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(float maximumEdgeLength READ getMaximumEdgeLength WRITE setMaximumEdgeLength NOTIFY maximumEdgeLengthChanged);
-            Q_PROPERTY(float maximumTriangleArea READ getMaximumTriangleArea WRITE setMaximumTriangleArea NOTIFY maximumTriangleAreaChanged);
+            Q_PROPERTY(qreal maximumEdgeLength READ getMaximumEdgeLength WRITE setMaximumEdgeLength NOTIFY maximumEdgeLengthChanged);
+            Q_PROPERTY(qreal maximumTriangleArea READ getMaximumTriangleArea WRITE setMaximumTriangleArea NOTIFY maximumTriangleAreaChanged);
             Q_PROPERTY(int maximumNumberOfTriangles READ getMaximumNumberOfTriangles WRITE setMaximumNumberOfTriangles NOTIFY maximumNumberOfTrianglesChanged);
             Q_PROPERTY(int maximumNumberOfPasses READ getMaximumNumberOfPasses WRITE setMaximumNumberOfPasses NOTIFY maximumNumberOfPassesChanged);
         private:
@@ -19,10 +19,10 @@ namespace quick {
             vtkSmartPointer<vtkAdaptiveSubdivisionFilter> m_vtkObject;
         public:
             AdaptiveSubdivisionFilter();
-            auto setMaximumEdgeLength(float) -> void;
-            auto getMaximumEdgeLength() -> float;
-            auto setMaximumTriangleArea(float) -> void;
-            auto getMaximumTriangleArea() -> float;
+            auto setMaximumEdgeLength(qreal) -> void;
+            auto getMaximumEdgeLength() -> qreal;
+            auto setMaximumTriangleArea(qreal) -> void;
+            auto getMaximumTriangleArea() -> qreal;
             auto setMaximumNumberOfTriangles(int) -> void;
             auto getMaximumNumberOfTriangles() -> int;
             auto setMaximumNumberOfPasses(int) -> void;

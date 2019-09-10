@@ -9,12 +9,12 @@ namespace quick {
             this->m_vtkObject = vtkCone::SafeDownCast(ImplicitFunction::getVtkObject());
         }
 
-        auto Cone::setAngle(float angle) -> void {
+        auto Cone::setAngle(qreal angle) -> void {
             this->m_vtkObject->SetAngle(angle);
             emit this->angleChanged();
         }
 
-        auto Cone::getAngle() -> float {
+        auto Cone::getAngle() -> qreal {
             return this->m_vtkObject->GetAngle();
         }
     }

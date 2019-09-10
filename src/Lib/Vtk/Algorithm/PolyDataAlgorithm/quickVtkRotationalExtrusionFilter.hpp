@@ -12,9 +12,9 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(int resolution READ getResolution WRITE setResolution NOTIFY resolutionChanged);
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
-            Q_PROPERTY(float angle READ getAngle WRITE setAngle NOTIFY angleChanged);
-            Q_PROPERTY(float translation READ getTranslation WRITE setTranslation NOTIFY translationChanged);
-            Q_PROPERTY(float deltaRadius READ getDeltaRadius WRITE setDeltaRadius NOTIFY deltaRadiusChanged);
+            Q_PROPERTY(qreal angle READ getAngle WRITE setAngle NOTIFY angleChanged);
+            Q_PROPERTY(qreal translation READ getTranslation WRITE setTranslation NOTIFY translationChanged);
+            Q_PROPERTY(qreal deltaRadius READ getDeltaRadius WRITE setDeltaRadius NOTIFY deltaRadiusChanged);
         private:
             static Qml::Register::Symbol::Class<RotationalExtrusionFilter> Register;
             vtkSmartPointer<vtkRotationalExtrusionFilter> m_vtkObject;
@@ -24,12 +24,12 @@ namespace quick {
             auto getResolution() -> int;
             auto setCapping(bool) -> void;
             auto getCapping() -> bool;
-            auto setAngle(float) -> void;
-            auto getAngle() -> float;
-            auto setTranslation(float) -> void;
-            auto getTranslation() -> float;
-            auto setDeltaRadius(float) -> void;
-            auto getDeltaRadius() -> float;
+            auto setAngle(qreal) -> void;
+            auto getAngle() -> qreal;
+            auto setTranslation(qreal) -> void;
+            auto getTranslation() -> qreal;
+            auto setDeltaRadius(qreal) -> void;
+            auto getDeltaRadius() -> qreal;
         signals:
             void resolutionChanged();
             void cappingChanged();

@@ -10,13 +10,13 @@ namespace quick {
             this->m_vtkObject = vtkHedgeHog::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto HedgeHog::setScaleFactor(float scaleFactor) -> void {
+        auto HedgeHog::setScaleFactor(qreal scaleFactor) -> void {
             this->m_vtkObject->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
             this->update();
         }
 
-        auto HedgeHog::getScaleFactor() -> float {
+        auto HedgeHog::getScaleFactor() -> qreal {
             return this->m_vtkObject->GetScaleFactor();
         }
 

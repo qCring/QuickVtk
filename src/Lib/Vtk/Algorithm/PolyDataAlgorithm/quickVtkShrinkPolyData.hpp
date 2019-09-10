@@ -10,14 +10,14 @@ namespace quick {
 
         class ShrinkPolyData : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(float shrinkFactor READ getShrinkFactor WRITE setShrinkFactor NOTIFY shrinkFactorChanged);
+            Q_PROPERTY(qreal shrinkFactor READ getShrinkFactor WRITE setShrinkFactor NOTIFY shrinkFactorChanged);
         private:
             static Qml::Register::Symbol::Class<ShrinkPolyData> Register;
             vtkSmartPointer<vtkShrinkPolyData> m_vtkObject;
         public:
             ShrinkPolyData();
-            auto setShrinkFactor(float) -> void;
-            auto getShrinkFactor() -> float;
+            auto setShrinkFactor(qreal) -> void;
+            auto getShrinkFactor() -> qreal;
         signals:
             void shrinkFactorChanged();
         };

@@ -30,33 +30,33 @@ namespace quick {
             return this->m_vtkObject->GetCapping();
         }
 
-        auto RotationalExtrusionFilter::setAngle(float angle) -> void {
+        auto RotationalExtrusionFilter::setAngle(qreal angle) -> void {
             this->m_vtkObject->SetAngle(angle);
             emit this->angleChanged();
             this->update();
         }
 
-        auto RotationalExtrusionFilter::getAngle() -> float {
+        auto RotationalExtrusionFilter::getAngle() -> qreal {
             return this->m_vtkObject->GetAngle();
         }
 
-        auto RotationalExtrusionFilter::setTranslation(float translation) -> void {
+        auto RotationalExtrusionFilter::setTranslation(qreal translation) -> void {
             this->m_vtkObject->SetTranslation(translation);
             emit this->translationChanged();
             this->update();
         }
 
-        auto RotationalExtrusionFilter::getTranslation() -> float {
+        auto RotationalExtrusionFilter::getTranslation() -> qreal {
             return this->m_vtkObject->GetTranslation();
         }
 
-        auto RotationalExtrusionFilter::setDeltaRadius(float deltaRadius) -> void {
+        auto RotationalExtrusionFilter::setDeltaRadius(qreal deltaRadius) -> void {
             this->m_vtkObject->SetDeltaRadius(deltaRadius);
             emit this->deltaRadiusChanged();
             this->update();
         }
 
-        auto RotationalExtrusionFilter::getDeltaRadius() -> float {
+        auto RotationalExtrusionFilter::getDeltaRadius() -> qreal {
             return this->m_vtkObject->GetDeltaRadius();
         }
     }

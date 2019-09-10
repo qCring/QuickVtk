@@ -9,23 +9,23 @@ namespace quick {
             this->m_vtkObject = vtkAdaptiveSubdivisionFilter::SafeDownCast(this->Algorithm::getVtkObject());
         }
 
-        auto AdaptiveSubdivisionFilter::setMaximumEdgeLength(float maximumEdgeLength) -> void {
+        auto AdaptiveSubdivisionFilter::setMaximumEdgeLength(qreal maximumEdgeLength) -> void {
             this->m_vtkObject->SetMaximumEdgeLength(maximumEdgeLength);
             emit this->maximumEdgeLengthChanged();
             this->update();
         }
 
-        auto AdaptiveSubdivisionFilter::getMaximumEdgeLength() -> float {
+        auto AdaptiveSubdivisionFilter::getMaximumEdgeLength() -> qreal {
             return this->m_vtkObject->GetMaximumEdgeLength();
         }
 
-        auto AdaptiveSubdivisionFilter::setMaximumTriangleArea(float maximumTriangleArea) -> void {
+        auto AdaptiveSubdivisionFilter::setMaximumTriangleArea(qreal maximumTriangleArea) -> void {
             this->m_vtkObject->SetMaximumTriangleArea(maximumTriangleArea);
             emit this->maximumTriangleAreaChanged();
             this->update();
         }
 
-        auto AdaptiveSubdivisionFilter::getMaximumTriangleArea() -> float {
+        auto AdaptiveSubdivisionFilter::getMaximumTriangleArea() -> qreal {
             return this->m_vtkObject->GetMaximumTriangleArea();
         }
 

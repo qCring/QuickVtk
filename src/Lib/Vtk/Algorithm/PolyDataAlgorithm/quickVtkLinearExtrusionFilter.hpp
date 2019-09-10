@@ -23,7 +23,7 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector3* vector READ getVector CONSTANT);
             Q_PROPERTY(quick::Math::Vector3* extrusionPoint READ getExtrusionPoint CONSTANT);
             Q_PROPERTY(ExtrusionType extrusionType READ getExtrusionType WRITE setExtrusionType NOTIFY extrusionTypeChanged);
-            Q_PROPERTY(float scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
+            Q_PROPERTY(qreal scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
             static Qml::Register::Symbol::Class<LinearExtrusionFilter> Register;
@@ -34,8 +34,8 @@ namespace quick {
             LinearExtrusionFilter();
             auto setExtrusionType(ExtrusionType) -> void;
             auto getExtrusionType() -> ExtrusionType;
-            auto setScaleFactor(float) -> void;
-            auto getScaleFactor() -> float;
+            auto setScaleFactor(qreal) -> void;
+            auto getScaleFactor() -> qreal;
             auto setCapping(bool) -> void;
             auto getCapping() -> bool;
             auto getVector() -> Math::Vector3*;

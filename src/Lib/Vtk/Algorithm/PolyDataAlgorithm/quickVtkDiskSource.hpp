@@ -10,8 +10,8 @@ namespace quick {
 
         class DiskSource : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(float innerRadius READ getInnerRadius WRITE setInnerRadius NOTIFY innerRadiusChanged);
-            Q_PROPERTY(float outerRadius READ getOuterRadius WRITE setOuterRadius NOTIFY outerRadiusChanged);
+            Q_PROPERTY(qreal innerRadius READ getInnerRadius WRITE setInnerRadius NOTIFY innerRadiusChanged);
+            Q_PROPERTY(qreal outerRadius READ getOuterRadius WRITE setOuterRadius NOTIFY outerRadiusChanged);
             Q_PROPERTY(int radialResolution READ getRadialResolution WRITE setRadialResolution NOTIFY radialResolutionChanged);
             Q_PROPERTY(int circumferentialResolution READ getCircumferentialResolution WRITE setCircumferentialResolution NOTIFY circumferentialResolutionChanged);
         private:
@@ -19,12 +19,12 @@ namespace quick {
             vtkSmartPointer<vtkDiskSource> m_vtkObject;
         public:
             DiskSource();
-            auto setInnerRadius(float) -> void;
-            auto setOuterRadius(float) -> void;
+            auto setInnerRadius(qreal) -> void;
+            auto setOuterRadius(qreal) -> void;
             auto setRadialResolution(int) -> void;
             auto setCircumferentialResolution(int) -> void ;
-            auto getInnerRadius() -> float;
-            auto getOuterRadius() -> float;
+            auto getInnerRadius() -> qreal;
+            auto getOuterRadius() -> qreal;
             auto getRadialResolution() -> int;
             auto getCircumferentialResolution() -> int;
         signals:

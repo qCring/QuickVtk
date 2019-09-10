@@ -20,13 +20,13 @@ namespace quick {
             return (Operation) this->m_vtkObject->GetOperation();
         }
 
-        auto BooleanOperationPolyDataFilter::setTolerance(float tolerance) -> void {
+        auto BooleanOperationPolyDataFilter::setTolerance(qreal tolerance) -> void {
             this->m_vtkObject->SetTolerance(tolerance);
             emit this->toleranceChanged();
             this->update();
         }
 
-        auto BooleanOperationPolyDataFilter::getTolerance() -> float {
+        auto BooleanOperationPolyDataFilter::getTolerance() -> qreal {
             return this->m_vtkObject->GetTolerance();
         }
 

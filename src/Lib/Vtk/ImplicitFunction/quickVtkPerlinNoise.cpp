@@ -20,12 +20,12 @@ namespace quick {
             });
         }
 
-        auto PerlinNoise::setAmplitude(float amplitude) -> void {
+        auto PerlinNoise::setAmplitude(qreal amplitude) -> void {
             this->m_vtkObject->SetAmplitude(amplitude);
             this->update();
         }
 
-        auto PerlinNoise::getAmplitude() -> float {
+        auto PerlinNoise::getAmplitude() -> qreal {
             return this->m_vtkObject->GetAmplitude();
         }
 

@@ -10,13 +10,13 @@ namespace quick {
             this->m_vtkObject = vtkPolyDataNormals::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto PolyDataNormals::setFeatureAngle(float featureAngle) -> void {
+        auto PolyDataNormals::setFeatureAngle(qreal featureAngle) -> void {
             this->m_vtkObject->SetFeatureAngle(featureAngle);
             emit this->featureAngleChanged();
             this->update();
         }
 
-        auto PolyDataNormals::getFeatureAngle() -> float {
+        auto PolyDataNormals::getFeatureAngle() -> qreal {
             return this->m_vtkObject->GetFeatureAngle();
         }
 

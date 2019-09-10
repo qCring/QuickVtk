@@ -10,14 +10,14 @@ namespace quick {
 
         class Cone : public ImplicitFunction {
             Q_OBJECT
-            Q_PROPERTY(float angle READ getAngle WRITE setAngle NOTIFY angleChanged);
+            Q_PROPERTY(qreal angle READ getAngle WRITE setAngle NOTIFY angleChanged);
         private:
             static Qml::Register::Symbol::Class<Cone> Register;
             vtkSmartPointer<vtkCone> m_vtkObject = nullptr;
         public:
             Cone();
-            auto setAngle(float) -> void;
-            auto getAngle() -> float;
+            auto setAngle(qreal) -> void;
+            auto getAngle() -> qreal;
         signals:
             void angleChanged();
         };

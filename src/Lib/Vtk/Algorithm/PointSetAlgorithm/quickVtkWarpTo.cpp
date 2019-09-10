@@ -18,13 +18,13 @@ namespace quick {
             return this->m_position;
         }
 
-        auto WarpTo::setScaleFactor(float scaleFactor) -> void {
+        auto WarpTo::setScaleFactor(qreal scaleFactor) -> void {
             this->m_vtkObject->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
             this->update();
         }
 
-        auto WarpTo::getScaleFactor() -> float {
+        auto WarpTo::getScaleFactor() -> qreal {
             return this->m_vtkObject->GetScaleFactor();
         }
 

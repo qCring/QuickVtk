@@ -28,35 +28,35 @@ namespace quick {
             return this->m_direction;
         }
 
-        auto ConeSource::setHeight(float height) -> void {
+        auto ConeSource::setHeight(qreal height) -> void {
             this->m_vtkObject->SetHeight(height);
             emit this->heightChanged();
             emit this->angleChanged();
             this->update();
         }
 
-        auto ConeSource::getHeight() -> float {
+        auto ConeSource::getHeight() -> qreal {
             return this->m_vtkObject->GetHeight();
         }
 
-        auto ConeSource::setRadius(float radius) -> void {
+        auto ConeSource::setRadius(qreal radius) -> void {
             this->m_vtkObject->SetRadius(radius);
             emit this->radiusChanged();
             this->update();
         }
 
-        auto ConeSource::getRadius() -> float {
+        auto ConeSource::getRadius() -> qreal {
             return this->m_vtkObject->GetRadius();
         }
 
-        auto ConeSource::setAngle(float angle) -> void {
+        auto ConeSource::setAngle(qreal angle) -> void {
             this->m_vtkObject->SetAngle(angle);
             emit this->angleChanged();
             emit this->heightChanged();
             this->update();
         }
 
-        auto ConeSource::getAngle() -> float {
+        auto ConeSource::getAngle() -> qreal {
             return this->m_vtkObject->GetAngle();
         }
 

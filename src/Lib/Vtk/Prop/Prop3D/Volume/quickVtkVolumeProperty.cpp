@@ -31,43 +31,43 @@ namespace quick {
             return this->m_vtkVolume->GetProperty()->GetShade();
         }
 
-        auto VolumeProperty::setAmbient(float ambient) -> void {
+        auto VolumeProperty::setAmbient(qreal ambient) -> void {
             this->m_vtkVolume->GetProperty()->SetAmbient(ambient);
             emit this->ambientChanged();
             this->update();
         }
 
-        auto VolumeProperty::getAmbient() -> float {
+        auto VolumeProperty::getAmbient() -> qreal {
             return this->m_vtkVolume->GetProperty()->GetAmbient();
         }
 
-        auto VolumeProperty::setDiffuse(float diffuse) -> void {
+        auto VolumeProperty::setDiffuse(qreal diffuse) -> void {
             this->m_vtkVolume->GetProperty()->SetDiffuse(diffuse);
             emit this->diffuseChanged();
             this->update();
         }
 
-        auto VolumeProperty::getDiffuse() -> float {
+        auto VolumeProperty::getDiffuse() -> qreal {
             return this->m_vtkVolume->GetProperty()->GetDiffuse();
         }
 
-        auto VolumeProperty::setSpecular(float specular) -> void {
+        auto VolumeProperty::setSpecular(qreal specular) -> void {
             this->m_vtkVolume->GetProperty()->SetSpecular(specular);
             emit this->specularChanged();
             this->update();
         }
 
-        auto VolumeProperty::getSpecular() -> float {
+        auto VolumeProperty::getSpecular() -> qreal {
             return this->m_vtkVolume->GetProperty()->GetSpecular();
         }
 
-        auto VolumeProperty::setSpecularPower(float specularPower) -> void {
+        auto VolumeProperty::setSpecularPower(qreal specularPower) -> void {
             this->m_vtkVolume->GetProperty()->SetSpecularPower(specularPower);
             emit this->specularPowerChanged();
             this->update();
         }
 
-        auto VolumeProperty::getSpecularPower() -> float {
+        auto VolumeProperty::getSpecularPower() -> qreal {
             return this->m_vtkVolume->GetProperty()->GetSpecularPower();
         }
 

@@ -13,9 +13,9 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
             Q_PROPERTY(quick::Math::Vector3* direction READ getDirection CONSTANT);
-            Q_PROPERTY(float height READ getHeight WRITE setHeight NOTIFY heightChanged);
-            Q_PROPERTY(float radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
-            Q_PROPERTY(float angle READ getAngle WRITE setAngle NOTIFY angleChanged);
+            Q_PROPERTY(qreal height READ getHeight WRITE setHeight NOTIFY heightChanged);
+            Q_PROPERTY(qreal radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
+            Q_PROPERTY(qreal angle READ getAngle WRITE setAngle NOTIFY angleChanged);
             Q_PROPERTY(int resolution READ getResolution WRITE setResolution NOTIFY resolutionChanged)
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
@@ -27,12 +27,12 @@ namespace quick {
             ConeSource();
             auto getCenter() -> Math::Vector3*;
             auto getDirection() -> Math::Vector3*;
-            auto setHeight(float) -> void;
-            auto getHeight() -> float;
-            auto setRadius(float) -> void;
-            auto getRadius() -> float;
-            auto setAngle(float) -> void;
-            auto getAngle() -> float;
+            auto setHeight(qreal) -> void;
+            auto getHeight() -> qreal;
+            auto setRadius(qreal) -> void;
+            auto getRadius() -> qreal;
+            auto setAngle(qreal) -> void;
+            auto getAngle() -> qreal;
             auto setResolution(int) -> void;
             auto getResolution() -> int;
             auto setCapping(bool) -> void;

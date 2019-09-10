@@ -10,13 +10,13 @@ namespace quick {
             this->m_vtkObject = vtkDiskSource::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto DiskSource::setInnerRadius(float radius) -> void {
+        auto DiskSource::setInnerRadius(qreal radius) -> void {
             this->m_vtkObject->SetInnerRadius(radius);
             emit this->innerRadiusChanged();
             this->update();
         }
 
-        auto DiskSource::setOuterRadius(float radius) -> void {
+        auto DiskSource::setOuterRadius(qreal radius) -> void {
             this->m_vtkObject->SetOuterRadius(radius);
             emit this->outerRadiusChanged();
             this->update();
@@ -34,11 +34,11 @@ namespace quick {
             this->update();
         }
 
-        auto DiskSource::getInnerRadius() -> float {
+        auto DiskSource::getInnerRadius() -> qreal {
             return this->m_vtkObject->GetInnerRadius();
         }
 
-        auto DiskSource::getOuterRadius() -> float {
+        auto DiskSource::getOuterRadius() -> qreal {
             return this->m_vtkObject->GetOuterRadius();
         }
 

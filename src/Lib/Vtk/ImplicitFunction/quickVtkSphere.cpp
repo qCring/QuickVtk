@@ -18,16 +18,16 @@ namespace quick {
             return this->m_center;
         }
 
-        float Sphere::evaluateFunction(float x, float y, float z) {
+        qreal Sphere::evaluateFunction(qreal x, qreal y, qreal z) {
             return this->m_vtkObject->EvaluateFunction(x, y, z);
         }
 
-        auto Sphere::setRadius(float radius) -> void {
+        auto Sphere::setRadius(qreal radius) -> void {
             this->m_vtkObject->SetRadius(radius);
             emit this->radiusChanged();
         }
 
-        auto Sphere::getRadius() -> float {
+        auto Sphere::getRadius() -> qreal {
             return this->m_vtkObject->GetRadius();
         }
     }

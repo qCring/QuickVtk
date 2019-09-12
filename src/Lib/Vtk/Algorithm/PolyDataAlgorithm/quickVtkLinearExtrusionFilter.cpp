@@ -30,13 +30,13 @@ namespace quick {
             return (ExtrusionType) this->m_vtkObject->GetExtrusionType();
         }
 
-        auto LinearExtrusionFilter::setScaleFactor(float scaleFactor) -> void {
+        auto LinearExtrusionFilter::setScaleFactor(qreal scaleFactor) -> void {
             this->m_vtkObject->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
             this->update();
         }
 
-        auto LinearExtrusionFilter::getScaleFactor() -> float {
+        auto LinearExtrusionFilter::getScaleFactor() -> qreal {
             return this->m_vtkObject->GetScaleFactor();
         }
 

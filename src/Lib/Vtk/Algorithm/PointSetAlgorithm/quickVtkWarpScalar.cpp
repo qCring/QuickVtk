@@ -10,13 +10,13 @@ namespace quick {
             this->m_vtkObject = vtkWarpScalar::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto WarpScalar::setScaleFactor(float scaleFactor) -> void {
+        auto WarpScalar::setScaleFactor(qreal scaleFactor) -> void {
             this->m_vtkObject->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
             this->update();
         }
 
-        auto WarpScalar::getScaleFactor() -> float {
+        auto WarpScalar::getScaleFactor() -> qreal {
             return this->m_vtkObject->GetScaleFactor();
         }
 

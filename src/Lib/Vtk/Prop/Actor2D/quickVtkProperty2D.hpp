@@ -29,7 +29,7 @@ namespace quick {
         public:
             Property2D() = delete;
             Property2D(Actor2D*);
-            auto setColor(QColor) -> void;
+            auto setColor(const QColor&) -> void;
             auto getColor() -> QColor;
             auto setOpacity(double) -> void;
             auto getOpacity() -> double;

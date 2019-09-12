@@ -10,13 +10,13 @@ namespace quick {
             this->m_vtkObject = vtkShrinkPolyData::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto ShrinkPolyData::setShrinkFactor(float val) -> void {
+        auto ShrinkPolyData::setShrinkFactor(qreal val) -> void {
             this->m_vtkObject->SetShrinkFactor(val);
             emit this->shrinkFactorChanged();
             this->update();
         }
 
-        auto ShrinkPolyData::getShrinkFactor() -> float {
+        auto ShrinkPolyData::getShrinkFactor() -> qreal {
             return this->m_vtkObject->GetShrinkFactor();
         }
     }

@@ -40,23 +40,23 @@ namespace quick {
             return this->m_vtkObject->GetPreSplitMesh();
         }
 
-        auto DecimatePro::setSplitAngle(float val) -> void {
+        auto DecimatePro::setSplitAngle(qreal val) -> void {
             this->m_vtkObject->SetSplitAngle(val);
             emit this->splittingChanged();
             this->update();
         }
 
-        auto DecimatePro::getSplitAngle() -> float {
+        auto DecimatePro::getSplitAngle() -> qreal {
             return this->m_vtkObject->GetSplitAngle();
         }
 
-        auto DecimatePro::setFeatureAngle(float val) -> void {
+        auto DecimatePro::setFeatureAngle(qreal val) -> void {
             this->m_vtkObject->SetFeatureAngle(val);
             emit this->featureAngleChanged();
             this->update();
         }
 
-        auto DecimatePro::getFeatureAngle() -> float {
+        auto DecimatePro::getFeatureAngle() -> qreal {
             return this->m_vtkObject->GetFeatureAngle();
         }
 
@@ -70,13 +70,13 @@ namespace quick {
             return this->m_vtkObject->GetPreserveTopology();
         }
 
-        auto DecimatePro::setTargetReduction(float val) -> void {
+        auto DecimatePro::setTargetReduction(qreal val) -> void {
             this->m_vtkObject->SetTargetReduction(val);
             emit this->targetReductionChanged();
             this->update();
         }
 
-        auto DecimatePro::getTargetReduction() -> float {
+        auto DecimatePro::getTargetReduction() -> qreal {
             return this->m_vtkObject->GetTargetReduction();
         }
     }

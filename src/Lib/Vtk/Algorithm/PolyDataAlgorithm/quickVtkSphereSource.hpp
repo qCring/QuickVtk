@@ -15,11 +15,11 @@ namespace quick {
             Q_PROPERTY(bool latLongTessellation READ getLatLongTessellation WRITE setLatLongTessellation NOTIFY latLongTessellationChanged);
             Q_PROPERTY(int thetaResolution READ getThetaResolution WRITE setThetaResolution NOTIFY thetaResolutionChanged);
             Q_PROPERTY(int phiResolution READ getPhiResolution WRITE setPhiResolution NOTIFY phiResolutionChanged);
-            Q_PROPERTY(float radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
-            Q_PROPERTY(float startTheta READ getStartTheta WRITE setStartTheta NOTIFY startThetaChanged);
-            Q_PROPERTY(float startPhi READ getStartPhi WRITE setStartPhi NOTIFY startPhiChanged);
-            Q_PROPERTY(float endTheta READ getEndTheta WRITE setEndTheta NOTIFY endThetaChanged);
-            Q_PROPERTY(float endPhi READ getEndPhi WRITE setEndPhi NOTIFY endPhiChanged);
+            Q_PROPERTY(qreal radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
+            Q_PROPERTY(qreal startTheta READ getStartTheta WRITE setStartTheta NOTIFY startThetaChanged);
+            Q_PROPERTY(qreal startPhi READ getStartPhi WRITE setStartPhi NOTIFY startPhiChanged);
+            Q_PROPERTY(qreal endTheta READ getEndTheta WRITE setEndTheta NOTIFY endThetaChanged);
+            Q_PROPERTY(qreal endPhi READ getEndPhi WRITE setEndPhi NOTIFY endPhiChanged);
         private:
             static Qml::Register::Symbol::Class<SphereSource> Register;
             vtkSmartPointer<vtkSphereSource> m_vtkObject;
@@ -29,20 +29,20 @@ namespace quick {
             auto getCenter() -> Math::Vector3*;
             auto setLatLongTessellation(bool) -> void;
             auto getLatLongTessellation() -> bool;
-            auto setRadius(float) -> void;
-            auto getRadius() -> float;
+            auto setRadius(qreal) -> void;
+            auto getRadius() -> qreal;
             auto setThetaResolution(int) -> void;
             auto getThetaResolution() -> int;
             auto setPhiResolution(int) -> void;
             auto getPhiResolution() -> int;
-            auto setStartTheta(float) -> void;
-            auto getStartTheta() -> float;
-            auto setStartPhi(float) -> void;
-            auto getStartPhi() -> float;
-            auto setEndTheta(float) -> void;
-            auto getEndTheta() -> float;
-            auto setEndPhi(float) -> void;
-            auto getEndPhi() -> float;
+            auto setStartTheta(qreal) -> void;
+            auto getStartTheta() -> qreal;
+            auto setStartPhi(qreal) -> void;
+            auto getStartPhi() -> qreal;
+            auto setEndTheta(qreal) -> void;
+            auto getEndTheta() -> qreal;
+            auto setEndPhi(qreal) -> void;
+            auto getEndPhi() -> qreal;
         signals:
             void latLongTessellationChanged();
             void thetaResolutionChanged();

@@ -10,9 +10,9 @@ namespace quick {
 
         class DecimatePro : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(float splitAngle READ getSplitAngle WRITE setSplitAngle NOTIFY splitAngleChanged);
-            Q_PROPERTY(float featureAngle READ getFeatureAngle WRITE setFeatureAngle NOTIFY featureAngleChanged);
-            Q_PROPERTY(float targetReduction READ getTargetReduction WRITE setTargetReduction NOTIFY targetReductionChanged);
+            Q_PROPERTY(qreal splitAngle READ getSplitAngle WRITE setSplitAngle NOTIFY splitAngleChanged);
+            Q_PROPERTY(qreal featureAngle READ getFeatureAngle WRITE setFeatureAngle NOTIFY featureAngleChanged);
+            Q_PROPERTY(qreal targetReduction READ getTargetReduction WRITE setTargetReduction NOTIFY targetReductionChanged);
             Q_PROPERTY(bool preserveTopology READ getPreserveTopology WRITE setPreserveTopology NOTIFY preserveTopologyChanged);
             Q_PROPERTY(bool splitting READ getSplitting WRITE setSplitting NOTIFY splittingChanged);
             Q_PROPERTY(bool preSplitMesh READ getPreSplitMesh WRITE setPreSplitMesh NOTIFY preSplitMeshChanged);
@@ -26,14 +26,14 @@ namespace quick {
             auto getDegree() -> int;
             auto setSplitting(bool) -> void;
             auto getSplitting() -> bool;
-            auto setSplitAngle(float) -> void;
-            auto getSplitAngle() -> float;
-            auto setFeatureAngle(float) -> void;
-            auto getFeatureAngle() -> float;
+            auto setSplitAngle(qreal) -> void;
+            auto getSplitAngle() -> qreal;
+            auto setFeatureAngle(qreal) -> void;
+            auto getFeatureAngle() -> qreal;
             auto setPreSplitMesh(bool) -> void;
             auto getPreSplitMesh() -> bool;
-            auto setTargetReduction(float) -> void;
-            auto getTargetReduction() -> float;
+            auto setTargetReduction(qreal) -> void;
+            auto getTargetReduction() -> qreal;
             auto setPreserveTopology(bool) -> void;
             auto getPreserveTopology() ->bool;
         signals:

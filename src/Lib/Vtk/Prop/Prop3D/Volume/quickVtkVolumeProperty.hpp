@@ -23,10 +23,10 @@ namespace quick {
             Q_PROPERTY(quick::Vtk::PiecewiseFunction* scalarOpacityFunction READ getScalarOpacityFunction CONSTANT);
             Q_PROPERTY(quick::Vtk::PiecewiseFunction* gradientOpacityFunction READ getGradientOpacityFunction CONSTANT);
             Q_PROPERTY(quick::Vtk::ColorTransferFunction* transferFunction READ getTransferFunction CONSTANT);
-            Q_PROPERTY(float ambient READ getAmbient WRITE setAmbient NOTIFY ambientChanged);
-            Q_PROPERTY(float diffuse READ getDiffuse WRITE setDiffuse NOTIFY diffuseChanged);
-            Q_PROPERTY(float specular READ getSpecular WRITE setSpecular NOTIFY specularChanged);
-            Q_PROPERTY(float specularPower READ getSpecularPower WRITE setSpecularPower NOTIFY specularPowerChanged);
+            Q_PROPERTY(qreal ambient READ getAmbient WRITE setAmbient NOTIFY ambientChanged);
+            Q_PROPERTY(qreal diffuse READ getDiffuse WRITE setDiffuse NOTIFY diffuseChanged);
+            Q_PROPERTY(qreal specular READ getSpecular WRITE setSpecular NOTIFY specularChanged);
+            Q_PROPERTY(qreal specularPower READ getSpecularPower WRITE setSpecularPower NOTIFY specularPowerChanged);
         private:
             static Qml::Register::Symbol::UncreatableClass<VolumeProperty> Register;
             Volume* m_volume = nullptr;
@@ -41,14 +41,14 @@ namespace quick {
             VolumeProperty(Volume*);
             auto setShade(bool) -> void;
             auto getShade() -> bool;
-            auto setAmbient(float) -> void;
-            auto getAmbient() -> float;
-            auto setDiffuse(float) -> void;
-            auto getDiffuse() -> float;
-            auto setSpecular(float) -> void;
-            auto getSpecular() -> float;
-            auto setSpecularPower(float) -> void;
-            auto getSpecularPower() -> float;
+            auto setAmbient(qreal) -> void;
+            auto getAmbient() -> qreal;
+            auto setDiffuse(qreal) -> void;
+            auto getDiffuse() -> qreal;
+            auto setSpecular(qreal) -> void;
+            auto getSpecular() -> qreal;
+            auto setSpecularPower(qreal) -> void;
+            auto getSpecularPower() -> qreal;
             auto getGradientOpacityFunction() -> PiecewiseFunction*;
             auto getScalarOpacityFunction() -> PiecewiseFunction*;
             auto getTransferFunction() -> ColorTransferFunction*;

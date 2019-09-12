@@ -40,63 +40,63 @@ namespace quick {
             return this->m_vtkObject->GetUseDepthPass();
         }
 
-        auto GPUVolumeRayCastMapper::setSampleDistance(float sampleDistance) -> void {
+        auto GPUVolumeRayCastMapper::setSampleDistance(qreal sampleDistance) -> void {
             this->m_vtkObject->SetSampleDistance(sampleDistance);
             emit this->sampleDistanceChanged();
             this->update();
         }
 
-        auto GPUVolumeRayCastMapper::getSampleDistance() -> float {
+        auto GPUVolumeRayCastMapper::getSampleDistance() -> qreal {
             return this->m_vtkObject->GetSampleDistance();
         }
 
-        auto GPUVolumeRayCastMapper::setImageSampleDistance(float imageSampleDistance) -> void {
+        auto GPUVolumeRayCastMapper::setImageSampleDistance(qreal imageSampleDistance) -> void {
             this->m_vtkObject->SetImageSampleDistance(imageSampleDistance);
             emit this->imageSampleDistanceChanged();
             this->update();
         }
 
-        auto GPUVolumeRayCastMapper::getImageSampleDistance() -> float {
+        auto GPUVolumeRayCastMapper::getImageSampleDistance() -> qreal {
             return this->m_vtkObject->GetImageSampleDistance();
         }
 
-        auto GPUVolumeRayCastMapper::setMinimumImageSampleDistance(float minimumImageSampleDistance) -> void {
+        auto GPUVolumeRayCastMapper::setMinimumImageSampleDistance(qreal minimumImageSampleDistance) -> void {
             this->m_vtkObject->SetMinimumImageSampleDistance(minimumImageSampleDistance);
             emit this->minimumImageSampleDistanceChanged();
             this->update();
         }
 
-        auto GPUVolumeRayCastMapper::getMinimumImageSampleDistance() -> float {
+        auto GPUVolumeRayCastMapper::getMinimumImageSampleDistance() -> qreal {
             return this->m_vtkObject->GetMinimumImageSampleDistance();
         }
 
-        auto GPUVolumeRayCastMapper::setMaximumImageSampleDistance(float maximumImageSampleDistance) -> void {
+        auto GPUVolumeRayCastMapper::setMaximumImageSampleDistance(qreal maximumImageSampleDistance) -> void {
             this->m_vtkObject->SetMaximumImageSampleDistance(maximumImageSampleDistance);
             emit this->maximumImageSampleDistanceChanged();
             this->update();
         }
 
-        auto GPUVolumeRayCastMapper::getMaximumImageSampleDistance() -> float {
+        auto GPUVolumeRayCastMapper::getMaximumImageSampleDistance() -> qreal {
             return this->m_vtkObject->GetMaximumImageSampleDistance();
         }
 
-        auto GPUVolumeRayCastMapper::setFinalColorWindow(float finalColorWindow) -> void {
+        auto GPUVolumeRayCastMapper::setFinalColorWindow(qreal finalColorWindow) -> void {
             this->m_vtkObject->SetFinalColorWindow(finalColorWindow);
             emit this->finalColorWindowChanged();
             this->update();
         }
 
-        auto GPUVolumeRayCastMapper::getFinalColorWindow() -> float {
+        auto GPUVolumeRayCastMapper::getFinalColorWindow() -> qreal {
             return this->m_vtkObject->GetFinalColorWindow();
         }
 
-        auto GPUVolumeRayCastMapper::setFinalColorLevel(float finalColorLevel) -> void {
+        auto GPUVolumeRayCastMapper::setFinalColorLevel(qreal finalColorLevel) -> void {
             this->m_vtkObject->SetFinalColorLevel(finalColorLevel);
             emit this->finalColorLevelChanged();
             this->update();
         }
 
-        auto GPUVolumeRayCastMapper::getFinalColorLevel() -> float {
+        auto GPUVolumeRayCastMapper::getFinalColorLevel() -> qreal {
             return this->m_vtkObject->GetFinalColorLevel();
         }
     }

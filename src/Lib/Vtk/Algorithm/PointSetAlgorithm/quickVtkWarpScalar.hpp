@@ -10,15 +10,15 @@ namespace quick {
 
         class WarpScalar : public PointSetAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(float scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
+            Q_PROPERTY(qreal scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
             Q_PROPERTY(bool useNormal READ getUseNormal WRITE setUseNormal NOTIFY useNormalChanged);
         private:
             static Qml::Register::Symbol::Class<WarpScalar> Register;
             vtkSmartPointer<vtkWarpScalar> m_vtkObject;
         public:
             WarpScalar();
-            auto setScaleFactor(float) -> void;
-            auto getScaleFactor() -> float;
+            auto setScaleFactor(qreal) -> void;
+            auto getScaleFactor() -> qreal;
             auto setUseNormal(bool) -> void;
             auto getUseNormal() -> bool;
         signals:

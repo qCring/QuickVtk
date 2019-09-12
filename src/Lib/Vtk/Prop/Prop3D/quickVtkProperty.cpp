@@ -14,7 +14,7 @@ namespace quick {
             this->m_actor->update();
         }
 
-        auto Property::setDiffuseColor(QColor color) -> void {
+        auto Property::setDiffuseColor(const QColor& color) -> void {
             this->m_diffuseColor = color;
 
             this->m_vtkActor->GetProperty()->SetDiffuseColor(color.redF(), color.greenF(), color.blueF());
@@ -23,7 +23,7 @@ namespace quick {
             emit this->diffuseColorChanged();
         }
 
-        auto Property::setSpecularColor(QColor color) -> void {
+        auto Property::setSpecularColor(const QColor& color) -> void {
             this->m_specularColor = color;
 
             this->m_vtkActor->GetProperty()->SetSpecularColor(color.redF(), color.greenF(), color.blueF());
@@ -32,7 +32,7 @@ namespace quick {
             emit this->specularColorChanged();
         }
 
-        auto Property::setAmbientColor(QColor color) -> void {
+        auto Property::setAmbientColor(const QColor& color) -> void {
             this->m_ambientColor = color;
 
             this->m_vtkActor->GetProperty()->SetAmbientColor(color.redF(), color.greenF(), color.blueF());
@@ -41,7 +41,7 @@ namespace quick {
             emit this->ambientColorChanged();
         }
 
-        auto Property::setEdgeColor(QColor color) -> void {
+        auto Property::setEdgeColor(const QColor& color) -> void {
             this->m_edgeColor = color;
 
             this->m_vtkActor->GetProperty()->SetEdgeColor(color.redF(), color.greenF(), color.blueF());
@@ -80,19 +80,19 @@ namespace quick {
             this->update();
         }
 
-        void Property::setOpacity(float opacity) {
+        void Property::setOpacity(qreal opacity) {
             this->m_vtkActor->GetProperty()->SetOpacity(opacity);
             emit this->opacityChanged();
             this->update();
         }
 
-        auto Property::setLineWidth(float lineWidth) -> void {
+        auto Property::setLineWidth(qreal lineWidth) -> void {
             this->m_vtkActor->GetProperty()->SetLineWidth(lineWidth);
             emit this->lineWidthChanged();
             this->update();
         }
 
-        auto Property::setPointSize(float pointSize) -> void {
+        auto Property::setPointSize(qreal pointSize) -> void {
             this->m_vtkActor->GetProperty()->SetPointSize(pointSize);
             emit this->pointSizeChanged();
             this->update();
@@ -118,25 +118,25 @@ namespace quick {
             return (Representation) this->m_vtkActor->GetProperty()->GetRepresentation();
         }
 
-        auto Property::setAmbient(float ambient) -> void {
+        auto Property::setAmbient(qreal ambient) -> void {
             this->m_vtkActor->GetProperty()->SetAmbient(ambient);
             emit this->ambientChanged();
             this->update();
         }
 
-        auto Property::setDiffuse(float diffuse) -> void {
+        auto Property::setDiffuse(qreal diffuse) -> void {
             this->m_vtkActor->GetProperty()->SetDiffuse(diffuse);
             emit this->diffuseChanged();
             this->update();
         }
 
-        auto Property::setSpecular(float specular) -> void {
+        auto Property::setSpecular(qreal specular) -> void {
             this->m_vtkActor->GetProperty()->SetSpecular(specular);
             emit this->specularChanged();
             this->update();
         }
 
-        auto Property::setSpecularPower(float specularPower) -> void {
+        auto Property::setSpecularPower(qreal specularPower) -> void {
             this->m_vtkActor->GetProperty()->SetSpecularPower(specularPower);
             emit this->specularPowerChanged();
             this->update();
@@ -178,31 +178,31 @@ namespace quick {
             return this->m_vtkActor->GetProperty()->GetBackfaceCulling();
         }
 
-        auto Property::getOpacity() -> float {
+        auto Property::getOpacity() -> qreal {
             return this->m_vtkActor->GetProperty()->GetOpacity();
         }
 
-        auto Property::getLineWidth() -> float {
+        auto Property::getLineWidth() -> qreal {
             return this->m_vtkActor->GetProperty()->GetLineWidth();
         }
 
-        auto Property::getPointSize() -> float {
+        auto Property::getPointSize() -> qreal {
             return this->m_vtkActor->GetProperty()->GetPointSize();
         }
 
-        auto Property::getAmbient() -> float {
+        auto Property::getAmbient() -> qreal {
             return this->m_vtkActor->GetProperty()->GetAmbient();
         }
 
-        auto Property::getDiffuse() -> float {
+        auto Property::getDiffuse() -> qreal {
             return this->m_vtkActor->GetProperty()->GetDiffuse();
         }
 
-        auto Property::getSpecular() -> float {
+        auto Property::getSpecular() -> qreal {
             return this->m_vtkActor->GetProperty()->GetSpecular();
         }
 
-        auto Property::getSpecularPower() -> float {
+        auto Property::getSpecularPower() -> qreal {
             return this->m_vtkActor->GetProperty()->GetSpecularPower();
         }
     }

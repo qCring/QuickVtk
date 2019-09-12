@@ -28,43 +28,43 @@ namespace quick {
             return this->m_principalPoint;
         }
 
-        auto WarpLens::setK1(float k1) -> void {
+        auto WarpLens::setK1(qreal k1) -> void {
             this->m_vtkObject->SetK1(k1);
             emit this->k1Changed();
             this->update();
         }
 
-        auto WarpLens::getK1() -> float {
+        auto WarpLens::getK1() -> qreal {
             return this->m_vtkObject->GetK1();
         }
 
-        auto WarpLens::setK2(float k2) -> void {
+        auto WarpLens::setK2(qreal k2) -> void {
             this->m_vtkObject->SetK2(k2);
             emit this->k2Changed();
             this->update();
         }
 
-        auto WarpLens::getK2() -> float {
+        auto WarpLens::getK2() -> qreal {
             return this->m_vtkObject->GetK2();
         }
 
-        auto WarpLens::setP1(float p1) -> void {
+        auto WarpLens::setP1(qreal p1) -> void {
             this->m_vtkObject->SetP1(p1);
             emit this->p1Changed();
             this->update();
         }
 
-        auto WarpLens::getP1() -> float {
+        auto WarpLens::getP1() -> qreal {
             return this->m_vtkObject->GetP1();
         }
 
-        auto WarpLens::setP2(float p2) -> void {
+        auto WarpLens::setP2(qreal p2) -> void {
             this->m_vtkObject->SetP2(p2);
             emit this->p2Changed();
             this->update();
         }
 
-        auto WarpLens::getP2() -> float {
+        auto WarpLens::getP2() -> qreal {
             return this->m_vtkObject->GetP2();
         }
     }

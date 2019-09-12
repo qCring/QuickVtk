@@ -10,7 +10,7 @@ namespace quick {
             this->m_vtkObject = vtkImageMapper::SafeDownCast(Algorithm::getVtkObject());
         }
 
-        auto ImageMapper::setColorWindow(float colorWindow) -> void {
+        auto ImageMapper::setColorWindow(qreal colorWindow) -> void {
             this->m_vtkObject->SetColorWindow(colorWindow);
             emit this->colorWindowChanged();
             emit this->colorScaleChanged();
@@ -19,11 +19,11 @@ namespace quick {
             this->update();
         }
 
-        auto ImageMapper::getColorWindow() -> float {
+        auto ImageMapper::getColorWindow() -> qreal {
             return this->m_vtkObject->GetColorWindow();
         }
 
-        auto ImageMapper::setColorLevel(float colorLevel) -> void {
+        auto ImageMapper::setColorLevel(qreal colorLevel) -> void {
             this->m_vtkObject->SetColorLevel(colorLevel);
             emit this->colorLevelChanged();
             emit this->colorScaleChanged();
@@ -32,15 +32,15 @@ namespace quick {
             this->update();
         }
 
-        auto ImageMapper::getColorLevel() -> float {
+        auto ImageMapper::getColorLevel() -> qreal {
             return this->m_vtkObject->GetColorLevel();
         }
 
-        auto ImageMapper::getColorShift() -> float {
+        auto ImageMapper::getColorShift() -> qreal {
             return this->m_vtkObject->GetColorShift();
         }
 
-        auto ImageMapper::getColorScale() -> float {
+        auto ImageMapper::getColorScale() -> qreal {
             return this->m_vtkObject->GetColorScale();
         }
     }

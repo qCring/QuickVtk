@@ -13,10 +13,10 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(quick::Math::Vector2* center READ getCenter CONSTANT);
             Q_PROPERTY(quick::Math::Vector2* principalPoint READ getPrincipalPoint CONSTANT);
-            Q_PROPERTY(float k1 READ getK1 WRITE setK1 NOTIFY k1Changed);
-            Q_PROPERTY(float k2 READ getK2 WRITE setK2 NOTIFY k2Changed);
-            Q_PROPERTY(float p1 READ getP1 WRITE setP1 NOTIFY p1Changed);
-            Q_PROPERTY(float p2 READ getP2 WRITE setP2 NOTIFY p2Changed);
+            Q_PROPERTY(qreal k1 READ getK1 WRITE setK1 NOTIFY k1Changed);
+            Q_PROPERTY(qreal k2 READ getK2 WRITE setK2 NOTIFY k2Changed);
+            Q_PROPERTY(qreal p1 READ getP1 WRITE setP1 NOTIFY p1Changed);
+            Q_PROPERTY(qreal p2 READ getP2 WRITE setP2 NOTIFY p2Changed);
         private:
             static Qml::Register::Symbol::Class<WarpLens> Register;
             vtkSmartPointer<vtkWarpLens> m_vtkObject;
@@ -26,14 +26,14 @@ namespace quick {
             WarpLens();
             auto getCenter() -> Math::Vector2*;
             auto getPrincipalPoint() -> Math::Vector2*;
-            auto setK1(float) -> void;
-            auto getK1() -> float;
-            auto setK2(float) -> void;
-            auto getK2() -> float;
-            auto setP1(float) -> void;
-            auto getP1() -> float;
-            auto setP2(float) -> void;
-            auto getP2() -> float;
+            auto setK1(qreal) -> void;
+            auto getK1() -> qreal;
+            auto setK2(qreal) -> void;
+            auto getK2() -> qreal;
+            auto setP1(qreal) -> void;
+            auto getP1() -> qreal;
+            auto setP2(qreal) -> void;
+            auto getP2() -> qreal;
         signals:
             void k1Changed();
             void k2Changed();

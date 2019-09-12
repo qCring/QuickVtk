@@ -19,23 +19,23 @@ namespace quick {
             return this->m_center;
         }
 
-        auto CylinderSource::setHeight(float height) -> void {
+        auto CylinderSource::setHeight(qreal height) -> void {
             this->m_vtkObject->SetHeight(height);
             emit this->heightChanged();
             this->update();
         }
 
-        auto CylinderSource::getHeight() -> float {
+        auto CylinderSource::getHeight() -> qreal {
             return this->m_vtkObject->GetHeight();
         }
 
-        auto CylinderSource::setRadius(float radius) -> void {
+        auto CylinderSource::setRadius(qreal radius) -> void {
             this->m_vtkObject->SetRadius(radius);
             emit this->radiusChanged();
             this->update();
         }
 
-        auto CylinderSource::getRadius() -> float {
+        auto CylinderSource::getRadius() -> qreal {
             return this->m_vtkObject->GetRadius();
         }
 

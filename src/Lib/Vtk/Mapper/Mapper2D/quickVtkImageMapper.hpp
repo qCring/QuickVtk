@@ -10,21 +10,21 @@ namespace quick {
 
         class ImageMapper : public Mapper2D {
             Q_OBJECT
-            Q_PROPERTY(float colorWindow READ getColorWindow WRITE setColorWindow NOTIFY colorWindowChanged);
-            Q_PROPERTY(float colorLevel READ getColorLevel WRITE setColorLevel NOTIFY colorLevelChanged);
-            Q_PROPERTY(float colorShift READ getColorShift NOTIFY colorShiftChanged);
-            Q_PROPERTY(float colorScale READ getColorScale NOTIFY colorScaleChanged);
+            Q_PROPERTY(qreal colorWindow READ getColorWindow WRITE setColorWindow NOTIFY colorWindowChanged);
+            Q_PROPERTY(qreal colorLevel READ getColorLevel WRITE setColorLevel NOTIFY colorLevelChanged);
+            Q_PROPERTY(qreal colorShift READ getColorShift NOTIFY colorShiftChanged);
+            Q_PROPERTY(qreal colorScale READ getColorScale NOTIFY colorScaleChanged);
         private:
             static Qml::Register::Symbol::Class<ImageMapper> Register;
             vtkSmartPointer<vtkImageMapper> m_vtkObject;
         public:
             ImageMapper();
-            auto setColorWindow(float) -> void;
-            auto getColorWindow() -> float;
-            auto setColorLevel(float) -> void;
-            auto getColorLevel() -> float;
-            auto getColorShift() -> float;
-            auto getColorScale() -> float;
+            auto setColorWindow(qreal) -> void;
+            auto getColorWindow() -> qreal;
+            auto setColorLevel(qreal) -> void;
+            auto getColorLevel() -> qreal;
+            auto getColorShift() -> qreal;
+            auto getColorScale() -> qreal;
         signals:
             void colorWindowChanged();
             void colorLevelChanged();

@@ -10,7 +10,7 @@ namespace quick {
 
         class PolyDataNormals : public PolyDataAlgorithm {
             Q_OBJECT
-            Q_PROPERTY(float featureAngle READ getFeatureAngle WRITE setFeatureAngle NOTIFY featureAngleChanged);
+            Q_PROPERTY(qreal featureAngle READ getFeatureAngle WRITE setFeatureAngle NOTIFY featureAngleChanged);
             Q_PROPERTY(bool splitting READ getSplitting WRITE setSplitting NOTIFY splittingChanged);
             Q_PROPERTY(bool consistency READ getConsistency WRITE setConsistency NOTIFY consistencyChanged);
             Q_PROPERTY(bool autoOrientNormals READ getAutoOrientNormals WRITE setAutoOrientNormals NOTIFY autoOrientNormalsChanged);
@@ -23,8 +23,8 @@ namespace quick {
             vtkSmartPointer<vtkPolyDataNormals> m_vtkObject;
         public:
             PolyDataNormals();
-            auto setFeatureAngle(float) -> void;
-            auto getFeatureAngle() -> float;
+            auto setFeatureAngle(qreal) -> void;
+            auto getFeatureAngle() -> qreal;
             auto setSplitting(bool) -> void;
             auto getSplitting() -> bool;
             auto setConsistency(bool) -> void;

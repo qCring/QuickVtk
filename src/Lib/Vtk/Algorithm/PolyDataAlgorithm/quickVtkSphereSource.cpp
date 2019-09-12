@@ -25,7 +25,7 @@ namespace quick {
             this->update();
         }
 
-        auto SphereSource::setRadius(float radius) -> void {
+        auto SphereSource::setRadius(qreal radius) -> void {
             this->m_vtkObject->SetRadius(radius);
             emit this->radiusChanged();
             this->update();
@@ -43,25 +43,25 @@ namespace quick {
             this->update();
         }
 
-        auto SphereSource::setStartTheta(float value) -> void {
+        auto SphereSource::setStartTheta(qreal value) -> void {
             this->m_vtkObject->SetStartTheta(value);
             emit this->startThetaChanged();
             this->update();
         }
 
-        auto SphereSource::setStartPhi(float value) -> void {
+        auto SphereSource::setStartPhi(qreal value) -> void {
             this->m_vtkObject->SetStartPhi(value);
             emit this->startPhiChanged();
             this->update();
         }
 
-        auto SphereSource::setEndTheta(float value) -> void {
+        auto SphereSource::setEndTheta(qreal value) -> void {
             this->m_vtkObject->SetEndTheta(value);
             emit this->endThetaChanged();
             this->update();
         }
 
-        auto SphereSource::setEndPhi(float value) -> void {
+        auto SphereSource::setEndPhi(qreal value) -> void {
             this->m_vtkObject->SetEndPhi(value);
             emit this->endPhiChanged();
             this->update();
@@ -79,23 +79,23 @@ namespace quick {
             return this->m_vtkObject->GetPhiResolution();
         }
 
-        auto SphereSource::getStartTheta() -> float {
+        auto SphereSource::getStartTheta() -> qreal {
             return this->m_vtkObject->GetStartTheta();
         }
 
-        auto SphereSource::getStartPhi() -> float {
+        auto SphereSource::getStartPhi() -> qreal {
             return this->m_vtkObject->GetStartPhi();
         }
 
-        auto SphereSource::getEndTheta() -> float {
+        auto SphereSource::getEndTheta() -> qreal {
             return this->m_vtkObject->GetEndTheta();
         }
 
-        auto SphereSource::getEndPhi() -> float {
+        auto SphereSource::getEndPhi() -> qreal {
             return this->m_vtkObject->GetEndPhi();
         }
 
-        auto SphereSource::getRadius() -> float {
+        auto SphereSource::getRadius() -> qreal {
             return this->m_vtkObject->GetRadius();
         }
     }

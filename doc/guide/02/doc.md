@@ -46,7 +46,7 @@ One of QML's major features are [**Property Bindings**](https://doc.qt.io/qt-5/q
 Instead of using constant values for the Rectangle's `width`, `height` and `radius` properties, we simply define them relative to the parent object in a declarative fashion. The root object's parent is always the viewport of the preview area on the right side. You can drag the separator between the preview and the built-in editor or resize the application window to see how changing the size affects the `Rectangle` element
 
 #### 4. Object hierarchy
-Next, we'll add a child to the `Rectangle` to display the second hand of our stopwatch. The `anchors` property is used for [**item positioning**](https://doc.qt.io/qt-5/qtquick-positioning-topic.html). The `width` property of the inner `Rectangle` scales with the `parent` object which in this case points to the outer `Rectangle`. As you can see, the `parent` is always relative to the current object scope
+Next, we will add a child to the `Rectangle` to display the second hand of our stop watch. The `anchors` property is used for [**item positioning**](https://doc.qt.io/qt-5/qtquick-positioning-topic.html). The `width` property of the inner `Rectangle` scales with the `parent` object which in this case points to the outer `Rectangle`. As you can see, the `parent` is always relative to the current object scope
 
 ```QML
 import QtQuick 2.3
@@ -77,7 +77,7 @@ Rectangle {
 ```
 
 #### 5. Adding a Timer
-In order to rotate the inner `Rectangle` each time a second passes, we need to add a [**Timer**](https://doc.qt.io/qt-5/qml-qtqml-timer.html) object. Not every type in the hierarchy is necessarily visible. This is also the case for [**Timer**](https://doc.qt.io/qt-5/qml-qtqml-timer.html) instances. We'll use this object only to invoke a [**Handler**](https://doc.qt.io/qt-5/qtqml-syntax-signals.html) which basically is a JavaScript function. The underlying QML engine provides a built-in [**JavaScript runtime**](https://doc.qt.io/qt-5/qtqml-javascript-expressions.html) in order to enable imperative programming 
+In order to rotate the inner `Rectangle` each time a second passes, we need to add a [**Timer**](https://doc.qt.io/qt-5/qml-qtqml-timer.html) object. Not every type in the hierarchy is necessarily visible. This is also the case for [**Timer**](https://doc.qt.io/qt-5/qml-qtqml-timer.html) instances. We will use this object only to invoke a [**Handler**](https://doc.qt.io/qt-5/qtqml-syntax-signals.html) which basically is a JavaScript function. The underlying QML engine provides a built-in [**JavaScript runtime**](https://doc.qt.io/qt-5/qtqml-javascript-expressions.html) in order to enable imperative programming 
 
 The [**Timer**](https://doc.qt.io/qt-5/qml-qtqml-timer.html) is initialized with the properties `running` and `repeat` set to `true` and an `interval` of `1000`. In this case, the expression assigned to `onTriggered` will be invoked every second
 
@@ -163,7 +163,7 @@ Rectangle {
 ```
 
 #### 7. Animation
-A classic approach to animate the second hand would be to rotate the `Rectangle` from within the previously added function. There is nothing wrong about that but to demonstrate the advantages of declarative programming, we'll do this differently. First, we assign a `Rotation` component to the inner object's `transform` and set the `origin` to the relative position `(5, 5)`. This is purely cosmetic and simply moves the rotation axis from the rectangle's top-left corner to the center, taking the rectangle's constant height of `10` into account. The actual rotation is performed by assigning the expression `clock.second * 6 - 90` to the `angle` property 
+A classic approach to animate the second hand would be to rotate the `Rectangle` from within the previously added function. There is nothing wrong about that but to demonstrate the advantages of declarative programming, we will do this differently. First, we assign a `Rotation` component to the inner object's `transform` and set the `origin` to the relative position `(5, 5)`. This is purely cosmetic and simply moves the rotation axis from the rectangle's top-left corner to the center, taking the rectangle's constant height of `10` into account. The actual rotation is performed by assigning the expression `clock.second * 6 - 90` to the `angle` property 
 
 We can rely on [**Property Bindings**](https://doc.qt.io/qt-5/qtqml-syntax-propertybinding.html) to calculate the correct angle. Every time the `second` property is changed in the `timeChanged` function, the `angle` property will be re-evaluated. The calculation is simple: A full rotation equals 360° and there are 60 seconds. So each second we want to apply a rotation of `n` times 360°/60, where `n` equals the current second. For any value of `clock.second` the expression `clock.second * 6` returns the correct angle. Since the hand is pointing up, we also have to subtract a constant 90°
 
@@ -284,7 +284,7 @@ To discuss user interaction on a basic level, we will add two buttons to manuall
 	<image src="screen-02.png">
 </center>
 
-There are some things worth mentioning. First, the timer now has an `id` which is necessary to access the `running` property and invoke the built-in `restart` method from outside the timer's scope. The label on the left changes it's text depending on whether the timer is currently running or not. For this, the ternary `? :` operator is used. 
+There are some things worth mentioning. First, the timer now has an `id` which is necessary to access the `running` property and invoke the built-in `restart` method from outside the timer's scope. The label on the left changes its text depending on whether the timer is currently running or not. For this, the ternary `? :` operator is used. 
 
 The line `text: timer.running? "Stop" : "Start"` demonstrates a common way to perform state-dependent assignments in a declarative way. The same goes for the `color` property. We assign a specific color depending on the timer's `running` flag by writing `color: timer.running ? "#f84" : "#48f"`
 

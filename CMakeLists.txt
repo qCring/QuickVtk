@@ -9,10 +9,13 @@ set(PROJECT_NAME "QuickVtk")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(CMAKE_DEBUG_POSTFIX "d")
+
+# c++14 for all targets
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(${PROJECT_NAME})
 
@@ -160,20 +163,6 @@ else()
     add_executable(${PROJECT_NAME} ${list_app_src})
 endif()
 
-# c++11
-# ******************************************************************************
-if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER 3.0)
-    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
-    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
-else()
-    if(APPLE)
-        list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -stdlib=libc++")
-    endif()
-    if(UNIX AND NOT APPLE)
-        list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    endif()
-endif()
-
 # configure files
 # ******************************************************************************
 configure_file(${ROOT_DIR}/cmake/meta_quickvtk.hpp.in ${BINARY_DIR}/meta_quickvtk.hpp)
@@ -190,10 +179,16 @@ endif()
 
 # setup api-docs generator target
 # ******************************************************************************
-add_executable("API-Docs" "${SOURCE_DIR}/API-Docs/main.cpp")
-target_link_libraries("API-Docs" ${LINK_LIBRARIES} ${LIB_NAME})
-target_include_directories("API-Docs" PRIVATE ${list_lib_hdr})
-target_include_directories("API-Docs" PUBLIC ${BINARY_DIR})
+set(API_DOCS_TARGET "API-Docs")
+add_executable(${API_DOCS_TARGET}
+  "${SOURCE_DIR}/API-Docs/main.cpp"
+  "${SOURCE_DIR}/API-Docs/APIGenerator.hpp"
+  "${SOURCE_DIR}/API-Docs/APIGenerator.cpp"
+)
+
+target_link_libraries(${API_DOCS_TARGET} ${LINK_LIBRARIES} ${LIB_NAME})
+target_include_directories(${API_DOCS_TARGET} PRIVATE ${list_lib_hdr})
+target_include_directories(${API_DOCS_TARGET} PUBLIC ${BINARY_DIR})
 
 # includes
 # ******************************************************************************

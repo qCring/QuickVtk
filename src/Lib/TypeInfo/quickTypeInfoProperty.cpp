@@ -25,11 +25,13 @@ namespace quick {
                     type = "string";
                 }
             }
-
-            if (type.startsWith("Q") && type.length() > 2) {
-                QChar character = type.at(1);
-                type = type.remove(0, 2);
-                type.push_front(character.toLower());
+            
+            if (type.compare("QString") == 0) {
+                type = "string";
+            } else if (type.compare("QColor") == 0) {
+                type = "color";
+            } else if (type.compare("double") == 0) {
+                type = "real";
             }
 
             auto property = new Property();
@@ -37,8 +39,7 @@ namespace quick {
             property->m_type = type;
             property->m_name = name;
             property->m_sequence = sequence;
-            property->m_readable = metaProperty.isReadable();
-            property->m_writable = metaProperty.isWritable();
+            property->m_readonly = !metaProperty.isWritable();
 
             return property;
         }
@@ -55,12 +56,8 @@ namespace quick {
             return this->m_sequence;
         }
 
-        auto Property::isWritable() -> bool {
-            return this->m_writable;
-        }
-
-        auto Property::isReadable() -> bool {
-            return this->m_readable;
+        auto Property::isReadonly() -> bool {
+            return this->m_readonly;
         }
     }
 }

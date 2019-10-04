@@ -35,6 +35,8 @@ namespace quick {
             auto getBase() -> QString;
             auto addProperty(QMetaProperty) -> void;
             auto addMethod(QMetaMethod) -> void;
+            auto getAllProperties() -> QList<Property*>;
+            auto getAllMethods() -> QList<Method*>;
         };
     }
 }

@@ -93,5 +93,9 @@ namespace quick {
         auto List::getTotalCount() -> int {
             return this->m_allSymbols.count();
         }
+    
+        auto List::getAllSymbols() -> QList<Symbol*> {
+            return this->m_allSymbols;
+        }
     }
 }

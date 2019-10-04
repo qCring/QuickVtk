@@ -37,6 +37,8 @@ namespace quick {
                 if (!basePrefix.isEmpty()) {
                     retVal = basePrefix + "." + baseName;
                 }
+            } else {
+                retVal = base.className();
             }
 
             return retVal;

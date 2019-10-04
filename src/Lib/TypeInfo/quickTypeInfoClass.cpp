@@ -48,5 +48,12 @@ namespace quick {
                 this->m_methods.append(method);
             }
         }
+    
+        auto Class::getAllProperties() -> QList<Property*> {
+            return this->m_properties;
+        }
+        auto Class::getAllMethods() -> QList<Method*> {
+            return this->m_methods;
+        }
     }
 }

@@ -72,7 +72,7 @@ Item {
         anchors.right: parent.right;
         anchors.rightMargin: 4;
 
-        text: item.writable ? item.readable ? "R+W" : "W" : "R";
+        text: item.readonly ? "R" : "R+W";
         font.pointSize: 8;
         font.bold: true;
         color: "#6E7582";

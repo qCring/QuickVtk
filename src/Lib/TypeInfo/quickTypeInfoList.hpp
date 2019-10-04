@@ -41,6 +41,7 @@ namespace quick {
             auto rowCount(const QModelIndex& = QModelIndex()) const -> int;
             auto data(const QModelIndex&, int) const -> QVariant;
             auto roleNames() const -> QHash<int, QByteArray>;
+            auto getAllSymbols() -> QList<Symbol*>;
         signals:
             void visibleChanged();
             void filterChanged();

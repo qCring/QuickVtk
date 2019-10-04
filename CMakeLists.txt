@@ -188,6 +188,13 @@ if(APPLE)
   set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${BINARY_DIR}/info.plist)
 endif()
 
+# setup api-docs generator target
+# ******************************************************************************
+add_executable("API-Docs" "${SOURCE_DIR}/API-Docs/main.cpp")
+target_link_libraries("API-Docs" ${LINK_LIBRARIES} ${LIB_NAME})
+target_include_directories("API-Docs" PRIVATE ${list_lib_hdr})
+target_include_directories("API-Docs" PUBLIC ${BINARY_DIR})
+
 # includes
 # ******************************************************************************
 target_include_directories(${PROJECT_NAME} PUBLIC ${BINARY_DIR})
@@ -222,13 +229,13 @@ if(NOT APPLE)
         PUBLIC_HEADER DESTINATION "include"
         FRAMEWORK DESTINATION Library/Frameworks
         COMPONENT libraries)
-        
+
   install(
    EXPORT QuickVtkLib-targets
     DESTINATION lib/cmake/QuickVtkLib
     FILE QuickVtkLib-config.cmake
     COMPONENT headers)
-    
+
   install(
     TARGETS QuickVtk
       EXPORT QuickVtk-targets

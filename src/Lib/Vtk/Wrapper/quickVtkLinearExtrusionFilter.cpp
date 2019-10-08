@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<LinearExtrusionFilter> LinearExtrusionFilter::Register;
+        Qml::Register::Symbol::Class<LinearExtrusionFilter> LinearExtrusionFilter::Register(true);
 
         LinearExtrusionFilter::LinearExtrusionFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkLinearExtrusionFilter>::New()) {
             this->m_vtkObject = vtkLinearExtrusionFilter::SafeDownCast(Algorithm::getVtkObject());

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::AbstractClass<DataReader> DataReader::Register;
+        Qml::Register::Symbol::AbstractClass<DataReader> DataReader::Register(true);
 
         DataReader::DataReader(vtkSmartPointer<vtkDataReader> vtkObject) : Algorithm(vtkObject) {
             this->m_vtkObject = vtkObject;

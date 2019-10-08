@@ -6,7 +6,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<Cutter> Cutter::Register;
+        Qml::Register::Symbol::Class<Cutter> Cutter::Register(true);
 
         Cutter::Cutter() : PolyDataAlgorithm(vtkSmartPointer<vtkCutter>::New()) {
             this->m_vtkObject = vtkCutter::SafeDownCast(Algorithm::getVtkObject());

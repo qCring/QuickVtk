@@ -133,10 +133,6 @@ namespace quick {
             generateMethodJson(method, methodsJson);
         }
         
-        if (classType->getPrefix().compare("Vtk") == 0) {
-            root[Key::VtkType] = "vtk" + classType->getName();
-        }
-        
         if (!propertiesJson.isEmpty()) {
             root[Key::Properties] = propertiesJson;
         }

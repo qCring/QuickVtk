@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::AbstractClass<DataSetAlgorithm> DataSetAlgorithm::Register;
+        Qml::Register::Symbol::AbstractClass<DataSetAlgorithm> DataSetAlgorithm::Register(true);
 
         DataSetAlgorithm::DataSetAlgorithm(vtkSmartPointer<vtkDataSetAlgorithm> vtkObject) : Algorithm(vtkObject) {
         }

@@ -23,7 +23,6 @@ namespace quick {
             static constexpr auto Base = "base";
             static constexpr auto Name = "name";
             static constexpr auto Type = "type";
-            static constexpr auto VtkType = "vtk_type";
             static constexpr auto Readonly = "readonly";
             static constexpr auto Args = "args";
             static constexpr auto Return = "return";

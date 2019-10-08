@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<RotationalExtrusionFilter> RotationalExtrusionFilter::Register;
+        Qml::Register::Symbol::Class<RotationalExtrusionFilter> RotationalExtrusionFilter::Register(true);
 
         RotationalExtrusionFilter::RotationalExtrusionFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkRotationalExtrusionFilter>::New()) {
             this->m_vtkObject = vtkRotationalExtrusionFilter::SafeDownCast(Algorithm::getVtkObject());

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<StructuredPointsReader> StructuredPointsReader::Register;
+        Qml::Register::Symbol::Class<StructuredPointsReader> StructuredPointsReader::Register(true);
 
         StructuredPointsReader::StructuredPointsReader() : DataReader(vtkSmartPointer<vtkStructuredPointsReader>::New()) {
         }

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<GPUVolumeRayCastMapper> GPUVolumeRayCastMapper::Register;
+        Qml::Register::Symbol::Class<GPUVolumeRayCastMapper> GPUVolumeRayCastMapper::Register(true);
 
         GPUVolumeRayCastMapper::GPUVolumeRayCastMapper() : VolumeMapper(vtkSmartPointer<vtkGPUVolumeRayCastMapper>::New()) {
             this->m_vtkObject = vtkGPUVolumeRayCastMapper::SafeDownCast(this->getVtkObject());

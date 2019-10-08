@@ -7,7 +7,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<Actor> Actor::Register;
+        Qml::Register::Symbol::Class<Actor> Actor::Register(true);
 
         Actor::Actor() : Prop3D(vtkSmartPointer<vtkActor>::New()) {
             this->m_vtkObject = vtkActor::SafeDownCast(Prop::getVtkObject());

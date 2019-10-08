@@ -6,7 +6,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<Volume> Volume::Register;
+        Qml::Register::Symbol::Class<Volume> Volume::Register(true);
 
         Volume::Volume() : Prop3D(vtkSmartPointer<vtkVolume>::New()) {
             this->m_vtkVolume = vtkVolume::SafeDownCast(Prop::getVtkObject());

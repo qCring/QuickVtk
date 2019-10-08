@@ -5,7 +5,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::AbstractClass<AbstractPolyDataReader> AbstractPolyDataReader::Register;
+        Qml::Register::Symbol::AbstractClass<AbstractPolyDataReader> AbstractPolyDataReader::Register(true);
 
         AbstractPolyDataReader::AbstractPolyDataReader(vtkSmartPointer<vtkAbstractPolyDataReader> vtkObject) : PolyDataAlgorithm(vtkObject) {
             this->m_vtkObject = vtkObject;

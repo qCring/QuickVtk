@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<PlatonicSolidSource> PlatonicSolidSource::Register;
+        Qml::Register::Symbol::Class<PlatonicSolidSource> PlatonicSolidSource::Register(true);
 
         PlatonicSolidSource::PlatonicSolidSource() : PolyDataAlgorithm(vtkSmartPointer<vtkPlatonicSolidSource>::New()) {
             this->m_vtkObject = vtkPlatonicSolidSource::SafeDownCast(Algorithm::getVtkObject());

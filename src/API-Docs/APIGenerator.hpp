@@ -36,7 +36,8 @@ namespace quick {
     private:
         QString output_root_dir;
         QList<TypeInfo::Symbol*> typeList;
-        QDir doc_dir;
+        QDir docs_dir;
+        QSet<QString> doc_dirs;
     private:
         auto init() -> bool;
         auto generateAPIJson() -> void;

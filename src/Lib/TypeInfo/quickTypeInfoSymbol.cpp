@@ -5,6 +5,7 @@
 #include "quickTypeInfoClass.hpp"
 
 #include <QMetaEnum>
+#include <QString>
 
 namespace quick {
 
@@ -49,6 +50,35 @@ namespace quick {
         auto Symbol::GetEnums() -> QStringList& {
             static QStringList Enums { ".TransformOrigin" };
             return Enums;
+        }
+    
+        auto Symbol::PrettifyTypeName(QString typeName) -> QString {
+            auto prettyTypeName = typeName.remove("*").remove("quick::").replace("::", ".");
+
+            if (prettyTypeName.contains("List")) {
+                auto bracketOpenIndex = prettyTypeName.lastIndexOf("<");
+                auto bracketCloseIndex = prettyTypeName.lastIndexOf(">");
+                
+                if (bracketOpenIndex && bracketCloseIndex) {
+                    prettyTypeName = "List <" + PrettifyType(prettyTypeName.mid(bracketOpenIndex + 1, bracketCloseIndex - bracketOpenIndex - 1)) + ">";
+                }
+            } else {
+                prettyTypeName = PrettifyType(prettyTypeName);
+            }
+            
+            return prettyTypeName;
+        }
+    
+        auto Symbol::PrettifyType(QString typeString) -> QString {
+            if (typeString.compare("QString") == 0) {
+                typeString = "string";
+            } else if (typeString.compare("QColor") == 0) {
+                typeString = "color";
+            } else if (typeString.compare("double") == 0) {
+                typeString = "real";
+            }
+            
+            return typeString;
         }
 
         auto Symbol::MakeEnum(QMetaEnum metaEnum) -> void {

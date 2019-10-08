@@ -18,7 +18,7 @@ namespace quick {
             generateAPIJson();
             generateAPIDocs();
             
-            std::cout << "\n\ndone!" << std::endl;
+            std::cout << "\ndone." << std::endl;
             
             return 0;
         }
@@ -30,16 +30,16 @@ namespace quick {
         
         quick::Qml::Register::Init();
         
-        doc_dir.cdUp();         // cdUp to 'bin'
-        doc_dir.cdUp();         // cdUp to project root directory 'QuickVtk'
-        doc_dir.cd("doc");      // cd to 'doc'
+        docs_dir.cdUp();         // cdUp to 'bin'
+        docs_dir.cdUp();         // cdUp to project root directory 'QuickVtk'
+        docs_dir.cd("docs");     // cd to 'docs'
 
-        if (!doc_dir.exists(json_path) && !doc_dir.mkpath(json_path)) {
+        if (!docs_dir.exists(json_path) && !docs_dir.mkpath(json_path)) {
             std::cerr << "unable to create directory '" << json_path << std::endl;
             return false;
         }
         
-        if (!doc_dir.exists(docs_path) && !doc_dir.mkpath(docs_path)) {
+        if (!docs_dir.exists(docs_path) && !docs_dir.mkpath(docs_path)) {
             std::cerr << "unable to create directory '" << docs_path << std::endl;
             return false;
         }
@@ -59,7 +59,7 @@ namespace quick {
             return false;
         }
         
-        output_root_dir = doc_dir.absolutePath();
+        output_root_dir = docs_dir.absolutePath();
         
         return true;
     }
@@ -68,7 +68,7 @@ namespace quick {
         
         auto filePath = output_root_dir + "/" + json_path + "/api.json";
         
-        std::cout << "generate api.json at '" << filePath.toStdString() << "'" << std::endl;
+        std::cout << "generate " << filePath.toStdString() << std::endl;
         
         QFile file(filePath);
         
@@ -99,17 +99,21 @@ namespace quick {
         auto type = symbol->getType();
         auto identifier = prefix + "." + name;
         
-        QJsonObject json;
-        
-        json[Key::Namespace] = prefix;
-        json[Key::Name] = name;
-        json[Key::Type] = type;
-        
         if (type.compare("class") == 0 || type.compare("abstract") == 0) {
+            QJsonObject json;
+            
+            if (!doc_dirs.contains(prefix)) {
+                doc_dirs.insert(prefix);
+            }
+            
+            json[Key::Namespace] = prefix;
+            json[Key::Name] = name;
+            json[Key::Type] = type;
+            
             generateClassJson(static_cast<quick::TypeInfo::Class*>(symbol), json);
+            
+            root[identifier] = json;
         }
-                            
-        root[identifier] = json;
     }
 
     auto APIGenerator::generateClassJson(TypeInfo::Class* classType, QJsonObject& root) -> void {
@@ -137,7 +141,7 @@ namespace quick {
         }
         
         if (!methodsJson.isEmpty()) {
-            root[Key::Properties] = methodsJson;
+            root[Key::Methods] = methodsJson;
         }
         
         root[Key::Base] = classType->getBase();
@@ -168,7 +172,17 @@ namespace quick {
 
     auto APIGenerator::generateAPIDocs() -> void {
         
-        doc_dir.cd(docs_path);
+        docs_dir.cd(docs_path);
+        
+        for (auto dir : doc_dirs) {
+            
+            if (docs_dir.exists(dir)) {
+                QDir sub_dir(docs_dir.absolutePath() + "/" + dir);
+                sub_dir.removeRecursively();
+            }
+            
+            docs_dir.mkpath(dir);
+        }
         
         for (auto type : typeList) {
             generateDocFile (type);
@@ -183,22 +197,19 @@ namespace quick {
             return;
         }
         
-        auto name = symbol->getName();
-        auto dir_path = doc_dir.absolutePath() + "/" + prefix;
-        
-        std::cout << "generate " << name.toStdString() << ".md at '" << dir_path.toStdString() << "'" << std::endl;
-        
-        if (!doc_dir.exists(prefix) && !doc_dir.mkpath(prefix)) {
-            std::cerr << "unable to create directory '" << dir_path.toStdString() << std::endl;
+        if (symbol->getType().compare("enum") == 0) {
             return;
         }
         
-        auto filePath = dir_path + "/" + name + ".md";
+        auto name = symbol->getName();
+        auto file_path = docs_dir.absolutePath() + "/" + prefix + "/" + name + ".md";
         
-        QFile file(filePath);
+        std::cout << "generate " << file_path.toStdString() << "'" << std::endl;
+        
+        QFile file(file_path);
         
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            std::cerr << "unable to open file '" << filePath.toStdString() << "'" << std::endl;
+            std::cerr << "unable to open file '" << file_path.toStdString() << "'" << std::endl;
             return;
         }
         

@@ -1,4 +1,5 @@
 #include "quickTypeInfoProperty.hpp"
+#include "quickTypeInfoSymbol.hpp"
 
 namespace quick {
 
@@ -14,29 +15,15 @@ namespace quick {
             }
 
             auto sequence = false;
-            auto type = QString(metaProperty.typeName()).remove("*").remove("quick::").replace("::", ".");
+            auto typeName = Symbol::PrettifyTypeName(QString(metaProperty.typeName()));
 
-            if (type.contains("List")) {
+            if (typeName.contains("List")) {
                 sequence = true;
-                if (auto bracketIndex = type.lastIndexOf("<")) {
-                    type.remove(0, bracketIndex + 1);
-                    type = type.remove("<").remove(">");
-                } else if (type.contains("string")) {
-                    type = "string";
-                }
             }
             
-            if (type.compare("QString") == 0) {
-                type = "string";
-            } else if (type.compare("QColor") == 0) {
-                type = "color";
-            } else if (type.compare("double") == 0) {
-                type = "real";
-            }
-
             auto property = new Property();
 
-            property->m_type = type;
+            property->m_type = typeName;
             property->m_name = name;
             property->m_sequence = sequence;
             property->m_readonly = !metaProperty.isWritable();

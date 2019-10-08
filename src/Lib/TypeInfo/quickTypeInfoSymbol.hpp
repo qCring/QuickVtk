@@ -31,11 +31,13 @@ namespace quick {
             QString m_prefix;
         private:
             static auto GetEnums() -> QStringList&;
+            static auto PrettifyType(QString) -> QString;
         public:
             static Qml::Register::Type<Symbol> Register;
             static auto MakeEnum(QMetaEnum) -> void;
             static auto MakeClass(QMetaObject) -> void;
             static auto MakeAbstractClass(QMetaObject) -> void;
+            static auto PrettifyTypeName(QString) -> QString;
             auto operator < (const Symbol&) -> const bool;
             auto getColor() -> QColor;
             auto getType() -> QString;

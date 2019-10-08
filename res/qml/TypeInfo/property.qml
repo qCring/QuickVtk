@@ -32,17 +32,6 @@ Item {
         }
 
         Lib.Label {
-            id: typePrefix;
-
-            anchors.verticalCenter: parent.verticalCenter;
-
-            visible: item.sequence;
-            font.pointSize: 12;
-            color: root.typeColor;
-            text: "list <"
-        }
-
-        Lib.Label {
             id: typeLabel;
 
             anchors.verticalCenter: parent.verticalCenter;
@@ -51,17 +40,6 @@ Item {
             color: item.sequence ? "#fff" : root.typeColor;
 
             text: item.type;
-        }
-
-        Lib.Label {
-            id: typeSuffix;
-
-            anchors.verticalCenter: parent.verticalCenter;
-
-            visible: item.sequence;
-            font.pointSize: 12;
-            color: root.typeColor;
-            text: ">"
         }
     }
 

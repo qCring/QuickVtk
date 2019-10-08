@@ -114,7 +114,7 @@ namespace quick {
             symbol->m_color = "#319CD3";
             symbol->m_isWrapper = isWrapper;
 
-            for (auto i = 0; i < metaObject.propertyCount(); ++i) {
+            for (auto i = metaObject.propertyOffset(); i < metaObject.propertyCount(); ++i) {
                 symbol->addProperty(metaObject.property(i));
             }
 

@@ -29,20 +29,22 @@ namespace quick {
             QString m_type;
             QString m_name;
             QString m_prefix;
+            bool m_isWrapper;
         private:
             static auto GetEnums() -> QStringList&;
             static auto PrettifyType(QString) -> QString;
         public:
             static Qml::Register::Type<Symbol> Register;
             static auto MakeEnum(QMetaEnum) -> void;
-            static auto MakeClass(QMetaObject) -> void;
-            static auto MakeAbstractClass(QMetaObject) -> void;
+            static auto MakeClass(QMetaObject, bool isWrapper) -> void;
+            static auto MakeAbstractClass(QMetaObject, bool isWrapper) -> void;
             static auto PrettifyTypeName(QString) -> QString;
             auto operator < (const Symbol&) -> const bool;
             auto getColor() -> QColor;
             auto getType() -> QString;
             auto getName() -> QString;
             auto getPrefix() -> QString;
+            auto isWrapper() -> bool;
             auto matches(const QString&) -> bool;
         };
     }

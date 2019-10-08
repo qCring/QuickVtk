@@ -109,6 +109,7 @@ namespace quick {
             json[Key::Namespace] = prefix;
             json[Key::Name] = name;
             json[Key::Type] = type;
+            json[Key::Wrapper] = symbol->isWrapper();
             
             generateClassJson(static_cast<quick::TypeInfo::Class*>(symbol), json);
             

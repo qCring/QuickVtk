@@ -104,7 +104,7 @@ namespace quick {
             List::Add(symbol);
         }
 
-        auto Symbol::MakeClass(QMetaObject metaObject) -> void {
+        auto Symbol::MakeClass(QMetaObject metaObject, bool isWrapper) -> void {
             auto symbol = new Class();
 
             symbol->setBase(Get::BaseString(metaObject));
@@ -112,6 +112,7 @@ namespace quick {
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "class";
             symbol->m_color = "#319CD3";
+            symbol->m_isWrapper = isWrapper;
 
             for (auto i = 0; i < metaObject.propertyCount(); ++i) {
                 symbol->addProperty(metaObject.property(i));
@@ -127,7 +128,7 @@ namespace quick {
             List::Add(symbol);
         }
 
-        auto Symbol::MakeAbstractClass(QMetaObject metaObject) -> void {
+        auto Symbol::MakeAbstractClass(QMetaObject metaObject, bool isWrapper) -> void {
             auto symbol = new Class();
 
             symbol->setBase(Get::BaseString(metaObject));
@@ -135,6 +136,7 @@ namespace quick {
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "abstract";
             symbol->m_color = "#9DA5B4";
+            symbol->m_isWrapper = isWrapper;
 
             symbol->setAbstract(true);
 
@@ -179,6 +181,10 @@ namespace quick {
 
         auto Symbol::getColor() -> QColor {
             return this->m_color;
+        }
+    
+        auto Symbol::isWrapper() -> bool {
+            return this->m_isWrapper;
         }
     }
 }

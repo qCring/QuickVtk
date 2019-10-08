@@ -17,12 +17,12 @@ namespace quick {
                         TypeInfo::Symbol::MakeEnum(metaEnum);
                     }
 
-                    auto Class(QMetaObject metaObject) -> void {
-                        TypeInfo::Symbol::MakeClass(metaObject);
+                    auto Class(QMetaObject metaObject, bool isWrapper) -> void {
+                        TypeInfo::Symbol::MakeClass(metaObject, isWrapper);
                     }
 
-                    auto AbstractClass(QMetaObject metaObject) -> void {
-                        TypeInfo::Symbol::MakeAbstractClass(metaObject);
+                    auto AbstractClass(QMetaObject metaObject, bool isWrapper) -> void {
+                        TypeInfo::Symbol::MakeAbstractClass(metaObject, isWrapper);
                     }
                 }
             }

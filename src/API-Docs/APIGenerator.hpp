@@ -27,6 +27,7 @@ namespace quick {
             static constexpr auto Readonly = "readonly";
             static constexpr auto Args = "args";
             static constexpr auto Return = "return";
+            static constexpr auto Wrapper = "wrapper";
         };
         
     private:

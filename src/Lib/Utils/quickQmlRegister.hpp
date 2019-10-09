@@ -54,14 +54,14 @@ namespace quick {
 
                 namespace Make {
                     auto Enum(QMetaEnum) -> void;
-                    auto Class(QMetaObject) -> void;
-                    auto AbstractClass(QMetaObject) -> void;
+                    auto Class(QMetaObject, bool isWrapper) -> void;
+                    auto AbstractClass(QMetaObject, bool isWrapper) -> void;
                 }
 
                 template <class T>
                 struct AbstractClass {
-                    AbstractClass() {
-                        auto initializer = []() {
+                    AbstractClass(bool isWrapper = false) {
+                        auto initializer = [isWrapper]() {
                             QMetaObject metaObject = T::staticMetaObject;
                             auto name = QString(metaObject.className());
                             auto prefix = name.section("::", 1, 1);
@@ -73,7 +73,7 @@ namespace quick {
                                 Make::Enum(metaObject.enumerator(i));
                             }
 
-                            Make::AbstractClass(metaObject);
+                            Make::AbstractClass(metaObject, isWrapper);
                         };
 #ifdef _MSC_VER
                         Queue::GetList().append(initializer);
@@ -85,8 +85,8 @@ namespace quick {
 
                 template <class T>
                 struct UncreatableClass {
-                    UncreatableClass() {
-                        auto initializer = []() {
+                    UncreatableClass(bool isWrapper = false) {
+                        auto initializer = [isWrapper]() {
                             QMetaObject metaObject = T::staticMetaObject;
                             auto name = QString(metaObject.className());
                             auto prefix = name.section("::", 1, 1);
@@ -98,7 +98,7 @@ namespace quick {
                                 Make::Enum(metaObject.enumerator(i));
                             }
 
-                            Make::Class(metaObject);
+                            Make::Class(metaObject, isWrapper);
                         };
 #ifdef _MSC_VER
                         Queue::GetList().append(initializer);
@@ -110,8 +110,8 @@ namespace quick {
 
                 template <class T>
                 struct Class {
-                    Class() {
-                        auto initializer = []() {
+                    Class(bool isWrapper = false) {
+                        auto initializer = [isWrapper]() {
                             QMetaObject metaObject = T::staticMetaObject;
                             auto name = QString(metaObject.className());
                             auto prefix = name.section("::", 1, 1);
@@ -123,7 +123,7 @@ namespace quick {
                                 Make::Enum(metaObject.enumerator(i));
                             }
                             
-                            Make::Class(metaObject);
+                            Make::Class(metaObject, isWrapper);
                         };
 #ifdef _MSC_VER
                         Queue::GetList().append(initializer);

@@ -1,4 +1,5 @@
 #include "quickTypeInfoProperty.hpp"
+#include "quickTypeInfoSymbol.hpp"
 
 namespace quick {
 
@@ -14,31 +15,18 @@ namespace quick {
             }
 
             auto sequence = false;
-            auto type = QString(metaProperty.typeName()).remove("*").remove("quick::").replace("::", ".");
+            auto typeName = Symbol::PrettifyTypeName(QString(metaProperty.typeName()));
 
-            if (type.contains("List")) {
+            if (typeName.contains("List")) {
                 sequence = true;
-                if (auto bracketIndex = type.lastIndexOf("<")) {
-                    type.remove(0, bracketIndex + 1);
-                    type = type.remove("<").remove(">");
-                } else if (type.contains("string")) {
-                    type = "string";
-                }
             }
-
-            if (type.startsWith("Q") && type.length() > 2) {
-                QChar character = type.at(1);
-                type = type.remove(0, 2);
-                type.push_front(character.toLower());
-            }
-
+            
             auto property = new Property();
 
-            property->m_type = type;
+            property->m_type = typeName;
             property->m_name = name;
             property->m_sequence = sequence;
-            property->m_readable = metaProperty.isReadable();
-            property->m_writable = metaProperty.isWritable();
+            property->m_readonly = !metaProperty.isWritable();
 
             return property;
         }
@@ -55,12 +43,8 @@ namespace quick {
             return this->m_sequence;
         }
 
-        auto Property::isWritable() -> bool {
-            return this->m_writable;
-        }
-
-        auto Property::isReadable() -> bool {
-            return this->m_readable;
+        auto Property::isReadonly() -> bool {
+            return this->m_readonly;
         }
     }
 }

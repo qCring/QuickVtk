@@ -1,0 +1,16 @@
+home:
+  id: home
+  title: Home
+  url: /
+docs:
+  id: docs
+  title: Docs
+  url: /docs
+dev:
+  id: dev
+  title: Dev
+  url: /dev
+api:
+  id: api
+  title: API
+  url: /api

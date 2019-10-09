@@ -1,4 +1,5 @@
 #include "quickTypeInfoMethod.hpp"
+#include "quickTypeInfoSymbol.hpp"
 
 namespace quick {
 
@@ -15,13 +16,13 @@ namespace quick {
                 return nullptr;
             }
 
-            auto returnType = QString(metaMethod.typeName()).remove("*").remove("quick::").replace("::", ".");
+            auto returnType = Symbol::PrettifyTypeName(metaMethod.typeName());
 
             auto paramTypeList = metaMethod.parameterTypes();
             auto separator = QString(", ");
 
             for (auto paramType : paramTypeList) {
-                paramTypes.append(paramType).append(separator);
+                paramTypes.append(Symbol::PrettifyTypeName(paramType)).append(separator);
             }
 
             if (paramTypeList.count() > 0) {
@@ -34,18 +35,6 @@ namespace quick {
 
             if (returnType.contains("List")) {
                 sequence = true;
-                if (auto bracketIndex = returnType.lastIndexOf("<")) {
-                    returnType.remove(0, bracketIndex + 1);
-                    returnType = returnType.remove("<").remove(">");
-                } else if (returnType.contains("string")) {
-                    returnType = "string";
-                }
-            }
-
-            if (returnType.startsWith("Q") && returnType.length() > 2) {
-                QChar character = returnType.at(1);
-                returnType = returnType.remove(0, 2);
-                returnType.push_front(character.toLower());
             }
 
             auto method = new Method();

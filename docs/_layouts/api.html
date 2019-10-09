@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <script>
+    window.addEventListener('beforeunload', function() {
+      localStorage["nav-scroll"] = document.getElementById("nav-scroll").scrollTop;
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById("nav-scroll").scrollTop = parseInt(localStorage["nav-scroll"]);
+    });
+  </script>
+
+  <body>
+
+    {%- assign info = site.data.api [page.type] -%}
+
+    {%- include nav/open.html -%}
+    <div class="api-list">
+      <ul>
+        {%- for item in site.data.api -%}
+
+          {%- if page.type == item[0] -%}
+            <li><a class="active" href="{{ site.baseurl }}/api/{{ item[0] | replace: ".", "/" }}">{{ item[0] | replace: ".", "::" }}</a></li>
+          {%- else -%}
+            <li><a href="{{ site.baseurl }}/api/{{ item[0] | replace: ".", "/" }}">{{ item[0] | replace: ".", "::" }}</a></li>
+          {%- endif -%}
+
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- include nav/close.html -%}
+
+    <div class="page">
+      {%- include page/header.html -%}
+
+      <div class="content">
+        <div class="api">
+
+          <h1>{{ info.namespace }}::{{ info.name }}</h1>
+
+          <div class="info">
+
+            {%- if info.wrapper -%}
+              {%- assign class_url = info.namespace | append: "/Wrapper/quick" | append: info.namespace | append: info.name -%}
+            {%- elsif info.namespace == "Vtk" -%}
+              {%- assign class_url = info.namespace | append: "/Internal/quick" | append: info.namespace | append: info.name -%}
+            {%- else -%}
+              {%- assign class_url = info.namespace | append: "/quick" | append: info.namespace | append: info.name -%}
+            {%- endif -%}
+
+            <div class="row">
+              <p>
+                <span class="tag {{ info.type }}"></span>
+                {%- if info.wrapper -%}
+                  <span class="tag wrapper"></span>
+                {%- endif -%}
+              </p>
+            </div>
+
+            <p class="label">Source:</p>
+            <div class="row">
+              <a href="{{ site.project_src_url }}Lib/{{ class_url }}.hpp">{{ class_url }}.hpp&nbsp;<i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <div class="row">
+              <a href="{{ site.project_src_url }}Lib/{{ class_url }}.cpp"><p>{{ class_url }}.cpp&nbsp;<i class="fas fa-external-link-alt"></i></p></a>
+            </div>
+
+            {%- if info.wrapper -%}
+            <p class="label">VTK class:</p>
+            <a href="{{ site.vtk_url}}/classvtk{{ info.name }}.html"><p>vtk{{ info.name }}&nbsp;<i class="fas fa-external-link-alt"></i></p></a>
+            {%- endif -%}
+
+            <p class="label">Class Hierarchy:</p>
+
+            <div class="hierarchy">
+
+              <a href="#">{{ info.namespace }}.{{ info.name}}</a>
+              <i class="arrow fas fa-caret-right"></i>
+
+              {%- assign for_type = info -%}
+
+              {%- for i in (1..10) -%}
+
+                {%- assign for_type = site.data.api[for_type.base] -%}
+
+                {%- if for_type == undefined -%}
+                  {%- break -%}
+                {%- endif -%}
+
+                {%- if for_type == "QObject" -%}
+                  <p>{{ for_type.namespace }}::{{ for_type.name }}</p>
+                {%- else -%}
+                  <a href="{{ site.baseurl }}/api/{{ for_type.namespace }}/{{ for_type.name }}">{{ for_type.namespace}}.{{ for_type.name}}</a>
+                {%- endif -%}
+                <i class="arrow fas fa-caret-right"></i>
+              {%- endfor -%}
+
+              <p class="name">QObject</p>
+            </div>
+
+          </div>
+
+          {%- if info.properties -%}
+
+            {%- include page/section.html title = "Properties" -%}
+
+            {%- if info.properties.size == 1 -%}
+              <p>{{ info.properties.size }} Property definition</p>
+            {%- else -%}
+              <p>{{ info.properties.size }} Property definitions</p>
+            {%- endif -%}
+
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Access</th>
+              </tr>
+
+              {%- for property in info.properties -%}
+                <tr>
+                  <td>{{ property.name }}</td>
+                  <td>{% include api/type-label.html type=property.type %}</td>
+                  {%- if property.readonly -%}
+                    <td>R</td>
+                  {%- else -%}
+                    <td>R+W</td>
+                  {%- endif -%}
+                </tr>
+              {%- endfor -%}
+
+            </table>
+
+          {%- endif -%}
+
+          {%- if info.methods -%}
+
+          {%- include page/section.html title = "Methods" -%}
+
+          {%- if info.methods.size == 1 -%}
+            <p>{{ info.methods.size }} Method definition</p>
+          {%- else -%}
+            <p>{{ info.methods.size }} Method definitions</p>
+          {%- endif -%}
+
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Arguments</th>
+                <th>Return</th>
+              </tr>
+
+              {%- for method in info.methods -%}
+
+                <tr>
+                  <td>{{ method.name }}</td>
+                  <td>{{ method.args }}</td>
+                  <td>{{ method.return }}</td>
+                </tr>
+
+              {%- endfor -%}
+
+            </table>
+
+          {%- endif -%}
+
+          {%- if info.enums -%}
+
+          {%- include page/section.html title = "Enums" -%}
+
+          {%- if info.enums.size == 1 -%}
+            <p>{{ info.enums.size }} Enum</p>
+          {%- else -%}
+            <p>{{ info.enums.size }} Enums</p>
+          {%- endif -%}
+
+            {%- for enum in info.enums -%}
+
+              <table>
+                <tr>
+                  <th>{{ enum.name }}</th>
+                  <th>Value</th>
+                </tr>
+
+                {%- for item in enum.values -%}
+
+                  <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.value }}</td>
+                  </tr>
+
+                {%- endfor -%}
+
+              </table>
+
+            {%- endfor -%}
+
+          {%- endif -%}
+
+          <hr>
+          {{ content }}
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>

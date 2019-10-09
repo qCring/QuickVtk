@@ -6,6 +6,7 @@ namespace quick {
     namespace TypeInfo {
 
         Qml::Register::Type<List> List::Register;
+        QMap<QString, Enum*> List::EnumLookup;
 
         auto List::GetInstance() -> List* {
             static List* instance = new List();
@@ -92,6 +93,10 @@ namespace quick {
 
         auto List::getTotalCount() -> int {
             return this->m_allSymbols.count();
+        }
+    
+        auto List::getAllSymbols() -> QList<Symbol*> {
+            return this->m_allSymbols;
         }
     }
 }

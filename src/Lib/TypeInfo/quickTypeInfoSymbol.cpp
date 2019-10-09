@@ -5,6 +5,7 @@
 #include "quickTypeInfoClass.hpp"
 
 #include <QMetaEnum>
+#include <QString>
 
 namespace quick {
 
@@ -37,6 +38,8 @@ namespace quick {
                 if (!basePrefix.isEmpty()) {
                     retVal = basePrefix + "." + baseName;
                 }
+            } else {
+                retVal = base.className();
             }
 
             return retVal;
@@ -47,6 +50,35 @@ namespace quick {
         auto Symbol::GetEnums() -> QStringList& {
             static QStringList Enums { ".TransformOrigin" };
             return Enums;
+        }
+    
+        auto Symbol::PrettifyTypeName(QString typeName) -> QString {
+            auto prettyTypeName = typeName.remove("*").remove("quick::").replace("::", ".");
+
+            if (prettyTypeName.contains("List")) {
+                auto bracketOpenIndex = prettyTypeName.lastIndexOf("<");
+                auto bracketCloseIndex = prettyTypeName.lastIndexOf(">");
+                
+                if (bracketOpenIndex && bracketCloseIndex) {
+                    prettyTypeName = "List <" + PrettifyType(prettyTypeName.mid(bracketOpenIndex + 1, bracketCloseIndex - bracketOpenIndex - 1)) + ">";
+                }
+            } else {
+                prettyTypeName = PrettifyType(prettyTypeName);
+            }
+            
+            return prettyTypeName;
+        }
+    
+        auto Symbol::PrettifyType(QString typeString) -> QString {
+            if (typeString.compare("QString") == 0) {
+                typeString = "string";
+            } else if (typeString.compare("QColor") == 0) {
+                typeString = "color";
+            } else if (typeString.compare("double") == 0) {
+                typeString = "real";
+            }
+            
+            return typeString;
         }
 
         auto Symbol::MakeEnum(QMetaEnum metaEnum) -> void {
@@ -69,10 +101,11 @@ namespace quick {
 
             GetEnums().append(name);
 
+            List::EnumLookup.insert(symbol->getPrefix() + "." + name, symbol);
             List::Add(symbol);
         }
 
-        auto Symbol::MakeClass(QMetaObject metaObject) -> void {
+        auto Symbol::MakeClass(QMetaObject metaObject, bool isWrapper) -> void {
             auto symbol = new Class();
 
             symbol->setBase(Get::BaseString(metaObject));
@@ -80,12 +113,19 @@ namespace quick {
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "class";
             symbol->m_color = "#319CD3";
+            symbol->m_isWrapper = isWrapper;
+            
+            for (auto i = metaObject.enumeratorOffset(); i < metaObject.enumeratorCount(); ++i) {
+                auto metaEnum = metaObject.enumerator(i);
+                
+                symbol->addEnumDefinition(Symbol::Get::EnumPrefix(metaEnum), Symbol::Get::EnumName(metaEnum));
+            }
 
-            for (auto i = 0; i < metaObject.propertyCount(); ++i) {
+            for (auto i = metaObject.propertyOffset(); i < metaObject.propertyCount(); ++i) {
                 symbol->addProperty(metaObject.property(i));
             }
 
-            for (auto i = 0; i < metaObject.methodCount(); ++i) {
+            for (auto i = metaObject.methodOffset(); i < metaObject.methodCount(); ++i) {
                 auto method = metaObject.method(i);
                 if (method.methodType() == QMetaMethod::MethodType::Slot && method.access() == QMetaMethod::Access::Public) {
                     symbol->addMethod(metaObject.method(i));
@@ -95,7 +135,7 @@ namespace quick {
             List::Add(symbol);
         }
 
-        auto Symbol::MakeAbstractClass(QMetaObject metaObject) -> void {
+        auto Symbol::MakeAbstractClass(QMetaObject metaObject, bool isWrapper) -> void {
             auto symbol = new Class();
 
             symbol->setBase(Get::BaseString(metaObject));
@@ -103,6 +143,7 @@ namespace quick {
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "abstract";
             symbol->m_color = "#9DA5B4";
+            symbol->m_isWrapper = isWrapper;
 
             symbol->setAbstract(true);
 
@@ -147,6 +188,10 @@ namespace quick {
 
         auto Symbol::getColor() -> QColor {
             return this->m_color;
+        }
+    
+        auto Symbol::isWrapper() -> bool {
+            return this->m_isWrapper;
         }
     }
 }

@@ -1,0 +1,18 @@
+{%- if include.type contains "List" -%}
+  {%- assign simple_type = include.type | remove: "List" | remove: "<" | remove: ">"  | strip -%}
+  {%- assign is_list = true -%}
+{%- else -%}
+  {%- assign simple_type = include.type -%}
+{%- endif -%}
+
+{%- if site.data.api [simple_type] == undefined -%}
+  {{ simple_type }}
+{%- else -%}
+  {%- assign identifiers = simple_type | split: "." -%}
+
+  {%- if is_list -%}
+    List &#60;<a href="{{ site.baseurl }}/api/{{ identifiers[0] }}/{{ identifiers [1] }}">{{ simple_type }}</a>&#62;
+  {%- else -%}
+    <a href="{{ site.baseurl }}/api/{{ identifiers[0] }}/{{ identifiers [1] }}">{{ include.type | escape }}</a>
+  {%- endif -%}
+{%- endif -%}

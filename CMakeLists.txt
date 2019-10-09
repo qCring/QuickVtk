@@ -9,10 +9,13 @@ set(PROJECT_NAME "QuickVtk")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(CMAKE_DEBUG_POSTFIX "d")
+
+# c++14 for all targets
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(${PROJECT_NAME})
 
@@ -102,29 +105,8 @@ AddLibrarySources("${SOURCE_DIR}/Lib/SampleData" "SampleData" list_lib_src list_
 AddLibrarySources("${SOURCE_DIR}/Lib/TypeInfo" "TypeInfo" list_lib_src list_lib_hdr)
 AddLibrarySources("${SOURCE_DIR}/Lib/Utils" "Utils" list_lib_src list_lib_hdr)
 AddLibrarySources("${SOURCE_DIR}/Lib/Vtk" "Vtk" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Widget" "Vtk\\Widget" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Viewer" "Vtk\\Viewer" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/ImplicitFunction" "Vtk\\ImplicitFunction" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Prop" "Vtk\\Prop" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Prop/Actor2D" "Vtk\\Prop\\Actor2D" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Prop/Prop3D" "Vtk\\Prop\\Prop3D" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Prop/Prop3D/Volume" "Vtk\\Prop\\Prop3D\\Volume" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Mapper" "Vtk\\Mapper" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Mapper/Mapper2D" "Vtk\\Mapper\\Mapper2D" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D" "Vtk\\Mapper\\AbstractMapper3D" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D/Mapper" "Vtk\\Mapper\\AbstractMapper3D\\Mapper" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper" "Vtk\\Mapper\\AbstractMapper3D\\AbstractVolumeMapper" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Mapper/AbstractMapper3D/AbstractVolumeMapper/VolumeMapper" "Vtk\\Mapper\\AbstractMapper3D\\AbstractVolumeMapper\\VolumeMapper" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm" "Vtk\\Algorithm" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/DataSetAlgorithm" "Vtk\\Algorithm\\DataSetAlgorithm" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/DataReader" "Vtk\\Algorithm\\DataReader" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/ImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/ImageAlgorithm/ThreadedImageAlgorithm" "Vtk\\Algorithm\\ImageAlgorithm\\ThreadedImageAlgorithm" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/ImageAlgorithm/ImageReader2" "Vtk\\Algorithm\\ImageAlgorithm\\ImageReader2" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/PolyDataAlgorithm" "Vtk\\Algorithm\\PolyDataAlgorithm" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/PolyDataAlgorithm/AbstractPolyDataReader" "Vtk\\Algorithm\\PolyDataAlgorithm\\AbstractPolyDataReader" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Algorithm/PointSetAlgorithm" "Vtk\\Algorithm\\PointSetAlgorithm" list_lib_src list_lib_hdr)
-
+AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Internal" "Vtk\\Internal" list_lib_src list_lib_hdr)
+AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Wrapper" "Vtk\\Wrapper" list_lib_src list_lib_hdr)
 
 #configure directories
 set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/Lib")
@@ -160,20 +142,6 @@ else()
     add_executable(${PROJECT_NAME} ${list_app_src})
 endif()
 
-# c++11
-# ******************************************************************************
-if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER 3.0)
-    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
-    set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
-else()
-    if(APPLE)
-        list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -stdlib=libc++")
-    endif()
-    if(UNIX AND NOT APPLE)
-        list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    endif()
-endif()
-
 # configure files
 # ******************************************************************************
 configure_file(${ROOT_DIR}/cmake/meta_quickvtk.hpp.in ${BINARY_DIR}/meta_quickvtk.hpp)
@@ -187,6 +155,19 @@ endif()
 if(APPLE)
   set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${BINARY_DIR}/info.plist)
 endif()
+
+# setup api-docs generator target
+# ******************************************************************************
+set(API_DOCS_TARGET "API-Docs")
+add_executable(${API_DOCS_TARGET}
+  "${SOURCE_DIR}/API-Docs/main.cpp"
+  "${SOURCE_DIR}/API-Docs/APIGenerator.hpp"
+  "${SOURCE_DIR}/API-Docs/APIGenerator.cpp"
+)
+
+target_link_libraries(${API_DOCS_TARGET} ${LINK_LIBRARIES} ${LIB_NAME})
+target_include_directories(${API_DOCS_TARGET} PRIVATE ${list_lib_hdr})
+target_include_directories(${API_DOCS_TARGET} PUBLIC ${BINARY_DIR})
 
 # includes
 # ******************************************************************************
@@ -222,13 +203,13 @@ if(NOT APPLE)
         PUBLIC_HEADER DESTINATION "include"
         FRAMEWORK DESTINATION Library/Frameworks
         COMPONENT libraries)
-        
+
   install(
    EXPORT QuickVtkLib-targets
     DESTINATION lib/cmake/QuickVtkLib
     FILE QuickVtkLib-config.cmake
     COMPONENT headers)
-    
+
   install(
     TARGETS QuickVtk
       EXPORT QuickVtk-targets

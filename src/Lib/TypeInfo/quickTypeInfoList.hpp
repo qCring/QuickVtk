@@ -30,6 +30,7 @@ namespace quick {
             static auto Add(Symbol*) -> void;
         public:
             static Qml::Register::Type<List> Register;
+            static QMap<QString, class Enum*> EnumLookup;
             static auto GetInstance() -> List*;
             auto init() -> void;
             auto setVisible(bool) -> void;
@@ -41,6 +42,7 @@ namespace quick {
             auto rowCount(const QModelIndex& = QModelIndex()) const -> int;
             auto data(const QModelIndex&, int) const -> QVariant;
             auto roleNames() const -> QHash<int, QByteArray>;
+            auto getAllSymbols() -> QList<Symbol*>;
         signals:
             void visibleChanged();
             void filterChanged();

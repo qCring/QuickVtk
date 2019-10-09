@@ -11,10 +11,10 @@ namespace quick {
         class ArrowSource : public PolyDataAlgorithm {
             Q_OBJECT
             Q_PROPERTY(int tipResolution READ getTipResolution WRITE setTipResolution NOTIFY tipResolutionChanged);
-            Q_PROPERTY(double tipLength READ getTipLength WRITE setTipLength NOTIFY tipLengthChanged);
-            Q_PROPERTY(double tipRadius READ getTipRadius WRITE setTipRadius NOTIFY tipRadiusChanged);
+            Q_PROPERTY(qreal tipLength READ getTipLength WRITE setTipLength NOTIFY tipLengthChanged);
+            Q_PROPERTY(qreal tipRadius READ getTipRadius WRITE setTipRadius NOTIFY tipRadiusChanged);
             Q_PROPERTY(int shaftResolution READ getShaftResolution WRITE setShaftResolution NOTIFY shaftResolutionChanged);
-            Q_PROPERTY(double shaftRadius READ getShaftRadius WRITE setShaftRadius NOTIFY shaftRadiusChanged);
+            Q_PROPERTY(qreal shaftRadius READ getShaftRadius WRITE setShaftRadius NOTIFY shaftRadiusChanged);
             Q_PROPERTY(bool invert READ getInvert WRITE setInvert NOTIFY invertChanged);
         private:
             static Qml::Register::Symbol::Class<ArrowSource> Register;
@@ -23,14 +23,14 @@ namespace quick {
             ArrowSource();
             auto setTipResolution(int) -> void;
             auto getTipResolution() -> int;
-            auto setTipLength(double) -> void;
-            auto getTipLength() -> double;
-            auto setTipRadius(double) -> void;
-            auto getTipRadius() -> double;
+            auto setTipLength(qreal) -> void;
+            auto getTipLength() -> qreal;
+            auto setTipRadius(qreal) -> void;
+            auto getTipRadius() -> qreal;
             auto setShaftResolution(int) -> void;
             auto getShaftResolution() -> int;
-            auto setShaftRadius(double) -> void;
-            auto getShaftRadius() -> double;
+            auto setShaftRadius(qreal) -> void;
+            auto getShaftRadius() -> qreal;
             auto setInvert(bool) -> void;
             auto getInvert() -> bool;
         signals:

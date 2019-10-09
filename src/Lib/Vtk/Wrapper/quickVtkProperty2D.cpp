@@ -27,14 +27,14 @@ namespace quick {
             return this->m_color;
         }
 
-        auto Property2D::setOpacity(double opacity) -> void {
+        auto Property2D::setOpacity(qreal opacity) -> void {
             this->m_vtkActor2D->GetProperty()->SetOpacity(opacity);
             this->update();
 
             emit this->opacityChanged();
         }
 
-        auto Property2D::getOpacity() -> double {
+        auto Property2D::getOpacity() -> qreal {
             return this->m_vtkActor2D->GetProperty()->GetOpacity();
         }
     }

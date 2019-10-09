@@ -18,7 +18,7 @@ namespace quick {
         class Property2D : public QObject {
             Q_OBJECT
             Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged);
-            Q_PROPERTY(double opacity READ getOpacity WRITE setOpacity NOTIFY opacityChanged);
+            Q_PROPERTY(qreal opacity READ getOpacity WRITE setOpacity NOTIFY opacityChanged);
         private:
             static Qml::Register::Symbol::UncreatableClass<Property2D> Register;
             QColor m_color;
@@ -31,8 +31,8 @@ namespace quick {
             Property2D(Actor2D*);
             auto setColor(const QColor&) -> void;
             auto getColor() -> QColor;
-            auto setOpacity(double) -> void;
-            auto getOpacity() -> double;
+            auto setOpacity(qreal) -> void;
+            auto getOpacity() -> qreal;
         signals:
             void colorChanged();
             void opacityChanged();

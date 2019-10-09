@@ -16,8 +16,8 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(quick::Vtk::Property2D* property READ getProperty CONSTANT);
             Q_PROPERTY(quick::Vtk::Mapper2D* mapper READ getMapper WRITE setMapper NOTIFY mapperChanged);
-            Q_PROPERTY(double width READ getWidth WRITE setWidth NOTIFY widthChanged);
-            Q_PROPERTY(double height READ getHeight WRITE setHeight NOTIFY heightChanged);
+            Q_PROPERTY(qreal width READ getWidth WRITE setWidth NOTIFY widthChanged);
+            Q_PROPERTY(qreal height READ getHeight WRITE setHeight NOTIFY heightChanged);
             Q_CLASSINFO("DefaultProperty", "mapper");
         private:
             static Qml::Register::Symbol::Class<Actor2D> Register;
@@ -31,10 +31,10 @@ namespace quick {
             auto getProperty() -> Property2D*;
             auto setMapper(Mapper2D*) -> void;
             auto getMapper() -> Mapper2D*;
-            auto setWidth(double) -> void;
-            auto getWidth() -> double;
-            auto setHeight(double) -> void;
-            auto getHeight() -> double;
+            auto setWidth(qreal) -> void;
+            auto getWidth() -> qreal;
+            auto setHeight(qreal) -> void;
+            auto getHeight() -> qreal;
             virtual ~Actor2D();
         signals:
             void widthChanged();

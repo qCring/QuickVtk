@@ -20,23 +20,23 @@ namespace quick {
             return this->m_vtkObject->GetTipResolution();
         }
 
-        auto ArrowSource::setTipLength(double tipLength) -> void {
+        auto ArrowSource::setTipLength(qreal tipLength) -> void {
             this->m_vtkObject->SetTipLength(tipLength);
             emit this->tipLengthChanged();
             this->update();
         }
 
-        auto ArrowSource::getTipLength() -> double {
+        auto ArrowSource::getTipLength() -> qreal {
             return this->m_vtkObject->GetTipLength();
         }
 
-        auto ArrowSource::setTipRadius(double tipRadius) -> void {
+        auto ArrowSource::setTipRadius(qreal tipRadius) -> void {
             this->m_vtkObject->SetTipRadius(tipRadius);
             emit this->tipRadiusChanged();
             this->update();
         }
 
-        auto ArrowSource::getTipRadius() -> double {
+        auto ArrowSource::getTipRadius() -> qreal {
             return this->m_vtkObject->GetTipRadius();
         }
 
@@ -50,13 +50,13 @@ namespace quick {
             return this->m_vtkObject->GetShaftResolution();
         }
 
-        auto ArrowSource::setShaftRadius(double shaftRadius) -> void {
+        auto ArrowSource::setShaftRadius(qreal shaftRadius) -> void {
             this->m_vtkObject->SetShaftRadius(shaftRadius);
             emit this->shaftRadiusChanged();
             this->update();
         }
 
-        auto ArrowSource::getShaftRadius() -> double {
+        auto ArrowSource::getShaftRadius() -> qreal {
             return this->m_vtkObject->GetShaftRadius();
         }
 

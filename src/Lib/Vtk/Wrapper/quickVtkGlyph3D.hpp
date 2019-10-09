@@ -43,7 +43,7 @@ namespace quick {
             Q_PROPERTY(ColorMode colorMode READ getColorMode WRITE setColorMode NOTIFY colorModeChanged);
             Q_PROPERTY(IndexMode indexMode READ getIndexMode WRITE setIndexMode NOTIFY indexModeChanged);
             Q_PROPERTY(VectorMode vectorMode READ getVectorMode WRITE setVectorMode NOTIFY vectorModeChanged);
-            Q_PROPERTY(double scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
+            Q_PROPERTY(qreal scaleFactor READ getScaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged);
             Q_PROPERTY(bool orient READ getOrient WRITE setOrient NOTIFY orientChanged);
             Q_PROPERTY(bool scaling READ getScaling WRITE setScaling NOTIFY scalingChanged);
             Q_PROPERTY(bool clamping READ getClamping WRITE setClamping NOTIFY clampingChanged);
@@ -65,8 +65,8 @@ namespace quick {
             auto getIndexMode() -> IndexMode;
             auto setVectorMode(VectorMode) -> void;
             auto getVectorMode() -> VectorMode;
-            auto setScaleFactor(double) -> void;
-            auto getScaleFactor() -> double;
+            auto setScaleFactor(qreal) -> void;
+            auto getScaleFactor() -> qreal;
             auto getRange() -> Math::Vector2*;
             auto setOrient(bool) -> void;
             auto getOrient() -> bool;

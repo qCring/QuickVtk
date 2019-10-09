@@ -40,23 +40,23 @@ namespace quick {
             return this->m_property;
         }
 
-        auto Actor2D::setWidth(double width) -> void {
+        auto Actor2D::setWidth(qreal width) -> void {
             this->m_vtkObject->SetWidth(width);
             emit this->widthChanged();
             this->update();
         }
 
-        auto Actor2D::getWidth() -> double {
+        auto Actor2D::getWidth() -> qreal {
             return this->m_vtkObject->GetWidth();
         }
 
-        auto Actor2D::setHeight(double height) -> void {
+        auto Actor2D::setHeight(qreal height) -> void {
             this->m_vtkObject->SetHeight(height);
             emit this->heightChanged();
             this->update();
         }
 
-        auto Actor2D::getHeight() -> double {
+        auto Actor2D::getHeight() -> qreal {
             return this->m_vtkObject->GetHeight();
         }
 

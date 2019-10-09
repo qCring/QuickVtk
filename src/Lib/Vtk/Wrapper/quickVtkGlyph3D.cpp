@@ -59,13 +59,13 @@ namespace quick {
             return (VectorMode) this->m_vtkObject->GetVectorMode();
         }
 
-        auto Glyph3D::setScaleFactor(double scaleFactor) -> void {
+        auto Glyph3D::setScaleFactor(qreal scaleFactor) -> void {
             this->m_vtkObject->SetScaleFactor(scaleFactor);
             emit this->scaleFactorChanged();
             this->update();
         }
 
-        auto Glyph3D::getScaleFactor() -> double {
+        auto Glyph3D::getScaleFactor() -> qreal {
             return this->m_vtkObject->GetScaleFactor();
         }
 

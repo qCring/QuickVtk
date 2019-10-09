@@ -35,13 +35,13 @@ namespace quick {
             return this->m_vtkObject->GetNumberOfPoints();
         }
 
-        auto PointSource::setRadius(double radius) -> void {
+        auto PointSource::setRadius(qreal radius) -> void {
             this->m_vtkObject->SetRadius(radius);
             emit this->radiusChanged();
             this->update();
         }
 
-        auto PointSource::getRadius() -> double {
+        auto PointSource::getRadius() -> qreal {
             return this->m_vtkObject->GetRadius();
         }
         

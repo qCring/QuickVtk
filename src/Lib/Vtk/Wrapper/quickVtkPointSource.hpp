@@ -22,7 +22,7 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
             Q_PROPERTY(Distribution distribution READ getDistribution WRITE setDistribution NOTIFY distributionChanged);
             Q_PROPERTY(int numberOfPoints READ getNumberOfPoints WRITE setNumberOfPoints NOTIFY numberOfPointsChanged);
-            Q_PROPERTY(double radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
+            Q_PROPERTY(qreal radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
         private:
             static Qml::Register::Symbol::Class<PointSource> Register;
             vtkSmartPointer<vtkPointSource> m_vtkObject;
@@ -33,8 +33,8 @@ namespace quick {
             auto getDistribution() -> Distribution;
             auto setNumberOfPoints(int) -> void;
             auto getNumberOfPoints() -> int;
-            auto setRadius(double) -> void;
-            auto getRadius() -> double;
+            auto setRadius(qreal) -> void;
+            auto getRadius() -> qreal;
             auto getCenter() -> Math::Vector3*;
         signals:
             void distributionChanged();

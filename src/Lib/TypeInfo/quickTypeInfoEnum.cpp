@@ -13,9 +13,13 @@ namespace quick {
         auto Enum::add(EnumItem* item) -> void {
             this->m_enumItems.append(item);
         }
-
+    
         auto Enum::getEnumItemList() -> QQmlListProperty<EnumItem> {
             return QQmlListProperty<EnumItem>(this, this->m_enumItems);
+        }
+    
+        auto Enum::getAllEnumItems() -> QList<EnumItem*> {
+            return this->m_enumItems;
         }
     }
 }

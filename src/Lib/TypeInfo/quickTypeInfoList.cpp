@@ -6,6 +6,7 @@ namespace quick {
     namespace TypeInfo {
 
         Qml::Register::Type<List> List::Register;
+        QMap<QString, Enum*> List::EnumLookup;
 
         auto List::GetInstance() -> List* {
             static List* instance = new List();

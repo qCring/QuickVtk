@@ -30,6 +30,7 @@ namespace quick {
             static auto Add(Symbol*) -> void;
         public:
             static Qml::Register::Type<List> Register;
+            static QMap<QString, class Enum*> EnumLookup;
             static auto GetInstance() -> List*;
             auto init() -> void;
             auto setVisible(bool) -> void;

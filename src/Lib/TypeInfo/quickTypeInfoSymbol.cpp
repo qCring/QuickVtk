@@ -101,6 +101,7 @@ namespace quick {
 
             GetEnums().append(name);
 
+            List::EnumLookup.insert(symbol->getPrefix() + "." + name, symbol);
             List::Add(symbol);
         }
 
@@ -113,12 +114,18 @@ namespace quick {
             symbol->m_type = "class";
             symbol->m_color = "#319CD3";
             symbol->m_isWrapper = isWrapper;
+            
+            for (auto i = metaObject.enumeratorOffset(); i < metaObject.enumeratorCount(); ++i) {
+                auto metaEnum = metaObject.enumerator(i);
+                
+                symbol->addEnumDefinition(Symbol::Get::EnumPrefix(metaEnum), Symbol::Get::EnumName(metaEnum));
+            }
 
             for (auto i = metaObject.propertyOffset(); i < metaObject.propertyCount(); ++i) {
                 symbol->addProperty(metaObject.property(i));
             }
 
-            for (auto i = 0; i < metaObject.methodCount(); ++i) {
+            for (auto i = metaObject.methodOffset(); i < metaObject.methodCount(); ++i) {
                 auto method = metaObject.method(i);
                 if (method.methodType() == QMetaMethod::MethodType::Slot && method.access() == QMetaMethod::Access::Public) {
                     symbol->addMethod(metaObject.method(i));

@@ -20,8 +20,11 @@ namespace quick {
             static constexpr auto Namespace = "namespace";
             static constexpr auto Properties = "properties";
             static constexpr auto Methods = "methods";
+            static constexpr auto Enums = "enums";
+            static constexpr auto EnumValues = "values";
             static constexpr auto Base = "base";
             static constexpr auto Name = "name";
+            static constexpr auto Value = "value";
             static constexpr auto Type = "type";
             static constexpr auto Readonly = "readonly";
             static constexpr auto Args = "args";
@@ -46,6 +49,7 @@ namespace quick {
         auto generateClassJson(TypeInfo::Class*, QJsonObject&) -> void;
         auto generatePropertyJson(TypeInfo::Property*, QJsonArray&) -> void;
         auto generateMethodJson(TypeInfo::Method*, QJsonArray&) -> void;
+        auto generateEnumJson(const QString&, QJsonArray&) -> void;
         auto generateDocFile(TypeInfo::Symbol*) -> void;
     public:
         auto execute() -> int;

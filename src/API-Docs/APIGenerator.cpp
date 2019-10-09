@@ -121,9 +121,11 @@ namespace quick {
 
         auto properties = classType->getAllProperties();
         auto methods = classType->getAllMethods();
+        auto enums = classType->getAllEnumDefinitions();
         
         QJsonArray propertiesJson;
         QJsonArray methodsJson;
+        QJsonArray enumsJson;
         
         for (auto prop : properties) {
             generatePropertyJson(prop, propertiesJson);
@@ -133,12 +135,20 @@ namespace quick {
             generateMethodJson(method, methodsJson);
         }
         
+        for (auto enumeration : enums) {
+            generateEnumJson(enumeration, enumsJson);
+        }
+        
         if (!propertiesJson.isEmpty()) {
             root[Key::Properties] = propertiesJson;
         }
         
         if (!methodsJson.isEmpty()) {
             root[Key::Methods] = methodsJson;
+        }
+        
+        if (!enumsJson.isEmpty()) {
+            root[Key::Enums] = enumsJson;
         }
         
         root[Key::Base] = classType->getBase();
@@ -165,6 +175,35 @@ namespace quick {
         json[Key::Return] = method->getReturnType();
         
         root.append (json);
+    }
+
+    auto APIGenerator::generateEnumJson(const QString& identifier, QJsonArray& root) -> void {
+        
+        auto enumeration = TypeInfo::List::EnumLookup.value(identifier);
+        
+        if (enumeration == nullptr) {
+            return;
+        }
+        
+        QJsonObject json;
+        QJsonArray valuesJson;
+        
+        json[Key::Name] = identifier;
+        
+        auto items = enumeration->getAllEnumItems();
+        
+        for (auto item : items) {
+            QJsonObject valueJson;
+            
+            valueJson[Key::Name] = item->getName();
+            valueJson[Key::Value] = item->getValue();
+            
+            valuesJson.append(valueJson);
+        }
+        
+        json[Key::EnumValues] = valuesJson;
+        
+        root.append(json);
     }
 
     auto APIGenerator::generateAPIDocs() -> void {

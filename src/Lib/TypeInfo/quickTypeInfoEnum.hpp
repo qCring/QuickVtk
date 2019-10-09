@@ -22,6 +22,7 @@ namespace quick {
             static Qml::Register::Type<Enum> Register;
             auto add(EnumItem*) -> void;
             auto getEnumItemList() -> QQmlListProperty<EnumItem>;
+            auto getAllEnumItems() -> QList<EnumItem*>;
         };
     }
 }

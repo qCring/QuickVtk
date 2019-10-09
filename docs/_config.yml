@@ -11,7 +11,12 @@ collections:
 style_path: "/assets/css/rev-1.css"
 
 # Build settings
+safe: true
 markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  
 plugins:
   - jekyll-feed
 

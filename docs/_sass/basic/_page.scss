@@ -80,5 +80,9 @@
       color: $site-link;
       text-decoration: none;
     }
+
+    ul {
+      margin-left: $spacing;
+    }
   }
 }

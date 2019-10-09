@@ -167,24 +167,29 @@
 
           {%- endif -%}
 
-          {%- if info.emums -%}
+          {%- if info.enums -%}
 
-          <h2>Enums</h2>
-          <p>{{ info.enums.size }} Enum definitions</p>
+          {%- include page/section.html title = "Enums" -%}
+
+          {%- if info.enums.size == 1 -%}
+            <p>{{ info.enums.size }} Enum</p>
+          {%- else -%}
+            <p>{{ info.enums.size }} Enums</p>
+          {%- endif -%}
 
             {%- for enum in info.enums -%}
 
               <table>
                 <tr>
-                  <th>{{ enum[0] }}</th>
+                  <th>{{ enum.name }}</th>
                   <th>Value</th>
                 </tr>
 
-                {%- for value in enum[1] -%}
+                {%- for item in enum.values -%}
 
                   <tr>
-                    <td>{{ value[0] }}</td>
-                    <td>{{ value[1] }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.value }}</td>
                   </tr>
 
                 {%- endfor -%}

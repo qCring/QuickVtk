@@ -61,8 +61,19 @@
 
   h1 {
     width: 100%;
-    border-bottom: 1px solid $separator-color;
     margin-bottom: $spacing;
     padding-bottom: $spacing;
+    word-wrap: break-word;
+  }
+
+  h2 {
+    a {
+      margin-left: -20px;
+      margin-right: 5px;
+
+      &::before {
+        content: "#";
+      }
+    }
   }
 }

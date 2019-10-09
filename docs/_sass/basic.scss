@@ -10,24 +10,24 @@ $font-display: fallback !default;
 // Site
 $site-bg: #fff !default;
 $site-text: #353a3f !default;
-$site-link: #ff0000 !default;
+$site-link: #ff2d20 !default;
 
 // Header
 $header-text-active: #ff2d20 !default;
 $header-text: #353a3f !default;
-$header-border: #ff2d20 !default;
+$header-border: #d7d7da !default;
 $header-github-icon: #ff2d20 !default;
 
 // Basics
-$separator-color: #fafafc !default;
+$separator-color: #d7d7da !default;
 $spacing: 30px !default;
 $header-height: 65px !default;
 
 // Nav
-$nav-bg: #fafafc !default;
-$nav-border: #ff2d20 !default;
+$nav-bg: #3d3d3f !default;
+$nav-border: #d7d7da !default;
 $nav-text: #ff2d20 !default;
-$nav-text-light: #353a3f !default;
+$nav-text-light: #fff; //#353a3f !default;
 $nav-width: 340px !default;
 
 // Constants

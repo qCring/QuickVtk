@@ -110,7 +110,7 @@
 
         {%- if info.properties -%}
 
-          <h2 class="col-11">Properties</h2>
+          {%- include page/section.html title = "Properties" -%}
 
           {%- if info.properties.size == 1 -%}
             <p>{{ info.properties.size }} Property definition</p>
@@ -143,7 +143,7 @@
 
         {%- if info.methods -%}
 
-        <h2>Methods</h2>
+        {%- include page/section.html title = "Methods" -%}
 
         {%- if info.methods.size == 1 -%}
           <p>{{ info.methods.size }} Method definition</p>

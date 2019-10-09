@@ -42,11 +42,6 @@
     border-bottom: 1px solid $separator-color;
   }
 
-  a {
-    color: $site-link;
-    text-decoration: none;
-  }
-
   ul {
     list-style-type: none;
   }
@@ -104,5 +99,11 @@
       padding: 0 6px;
       color: $site-text;
     }
+  }
+}
+
+.api-list {
+  a {
+    font-size: $font-size;
   }
 }

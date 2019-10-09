@@ -1,21 +1,24 @@
 # Site settings
-title: QuickVtk
-email: your-email@example.com
-description: QuickVtk Description
+email: qCring@gmail.com
 baseurl: ""
 url: ""
-github_username: qCring
+
 collections_dir: content
+collections:
+  api:
+    output: true
+
+style_path: "/assets/css/rev-1.css"
 
 # Build settings
 markdown: kramdown
 plugins:
   - jekyll-feed
 
-# Custom settings
-style_path: "/assets/css/rev-1.css"
-src_url: "https://github.com/qCring/QuickVtk/tree/master/src/"
+# Project settings
+project_name: QuickVtk
+project_description: description
+project_version: 0.5.6
+project_github_url: "https://github.com/qCring/QuickVtk/"
+project_src_url: "https://github.com/qCring/QuickVtk/tree/master/src/"
 vtk_url: "https://vtk.org/doc/nightly/html/"
-collections:
-  api:
-    output: true

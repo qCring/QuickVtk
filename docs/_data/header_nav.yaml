@@ -1,16 +1,16 @@
-- home:
+home:
   id: home
   title: Home
   url: /
-- guide:
+docs:
   id: docs
   title: Docs
   url: /docs
-- dev:
+dev:
   id: dev
   title: Dev
   url: /dev
-- api:
+api:
   id: api
   title: API
   url: /api

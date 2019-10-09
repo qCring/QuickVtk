@@ -12,26 +12,22 @@
   <body>
 
     {%- include nav/open.html -%}
-
     <div class="api-list">
-
-      <h2>API</h2>
-
       <ul>
         {%- for item in site.data.api -%}
           <li><a href="{{ site.baseurl }}/api/{{ item[0] | replace: ".", "/" }}">{{ item[0] | replace: ".", "::" }}</a></li>
         {%- endfor -%}
       </ul>
-
     </div>
-
     {%- include nav/close.html -%}
 
-    {%- include page/header.html -%}
+    <div class="page">
 
-    <div class="page-content">
+      {%- include page/header.html -%}
 
-      {{ content }}
+      <div class="content">
+        {{ content }}
+      </div>
 
     </div>
 

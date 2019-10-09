@@ -6,20 +6,16 @@
   <body>
 
     {%- include nav/open.html -%}
-      <ul>
-        {%- for group in site.data.nav.sections[page.category].groups -%}
-          <li><a class="group" href="{{ group.url }}">{{ group.title }}</a></li>
-          {%- for item in group.items -%}
-            <li><a class="item" href="{{ item.url }}">{{ item.title }}</a></li>
-          {%- endfor -%}
-        {%- endfor -%}
-      </ul>
+      
     {%- include nav/close.html -%}
 
-    {%- include page/header.html -%}
+    <div class="page">
 
-    <div class="page-content">
-      {{ content }}
+      {%- include page/header.html -%}
+
+      <div class="content">
+        {{ content }}
+      </div>
     </div>
 
   </body>

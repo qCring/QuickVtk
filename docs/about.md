@@ -1,5 +1,9 @@
 ---
 layout: default
-title: About
 permalink: /about/
+header_nav: home
 ---
+
+# About
+
+Coming soon...

@@ -15,6 +15,9 @@ body {
   font-kerning: normal;
   min-height: 100vh;
   flex-direction: column;
+  @media screen and (min-width: $on-large) {
+    flex-direction: row;
+  }
 }
 
 main {

@@ -1,79 +1,84 @@
-.page-header {
-  padding-left: 2 * $spacing;
+.page {
   width: 100%;
-  height: $header-height;
-  border-bottom: 1px solid $header-border;
 
-  @media screen and (min-width: $on-large) {
-    width: calc(100% - #{$nav-width});
-    margin-left: $nav-width;
-    padding-left: 4 * $spacing;
-  }
-
-  .github-container {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-
-    .github-link {
-      margin-right: $spacing;
-      color: $header-github-icon;
-      font-size: $header-height * 0.5;
-      line-height: $header-height;
-    }
-  }
-
-  .item {
-    margin-right: $spacing;
-    display: inline-block;
-    font-size: 12pt;
+  .header {
+    padding-left: 2 * $spacing;
+    width: 100%;
     height: $header-height;
-    line-height: $header-height;
-    font-weight: 500;
+    border-bottom: 1px solid $header-border;
 
-    a {
-      text-decoration: none;
-      color: $header-text;
+    @media screen and (min-width: $on-large) {
+      padding-left: 4 * $spacing;
     }
 
-    &.active {
-      border-bottom: 3px solid $header-text-active;
+    .github-container {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+
+      .github-link {
+        margin-right: $spacing;
+        color: $header-github-icon;
+        font-size: $header-height * 0.5;
+        line-height: $header-height;
+      }
+    }
+
+    .item {
+      margin-right: $spacing;
+      display: inline-block;
+      font-size: 12pt;
+      height: $header-height;
+      line-height: $header-height;
+      font-weight: 500;
 
       a {
-        color: $header-text-active;
+        text-decoration: none;
+        color: $header-text;
+      }
+
+      &.active {
+        border-bottom: 3px solid $header-text-active;
+
+        a {
+          color: $header-text-active;
+        }
       }
     }
   }
-}
 
-.page-content {
-  width: 100%;
-  height: calc(100vh - #{$header-height});
-  overflow-y: scroll;
-  padding: $spacing 2 * $spacing;
-  z-index: 1;
-
-  @media screen and (min-width: $on-large) {
-    margin-left: $nav-width;
-    width: calc(100% - #{$nav-width});
-    padding: $spacing 4 * $spacing;
-  }
-
-  h1 {
+  .content {
     width: 100%;
-    margin-bottom: $spacing;
-    padding-bottom: $spacing;
-    word-wrap: break-word;
-  }
+    height: calc(100vh - #{$header-height});
+    overflow-y: scroll;
+    padding: $spacing 2 * $spacing;
+    z-index: 1;
 
-  h2 {
-    a {
-      margin-left: -20px;
-      margin-right: 5px;
+    @media screen and (min-width: $on-large) {
+      padding: $spacing 4 * $spacing;
+    }
 
-      &::before {
-        content: "#";
+    h1 {
+      width: 100%;
+      margin-bottom: $spacing;
+      padding-bottom: $spacing;
+      word-wrap: break-word;
+    }
+
+    h2 {
+      a {
+        margin-left: -28px;
+        margin-right: 8px;
+
+        &::before {
+          content: "@";
+        }
       }
+    }
+
+    a {
+      color: $site-link;
+      text-decoration: none;
     }
   }
 }

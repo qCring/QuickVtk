@@ -1,6 +1,5 @@
 .nav {
   position: absolute;
-  width: $nav-width;
   height: 100vh;
   background-color: $nav-bg;
   color: $nav-text;
@@ -8,13 +7,15 @@
   transform: translateX(-100%);
 
   @media screen and (min-width: $on-large) {
+    position: relative;
+    min-width: $nav-width;
     transform: translateX(0%);
   }
 
   .header {
     height: $header-height;
     line-height: $header-height;
-    color: $nav-text;
+    border-bottom: 1px solid #4c4c4c;
 
     .icon {
       display: inline-block;
@@ -33,13 +34,18 @@
     }
 
     .title {
-      display: block;
+      display: inline;
       margin-left: $spacing / 2;
       font-size: 16pt;
       font-weight: 600;
       height: $header-height;
-      color: $nav-text;
+      color: $nav-text-light;
       text-decoration: none;
+    }
+
+    .version {
+      display: inline;
+      color: $nav-text-light;
     }
   }
 
@@ -64,12 +70,13 @@
         }
       }
 
-      .group {
+      .item {
         font-size: 12pt;
-        font-weight: 600;
+        font-weight: 400;
       }
 
-      .item {
+      .group {
+        font-size: 12pt;
         font-weight: 600;
       }
     }

@@ -1,5 +1,7 @@
-<div class="page-header">
-  {%- for nav in site.data.header_nav -%}
+<div class="header noselect">
+  {%- for item in site.data.header_nav -%}
+
+    {%- assign nav = item[1] -%}
 
     {%- if page.header_nav == nav.id -%}
       <div class="item active"><a href="{{ nav.url }}">{{ nav.title }}</a></div>
@@ -9,7 +11,7 @@
   {%- endfor -%}
 
   <div class="github-container">
-    <a href="https://github.com/qCring/QuickVtk" class="github-link">
+    <a href="{{ site.project_github_url }}" class="github-link">
       <i class="fab fa-github"></i>
     </a>
   </div>

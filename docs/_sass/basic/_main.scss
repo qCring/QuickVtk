@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  font: $font-weight #{$font-size}/#{$font-line-height} $font-family;
+  color: $site-text;
+  background-color: $site-bg;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+     -moz-font-feature-settings: "kern" 1;
+       -o-font-feature-settings: "kern" 1;
+          font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  display: block;
+}
+
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure {
+  margin-bottom: $spacing / 2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+li {
+  > ul,
+  > ol {
+    margin-bottom: 0;
+  }
+}
+
+ol {
+  li {
+    margin-top: $spacing / 2;
+  }
+}
+
+hr {
+  border-top: 1px solid $separator-color;
+  border-style: solid none none none;
+  margin-top: $spacing;
+  margin-bottom: $spacing;
+}

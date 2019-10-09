@@ -1,0 +1,108 @@
+.api {
+
+  .tag {
+    font-size: 10pt;
+    margin: auto 0;
+    padding: 1px 8px;
+    border-radius: 4px;
+    margin-right: 12px;
+    white-space: nowrap;
+
+    &.wrapper {
+      background-color: #4c4c4c;
+      color: #fff;
+
+      &::before {
+        content: "wrapper";
+      }
+    }
+
+    &.class {
+      background-color: #4c4c4c;
+      color: #fff;
+
+      &::before {
+        content: "class";
+      }
+    }
+
+    &.abstract {
+      background-color: #4c4c4c;
+      color: #fff;
+
+      &::before {
+        content: "abstract class";
+      }
+    }
+  }
+
+  h2 {
+    margin-top: $spacing;
+    width: 100%;
+    border-bottom: 1px solid $separator-color;
+  }
+
+  a {
+    color: $site-link;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  table {
+    table-layout: fixed ;
+    width: 100%;
+    margin-top: $spacing / 2;
+    margin-bottom: $spacing / 2;
+    border-spacing: 0;
+    word-wrap: break-word;
+
+    tr {
+      th {
+        color: $site-text;
+        font-weight: 600;
+
+        text-align: left;
+      }
+      td {
+        font-family: 'Inconsolata', monospace;
+        font-size: 12pt;
+      }
+    }
+  }
+
+  .info {
+
+    margin-top: $spacing;
+
+    .label {
+      display: block;
+      font-weight: 600;
+    }
+  }
+
+  .overview {
+    order: 1;
+    display: inline-block;
+  }
+
+  .hierarchy {
+
+    div {
+      display: inline;
+      marign-left: $spacing;
+    }
+
+    p {
+      display: inline;
+    }
+
+    .arrow {
+      font-size: 10pt;
+      padding: 0 6px;
+      color: $site-text;
+    }
+  }
+}

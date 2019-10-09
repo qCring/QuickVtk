@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <script>
+    window.addEventListener('beforeunload', function() {
+      localStorage["nav-scroll"] = document.getElementById("nav-scroll").scrollTop;
+    });
+  </script>
+
+  <body>
+
+    {%- include nav/open.html -%}
+
+    <div class="api-list">
+
+      <h2>API</h2>
+
+      <ul>
+        {%- for item in site.data.api -%}
+          <li><a href="{{ site.baseurl }}/api/{{ item[0] | replace: ".", "/" }}">{{ item[0] | replace: ".", "::" }}</a></li>
+        {%- endfor -%}
+      </ul>
+
+    </div>
+
+    {%- include nav/close.html -%}
+
+    {%- include page/header.html -%}
+
+    <div class="page-content">
+
+      {{ content }}
+
+    </div>
+
+  </body>
+
+</html>

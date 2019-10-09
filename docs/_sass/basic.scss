@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+// Font
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-size:   11pt !default;
+$font-weight: 400 !default;
+$font-line-height: 1.5 !default;
+$font-display: fallback !default;
+
+// Site
+$site-bg: #fff !default;
+$site-text: #353a3f !default;
+$site-link: #ff0000 !default;
+
+// Header
+$header-text-active: #ff2d20 !default;
+$header-text: #353a3f !default;
+$header-border: #ff2d20 !default;
+$header-github-icon: #ff2d20 !default;
+
+// Basics
+$separator-color: #fafafc !default;
+$spacing: 30px !default;
+$header-height: 65px !default;
+
+// Nav
+$nav-bg: #fafafc !default;
+$nav-border: #ff2d20 !default;
+$nav-text: #ff2d20 !default;
+$nav-text-light: #353a3f !default;
+$nav-width: 340px !default;
+
+// Constants
+$column-count: 12 !default;
+$box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.08);
+
+// Media
+$on-medium: 600px !default;
+$on-large: 800px !default;
+
+@import
+  "basic/main",
+  "basic/page",
+  "basic/nav",
+  "basic/api",
+  "basic/util"
+;

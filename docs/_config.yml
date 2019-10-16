@@ -8,7 +8,13 @@ collections:
   api:
     output: true
 
+# .css/.js files will be cached by the browser so make sure to increment the
+# file suffix or use a unique version-sepcific filename in order to bypass
+# previously cached resources! something like checksum based naming would be
+# nice but since custom jekyll plugins are not supported by GH pages yet,
+# this has to be done manually...
 style_path: "/assets/css/rev-1.css"
+js_path: "/assets/js/rev-1.js"
 
 # Build settings
 safe: true

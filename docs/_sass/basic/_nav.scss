@@ -1,21 +1,37 @@
 .nav {
   position: absolute;
-  height: 100vh;
-  background-color: $nav-bg;
+  height: calc(100vh - #{$header-height});
   color: $nav-text;
-  border-right: 1px solid $nav-border;
+  border-right: none;
   transform: translateX(-100%);
+  margin-top: $header-height;
+  width: 100vw;
+  transition: transform 120ms ease-out;
+
+  &.overlay {
+    transform: translateX(0%);
+  }
 
   @media screen and (min-width: $on-large) {
     position: relative;
     min-width: $nav-width;
+    max-width: $nav-width;
+    border-right: 1px solid $nav-border;
     transform: translateX(0%);
+    margin-top: 0;
+    transition: none !important;
   }
 
   .header {
     height: $header-height;
     line-height: $header-height;
     border-bottom: 1px solid #4c4c4c;
+    display: none;
+    background-color: $nav-bg;
+
+    @media screen and (min-width: $on-large) {
+      display: block;
+    }
 
     .icon {
       display: inline-block;
@@ -49,12 +65,33 @@
     }
   }
 
+  .subheader {
+    display: block;
+    height: $nav-subheader-height;
+    background-color: $header-bg;
+    line-height: $nav-subheader-height;
+    padding: 0 $spacing 0 2 * $spacing;
+    border-bottom: 1px solid #4c4c4c;
+    color: $site-text;
+
+    @media screen and (min-width: $on-large) {
+      padding: 0 $spacing 0 $spacing;
+      background-color: $nav-bg;
+      color: $nav-text-light;
+    }
+  }
+
   .content-wrapper {
     overflow-y: scroll;
-    height: calc(100vh - #{$header-height});
+    height: calc(100vh - #{$header-height} - #{$nav-subheader-height});
+    background-color: $nav-bg;
 
     .content {
-      padding: $spacing;
+      padding: 0 $spacing 0 2 * $spacing;
+
+      @media screen and (min-width: $on-large) {
+        padding: 0 $spacing 0 $spacing;
+      }
 
       ul {
         margin-top: $spacing;

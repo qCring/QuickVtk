@@ -1,4 +1,4 @@
-<div class="nav noselect">
+<div class="nav noselect" id="nav">
   <div class="header">
     <a href="{{ site.baseurl }}/" class="title">
       <div class="icon">
@@ -8,8 +8,9 @@
     </a>
     <span class="version">{{ site.project_version }}</span>
   </div>
+  <div class="subheader">
+    <p>@&nbsp;{{ site.data.header_nav [page.header_nav].title }}</p>
+  </div>
   <div class="content-wrapper" id="nav-scroll">
 
     <div class="content">
-
-    <h2>@&nbsp;{{ site.data.header_nav [page.header_nav].title }}</h2>

@@ -6,6 +6,7 @@
     width: 100%;
     height: $header-height;
     border-bottom: 1px solid $header-border;
+    background-color: $header-bg;
 
     @media screen and (min-width: $on-large) {
       padding-left: 4 * $spacing;
@@ -15,12 +16,36 @@
       position: absolute;
       right: 0px;
       top: 0px;
+      visibility: hidden;
+
+      @media screen and (min-width: $on-large) {
+        visibility: visible;
+      }
 
       .github-link {
         margin-right: $spacing;
         color: $header-github-icon;
         font-size: $header-height * 0.5;
         line-height: $header-height;
+      }
+    }
+
+    .nav-toggle {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      margin-right: $spacing;
+      font-size: $header-height * 0.5;
+      line-height: $header-height;
+      visibility: visible;
+      color: $header-text;
+
+      &:hover {
+        color: $site-link;
+      }
+
+      @media screen and (min-width: $on-large) {
+        visibility: hidden;
       }
     }
 
@@ -51,7 +76,7 @@
     width: 100%;
     height: calc(100vh - #{$header-height});
     overflow-y: scroll;
-    padding: $spacing 2 * $spacing;
+    padding: $spacing $spacing $spacing 2 * $spacing;
     z-index: 1;
 
     @media screen and (min-width: $on-large) {

@@ -17,6 +17,7 @@ $header-text-active: #ff2d20 !default;
 $header-text: #353a3f !default;
 $header-border: #d7d7da !default;
 $header-github-icon: #ff2d20 !default;
+$header-bg: #fff !default;
 
 // Basics
 $separator-color: #d7d7da !default;
@@ -27,8 +28,9 @@ $header-height: 65px !default;
 $nav-bg: #3d3d3f !default;
 $nav-border: #d7d7da !default;
 $nav-text: #ff2d20 !default;
-$nav-text-light: #fff; //#353a3f !default;
+$nav-text-light: #fff;
 $nav-width: 340px !default;
+$nav-subheader-height: 40px;
 
 // Constants
 $column-count: 12 !default;

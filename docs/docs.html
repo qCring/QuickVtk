@@ -1,0 +1,18 @@
+---
+layout: page
+nav: docs
+---
+
+<h1>Documentation</h1>
+
+<ul>
+
+  <div class="link-list">
+    <ul>
+      {%- for item in site.docs -%}
+        <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+</ul>

@@ -7,6 +7,14 @@ collections_dir: content
 collections:
   api:
     output: true
+  guide:
+    output: true
+  roadmap:
+    output: true
+  docs:
+    output: true
+  examples:
+    output: true
 
 # .css/.js files will be cached by the browser so make sure to increment the
 # file suffix or use a unique version-sepcific filename in order to bypass

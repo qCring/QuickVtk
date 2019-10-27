@@ -1,6 +1,6 @@
 ---
 layout: api
-header_nav: api
+nav: api
 
 type: Vtk.PLYReader
 ---

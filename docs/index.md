@@ -1,6 +1,6 @@
 ---
-layout: default
-header_nav: home
+layout: page
+nav: home
 ---
 
 # QuickVtk

@@ -7,34 +7,27 @@ $font-weight: 400 !default;
 $font-line-height: 1.5 !default;
 $font-display: fallback !default;
 
-// Site
-$site-bg: #fff !default;
-$site-text: #353a3f !default;
-$site-link: #ff2d20 !default;
-
-// Header
-$header-text-active: #ff2d20 !default;
-$header-text: #353a3f !default;
-$header-border: #d7d7da !default;
-$header-github-icon: #ff2d20 !default;
-$header-bg: #fff !default;
-
 // Basics
-$separator-color: #d7d7da !default;
+$separator-color: #e7ecf0 !default;
 $spacing: 30px !default;
 $header-height: 65px !default;
+$text-default: #353a3f !default;
+$text-highlight: #ff2d20 !default;
+$text-hover: #ff6640 !default;
+$transition-default: 120ms linear !default;
 
 // Nav
-$nav-bg: #3d3d3f !default;
+$nav-bg: #fff !default;
 $nav-border: #d7d7da !default;
-$nav-text: #ff2d20 !default;
-$nav-text-light: #fff;
-$nav-width: 340px !default;
-$nav-subheader-height: 40px;
+$nav-text-light: #fff !default;
+$nav-width: 420px !default;
+$nav-height: 50px !default;
+$nav-text-default: #353a3f !default;
+$nav-text-highlight: #ff2d20 !default;
 
 // Constants
 $column-count: 12 !default;
-$box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.08);
+$box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.08) !default;
 
 // Media
 $on-medium: 600px !default;
@@ -45,5 +38,6 @@ $on-large: 800px !default;
   "basic/page",
   "basic/nav",
   "basic/api",
+  "basic/code",
   "basic/util"
 ;

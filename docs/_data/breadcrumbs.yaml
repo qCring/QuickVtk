@@ -1,0 +1,33 @@
+home:
+  title: Home
+  url: /
+posts:
+  title: Posts
+  url: /posts
+build:
+  title: Build Instructions
+  url: /build
+api:
+  title: API Reference
+  url: /api
+guide:
+  title: User Guide
+  url: /user-guide
+examples:
+  title: Examples
+  url: /examples
+roadmap:
+  title: Roadmap
+  url: /roadmap
+docs:
+  title: Documentation
+  url: /docs
+contributors:
+  title: Contributors
+  url: /contributors
+contribute:
+  title: How to Contribute
+  url: /contribute
+about:
+  title: About
+  url: /about

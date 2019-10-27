@@ -1,0 +1,52 @@
+<nav class="nav noselect">
+
+  <div class="header">
+
+    <span class="fa-stack icon">
+      <i class="fas fa-circle fa-stack-2x"></i>
+      <i class="fas fa-file-alt fa-stack-1x fa-inverse"></i>
+    </span>
+
+    <a class="title" href="{{ site.baseurl }}/">{{- site.project_name -}}</a>
+    <a class="version" href="{{ site.baseurl }}/roadmap/{{ site.project_version }}">{{- site.project_version -}}</a>
+
+    <div class="toggle" onclick="nav.toggle()">
+      <i class="fas fa-grip-lines"></i>
+    </div>
+
+  </div>
+
+  <div class="content" id="nav-content">
+    <ul>
+      {%- for item in site.data.nav -%}
+
+        {%- if item.pages -%}
+          <li>
+            <p>{{- item.title -}}</p>
+
+            <ul>
+
+              {%- for sub in item.pages -%}
+                {%- if page.nav == sub.nav -%}
+                  <li><a class="group-item active" href="{{ site.baseurl }}{{ sub.url }}">{{- sub.title -}}</a></li>
+                {%- else -%}
+                  <li><a class="group-item" href="{{ site.baseurl }}{{ sub.url }}">{{- sub.title -}}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+
+            </ul>
+
+          </li>
+
+        {%- else -%}
+          {%- if page.nav == item.nav -%}
+            <li><a class="active" href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
+          {%- else -%}
+            <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
+          {%- endif -%}
+        {%- endif -%}
+
+      {%- endfor -%}
+    </ul>
+  </div>
+</nav>

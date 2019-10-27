@@ -36,10 +36,9 @@
     }
   }
 
-  h2 {
-    margin-top: $spacing;
-    width: 100%;
-    border-bottom: 1px solid $separator-color;
+  a {
+    max-width: 99%;
+    word-wrap: break-word;
   }
 
   ul {
@@ -47,16 +46,15 @@
   }
 
   table {
-    table-layout: fixed ;
     width: 100%;
     margin-top: $spacing / 2;
     margin-bottom: $spacing / 2;
     border-spacing: 0;
-    word-wrap: break-word;
+    white-space: nowrap;
+    overflow-x: auto;
 
     tr {
       th {
-        color: $site-text;
         font-weight: 600;
 
         text-align: left;
@@ -97,13 +95,6 @@
     .arrow {
       font-size: 10pt;
       padding: 0 6px;
-      color: $site-text;
     }
-  }
-}
-
-.api-list {
-  a {
-    font-size: $font-size;
   }
 }

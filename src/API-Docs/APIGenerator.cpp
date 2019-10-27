@@ -249,7 +249,7 @@ namespace quick {
             return;
         }
         
-        QString content = "---\nlayout: api\nheader_nav: api\n\ntype: " + prefix + "." + name + "\n---";
+        QString content = "---\nlayout: api\nnav: api\n\ntype: " + prefix + "." + name + "\n---";
         
         file.write(content.toUtf8());
     }

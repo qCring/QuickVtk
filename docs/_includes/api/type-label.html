@@ -6,13 +6,13 @@
 {%- endif -%}
 
 {%- if site.data.api [simple_type] == undefined -%}
-  {{ simple_type }}
+  {{- simple_type -}}
 {%- else -%}
   {%- assign identifiers = simple_type | split: "." -%}
 
   {%- if is_list -%}
-    List &#60;<a href="{{ site.baseurl }}/api/{{ identifiers[0] }}/{{ identifiers [1] }}">{{ simple_type }}</a>&#62;
+    List &#60;<a href="{{ site.baseurl }}/api/{{- identifiers[0] -}}/{{- identifiers [1] -}}">{{- simple_type -}}</a>&#62;
   {%- else -%}
-    <a href="{{ site.baseurl }}/api/{{ identifiers[0] }}/{{ identifiers [1] }}">{{ include.type | escape }}</a>
+    <a href="{{ site.baseurl }}/api/{{- identifiers[0] -}}/{{- identifiers [1] -}}">{{- include.type | escape -}}</a>
   {%- endif -%}
 {%- endif -%}

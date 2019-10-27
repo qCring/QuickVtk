@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include nav.html -%}
+
+    <div class="page">
+
+      <div class="content">
+
+        <div class="breadcrumbs">
+          <a href="{{ site.baseurl }}/{{ site.data.breadcrumbs[page.nav].url }}">{{ site.data.breadcrumbs[page.nav].title }}</a>
+          {%- if page.title -%}
+            <i class="fas fa-caret-right"></i>
+            <p>{{- page.title -}}</p>
+          {%- endif -%}
+        </div>
+
+        {{ content }}
+      </div>
+    </div>
+
+  </body>
+
+</html>

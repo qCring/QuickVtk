@@ -1,0 +1,20 @@
+---
+layout: page
+nav: posts
+---
+
+<h1>Posts</h1>
+
+<ul>
+
+  <div class="link-list">
+    <ul>
+      {%- for item in site.posts -%}
+        <li>
+          <a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+</ul>

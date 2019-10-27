@@ -1,113 +1,65 @@
 .page {
-  width: 100%;
 
-  .header {
-    padding-left: 2 * $spacing;
+  margin-top: $nav-height;
+  overflow-y: auto;
+  height: calc(100vh - #{$nav-height});
+  width: 100vw;
+
+  @media screen and (min-width: $on-large) {
+    margin-top: 0;
+    height: 100vh;
+  }
+
+  .breadcrumbs {
     width: 100%;
-    height: $header-height;
-    border-bottom: 1px solid $header-border;
-    background-color: $header-bg;
+    border-bottom: 1px solid $separator-color;
+    margin-bottom: 2 * $spacing;
 
-    @media screen and (min-width: $on-large) {
-      padding-left: 4 * $spacing;
-    }
-
-    .github-container {
-      position: absolute;
-      right: 0px;
-      top: 0px;
-      visibility: hidden;
-
-      @media screen and (min-width: $on-large) {
-        visibility: visible;
-      }
-
-      .github-link {
-        margin-right: $spacing;
-        color: $header-github-icon;
-        font-size: $header-height * 0.5;
-        line-height: $header-height;
-      }
-    }
-
-    .nav-toggle {
-      position: absolute;
-      right: 0px;
-      top: 0px;
-      margin-right: $spacing;
-      font-size: $header-height * 0.5;
-      line-height: $header-height;
-      visibility: visible;
-      color: $header-text;
-
-      &:hover {
-        color: $site-link;
-      }
-
-      @media screen and (min-width: $on-large) {
-        visibility: hidden;
-      }
-    }
-
-    .item {
-      margin-right: $spacing;
-      display: inline-block;
-      font-size: 12pt;
-      height: $header-height;
-      line-height: $header-height;
-      font-weight: 500;
-
-      a {
-        text-decoration: none;
-        color: $header-text;
-      }
-
-      &.active {
-        border-bottom: 3px solid $header-text-active;
-
-        a {
-          color: $header-text-active;
-        }
-      }
+    * {
+      display: inline;
+      margin-right: 8px;
     }
   }
 
   .content {
-    width: 100%;
-    height: calc(100vh - #{$header-height});
-    overflow-y: scroll;
-    padding: $spacing $spacing $spacing 2 * $spacing;
-    z-index: 1;
+    margin-bottom: $spacing;
+    margin-top: $spacing;
+    margin-left: $spacing;
+    margin-right: $spacing;
 
     @media screen and (min-width: $on-large) {
-      padding: $spacing 4 * $spacing;
+      margin-left: 2 * $spacing;
+      margin-right: 2 * $spacing;
+      max-width: 800px;
     }
+  }
 
-    h1 {
-      width: 100%;
-      margin-bottom: $spacing;
-      padding-bottom: $spacing;
-      word-wrap: break-word;
-    }
-
-    h2 {
-      a {
-        margin-left: -28px;
-        margin-right: 8px;
-
-        &::before {
-          content: "@";
-        }
-      }
-    }
+  .link-list {
 
     a {
-      color: $site-link;
-      text-decoration: none;
-    }
+      font-size: $font-size;
+      color: $text-default;
+      transition: color $transition-default;
 
-    ul {
-      margin-left: $spacing;
+      &:hover {
+        color: $text-highlight;
+      }
     }
+  }
+
+  h1 {
+    margin-top: 2 * $spacing;
+    word-wrap: break-word;
+  }
+
+  h2 {
+    margin-top: 1.5 * $spacing;
+    border-bottom: 1px solid $separator-color;
+    word-wrap: break-word;
+  }
+
+  h3 {
+    margin-top: $spacing;
+    word-wrap: break-word;
   }
 }

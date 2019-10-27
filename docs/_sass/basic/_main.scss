@@ -5,8 +5,8 @@
 body {
   display: flex;
   font: $font-weight #{$font-size}/#{$font-line-height} $font-family;
-  color: $site-text;
-  background-color: $site-bg;
+  color: $text-default;
+  background-color: #fff;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
      -moz-font-feature-settings: "kern" 1;
@@ -15,6 +15,7 @@ body {
   font-kerning: normal;
   min-height: 100vh;
   flex-direction: column;
+
   @media screen and (min-width: $on-large) {
     flex-direction: row;
   }
@@ -41,11 +42,19 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
 }
 
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  margin-bottom: $spacing / 2;
+}
+
 li {
   > ul,
   > ol {
     margin-bottom: 0;
   }
+
+  list-style: none;
 }
 
 ol {
@@ -54,9 +63,23 @@ ol {
   }
 }
 
+table {
+  width: 100%;
+}
+
 hr {
   border-top: 1px solid $separator-color;
   border-style: solid none none none;
   margin-top: $spacing;
   margin-bottom: $spacing;
+}
+
+a {
+  text-decoration: none;
+  color: $text-highlight;
+  transition: color $transition-default;
+
+  &:hover {
+    color: $text-hover;
+  }
 }

@@ -3,43 +3,25 @@
 
   {%- include head.html -%}
 
-  <script>
-    window.addEventListener('beforeunload', function() {
-      localStorage["nav-scroll"] = document.getElementById("nav-scroll").scrollTop;
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById("nav-scroll").scrollTop = parseInt(localStorage["nav-scroll"]);
-    });
-  </script>
-
   <body>
+
+    {%- include nav.html -%}
 
     {%- assign info = site.data.api [page.type] -%}
 
-    {%- include nav/open.html -%}
-    <div class="api-list">
-      <ul>
-        {%- for item in site.data.api -%}
-
-          {%- if page.type == item[0] -%}
-            <li><a class="active" href="{{ site.baseurl }}/api/{{ item[0] | replace: ".", "/" }}">{{ item[0] | replace: ".", "::" }}</a></li>
-          {%- else -%}
-            <li><a href="{{ site.baseurl }}/api/{{ item[0] | replace: ".", "/" }}">{{ item[0] | replace: ".", "::" }}</a></li>
-          {%- endif -%}
-
-        {%- endfor -%}
-      </ul>
-    </div>
-    {%- include nav/close.html -%}
-
     <div class="page">
-      {%- include page/header.html -%}
 
       <div class="content">
+
+        <div class="breadcrumbs">
+          <a href="{{ site.baseurl }}/{{ site.data.breadcrumbs[page.nav].url }}">{{ site.data.breadcrumbs[page.nav].title }}</a>
+          <i class="fas fa-caret-right"></i>
+          <p>{{- page.type -}}</p>
+        </div>
+
         <div class="api">
 
-          <h1>{{ info.namespace }}::{{ info.name }}</h1>
+          <h1>{{ info.namespace }}.{{ info.name }}</h1>
 
           <div class="info">
 
@@ -105,7 +87,7 @@
 
           {%- if info.properties -%}
 
-            {%- include page/section.html title = "Properties" -%}
+            {%- include section.html title = "Properties" -%}
 
             {%- if info.properties.size == 1 -%}
               <p>{{ info.properties.size }} Property definition</p>
@@ -138,7 +120,7 @@
 
           {%- if info.methods -%}
 
-          {%- include page/section.html title = "Methods" -%}
+          {%- include section.html title = "Methods" -%}
 
           {%- if info.methods.size == 1 -%}
             <p>{{ info.methods.size }} Method definition</p>
@@ -169,7 +151,7 @@
 
           {%- if info.enums -%}
 
-          {%- include page/section.html title = "Enums" -%}
+          {%- include section.html title = "Enums" -%}
 
           {%- if info.enums.size == 1 -%}
             <p>{{ info.enums.size }} Enum</p>

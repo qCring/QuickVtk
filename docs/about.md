@@ -1,7 +1,7 @@
 ---
-layout: default
+layout: page
 permalink: /about/
-header_nav: home
+nav: about
 ---
 
 # About

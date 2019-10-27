@@ -1,0 +1,25 @@
+---
+layout: page
+nav: guide
+---
+
+<h1>User Guide</h1>
+
+<ul>
+
+  <div class="link-list">
+    <ul>
+      {%- for item in site.guide -%}
+        <li>
+          <b>Article {{ forloop.index }}: </b><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a>
+          <ul>
+            {%- for topic in item.topics -%}
+            <li>{{- topic -}}</li>
+            {%- endfor -%}
+          </ul>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+</ul>

@@ -1,21 +1,21 @@
 var nav = {
   element: undefined,
-  expanded: false,
+  visible: false,
 
   toggle: function () {
     console.log("toggle");
 
     if (this.element == undefined) {
-      this.element = document.getElementById ('nav');
+      this.element = document.getElementById ('nav-content');
     }
 
     if (this.element != undefined) {
-      this.expanded = !this.expanded;
+      this.visible = !this.visible;
 
-      if (this.expanded) {
-        this.element.classList.add ('overlay');
+      if (this.visible) {
+        this.element.classList.add ('visible');
       } else {
-        this.element.classList.remove ('overlay');
+        this.element.classList.remove ('visible');
       }
     }
   }

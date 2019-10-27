@@ -1,0 +1,37 @@
+- nav: home
+  title: Home
+  url: /
+- nav: posts
+  title: Posts
+  url: /posts
+- title: Resources
+  pages:
+    - nav: build
+      title: Build Instructions
+      url: /build
+    - nav: api
+      title: API Reference
+      url: /api
+    - nav: guide
+      title: User Guide
+      url: /user-guide
+    - nav: examples
+      title: Examples
+      url: /examples
+- title: Development
+  pages:
+    - nav: roadmap
+      title: Roadmap
+      url: /roadmap
+    - nav: docs
+      title: Documentation
+      url: /docs
+    - nav: contributors
+      title: Contributors
+      url: /contributors
+    - nav: contribute
+      title: How to Contribute
+      url: /contribute
+- nav: about
+  title: About
+  url: /about

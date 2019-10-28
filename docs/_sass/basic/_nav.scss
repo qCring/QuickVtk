@@ -47,7 +47,7 @@
       color: $text-highlight;
       font-weight: 500;
       font-size: 9pt;
-      vertical-align: baseline;
+      vertical-align: sub;
 
       @media screen and (min-width: $on-large) {
         font-size: 11pt;

@@ -165,7 +165,7 @@ auto VtkWrapper::getVector3 () -> Math::Vector3* {
 }
 {%- endhighlight -%}
 
-Both vector implementations are based on the generic `std::array` container type and provide access to underlying data via `getValues().data()`. This makes it possible to assign all components in one single call.
+Both vector implementations are based on the generic `std::array` container type and provide access to underlying data via `getValues().data()`. This makes it possible to assign all components in one single call.
 
 
 ## Enums

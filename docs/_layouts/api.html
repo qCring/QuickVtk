@@ -13,11 +13,7 @@
 
       <div class="content">
 
-        <div class="breadcrumbs">
-          <a href="{{ site.baseurl }}/{{ site.data.breadcrumbs[page.nav].url }}">{{ site.data.breadcrumbs[page.nav].title }}</a>
-          <i class="fas fa-caret-right"></i>
-          <p>{{- page.type -}}</p>
-        </div>
+        {%- include breadcrumbs.html title = page.type -%}
 
         <div class="api">
 

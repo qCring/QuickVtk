@@ -11,15 +11,10 @@
 
       <div class="content">
 
-        <div class="breadcrumbs">
-          <a href="{{ site.baseurl }}/{{ site.data.breadcrumbs[page.nav].url }}">{{ site.data.breadcrumbs[page.nav].title }}</a>
-          {%- if page.title -%}
-            <i class="fas fa-caret-right"></i>
-            <p>{{- page.title -}}</p>
-          {%- endif -%}
-        </div>
+        {%- include breadcrumbs.html title = page.title -%}
 
-        {{ content }}
+        {{- content -}}
+
       </div>
     </div>
 

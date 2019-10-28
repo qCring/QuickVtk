@@ -102,6 +102,11 @@
 
     a {
       color: $nav-text-default;
+      display: block;
+
+      @media screen and (min-width: $on-large) {
+        display: inline;
+      }
 
       &.active {
         color: $nav-text-highlight;

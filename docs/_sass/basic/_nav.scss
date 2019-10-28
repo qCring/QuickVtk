@@ -3,6 +3,8 @@
   width: 100vw;
   background-color: $nav-bg;
   border-right: 1px solid $separator-color;
+  display: flex;
+  flex-direction: column;
 
   @media screen and (min-width: $on-large) {
     position: relative;
@@ -17,7 +19,6 @@
     line-height: $nav-height;
 
     @media screen and (min-width: $on-large) {
-      height: auto;
       margin-top: $spacing / 2;
       border-bottom: none;
     }
@@ -46,7 +47,7 @@
       color: $text-highlight;
       font-weight: 500;
       font-size: 9pt;
-      vertical-align: baseline;
+      vertical-align: sub;
 
       @media screen and (min-width: $on-large) {
         font-size: 11pt;
@@ -58,9 +59,17 @@
     display: inline;
     position: fixed;
     right: 0px;
-    margin-right: $spacing;
     font-size: 14pt;
     transition: color $transition-default;
+    margin-right: $spacing / 2;
+    width: $nav-height;
+    height: $nav-height;
+    text-align: center;
+
+    i {
+      font-size: 16pt;
+      vertical-align: middle;
+    }
 
     @media screen and (min-width: $on-large) {
       display: none;
@@ -73,18 +82,24 @@
 
   .content {
     display: none;
-    padding: 0 $spacing;
+    padding-left: $spacing;
+    padding-right: $spacing;
+    padding-top: 0px;
+    padding-bottom: 0px;
     border-bottom: 1px solid $separator-color;
     font-weight: 500;
     font-size: 13pt;
+    overflow-y: auto;
+    height: calc(100vh - #{$nav-height});
 
     @media screen and (min-width: $on-large) {
       display: block;
-      padding: $spacing $spacing;
-      margin-top: 2 * $spacing;
+      padding-bottom: 2 * $spacing;
+      padding-top: 2 * $spacing;
       margin-left: $spacing;
       border-bottom: none;
       font-size: 11pt;
+      height: auto;
     }
 
     &.visible {
@@ -102,6 +117,11 @@
 
     a {
       color: $nav-text-default;
+      display: block;
+
+      @media screen and (min-width: $on-large) {
+        display: inline;
+      }
 
       &.active {
         color: $nav-text-highlight;

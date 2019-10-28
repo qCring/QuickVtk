@@ -1,21 +1,27 @@
 var nav = {
-  element: undefined,
+  content: undefined,
+  icon: undefined,
   visible: false,
 
   toggle: function () {
-    console.log("toggle");
 
-    if (this.element == undefined) {
-      this.element = document.getElementById ('nav-content');
+    if (this.content == undefined) {
+      this.content = document.getElementById ('nav-content');
     }
 
-    if (this.element != undefined) {
+    if (this.icon == undefined) {
+      this.icon = document.getElementById ('nav-toggle-icon');
+    }
+
+    if (this.content != undefined && this.icon != undefined) {
       this.visible = !this.visible;
 
       if (this.visible) {
-        this.element.classList.add ('visible');
+        this.content.classList.add ('visible');
+        this.icon.className = "fas fa-times";
       } else {
-        this.element.classList.remove ('visible');
+        this.content.classList.remove ('visible');
+        this.icon.className = "fas fa-grip-lines";
       }
     }
   }

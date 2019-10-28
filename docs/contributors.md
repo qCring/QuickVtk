@@ -1,6 +1,7 @@
 ---
 layout: page
 nav: contributors
+toplevel: true
 ---
 
 # Contributors

@@ -1,6 +1,6 @@
 <div class="breadcrumbs">
   <a href="{{ site.baseurl }}/{{ site.data.breadcrumbs[page.nav].url }}">{{ site.data.breadcrumbs[page.nav].title }}</a>
-  {%- if include.title -%}
+  {%- if !page.toplevel and include.title -%}
     <i class="fas fa-caret-right"></i>
     <p>{{- include.title -}}</p>
   {%- endif -%}

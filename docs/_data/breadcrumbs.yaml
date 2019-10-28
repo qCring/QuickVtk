@@ -31,3 +31,6 @@ contribute:
 about:
   title: About
   url: /about
+status:
+  title: Status
+  url: /status

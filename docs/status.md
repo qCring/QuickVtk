@@ -1,8 +1,7 @@
 ---
 layout: page
+nav: status
 ---
-
-# Status
 
 ### Build Timestamp
 {{ site.time | date: '%B %d, %Y at %T' }}

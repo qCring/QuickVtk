@@ -14,7 +14,7 @@ For a comprehensive documentation on the visualization pipeline see the official
 - The VTK User's Guide
 - The Visualization Toolkit
 
-# 1. A practical approach
+## A practical approach
 Let's start with a simple QML file instead of diving right into the many different concepts used in the [VTK](https://vtk.org/) framework. To access types from [VTK](https://vtk.org/), we first have to `import` the `Vtk` namespace. The following code snippet shows how a [vtkCylinderSource](https://vtk.org/doc/nightly/html/classvtkCylinderSource.html) is created in QuickVtk
 
 {% highlight qml %}
@@ -85,7 +85,7 @@ Another advantage of the JSON representation is simpler debugging. You will get 
 }
 {% endhighlight %}
 
-# 2. The VTK visualization pipeline
+## The VTK visualization pipeline
 While visual QML elements are rendered directly by the QML engine, objects from [VTK](https://vtk.org/) must be assigned to a `Vtk.Viewer` instance in order to appear on screen
 
 {% highlight qml %}
@@ -175,7 +175,7 @@ The visualization pipeline can be described as a sequence of different processin
 
 It makes sense to separate visualization from rendering. The core visualization layer is designed to be independent from the rendering system in order to offer a consistent pipeline infrastructure. While QuickVtk relies on OpenGL, there are other implementations available which supporting WebGL, VR or alternative rendering techniques like raytracing for example.
 
-# 3. The visualization pipeline in QuickVtk
+## The visualization pipeline in QuickVtk
 If you are familiar with [VTK](https://vtk.org/) you'll notice that the same building blocks are used in QuickVtk. Pipelines written in C++, TCL, Python, etc. should be conceptually compatible and easy to implement in QuickVtk. Besides the fact that there are many types still missing in QuickVtk the most noticeable difference is the use of **properties** instead of get and set methods. For example, the [vtkCylinderSource](https://vtk.org/doc/nightly/html/classvtkCylinderSource.html) class provides the method pair `SetResolution` and `GetResolution` while QuickVtk uses an equivalent `resolution` property. We will discuss properties in the context of [VTK](https://vtk.org/) in a later article.
 
 With the declarative nature of QML you can design the visualization pipeline using the object hierarchy. The following code demonstrates the different notation and also the access to the `resolution` property to generate a smoother cylinder shape

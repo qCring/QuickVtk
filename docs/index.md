@@ -1,6 +1,7 @@
 ---
 layout: page
 nav: home
+toplevel: true
 ---
 
 # QuickVtk

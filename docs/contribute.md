@@ -1,6 +1,7 @@
 ---
 layout: page
 nav: contribute
+toplevel: true
 ---
 
 # Contribute

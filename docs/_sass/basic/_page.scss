@@ -56,10 +56,22 @@
     margin-top: 1.5 * $spacing;
     border-bottom: 1px solid $separator-color;
     word-wrap: break-word;
+
+    &:before {
+      content: "# ";
+      color: $text-highlight;
+    }
   }
 
   h3 {
     margin-top: $spacing;
     word-wrap: break-word;
+  }
+
+  ul {
+    margin-left: $spacing * 0.75;
+    list-style: disc;
+    line-height: 1.8;
+    margin-bottom: $spacing / 2;
   }
 }

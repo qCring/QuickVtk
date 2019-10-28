@@ -59,9 +59,17 @@
     display: inline;
     position: fixed;
     right: 0px;
-    margin-right: $spacing;
     font-size: 14pt;
     transition: color $transition-default;
+    margin-right: $spacing / 2;
+    width: $nav-height;
+    height: $nav-height;
+    text-align: center;
+
+    i {
+      font-size: 16pt;
+      vertical-align: middle;
+    }
 
     @media screen and (min-width: $on-large) {
       display: none;

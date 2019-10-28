@@ -14,8 +14,8 @@ title: Type Conversion
 | `double` | `qreal` |
 | `const char*` | `QString` |
 | Color (`double [3]`) | `QColor` |
-| Vector3 (`double [3]`) | `Math::Vector3` |
 | Vector2 (`double [2]`) | `Math::Vector2` |
+| Vector3 (`double [3]`) | `Math::Vector3` |
 
 ## Simple Types
 Most of the basic types can be used in QML and C++ without specific type conversion
@@ -140,13 +140,13 @@ Vector data is stored component-wise in arrays (`double [2]` and `double [3]` re
 {:.hl-caption}
 
 {%- highlight cpp -%}
-auto VtkWrapper::setVector2 (Math::Vector2* value) -> void {
-  this->m_vector = value;
-  this->m_vtkObject->SetVector2 (value->getValues()->data());
+auto VtkWrapper::setVector2 (Math::Vector2* vector) -> void {
+  this->m_vector = vector;
+  this->m_vtkObject->SetVector2 (vector->getValues()->data());
 }
 
 auto VtkWrapper::getVector2 () -> Math::Vector2* {
-  return this->m_vector2; // bypass m_vtkObject and use Vector2 member instead
+  return this->m_vector; // bypass m_vtkObject and use Vector2 member instead
 }
 {%- endhighlight -%}
 
@@ -155,13 +155,13 @@ auto VtkWrapper::getVector2 () -> Math::Vector2* {
 {:.hl-caption}
 
 {%- highlight cpp -%}
-auto VtkWrapper::setVector3 (Math::Vector3* value) -> void {
-  this->m_vector = value;
-  this->m_vtkObject->SetVector3 (value->getValues()->data());
+auto VtkWrapper::setVector3 (Math::Vector3* vector) -> void {
+  this->m_vector = vector;
+  this->m_vtkObject->SetVector3 (vector->getValues()->data());
 }
 
 auto VtkWrapper::getVector3 () -> Math::Vector3* {
-  return this->m_vector3; // bypass m_vtkObject and use Vector3 member instead
+  return this->m_vector; // bypass m_vtkObject and use Vector3 member instead
 }
 {%- endhighlight -%}
 

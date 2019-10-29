@@ -6,14 +6,16 @@ toplevel: true
 
 <h1>Documentation</h1>
 
-<ul>
+<p>Developer documentation</p>
 
-  <div class="link-list">
-    <ul>
-      {%- for item in site.docs -%}
-        <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
-      {%- endfor -%}
-    </ul>
-  </div>
+{%- assign categories = site.docs | group_by: "category" -%}
 
-</ul>
+{%- for category in categories -%}
+  <h2>{{ category.name }}</h2>
+
+  <ul class="list-simple">
+    {%- for item in category.items -%}
+    <li><a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+{%- endfor -%}

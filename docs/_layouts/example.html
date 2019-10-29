@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include nav.html -%}
+
+    <div class="page">
+
+      <div class="content">
+
+        {%- include breadcrumbs.html title = page.title -%}
+
+        <blockquote class="hl-caption">
+          <p>{{- page.title -}}.qml</p>
+          <div class="copy">
+            <p id="copy-indicator"></p>
+            <i id="copy-button" class="far fa-copy" onclick="copy_snippet()"></i>
+          </div>
+        </blockquote>
+
+        <div id="copy-container">
+          {{- page.content -}}
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      function copy_snippet() {
+        const indicator = document.getElementById ('copy-indicator');
+        const container = document.getElementById ('copy-container');
+        const copy_text = container.innerText;
+
+        if (navigator.clipboard != undefined) {
+          navigator.clipboard.writeText(copy_text).then(function() {
+              indicator.className = "success";
+              indicator.innerText = "copied to clipboard"
+              setTimeout(function(){ indicator.className = "" }, 1500);
+            }, function(err) {
+              inidicator.className = "error";
+              inidicator.innerText = "unable to copy to clipboard!"
+              setTimeout(function(){ indicator.className = "" }, 1500);
+          });
+        }
+      }
+    </script>
+
+  </body>
+
+</html>

@@ -68,10 +68,18 @@
     word-wrap: break-word;
   }
 
-  ul {
+  ol, ul {
     margin-left: $spacing * 0.75;
-    list-style: disc;
-    line-height: 1.8;
     margin-bottom: $spacing / 2;
+    line-height: 1.8;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  .list-simple {
+    list-style: none;
+    margin-left: 0;
   }
 }

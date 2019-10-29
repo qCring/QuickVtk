@@ -6,8 +6,11 @@ toplevel: true
 
 # QuickVtk
 
-Welcome to the [QuickVtk project]({{ site.project_github_url }}) documentation!
+Welcome to the [QuickVtk]({{ site.project_github_url }}) documentation website!
 
-If you're seeing this, you caught me setting up [GitHub pages](https://pages.github.com/) for QuickVtk :) Stay tuned for upcoming content!
 
-Since you're already here, check out the new and shiny [API Reference]({{ site.baseurl }}/api)!
+## About QuickVtk
+QuickVtk provides an implementation of the [Visualization Toolkit (VTK)](https://vtk.org/) in [QML](https://doc.qt.io/qt-5/qtqml-index.html). Access types from [VTK](https://vtk.org/) in a declarative way and create simple prototypes in the domain of data visualization.
+
+## Getting Started
+Coming soon...

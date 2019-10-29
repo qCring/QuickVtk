@@ -1,12 +1,9 @@
 ---
-layout: page
+layout: example
 nav: examples
 title: Prop3D
+category: Vtk
 ---
-
->Prop3D.qml
-{: .hl-caption}
-
 {% highlight qml %}
 
 import QtQuick 2.6

@@ -2,6 +2,7 @@
 layout: page
 nav: docs
 title: Type Conversion
+category: Reference
 ---
 
 ## Overview

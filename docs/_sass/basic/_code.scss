@@ -21,9 +21,12 @@ pre {
 
 .highlighter-rouge {
   background-color: #f5f7f9;
+  word-wrap: break-word;
 }
 
 .hl-caption {
+  display: flex;
+  flex-direction: row;
   padding: 0px;
   margin: 0px;
   background-color: #f0f3f6;
@@ -32,12 +35,52 @@ pre {
   margin-bottom: 0px;
   padding-left: 1em;
   border-bottom: 1px solid $separator-color;
+  font-size: 11pt;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   p {
     margin-bottom: 0;
     padding: 2px 0;
     font-family: 'Inconsolata', monospace;
-    font-size: 10pt;
+    line-height: 1.8;
+  }
+
+  .copy {
+    margin-left: auto;
+    margin-right: $spacing / 2;
+    align-self: center;
+
+    #copy-indicator {
+      display: inline;
+      opacity: 0;
+      transition: opacity 200ms ease-in;
+      margin-right: $spacing / 4;
+
+      &.success {
+        opacity: 1;
+        color: #60819f;
+      }
+
+      &.error {
+        opacity: 1;
+        color: red;
+      }
+    }
+
+    #copy-button {
+      color: #90a7bc;
+      transition: color $transition-default;
+
+      &:hover {
+        color: #60819f;
+      }
+    }
   }
 }
 
@@ -57,4 +100,5 @@ kbd {
   border-radius: 4px;
   border: 1px solid #d0d3d6;
   padding: 1px 6px;
+  font-size: 10pt;
 }

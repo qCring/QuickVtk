@@ -5,15 +5,16 @@ toplevel: true
 ---
 
 <h1>Examples</h1>
+List of QML code examples
 
-<ul>
+{%- assign categories = site.examples | group_by: "category" -%}
 
-  <div class="link-list">
-    <ul>
-      {%- for item in site.examples -%}
-        <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
-      {%- endfor -%}
-    </ul>
-  </div>
+{%- for category in categories -%}
+  <h2>{{ category.name }}</h2>
 
-</ul>
+  <ul class="list-simple">
+    {%- for item in category.items -%}
+    <li><a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+{%- endfor -%}

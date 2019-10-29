@@ -2,10 +2,10 @@
 layout: page
 nav: guide
 title: Getting started with QuickVtk
+category: Introduction
 topics:
   - Setting up an external text editor
   - Compiling QML code
-  - Loading examples
 ---
 
 ## Using an external editor
@@ -36,6 +36,3 @@ Open QuickVtk and load the newly created file via **File &rarr; Load...** from t
 In this screenshot, [Atom](https://atom.io/) and QuickVtk are opened side by side and both applications are operating on the same file. Saving the file in [Atom](https://atom.io/) will trigger QuickVtk to reload, compile and run the code immediately since `autorun` is enabled
 
 ![image]({{ site.baseurl }}/assets/guide/01/img-01.png)
-
-## Loading examples
-There are also some examples available to demonstrate how to access different types from the [VTK](https://vtk.org/) framework. You can load example *.qml* files from the menu via **Help &rarr; Examples**

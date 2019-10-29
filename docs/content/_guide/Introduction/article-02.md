@@ -1,7 +1,7 @@
 ---
 layout: page
 nav: guide
-title: An introduction to QML
+title: Getting started with QML
 category: Introduction
 topics:
   - Optional but recommended for QML newcomers

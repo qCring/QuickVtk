@@ -6,17 +6,21 @@ toplevel: true
 
 <h1>User Guide</h1>
 
-<h2>Articles</h2>
+{%- assign categories = site.guide | group_by: "category" -%}
 
-<ul class="list-simple">
-  {%- for item in site.guide -%}
+{%- for category in categories -%}
+  <h2>{{ category.name }}</h2>
+
+  <ul class="list-simple">
+    {%- for item in category.items -%}
     <li>
-      <a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a>
+      <a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a>
       <ul>
         {%- for topic in item.topics -%}
         <li>{{- topic -}}</li>
         {%- endfor -%}
       </ul>
     </li>
-  {%- endfor -%}
-</ul>
+    {%- endfor -%}
+  </ul>
+{%- endfor -%}

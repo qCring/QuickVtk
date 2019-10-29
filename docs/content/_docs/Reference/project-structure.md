@@ -2,6 +2,9 @@
 layout: page
 nav: docs
 title: Project Structure
+category: Reference
 ---
 
-Test
+# Project Structure
+
+## Targets

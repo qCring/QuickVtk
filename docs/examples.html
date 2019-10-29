@@ -4,10 +4,17 @@ nav: examples
 toplevel: true
 ---
 
-<h2>Examples</h2>
+<h1>Examples</h1>
+List of QML code examples
 
-<ul class="list-simple">
-  {%- for item in site.examples -%}
-    <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
-  {%- endfor -%}
-</ul>
+{%- assign categories = site.examples | group_by: "category" -%}
+
+{%- for category in categories -%}
+  <h2>{{ category.name }}</h2>
+
+  <ul class="list-simple">
+    {%- for item in category.items -%}
+    <li><a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+{%- endfor -%}

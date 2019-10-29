@@ -34,15 +34,17 @@
         const container = document.getElementById ('copy-container');
         const copy_text = container.innerText;
 
-        navigator.clipboard.writeText(copy_text).then(function() {
-            indicator.className = "success";
-            indicator.innerText = "copied to clipboard"
-            setTimeout(function(){ indicator.className = "" }, 1500);
-          }, function(err) {
-            inidicator.className = "error";
-            inidicator.innerText = "unable to copy to clipboard!"
-            setTimeout(function(){ indicator.className = "" }, 1500);
-        });
+        if (navigator.clipboard != undefined) {
+          navigator.clipboard.writeText(copy_text).then(function() {
+              indicator.className = "success";
+              indicator.innerText = "copied to clipboard"
+              setTimeout(function(){ indicator.className = "" }, 1500);
+            }, function(err) {
+              inidicator.className = "error";
+              inidicator.innerText = "unable to copy to clipboard!"
+              setTimeout(function(){ indicator.className = "" }, 1500);
+          });
+        }
       }
     </script>
 

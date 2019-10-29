@@ -9,7 +9,7 @@ List of QML code examples
 
 {%- assign categories = site.examples | group_by: "category" -%}
 
-{%- for category in categories -%}
+{%- for category in categories reversed -%}
   <h2>{{ category.name }}</h2>
 
   <ul class="list-simple">

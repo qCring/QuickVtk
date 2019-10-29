@@ -2,6 +2,7 @@
 layout: page
 nav: guide
 title: The VTK visualization pipeline in QuickVtk
+category: Introduction
 topics:
   - How the VTK visualization pipeline is applied in QuickVtk
   - Visualizing procedural geometry in a simple pipeline

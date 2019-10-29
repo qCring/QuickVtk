@@ -6,16 +6,12 @@ toplevel: true
 
 <h1>Roadmap</h1>
 
-<ul>
+<h2>Versions</h2>
 
-  <div class="link-list">
-    <ul>
-      {%- for item in site.roadmap -%}
-        <li>
-          <a href="{{ site.baseurl }}{{ item.url }}">{{- item.version -}}</a>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </div>
-
+<ul class="list-simple">
+  {%- for item in site.roadmap -%}
+    <li>
+      <a href="{{ site.baseurl }}{{ item.url }}">v&nbsp;{{- item.version -}}</a>
+    </li>
+  {%- endfor -%}
 </ul>

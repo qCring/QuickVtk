@@ -21,6 +21,7 @@ pre {
 
 .highlighter-rouge {
   background-color: #f5f7f9;
+  word-wrap: break-word;
 }
 
 .hl-caption {
@@ -57,4 +58,5 @@ kbd {
   border-radius: 4px;
   border: 1px solid #d0d3d6;
   padding: 1px 6px;
+  font-size: 10pt;
 }

@@ -2,6 +2,7 @@
 layout: page
 nav: guide
 title: An introduction to QML
+category: Introduction
 topics:
   - Optional but recommended for QML newcomers
   - Learn about basic language features and concepts by implementing a simple stop watch in QML

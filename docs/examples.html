@@ -4,16 +4,10 @@ nav: examples
 toplevel: true
 ---
 
-<h1>Examples</h1>
+<h2>Examples</h2>
 
-<ul>
-
-  <div class="link-list">
-    <ul>
-      {%- for item in site.examples -%}
-        <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
-      {%- endfor -%}
-    </ul>
-  </div>
-
+<ul class="list-simple">
+  {%- for item in site.examples -%}
+    <li><a href="{{ site.baseurl }}{{ item.url }}">{{- item.title -}}</a></li>
+  {%- endfor -%}
 </ul>

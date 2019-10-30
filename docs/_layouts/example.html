@@ -16,9 +16,10 @@
         <blockquote class="hl-caption">
           <p>{{- page.title -}}.qml</p>
           <div class="copy">
-            <p id="copy-indicator"></p>
-            <i id="copy-button" class="far fa-copy" onclick="copy_snippet()"></i>
-          </div>
+            <span class="fa-stack" onclick="copy_snippet()">
+              <i id="copy-button" class="far fa-copy fa-stack-1x"></i>
+              <i id="copy-indicator" class="fas fa-check fa-stack-1x"></i>
+            </span>
         </blockquote>
 
         <div id="copy-container">
@@ -36,13 +37,11 @@
 
         if (navigator.clipboard != undefined) {
           navigator.clipboard.writeText(copy_text).then(function() {
-              indicator.className = "success";
-              indicator.innerText = "copied to clipboard"
-              setTimeout(function(){ indicator.className = "" }, 1500);
+              indicator.classList.add("success");
+              setTimeout(function() { indicator.classList.remove("success") }, 1500);
             }, function(err) {
-              inidicator.className = "error";
-              inidicator.innerText = "unable to copy to clipboard!"
-              setTimeout(function(){ indicator.className = "" }, 1500);
+              inidicator.classList.add("error");
+              setTimeout(function() { indicator.classList.remove("error") }, 1500);
           });
         }
       }

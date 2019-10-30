@@ -57,10 +57,9 @@ pre {
     align-self: center;
 
     #copy-indicator {
-      display: inline;
       opacity: 0;
       transition: opacity 200ms ease-in;
-      margin-right: $spacing / 4;
+      background-color: #f0f3f6;
 
       &.success {
         opacity: 1;
@@ -75,11 +74,6 @@ pre {
 
     #copy-button {
       color: #90a7bc;
-      transition: color $transition-default;
-
-      &:hover {
-        color: #60819f;
-      }
     }
   }
 }

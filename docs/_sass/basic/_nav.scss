@@ -5,6 +5,7 @@
   border-right: 1px solid $separator-color;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 
   @media screen and (min-width: $on-large) {
     position: relative;

@@ -26,6 +26,9 @@
     - nav: docs
       title: Documentation
       url: /docs
+    - nav: research
+      title: Research
+      url: /research
     - nav: contributors
       title: Contributors
       url: /contributors

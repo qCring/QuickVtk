@@ -1,0 +1,19 @@
+---
+layout: page
+nav: research
+toplevel: true
+---
+
+<h1>Research</h1>
+
+{%- assign categories = site.research | group_by: "category" -%}
+
+{%- for category in categories reversed -%}
+  <h2>{{ category.name | capitalize }} research topics</h2>
+
+  <ul class="list-simple">
+    {%- for item in category.items -%}
+    <li><a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+{%- endfor -%}

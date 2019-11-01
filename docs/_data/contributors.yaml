@@ -1,0 +1,24 @@
+- name: "Harmen Stoppels"
+  gh_id: "194764"
+  gh_name: "haampie"
+  contribs:
+    - 33
+    - 34
+    - 37
+    - 41
+    - 43
+- name: "zomboir"
+  gh_id: "1277328"
+  gh_name: "zomboir"
+  contribs:
+    - 39
+    - 40
+- name: "bensch128"
+  gh_id: "63752"
+  gh_name: "bensch128"
+  contribs:
+    - 44
+- name: "Andrew Crabb"
+  gh_id: "505971"
+  gh_name: "idoimaging"
+  thanks: "providing sample DICOM data"

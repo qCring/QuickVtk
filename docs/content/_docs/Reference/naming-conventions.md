@@ -7,7 +7,7 @@ category: Reference
 
 ## Namespaces
 
-All classes in QuickVtk reside in the top-level `quick` namespace. Of course, program entry points are an exception to this convention.
+All classes in QuickVtk reside in the top-level `quick` namespace.
 
 ### Public API namespaces
 - The `Vtk`namespace holds all [VTK](https://vtk.org/) wrapper classes
@@ -24,7 +24,7 @@ All classes in QuickVtk reside in the top-level `quick` namespace. Of course, pr
 ## Classes
 Header (.hpp) and implementation (.cpp) pairs for an individual class should always have the same name. Also, the full namespace should be used to build a unique identifier by convention. For example, the class `MyClass` located in the `quick::Vtk` namespace should be defined in `quickVtkMyClass.hpp` and implemented in `quickVtkMyClass.cpp` while the classname should be `MyClass`.
 
-While this is the convention for now, it would be better to organize `#includes` in directories to line up with namespaces like `#include "quick/Vtk/MyClass.hpp"`. But this needs some research first since it involves some [CMake](https://cmake.org/) restructuring and testing.
+While this is the convention for now, this might [change in the future]({{ site.baseurl }}/research/open/include-headers).
 
 ## Enums
 

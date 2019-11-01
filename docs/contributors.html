@@ -1,0 +1,46 @@
+---
+layout: page
+nav: contributors
+toplevel: true
+---
+
+<h1>Contributors</h1>
+<p>
+  Special thanks to all the helpful contributions provided by awesome people!
+</p>
+
+<h2>List of Contributors</h2>
+
+<div>
+  {%- for contributor in site.data.contributors -%}
+    <div class="card-contributor">
+      {%- if contributor.gh_id -%}
+        <div class="img-container">
+          <img src="https://avatars.githubusercontent.com/u/{{ contributor.gh_id }}">
+        </div>
+      {%- endif -%}
+      <div class="card-content">
+        {%- if contributor.gh_name -%}
+          <a class="title" href="https://github.com/{{ contributor.gh_name }}">{{ contributor.name }}</a>
+        {%- else -%}
+          <p class="title">{{ contributor.name }}</p>
+        {%- endif -%}
+        <div class="contrib-list">
+          {%- if contributor.contribs -%}
+            <p>Contributions</p>
+            {%- for contrib in contributor.contribs -%}
+              <a href="https://github.com/qCring/QuickVtk/issues/{{ contrib }}">
+                #{{ contrib }}
+              </a>
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- if contributor.thanks -%}
+          <p>Special thanks for&nbsp;</p>
+            {{ contributor.thanks }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>

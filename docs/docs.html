@@ -10,7 +10,7 @@ toplevel: true
 
 {%- assign categories = site.docs | group_by: "category" -%}
 
-{%- for category in categories -%}
+{%- for category in categories reversed -%}
   <h2>{{ category.name }}</h2>
 
   <ul class="list-simple">

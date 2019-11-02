@@ -12,7 +12,7 @@ api:
   url: /api
 guide:
   title: User Guide
-  url: /user-guide
+  url: /guide
 examples:
   title: Examples
   url: /examples

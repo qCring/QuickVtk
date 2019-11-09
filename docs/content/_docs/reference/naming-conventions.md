@@ -3,6 +3,7 @@ layout: page
 nav: docs
 title: Naming Conventions
 category: Reference
+number: 1
 ---
 
 ## Namespaces

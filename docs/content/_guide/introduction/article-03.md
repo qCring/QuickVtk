@@ -8,6 +8,8 @@ topics:
   - Visualizing procedural geometry in a simple pipeline
 ---
 
+# The VTK visualization pipeline in QuickVtk
+
 ![image]({{ site.baseurl }}/assets/guide/03/img-01.png)
 
 For a comprehensive documentation on the visualization pipeline see the official [VTK documentation website](https://vtk.org/documentation/) from where you also have access to the free PDF versions of

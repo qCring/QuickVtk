@@ -13,9 +13,11 @@ toplevel: true
 {%- for category in categories reversed -%}
   <h2>{{ category.name }}</h2>
 
+  {%- assign list = category.items | sort: "number" -%}
+
   <ul class="list-simple">
-    {%- for item in category.items -%}
-    <li><a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a></li>
+    {%- for item in list -%}
+      <li><a href="{{ site.baseurl}}{{ item.url }}">{{ item.title }}</a></li>
     {%- endfor -%}
   </ul>
 {%- endfor -%}

@@ -1,9 +1,8 @@
 ---
-layout: page
+layout: subpage
 nav: docs
 title: Part 4 - Properties
 category: Implementing a VTK wrapper in QuickVtk
-number: 4
 ---
 
 ## Identifying Properties

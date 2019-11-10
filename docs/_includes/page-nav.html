@@ -1,0 +1,16 @@
+<hr>
+<div class="page-nav row">
+  {% if page.previous %}
+    <a class="container" href="{{ site.baseurl }}{{ page.previous.url }}">
+      <i class="fas fa-arrow-left arrow"></i>
+      <p>{{ page.previous.title }}</p>
+    </a>
+  {% endif %}
+
+  {% if page.next %}
+    <a class="container right" href="{{ site.baseurl }}{{ page.next.url }}">
+      <p>{{ page.next.title }}</p>
+      <i class="fas fa-arrow-right arrow"></i>
+    </a>
+  {% endif %}
+</div>

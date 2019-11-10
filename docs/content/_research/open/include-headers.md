@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: subpage
 nav: research
 title: Include Headers
 category: open

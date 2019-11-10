@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: subpage
 nav: docs
 title: Part 5 - Adding a Vector Property
 category: Implementing a VTK wrapper in QuickVtk
-number: 5
 ---
+
 ## Adding a Vector property
 Next we are going to implement the `Center` property. [VTK](https://vtk.org/) uses native arrays for data types like vectors and colors. QuickVtk provides the [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) type which we are using to implement the new `center` property.
 

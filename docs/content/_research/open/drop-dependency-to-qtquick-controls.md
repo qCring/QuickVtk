@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: subpage
 nav: research
 title: Drop Dependency to QtQuick.Controls
 category: open

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: subpage
 nav: reference
 title: Project Structure
 number: 3

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: subpage
 nav: guide
 title: Getting started with QuickVtk
 category: Introduction

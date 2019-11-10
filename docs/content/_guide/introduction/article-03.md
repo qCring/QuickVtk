@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: subpage
 nav: guide
 title: The VTK visualization pipeline in QuickVtk
 category: Introduction

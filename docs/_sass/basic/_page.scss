@@ -82,4 +82,30 @@
     list-style: none;
     margin-left: 0;
   }
+
+  .page-nav {
+    display: flex;
+    justify-content: space-between;
+
+    .container {
+      display: flex;
+      width: 50%;
+
+      .arrow {
+        align-self: center;
+      }
+
+      p {
+        display: inline;
+        margin-bottom: 0px;
+        margin: 0px $spacing/2;
+        align-self: center;
+      }
+    }
+
+    .right {
+      margin-left: auto;
+      justify-content: flex-end;
+    }
+  }
 }

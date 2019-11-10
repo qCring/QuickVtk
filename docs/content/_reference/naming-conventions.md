@@ -1,8 +1,7 @@
 ---
 layout: page
-nav: docs
+nav: reference
 title: Naming Conventions
-category: Reference
 number: 1
 ---
 

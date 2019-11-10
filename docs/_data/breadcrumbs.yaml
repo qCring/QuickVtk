@@ -22,6 +22,9 @@ roadmap:
 docs:
   title: Documentation
   url: /docs
+reference:
+  title: Reference
+  url: /reference
 research:
   title: Research
   url: /research

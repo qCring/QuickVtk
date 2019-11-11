@@ -1,5 +1,7 @@
 #pragma once
 
+#include "quickTypeInfoMakeSymbol.hpp"
+
 #include <functional>
 
 #include <QtQml>
@@ -45,12 +47,6 @@ namespace quick {
 
             namespace Symbol {
 
-                namespace Make {
-                    auto Enum(QMetaEnum) -> void;
-                    auto Class(QMetaObject, bool isWrapper) -> void;
-                    auto AbstractClass(QMetaObject, bool isWrapper) -> void;
-                }
-
                 template <class T>
                 struct AbstractClass {
                     AbstractClass(bool isWrapper = false) {
@@ -63,10 +59,10 @@ namespace quick {
                             qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "abstract class \'" + className + "\' can not be instantiated.");
 
                             for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                                Make::Enum(metaObject.enumerator(i));
+                                TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
                             }
 
-                            Make::AbstractClass(metaObject, isWrapper);
+                            TypeInfo::MakeSymbol::AbstractClass(metaObject, isWrapper);
                         };
 
                         Queue::GetList().append(initializer);
@@ -85,10 +81,10 @@ namespace quick {
                             qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "\'" + className + "\' can not be instantiated.");
 
                             for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                                Make::Enum(metaObject.enumerator(i));
+                                TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
                             }
 
-                            Make::Class(metaObject, isWrapper);
+                            TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
                         };
 
                         Queue::GetList().append(initializer);
@@ -107,10 +103,10 @@ namespace quick {
                             qmlRegisterType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str());
                             
                             for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                                Make::Enum(metaObject.enumerator(i));
+                                TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
                             }
                             
-                            Make::Class(metaObject, isWrapper);
+                            TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
                         };
 
                         Queue::GetList().append(initializer);

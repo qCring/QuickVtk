@@ -9,24 +9,6 @@ namespace quick {
 
         namespace Register {
 
-            namespace Symbol {
-
-                namespace Make {
-
-                    auto Enum(QMetaEnum metaEnum) -> void {
-                        TypeInfo::Symbol::MakeEnum(metaEnum);
-                    }
-
-                    auto Class(QMetaObject metaObject, bool isWrapper) -> void {
-                        TypeInfo::Symbol::MakeClass(metaObject, isWrapper);
-                    }
-
-                    auto AbstractClass(QMetaObject metaObject, bool isWrapper) -> void {
-                        TypeInfo::Symbol::MakeAbstractClass(metaObject, isWrapper);
-                    }
-                }
-            }
-
             auto Init() -> void {
 
                 for (auto func : Queue::GetList()) {

@@ -7,16 +7,16 @@ namespace quick {
 
     namespace Qml {
 
-        namespace Register {
+        auto RegisterTypes() -> void {
 
-            auto Init() -> void {
-
-                for (auto initializer : Initializers::GetList()) {
-                    initializer();
-                }
-
-                TypeInfo::List::GetInstance()->init();
+            for (auto initializer : Register::Initializers::GetList()) {
+                initializer();
             }
+
+            TypeInfo::List::GetInstance()->init();
+        }
+
+        namespace Register {
 
             auto Initializers::GetList() -> QList<std::function<void(void)>>& {
                 static QList<std::function<void(void)>> List;

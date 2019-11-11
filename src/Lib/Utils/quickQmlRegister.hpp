@@ -14,9 +14,9 @@ namespace quick {
 
     namespace Qml {
 
+        auto RegisterTypes() -> void;
+    
         namespace Register {
-
-            auto Init() -> void;
 
             struct Initializers {
                 static auto GetList() -> QList<std::function<void(void)>>&;

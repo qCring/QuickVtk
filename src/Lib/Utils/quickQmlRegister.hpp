@@ -18,8 +18,8 @@ namespace quick {
 
             auto Init() -> void;
 
-            struct Queue {
-                static auto GetList()->QList<std::function<void(void)>>&;
+            struct Initializers {
+                static auto GetList() -> QList<std::function<void(void)>>&;
             };
 
             template <class T>
@@ -30,7 +30,7 @@ namespace quick {
                         T::Create();
                     };
 
-                    Queue::GetList().append(initializer);
+                    Initializers::GetList().append(initializer);
                 }
             };
 
@@ -41,7 +41,7 @@ namespace quick {
                         qmlRegisterType<T>();
                     };
 
-                    Queue::GetList().append(initializer);
+                    Initializers::GetList().append(initializer);
                 }
             };
 
@@ -63,7 +63,7 @@ namespace quick {
                         TypeInfo::MakeSymbol::AbstractClass(metaObject, isWrapper);
                     };
 
-                    Queue::GetList().append(initializer);
+                    Initializers::GetList().append(initializer);
                 }
             };
 
@@ -85,7 +85,7 @@ namespace quick {
                         TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
                     };
 
-                    Queue::GetList().append(initializer);
+                    Initializers::GetList().append(initializer);
                 }
             };
 
@@ -107,7 +107,7 @@ namespace quick {
                         TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
                     };
 
-                    Queue::GetList().append(initializer);
+                    Initializers::GetList().append(initializer);
                 }
             };
         }

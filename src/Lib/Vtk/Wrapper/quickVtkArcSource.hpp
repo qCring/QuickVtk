@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(bool negative READ getNegative WRITE setNegative NOTIFY negativeChanged);
             Q_PROPERTY(bool useNormalAndAngle READ getUseNormalAndAngle WRITE setUseNormalAndAngle NOTIFY useNormalAndAngleChanged);
         private:
-            static Qml::Register::Symbol::Class<ArcSource> Register;
+            static Qml::Register::Class<ArcSource> Register;
             vtkSmartPointer<vtkArcSource> m_vtkObject;
             Math::Vector3* m_point1 = nullptr;
             Math::Vector3* m_point2 = nullptr;

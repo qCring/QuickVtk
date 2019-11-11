@@ -11,7 +11,7 @@ namespace quick {
         class ImageLaplacian : public ThreadedImageAlgorithm {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<ImageLaplacian> Register;
+            static Qml::Register::Class<ImageLaplacian> Register;
         public:
             ImageLaplacian();
         };

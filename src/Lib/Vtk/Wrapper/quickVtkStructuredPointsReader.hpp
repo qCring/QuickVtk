@@ -11,7 +11,7 @@ namespace quick {
         class StructuredPointsReader : public DataReader {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<StructuredPointsReader> Register;
+            static Qml::Register::Class<StructuredPointsReader> Register;
         public:
             StructuredPointsReader();
         };

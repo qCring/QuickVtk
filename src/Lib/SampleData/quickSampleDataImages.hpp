@@ -19,7 +19,7 @@ namespace quick {
         private:
             auto makeDataPath(const QString&) -> QString;
         public:
-            static Qml::Register::Symbol::Class<Images> Register;
+            static Qml::Register::Class<Images> Register;
             static Images* instance;
             static auto Create() -> void;
             auto getLenaPNG() -> QString;

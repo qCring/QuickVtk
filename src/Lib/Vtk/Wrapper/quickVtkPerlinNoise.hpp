@@ -15,7 +15,7 @@ namespace quick {
             Q_PROPERTY(quick::Math::Vector3* frequency READ getFrequency CONSTANT);
             Q_PROPERTY(quick::Math::Vector3* phase READ getPhase CONSTANT);
         private:
-            static Qml::Register::Symbol::Class<PerlinNoise> Register;
+            static Qml::Register::Class<PerlinNoise> Register;
             vtkSmartPointer<vtkPerlinNoise> m_vtkObject = nullptr;
             Math::Vector3* m_frequency = nullptr;
             Math::Vector3* m_phase = nullptr;

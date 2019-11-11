@@ -6,7 +6,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<OFFReader> OFFReader::Register;
+        Qml::Register::Class<OFFReader> OFFReader::Register;
 
         OFFReader::OFFReader() : quick::Vtk::PolyDataAlgorithm(vtkSmartPointer<vtkOFFReader>::New()) {
             this->m_vtkObject = vtkOFFReader::SafeDownCast(getVtkObject());

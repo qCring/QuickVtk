@@ -11,7 +11,7 @@ namespace quick {
         class TextureMapToCylinder : public DataSetAlgorithm {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<TextureMapToCylinder> Register;
+            static Qml::Register::Class<TextureMapToCylinder> Register;
             vtkSmartPointer<vtkTextureMapToCylinder> m_vtkObject;
         public:
             TextureMapToCylinder();

@@ -11,7 +11,7 @@ namespace quick {
         class PointSetAlgorithm : public Algorithm {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::AbstractClass<PointSetAlgorithm> Register;
+            static Qml::Register::AbstractClass<PointSetAlgorithm> Register;
         public:
             PointSetAlgorithm(vtkSmartPointer<vtkPointSetAlgorithm>);
         };

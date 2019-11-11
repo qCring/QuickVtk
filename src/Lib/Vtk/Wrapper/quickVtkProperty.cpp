@@ -5,7 +5,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::UncreatableClass<Property> Property::Register(true);
+        Qml::Register::UncreatableClass<Property> Property::Register(true);
 
         Property::Property(Actor* actor) : m_actor(actor), m_vtkActor(actor->getVtkObject()) {
         }

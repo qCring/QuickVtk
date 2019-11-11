@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::AbstractClass<AbstractWidget> AbstractWidget::Register(true);
+        Qml::Register::AbstractClass<AbstractWidget> AbstractWidget::Register(true);
 
         AbstractWidget::AbstractWidget(vtkSmartPointer<vtkAbstractWidget> vtkObject) : Object(Object::Type::Widget), m_vtkObject(vtkObject) {
         }

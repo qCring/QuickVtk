@@ -28,7 +28,7 @@ namespace quick {
             Q_PROPERTY(qreal specular READ getSpecular WRITE setSpecular NOTIFY specularChanged);
             Q_PROPERTY(qreal specularPower READ getSpecularPower WRITE setSpecularPower NOTIFY specularPowerChanged);
         private:
-            static Qml::Register::Symbol::UncreatableClass<VolumeProperty> Register;
+            static Qml::Register::UncreatableClass<VolumeProperty> Register;
             Volume* m_volume = nullptr;
             PiecewiseFunction* m_gradientOpacityFunction = nullptr;
             PiecewiseFunction* m_scalarOpacityFunction = nullptr;

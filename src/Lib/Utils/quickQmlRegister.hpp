@@ -45,74 +45,71 @@ namespace quick {
                 }
             };
 
-            namespace Symbol {
+            template <class T>
+            struct AbstractClass {
+                AbstractClass(bool isWrapper = false) {
+                    auto initializer = [isWrapper]() {
+                        QMetaObject metaObject = T::staticMetaObject;
+                        auto name = QString(metaObject.className());
+                        auto prefix = name.section("::", 1, 1);
+                        auto className = name.section("::", 2, 2);
 
-                template <class T>
-                struct AbstractClass {
-                    AbstractClass(bool isWrapper = false) {
-                        auto initializer = [isWrapper]() {
-                            QMetaObject metaObject = T::staticMetaObject;
-                            auto name = QString(metaObject.className());
-                            auto prefix = name.section("::", 1, 1);
-                            auto className = name.section("::", 2, 2);
+                        qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "abstract class \'" + className + "\' can not be instantiated.");
 
-                            qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "abstract class \'" + className + "\' can not be instantiated.");
+                        for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
+                            TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
+                        }
 
-                            for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                                TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
-                            }
+                        TypeInfo::MakeSymbol::AbstractClass(metaObject, isWrapper);
+                    };
 
-                            TypeInfo::MakeSymbol::AbstractClass(metaObject, isWrapper);
-                        };
+                    Queue::GetList().append(initializer);
+                }
+            };
 
-                        Queue::GetList().append(initializer);
-                    }
-                };
+            template <class T>
+            struct UncreatableClass {
+                UncreatableClass(bool isWrapper = false) {
+                    auto initializer = [isWrapper]() {
+                        QMetaObject metaObject = T::staticMetaObject;
+                        auto name = QString(metaObject.className());
+                        auto prefix = name.section("::", 1, 1);
+                        auto className = name.section("::", 2, 2);
 
-                template <class T>
-                struct UncreatableClass {
-                    UncreatableClass(bool isWrapper = false) {
-                        auto initializer = [isWrapper]() {
-                            QMetaObject metaObject = T::staticMetaObject;
-                            auto name = QString(metaObject.className());
-                            auto prefix = name.section("::", 1, 1);
-                            auto className = name.section("::", 2, 2);
+                        qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "\'" + className + "\' can not be instantiated.");
 
-                            qmlRegisterUncreatableType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str(), "\'" + className + "\' can not be instantiated.");
+                        for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
+                            TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
+                        }
 
-                            for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                                TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
-                            }
+                        TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
+                    };
 
-                            TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
-                        };
+                    Queue::GetList().append(initializer);
+                }
+            };
 
-                        Queue::GetList().append(initializer);
-                    }
-                };
+            template <class T>
+            struct Class {
+                Class(bool isWrapper = false) {
+                    auto initializer = [isWrapper]() {
+                        QMetaObject metaObject = T::staticMetaObject;
+                        auto name = QString(metaObject.className());
+                        auto prefix = name.section("::", 1, 1);
+                        auto className = name.section("::", 2, 2);
 
-                template <class T>
-                struct Class {
-                    Class(bool isWrapper = false) {
-                        auto initializer = [isWrapper]() {
-                            QMetaObject metaObject = T::staticMetaObject;
-                            auto name = QString(metaObject.className());
-                            auto prefix = name.section("::", 1, 1);
-                            auto className = name.section("::", 2, 2);
+                        qmlRegisterType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str());
+                        
+                        for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
+                            TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
+                        }
+                        
+                        TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
+                    };
 
-                            qmlRegisterType<T>(prefix.toStdString().c_str(), 1, 0, className.toStdString().c_str());
-                            
-                            for (auto i = 0; i < metaObject.enumeratorCount(); ++i) {
-                                TypeInfo::MakeSymbol::Enum(metaObject.enumerator(i));
-                            }
-                            
-                            TypeInfo::MakeSymbol::Class(metaObject, isWrapper);
-                        };
-
-                        Queue::GetList().append(initializer);
-                    }
-                };
-            }
+                    Queue::GetList().append(initializer);
+                }
+            };
         }
     }
 }

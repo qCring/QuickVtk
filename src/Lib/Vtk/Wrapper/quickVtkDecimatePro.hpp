@@ -18,7 +18,7 @@ namespace quick {
             Q_PROPERTY(bool preSplitMesh READ getPreSplitMesh WRITE setPreSplitMesh NOTIFY preSplitMeshChanged);
             Q_PROPERTY(int degree READ getDegree WRITE setDegree NOTIFY degreeChanged);
         private:
-            static Qml::Register::Symbol::Class<DecimatePro> Register;
+            static Qml::Register::Class<DecimatePro> Register;
             vtkSmartPointer<vtkDecimatePro> m_vtkObject;
         public:
             DecimatePro();

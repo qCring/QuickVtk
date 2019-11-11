@@ -22,7 +22,7 @@ namespace quick {
             Q_PROPERTY(qreal tolerance READ getTolerance WRITE setTolerance NOTIFY toleranceChanged);
             Q_PROPERTY(bool reorientDifferentCells READ getReorientDifferentCells WRITE setReorientDifferentCells NOTIFY reorientDifferentCellsChanged);
         private:
-            static Qml::Register::Symbol::Class<BooleanOperationPolyDataFilter> Register;
+            static Qml::Register::Class<BooleanOperationPolyDataFilter> Register;
             vtkSmartPointer<vtkBooleanOperationPolyDataFilter> m_vtkObject;
         public:
             BooleanOperationPolyDataFilter();

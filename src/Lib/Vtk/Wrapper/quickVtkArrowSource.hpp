@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(qreal shaftRadius READ getShaftRadius WRITE setShaftRadius NOTIFY shaftRadiusChanged);
             Q_PROPERTY(bool invert READ getInvert WRITE setInvert NOTIFY invertChanged);
         private:
-            static Qml::Register::Symbol::Class<ArrowSource> Register;
+            static Qml::Register::Class<ArrowSource> Register;
             vtkSmartPointer<vtkArrowSource> m_vtkObject;
         public:
             ArrowSource();

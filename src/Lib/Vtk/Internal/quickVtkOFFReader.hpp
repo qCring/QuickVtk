@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(QString fileName READ getFileName WRITE setFileName NOTIFY fileNameChanged);
         private:
-            static Qml::Register::Symbol::Class<OFFReader> Register;
+            static Qml::Register::Class<OFFReader> Register;
             vtkSmartPointer<vtkOFFReader> m_vtkObject;
             QString m_fileName;
         public:

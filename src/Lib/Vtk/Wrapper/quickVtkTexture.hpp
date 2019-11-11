@@ -36,7 +36,7 @@ namespace quick {
             Q_PROPERTY(bool interpolate READ getInterpolate WRITE setInterpolate NOTIFY interpolateChanged);
         private:
             using cb_t = std::function<void()>;
-            static Qml::Register::Symbol::UncreatableClass<Texture> Register;
+            static Qml::Register::UncreatableClass<Texture> Register;
             vtkSmartPointer<vtkTexture> m_vtkObject;
             cb_t m_callback;
         public:

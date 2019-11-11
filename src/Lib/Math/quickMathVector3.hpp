@@ -23,7 +23,7 @@ namespace quick {
             array_t m_values;
             auto notify() -> void;
         public:
-            static Qml::Register::Symbol::UncreatableClass<Vector3> Register;
+            static Qml::Register::UncreatableClass<Vector3> Register;
             Vector3() = delete;
             Vector3(cb_t&&, array_t = {{0,0,0}});
             auto setX(double) -> void;

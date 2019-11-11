@@ -11,7 +11,7 @@ namespace quick {
         class DataSetAlgorithm : public Algorithm {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::AbstractClass<DataSetAlgorithm> Register;
+            static Qml::Register::AbstractClass<DataSetAlgorithm> Register;
         public:
             DataSetAlgorithm(vtkSmartPointer<vtkDataSetAlgorithm>);
         };

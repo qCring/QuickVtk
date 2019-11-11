@@ -11,7 +11,7 @@ namespace quick {
         class ImageDataGeometryFilter : public PolyDataAlgorithm {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<ImageDataGeometryFilter> Register;
+            static Qml::Register::Class<ImageDataGeometryFilter> Register;
             vtkSmartPointer<vtkImageDataGeometryFilter> m_vtkObject;
         public:
             ImageDataGeometryFilter();

@@ -15,11 +15,10 @@ namespace quick {
         namespace Register {
 
             auto Init() -> void;
-#ifdef _MSC_VER
+
             struct Queue {
                 static auto GetList()->QList<std::function<void(void)>>&;
             };
-#endif
 
             template <class T>
             struct Controller {
@@ -28,11 +27,8 @@ namespace quick {
                         qmlRegisterType<T>();
                         T::Create();
                     };
-#ifdef _MSC_VER
+
                     Queue::GetList().append(initializer);
-#else
-                    initializer();
-#endif
                 }
             };
 
@@ -42,11 +38,8 @@ namespace quick {
                     auto initializer = []() {
                         qmlRegisterType<T>();
                     };
-#ifdef _MSC_VER
+
                     Queue::GetList().append(initializer);
-#else
-                    initializer();
-#endif
                 }
             };
 
@@ -75,11 +68,8 @@ namespace quick {
 
                             Make::AbstractClass(metaObject, isWrapper);
                         };
-#ifdef _MSC_VER
+
                         Queue::GetList().append(initializer);
-#else
-                        initializer();
-#endif
                     }
                 };
 
@@ -100,11 +90,8 @@ namespace quick {
 
                             Make::Class(metaObject, isWrapper);
                         };
-#ifdef _MSC_VER
+
                         Queue::GetList().append(initializer);
-#else
-                        initializer();
-#endif
                     }
                 };
 
@@ -125,11 +112,8 @@ namespace quick {
                             
                             Make::Class(metaObject, isWrapper);
                         };
-#ifdef _MSC_VER
+
                         Queue::GetList().append(initializer);
-#else
-                        initializer();
-#endif
                     }
                 };
             }

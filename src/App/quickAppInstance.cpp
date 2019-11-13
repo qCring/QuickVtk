@@ -42,7 +42,7 @@ namespace quick {
             QApplication::setApplicationName(Meta::appName);
             QApplication::setApplicationVersion(Meta::versionString);
 
-            Qml::Register::Init();
+            Qml::RegisterTypes();
 
             auto path = QDir(QGuiApplication::applicationDirPath());
 

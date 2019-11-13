@@ -25,7 +25,7 @@ namespace quick {
             Q_PROPERTY(ScalarMode scalarMode READ getScalarMode WRITE setScalarMode NOTIFY scalarModeChanged);
             Q_PROPERTY(bool scalarVisibility READ getScalarVisibility WRITE setScalarVisibility NOTIFY scalarVisibilityChanged);
         private:
-            static Qml::Register::Symbol::AbstractClass<Mapper> Register;
+            static Qml::Register::AbstractClass<Mapper> Register;
             vtkSmartPointer<vtkMapper> m_vtkObject;
         public:
             Mapper(vtkSmartPointer<vtkMapper>);

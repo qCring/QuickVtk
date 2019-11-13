@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(int resolution READ getResolution WRITE setResolution NOTIFY resolutionChanged)
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
-            static Qml::Register::Symbol::Class<CylinderSource> Register;
+            static Qml::Register::Class<CylinderSource> Register;
             vtkSmartPointer<vtkCylinderSource> m_vtkObject;
             Math::Vector3* m_center = nullptr;
         public:

@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<PointSource> PointSource::Register(true);
+        Qml::Register::Class<PointSource> PointSource::Register(true);
 
         PointSource::PointSource() : PolyDataAlgorithm(vtkSmartPointer<vtkPointSource>::New()) {
             this->m_vtkObject = vtkPointSource::SafeDownCast(Algorithm::getVtkObject());

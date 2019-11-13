@@ -14,7 +14,7 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(bool enabled READ getEnabled WRITE setEnabled NOTIFY enabledChanged);
         private:
-            static Qml::Register::Symbol::AbstractClass<AbstractWidget> Register;
+            static Qml::Register::AbstractClass<AbstractWidget> Register;
             bool m_enabled;
             vtkSmartPointer<vtkAbstractWidget> m_vtkObject = nullptr;
         public:

@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(quick::Vtk::VolumeProperty* property READ getProperty CONSTANT);
             Q_CLASSINFO("DefaultProperty", "mapper");
         private:
-            static Qml::Register::Symbol::Class<Volume> Register;
+            static Qml::Register::Class<Volume> Register;
             VolumeProperty* m_property = nullptr;
             AbstractVolumeMapper* m_mapper = nullptr;
             vtkSmartPointer<vtkVolume> m_vtkVolume = nullptr;

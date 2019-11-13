@@ -11,7 +11,7 @@ namespace quick {
         class LoopSubdivisionFilter : public ApproximatingSubdivisionFilter {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<LoopSubdivisionFilter> Register;
+            static Qml::Register::Class<LoopSubdivisionFilter> Register;
         public:
             LoopSubdivisionFilter();
         };

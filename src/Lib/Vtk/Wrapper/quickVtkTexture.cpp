@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::UncreatableClass<Texture> Texture::Register(true);
+        Qml::Register::UncreatableClass<Texture> Texture::Register(true);
 
         Texture::Texture(vtkSmartPointer<vtkTexture> vtkObject, cb_t&& callback) : ImageAlgorithm(vtkObject), m_vtkObject(vtkObject), m_callback(callback) {
         }

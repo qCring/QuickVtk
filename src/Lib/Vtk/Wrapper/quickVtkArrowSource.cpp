@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<ArrowSource> ArrowSource::Register(true);
+        Qml::Register::Class<ArrowSource> ArrowSource::Register(true);
 
         ArrowSource::ArrowSource() : PolyDataAlgorithm(vtkSmartPointer<vtkArrowSource>::New()) {
             this->m_vtkObject = vtkArrowSource::SafeDownCast(Algorithm::getVtkObject());

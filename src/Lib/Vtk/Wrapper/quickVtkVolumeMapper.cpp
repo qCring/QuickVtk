@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::AbstractClass<VolumeMapper> VolumeMapper::Register(true);
+        Qml::Register::AbstractClass<VolumeMapper> VolumeMapper::Register(true);
 
         VolumeMapper::VolumeMapper(vtkSmartPointer<vtkVolumeMapper> vtkObject) : AbstractVolumeMapper(vtkObject) {
             this->m_vtkObject = vtkVolumeMapper::SafeDownCast(vtkObject);

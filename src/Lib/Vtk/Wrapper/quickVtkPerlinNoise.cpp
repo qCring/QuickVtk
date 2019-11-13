@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<PerlinNoise> PerlinNoise::Register(true);
+        Qml::Register::Class<PerlinNoise> PerlinNoise::Register(true);
 
         PerlinNoise::PerlinNoise() : ImplicitFunction(vtkSmartPointer<vtkPerlinNoise>::New()) {
             this->m_vtkObject = vtkPerlinNoise::SafeDownCast(ImplicitFunction::getVtkObject());

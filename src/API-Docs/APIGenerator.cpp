@@ -28,7 +28,7 @@ namespace quick {
 
     auto APIGenerator::init() -> bool {
         
-        quick::Qml::Register::Init();
+        Qml::RegisterTypes();
         
         docs_dir.cdUp();         // cdUp to 'bin'
         docs_dir.cdUp();         // cdUp to project root directory 'QuickVtk'

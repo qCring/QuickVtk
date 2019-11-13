@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(qreal finalColorWindow READ getFinalColorWindow WRITE setFinalColorWindow NOTIFY finalColorWindowChanged);
             Q_PROPERTY(qreal finalColorLevel READ getFinalColorLevel WRITE setFinalColorLevel NOTIFY finalColorLevelChanged);
         private:
-            static Qml::Register::Symbol::Class<GPUVolumeRayCastMapper> Register;
+            static Qml::Register::Class<GPUVolumeRayCastMapper> Register;
             vtkSmartPointer<vtkGPUVolumeRayCastMapper> m_vtkObject = nullptr;
         public:
             GPUVolumeRayCastMapper();

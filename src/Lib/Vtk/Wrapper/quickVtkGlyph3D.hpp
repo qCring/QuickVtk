@@ -50,7 +50,7 @@ namespace quick {
             Q_PROPERTY(bool fillCellData READ getFillCellData WRITE setFillCellData NOTIFY fillCellDataChanged);
             Q_PROPERTY(bool generatePointIds READ getGeneratePointIds WRITE setGeneratePointIds NOTIFY generatePointIdsChanged);
         private:
-            static Qml::Register::Symbol::Class<Glyph3D> Register;
+            static Qml::Register::Class<Glyph3D> Register;
             vtkSmartPointer<vtkGlyph3D> m_vtkObject;
             Math::Vector2* m_range;
         private:

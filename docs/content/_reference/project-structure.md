@@ -1,8 +1,8 @@
 ---
-layout: page
-nav: docs
+layout: subpage
+nav: reference
 title: Project Structure
-category: Reference
+number: 3
 ---
 
 # Project Structure

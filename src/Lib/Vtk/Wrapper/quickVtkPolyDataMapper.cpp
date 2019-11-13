@@ -7,7 +7,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<PolyDataMapper> PolyDataMapper::Register(true);
+        Qml::Register::Class<PolyDataMapper> PolyDataMapper::Register(true);
 
         PolyDataMapper::PolyDataMapper() : Mapper(vtkSmartPointer<vtkPolyDataMapper>::New()) {
         }

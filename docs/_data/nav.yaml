@@ -14,7 +14,7 @@
       url: /api
     - nav: guide
       title: User Guide
-      url: /user-guide
+      url: /guide
     - nav: examples
       title: Examples
       url: /examples
@@ -26,6 +26,9 @@
     - nav: docs
       title: Documentation
       url: /docs
+    - nav: reference
+      title: Reference
+      url: /reference
     - nav: research
       title: Research
       url: /research

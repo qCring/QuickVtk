@@ -13,6 +13,8 @@ collections:
     output: true
   docs:
     output: true
+  reference:
+    output: true
   research:
     output: true
   examples:

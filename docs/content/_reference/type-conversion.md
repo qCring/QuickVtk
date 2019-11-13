@@ -1,8 +1,8 @@
 ---
-layout: page
-nav: docs
+layout: subpage
+nav: reference
 title: Type Conversion
-category: Reference
+number: 2
 ---
 
 ## Overview

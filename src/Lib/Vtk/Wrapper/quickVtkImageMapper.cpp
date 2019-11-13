@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<ImageMapper> ImageMapper::Register(true);
+        Qml::Register::Class<ImageMapper> ImageMapper::Register(true);
 
         ImageMapper::ImageMapper() : Mapper2D(vtkSmartPointer<vtkImageMapper>::New()) {
             this->m_vtkObject = vtkImageMapper::SafeDownCast(Algorithm::getVtkObject());

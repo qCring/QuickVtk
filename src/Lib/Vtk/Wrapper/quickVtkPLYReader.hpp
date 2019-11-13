@@ -11,7 +11,7 @@ namespace quick {
         class PLYReader : public AbstractPolyDataReader {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<PLYReader> Register;
+            static Qml::Register::Class<PLYReader> Register;
         public:
             PLYReader();
         };

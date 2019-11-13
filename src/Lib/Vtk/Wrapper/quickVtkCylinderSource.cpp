@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<CylinderSource> CylinderSource::Register(true);
+        Qml::Register::Class<CylinderSource> CylinderSource::Register(true);
 
         CylinderSource::CylinderSource() : PolyDataAlgorithm(vtkSmartPointer<vtkCylinderSource>::New()) {
             this->m_vtkObject = vtkCylinderSource::SafeDownCast(Algorithm::getVtkObject());

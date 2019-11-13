@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<ArcSource> ArcSource::Register(true);
+        Qml::Register::Class<ArcSource> ArcSource::Register(true);
     
         ArcSource::ArcSource() : PolyDataAlgorithm(vtkSmartPointer<vtkArcSource>::New()) {
             

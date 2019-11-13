@@ -18,7 +18,7 @@ namespace quick {
                 Widget
             };
         private:
-            static Qml::Register::Symbol::AbstractClass<Object> Register;
+            static Qml::Register::AbstractClass<Object> Register;
             Type m_type;
         public:
             Object(Type);

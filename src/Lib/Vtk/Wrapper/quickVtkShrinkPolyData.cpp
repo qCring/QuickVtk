@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<ShrinkPolyData> ShrinkPolyData::Register(true);
+        Qml::Register::Class<ShrinkPolyData> ShrinkPolyData::Register(true);
 
         ShrinkPolyData::ShrinkPolyData() : PolyDataAlgorithm(vtkSmartPointer<vtkShrinkPolyData>::New()) {
             this->m_vtkObject = vtkShrinkPolyData::SafeDownCast(Algorithm::getVtkObject());

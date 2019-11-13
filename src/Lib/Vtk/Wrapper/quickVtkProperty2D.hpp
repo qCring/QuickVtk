@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(QColor color READ getColor WRITE setColor NOTIFY colorChanged);
             Q_PROPERTY(qreal opacity READ getOpacity WRITE setOpacity NOTIFY opacityChanged);
         private:
-            static Qml::Register::Symbol::UncreatableClass<Property2D> Register;
+            static Qml::Register::UncreatableClass<Property2D> Register;
             QColor m_color;
             quick::Vtk::Actor2D* m_actor2D;
             vtkSmartPointer<vtkActor2D> m_vtkActor2D;

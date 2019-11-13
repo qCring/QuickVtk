@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include nav.html -%}
+
+    <div class="page">
+
+      <div class="content">
+
+        {%- include breadcrumbs.html title = page.title -%}
+
+        {{- content -}}
+
+        {%- include page-nav.html -%}
+
+      </div>
+    </div>
+
+  </body>
+
+</html>

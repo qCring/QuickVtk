@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
 
         private:
-            static Qml::Register::Symbol::Class<VertexGlyphFilter> Register;
+            static Qml::Register::Class<VertexGlyphFilter> Register;
         public:
             VertexGlyphFilter();
         };

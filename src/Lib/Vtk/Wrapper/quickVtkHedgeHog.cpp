@@ -4,7 +4,7 @@ namespace quick {
 
     namespace Vtk {
 
-        Qml::Register::Symbol::Class<HedgeHog> HedgeHog::Register(true);
+        Qml::Register::Class<HedgeHog> HedgeHog::Register(true);
 
         HedgeHog::HedgeHog() : PolyDataAlgorithm(vtkSmartPointer<vtkHedgeHog>::New()) {
             this->m_vtkObject = vtkHedgeHog::SafeDownCast(Algorithm::getVtkObject());

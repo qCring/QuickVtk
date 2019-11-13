@@ -22,7 +22,7 @@ namespace quick {
             Q_PROPERTY(BlendMode blendMode READ getBlendMode WRITE setBlendMode NOTIFY blendModeChanged);
             Q_PROPERTY(bool cropping READ getCropping WRITE setCropping NOTIFY croppingChanged);
         private:
-            static Qml::Register::Symbol::AbstractClass<VolumeMapper> Register;
+            static Qml::Register::AbstractClass<VolumeMapper> Register;
             vtkSmartPointer<vtkVolumeMapper> m_vtkObject = nullptr;
         public:
             VolumeMapper(vtkSmartPointer<vtkVolumeMapper>);

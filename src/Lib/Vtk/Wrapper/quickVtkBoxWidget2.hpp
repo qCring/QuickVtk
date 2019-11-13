@@ -11,7 +11,7 @@ namespace quick {
         class BoxWidget2 : public AbstractWidget {
             Q_OBJECT
         private:
-            static Qml::Register::Symbol::Class<BoxWidget2> Register;
+            static Qml::Register::Class<BoxWidget2> Register;
             vtkSmartPointer<vtkAbstractWidget> m_vtkObject = nullptr;
         public:
             BoxWidget2();

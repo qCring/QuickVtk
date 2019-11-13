@@ -225,11 +225,11 @@ Item {
 
 {% endhighlight %}
 
-We bind the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) component's `text` property to the `numberOfPoints` property by referencing `source.numberOfPoints` in the assignment. Every time the `numberOfPoints` property changes, the text will be updated. This only works because we are emitting the changed-signal in the `setNumberOfPoints` accessor. Emitting this signal tells all observers that they need to re-evaluate their value based on the observed property.
+We bind the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) component's `text` property to the `numberOfPoints` property by referencing `source.numberOfPoints` in the assignment. Every time the `numberOfPoints` property changes, the text will be updated. This only works because we emit the `-changed` signal in the `setNumberOfPoints` accessor. This tells all observers (in this case the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) component's `text` property) that they need to re-evaluate their value based on the observed property.
 
 If you delete or comment the `emit this->numberOfPointsChanged()` statement in the `setNumberOfPoints` method, the [Text](https://doc.qt.io/qt-5/qml-qtquick-text.html) component will no longer react to value changes after interacting with the slider.
 
-You might wonder why observers are not re-evaluated automatically after assigning a value to the observed property. By emitting signals from C++ explicitly, we have more control over our properties in terms of performance. We could cache previously assigned values and compare them to new property values like shown in the following example:
+You might wonder why observers are not re-evaluated automatically after assigning a value to the observed property. By emitting signals from C++ explicitly, we have more control over our properties. We could cache previously assigned values and compare them to new property values like shown in the following example:
 
 >Optimizing Property Assignments
 {: .hl-caption}

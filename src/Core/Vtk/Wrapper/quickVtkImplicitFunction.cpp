@@ -6,7 +6,7 @@ namespace quick {
 
         Qml::Register::AbstractClass<ImplicitFunction> ImplicitFunction::Register(true);
 
-        ImplicitFunction::ImplicitFunction(vtkSmartPointer<vtkImplicitFunction> vtkObject) : Object(Object::Type::ImplicitFunction), m_vtkObject(vtkObject) {
+        ImplicitFunction::ImplicitFunction(vtkSmartPointer<vtkImplicitFunction> vtkObject) : Object(Object::Type::Other), m_vtkObject(vtkObject) {
         }
 
         auto ImplicitFunction::update() -> void {

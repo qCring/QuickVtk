@@ -100,22 +100,22 @@ include(${VTK_USE_FILE})
 AddApplicationSources("${SOURCE_DIR}/App" "App" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/Editor" "Editor" list_app_src)
 
-AddLibrarySources("${SOURCE_DIR}/Lib/Math" "Math" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/SampleData" "SampleData" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/TypeInfo" "TypeInfo" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Utils" "Utils" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk" "Vtk" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Internal" "Vtk\\Internal" list_lib_src list_lib_hdr)
-AddLibrarySources("${SOURCE_DIR}/Lib/Vtk/Wrapper" "Vtk\\Wrapper" list_lib_src list_lib_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/Math" "Math" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/SampleData" "SampleData" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/TypeInfo" "TypeInfo" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/Utils" "Utils" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/Vtk" "Vtk" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/Vtk/Internal" "Vtk\\Internal" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/Core/Vtk/Wrapper" "Vtk\\Wrapper" list_core_src list_core_hdr)
 
 #configure directories
-set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/Lib")
+set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/Core")
 
 #setup library
 # ******************************************************************************
-set (LIB_NAME "${PROJECT_NAME}Lib")
-add_library (${LIB_NAME} SHARED ${list_lib_src} ${list_lib_hdr})
-set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "${list_lib_hdr}")
+set (QUICKVTK_CORE_NAME "${PROJECT_NAME}Core")
+add_library (${QUICKVTK_CORE_NAME} SHARED ${list_core_src} ${list_core_hdr})
+set_target_properties(${QUICKVTK_CORE_NAME} PROPERTIES PUBLIC_HEADER "${list_core_hdr}")
 
 set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
 if(UNIX AND NOT APPLE)
@@ -123,7 +123,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # link
-target_link_libraries(${LIB_NAME} ${LINK_LIBRARIES})
+target_link_libraries(${QUICKVTK_CORE_NAME} ${LINK_LIBRARIES})
 
 
 # setup target
@@ -165,8 +165,8 @@ add_executable(${API_DOCS_TARGET}
   "${SOURCE_DIR}/API-Docs/APIGenerator.cpp"
 )
 
-target_link_libraries(${API_DOCS_TARGET} ${LINK_LIBRARIES} ${LIB_NAME})
-target_include_directories(${API_DOCS_TARGET} PRIVATE ${list_lib_hdr})
+target_link_libraries(${API_DOCS_TARGET} ${LINK_LIBRARIES} ${QUICKVTK_CORE_NAME})
+target_include_directories(${API_DOCS_TARGET} PRIVATE ${list_core_hdr})
 target_include_directories(${API_DOCS_TARGET} PUBLIC ${BINARY_DIR})
 
 # includes
@@ -191,13 +191,13 @@ endif()
 #    set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)
 #endif()
 
-target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES} ${LIB_NAME})
-target_include_directories(${PROJECT_NAME} PRIVATE ${list_lib_hdr})
+target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES} ${QUICKVTK_CORE_NAME})
+target_include_directories(${PROJECT_NAME} PRIVATE ${list_core_hdr})
 
 if(NOT APPLE)
   install(
-      TARGETS QuickVtkLib
-        EXPORT QuickVtkLib-targets
+      TARGETS QuickVtkCore
+        EXPORT QuickVtkCore-targets
         ARCHIVE DESTINATION "lib"
         RUNTIME DESTINATION "bin"
         PUBLIC_HEADER DESTINATION "include"
@@ -205,9 +205,9 @@ if(NOT APPLE)
         COMPONENT libraries)
 
   install(
-   EXPORT QuickVtkLib-targets
-    DESTINATION lib/cmake/QuickVtkLib
-    FILE QuickVtkLib-config.cmake
+   EXPORT QuickVtkCore-targets
+    DESTINATION lib/cmake/QuickVtkCore
+    FILE QuickVtkCore-config.cmake
     COMPONENT headers)
 
   install(

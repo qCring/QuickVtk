@@ -105,7 +105,7 @@ namespace quick {
         }
 
         auto Property::getInterpolation() -> Interpolation {
-            return (Interpolation) this->m_vtkActor->GetProperty()->GetInterpolation();
+            return static_cast<Interpolation>(this->m_vtkActor->GetProperty()->GetInterpolation());
         }
 
         auto Property::setRepresentation(Representation representation) -> void {
@@ -115,7 +115,7 @@ namespace quick {
         }
 
         auto Property::getRepresentation() -> Representation {
-            return (Representation) this->m_vtkActor->GetProperty()->GetRepresentation();
+            return static_cast<Representation>(this->m_vtkActor->GetProperty()->GetRepresentation());
         }
 
         auto Property::setAmbient(qreal ambient) -> void {

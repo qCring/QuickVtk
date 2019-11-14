@@ -27,7 +27,7 @@ namespace quick {
         }
 
         auto HedgeHog::getVectorMode() -> VectorMode {
-            return (VectorMode) this->m_vtkObject->GetVectorMode();
+            return static_cast<VectorMode>(this->m_vtkObject->GetVectorMode());
         }
     }
 }

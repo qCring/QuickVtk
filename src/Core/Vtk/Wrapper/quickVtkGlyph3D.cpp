@@ -36,7 +36,7 @@ namespace quick {
         }
 
         auto Glyph3D::getColorMode() -> ColorMode {
-            return (ColorMode) this->m_vtkObject->GetColorMode();
+            return static_cast<ColorMode>(this->m_vtkObject->GetColorMode());
         }
 
         auto Glyph3D::setIndexMode(IndexMode indexMode) -> void {
@@ -46,7 +46,7 @@ namespace quick {
         }
 
         auto Glyph3D::getIndexMode() -> IndexMode {
-            return (IndexMode) this->m_vtkObject->GetIndexMode();
+            return static_cast<IndexMode>(this->m_vtkObject->GetIndexMode());
         }
 
         auto Glyph3D::setVectorMode(VectorMode vectorMode) -> void {
@@ -56,7 +56,7 @@ namespace quick {
         }
 
         auto Glyph3D::getVectorMode() -> VectorMode {
-            return (VectorMode) this->m_vtkObject->GetVectorMode();
+            return static_cast<VectorMode>(this->m_vtkObject->GetVectorMode());
         }
 
         auto Glyph3D::setScaleFactor(qreal scaleFactor) -> void {

@@ -22,7 +22,7 @@ namespace quick {
         }
 
         auto PointSource::getDistribution() -> Distribution {
-            return (Distribution) this->m_vtkObject->GetDistribution();
+            return static_cast<Distribution>(this->m_vtkObject->GetDistribution());
         }
 
         auto PointSource::setNumberOfPoints(int numberOfPoints) -> void {

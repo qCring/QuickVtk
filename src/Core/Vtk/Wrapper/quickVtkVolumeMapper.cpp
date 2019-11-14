@@ -17,7 +17,7 @@ namespace quick {
         }
 
         auto VolumeMapper::getBlendMode() -> BlendMode {
-            return (BlendMode) this->m_vtkObject->GetBlendMode();
+            return static_cast<BlendMode>(this->m_vtkObject->GetBlendMode());
         }
 
         auto VolumeMapper::setCropping(bool cropping) -> void {

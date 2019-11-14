@@ -12,6 +12,7 @@ Next we are going to implement the `Center` attribute of the [vtkPointSource](ht
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
@@ -51,6 +52,7 @@ Let's implement the `getCenter` method and initialize the private `m_center` mem
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #include "quickVtkPointSource.hpp"
 
 namespace quick {
@@ -106,6 +108,7 @@ Since individual vector components can be changed at any time, we need a way to 
 {: .hl-caption}
 
 {% highlight cpp %}
+
 PointSource::PointSource() : PolyDataAlgorithm(vtkSmartPointer<vtkPointSource>::New()) {
     this->m_vtkObject = vtkPointSource::SafeDownCast(Algorithm::getVtkObject());
 
@@ -193,6 +196,7 @@ In this section, we will talk about the technical aspects of how we handle funct
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickQmlRegister.hpp"

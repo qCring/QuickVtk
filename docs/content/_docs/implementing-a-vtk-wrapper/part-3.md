@@ -12,6 +12,7 @@ We have a basic implementation for our `PointSource` class and registered the ty
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
@@ -28,6 +29,7 @@ namespace quick {
     };
   }
 }
+
 {% endhighlight %}
 
 Since the `PolyDataAlgorithm` constructor expects an argument, we have to implement the  default constructor for our `PointSource` wrapper explicitly. We will take a closer look at this in just a bit.
@@ -36,6 +38,7 @@ Since the `PolyDataAlgorithm` constructor expects an argument, we have to implem
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #include "quickVtkPointSource.hpp"
 #include <vtkPointSource.h>
 
@@ -61,6 +64,7 @@ Since we added a default constructor, we should be able to create our `PointSour
 {: .hl-caption}
 
 {% highlight qml %}
+
 import Vtk 1.0 as Vtk
 
 Vtk.PointSource {
@@ -79,6 +83,7 @@ Each wrapper has to store a local reference to the corresponding [VTK](https://v
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
@@ -97,6 +102,7 @@ namespace quick {
     };
   }
 }
+
 {% endhighlight %}
 
 We are going to initialize the `m_vtkObject` member in the constructor. We want to make sure that the reference is always valid so that we can safely access our `m_vtkObject` and avoid `nullptr`-checks. This might seem like bad practice but we have full control over the object's lifecycle. Instantiation is always immediate. And since the [vtkSmartPointer](https://vtk.org/doc/nightly/html/classvtkSmartPointer.html) is bound to the wrapper, we don't have to worry about the smart pointer's reference count either.
@@ -107,6 +113,7 @@ Let's take a look at how an object reference is assigned to our private `m_vtkOb
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #include "quickVtkPointSource.hpp"
 
 namespace quick {
@@ -159,6 +166,7 @@ Let's take another look at our `PointSource` constructor which should be easier 
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #include "quickVtkPointSource.hpp"
 
 namespace quick {

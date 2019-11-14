@@ -21,7 +21,7 @@ namespace quick {
         }
 
         auto Mapper::getScalarMode() -> ScalarMode {
-            return (ScalarMode) this->m_vtkObject->GetScalarMode();
+            return static_cast<ScalarMode>(this->m_vtkObject->GetScalarMode());
         }
 
         auto Mapper::setScalarVisibility(bool val) -> void {

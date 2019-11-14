@@ -27,7 +27,7 @@ namespace quick {
         }
 
         auto LinearExtrusionFilter::getExtrusionType() -> ExtrusionType {
-            return (ExtrusionType) this->m_vtkObject->GetExtrusionType();
+            return static_cast<ExtrusionType>(this->m_vtkObject->GetExtrusionType());
         }
 
         auto LinearExtrusionFilter::setScaleFactor(qreal scaleFactor) -> void {

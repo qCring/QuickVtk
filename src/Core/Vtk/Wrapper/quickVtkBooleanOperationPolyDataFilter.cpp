@@ -17,7 +17,7 @@ namespace quick {
         }
 
         auto BooleanOperationPolyDataFilter::getOperation() -> Operation {
-            return (Operation) this->m_vtkObject->GetOperation();
+            return static_cast<Operation>(this->m_vtkObject->GetOperation());
         }
 
         auto BooleanOperationPolyDataFilter::setTolerance(qreal tolerance) -> void {

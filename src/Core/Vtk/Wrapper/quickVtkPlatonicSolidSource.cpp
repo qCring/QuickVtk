@@ -17,7 +17,7 @@ namespace quick {
         }
 
         auto PlatonicSolidSource::getSolidType() -> SolidType {
-            return (SolidType) this->m_vtkObject->GetSolidType();
+            return static_cast<SolidType>(this->m_vtkObject->GetSolidType());
         }
     }
 }

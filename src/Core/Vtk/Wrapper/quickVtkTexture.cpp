@@ -16,7 +16,7 @@ namespace quick {
         }
 
         auto Texture::getQuality() -> Quality {
-            return (Quality) this->m_vtkObject->GetQuality();
+            return static_cast<Quality>(this->m_vtkObject->GetQuality());
         }
 
         auto Texture::setBlendingMode(BlendingMode blendingMode) -> void {
@@ -26,7 +26,7 @@ namespace quick {
         }
 
         auto Texture::getBlendingMode() -> BlendingMode {
-            return (BlendingMode) this->m_vtkObject->GetBlendingMode();
+            return static_cast<BlendingMode>(this->m_vtkObject->GetBlendingMode());
         }
 
         auto Texture::setRepeat(bool repeat) -> void {

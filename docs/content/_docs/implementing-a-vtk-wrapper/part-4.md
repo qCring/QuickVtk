@@ -29,6 +29,7 @@ We can use the `Q_PROPERTY` macro to define a new `numberOfPoints` property toge
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
@@ -52,6 +53,7 @@ namespace quick {
     };
   }
 }
+
 {% endhighlight %}
 
 As you can see, `Q_PROPERTY` uses the `READ`, `WRITE`, and `NOTIFY` macros which link the property to `get-`, `set-` and `-notify` methods. While QuickVtk uses trailing return types for all methods by default, signals only support the classic return type notation.
@@ -62,6 +64,7 @@ Let's take a look at the implementation of our property accessors next.
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #include "quickVtkPointSource.hpp"
 
 namespace quick {
@@ -111,6 +114,7 @@ After rebuilding the project we should have access to the `numberOfPoints` prope
 {: .hl-caption}
 
 {% highlight qml %}
+
 import Vtk 1.0 as Vtk
 
 Vtk.Viewer {
@@ -135,6 +139,7 @@ Instead of using a constant value of `20000`, we can bind the `numberOfPoints` p
 {: .hl-caption}
 
 {% highlight qml %}
+
 import QtQuick 2.9
 import Vtk 1.0 as Vtk
 import Utils 1.0 as Utils
@@ -183,6 +188,7 @@ As stated earlier, the `-changed` signal of a property tells all observers that 
 {: .hl-caption}
 
 {% highlight qml %}
+
 import QtQuick 2.9
 import Vtk 1.0 as Vtk
 import Utils 1.0 as Utils

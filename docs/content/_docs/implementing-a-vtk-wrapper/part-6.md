@@ -145,4 +145,6 @@ Item {
 
 We can see how the `distribution` propery is accessed and also how individual enum values are retrieved via the `Vtk.PointSource` prefix. Keep in mind that enums are only available from where they are defined. While this can lead to lengthy identifiers in some cases, we maintain a clean API design. If a type provides an enum property, we know that all enum values are defined in the same type.
 
-While there are some cases where the same enum type is used by different classes in [VTK](https://vtk.org/), we will always provide an individual enum for every class in QuickVtk. This might add some redundant enum definitions but we always know that all enum values are available from the same type.
+While there are some cases where the same enum type is used by different classes in [VTK](https://vtk.org/), we will always provide an individual enum for every class in QuickVtk even though this might add some redundant enum definitions.
+
+The last thing to note is how the `ComboBox` component is used to change the value of the `distribution` property. The `model` property contains an array of strings which are used to label individual items. The `onIndexChanged` function is called after a new value is selected. Based on the new index we can assign a value to the `distribution` property. 

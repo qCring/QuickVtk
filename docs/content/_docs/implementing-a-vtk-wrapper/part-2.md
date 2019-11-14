@@ -77,7 +77,7 @@ qmlRegisterType<quick::Vtk::PointSource>("Vtk", 1, 0, "PointSource");
 
 {% endhighlight %}
 
-Instead of mapping each type individually and maintaining a list of `qmlRegisterType` calls somewhere in the  code like shown in the above example, we can rely on the static `Qml::Register::Class<T>` member. Let's take a look at the implementation of the `Class<T>` struct which can be found in `src/Lib/Utils/quickQmlRegister.hpp`
+Instead of mapping each type individually and maintaining a list of `qmlRegisterType` calls somewhere in the  code like shown in the above example, we can rely on the static `Qml::Register::Class<T>` member. Let's take a look at the implementation of the `Class<T>` struct which can be found in `src/Core/Utils/quickQmlRegister.hpp`
 
 >quickQmlRegister.hpp
 {: .hl-caption}

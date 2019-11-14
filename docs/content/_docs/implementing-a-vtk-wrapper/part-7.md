@@ -1,8 +1,8 @@
 ---
 layout: subpage
 nav: docs
-title: Part 7 - Adding a Reference Property
+title: Part 7 - Adding an Object Property
 category: Implementing a VTK wrapper in QuickVtk
 ---
 
-## Adding a Reference Property
+## Adding an Object Property

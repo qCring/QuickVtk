@@ -11,7 +11,7 @@ This series of articles discusses the process of implementing a [VTK](https://vt
 For a practical approach, you can delete the existing `quickVtkPointSource` **.cpp** and **.hpp** files, rebuild the project, and rewrite the wrapper from scratch along with the documentation.
 
 ## Adding a New Class
-The first step of implementing a wrapper class for an existing [VTK](https://vtk.org/) type is to add new **.hpp** and **.cpp** files to the **QuickVtkLib** project under `src/Lib/Vtk/Wrapper/`. Since we want to wrap the [vtkPointSource](https://vtk.org/doc/nightly/html/classvtkPointSource.html) class, the files should be named `quickVtkPointSource.hpp` and `quickVtkPointSource.cpp`.
+The first step of implementing a wrapper class for an existing [VTK](https://vtk.org/) type is to add new **.hpp** and **.cpp** files to the **QuickVtkCore** project under `src/Core/Vtk/Wrapper/`. Since we want to wrap the [vtkPointSource](https://vtk.org/doc/nightly/html/classvtkPointSource.html) class, the files should be named `quickVtkPointSource.hpp` and `quickVtkPointSource.cpp`.
 
 The `quickVtk` prefix indicates that the wrapper class named `PointSource` is inside the `quick::Vtk` namespace. This [naming convention]({{ site.baseurl }}/reference/naming-conventions) also allows to distinguish wrappers from [VTK](https://vtk.org/) types. `#include "quickVtkPointSource.hpp"` will include the QuickVtk class while `#include <vtkPointSource.h>` includes the type provided by the [VTK](https://vtk.org/) framework.
 

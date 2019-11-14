@@ -8,8 +8,11 @@ toplevel: true
 QuickVtk can be built for Windows, macOS, and Linux via [CMake](https://cmake.org/)
 
 ## Prerequisites
-- Download and install [CMake](https://cmake.org/)
-- Download and install [Qt](https://www.qt.io/)
+- [CMake](https://cmake.org/)
+- [Qt](https://www.qt.io/)
+- C++14 compiler
+- git
+- The cloned repository from `https://github.com/qCring/QuickVtk.git`
 
 ## Build VTK
 - [VTK](https://vtk.org/) can be built from the `libs` folder

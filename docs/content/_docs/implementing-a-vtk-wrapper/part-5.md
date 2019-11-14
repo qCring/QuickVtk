@@ -27,7 +27,7 @@ namespace quick {
       Q_PROPERTY(int numberOfPoints READ getNumberOfPoints WRITE setNumberOfPoints NOTIFY numberOfPointsChanged);
       Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
     private:
-      static Qml::Register::Class<PointSource2> Register;
+      static Qml::Register::Class<PointSource> Register;
       vtkSmartPointer<vtkPointSource> m_vtkObject;
       Math::Vector3* m_center;
     public:
@@ -143,7 +143,7 @@ Item {
 
     Vtk.Actor {
       Vtk.PolyDataMapper {
-        Vtk.PointSource2 {
+        Vtk.PointSource {
           id: source
           numberOfPoints: 20000
           center.x: 0.1
@@ -298,8 +298,8 @@ namespace quick {
 
 {% endhighlight %}
 
-The `x`, `y`, and `z` accessors are relatively straight-forward. Components are assigned to the private `std::array` member by reading/writing from/to the underlying array. After assigning either one of the vector components, the `notify()` method will be called which invokes the assigned function object via `this->m_callback.operator()()`. This will execute the specific lambda expression provided by the object that instantiates [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) and is usually used to retrieve the current vector data via the `getValues()` method. Keep in mind that usually the wrapper will be accessed at this moment since in most cases the instance was captured.
+The `x`, `y`, and `z` accessors are relatively straight-forward. Components are assigned to the private `std::array` member by reading/writing from/to the underlying array. After assigning either one of the vector components, the `notify()` method will be called which invokes the assigned function object via `this->m_callback.operator()()`. This will execute the specific lambda expression provided by the object that instantiates [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) and is usually used to retrieve the current vector data via the `getValues()` method. Keep in mind that usually the captured wrapper will be accessed from here.
 
-While captures are a non-trivial topic, we don't have to worry about this too much in QuickVtk since [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) instances have the same lifetime as associated wrappers. We can always be sure that the captured reference to the `PointSource` instance will be available as long as the [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) object exists. This applies for all wrappers that hold [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) members. The same design is also used for the [Math::Vector2]({{ site.baseurl }}/api/Math/Vector2) type.
+While lambda captures are a non-trivial topic, we don't have to worry about this too much in QuickVtk since [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) instances have the same lifetime as the object that created the vector object. This applies to all wrappers that hold [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) members. The same design is also used for the [Math::Vector2]({{ site.baseurl }}/api/Math/Vector2) type.
 
-The only limitation of this approach is that vectors can not be assigned or shared across wrappers. This would introduce many different edge cases and can lead to unexpected behaviour under certain conditions. By maintaining a 1:1 relationship for wrappers and [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) instances, we can avoid many runtime checks and benefit from a much simpler implementation.
+The only limitation of this implementation is that vectors can not be assigned or shared across wrappers. By maintaining a 1:1 relationship for wrappers and [Math::Vector3]({{ site.baseurl }}/api/Math/Vector3) instances, we can avoid many different edge cases and benefit from a much simpler implementation.

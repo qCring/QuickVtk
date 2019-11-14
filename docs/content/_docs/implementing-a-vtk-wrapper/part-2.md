@@ -11,6 +11,7 @@ While [QML](https://doc.qt.io/qt-5/qtqml-index.html) provides a set of built-in 
 {: .hl-caption}
 
 {% highlight qml %}
+
 import Vtk 1.0 as Vtk
 
 Vtk.PointSource {
@@ -28,6 +29,7 @@ In order to access our custom type from [QML](https://doc.qt.io/qt-5/qtqml-index
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
@@ -42,6 +44,7 @@ namespace quick {
     };
   }
 }
+
 {% endhighlight %}
 
 `Class<T>` will register the type by extracting type information from the type's static [QMetaObject](https://doc.qt.io/qt-5/qmetaobject.html) property provided by the [QObject](https://doc.qt.io/qt-5/qobject.html) base. The class name is used as a unique type identifier while the namespace is used to determine the module name. In this case the class `PointSource` will be registered to the module `Vtk`.
@@ -52,6 +55,7 @@ Since `static` class members are not associated with objects of the class, the
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #include "quickVtkPointSource.hpp"
 
 namespace quick {
@@ -68,7 +72,9 @@ The `bool` argument indicates that this type wraps a class from the [VTK](https:
 Usually, every [QML](https://doc.qt.io/qt-5/qtqml-index.html) application registers a set of custom types on application startup by calling [qmlRegisterType\<T\>](https://doc.qt.io/qt-5/qqmlengine.html#qmlRegisterType-2) or other available register functions. In our case we would have to write the following line in order to register the new `PointSource` type to the `Vtk 1.0` module:
 
 {% highlight cpp %}
+
 qmlRegisterType<quick::Vtk::PointSource>("Vtk", 1, 0, "PointSource");
+
 {% endhighlight %}
 
 Instead of mapping each type individually and maintaining a list of `qmlRegisterType` calls somewhere in the  code like shown in the above example, we can rely on the static `Qml::Register::Class<T>` member. Let's take a look at the implementation of the `Class<T>` struct which can be found in `src/Lib/Utils/quickQmlRegister.hpp`
@@ -77,6 +83,7 @@ Instead of mapping each type individually and maintaining a list of `qmlRegister
 {: .hl-caption}
 
 {% highlight cpp %}
+
 // namespace quick::Qml::Register {
 
   template <class T>
@@ -113,6 +120,7 @@ Since all of these lambdas are added at compile-time, we can invoke them safely 
 {: .hl-caption}
 
 {% highlight cpp %}
+
 // namespace quick::Qml {
 
   auto RegisterTypes() -> void {
@@ -120,6 +128,7 @@ Since all of these lambdas are added at compile-time, we can invoke them safely 
       initializer();
     }
   }
+
 {% endhighlight %}
 
 ## Recap
@@ -131,36 +140,37 @@ In order to register custom types in [QML](https://doc.qt.io/qt-5/qtqml-index.ht
 
 {% highlight cpp %}
 
-  #include "quickMathVector2.hpp"
-  #include "quickMathVector3.hpp"
-  #include "quickVtkAbstractMapper.hpp"
-  #include "quickVtkAbstractMapper3D.hpp"
-  #include "quickVtkAbstractPolyDataReader.hpp"
-  #include "quickVtkAbstractVolumeMapper.hpp"
-  #include "quickVtkAbstractWidget.hpp"
-  #include "quickVtkActor.hpp"
-  #include "quickVtkActor2D.hpp"
-  #include "quickVtkAdaptiveSubdivissionFilter.hpp"
-  #include "quickVtkAlgorithm.hpp"
+#include "quickMathVector2.hpp"
+#include "quickMathVector3.hpp"
+#include "quickVtkAbstractMapper.hpp"
+#include "quickVtkAbstractMapper3D.hpp"
+#include "quickVtkAbstractPolyDataReader.hpp"
+#include "quickVtkAbstractVolumeMapper.hpp"
+#include "quickVtkAbstractWidget.hpp"
+#include "quickVtkActor.hpp"
+#include "quickVtkActor2D.hpp"
+#include "quickVtkAdaptiveSubdivissionFilter.hpp"
+#include "quickVtkAlgorithm.hpp"
 
-  // and so on...
+// and so on...
 
-  auto RegisterTypes() -> void {
+auto RegisterTypes() -> void {
 
-    qmlRegisterType<Math.Vector2>("Vtk", 1, 0, "Vector2");
-    qmlRegisterType<Math.Vector3>("Vtk", 1, 0, "Vector3");
-    qmlRegisterType<Vtk.AbstractMapper>("Vtk", 1, 0, "AbstractMapper");
-    qmlRegisterType<Vtk.AbstractMapper3D>("Vtk", 1, 0, "AbstractMapper3D");
-    qmlRegisterType<Vtk.AbstractPolyDataReader>("Vtk", 1, 0, "AbstractPolyDataReader");
-    qmlRegisterType<Vtk.AbstractVolumeMapper>("Vtk", 1, 0, "AbstractVolumeMapper");
-    qmlRegisterType<Vtk.AbstractWidget>("Vtk", 1, 0, "AbstractWidget");
-    qmlRegisterType<Vtk.Actor>("Vtk", 1, 0, "Actor");
-    qmlRegisterType<Vtk.Actor2D>("Vtk", 1, 0, "Actor2D");
-    qmlRegisterType<Vtk.AdaptiveSubdivisionFilter>("Vtk", 1, 0, "AdaptiveSubdivisionFilter");
-    qmlRegisterType<Vtk.Algorithm>("Vtk", 1, 0, "Algorithm");
+  qmlRegisterType<Math.Vector2>("Vtk", 1, 0, "Vector2");
+  qmlRegisterType<Math.Vector3>("Vtk", 1, 0, "Vector3");
+  qmlRegisterType<Vtk.AbstractMapper>("Vtk", 1, 0, "AbstractMapper");
+  qmlRegisterType<Vtk.AbstractMapper3D>("Vtk", 1, 0, "AbstractMapper3D");
+  qmlRegisterType<Vtk.AbstractPolyDataReader>("Vtk", 1, 0, "AbstractPolyDataReader");
+  qmlRegisterType<Vtk.AbstractVolumeMapper>("Vtk", 1, 0, "AbstractVolumeMapper");
+  qmlRegisterType<Vtk.AbstractWidget>("Vtk", 1, 0, "AbstractWidget");
+  qmlRegisterType<Vtk.Actor>("Vtk", 1, 0, "Actor");
+  qmlRegisterType<Vtk.Actor2D>("Vtk", 1, 0, "Actor2D");
+  qmlRegisterType<Vtk.AdaptiveSubdivisionFilter>("Vtk", 1, 0, "AdaptiveSubdivisionFilter");
+  qmlRegisterType<Vtk.Algorithm>("Vtk", 1, 0, "Algorithm");
 
-    // and so forth...
-  }
+  // and so forth...
+}
+
 {% endhighlight %}
 
 Maintaining a list of `qmlRegisterType` calls would be not ideal for obvious reasons. Typing errors, missing or redundant `#includes` and the inability to support refactoring without manually adjusting the code would introduce many potential problems with this approach.

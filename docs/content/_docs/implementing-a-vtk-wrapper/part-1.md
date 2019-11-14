@@ -21,6 +21,7 @@ Let's start by declaring the `PointSource` class in the header file
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 namespace quick {
@@ -31,6 +32,7 @@ namespace quick {
     };
   }
 }
+
 {% endhighlight %}
 
 ## The Base Class
@@ -40,6 +42,7 @@ The [vtkPointSource documentation](https://vtk.org/doc/nightly/html/classvtkPoin
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 #include "quickVtkPolyDataAlgorithm.hpp"
@@ -68,6 +71,7 @@ This means that any wrapper that subclasses [Vtk::Object]({{ site.baseurl }}/api
 {: .hl-caption}
 
 {% highlight cpp %}
+
 #pragma once
 
 namespace quick {
@@ -78,6 +82,7 @@ namespace quick {
     };
   }
 }
+
 {% endhighlight %}
 
 The `Q_OBJECT` macro is used by the [Meta-Object Compiler (moc)](https://doc.qt.io/qt-5/moc.html) and is required for the signals and slot mechanism, the run-time type information, and the dynamic property system in [Qt](https://www.qt.io/).

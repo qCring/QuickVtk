@@ -48,5 +48,22 @@ namespace quick {
         auto PointSource::getCenter() -> Math::Vector3* {
             return this->m_center;
         }
+    
+        auto PointSource::setRandomSequence(RandomSequence* randomSequence) -> void {
+            this->m_randomSequence = randomSequence;
+            
+            if (randomSequence == nullptr) {
+                this->m_vtkObject->SetRandomSequence(nullptr);
+            } else {
+                this->m_vtkObject->SetRandomSequence(randomSequence->getVtkObject());
+            }
+            
+            emit this->randomSequenceChanged();
+            this->update();
+        }
+    
+        auto PointSource::getRandomSequence() -> RandomSequence* {
+            return this->m_randomSequence;
+        }
     }
 }

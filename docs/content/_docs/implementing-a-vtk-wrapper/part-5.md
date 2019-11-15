@@ -61,16 +61,16 @@ namespace quick {
     Qml::Register::Class<PointSource> PointSource::Register(true);
 
     PointSource::PointSource() : PolyDataAlgorithm(vtkSmartPointer<vtkPointSource>::New()) {
-        this->m_vtkObject = vtkPointSource::SafeDownCast(Algorithm::getVtkObject());
+      this->m_vtkObject = vtkPointSource::SafeDownCast(Algorithm::getVtkObject());
 
-        this->m_center = new Math::Vector3([this]() {
-            this->m_vtkObject->SetCenter(this->m_center->getValues().data());
-            this->update();
-        });
+      this->m_center = new Math::Vector3([this]() {
+          this->m_vtkObject->SetCenter(this->m_center->getValues().data());
+          this->update();
+      });
     }
 
     auto PointSource::getCenter() -> Math::Vector3* {
-        return this->m_center;
+      return this->m_center;
     }
 
     // setNumberOfPoints/getNumberOfPoints
@@ -110,12 +110,12 @@ Since individual vector components can be changed at any time, we need a way to 
 {% highlight cpp %}
 
 PointSource::PointSource() : PolyDataAlgorithm(vtkSmartPointer<vtkPointSource>::New()) {
-    this->m_vtkObject = vtkPointSource::SafeDownCast(Algorithm::getVtkObject());
+  this->m_vtkObject = vtkPointSource::SafeDownCast(Algorithm::getVtkObject());
 
-    this->m_center = new Math::Vector3([this]() {
-        this->m_vtkObject->SetCenter(this->m_center->getValues().data());
-        this->update();
-    });
+  this->m_center = new Math::Vector3([this]() {
+    this->m_vtkObject->SetCenter(this->m_center->getValues().data());
+    this->update();
+  });
 }
 
 {% endhighlight %}
@@ -261,41 +261,41 @@ namespace quick {
     }
 
     auto Vector3::notify() -> void {
-        this->m_callback.operator()();
+      this->m_callback.operator()();
     }
 
     auto Vector3::setX(double x) -> void {
-        this->m_values[0] = x;
-        emit this->xChanged();
-        this->notify();
+      this->m_values[0] = x;
+      emit this->xChanged();
+      this->notify();
     }
 
     auto Vector3::getX() -> double {
-        return this->m_values[0];
+      return this->m_values[0];
     }
 
     auto Vector3::setY(double y) -> void {
-        this->m_values[1] = y;
-        emit this->yChanged();
-        this->notify();
+      this->m_values[1] = y;
+      emit this->yChanged();
+      this->notify();
     }
 
     auto Vector3::getY() -> double {
-        return this->m_values[1];
+      return this->m_values[1];
     }
 
     auto Vector3::setZ(double z) -> void {
-        this->m_values[2] = z;
-        emit this->zChanged();
-        this->notify();
+      this->m_values[2] = z;
+      emit this->zChanged();
+      this->notify();
     }
 
     auto Vector3::getZ() -> double {
-        return this->m_values[2];
+      return this->m_values[2];
     }
 
     auto Vector3::getValues() -> array_t {
-        return this->m_values;
+      return this->m_values;
     }
   }
 }

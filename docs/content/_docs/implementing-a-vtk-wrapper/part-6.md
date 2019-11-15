@@ -22,36 +22,36 @@ It is not always possible to follow a strict guideline on how to implement prope
 #include <vtkPointSource.h>
 
 namespace quick {
-    namespace Vtk {
+  namespace Vtk {
 
-        class PointSource : public PolyDataAlgorithm {
-            Q_OBJECT
-        public:
-            enum Distribution {
-                UniformDistribution = VTK_POINT_UNIFORM,
-                ShellDistribution = VTK_POINT_SHELL
-            };
-        private:
-            Q_ENUM(Distribution);
-            Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
-            Q_PROPERTY(Distribution distribution READ getDistribution WRITE setDistribution NOTIFY distributionChanged);
-            Q_PROPERTY(int numberOfPoints READ getNumberOfPoints WRITE setNumberOfPoints NOTIFY numberOfPointsChanged);
-        private:
-            static Qml::Register::Class<PointSource> Register;
-            vtkSmartPointer<vtkPointSource> m_vtkObject;
-            Math::Vector3* m_center;
-        public:
-            PointSource();
-            auto setDistribution(Distribution) -> void;
-            auto getDistribution() -> Distribution;
-            auto setNumberOfPoints(int) -> void;
-            auto getNumberOfPoints() -> int;
-            auto getCenter() -> Math::Vector3*;
-        signals:
-            void distributionChanged();
-            void numberOfPointsChanged();
-        };
-    }
+    class PointSource : public PolyDataAlgorithm {
+      Q_OBJECT
+    public:
+      enum Distribution {
+          UniformDistribution = VTK_POINT_UNIFORM,
+          ShellDistribution = VTK_POINT_SHELL
+      };
+    private:
+      Q_ENUM(Distribution);
+      Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
+      Q_PROPERTY(Distribution distribution READ getDistribution WRITE setDistribution NOTIFY distributionChanged);
+      Q_PROPERTY(int numberOfPoints READ getNumberOfPoints WRITE setNumberOfPoints NOTIFY numberOfPointsChanged);
+    private:
+      static Qml::Register::Class<PointSource> Register;
+      vtkSmartPointer<vtkPointSource> m_vtkObject;
+      Math::Vector3* m_center;
+    public:
+      PointSource();
+      auto setDistribution(Distribution) -> void;
+      auto getDistribution() -> Distribution;
+      auto setNumberOfPoints(int) -> void;
+      auto getNumberOfPoints() -> int;
+      auto getCenter() -> Math::Vector3*;
+    signals:
+      void distributionChanged();
+      void numberOfPointsChanged();
+    };
+  }
 }
 
 {% endhighlight %}
@@ -72,13 +72,13 @@ namespace quick {
     Qml::Register::Class<PointSource> PointSource::Register(true);
 
     auto PointSource::setDistribution(Distribution distribution) -> void {
-        this->m_vtkObject->SetDistribution(distribution);
-        emit this->distributionChanged();
-        this->update();
+      this->m_vtkObject->SetDistribution(distribution);
+      emit this->distributionChanged();
+      this->update();
     }
 
     auto PointSource::getDistribution() -> Distribution {
-        return static_cast<Distribution>(this->m_vtkObject->GetDistribution());
+      return static_cast<Distribution>(this->m_vtkObject->GetDistribution());
     }
 
     // and more things that we already know
@@ -147,4 +147,4 @@ We can see how the `distribution` propery is accessed and also how individual en
 
 While there are some cases where the same enum type is used by different classes in [VTK](https://vtk.org/), we will always provide an individual enum for every class in QuickVtk even though this might add some redundant enum definitions.
 
-The last thing to note is how the `ComboBox` component is used to change the value of the `distribution` property. The `model` property contains an array of strings which are used to label individual items. The `onIndexChanged` function is called after a new value is selected. Based on the new index we can assign a value to the `distribution` property. 
+The last thing to note is how the `ComboBox` component is used to change the value of the `distribution` property. The `model` property contains an array of strings which are used to label individual items. The `onIndexChanged` function is called after a new value is selected. Based on the new index we can assign a value to the `distribution` property.

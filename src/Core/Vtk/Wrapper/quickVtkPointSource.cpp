@@ -56,6 +56,7 @@ namespace quick {
                 this->m_vtkObject->SetRandomSequence(nullptr);
             } else {
                 this->m_vtkObject->SetRandomSequence(randomSequence->getVtkObject());
+                randomSequence->initialize();
             }
             
             emit this->randomSequenceChanged();

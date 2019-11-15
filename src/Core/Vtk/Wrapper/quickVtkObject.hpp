@@ -14,8 +14,8 @@ namespace quick {
             enum class Type {
                 Prop,
                 Algorithm,
-                ImplicitFunction,
-                Widget
+                Widget,
+                Other
             };
         private:
             static Qml::Register::AbstractClass<Object> Register;

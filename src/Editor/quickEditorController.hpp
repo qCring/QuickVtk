@@ -41,7 +41,7 @@ namespace quick {
             int m_fontSizeMax = 20;
             bool m_expanded = true;
             bool m_modified = false;
-            bool m_autorun = false;
+            bool m_autorun = true;
             Highlighter* m_highlighter = nullptr;
             QFileSystemWatcher* m_fileWatcher = nullptr;
             QQuickTextDocument* m_document = nullptr;

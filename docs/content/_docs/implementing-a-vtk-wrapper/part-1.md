@@ -3,6 +3,7 @@ layout: subpage
 nav: docs
 title: Part 1 - Basic Implementation
 category: Implementing a VTK wrapper in QuickVtk
+number: 1
 ---
 
 # Implementing a VTK Wrapper in QuickVtk

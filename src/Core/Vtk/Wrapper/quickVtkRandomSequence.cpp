@@ -22,7 +22,9 @@ namespace quick {
         }
     
         auto RandomSequence::initialize() -> void {
-            this->m_vtkObject->Initialize(this->m_seed);
+            if (this->m_vtkObject != nullptr) {
+                this->m_vtkObject->Initialize(this->m_seed);
+            }
         }
     }
 }

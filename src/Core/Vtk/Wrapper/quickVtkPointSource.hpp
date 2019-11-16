@@ -13,8 +13,7 @@ namespace quick {
         class PointSource : public PolyDataAlgorithm {
             Q_OBJECT
         public:
-            enum Distribution
-            {
+            enum Distribution {
                 UniformDistribution = VTK_POINT_UNIFORM,
                 ShellDistribution = VTK_POINT_SHELL
             };
@@ -25,11 +24,14 @@ namespace quick {
             Q_PROPERTY(quick::Vtk::RandomSequence* randomSequence READ getRandomSequence WRITE setRandomSequence NOTIFY randomSequenceChanged);
             Q_PROPERTY(int numberOfPoints READ getNumberOfPoints WRITE setNumberOfPoints NOTIFY numberOfPointsChanged);
             Q_PROPERTY(qreal radius READ getRadius WRITE setRadius NOTIFY radiusChanged);
+            Q_CLASSINFO("DefaultProperty", "randomSequence");
         private:
             static Qml::Register::Class<PointSource> Register;
             vtkSmartPointer<vtkPointSource> m_vtkObject;
             Math::Vector3* m_center;
             RandomSequence* m_randomSequence;
+        private:
+            auto resetSeed() -> void;
         public:
             PointSource();
             auto setDistribution(Distribution) -> void;

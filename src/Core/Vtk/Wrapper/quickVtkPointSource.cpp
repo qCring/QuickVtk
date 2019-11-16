@@ -11,6 +11,7 @@ namespace quick {
 
             this->m_center = new Math::Vector3([this](){
                 this->m_vtkObject->SetCenter(this->m_center->getValues().data());
+                this->resetSeed();
                 this->update();
             });
         }
@@ -18,6 +19,7 @@ namespace quick {
         auto PointSource::setDistribution(Distribution distribution) -> void {
             this->m_vtkObject->SetDistribution(distribution);
             emit this->distributionChanged();
+            this->resetSeed();
             this->update();
         }
 
@@ -28,6 +30,7 @@ namespace quick {
         auto PointSource::setNumberOfPoints(int numberOfPoints) -> void {
             this->m_vtkObject->SetNumberOfPoints(numberOfPoints);
             emit this->numberOfPointsChanged();
+            this->resetSeed();
             this->update();
         }
 
@@ -38,6 +41,7 @@ namespace quick {
         auto PointSource::setRadius(qreal radius) -> void {
             this->m_vtkObject->SetRadius(radius);
             emit this->radiusChanged();
+            this->resetSeed();
             this->update();
         }
 
@@ -65,6 +69,12 @@ namespace quick {
     
         auto PointSource::getRandomSequence() -> RandomSequence* {
             return this->m_randomSequence;
+        }
+    
+        auto PointSource::resetSeed() -> void {
+            if (this->m_randomSequence != nullptr) {
+                this->m_randomSequence->initialize();
+            }
         }
     }
 }

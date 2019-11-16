@@ -32,7 +32,7 @@ QuickVtk can be built for Windows, macOS, and Linux via [CMake](https://cmake.or
 
 ### on Windows via Visual Studio
 - Navigate to `/dependencies/bin` from the project directory
-- Open the generated solution in Visual Studio
+- Open the `QuickVtkDependencies` solution file in Visual Studio
 - Start the build process from the IDE
 
 ## Build QuickVtk
@@ -58,7 +58,13 @@ QuickVtk can be built for Windows, macOS, and Linux via [CMake](https://cmake.or
 - Hit <kbd>⌘</kbd> + <kbd>R</kbd> to build and run QuickVtk
 
 ### on Windows via Visual Studio
-- Navigate to the project `/bin` directory
-- Open the generated `.sln` file
+- Navigate to the project's `/bin` directory
+- Open the generated `QuickVtk.sln` file
 - In the solution explorer, right click on **QuickVtk** and select **Set as StartUp project**
+- Open the project properties from the menu via **Project** / **Properties** or <kbd>Alt</kbd> + <kbd>F7</kbd>
+  - Select **Debugging** from the **Configuration Properties**
+  - Edit the value for **Environment**
+  - Add the paths to `Qt\bin` and `Vtk\bin` which should look something like   
+    `PATH=C:\Qt\5.13.0\msvc2017\bin;E:\GitHub\QuickVtk\dependencies\bin\VTK\bin\bin\Debug;%PATH%;`   
+    depending on your [Qt](https://www.qt.io/) installation and the location of your [VTK](https://vtk.org/) binaries
 - Build and run the application

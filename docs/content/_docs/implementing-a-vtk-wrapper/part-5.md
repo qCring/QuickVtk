@@ -3,6 +3,7 @@ layout: subpage
 nav: docs
 title: Part 5 - Adding a Vector Property
 category: Implementing a VTK wrapper in QuickVtk
+number: 5
 ---
 
 ## Adding a Vector property

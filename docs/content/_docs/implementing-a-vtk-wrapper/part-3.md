@@ -3,6 +3,7 @@ layout: subpage
 nav: docs
 title: Part 3 - Constructor
 category: Implementing a VTK wrapper in QuickVtk
+number: 3
 ---
 
 ## Adding the Constructor

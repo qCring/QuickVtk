@@ -3,6 +3,7 @@ layout: subpage
 nav: docs
 title: Part 2 - Type Registration
 category: Implementing a VTK wrapper in QuickVtk
+number: 2
 ---
 ## Custom Types in QML
 While [QML](https://doc.qt.io/qt-5/qtqml-index.html) provides a set of built-in types, custom types have to be registered and imported from a module first. Let's think about how we would like to access the wrapper from a [QML](https://doc.qt.io/qt-5/qtqml-index.html) perspective

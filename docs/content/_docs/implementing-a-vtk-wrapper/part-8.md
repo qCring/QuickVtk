@@ -11,8 +11,8 @@ There are two more properties we haven't discussed yet. The first is the `radius
 
 Another [vtkPointSource](https://vtk.org/doc/nightly/html/classvtkPointSource.html) class attribute is  `OutputPointsPrecision` which lets you control whether `float` or `double` should be used for internal calculations. An equivalent attribute is provided by many types in [VTK](https://vtk.org/) and implementing a property for this might not be the best choice. For now, all wrappers in QuickVtk rely on the default floating-point precision and ingore the precision attribute. It might make more sense to control this from the build-configuration.
 
-## Updating the API-Docs
-The [API Reference]({{ site.baseurl }}/api) is generated from C++ via the **API-DOCS** target. A JSON file contains all type information like the list of properties, enums and methods provided by individual wrappers in QuickVtk. Also, an **.md** file is generated for each type in order to generate unique urls for the website. If wrappers are changed or new wrappers are added to QuickVtk, make sure to run the **API-Docs** target and commit the generated **.json** and **.md** files to keep the documentation in sync with the implementation.
+## Updating the API Documentation
+All [API Reference]({{ site.baseurl }}/api) pages are generated from C++ via the **API-DOCS** target. A JSON file contains all type information like the list of properties, enums and methods provided by individual wrappers in QuickVtk. Also, an **.md** file is generated for each type in order to generate unique urls for the website. If wrappers are changed or added to the project, make sure to run the **API-Docs** target. The **.json** and **.md** files from the `doc` folder will be used by [GitHub Pages](https://pages.github.com/) to automatically build the project website from the `master` branch. Make sure to keep the documentation in sync with the implementation.
 
 ## quickVtkPointSource.hpp
 

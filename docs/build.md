@@ -47,7 +47,7 @@ QuickVtk can be built for Windows, macOS, and Linux via [CMake](https://cmake.or
 - Press **Configure** to apply changes
 - Set the path to [VTK](https://vtk.org/)
   - `dependencies/bin/VTK/bin` if you are using the VTK build from the `dependencies` folder
-  - alternatively you can use an existing, external build
+  - alternatively you can use an existing external build
 - Press **Configure** and specify a project generator
 - Press **Generate**
 

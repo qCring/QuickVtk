@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.0)
 
 include (ExternalProject)
 
-set(PROJECT_NAME "QuickVtkLibs")
+set(PROJECT_NAME "QuickVtkDependencies")
 
 project(${PROJECT_NAME})
 

@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(int maximumNumberOfPasses READ getMaximumNumberOfPasses WRITE setMaximumNumberOfPasses NOTIFY maximumNumberOfPassesChanged);
         private:
             static Qml::Register::Class<AdaptiveSubdivisionFilter> Register;
-            vtkSmartPointer<vtkAdaptiveSubdivisionFilter> m_vtkObject;
+            vtkSmartPointer<vtkAdaptiveSubdivisionFilter> m_vtkObject = nullptr;
         public:
             AdaptiveSubdivisionFilter();
             auto setMaximumEdgeLength(qreal) -> void;

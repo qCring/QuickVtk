@@ -27,9 +27,9 @@ namespace quick {
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
             static Qml::Register::Class<LinearExtrusionFilter> Register;
-            vtkSmartPointer<vtkLinearExtrusionFilter> m_vtkObject;
-            Math::Vector3* m_extrusionPoint;
-            Math::Vector3* m_vector;
+            vtkSmartPointer<vtkLinearExtrusionFilter> m_vtkObject = nullptr;
+            Math::Vector3* m_extrusionPoint = nullptr;
+            Math::Vector3* m_vector = nullptr;
         public:
             LinearExtrusionFilter();
             auto setExtrusionType(ExtrusionType) -> void;

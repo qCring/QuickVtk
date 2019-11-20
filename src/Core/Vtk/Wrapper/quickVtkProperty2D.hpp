@@ -22,8 +22,8 @@ namespace quick {
         private:
             static Qml::Register::UncreatableClass<Property2D> Register;
             QColor m_color;
-            quick::Vtk::Actor2D* m_actor2D;
-            vtkSmartPointer<vtkActor2D> m_vtkActor2D;
+            quick::Vtk::Actor2D* m_actor2D = nullptr;
+            vtkSmartPointer<vtkActor2D> m_vtkActor2D = nullptr;
         private:
             void update();
         public:

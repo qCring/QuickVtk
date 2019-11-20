@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<TextureMapToCylinder> Register;
-            vtkSmartPointer<vtkTextureMapToCylinder> m_vtkObject;
+            vtkSmartPointer<vtkTextureMapToCylinder> m_vtkObject = nullptr;
         public:
             TextureMapToCylinder();
         };

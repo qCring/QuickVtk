@@ -18,7 +18,7 @@ namespace quick {
             Q_PROPERTY(bool invert READ getInvert WRITE setInvert NOTIFY invertChanged);
         private:
             static Qml::Register::Class<ArrowSource> Register;
-            vtkSmartPointer<vtkArrowSource> m_vtkObject;
+            vtkSmartPointer<vtkArrowSource> m_vtkObject = nullptr;
         public:
             ArrowSource();
             auto setTipResolution(int) -> void;

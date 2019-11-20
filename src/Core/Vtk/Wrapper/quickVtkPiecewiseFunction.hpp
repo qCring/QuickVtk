@@ -18,7 +18,7 @@ namespace quick {
         private:
             using cb_t = std::function<void()>;
             using vtk_t = vtkSmartPointer<vtkPiecewiseFunction>;
-            vtk_t m_vtkObject;
+            vtk_t m_vtkObject = nullptr;
             cb_t m_callback;
             QList<double> m_xValues;
             QList<double> m_yValues;

@@ -19,7 +19,7 @@ namespace quick {
             Q_PROPERTY(int degree READ getDegree WRITE setDegree NOTIFY degreeChanged);
         private:
             static Qml::Register::Class<DecimatePro> Register;
-            vtkSmartPointer<vtkDecimatePro> m_vtkObject;
+            vtkSmartPointer<vtkDecimatePro> m_vtkObject = nullptr;
         public:
             DecimatePro();
             auto setDegree(int) -> void;

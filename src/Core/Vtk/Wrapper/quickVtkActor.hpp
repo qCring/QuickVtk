@@ -23,7 +23,7 @@ namespace quick {
             Property* m_property = nullptr;
             Texture* m_texture = nullptr;
             Mapper* m_mapper = nullptr;
-            vtkSmartPointer<vtkActor> m_vtkObject;
+            vtkSmartPointer<vtkActor> m_vtkObject = nullptr;
         public:
             Actor();
             Actor(vtkSmartPointer<vtkActor>);

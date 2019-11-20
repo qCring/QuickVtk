@@ -17,10 +17,10 @@ namespace quick {
         class FboRenderer : public QQuickFramebufferObject::Renderer {
             friend class FboOffscreenWindow;
         private:
-            FboOffscreenWindow* m_fboOffscreenWindow;
-            QOpenGLFramebufferObject* m_fbo;
+            FboOffscreenWindow* m_fboOffscreenWindow = nullptr;
+            QOpenGLFramebufferObject* m_fbo = nullptr;
         public:
-            vtkSmartPointer<vtkRenderWindowInteractor> m_interactor;
+            vtkSmartPointer<vtkRenderWindowInteractor> m_interactor = nullptr;
             vtkSmartPointer<vtkInteractorStyleTrackballCamera> m_interactorStyle;
         public:
             FboRenderer(FboOffscreenWindow*);

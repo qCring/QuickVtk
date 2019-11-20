@@ -22,7 +22,7 @@ namespace quick {
             Math::Vector3* m_origin = nullptr;
             Math::Vector3* m_position = nullptr;
             Math::Vector3* m_orientation = nullptr;
-            vtkSmartPointer<vtkProp3D> m_vtkObject;
+            vtkSmartPointer<vtkProp3D> m_vtkObject = nullptr;
         public:
             Prop3D(vtkSmartPointer<vtkProp3D>);
             auto getScale() -> Math::Vector3*;

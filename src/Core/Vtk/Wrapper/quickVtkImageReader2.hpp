@@ -13,7 +13,7 @@ namespace quick {
             Q_PROPERTY(QString fileName READ getFileName WRITE setFileName NOTIFY fileNameChanged);
         private:
             static Qml::Register::AbstractClass<ImageReader2> Register;
-            vtkSmartPointer<vtkImageReader2> m_vtkObject;
+            vtkSmartPointer<vtkImageReader2> m_vtkObject = nullptr;
             QString m_fileName;
         public:
             ImageReader2(vtkSmartPointer<vtkImageReader2>);

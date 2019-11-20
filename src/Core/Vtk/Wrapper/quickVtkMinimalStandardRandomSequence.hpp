@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<MinimalStandardRandomSequence> Register;
-            vtkSmartPointer<vtkMinimalStandardRandomSequence> m_vtkObject;
+            vtkSmartPointer<vtkMinimalStandardRandomSequence> m_vtkObject = nullptr;
         public:
             MinimalStandardRandomSequence();
         };

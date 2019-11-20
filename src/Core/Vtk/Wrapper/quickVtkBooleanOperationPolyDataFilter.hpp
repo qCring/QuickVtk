@@ -23,7 +23,7 @@ namespace quick {
             Q_PROPERTY(bool reorientDifferentCells READ getReorientDifferentCells WRITE setReorientDifferentCells NOTIFY reorientDifferentCellsChanged);
         private:
             static Qml::Register::Class<BooleanOperationPolyDataFilter> Register;
-            vtkSmartPointer<vtkBooleanOperationPolyDataFilter> m_vtkObject;
+            vtkSmartPointer<vtkBooleanOperationPolyDataFilter> m_vtkObject = nullptr;
         public:
             BooleanOperationPolyDataFilter();
             auto setOperation(Operation) -> void;

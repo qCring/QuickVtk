@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(bool absolute READ getAbsolute WRITE setAbsolute NOTIFY absoluteChanged);
         private:
             static Qml::Register::Class<WarpTo> Register;
-            vtkSmartPointer<vtkWarpTo> m_vtkObject;
+            vtkSmartPointer<vtkWarpTo> m_vtkObject = nullptr;
             Math::Vector3* m_position = nullptr;
         public:
             WarpTo();

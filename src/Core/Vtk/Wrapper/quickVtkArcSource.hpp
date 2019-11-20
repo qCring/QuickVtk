@@ -21,7 +21,7 @@ namespace quick {
             Q_PROPERTY(bool useNormalAndAngle READ getUseNormalAndAngle WRITE setUseNormalAndAngle NOTIFY useNormalAndAngleChanged);
         private:
             static Qml::Register::Class<ArcSource> Register;
-            vtkSmartPointer<vtkArcSource> m_vtkObject;
+            vtkSmartPointer<vtkArcSource> m_vtkObject = nullptr;
             Math::Vector3* m_point1 = nullptr;
             Math::Vector3* m_point2 = nullptr;
             Math::Vector3* m_center = nullptr;

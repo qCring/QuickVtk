@@ -37,7 +37,7 @@ namespace quick {
         private:
             using cb_t = std::function<void()>;
             static Qml::Register::UncreatableClass<Texture> Register;
-            vtkSmartPointer<vtkTexture> m_vtkObject;
+            vtkSmartPointer<vtkTexture> m_vtkObject = nullptr;
             cb_t m_callback;
         public:
             Texture() = delete;

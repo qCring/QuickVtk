@@ -20,7 +20,7 @@ namespace quick {
         private:
             using cb_t = std::function<void()>;
             using vtk_t = vtkSmartPointer<vtkColorTransferFunction>;
-            vtk_t m_vtkObject;
+            vtk_t m_vtkObject = nullptr;
             cb_t m_callback;
             QList<double> m_values;
             QList<QColor> m_colors;

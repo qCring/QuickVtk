@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(qreal colorScale READ getColorScale NOTIFY colorScaleChanged);
         private:
             static Qml::Register::Class<ImageMapper> Register;
-            vtkSmartPointer<vtkImageMapper> m_vtkObject;
+            vtkSmartPointer<vtkImageMapper> m_vtkObject = nullptr;
         public:
             ImageMapper();
             auto setColorWindow(qreal) -> void;

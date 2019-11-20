@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(VectorMode vectorMode READ getVectorMode WRITE setVectorMode NOTIFY vectorModeChanged);
         private:
             static Qml::Register::Class<HedgeHog> Register;
-            vtkSmartPointer<vtkHedgeHog> m_vtkObject;
+            vtkSmartPointer<vtkHedgeHog> m_vtkObject = nullptr;
         public:
             HedgeHog();
             auto setScaleFactor(qreal) -> void;

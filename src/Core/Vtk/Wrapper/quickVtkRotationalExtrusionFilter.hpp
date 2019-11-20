@@ -17,7 +17,7 @@ namespace quick {
             Q_PROPERTY(qreal deltaRadius READ getDeltaRadius WRITE setDeltaRadius NOTIFY deltaRadiusChanged);
         private:
             static Qml::Register::Class<RotationalExtrusionFilter> Register;
-            vtkSmartPointer<vtkRotationalExtrusionFilter> m_vtkObject;
+            vtkSmartPointer<vtkRotationalExtrusionFilter> m_vtkObject = nullptr;
         public:
             RotationalExtrusionFilter();
             auto setResolution(int) -> void;

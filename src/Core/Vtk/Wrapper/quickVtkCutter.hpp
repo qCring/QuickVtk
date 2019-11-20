@@ -19,7 +19,7 @@ namespace quick
             static Qml::Register::Class<Cutter> Register;
             ImplicitFunction::cb_t m_cutFunctionCb;
             ImplicitFunction* m_cutFunction = nullptr;
-            vtkSmartPointer<vtkCutter> m_vtkObject;
+            vtkSmartPointer<vtkCutter> m_vtkObject = nullptr;
         public:
             Cutter();
             auto updateCutFunction() -> void;

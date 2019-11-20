@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(bool nonManifoldTraversal READ getNonManifoldTraversal WRITE setNonManifoldTraversal NOTIFY nonManifoldTraversalChanged);
         private:
             static Qml::Register::Class<PolyDataNormals> Register;
-            vtkSmartPointer<vtkPolyDataNormals> m_vtkObject;
+            vtkSmartPointer<vtkPolyDataNormals> m_vtkObject = nullptr;
         public:
             PolyDataNormals();
             auto setFeatureAngle(qreal) -> void;

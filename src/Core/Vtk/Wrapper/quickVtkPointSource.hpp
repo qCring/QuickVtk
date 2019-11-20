@@ -27,9 +27,9 @@ namespace quick {
             Q_CLASSINFO("DefaultProperty", "randomSequence");
         private:
             static Qml::Register::Class<PointSource> Register;
-            vtkSmartPointer<vtkPointSource> m_vtkObject;
-            Math::Vector3* m_center;
-            RandomSequence* m_randomSequence;
+            vtkSmartPointer<vtkPointSource> m_vtkObject = nullptr;
+            Math::Vector3* m_center = nullptr;
+            RandomSequence* m_randomSequence = nullptr;
         private:
             auto resetSeed() -> void;
         public:

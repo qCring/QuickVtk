@@ -14,7 +14,7 @@ namespace quick {
             Q_PROPERTY(int seed READ getSeed WRITE setSeed NOTIFY seedChanged);
         private:
             static Qml::Register::AbstractClass<RandomSequence> Register;
-            vtkSmartPointer<vtkRandomSequence> m_vtkObject;
+            vtkSmartPointer<vtkRandomSequence> m_vtkObject = nullptr;
             int m_seed;
         public:
             RandomSequence() = delete;

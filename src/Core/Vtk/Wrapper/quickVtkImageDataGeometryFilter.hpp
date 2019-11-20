@@ -12,7 +12,7 @@ namespace quick {
             Q_OBJECT
         private:
             static Qml::Register::Class<ImageDataGeometryFilter> Register;
-            vtkSmartPointer<vtkImageDataGeometryFilter> m_vtkObject;
+            vtkSmartPointer<vtkImageDataGeometryFilter> m_vtkObject = nullptr;
         public:
             ImageDataGeometryFilter();
         signals:

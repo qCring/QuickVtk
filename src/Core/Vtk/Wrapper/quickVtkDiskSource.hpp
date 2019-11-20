@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(int circumferentialResolution READ getCircumferentialResolution WRITE setCircumferentialResolution NOTIFY circumferentialResolutionChanged);
         private:
             static Qml::Register::Class<DiskSource> Register;
-            vtkSmartPointer<vtkDiskSource> m_vtkObject;
+            vtkSmartPointer<vtkDiskSource> m_vtkObject = nullptr;
         public:
             DiskSource();
             auto setInnerRadius(qreal) -> void;

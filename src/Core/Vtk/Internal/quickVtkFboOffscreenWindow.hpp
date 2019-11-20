@@ -13,7 +13,7 @@ namespace quick {
 
         class FboOffscreenWindow : public vtkExternalOpenGLRenderWindow, protected QOpenGLFunctions {
         public:
-            FboRenderer* QtParentRenderer;
+            FboRenderer* QtParentRenderer = nullptr;
             static auto New() -> FboOffscreenWindow*;
             virtual auto OpenGLInitState() -> void override;
             auto Render() -> void override;

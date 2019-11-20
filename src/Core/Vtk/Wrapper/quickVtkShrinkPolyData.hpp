@@ -13,7 +13,7 @@ namespace quick {
             Q_PROPERTY(qreal shrinkFactor READ getShrinkFactor WRITE setShrinkFactor NOTIFY shrinkFactorChanged);
         private:
             static Qml::Register::Class<ShrinkPolyData> Register;
-            vtkSmartPointer<vtkShrinkPolyData> m_vtkObject;
+            vtkSmartPointer<vtkShrinkPolyData> m_vtkObject = nullptr;
         public:
             ShrinkPolyData();
             auto setShrinkFactor(qreal) -> void;

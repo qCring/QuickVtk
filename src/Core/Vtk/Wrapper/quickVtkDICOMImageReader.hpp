@@ -14,7 +14,7 @@ namespace quick {
         private:
             QString m_directoryName;
             static Qml::Register::Class<DICOMImageReader> Register;
-            vtkSmartPointer<vtkDICOMImageReader> m_vtkObject;
+            vtkSmartPointer<vtkDICOMImageReader> m_vtkObject = nullptr;
         public:
             DICOMImageReader();
             auto setDirectoryName(const QString&) -> void;

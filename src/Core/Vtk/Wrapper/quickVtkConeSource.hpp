@@ -20,7 +20,7 @@ namespace quick {
             Q_PROPERTY(bool capping READ getCapping WRITE setCapping NOTIFY cappingChanged);
         private:
             static Qml::Register::Class<ConeSource> Register;
-            vtkSmartPointer<vtkConeSource> m_vtkObject;
+            vtkSmartPointer<vtkConeSource> m_vtkObject = nullptr;
             Math::Vector3* m_center = nullptr;
             Math::Vector3* m_direction = nullptr;
         public:

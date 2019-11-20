@@ -22,7 +22,7 @@ namespace quick {
             Q_PROPERTY(qreal endPhi READ getEndPhi WRITE setEndPhi NOTIFY endPhiChanged);
         private:
             static Qml::Register::Class<SphereSource> Register;
-            vtkSmartPointer<vtkSphereSource> m_vtkObject;
+            vtkSmartPointer<vtkSphereSource> m_vtkObject = nullptr;
             Math::Vector3* m_center = nullptr;
         public:
             SphereSource();

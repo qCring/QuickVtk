@@ -23,7 +23,7 @@ namespace quick {
             Q_PROPERTY(SolidType solidType READ getSolidType WRITE setSolidType NOTIFY solidTypeChanged);
         private:
             static Qml::Register::Class<PlatonicSolidSource> Register;
-            vtkSmartPointer<vtkPlatonicSolidSource> m_vtkObject;
+            vtkSmartPointer<vtkPlatonicSolidSource> m_vtkObject = nullptr;
         public:
             PlatonicSolidSource();
             auto setSolidType(SolidType) -> void;

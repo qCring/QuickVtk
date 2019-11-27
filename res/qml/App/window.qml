@@ -10,54 +10,32 @@ Window {
 
     color: "#282C34"
 
+    FocusScope {
+      id: defaultFocus;
+    }
+
+    MouseArea {
+      anchors.fill: parent;
+
+      onClicked: {
+        console.log("root-click");
+        defaultFocus.forceActiveFocus();
+      }
+    }
+
     Header {
-        id: header;
+      id: header
 
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-    }
-
-    Lib.SplitView {
-        id: splitView;
-
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.top: header.bottom;
-        anchors.bottom: footer.top;
-
-        leftItem: Code.Editor {
-            anchors.fill: parent;
-        }
-
-        rightItem: Lib.TabView {
-            anchors.fill: parent;
-
-            Preview {
-                anchors.fill: parent;
-            }
-
-            LogView {
-                anchors.fill: parent;
-            }
-        }
-    }
-
-    TypeInfo.List {
-        id: typeList;
-
-        anchors.right: parent.right;
-        anchors.top: header.bottom;
-        anchors.bottom: footer.top;
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.top: parent.top
     }
 
     Footer {
-        id: footer;
+      id: footer
 
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
     }
-
-
 }

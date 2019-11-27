@@ -2,6 +2,7 @@
 
 #include "quickEditorController.hpp"
 #include "quickAppInstance.hpp"
+#include "quickAppMenuItem.hpp"
 #include "quickIO.hpp"
 
 #include <QMenuBar>
@@ -30,6 +31,47 @@ namespace quick {
 
         auto Menu::init() -> void {
             this->m_examples = IO::FileNamesFromDir(Instance::GetResourceDir() + "examples/qml/simple", {"*.qml"}, IO::FileSuffix::Off);
+            
+            auto menu_file = new MenuItem("File");
+            auto menu_edit = new MenuItem("Edit");
+            auto menu_view = new MenuItem("View");
+            auto menu_help = new MenuItem("Help");
+            
+            menu_file->add(new MenuItem("Open"));
+            menu_file->add(new MenuItem("Open Recent"));
+            menu_file->add(new MenuItem("Quit"));
+            
+            menu_help->add(new MenuItem("About"));
+            menu_help->add(new MenuItem("Website"));
+            
+            this->m_items.append(menu_file);
+            this->m_items.append(menu_edit);
+            this->m_items.append(menu_view);
+            this->m_items.append(menu_help);
+        }
+    
+        auto Menu::getItemList() -> QQmlListProperty<MenuItem> {
+            return QQmlListProperty<MenuItem>(this, nullptr, &itemCount, &itemAt);
+        }
+    
+        auto Menu::itemCount(QQmlListProperty<MenuItem>* list) -> int {
+            auto parent = qobject_cast<Menu*>(list->object);
+            
+            if (parent) {
+                return parent->m_items.count();
+            }
+            
+            return 0;
+        }
+        
+        auto Menu::itemAt(QQmlListProperty<MenuItem>* list, int index) -> MenuItem* {
+            auto parent = qobject_cast<Menu*>(list->object);
+            
+            if (parent) {
+                return parent->m_items.at(index);
+            }
+            
+            return nullptr;
         }
 
         auto Menu::getExamples() -> QStringList {
@@ -74,6 +116,10 @@ namespace quick {
 
         void Menu::OnHelpExample(const QString& exampleName) {
             Editor::Controller::instance->loadExample(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
+        }
+    
+        void Menu::select(MenuItem* item) {
+            qDebug() << item->getName();
         }
     }
 }

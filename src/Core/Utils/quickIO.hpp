@@ -28,6 +28,7 @@ namespace quick {
             auto TextToFile(const QString& text, const QString& url) -> bool;
         }
 
+        auto FileNameFromPath(const QString& path) -> QString;
         auto FileUrlsFromDir(const QString& dir, QStringList filters, FileSuffix) -> QStringList;
         auto FileNamesFromDir(const QString& dir, QStringList filters, FileSuffix) -> QStringList;
         auto FileExists(const QString& filePath) -> bool;

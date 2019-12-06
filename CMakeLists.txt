@@ -98,6 +98,8 @@ include(${VTK_USE_FILE})
 # sources
 # ******************************************************************************
 AddApplicationSources("${SOURCE_DIR}/App" "App" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/Console" "Console" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/Document" "Document" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/Editor" "Editor" list_app_src)
 
 AddCoreSources("${SOURCE_DIR}/Core/Math" "Math" list_core_src list_core_hdr)

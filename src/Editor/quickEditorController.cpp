@@ -3,7 +3,6 @@
 #include "quickIO.hpp"
 #include "quickEditorHighlighter.hpp"
 #include "quickEditorSelection.hpp"
-#include "quickEditorErrors.hpp"
 #include "quickEditorSearch.hpp"
 #include "quickEditorUtil.hpp"
 
@@ -103,10 +102,6 @@ namespace quick {
             return this->m_document;
         }
 
-        auto Controller::getErrors() -> Errors* {
-            return Errors::instance;
-        }
-
         auto Controller::getSearch() -> Search* {
             return Search::instance;
         }
@@ -114,42 +109,13 @@ namespace quick {
         auto Controller::getSelection() -> Selection* {
             return Selection::instance;
         }
-
-        auto Controller::observeFile(const QString& fileUrl) -> void {
-            
-            if (IO::FileExists(fileUrl)) {
-                
-                if (this->m_fileUrl.length() > 0) {
-                    this->m_fileWatcher->removePath(this->m_fileUrl);
-                }
-                
-                this->m_fileWatcher->addPath(fileUrl);
-                this->setFileUrl(fileUrl);
-                this->loadSourceFromFile();
-
-                this->run();
-            }
-        }
         
         auto Controller::loadSourceFromFile() -> void {
             if (IO::FileExists(this->m_fileUrl)) {
                 Search::instance->invalidate();
-                Errors::instance->clear();
                 
-                this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(this->m_fileUrl));
+                //this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(this->m_fileUrl));
                 this->setModified(false);
-            }
-        }
-                
-        auto Controller::loadExample(const QString& fileUrl) -> void {
-            if (IO::FileExists(fileUrl)) {
-                Search::instance->invalidate();
-                Errors::instance->clear();
-                
-                this->m_document->textDocument()->setPlainText(IO::Read::TextFromUrl(fileUrl));
-                this->setFileUrl(nullptr);
-                
-                this->run();
             }
         }
         
@@ -170,8 +136,17 @@ namespace quick {
             this->setBuildTimestamp(QDateTime::currentDateTime().toString("hh:mm:ss"));
         }
 
-        void Controller::loadFile() {
-            this->observeFile(IO::FromDialog::SelectOpenFileUrl("*.qml"));
+        void Controller::loadFile(const QString& path) {
+    
+            if (this->m_fileUrl.length() > 0) {
+                this->m_fileWatcher->removePath(this->m_fileUrl);
+            }
+            
+            this->m_fileWatcher->addPath(path);
+            this->setFileUrl(path);
+            this->loadSourceFromFile();
+
+            this->run();
         }
 
         void Controller::showSearch() {

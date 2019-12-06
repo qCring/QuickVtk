@@ -12,7 +12,6 @@ namespace quick {
 
         class Util;
         class Search;
-        class Errors;
         class Selection;
         class Highlighter;
 
@@ -25,7 +24,6 @@ namespace quick {
             Q_PROPERTY(QString buildTimestamp READ getBuildTimestamp NOTIFY buildTimestampChanged);
             Q_PROPERTY(QString fileUrl READ getFileUrl NOTIFY fileUrlChanged);
             Q_PROPERTY(QQuickTextDocument* document READ getDocument WRITE setDocument NOTIFY documentChanged);
-            Q_PROPERTY(quick::Editor::Errors* errors READ getErrors CONSTANT);
             Q_PROPERTY(quick::Editor::Search* search READ getSearch CONSTANT);
             Q_PROPERTY(quick::Editor::Selection* selection READ getSelection CONSTANT);
         public:
@@ -53,7 +51,6 @@ namespace quick {
             void copyToClipboard(const QString&);
             void observedFileChanged(const QString&);
             void run();
-            void loadFile();
             void showSearch();
             void resetFontSize();
             void increaseFontSize();
@@ -65,10 +62,7 @@ namespace quick {
             auto setBuildTimestamp (const QString&) -> void;
             auto getBuildTimestamp () -> QString;
             auto getSelection() -> Selection*;
-            auto getErrors() -> Errors*;
             auto getSearch() -> Search*;
-            auto observeFile(const QString&) -> void;
-            auto loadExample(const QString&) -> void;
             auto getFileUrl() -> QString;
             auto getExpanded() -> bool;
             auto getModified() -> bool;
@@ -76,6 +70,7 @@ namespace quick {
             auto getFontSize() -> int;
             auto setAutorun(bool) -> void;
             auto getAutorun() -> bool;
+            auto loadFile(const QString&) -> void;
             ~Controller();
         signals:
             void select(int start, int end);

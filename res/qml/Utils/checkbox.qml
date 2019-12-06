@@ -38,7 +38,7 @@ Item {
         Lib.Icon {
             anchors.centerIn: parent;
 
-            color: "orange";
+            color: "#fff";
             visible: root.checked;
             icon: icons.fa_check;
         }

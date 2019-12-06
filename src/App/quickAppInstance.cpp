@@ -5,7 +5,7 @@
 #include "quickQmlRegister.hpp"
 #include "quickAppController.hpp"
 #include "quickSampleDataController.hpp"
-#include "quickAppLogger.hpp"
+#include "quickConsoleController.hpp"
 
 #include <QWindow>
 #include <QFontDatabase>
@@ -32,8 +32,13 @@ namespace quick {
             }
 
             QScopedValueRollback<bool> roll(instance->m_messageHandled.localData(), true);
-
-            Logger::GetInstance()->addEntry(msg);
+            
+            switch(type) {
+                case QtMsgType::QtDebugMsg: Console::Controller::GetInstance()->addDebugMsg(msg); break;
+                case QtMsgType::QtInfoMsg: Console::Controller::GetInstance()->addInfoMsg(msg); break;
+                case QtMsgType::QtWarningMsg: Console::Controller::GetInstance()->addWarningMsg(msg); break;
+                default: Console::Controller::GetInstance()->addErrorMsg(msg); break;
+            }
         }
 
         auto Instance::init() -> void {

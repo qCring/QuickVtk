@@ -62,7 +62,7 @@ Item {
                 height: 8;
                 radius: 4;
 
-                color: "orange"
+                color: "#2B68A4"
                 border.color: "#fff"
             }
 
@@ -80,7 +80,7 @@ Item {
 
                     width: (control.value - control.minimumValue) / (control.maximumValue - control.minimumValue) * parent.width
                     radius: 8;
-                    color: "orange"
+                    color: "#2B68A4"
                 }
            }
         }

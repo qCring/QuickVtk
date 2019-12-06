@@ -5,12 +5,15 @@ namespace quick {
 
         Qml::Register::Type<MenuItem> MenuItem::Register;
     
-        MenuItem::MenuItem(const QString& name) {
-            this->m_name = name;
+        MenuItem::MenuItem(const QString& name, Action action) : m_name(name), action(action) {
+        }
+    
+        MenuItem::MenuItem(const QString& name, const QString& icon, Action action) : m_name(name), m_icon(icon), action(action) {
         }
 
         auto MenuItem::add(MenuItem* item) -> void {
             this->m_items.append(item);
+            emit this->itemsChanged();
         }
     
         auto MenuItem::setName(const QString& name) -> void {
@@ -20,6 +23,14 @@ namespace quick {
     
         auto MenuItem::getName() -> QString {
             return this->m_name;
+        }
+    
+        auto MenuItem::setIcon(const QString& icon) -> void {
+            this->m_icon = icon;
+        }
+    
+        auto MenuItem::getIcon() -> QString {
+            return this->m_icon;
         }
     
         auto MenuItem::getItems() -> QQmlListProperty<MenuItem> {
@@ -44,6 +55,14 @@ namespace quick {
             }
             
             return nullptr;
+        }
+    
+        auto MenuItem::setData(const QString& data) -> void {
+            this->m_data = data;
+        }
+    
+        auto MenuItem::getData() -> QString {
+            return this->m_data;
         }
     }
 }

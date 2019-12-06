@@ -4,3 +4,12 @@ Footer 1.0 footer.qml
 Header 1.0 header.qml
 LogView 1.0 logview.qml
 Menu 1.0 menu.qml
+Console 1.0 console.qml
+Context 1.0 context.qml
+Content 1.0 content.qml
+Tabs 1.0 tabs.qml
+Editor 1.0 editor.qml
+Errors 1.0 errors.qml
+ErrorItem 1.0 erroritem.qml
+CodeView 1.0 codeview.qml
+Error 1.0 error.qml

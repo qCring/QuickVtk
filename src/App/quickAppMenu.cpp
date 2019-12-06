@@ -1,10 +1,12 @@
 #include "quickAppMenu.hpp"
 
+#include "quickDocumentController.hpp"
 #include "quickEditorController.hpp"
 #include "quickAppInstance.hpp"
 #include "quickAppMenuItem.hpp"
 #include "quickIO.hpp"
 
+#include <iostream>
 #include <QMenuBar>
 #include <QDesktopServices>
 
@@ -30,19 +32,19 @@ namespace quick {
         }
 
         auto Menu::init() -> void {
-            this->m_examples = IO::FileNamesFromDir(Instance::GetResourceDir() + "examples/qml/simple", {"*.qml"}, IO::FileSuffix::Off);
-            
             auto menu_file = new MenuItem("File");
             auto menu_edit = new MenuItem("Edit");
             auto menu_view = new MenuItem("View");
             auto menu_help = new MenuItem("Help");
             
-            menu_file->add(new MenuItem("Open"));
-            menu_file->add(new MenuItem("Open Recent"));
-            menu_file->add(new MenuItem("Quit"));
+            this->m_recentFiles = new MenuItem("Open Recent", MenuItem::Action::File_Open_Recent);
             
-            menu_help->add(new MenuItem("About"));
-            menu_help->add(new MenuItem("Website"));
+            menu_file->add(new MenuItem("Open", "fa_folder_open_o", MenuItem::Action::File_Open));
+            menu_file->add(this->m_recentFiles);
+            menu_file->add(new MenuItem("Quit", "fa_power_off", MenuItem::Action::File_Quit));
+            
+            menu_help->add(new MenuItem("About", MenuItem::Action::Help_About));
+            menu_help->add(new MenuItem("Website", "fa_globe", MenuItem::Action::Help_Website));
             
             this->m_items.append(menu_file);
             this->m_items.append(menu_edit);
@@ -74,52 +76,47 @@ namespace quick {
             return nullptr;
         }
 
-        auto Menu::getExamples() -> QStringList {
-            return this->m_examples;
-        }
-
-        void Menu::OnFileLoad() {
-            Editor::Controller::instance->loadFile();
-        }
-
-        void Menu::OnFindFind() {
-            Editor::Controller::instance->showSearch();
-        }
-
-        void Menu::OnCodeRun() {
-            Editor::Controller::instance->run();
-        }
-
-        void Menu::OnViewIncreaseFontSize() {
-            Editor::Controller::instance->increaseFontSize();
-        }
-
-        void Menu::OnViewDecreaseFontSize() {
-            Editor::Controller::instance->decreaseFontSize();
-        }
-
-        void Menu::OnViewResetFontSize() {
-            Editor::Controller::instance->resetFontSize();
-        }
-
-        void Menu::OnViewToggleEditor() {
-            Editor::Controller::instance->toggleExpanded();
-        }
-
-        void Menu::OnHelpVisitOnGitHub() {
-            QDesktopServices::openUrl(QUrl("https://github.com/qCring/QuickVtk", QUrl::TolerantMode));
-        }
-
-        void Menu::OnHelpSendFeedback() {
-            QDesktopServices::openUrl(QUrl("mailto:qCring@gmail.com?subject=QuickVtk Feedback", QUrl::TolerantMode));
-        }
-
-        void Menu::OnHelpExample(const QString& exampleName) {
-            Editor::Controller::instance->loadExample(Instance::GetResourceDir() + "examples/qml/simple/" + exampleName + ".qml");
+        void Menu::select(MenuItem* item) {
+            switch (item->action) {
+                case MenuItem::Action::File_Open: OnFileOpen(); break;
+                case MenuItem::Action::File_Open_Recent: OnFileOpenRecent(item->getData()); break;
+                case MenuItem::Action::File_Quit: OnFileQuit(); break;
+                case MenuItem::Action::Help_Website: OnHelpWebsite(); break;
+                case MenuItem::Action::Help_About: OnHelpAbout(); break;
+            }
         }
     
-        void Menu::select(MenuItem* item) {
-            qDebug() << item->getName();
+        auto Menu::OnFileOpen() -> void {
+            auto filePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
+            
+            if (IO::FileExists(filePath)) {
+                auto menuItem = new MenuItem(filePath);
+                menuItem->setData(filePath);
+                
+                this->m_recentFiles->add(menuItem);
+            }
+            
+            Document::Controller::instance->openFile(filePath);
+        }
+    
+        auto Menu::OnFileOpenRecent(const QString& path) -> void {
+            if (IO::FileExists(path)) {
+                Document::Controller::instance->openFile(path);
+            } else {
+                // remove from recent files
+            }
+        }
+        
+        auto Menu::OnFileQuit() -> void {
+            qDebug() << "File Quit";
+        }
+        
+        auto Menu::OnHelpAbout() -> void {
+            qDebug() << "Help About";
+        }
+        
+        auto Menu::OnHelpWebsite() -> void {
+            qDebug() << "Help Website";
         }
     }
 }

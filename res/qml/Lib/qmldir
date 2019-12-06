@@ -9,3 +9,4 @@ TextEdit 1.0 textedit.qml
 ScrollView 1.0 scrollview.qml
 SplitView 1.0 splitview.qml
 TabView 1.0 tabview.qml
+List 1.0 list.qml

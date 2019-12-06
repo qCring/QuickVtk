@@ -14,9 +14,16 @@ namespace quick {
         class Controller;
     }
 
+    namespace Document {
+        class Controller;
+    }
+
+    namespace Console {
+        class Controller;
+    }
+
     namespace App {
 
-        class Logger;
         class Settings;
         class Menu;
 
@@ -27,8 +34,9 @@ namespace quick {
             Q_PROPERTY(QString version READ getVersion CONSTANT);
             Q_PROPERTY(quick::App::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
+            Q_PROPERTY(quick::Document::Controller* document READ getDocumentController CONSTANT);
             Q_PROPERTY(quick::Editor::Controller* editor READ getEditor CONSTANT);
-            Q_PROPERTY(quick::App::Logger* logger READ getLogger CONSTANT);
+            Q_PROPERTY(quick::Console::Controller* console READ getConsole CONSTANT);
             Q_PROPERTY(quick::App::Menu* menu READ getMenu CONSTANT);
         private:
             bool m_showList = false;
@@ -47,8 +55,9 @@ namespace quick {
             auto getTypeList() -> TypeInfo::List*;
             auto getEditor() -> Editor::Controller*;
             auto getSettings() -> Settings*;
-            auto getLogger() -> Logger*;
+            auto getConsole() -> Console::Controller*;
             auto getMenu() -> Menu*;
+            auto getDocumentController() -> Document::Controller*;
         signals:
             void expandedChanged();
         };

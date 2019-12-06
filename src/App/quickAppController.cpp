@@ -5,9 +5,9 @@
 #include "quickTypeInfoList.hpp"
 
 #include "quickEditorController.hpp"
-
+#include "quickDocumentController.hpp"
 #include "quickAppSettings.hpp"
-#include "quickAppLogger.hpp"
+#include "quickConsoleController.hpp"
 #include "quickAppMenu.hpp"
 
 namespace quick {
@@ -59,8 +59,8 @@ namespace quick {
             return Editor::Controller::instance;
         }
 
-        auto Controller::getLogger() -> Logger* {
-            return Logger::GetInstance();
+        auto Controller::getConsole() -> Console::Controller* {
+            return Console::Controller::GetInstance();
         }
 
         auto Controller::getSettings() -> Settings* {
@@ -69,6 +69,10 @@ namespace quick {
 
         auto Controller::getMenu() -> Menu* {
             return Menu::GetInstance();
+        }
+    
+        auto Controller::getDocumentController() -> Document::Controller* {
+            return Document::Controller::instance;
         }
         
         auto Controller::isDebugBuild() -> bool {

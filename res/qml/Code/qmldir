@@ -1,6 +1,5 @@
 module Code
 Error 1.0 error.qml
 Footer 1.0 footer.qml
-Editor 1.0 editor.qml
 Search 1.0 search.qml
 SearchInput 1.0 searchinput.qml

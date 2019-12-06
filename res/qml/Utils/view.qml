@@ -3,27 +3,19 @@ import QtQuick 2.6
 import Utils 1.0 as Utils
 import Lib 1.0 as Lib
 
-Rectangle {
+Item {
     id: root;
 
+    anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.bottom: parent.bottom;
+    anchors.top: parent.top;
     anchors.margins: 8;
 
-    width: 300;
     height: column.height;
 
-    color: "#21252B";
-    border.color: "#3C424F";
-
-default property alias content: contentColumn.children;
+    default property alias content: contentColumn.children;
     property bool expanded: true;
     property alias title: label.text;
-
-    MouseArea {
-        anchors.fill: parent;
-        propagateComposedEvents: false;
-    }
 
     Column {
         id: column;
@@ -50,7 +42,8 @@ default property alias content: contentColumn.children;
 
                 anchors.left: parent.left;
                 anchors.verticalCenter: parent.verticalCenter;
-                icon: root.expanded ? icons.fa_caret_down : icons.fa_caret_up;
+                width: parent.height;
+                icon: root.expanded ? icons.fa_caret_down : icons.fa_caret_right;
                 color: ma.containsMouse ? "#fff" : "#9DA5B4";
             }
 
@@ -82,7 +75,13 @@ default property alias content: contentColumn.children;
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            spacing: 2;
+            spacing: 8;
         }
+    }
+
+    Component.onCompleted:  {
+
+      console.log("utilsView: " + utilsView);
+      root.parent = utilsView;
     }
 }

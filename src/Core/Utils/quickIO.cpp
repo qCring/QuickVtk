@@ -1,5 +1,6 @@
 #include "quickIO.hpp"
 
+#include <QDebug>
 #include <QDirIterator>
 #include <QTextStream>
 #include <QFileDialog>
@@ -105,6 +106,16 @@ namespace quick {
         auto FileExists(const QString& filePath) -> bool {
             QFile file(filePath);
             return file.exists();
+        }
+    
+        auto FileNameFromPath(const QString& path) -> QString {
+            auto index = path.lastIndexOf('/');
+            
+            if (index > 0) {
+                return path.mid(index + 1);
+            }
+            
+            return nullptr;
         }
     }
 }

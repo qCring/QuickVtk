@@ -4,25 +4,19 @@ import QtQuick.Controls 1.4
 import App 1.0 as App
 import Lib 1.0 as Lib
 
-Rectangle {
+Item {
     id: root;
 
-    property var editor: Controllers.editor;
+    property var file: Controllers.document.file;
 
     clip: true;
-
-    color: "#181A1F"
-
-    function activate() {
-        textEdit.forceActiveFocus();
-    }
 
     Flickable {
         id: flickable;
 
         anchors.left: lines.right;
         anchors.top: parent.top;
-        anchors.bottom: search.visible ? search.top : footer.top;
+        anchors.bottom: parent.bottom;
         anchors.right: parent.right;
 
         contentWidth: textEdit.width;
@@ -59,7 +53,7 @@ Rectangle {
         }
 
         Repeater {
-            model: Controllers.editor.errors;
+            model: file != undefined ? file.errors : null;
 
             delegate: Error {
                 anchors.left: parent.left;
@@ -78,33 +72,23 @@ Rectangle {
             readOnly: true;
 
             width: Math.max(implicitWidth, root.width - lines.width);
-            height: Math.max(implicitHeight, root.height - footer.height);
+            height: Math.max(implicitHeight, root.height);
 
             leftPadding: 4;
 
-            property bool multiSelection: editor.selection.startLine != editor.selection.endLine;
             property int cursorX: cursorRectangle.x;
             property int cursorY: cursorRectangle.y;
             property int cursorHeight: cursorRectangle.height;
             property bool showCursor: true;
 
-            font.pointSize: editor.fontSize;
-
-            onActiveFocusChanged: {
-                if (activeFocus) {
-                    activateCursor();
-                } else {
-                    deactivateCursor();
-                }
-            }
+            font.pointSize: 12;
+            text: file != undefined ? file.content : "";
 
             onCursorXChanged: {
-                activateCursor();
                 flickable.updateScrollX(cursorX);
             }
 
             onCursorYChanged: {
-                activateCursor();
                 flickable.updateScrollY(cursorY);
             }
 
@@ -113,28 +97,7 @@ Rectangle {
 
                 width: 1.5;
                 color: "orange";
-                visible: textEdit.showCursor && !textEdit.multiSelection;
-            }
-
-            function activateCursor() {
-                textEdit.showCursor = true;
-                cursorTimer.restart();
-            }
-
-            function deactivateCursor() {
-                textEdit.showCursor = false;
-                cursorTimer.stop();
-            }
-
-            Timer {
-                id: cursorTimer;
-
-                interval: Controllers.settings.cursorFlashTime;
-                running: true;
-                repeat: true;
-
-                onTriggered: textEdit.showCursor = !textEdit.showCursor;
-
+                visible: textEdit.showCursor;
             }
         }
     }
@@ -144,9 +107,8 @@ Rectangle {
 
         anchors.left: parent.left;
         anchors.top: parent.top;
-        anchors.bottom: footer.top;
-
-        color: "#181A1F"
+        anchors.bottom: parent.bottom;
+        color: "#282C34";
 
         width: linesCol.width + 4;
 
@@ -164,10 +126,9 @@ Rectangle {
                     leftPadding: 8;
 
                     font.family: textEdit.font.family;
-                    font.pointSize: editor.fontSize;
                     verticalAlignment: Text.AlignVCenter;
 
-                    color: index  >= editor.selection.startLine && index <= editor.selection.endLine ? "#fff" : "#6E7582"
+                    color: "#6E7582"
                     text: index + 1;
                 }
             }
@@ -181,49 +142,5 @@ Rectangle {
             width: 1;
             color: "#21252B"
         }
-    }
-
-    Search {
-        id: search;
-
-        anchors.left: parent.left;
-        anchors.bottom: footer.top;
-        anchors.right: parent.right;
-
-        refocus: textEdit;
-    }
-
-    MouseArea {
-        anchors.fill: parent;
-        enabled: !textEdit.activeFocus;
-
-        onClicked: {
-            root.activate();
-        }
-    }
-
-    Footer {
-        id: footer;
-
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
-    }
-
-    Connections {
-        target: editor;
-        onClear: textEdit.clear();
-    }
-
-    Connections {
-        target: editor;
-        onSelect: textEdit.select(start, end);
-    }
-
-    Component.onCompleted: {
-        editor.document = textEdit.textDocument;
-        editor.selection.startPosition = Qt.binding (function() { return textEdit.selectionStart; });
-        editor.selection.endPosition = Qt.binding (function() { return textEdit.selectionEnd; });
-        textEdit.forceActiveFocus();
     }
 }

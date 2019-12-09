@@ -15,6 +15,7 @@ Rectangle {
 
         Item {
           id: container;
+
           anchors.fill: parent;
           anchors.bottomMargin: 40;
         }
@@ -23,6 +24,7 @@ Rectangle {
           anchors.left: parent.left;
           anchors.right: parent.right;
           anchors.bottom: parent.bottom;
+
           height: 40;
 
           Row {
@@ -67,49 +69,61 @@ Rectangle {
     }
 
     function createComponent() {
-        const file = Controllers.document.file;
+      const file = Controllers.document.file;
+      console.log("component.createComponent: file: " + file);
 
-        if (file == undefined) {
-          console.error("unable to create component: Controllers.document.file is undefined");
-          return;
+      if (file == undefined) {
+        console.error("unable to create component: Controllers.document.file is undefined");
+        return;
+      }
+
+      Controllers.document.preRun();
+
+      try {
+        if (file.component) {
+          file.component.destroy();
         }
 
-        try {
-          file.root = Qt.createQmlObject(Controllers.document.file.content, container, "root");
-        } catch (exc) {
-          var errors = exc.qmlErrors;
+        file.component = Qt.createQmlObject(Controllers.document.file.content, container, "root");
+      } catch (exc) {
+        var errors = exc.qmlErrors;
 
+        console.log("errors: " + errors);
+
+        if (errors == undefined) {
+          console.log("msg: " + exc.message);
+          file.addError(0, 0, exc.message);
+        } else {
           for (var i = 0; i < errors.length; i++) {
               var error = errors[i];
 
               file.addError(error.lineNumber, error.columnNumber, error.message);
           }
         }
+      } finally {
+        Controllers.document.postRun();
+      }
     }
 
     function destroyComponent(file) {
-      if (file != undefined) {
-        console.log("destroy file.root: " + file.root);
-        file.root.destroy();
+      if (file) {
+        console.log("component.destroyComponent: " + file.component);
+        file.component.destroy();
       }
     }
 
     function selectComponent(file) {
-      console.log("select: " + file + " root: " + file.root);
+      if (file) {
+        console.log("content: selectComponent: " + file.component);
 
-      if (file != undefined && container.children.length > 0) {
         for (var i = 0; i < container.children.length; i++) {
           const child = container.children[i];
 
-          console.log(" it: " + i + " child: " + child);
-
-          child.visible = false;
-          child.enabled = false;
-        }
-
-        if (file.root != undefined) {
-          file.root.visible = true;
-          file.root.enabled = true;  
+          if (child != file.component) {
+            child.visible = child.enabled = false;
+          } else {
+            child.visible = child.enabled = true;
+          }
         }
       }
     }

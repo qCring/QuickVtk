@@ -15,7 +15,13 @@ namespace quick {
             if (this->m_file != file) {
                 this->m_file = file;
                 emit this->fileChanged();
-                emit this->selectComponent(file);
+                
+                for (const auto& file : this->m_files) {
+                    file->setSelected(false);
+                }
+                
+                this->m_file->setSelected(true);
+                emit this->selectComponent(this->m_file);
             }
         }
     
@@ -77,13 +83,23 @@ namespace quick {
             this->setFile(file);
         }
     
-        void Controller::run() {
+        void Controller::preRun() {
             if (this->m_file != nullptr) {
                 this->m_file->clearErrors();
             }
+        }
+    
+        void Controller::postRun() {
+            if (this->m_file != nullptr) {
+                this->m_file->setModified(false);
+                emit this->m_file->errorsChanged();
+            }
+        }
+    
+        void Controller::run() {
             
             if (this->m_file != nullptr) {
-                emit this->m_file->errorsChanged();
+                emit this->createComponent();
             }
         }
     }

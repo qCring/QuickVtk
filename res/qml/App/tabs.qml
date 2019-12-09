@@ -48,7 +48,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             text: model.title;
-            color: ma.containsMouse ? "#fff" : "#a0a0a0";
+            color: model.selected ? "#2B68A4" : ma.containsMouse ? "#fff" : "#a0a0a0";
           }
 
           Lib.Icon {

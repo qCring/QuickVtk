@@ -93,6 +93,17 @@ namespace quick {
             return this->m_modified;
         }
     
+        auto File::setSelected(bool selected) -> void {
+            if (this->m_selected != selected) {
+                this->m_selected = selected;
+                emit this->selectedChanged();
+            }
+        }
+    
+        auto File::getSelected() -> bool {
+            return this->m_selected;
+        }
+    
         auto File::close() -> void {
             Controller::instance->removeFile(this);
         }
@@ -101,13 +112,13 @@ namespace quick {
             Controller::instance->selectFile(this);
         }
     
-        auto File::setRoot(QObject* root) -> void {
-            this->m_root = root;
-            emit this->rootChanged();
+        auto File::setComponent(QObject* component) -> void {
+            this->m_component = component;
+            emit this->componentChanged();
         }
     
-        auto File::getRoot() -> QObject* {
-            return this->m_root;
+        auto File::getComponent() -> QObject* {
+            return this->m_component;
         }
     
         auto File::clearErrors() -> void {

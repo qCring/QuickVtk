@@ -29,6 +29,8 @@ namespace quick {
             auto selectFile(File*) -> void;
         public slots:
             void run();
+            void preRun();
+            void postRun();
         signals:
             void fileChanged();
             void filesChanged();

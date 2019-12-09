@@ -4,84 +4,109 @@ import Utils 1.0 as Utils
 import Lib 1.0 as Lib
 
 Item {
-    id: root;
+  id: root;
+
+  anchors.left: parent ? parent.left : undefined;
+  anchors.right: parent ? parent.right : undefined;
+  anchors.top: parent ? parent.top : undefined;
+  anchors.margins: 8;
+  property var file: null;
+  property bool selected: false;
+
+  height: column.height;
+
+  default property alias content: contentColumn.children;
+  property bool expanded: true;
+  property alias title: label.text;
+
+  Column {
+    id: column;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.top: parent.top;
-    anchors.margins: 8;
 
-    height: column.height;
+    anchors.leftMargin: 8;
+    anchors.rightMargin: 8;
 
-    default property alias content: contentColumn.children;
-    property bool expanded: true;
-    property alias title: label.text;
+    topPadding: 4;
+    bottomPadding: 4;
 
-    Column {
-        id: column;
+    spacing: 2;
+
+    Item {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+
+      height: label.height;
+
+      Lib.Icon {
+        id: icon;
 
         anchors.left: parent.left;
-        anchors.right: parent.right;
+        anchors.verticalCenter: parent.verticalCenter;
+        width: parent.height;
+        icon: root.expanded ? icons.fa_caret_down : icons.fa_caret_right;
+        color: ma.containsMouse ? "#fff" : "#9DA5B4";
+      }
 
+      Utils.Label {
+        id: label;
+
+        anchors.left: icon.right;
         anchors.leftMargin: 8;
-        anchors.rightMargin: 8;
 
-        topPadding: 4;
-        bottomPadding: 4;
+        text: "Properties"
+        color: "#fff"
+        font.bold: true;
+      }
 
-        spacing: 2;
+      MouseArea {
+        id: ma;
 
-        Item {
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-
-            height: label.height;
-
-            Lib.Icon {
-                id: icon;
-
-                anchors.left: parent.left;
-                anchors.verticalCenter: parent.verticalCenter;
-                width: parent.height;
-                icon: root.expanded ? icons.fa_caret_down : icons.fa_caret_right;
-                color: ma.containsMouse ? "#fff" : "#9DA5B4";
-            }
-
-            Utils.Label {
-                id: label;
-
-                anchors.left: icon.right;
-                anchors.leftMargin: 8;
-
-                text: "Properties"
-                color: "#fff"
-                font.bold: true;
-            }
-
-            MouseArea {
-                id: ma;
-
-                anchors.fill: parent;
-                onClicked: root.expanded = !root.expanded;
-                hoverEnabled: true;
-            }
-        }
-
-        Column {
-            id: contentColumn;
-
-            visible: root.expanded;
-
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-
-            spacing: 8;
-        }
+        anchors.fill: parent;
+        onClicked: root.expanded = !root.expanded;
+        hoverEnabled: true;
+      }
     }
 
-    Component.onCompleted:  {
+    Column {
+      id: contentColumn;
 
-      console.log("utilsView: " + utilsView);
+      visible: root.expanded;
+
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+
+      spacing: 8;
+    }
+  }
+
+  onSelectedChanged: {
+    console.log("uv.onSelectedChanged - uv: " + this + " uv.selected: " + this.selected);
+
+    if (selected) {
+      root.visible = root.enabled = true;
       root.parent = utilsView;
+    } else {
+      root.visible = root.enabled = false;
+      root.parent = null;
     }
+  }
+
+  onFileChanged: {
+    console.log("uv.onFileChanged - uv: " + this + " uv.file: " + this.file);
+
+    if (file) {
+      console.log("bind..");
+      root.selected = Qt.binding (function() { return file.selected; });
+    }
+  }
+
+  Component.onCompleted: {
+
+    this.file = Controllers.document.file;
+    console.log("uv.onCompleted - uv: " + this + " uv.file: " + this.file);
+
+    root.parent = utilsView;
+  }
 }

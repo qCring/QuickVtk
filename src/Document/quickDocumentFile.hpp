@@ -15,14 +15,16 @@ namespace quick {
             Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged);
             Q_PROPERTY(QString content READ getContent NOTIFY contentChanged);
             Q_PROPERTY(bool modified READ getModified NOTIFY modifiedChanged);
+            Q_PROPERTY(bool selected READ getSelected NOTIFY selectedChanged);
             Q_PROPERTY(QQmlListProperty<quick::Document::Error> errors READ getErrorList NOTIFY errorsChanged);
-            Q_PROPERTY(QObject* root READ getRoot WRITE setRoot NOTIFY rootChanged);
+            Q_PROPERTY(QObject* component READ getComponent WRITE setComponent NOTIFY componentChanged);
         private:
             QString m_path;
             QString m_title;
             QString m_content;
             bool m_modified;
-            QObject* m_root = nullptr;
+            bool m_selected;
+            QObject* m_component = nullptr;
             QFileSystemWatcher* m_fileWatcher = nullptr;
             QList<Error*> m_errors;
             static Qml::Register::Type<File> Register;
@@ -36,8 +38,10 @@ namespace quick {
             auto getContent() -> QString;
             auto setModified(bool) -> void;
             auto getModified() -> bool;
-            auto setRoot(QObject*) -> void;
-            auto getRoot() -> QObject*;
+            auto setSelected(bool) -> void;
+            auto getSelected() -> bool;
+            auto setComponent(QObject*) -> void;
+            auto getComponent() -> QObject*;
             auto clearErrors() -> void;
             auto getErrorList() -> QQmlListProperty<Error>;
             static auto errorCount(QQmlListProperty<Error>*) -> int;
@@ -50,12 +54,11 @@ namespace quick {
         signals:
             void errorsChanged();
             void pathChanged();
-            void rootChanged();
             void titleChanged();
             void contentChanged();
             void modifiedChanged();
-            
-            
+            void selectedChanged();
+            void componentChanged();
         };
     }
 }

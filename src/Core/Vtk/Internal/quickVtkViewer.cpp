@@ -144,7 +144,6 @@ namespace quick {
                     vtkWidget->SetInteractor(viewer->GetRenderWindow()->GetInteractor());
                     vtkWidget->CreateDefaultRepresentation();
                     vtkWidget->On();
-                    //widget->getVtkObject()->SetInteractor(<#vtkRenderWindowInteractor *iren#>)
                 }
 
                 emit viewer->inputChanged();

@@ -19,9 +19,32 @@ namespace quick {
         auto Settings::Create() -> void {
             instance = new Settings();
         }
-
-        auto Settings::getCursorFlashTime() -> int {
-            return QApplication::cursorFlashTime() / 2;
+    
+        auto Settings::Init() -> void {
+            QSettings settings;
+            auto files = settings.value("menu/recent").toList();
+            
+            for (const auto& entry : files) {
+                instance->m_recentFiles << entry.toString();
+            }
+        }
+    
+        auto Settings::ClearRecentFiles() -> void {
+            QSettings settings;
+            settings.remove("menu/recent");
+            instance->m_recentFiles.clear();
+        }
+    
+        auto Settings::AddRecentFile(const QString& filePath) -> void {
+            qDebug() << "Settings::AddRecentFile: " << filePath;
+            
+            instance->m_recentFiles.append(filePath);
+            QSettings settings;
+            settings.setValue("menu/recent", instance->m_recentFiles);
+        }
+    
+        auto Settings::GetRecentFiles() -> QStringList {
+            return instance->m_recentFiles;
         }
     }
 }

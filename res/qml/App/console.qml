@@ -48,6 +48,7 @@ Rectangle {
     anchors.bottom: parent.bottom;
 
     model: Controllers.console.items;
+
     delegate: Rectangle {
 
       anchors.left: parent.left;

@@ -11,33 +11,13 @@ Rectangle {
     color: "#181A1F"
 
     Item {
+      anchors.fill: parent;
+
+      Item {
+        id: container;
+
         anchors.fill: parent;
-
-        Item {
-          id: container;
-
-          anchors.fill: parent;
-          anchors.bottomMargin: 40;
-        }
-
-        Rectangle {
-          anchors.left: parent.left;
-          anchors.right: parent.right;
-          anchors.bottom: parent.bottom;
-
-          height: 40;
-
-          Row {
-            anchors.fill: parent;
-
-            Repeater {
-              model: container.children;
-              Text {
-                text: index;
-              }
-            }
-          }
-        }
+      }
     }
 
     Rectangle {
@@ -88,16 +68,14 @@ Rectangle {
       } catch (exc) {
         var errors = exc.qmlErrors;
 
-        console.log("errors: " + errors);
-
         if (errors == undefined) {
           console.log("msg: " + exc.message);
           file.addError(0, 0, exc.message);
         } else {
           for (var i = 0; i < errors.length; i++) {
-              var error = errors[i];
+            var error = errors[i];
 
-              file.addError(error.lineNumber, error.columnNumber, error.message);
+            file.addError(error.lineNumber, error.columnNumber, error.message);
           }
         }
       } finally {

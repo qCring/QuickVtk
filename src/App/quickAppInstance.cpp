@@ -1,9 +1,11 @@
 #include "quickAppInstance.hpp"
+#include "quickAppSettings.hpp"
+#include "quickAppController.hpp"
+#include "quickAppMenu.hpp"
 
 #include "quickIO.hpp"
 #include "meta_quickvtk.hpp"
 #include "quickQmlRegister.hpp"
-#include "quickAppController.hpp"
 #include "quickSampleDataController.hpp"
 #include "quickConsoleController.hpp"
 
@@ -42,12 +44,15 @@ namespace quick {
         }
 
         auto Instance::init() -> void {
-            QApplication::setOrganizationName(Meta::orgName);
-            QApplication::setOrganizationDomain(Meta::orgDomain);
-            QApplication::setApplicationName(Meta::appName);
-            QApplication::setApplicationVersion(Meta::versionString);
+            QApplication::setOrganizationName(Meta::OrgName);
+            QApplication::setOrganizationDomain(Meta::OrgDomain);
+            QApplication::setApplicationName(Meta::AppName);
+            QApplication::setApplicationVersion(Meta::AppVersion);
 
             Qml::RegisterTypes();
+            
+            Settings::Init();
+            Menu::Init();
 
             auto path = QDir(QGuiApplication::applicationDirPath());
 

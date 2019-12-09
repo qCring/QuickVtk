@@ -14,11 +14,9 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(QQmlListProperty<quick::App::MenuItem> items READ getItemList CONSTANT);
         private:
-            static Menu* instance;
             QList<MenuItem*> m_items;
-            static Qml::Register::Type<Menu> Register;
+            static Qml::Register::Controller<Menu> Register;
             MenuItem* m_recentFiles;
-            auto init() -> void;
             Menu();
             auto OnFileOpen() -> void;
             auto OnFileOpenRecent(const QString&) -> void;
@@ -26,7 +24,9 @@ namespace quick {
             auto OnHelpAbout() -> void;
             auto OnHelpWebsite() -> void;
         public:
-            static auto GetInstance() -> Menu*;
+            static Menu* instance;
+            static auto Init() -> void;
+            static auto Create() -> void;
             auto getItemList() -> QQmlListProperty<MenuItem>;
             static auto itemCount(QQmlListProperty<MenuItem>*) -> int;
             static auto itemAt(QQmlListProperty<MenuItem>*, int) -> MenuItem*;

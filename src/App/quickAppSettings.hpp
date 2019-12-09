@@ -10,14 +10,17 @@ namespace quick {
 
         class Settings : public QObject {
             Q_OBJECT
-            Q_PROPERTY(int cursorFlashTime READ getCursorFlashTime CONSTANT);
         private:
             static Qml::Register::Controller<Settings> Register;
             Settings();
+            QStringList m_recentFiles;
         public:
             static Settings* instance;
             static auto Create() -> void;
-            auto getCursorFlashTime() -> int;
+            static auto Init() -> void;
+            static auto ClearRecentFiles() -> void;
+            static auto AddRecentFile(const QString&) -> void;
+            static auto GetRecentFiles() -> QStringList;
         };
     }
 }

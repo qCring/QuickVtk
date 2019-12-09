@@ -48,7 +48,7 @@ namespace quick {
         }
 
         auto Controller::getVersion() -> QString {
-            return Meta::versionString;
+            return Meta::AppVersion;
         }
 
         auto Controller::getTypeList() -> TypeInfo::List* {
@@ -68,7 +68,7 @@ namespace quick {
         }
 
         auto Controller::getMenu() -> Menu* {
-            return Menu::GetInstance();
+            return Menu::instance;
         }
     
         auto Controller::getDocumentController() -> Document::Controller* {

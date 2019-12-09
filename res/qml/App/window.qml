@@ -16,11 +16,7 @@ Window {
 
     MouseArea {
       anchors.fill: parent;
-
-      onClicked: {
-        console.log("root-click");
-        defaultFocus.forceActiveFocus();
-      }
+      onClicked: defaultFocus.forceActiveFocus();
     }
 
     Preview {
@@ -59,12 +55,25 @@ Window {
       anchors.left: parent.left;
       anchors.right: hSplit.left;
 
-      Lib.Label {
-        id: vLabel;
+      Row {
         anchors.left: parent.left;
-        anchors.leftMargin: 12;
         anchors.verticalCenter: parent.verticalCenter;
-        text: "Console"
+        anchors.leftMargin: 8;
+        spacing: 8;
+
+        Lib.Button {
+          id: vLabel;
+          frameless: true
+          anchors.verticalCenter: parent.verticalCenter;
+          icon: icons.fa_terminal;
+          label.text: "Console";
+        }
+
+        /*Lib.Label {
+          id: vLabel;
+          anchors.verticalCenter: parent.verticalCenter;
+          text: "Console"
+        }*/
       }
 
       MouseArea {
@@ -73,10 +82,6 @@ Window {
         drag.axis: Drag.YAxis;
         drag.minimumY: header.height;
         drag.maximumY: root.height - footer.height - parent.height;
-
-        onPressed: {
-          console.log(vSplit.y + mouse.y);
-        }
 
         onReleased: {
           const py = vSplit.y + mouse.y;
@@ -90,11 +95,6 @@ Window {
           }
 
           vSplit.y = vSplit.y;
-        }
-
-        Text {
-          anchors.centerIn: parent;
-          text: vSplit.y
         }
       }
     }

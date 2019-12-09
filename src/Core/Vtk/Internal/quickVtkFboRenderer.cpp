@@ -67,7 +67,7 @@ namespace quick {
         }
 
         auto FboRenderer::onMouseEvent(QMouseEvent* event) -> void {
-            if(this->m_interactor == NULL || event == NULL) {
+            if(this->m_interactor == nullptr || event == nullptr) {
                 return;
             }
 

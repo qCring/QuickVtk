@@ -92,6 +92,8 @@ namespace quick {
             if (this->m_fboRenderer) {
                 this->m_fboRenderer->onMouseEvent(event);
             }
+            
+            this->forceActiveFocus();
         }
 
         auto Viewer::mouseReleaseEvent(QMouseEvent* event) -> void {

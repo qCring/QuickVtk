@@ -3,6 +3,7 @@
 #include "quickAppInstance.hpp"
 #include "quickAppMenuItem.hpp"
 
+#include "quickConsoleController.hpp"
 #include "quickDocumentController.hpp"
 #include "quickDocumentFile.hpp"
 #include "quickEditorController.hpp"
@@ -50,7 +51,12 @@ namespace quick {
             menu_file->add(new MenuItem("Open", "fa_folder_open_o", MenuItem::Action::File_Open));
             menu_file->add(instance->m_recentFiles);
             menu_file->add(new MenuItem("Quit", "fa_power_off", MenuItem::Action::File_Quit));
+            
             menu_edit->add(new MenuItem("Settings", "fa_cog", MenuItem::Action::Edit_Settings));
+            
+            menu_view->add(new MenuItem("Toggle Console", "fa_terminal", MenuItem::Action::View_Console));
+            menu_view->add(new MenuItem("Toggle Context View", MenuItem::Action::View_Context));
+            
             menu_help->add(new MenuItem("About", MenuItem::Action::Help_About));
             menu_help->add(new MenuItem("Website", "fa_globe", MenuItem::Action::Help_Website));
             
@@ -90,6 +96,8 @@ namespace quick {
                 case MenuItem::Action::File_Open_Recent: OnFileOpenRecent(item->getData()); break;
                 case MenuItem::Action::File_Quit: OnFileQuit(); break;
                 case MenuItem::Action::Edit_Settings: OnEditSettings(); break;
+                case MenuItem::Action::View_Console: OnViewConsole(); break;
+                case MenuItem::Action::View_Context: OnViewContext(); break;
                 case MenuItem::Action::Help_Website: OnHelpWebsite(); break;
                 case MenuItem::Action::Help_About: OnHelpAbout(); break;
                 default: break;
@@ -133,6 +141,14 @@ namespace quick {
         
         auto Menu::OnEditSettings() -> void {
             Settings::instance->setVisible(true);
+        }
+    
+        auto Menu::OnViewConsole() -> void {
+            Console::Controller::instance->toggle();
+        }
+        
+        auto Menu::OnViewContext() -> void {
+            
         }
     
         auto Menu::OnHelpAbout() -> void {

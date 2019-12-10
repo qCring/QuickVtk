@@ -36,10 +36,10 @@ namespace quick {
             QScopedValueRollback<bool> roll(instance->m_messageHandled.localData(), true);
             
             switch(type) {
-                case QtMsgType::QtDebugMsg: Console::Controller::GetInstance()->addDebugMsg(msg); break;
-                case QtMsgType::QtInfoMsg: Console::Controller::GetInstance()->addInfoMsg(msg); break;
-                case QtMsgType::QtWarningMsg: Console::Controller::GetInstance()->addWarningMsg(msg); break;
-                default: Console::Controller::GetInstance()->addErrorMsg(msg); break;
+                case QtMsgType::QtDebugMsg: Console::Controller::instance->addDebugMsg(msg); break;
+                case QtMsgType::QtInfoMsg: Console::Controller::instance->addInfoMsg(msg); break;
+                case QtMsgType::QtWarningMsg: Console::Controller::instance->addWarningMsg(msg); break;
+                default: Console::Controller::instance->addErrorMsg(msg); break;
             }
         }
 

@@ -9,14 +9,29 @@ namespace quick {
         Qml::Register::Controller<Controller> Controller::Register;
 
         Controller::Controller() {
+            if (instance != nullptr) {
+                throw std::runtime_error("instance already existing");
+            }
         }
 
         auto Controller::Create() -> void {
             instance = new Controller();
         }
-
-        auto Controller::GetInstance() -> Controller* {
-            return instance;
+    
+        auto Controller::setCollapsed(bool collapsed) -> void {
+            if (this->m_collapsed != collapsed) {
+                this->m_collapsed = collapsed;
+                emit this->collapsedChanged();
+            }
+        }
+    
+        auto Controller::getCollapsed() -> bool {
+            return this->m_collapsed;
+        }
+    
+        auto Controller::toggle() -> void {
+            this->m_collapsed = !this->m_collapsed;
+            emit this->collapsedChanged();
         }
 
         void Controller::clear() {

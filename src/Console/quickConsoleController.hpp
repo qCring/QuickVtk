@@ -13,15 +13,19 @@ namespace quick {
         class Controller : public QObject {
             Q_OBJECT
             Q_PROPERTY(QQmlListProperty<quick::Console::Item> items READ getItemList NOTIFY itemsChanged);
+            Q_PROPERTY(bool collapsed READ getCollapsed WRITE setCollapsed NOTIFY collapsedChanged);
         private:
             static Qml::Register::Controller<Controller> Register;
-            static Controller* instance;
+            bool m_collapsed;
             QList<Item*> m_items;
         private:
             Controller();
         public:
+            static Controller* instance;
             static auto Create() -> void;
-            static auto GetInstance() -> Controller*;
+            auto setCollapsed(bool) -> void;
+            auto getCollapsed() -> bool;
+            auto toggle() -> void;
             auto addInfoMsg(const QString&) -> void;
             auto addDebugMsg(const QString&) -> void;
             auto addWarningMsg(const QString&) -> void;
@@ -33,6 +37,7 @@ namespace quick {
             void clear();
         signals:
             void itemsChanged();
+            void collapsedChanged();
         };
     }
 }

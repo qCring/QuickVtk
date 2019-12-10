@@ -22,7 +22,7 @@ Item  {
       anchors.top: parent.top;
 
       Lib.Button {
-        icon: icons.fa_list;
+        icon: icons.fa_sliders;
         use_toggle: true;
         toggle_on_click: false;
         toggle: focus;

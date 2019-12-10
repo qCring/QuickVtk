@@ -60,7 +60,7 @@ namespace quick {
         }
 
         auto Controller::getConsole() -> Console::Controller* {
-            return Console::Controller::GetInstance();
+            return Console::Controller::instance;
         }
 
         auto Controller::getSettings() -> Settings* {

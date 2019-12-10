@@ -18,6 +18,30 @@ Rectangle {
 
         anchors.fill: parent;
       }
+
+      Item {
+        anchors.fill: parent;
+        visible: container.children.length < 1;
+
+        Column {
+          anchors.centerIn: parent;
+
+          Lib.Icon {
+            anchors.horizontalCenter: parent.horizontalCenter;
+            icon: icons.fa_folder_open_o;
+            font.pointSize: 80;
+            color: "#21252B";
+          }
+
+          Lib.Label {
+            anchors.horizontalCenter: parent.horizontalCenter;
+            text: "Open File"
+            font.pointSize: 25;
+            font.bold: true;
+            color: "#21252B";
+          }
+        }
+      }
     }
 
     Rectangle {

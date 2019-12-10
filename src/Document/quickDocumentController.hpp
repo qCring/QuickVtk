@@ -27,6 +27,7 @@ namespace quick {
             auto openFile(const QString&) -> void;
             auto removeFile(File*) -> void;
             auto selectFile(File*) -> void;
+            auto getFile(const QString&) -> File*;
         public slots:
             void run();
             void preRun();

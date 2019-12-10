@@ -21,6 +21,7 @@ namespace quick {
             auto OnFileOpen() -> void;
             auto OnFileOpenRecent(const QString&) -> void;
             auto OnFileQuit() -> void;
+            auto OnEditSettings() -> void;
             auto OnHelpAbout() -> void;
             auto OnHelpWebsite() -> void;
         public:

@@ -46,5 +46,23 @@ namespace quick {
         auto Settings::GetRecentFiles() -> QStringList {
             return instance->m_recentFiles;
         }
+    
+        auto Settings::setVisible(bool visible) -> void {
+            if (this->m_visible != visible) {
+                this->m_visible = visible;
+                emit this->visibleChanged();
+            }
+        }
+    
+        auto Settings::getVisible() -> bool {
+            return this->m_visible;
+        }
+    
+        void Settings::reset() {
+            this->m_recentFiles.clear();
+            
+            QSettings settings;
+            settings.remove("menu/recent");
+        }
     }
 }

@@ -4,6 +4,7 @@
 #include "quickAppMenuItem.hpp"
 
 #include "quickDocumentController.hpp"
+#include "quickDocumentFile.hpp"
 #include "quickEditorController.hpp"
 #include "quickIO.hpp"
 
@@ -49,7 +50,7 @@ namespace quick {
             menu_file->add(new MenuItem("Open", "fa_folder_open_o", MenuItem::Action::File_Open));
             menu_file->add(instance->m_recentFiles);
             menu_file->add(new MenuItem("Quit", "fa_power_off", MenuItem::Action::File_Quit));
-            
+            menu_edit->add(new MenuItem("Settings", "fa_cog", MenuItem::Action::Edit_Settings));
             menu_help->add(new MenuItem("About", MenuItem::Action::Help_About));
             menu_help->add(new MenuItem("Website", "fa_globe", MenuItem::Action::Help_Website));
             
@@ -88,6 +89,7 @@ namespace quick {
                 case MenuItem::Action::File_Open: OnFileOpen(); break;
                 case MenuItem::Action::File_Open_Recent: OnFileOpenRecent(item->getData()); break;
                 case MenuItem::Action::File_Quit: OnFileQuit(); break;
+                case MenuItem::Action::Edit_Settings: OnEditSettings(); break;
                 case MenuItem::Action::Help_Website: OnHelpWebsite(); break;
                 case MenuItem::Action::Help_About: OnHelpAbout(); break;
                 default: break;
@@ -96,22 +98,30 @@ namespace quick {
     
         auto Menu::OnFileOpen() -> void {
             auto filePath = IO::FromDialog::SelectOpenFileUrl("*.qml");
+            auto file = Document::Controller::instance->getFile(filePath);
             
-            if (IO::FileExists(filePath)) {
+            if (file != nullptr) {
+                file->select();
+            } else if (IO::FileExists(filePath)) {
                 auto menuItem = new MenuItem(filePath, MenuItem::Action::File_Open_Recent);
                 menuItem->setData(filePath);
                 
                 this->m_recentFiles->add(menuItem);
                 Settings::AddRecentFile(filePath);
+                
+                Document::Controller::instance->openFile(filePath);
             }
-            
-            Document::Controller::instance->openFile(filePath);
+            // TODO: handle invalid file urls
         }
     
         auto Menu::OnFileOpenRecent(const QString& path) -> void {
             qDebug() << "Menu::OnFileOpenRecent: " << path;
             
-            if (IO::FileExists(path)) {
+            auto file = Document::Controller::instance->getFile(path);
+            
+            if (file != nullptr) {
+                file->select();
+            } else if (IO::FileExists(path)) {
                 Document::Controller::instance->openFile(path);
                 // TODO: check if this specific file is already opened
             } else {
@@ -120,15 +130,19 @@ namespace quick {
         }
         
         auto Menu::OnFileQuit() -> void {
-            qDebug() << "File Quit";
+            QCoreApplication::quit();
         }
         
+        auto Menu::OnEditSettings() -> void {
+            Settings::instance->setVisible(true);
+        }
+    
         auto Menu::OnHelpAbout() -> void {
-            qDebug() << "Help About";
+            qDebug() << "Help > About";
         }
         
         auto Menu::OnHelpWebsite() -> void {
-            qDebug() << "Help Website";
+            qDebug() << "Help > Website";
         }
     }
 }

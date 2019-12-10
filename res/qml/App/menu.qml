@@ -26,6 +26,7 @@ Row {
 
       MouseArea {
         anchors.fill: parent
+        enabled: modelData.items.length > 0;
 
         onClicked: {
           item.focus = !item.focus;

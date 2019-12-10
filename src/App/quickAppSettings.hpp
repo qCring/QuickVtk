@@ -10,8 +10,10 @@ namespace quick {
 
         class Settings : public QObject {
             Q_OBJECT
+            Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged);
         private:
             static Qml::Register::Controller<Settings> Register;
+            bool m_visible;
             Settings();
             QStringList m_recentFiles;
         public:
@@ -21,6 +23,13 @@ namespace quick {
             static auto ClearRecentFiles() -> void;
             static auto AddRecentFile(const QString&) -> void;
             static auto GetRecentFiles() -> QStringList;
+        public:
+            auto setVisible(bool) -> void;
+            auto getVisible() -> bool;
+        public slots:
+            void reset();
+        signals:
+            void visibleChanged();
         };
     }
 }

@@ -13,3 +13,4 @@ Errors 1.0 errors.qml
 ErrorItem 1.0 erroritem.qml
 CodeView 1.0 codeview.qml
 Error 1.0 error.qml
+Settings 1.0 settings.qml

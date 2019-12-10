@@ -18,6 +18,7 @@ namespace quick {
                 File_Open,
                 File_Open_Recent,
                 File_Quit,
+                Edit_Settings,
                 Help_About,
                 Help_Website
             };

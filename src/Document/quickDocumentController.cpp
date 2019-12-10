@@ -65,6 +65,16 @@ namespace quick {
             }
         }
     
+        auto Controller::getFile(const QString& filePath) -> File* {
+            for (const auto& file : this->m_files) {
+                if (file->getPath().compare(filePath) == 0) {
+                    return file;
+                }
+            }
+            
+            return nullptr;
+        }
+    
         auto Controller::removeFile(File* file) -> void {
             this->m_files.removeOne(file);
             

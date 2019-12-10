@@ -68,12 +68,6 @@ Window {
           icon: icons.fa_terminal;
           label.text: "Console";
         }
-
-        /*Lib.Label {
-          id: vLabel;
-          anchors.verticalCenter: parent.verticalCenter;
-          text: "Console"
-        }*/
       }
 
       MouseArea {
@@ -112,6 +106,13 @@ Window {
       anchors.top: vSplit.bottom;
       anchors.left: parent.left;
       anchors.right: context.left;
+      anchors.bottom: footer.top;
+    }
+
+    Settings {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.top: header.bottom;
       anchors.bottom: footer.top;
     }
 

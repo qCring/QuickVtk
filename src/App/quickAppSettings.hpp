@@ -13,7 +13,7 @@ namespace quick {
             Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged);
         private:
             static Qml::Register::Controller<Settings> Register;
-            bool m_visible;
+            bool m_visible = false;
             Settings();
             QStringList m_recentFiles;
         public:

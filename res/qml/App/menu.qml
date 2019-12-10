@@ -104,6 +104,7 @@ Row {
 
                 onExited: {
                   if (model.items.length > 0) {
+                    openTimer.stop();
                     inner.hide();
                   }
                 }
@@ -139,7 +140,7 @@ Row {
                 width: innerCol.width;
 
                 Timer {
-                  id: innerTimer;
+                  id: hideTimer;
                   interval: 1000;
 
                   onTriggered: {
@@ -148,11 +149,11 @@ Row {
                 }
 
                 function retain() {
-                    innerTimer.running = false;
+                  hideTimer.running = false;
                 }
 
                 function hide() {
-                    innerTimer.restart();
+                  hideTimer.restart();
                 }
 
                 color: "#cc111111"

@@ -25,9 +25,9 @@ namespace quick {
         private:
             friend class FboRenderer;
             QList<quick::Vtk::Object*> m_input;
-            bool m_initialized;
-            bool m_hoverEnabled;
-            bool m_mouseEnabled;
+            bool m_initialized = false;
+            bool m_hoverEnabled = false;
+            bool m_mouseEnabled = false;
             vtkSmartPointer<vtkRenderer> m_renderer;
         public:
             static Qml::Register::Class<Viewer> Register;

@@ -16,7 +16,7 @@ Rectangle {
       Rectangle {
         anchors.bottom: parent.bottom;
         height: content.height + 10;
-        width: content.width + 12;
+        width: content.width + 20;
         color: "#181A1F"
         border.color: "#282C34";
         radius: 4;
@@ -36,11 +36,8 @@ Rectangle {
         Row {
           id: content;
 
-          spacing: 4;
-          anchors.top: parent.top;
-          anchors.left: parent.left;
-          anchors.topMargin: 4;
-          anchors.leftMargin: 4;
+          spacing: 10;
+          anchors.centerIn: parent;
 
           Lib.Label {
             id: label;
@@ -48,12 +45,12 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
 
             text: model.title;
-            color: model.selected ? "#2B68A4" : ma.containsMouse ? "#fff" : "#a0a0a0";
+            color: model.selected ? "#fff" : ma.containsMouse ? "#a0a0a0" : "#888";
           }
 
           Lib.Icon {
             icon: icons.fa_times;
-            color: close_ma.containsMouse ? "#fff" : "#a0a0a0";
+            color: close_ma.containsMouse ? "#fff" : "#888";
             anchors.verticalCenter: parent.verticalCenter;
 
             MouseArea {

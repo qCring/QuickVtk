@@ -29,7 +29,7 @@ namespace quick {
             QString m_type;
             QString m_name;
             QString m_prefix;
-            bool m_isWrapper;
+            bool m_isWrapper = false;
         private:
             static auto GetEnums() -> QStringList&;
             static auto PrettifyType(QString) -> QString;

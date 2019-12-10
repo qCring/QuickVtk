@@ -24,21 +24,44 @@ Rectangle {
         visible: container.children.length < 1;
 
         Column {
+          id: placeholder;
+
           anchors.centerIn: parent;
+          spacing: 8;
 
           Lib.Icon {
             anchors.horizontalCenter: parent.horizontalCenter;
             icon: icons.fa_folder_open_o;
-            font.pointSize: 80;
-            color: "#21252B";
+            font.pointSize: 35;
+            color: "#31353B";
           }
 
-          Lib.Label {
+          Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            text: "Open File"
-            font.pointSize: 25;
-            font.bold: true;
-            color: "#21252B";
+            property string color: "#31353B";
+            property int textSize: 20;
+            spacing: 4;
+
+            Lib.Label {
+              anchors.verticalCenter: parent.verticalCenter;
+              text: "Open .qml Files from the Menu via File "
+              font.pointSize: parent.textSize;
+              color: parent.color;
+            }
+
+            Lib.Icon {
+              anchors.verticalCenter: parent.verticalCenter;
+              icon: icons.fa_angle_right;
+              color: parent.color;
+              font.pointSize: parent.textSize;
+            }
+
+            Lib.Label {
+              anchors.verticalCenter: parent.verticalCenter;
+              text: "Open..."
+              font.pointSize: parent.textSize;
+              color: parent.color;
+            }
           }
         }
       }

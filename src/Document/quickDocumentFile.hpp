@@ -22,8 +22,8 @@ namespace quick {
             QString m_path;
             QString m_title;
             QString m_content;
-            bool m_modified;
-            bool m_selected;
+            bool m_modified = false;
+            bool m_selected = false;
             QObject* m_component = nullptr;
             QFileSystemWatcher* m_fileWatcher = nullptr;
             QList<Error*> m_errors;

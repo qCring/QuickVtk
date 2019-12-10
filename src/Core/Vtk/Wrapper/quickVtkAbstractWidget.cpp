@@ -13,8 +13,8 @@ namespace quick {
             return this->m_vtkObject;
         }
 
-        auto AbstractWidget::setEnabled(bool visible) -> void {
-            this->m_vtkObject->SetEnabled(visible);
+        auto AbstractWidget::setEnabled(bool enabled) -> void {
+            this->m_vtkObject->SetEnabled(enabled);
             emit this->enabledChanged();
         }
 

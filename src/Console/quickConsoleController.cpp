@@ -29,7 +29,7 @@ namespace quick {
             return this->m_collapsed;
         }
     
-        auto Controller::toggle() -> void {
+        void Controller::toggle() {
             this->m_collapsed = !this->m_collapsed;
             emit this->collapsedChanged();
         }

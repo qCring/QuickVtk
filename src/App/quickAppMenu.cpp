@@ -48,7 +48,7 @@ namespace quick {
                 instance->m_recentFiles->add(menuItem);
             }
             
-            menu_file->add(new MenuItem("Open", "fa_folder_open_o", MenuItem::Action::File_Open));
+            menu_file->add(new MenuItem("Open...", "fa_folder_open_o", MenuItem::Action::File_Open));
             menu_file->add(instance->m_recentFiles);
             menu_file->add(new MenuItem("Close", MenuItem::Action::File_Close));
             menu_file->add(new MenuItem("Quit", "fa_power_off", MenuItem::Action::File_Quit));

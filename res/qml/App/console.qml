@@ -5,39 +5,52 @@ Rectangle {
 
   color: "#181A1F"
 
-  Rectangle {
+  Item {
     id: header;
 
-    anchors.top: parent.top;
     anchors.left: parent.left;
     anchors.right: parent.right;
+    anchors.top: parent.top;
 
-    height: label.height + 8;
-    color: "#21252B"
+    height: label_time.height + 8;
+
+    Rectangle {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.bottom: parent.bottom;
+
+      height: 1;
+      color: "#21252B"
+    }
 
     Lib.Label {
-      id: label;
+      id: label_type;
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.left: parent.left;
       anchors.leftMargin: 8;
 
-      text: "Output"
+      text: "Type"
     }
 
-    Row {
+    Lib.Label {
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.left: label_type.right;
+      anchors.right: label_time.left;
+      anchors.rightMargin: 8;
+      anchors.leftMargin: 8;
+
+      text: "Message"
+    }
+
+    Lib.Icon {
+      id: label_time;
+
       anchors.verticalCenter: parent.verticalCenter;
       anchors.right: parent.right;
       anchors.rightMargin: 8;
 
-      Lib.Button {
-        frameless: true;
-        icon: icons.fa_trash;
-
-        onClicked: {
-          Controllers.console.clear();
-        }
-      }
+      icon: icons.fa_clock_o;
     }
   }
 
@@ -57,20 +70,24 @@ Rectangle {
 
       color: index % 2 ? "#1a1c22" : "#181A1F";
 
-      Lib.Icon {
-        id: ic;
-        icon: modelData.type == 0 ? icons.fa_info_circle : modelData.type > 1 ? icons.fa_exclamation_triangle : "";
-        width: 20;
-        color: modelData.type == 2 ? "#ffff00" : modelData.type == 3 ? "#ff0000" : "#777";
-        anchors.top: parent.top;
+      Item {
+        width: label_type.width + 16;
+        anchors.verticalCenter: time.verticalCenter;
+
+        Lib.Icon {
+          id: ic;
+          icon: modelData.type == 0 ? icons.fa_info_circle : modelData.type > 1 ? icons.fa_exclamation_triangle : "";
+          color: modelData.type == 2 ? "#ffff00" : modelData.type == 3 ? "#ff0000" : "#777";
+          anchors.centerIn: parent;
+        }
       }
 
       Lib.Label {
         id: label;
         text: modelData.message;
         anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: ic.right;
-        anchors.leftMargin: 8;
+        anchors.left: parent.left;
+        anchors.leftMargin: label_type.width + 16;
         anchors.right: time.left;
         anchors.rightMargin: 8;
       }
@@ -78,7 +95,9 @@ Rectangle {
       Lib.Label {
         id: time;
         text: modelData.time;
+
         anchors.top: parent.top;
+        anchors.topMargin: 1;
         anchors.right: parent.right;
         anchors.rightMargin: 8;
       }

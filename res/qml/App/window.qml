@@ -48,12 +48,56 @@ Window {
     Rectangle {
       id: vSplit;
 
-      y: parent.height - 300;
       height: vLabel.height + 8;
-      color: "#282C34"
+      color: "#21252B"
 
       anchors.left: parent.left;
       anchors.right: hSplit.left;
+      anchors.bottom: footer.top;
+      anchors.bottomMargin: Controllers.console.collapsed ? 0 : 200;
+
+      Rectangle {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: parent.top;
+        height: 1;
+        color: "#282C34"
+      }
+
+      Rectangle {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.bottom: parent.bottom;
+        height: 1;
+        color: "#282C34"
+      }
+
+      MouseArea {
+        anchors.fill: parent;
+        //drag.target: parent;
+        //drag.axis: Drag.YAxis;
+        //drag.minimumY: header.height;
+        //drag.maximumY: root.height - footer.height - parent.height;
+/*
+        onReleased: {
+          const py = vSplit.y + mouse.y;
+          var case_indicator = 0;
+
+          if (py < root.height / 2) {
+            vSplit.anchors.top = header.bottom;
+            vSplit.anchors.bottom = undefined;
+            case_indicator = 1;
+          } else {
+            vSplit.anchors.top = undefined;
+            vSplit.anchors.bottom = footer.top;
+            case_indicator = 2;
+          }
+
+          console.log("py: " + py + " case: " + case_indicator);
+
+          vSplit.y = vSplit.y;
+        }*/
+      }
 
       Row {
         anchors.left: parent.left;
@@ -67,28 +111,36 @@ Window {
           anchors.verticalCenter: parent.verticalCenter;
           icon: icons.fa_terminal;
           label.text: "Console";
+          onClicked: Controllers.console.toggle();
+        }
+
+        Rectangle {
+          color: "#181A1F"
+          width: label_logs.width + 12;
+          height: label_logs.height + 2;
+          anchors.verticalCenter: parent.verticalCenter;
+          radius: 4;
+
+          Lib.Label {
+            id: label_logs;
+            anchors.centerIn: parent;
+            text: Controllers.console.items.length;
+            font.pointSize: 10;
+          }
         }
       }
 
-      MouseArea {
-        anchors.fill: parent;
-        drag.target: parent;
-        drag.axis: Drag.YAxis;
-        drag.minimumY: header.height;
-        drag.maximumY: root.height - footer.height - parent.height;
+      Row {
+        anchors.right: parent.right;
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.rightMargin: 8;
+        spacing: 8;
 
-        onReleased: {
-          const py = vSplit.y + mouse.y;
-
-          if (py < root.height / 2) {
-            vSplit.anchors.top = root.top;
-            vSplit.anchors.bottom = undefined;
-          } else {
-            vSplit.anchors.top = undefined;
-            vSplit.anchors.bottom = root.bottom;
-          }
-
-          vSplit.y = vSplit.y;
+        Lib.Button {
+          anchors.verticalCenter: parent.verticalCenter;
+          frameless: true;
+          icon: icons.fa_trash;
+          onClicked: Controllers.console.clear();
         }
       }
     }

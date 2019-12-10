@@ -16,7 +16,7 @@ namespace quick {
             Q_PROPERTY(bool collapsed READ getCollapsed WRITE setCollapsed NOTIFY collapsedChanged);
         private:
             static Qml::Register::Controller<Controller> Register;
-            bool m_collapsed;
+            bool m_collapsed = true;
             QList<Item*> m_items;
         private:
             Controller();
@@ -25,7 +25,6 @@ namespace quick {
             static auto Create() -> void;
             auto setCollapsed(bool) -> void;
             auto getCollapsed() -> bool;
-            auto toggle() -> void;
             auto addInfoMsg(const QString&) -> void;
             auto addDebugMsg(const QString&) -> void;
             auto addWarningMsg(const QString&) -> void;
@@ -35,6 +34,7 @@ namespace quick {
             static auto itemAt(QQmlListProperty<Item>*, int) -> Item*;
         public slots:
             void clear();
+            void toggle();
         signals:
             void itemsChanged();
             void collapsedChanged();

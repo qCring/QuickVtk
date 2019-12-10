@@ -43,6 +43,7 @@ namespace quick {
             auto getIcon() -> QString;
             auto getItems() -> QQmlListProperty<MenuItem>;
             auto add(MenuItem*) -> void;
+            auto removeItems() -> void;
         signals:
             void nameChanged();
             void iconChanged();

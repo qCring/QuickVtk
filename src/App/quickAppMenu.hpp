@@ -25,6 +25,7 @@ namespace quick {
             auto OnHelpAbout() -> void;
             auto OnHelpWebsite() -> void;
         public:
+            auto clearRecentFiles() -> void;
             static Menu* instance;
             static auto Init() -> void;
             static auto Create() -> void;

@@ -30,7 +30,7 @@ Rectangle  {
       anchors.fill: parent;
 
       Lib.Button {
-        label.text: "Reset"
+        label.text: "Clear Recent File History"
         onClicked: Controllers.settings.reset();
       }
     }

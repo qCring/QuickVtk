@@ -50,7 +50,6 @@ Rectangle {
 
     function createComponent() {
       const file = Controllers.document.file;
-      console.log("component.createComponent: file: " + file);
 
       if (file == undefined) {
         console.error("unable to create component: Controllers.document.file is undefined");
@@ -69,7 +68,6 @@ Rectangle {
         var errors = exc.qmlErrors;
 
         if (errors == undefined) {
-          console.log("msg: " + exc.message);
           file.addError(0, 0, exc.message);
         } else {
           for (var i = 0; i < errors.length; i++) {
@@ -85,14 +83,12 @@ Rectangle {
 
     function destroyComponent(file) {
       if (file) {
-        console.log("component.destroyComponent: " + file.component);
         file.component.destroy();
       }
     }
 
     function selectComponent(file) {
       if (file) {
-        console.log("content: selectComponent: " + file.component);
 
         for (var i = 0; i < container.children.length; i++) {
           const child = container.children[i];

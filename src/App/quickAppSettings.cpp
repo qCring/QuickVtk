@@ -1,4 +1,5 @@
 #include "quickAppSettings.hpp"
+#include "quickAppMenu.hpp"
 
 #include <QApplication>
 
@@ -29,15 +30,7 @@ namespace quick {
             }
         }
     
-        auto Settings::ClearRecentFiles() -> void {
-            QSettings settings;
-            settings.remove("menu/recent");
-            instance->m_recentFiles.clear();
-        }
-    
         auto Settings::AddRecentFile(const QString& filePath) -> void {
-            qDebug() << "Settings::AddRecentFile: " << filePath;
-            
             instance->m_recentFiles.append(filePath);
             QSettings settings;
             settings.setValue("menu/recent", instance->m_recentFiles);
@@ -59,10 +52,10 @@ namespace quick {
         }
     
         void Settings::reset() {
-            this->m_recentFiles.clear();
-            
             QSettings settings;
             settings.remove("menu/recent");
+            instance->m_recentFiles.clear();
+            Menu::instance->clearRecentFiles();
         }
     }
 }

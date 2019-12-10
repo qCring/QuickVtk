@@ -64,5 +64,10 @@ namespace quick {
         auto MenuItem::getData() -> QString {
             return this->m_data;
         }
+    
+        auto MenuItem::removeItems() -> void {
+            this->m_items.clear();
+            emit this->itemsChanged();
+        }
     }
 }

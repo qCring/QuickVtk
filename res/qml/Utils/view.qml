@@ -10,14 +10,14 @@ Item {
   anchors.right: parent ? parent.right : undefined;
   anchors.top: parent ? parent.top : undefined;
   anchors.margins: 8;
+
   property var file: null;
   property bool selected: false;
-
-  height: column.height;
-
-  default property alias content: contentColumn.children;
   property bool expanded: true;
   property alias title: label.text;
+  default property alias content: contentColumn.children;
+
+  height: column.height;
 
   Column {
     id: column;
@@ -82,8 +82,6 @@ Item {
   }
 
   onSelectedChanged: {
-    console.log("uv.onSelectedChanged - uv: " + this + " uv.selected: " + this.selected);
-
     if (selected) {
       root.visible = root.enabled = true;
       root.parent = utilsView;
@@ -94,19 +92,13 @@ Item {
   }
 
   onFileChanged: {
-    console.log("uv.onFileChanged - uv: " + this + " uv.file: " + this.file);
-
     if (file) {
-      console.log("bind..");
       root.selected = Qt.binding (function() { return file.selected; });
     }
   }
 
   Component.onCompleted: {
-
     this.file = Controllers.document.file;
-    console.log("uv.onCompleted - uv: " + this + " uv.file: " + this.file);
-
     root.parent = utilsView;
   }
 }

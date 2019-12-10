@@ -115,8 +115,6 @@ namespace quick {
         }
     
         auto Menu::OnFileOpenRecent(const QString& path) -> void {
-            qDebug() << "Menu::OnFileOpenRecent: " << path;
-            
             auto file = Document::Controller::instance->getFile(path);
             
             if (file != nullptr) {
@@ -143,6 +141,10 @@ namespace quick {
         
         auto Menu::OnHelpWebsite() -> void {
             qDebug() << "Help > Website";
+        }
+    
+        auto Menu::clearRecentFiles() -> void {
+            this->m_recentFiles->removeItems();
         }
     }
 }

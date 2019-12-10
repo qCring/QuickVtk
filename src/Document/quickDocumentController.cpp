@@ -75,18 +75,18 @@ namespace quick {
             return nullptr;
         }
     
-        auto Controller::removeFile(File* file) -> void {
+        auto Controller::closeFile(File* file) -> void {
             this->m_files.removeOne(file);
             
+            emit this->destroyComponent(file);
+            emit this->filesChanged();
+            
             if (this->m_files.count() > 0) {
-                this->m_file = this->m_files.at(0);
+                this->setFile(this->m_files.at(0));
             } else {
                 this->m_file = nullptr;
+                emit this->fileChanged();
             }
-                
-            emit this->filesChanged();
-            emit this->fileChanged();
-            emit this->destroyComponent(file);
         }
     
         auto Controller::selectFile(File* file) -> void {

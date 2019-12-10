@@ -105,7 +105,7 @@ namespace quick {
         }
     
         auto File::close() -> void {
-            Controller::instance->removeFile(this);
+            Controller::instance->closeFile(this);
         }
     
         auto File::select() -> void {

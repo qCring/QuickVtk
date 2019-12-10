@@ -69,5 +69,15 @@ namespace quick {
             this->m_items.clear();
             emit this->itemsChanged();
         }
+    
+        auto MenuItem::removeItem(const QString& title) -> void {
+            for (const auto& item : this->m_items) {
+                if (item->getName().compare(title) == 0) {
+                    this->m_items.removeOne(item);
+                    emit this->itemsChanged();
+                    break;
+                }
+            }
+        }
     }
 }

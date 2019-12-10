@@ -188,8 +188,8 @@ Row {
                         hoverEnabled: true;
 
                         onClicked: {
-                          Controllers.menu.select(modelData);
                           item.focus = false;
+                          Controllers.menu.select(modelData);
                         }
 
                         onExited: {

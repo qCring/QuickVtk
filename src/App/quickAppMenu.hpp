@@ -20,6 +20,7 @@ namespace quick {
             Menu();
             auto OnFileOpen() -> void;
             auto OnFileOpenRecent(const QString&) -> void;
+            auto OnFileClose() -> void;
             auto OnFileQuit() -> void;
             auto OnEditSettings() -> void;
             auto OnViewConsole() -> void;

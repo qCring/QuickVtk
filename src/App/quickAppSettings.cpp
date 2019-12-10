@@ -36,6 +36,12 @@ namespace quick {
             settings.setValue("menu/recent", instance->m_recentFiles);
         }
     
+        auto Settings::RemoveRecentFile(const QString& filePath) -> void {
+            instance->m_recentFiles.removeOne(filePath);
+            QSettings settings;
+            settings.setValue("menu/recent", instance->m_recentFiles);
+        }
+    
         auto Settings::GetRecentFiles() -> QStringList {
             return instance->m_recentFiles;
         }

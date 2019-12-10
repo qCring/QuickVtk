@@ -21,6 +21,7 @@ namespace quick {
             static auto Create() -> void;
             static auto Init() -> void;
             static auto AddRecentFile(const QString&) -> void;
+            static auto RemoveRecentFile(const QString&) -> void;
             static auto GetRecentFiles() -> QStringList;
         public:
             auto setVisible(bool) -> void;

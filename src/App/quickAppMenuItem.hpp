@@ -17,6 +17,7 @@ namespace quick {
                 None,
                 File_Open,
                 File_Open_Recent,
+                File_Close,
                 File_Quit,
                 Edit_Settings,
                 View_Console,
@@ -46,6 +47,7 @@ namespace quick {
             auto getItems() -> QQmlListProperty<MenuItem>;
             auto add(MenuItem*) -> void;
             auto removeItems() -> void;
+            auto removeItem(const QString&) -> void;
         signals:
             void nameChanged();
             void iconChanged();

@@ -25,7 +25,7 @@ namespace quick {
             static auto fileCount(QQmlListProperty<File>*) -> int;
             static auto fileAt(QQmlListProperty<File>*, int) -> File*;
             auto openFile(const QString&) -> void;
-            auto removeFile(File*) -> void;
+            auto closeFile(File*) -> void;
             auto selectFile(File*) -> void;
             auto getFile(const QString&) -> File*;
         public slots:

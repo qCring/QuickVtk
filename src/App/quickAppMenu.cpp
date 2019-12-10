@@ -50,6 +50,7 @@ namespace quick {
             
             menu_file->add(new MenuItem("Open", "fa_folder_open_o", MenuItem::Action::File_Open));
             menu_file->add(instance->m_recentFiles);
+            menu_file->add(new MenuItem("Close", MenuItem::Action::File_Close));
             menu_file->add(new MenuItem("Quit", "fa_power_off", MenuItem::Action::File_Quit));
             
             menu_edit->add(new MenuItem("Settings", "fa_cog", MenuItem::Action::Edit_Settings));
@@ -94,6 +95,7 @@ namespace quick {
             switch (item->action) {
                 case MenuItem::Action::File_Open: OnFileOpen(); break;
                 case MenuItem::Action::File_Open_Recent: OnFileOpenRecent(item->getData()); break;
+                case MenuItem::Action::File_Close: OnFileClose(); break;
                 case MenuItem::Action::File_Quit: OnFileQuit(); break;
                 case MenuItem::Action::Edit_Settings: OnEditSettings(); break;
                 case MenuItem::Action::View_Console: OnViewConsole(); break;
@@ -129,9 +131,17 @@ namespace quick {
                 file->select();
             } else if (IO::FileExists(path)) {
                 Document::Controller::instance->openFile(path);
-                // TODO: check if this specific file is already opened
             } else {
-                // TODO: remove non-existing file from recent files list
+                this->m_recentFiles->removeItem(path);
+                Settings::RemoveRecentFile(path);
+            }
+        }
+    
+        auto Menu::OnFileClose() -> void {
+            auto file = Document::Controller::instance->getFile();
+            
+            if (file != nullptr) {
+                file->close();
             }
         }
         

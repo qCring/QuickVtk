@@ -5,10 +5,10 @@ namespace quick {
 
         Qml::Register::Type<Item> Item::Register;
     
-        Item::Item(const QString& name, Action action) : m_name(name), action(action) {
+        Item::Item(const QString& name, Id id) : m_name(name), id(id) {
         }
     
-        Item::Item(const QString& name, const QString& icon, Action action) : m_name(name), m_icon(icon), action(action) {
+        Item::Item(const QString& name, const QString& icon, Id id) : m_name(name), m_icon(icon), id(id) {
         }
 
         auto Item::add(Item* item) -> void {

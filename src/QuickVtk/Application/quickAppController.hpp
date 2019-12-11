@@ -22,10 +22,13 @@ namespace quick {
         class Controller;
     }
 
+    namespace Menu {
+        class Controller;
+    }
+
     namespace App {
 
         class Settings;
-        class Menu;
 
         class Controller : public QObject {
             Q_OBJECT
@@ -37,7 +40,7 @@ namespace quick {
             Q_PROPERTY(quick::Document::Controller* document READ getDocumentController CONSTANT);
             Q_PROPERTY(quick::Editor::Controller* editor READ getEditor CONSTANT);
             Q_PROPERTY(quick::Console::Controller* console READ getConsole CONSTANT);
-            Q_PROPERTY(quick::App::Menu* menu READ getMenu CONSTANT);
+            Q_PROPERTY(quick::Menu::Controller* menu READ getMenu CONSTANT);
         private:
             bool m_showList = false;
             bool m_expanded = false;
@@ -56,7 +59,7 @@ namespace quick {
             auto getEditor() -> Editor::Controller*;
             auto getSettings() -> Settings*;
             auto getConsole() -> Console::Controller*;
-            auto getMenu() -> Menu*;
+            auto getMenu() -> Menu::Controller*;
             auto getDocumentController() -> Document::Controller*;
         signals:
             void expandedChanged();

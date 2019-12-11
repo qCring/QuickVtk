@@ -1,7 +1,5 @@
 #include "quickAppSettings.hpp"
-#include "quickAppMenu.hpp"
-
-#include <QApplication>
+#include "quickMenuController.hpp"
 
 namespace quick {
 
@@ -61,7 +59,7 @@ namespace quick {
             QSettings settings;
             settings.remove("menu/recent");
             instance->m_recentFiles.clear();
-            Menu::instance->clearRecentFiles();
+            Menu::Controller::instance->clearRecentFiles();
         }
     }
 }

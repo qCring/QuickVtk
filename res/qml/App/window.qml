@@ -74,6 +74,8 @@ Window {
 
       MouseArea {
         anchors.fill: parent;
+
+        onDoubleClicked: Controllers.console.toggle();
         //drag.target: parent;
         //drag.axis: Drag.YAxis;
         //drag.minimumY: header.height;

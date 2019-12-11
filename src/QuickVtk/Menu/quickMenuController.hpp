@@ -6,18 +6,18 @@
 
 namespace quick {
 
-    namespace App {
+    namespace Menu {
 
-        class MenuItem;
+        class Item;
     
-        class Menu : public QObject {
+        class Controller : public QObject {
             Q_OBJECT
-            Q_PROPERTY(QQmlListProperty<quick::App::MenuItem> items READ getItemList CONSTANT);
+            Q_PROPERTY(QQmlListProperty<quick::Menu::Item> items READ getItemList CONSTANT);
         private:
-            QList<MenuItem*> m_items;
-            static Qml::Register::Controller<Menu> Register;
-            MenuItem* m_recentFiles;
-            Menu();
+            QList<Item*> m_items;
+            static Qml::Register::Controller<Controller> Register;
+            Item* m_recentFiles;
+            Controller();
             auto OnFileOpen() -> void;
             auto OnFileOpenRecent(const QString&) -> void;
             auto OnFileClose() -> void;
@@ -29,14 +29,14 @@ namespace quick {
             auto OnHelpWebsite() -> void;
         public:
             auto clearRecentFiles() -> void;
-            static Menu* instance;
+            static Controller* instance;
             static auto Init() -> void;
             static auto Create() -> void;
-            auto getItemList() -> QQmlListProperty<MenuItem>;
-            static auto itemCount(QQmlListProperty<MenuItem>*) -> int;
-            static auto itemAt(QQmlListProperty<MenuItem>*, int) -> MenuItem*;
+            auto getItemList() -> QQmlListProperty<Item>;
+            static auto itemCount(QQmlListProperty<Item>*) -> int;
+            static auto itemAt(QQmlListProperty<Item>*, int) -> Item*;
         public slots:
-            void select(quick::App::MenuItem*);
+            void select(quick::Menu::Item*);
         };
     }
 }

@@ -1,7 +1,7 @@
 #include "quickAppInstance.hpp"
 #include "quickAppSettings.hpp"
 #include "quickAppController.hpp"
-#include "quickAppMenu.hpp"
+#include "quickMenuController.hpp"
 
 #include "quickIO.hpp"
 #include "meta_quickvtk.hpp"
@@ -52,7 +52,7 @@ namespace quick {
             Qml::RegisterTypes();
             
             Settings::Init();
-            Menu::Init();
+            Menu::Controller::Init();
 
             auto path = QDir(QGuiApplication::applicationDirPath());
 

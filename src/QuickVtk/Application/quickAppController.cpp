@@ -8,7 +8,7 @@
 #include "quickDocumentController.hpp"
 #include "quickAppSettings.hpp"
 #include "quickConsoleController.hpp"
-#include "quickAppMenu.hpp"
+#include "quickMenuController.hpp"
 
 namespace quick {
     namespace App {
@@ -67,8 +67,8 @@ namespace quick {
             return Settings::instance;
         }
 
-        auto Controller::getMenu() -> Menu* {
-            return Menu::instance;
+        auto Controller::getMenu() -> Menu::Controller* {
+            return Menu::Controller::instance;
         }
     
         auto Controller::getDocumentController() -> Document::Controller* {

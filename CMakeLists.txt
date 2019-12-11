@@ -6,6 +6,9 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake;")
 include(Functions)
 
 set(PROJECT_NAME "QuickVtk")
+set(TARGET_APPLICATION "QuickVtk")
+set(TARGET_CORE "QuickVtk-Core")
+set(TARGET_DOCS "QuickVtk-Docs")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -97,27 +100,27 @@ include(${VTK_USE_FILE})
 
 # sources
 # ******************************************************************************
-AddApplicationSources("${SOURCE_DIR}/App" "App" list_app_src)
-AddApplicationSources("${SOURCE_DIR}/Console" "Console" list_app_src)
-AddApplicationSources("${SOURCE_DIR}/Document" "Document" list_app_src)
-AddApplicationSources("${SOURCE_DIR}/Editor" "Editor" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Application" "Application" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Console" "Console" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Document" "Document" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Editor" "Editor" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Menu" "Menu" list_app_src)
 
-AddCoreSources("${SOURCE_DIR}/Core/Math" "Math" list_core_src list_core_hdr)
-AddCoreSources("${SOURCE_DIR}/Core/SampleData" "SampleData" list_core_src list_core_hdr)
-AddCoreSources("${SOURCE_DIR}/Core/TypeInfo" "TypeInfo" list_core_src list_core_hdr)
-AddCoreSources("${SOURCE_DIR}/Core/Utils" "Utils" list_core_src list_core_hdr)
-AddCoreSources("${SOURCE_DIR}/Core/Vtk" "Vtk" list_core_src list_core_hdr)
-AddCoreSources("${SOURCE_DIR}/Core/Vtk/Internal" "Vtk\\Internal" list_core_src list_core_hdr)
-AddCoreSources("${SOURCE_DIR}/Core/Vtk/Wrapper" "Vtk\\Wrapper" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Math" "Math" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/SampleData" "SampleData" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/TypeInfo" "TypeInfo" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Utils" "Utils" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Vtk" "Vtk" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Vtk/Internal" "Vtk\\Internal" list_core_src list_core_hdr)
+AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Vtk/Wrapper" "Vtk\\Wrapper" list_core_src list_core_hdr)
 
 #configure directories
-set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/Core")
+set (LIBRARY_MODULE_PATH "${PROJECT_SOURCE_DIR}/${TARGET_CORE}")
 
 #setup library
 # ******************************************************************************
-set (QUICKVTK_CORE_NAME "${PROJECT_NAME}Core")
-add_library (${QUICKVTK_CORE_NAME} SHARED ${list_core_src} ${list_core_hdr})
-set_target_properties(${QUICKVTK_CORE_NAME} PROPERTIES PUBLIC_HEADER "${list_core_hdr}")
+add_library (${TARGET_CORE} SHARED ${list_core_src} ${list_core_hdr})
+set_target_properties(${TARGET_CORE} PROPERTIES PUBLIC_HEADER "${list_core_hdr}")
 
 set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
 if(UNIX AND NOT APPLE)
@@ -125,7 +128,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # link
-target_link_libraries(${QUICKVTK_CORE_NAME} ${LINK_LIBRARIES})
+target_link_libraries(${TARGET_CORE} ${LINK_LIBRARIES})
 
 
 # setup target
@@ -160,16 +163,15 @@ endif()
 
 # setup api-docs generator target
 # ******************************************************************************
-set(API_DOCS_TARGET "API-Docs")
-add_executable(${API_DOCS_TARGET}
-  "${SOURCE_DIR}/API-Docs/main.cpp"
-  "${SOURCE_DIR}/API-Docs/APIGenerator.hpp"
-  "${SOURCE_DIR}/API-Docs/APIGenerator.cpp"
+add_executable(${TARGET_DOCS}
+  "${SOURCE_DIR}/${TARGET_DOCS}/main.cpp"
+  "${SOURCE_DIR}/${TARGET_DOCS}/APIGenerator.hpp"
+  "${SOURCE_DIR}/${TARGET_DOCS}/APIGenerator.cpp"
 )
 
-target_link_libraries(${API_DOCS_TARGET} ${LINK_LIBRARIES} ${QUICKVTK_CORE_NAME})
-target_include_directories(${API_DOCS_TARGET} PRIVATE ${list_core_hdr})
-target_include_directories(${API_DOCS_TARGET} PUBLIC ${BINARY_DIR})
+target_link_libraries(${TARGET_DOCS} ${LINK_LIBRARIES} ${TARGET_CORE})
+target_include_directories(${TARGET_DOCS} PRIVATE ${list_core_hdr})
+target_include_directories(${TARGET_DOCS} PUBLIC ${BINARY_DIR})
 
 # includes
 # ******************************************************************************
@@ -193,29 +195,33 @@ endif()
 #    set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)
 #endif()
 
-target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES} ${QUICKVTK_CORE_NAME})
+target_link_libraries(${PROJECT_NAME} ${LINK_LIBRARIES} ${TARGET_CORE})
 target_include_directories(${PROJECT_NAME} PRIVATE ${list_core_hdr})
 
 if(NOT APPLE)
   install(
-      TARGETS QuickVtkCore
-        EXPORT QuickVtkCore-targets
-        ARCHIVE DESTINATION "lib"
-        RUNTIME DESTINATION "bin"
-        PUBLIC_HEADER DESTINATION "include"
-        FRAMEWORK DESTINATION Library/Frameworks
-        COMPONENT libraries)
+    TARGETS ${TARGET_CORE}
+    EXPORT ${TARGET_CORE}-targets
+    ARCHIVE DESTINATION "lib"
+    RUNTIME DESTINATION "bin"
+    PUBLIC_HEADER DESTINATION "include"
+    FRAMEWORK DESTINATION Library/Frameworks
+    COMPONENT libraries
+  )
 
   install(
-   EXPORT QuickVtkCore-targets
-    DESTINATION lib/cmake/QuickVtkCore
-    FILE QuickVtkCore-config.cmake
-    COMPONENT headers)
+    EXPORT ${TARGET_CORE}-targets
+    DESTINATION lib/cmake/${TARGET_CORE}
+    FILE ${TARGET_CORE}-config.cmake
+    COMPONENT headers
+  )
 
   install(
-    TARGETS QuickVtk
-      EXPORT QuickVtk-targets
-      RUNTIME DESTINATION "bin/"
-      FRAMEWORK DESTINATION Library/Frameworks
-      COMPONENT libraries)
+    TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}-targets
+    RUNTIME DESTINATION "bin/"
+    FRAMEWORK DESTINATION Library/Frameworks
+    COMPONENT libraries
+  )
+
 endif()

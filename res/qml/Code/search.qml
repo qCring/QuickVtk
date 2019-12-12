@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 import App 1.0 as App
@@ -7,7 +7,7 @@ Rectangle {
     id: root;
 
     property var refocus;
-    property var controller: Controllers.editor.search;
+    property var controller: context.editor.search;
 
     height: column.height;
     color: "#21252B"

@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 import TypeInfo 1.0 as TypeInfo
@@ -7,7 +7,7 @@ Rectangle {
   id: root;
 
   height: 35
-  property var file: Controllers.document.file;
+  property var file: App.document.file;
   property bool modified: file != undefined && file.modified;
 
   color: "#21252B"
@@ -30,7 +30,7 @@ Rectangle {
       label.text: root.modified ? "Run" : "-";
       anchors.verticalCenter: parent.verticalCenter;
 
-      onClicked: Controllers.document.run();
+      onClicked: App.document.run();
     }
   }
 

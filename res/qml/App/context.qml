@@ -1,10 +1,11 @@
-import QtQuick 2.6
+import QtQuick 2.12
+
 import Lib 1.0 as Lib
 
 Item  {
 
   property alias utilsView: utilsView;
-  property var file: Controllers.document.file;
+  property var file: App.document.file;
 
   FocusScope {
     id: header;

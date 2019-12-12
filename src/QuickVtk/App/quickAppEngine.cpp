@@ -1,13 +1,14 @@
-#include "quickAppInstance.hpp"
+#include "quickAppEngine.hpp"
 #include "quickAppSettings.hpp"
 #include "quickAppController.hpp"
+
 #include "quickMenuController.hpp"
+#include "quickSampleDataController.hpp"
+#include "quickConsoleController.hpp"
 
 #include "quickIO.hpp"
 #include "meta_quickvtk.hpp"
 #include "quickQmlRegister.hpp"
-#include "quickSampleDataController.hpp"
-#include "quickConsoleController.hpp"
 
 #include <QWindow>
 #include <QFontDatabase>
@@ -18,15 +19,11 @@
 #include <iostream>
 
 namespace quick {
-
     namespace App {
+    
+        Engine* Engine::instance = nullptr;
 
-        Instance* Instance::instance = nullptr;
-
-        Instance::Instance() {
-        }
-
-        auto Instance::HandleMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg) -> void {
+        auto Engine::HandleMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg) -> void {
             std::cout << msg.toStdString() << std::endl;
 
             if (instance->m_messageHandled.localData()) {
@@ -43,7 +40,7 @@ namespace quick {
             }
         }
 
-        auto Instance::init() -> void {
+        auto Engine::init() -> void {
             QApplication::setOrganizationName(Meta::OrgName);
             QApplication::setOrganizationDomain(Meta::OrgDomain);
             QApplication::setApplicationName(Meta::AppName);
@@ -51,14 +48,15 @@ namespace quick {
 
             Qml::RegisterTypes();
             
-            Settings::Init();
+            Settings::Create();
+            SampleData::Controller::Create();
             Menu::Controller::Init();
 
             auto path = QDir(QGuiApplication::applicationDirPath());
 
-#ifdef __APPLE__
+    #ifdef __APPLE__
             path.cdUp();
-#endif
+    #endif
             resourceDir = path.absolutePath() + "/Resources/";
 
             AddFontDir(resourceDir + "fonts/roboto/");
@@ -68,8 +66,8 @@ namespace quick {
             auto engine = new QQmlApplicationEngine ();
 
             auto context = engine->rootContext();
-            context->setContextProperty("Controllers", Controller::instance);
-            context->setContextProperty("SampleData", SampleData::Controller::Create());
+            context->setContextProperty("App", Controller::instance);
+            context->setContextProperty("SampleData", SampleData::Controller::instance);
 
             engine->addImportPath(resourceDir + "qml");
             engine->load(QUrl::fromLocalFile(resourceDir + "qml/App/window.qml"));
@@ -88,14 +86,14 @@ namespace quick {
             window->showMaximized();
         }
 
-        auto Instance::Execute(int argc, char** argv) -> int {
+        auto Engine::Execute(int argc, char** argv) -> int {
             qInstallMessageHandler(HandleMessage);
 
             QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
             QApplication application(argc, argv);
 
             if (!instance) {
-                instance = new Instance();
+                instance = new Engine();
                 instance->init();
                 return application.exec();
             }
@@ -103,15 +101,15 @@ namespace quick {
             return 1;
         }
 
-        auto Instance::AddFontDir(const QString& directory) -> void {
+        auto Engine::AddFontDir(const QString& directory) -> void {
             auto fontUrls = IO::FileUrlsFromDir(directory, {"*.ttf", "*.otf"}, IO::FileSuffix::On);
 
-            for (auto fontUrl : fontUrls) {
+            for (const auto& fontUrl : fontUrls) {
                 QFontDatabase::addApplicationFont(fontUrl);
             }
         }
 
-        auto Instance::GetResourceDir() -> QString {
+        auto Engine::GetResourceDir() -> QString {
             return instance->resourceDir;
         }
     }

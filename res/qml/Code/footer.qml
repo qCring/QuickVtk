@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 import App 1.0 as App
@@ -17,7 +17,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter;
         
 
-        text: (Controllers.editor.selection.startLine + 1) + ":" + (Controllers.editor.selection.startColumn + 1);
+        text: (context.editor.selection.startLine + 1) + ":" + (context.editor.selection.startColumn + 1);
         font.pointSize: 12;
     }
 
@@ -56,7 +56,7 @@ Rectangle {
             iconSize: 12;
             icon: icons.fa_search_plus;
 
-            onClicked: Controllers.editor.increaseFontSize();
+            onClicked: context.editor.increaseFontSize();
         }
 
         Lib.Button {
@@ -66,7 +66,7 @@ Rectangle {
             iconSize: 12;
             icon: icons.fa_search_minus;
 
-            onClicked: Controllers.editor.decreaseFontSize();
+            onClicked: context.editor.decreaseFontSize();
         }
     }
 

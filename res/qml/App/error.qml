@@ -1,7 +1,6 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
-import App 1.0 as App
 
 Rectangle {
     id: root;
@@ -25,7 +24,6 @@ Rectangle {
         anchors.bottom: parent.bottom;
 
         label.text: error.message;
-        label.font.pointSize: Controllers.editor.fontSize - 2;
 
         //label.leftPadding: 4;
         //label.rightPadding: 4;

@@ -32,34 +32,27 @@ namespace quick {
 
         class Controller : public QObject {
             Q_OBJECT
-            Q_PROPERTY(bool expanded READ isExpanded WRITE setExpanded NOTIFY expandedChanged);
             Q_PROPERTY(bool debugBuild READ isDebugBuild CONSTANT);
             Q_PROPERTY(QString version READ getVersion CONSTANT);
-            Q_PROPERTY(quick::App::Settings* settings READ getSettings CONSTANT);
-            Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
+            Q_PROPERTY(quick::App::Settings* settings READ getSettingsController CONSTANT);
             Q_PROPERTY(quick::Document::Controller* document READ getDocumentController CONSTANT);
-            Q_PROPERTY(quick::Editor::Controller* editor READ getEditor CONSTANT);
-            Q_PROPERTY(quick::Console::Controller* console READ getConsole CONSTANT);
-            Q_PROPERTY(quick::Menu::Controller* menu READ getMenu CONSTANT);
+            Q_PROPERTY(quick::Console::Controller* console READ getConsoleController CONSTANT);
+            Q_PROPERTY(quick::Menu::Controller* menu READ getMenuController CONSTANT);
+            Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
         private:
             bool m_showList = false;
-            bool m_expanded = false;
             QString m_version;
-        private:
-            Controller();
+            Controller() = default;
         public:
             static Qml::Register::Controller<Controller> Register;
             static Controller* instance;
             static auto Create() -> void;
-            auto setExpanded(bool) -> void;
-            auto isExpanded() -> bool;
             auto getVersion() -> QString;
             auto isDebugBuild() -> bool;
             auto getTypeList() -> TypeInfo::List*;
-            auto getEditor() -> Editor::Controller*;
-            auto getSettings() -> Settings*;
-            auto getConsole() -> Console::Controller*;
-            auto getMenu() -> Menu::Controller*;
+            auto getSettingsController() -> Settings*;
+            auto getConsoleController() -> Console::Controller*;
+            auto getMenuController() -> Menu::Controller*;
             auto getDocumentController() -> Document::Controller*;
         signals:
             void expandedChanged();

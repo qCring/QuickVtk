@@ -1,11 +1,12 @@
-import QtQuick 2.6
+import QtQuick 2.12
+
 import Lib 1.0 as Lib
 
 Rectangle  {
   id: root;
 
   color: "#282C34";
-  visible: Controllers.settings.visible;
+  visible: App.settings.visible;
 
   Rectangle {
     id: header;
@@ -31,7 +32,7 @@ Rectangle  {
 
       Lib.Button {
         label.text: "Clear Recent File History"
-        onClicked: Controllers.settings.reset();
+        onClicked: App.settings.reset();
       }
     }
   }
@@ -55,13 +56,13 @@ Rectangle  {
       Lib.Button {
         icon: icons.fa_times;
         label.text: "Close"
-        onClicked: Controllers.settings.visible = false;
+        onClicked: App.settings.visible = false;
       }
 
       Lib.Button {
         icon: icons.fa_check;
         label.text: "OK"
-        onClicked: Controllers.settings.visible = false;
+        onClicked: App.settings.visible = false;
       }
     }
   }

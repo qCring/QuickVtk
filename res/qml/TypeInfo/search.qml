@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 
@@ -28,14 +28,14 @@ Item {
         anchors.bottom: parent.bottom;
         anchors.margins: 4;
 
-        from: Controllers.typeList;
+        from: context.typeList;
         bind: "filter";
 
         immediate: true;
         radius: 2;
 
         onActiveFocusChanged: {
-            Controllers.typeList.visible = activeFocus;
+            context.typeList.visible = activeFocus;
         }
     }
 
@@ -43,7 +43,7 @@ Item {
         anchors.right: input.right;
         anchors.rightMargin: 4;
         anchors.verticalCenter: parent.verticalCenter;
-        text: Controllers.typeList.count + "/" + Controllers.typeList.totalCount;
+        text: context.typeList.count + "/" + context.typeList.totalCount;
         font.pointSize: 11;
         font.bold: true;
         visible: input.activeFocus;

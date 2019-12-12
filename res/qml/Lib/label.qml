@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 Text {
     color: enabled ? "#9DA5B4" : "#6E7582"

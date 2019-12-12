@@ -5,21 +5,19 @@
 #include <QObject>
 
 namespace quick {
-
     namespace App {
 
         class Settings : public QObject {
             Q_OBJECT
             Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged);
         private:
-            static Qml::Register::Controller<Settings> Register;
+            static Qml::Register::Type<Settings> Register;
             bool m_visible = false;
-            Settings();
+            Settings() = default;
             QStringList m_recentFiles;
         public:
             static Settings* instance;
             static auto Create() -> void;
-            static auto Init() -> void;
             static auto AddRecentFile(const QString&) -> void;
             static auto RemoveRecentFile(const QString&) -> void;
             static auto GetRecentFiles() -> QStringList;

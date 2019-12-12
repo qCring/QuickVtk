@@ -1,11 +1,11 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 
 Item {
   id: root;
 
-  property var file: Controllers.document.file;
+  property var file: App.document.file;
 
   Lib.Label {
     id: title;
@@ -24,6 +24,8 @@ Item {
     model: file != undefined ? file.errors : null;
     delegate: ErrorItem {
       message: model.line + ":" + model.column + " - " + model.message
+      anchors.left: parent.left;
+      anchors.right: parent.right;
     }
   }
 }

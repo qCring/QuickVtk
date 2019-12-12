@@ -77,7 +77,7 @@ endif()
 
 # libraries
 # ******************************************************************************
-set(QUICKVTK_QT_VERSION "5.13.0" CACHE STRING "Qt Version")
+set(QUICKVTK_QT_VERSION "5.12.0" CACHE STRING "Qt Version")
 set(QUICKVTK_QT_MODULES Core Gui Widgets Quick Qml Concurrent Network DBus PrintSupport)
 
 if(UNIX AND NOT APPLE)
@@ -100,10 +100,9 @@ include(${VTK_USE_FILE})
 
 # sources
 # ******************************************************************************
-AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Application" "Application" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/App" "App" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Console" "Console" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Document" "Document" list_app_src)
-AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Editor" "Editor" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Menu" "Menu" list_app_src)
 
 AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Math" "Math" list_core_src list_core_hdr)

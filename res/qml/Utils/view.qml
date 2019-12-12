@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Utils 1.0 as Utils
 import Lib 1.0 as Lib
@@ -98,7 +98,7 @@ Item {
   }
 
   Component.onCompleted: {
-    this.file = Controllers.document.file;
+    this.file = App.document.file;
     root.parent = utilsView;
   }
 }

@@ -1,6 +1,5 @@
-import QtQuick 2.6
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 import Utils 1.0 as Utils
 
@@ -13,8 +12,8 @@ Item {
     property alias label: nameLabel.text;
     property alias value: slider.value;
     property alias step: slider.stepSize;
-    property alias min: slider.minimumValue;
-    property alias max: slider.maximumValue;
+    property alias min: slider.from;
+    property alias max: slider.to;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
@@ -56,7 +55,16 @@ Item {
             }
         }
 
-        style: SliderStyle {
+        handle: Rectangle {
+            width: 8;
+            height: 8;
+            radius: 4;
+
+            color: "#2B68A4"
+            border.color: "#fff"
+        }
+
+        /*style: SliderStyle {
             handle: Rectangle {
                 width: 8;
                 height: 8;
@@ -84,5 +92,6 @@ Item {
                 }
            }
         }
+        */
     }
 }

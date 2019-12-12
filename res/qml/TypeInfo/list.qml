@@ -1,15 +1,15 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 
 ListView {
-    visible: Controllers.typeList.visible;
+    visible: context.typeList.visible;
     clip: true;
     width: 420;
 
     boundsBehavior: Flickable.StopAtBounds;
 
-    model: Controllers.typeList;
+    model: context.typeList;
     delegate: Symbol {
         symbol: model.symbol;
     }

@@ -1,8 +1,12 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 
-#include "quickAppInstance.hpp"
+#include "quickAppEngine.hpp"
 
 auto main(int argc, char *argv[]) -> int {
+    
+    std::cout << "arg: " << argc << " argv : " << **argv;
 
 #ifdef _MSC_VER
     _putenv("QML_BAD_GUI_RENDER_LOOP=1");
@@ -13,5 +17,5 @@ auto main(int argc, char *argv[]) -> int {
     setenv("QML_USE_GLYPHCACHE_WORKAROUND", "1", 1);
 #endif
 
-    return quick::App::Instance::Execute(argc, argv);
+    return quick::App::Engine::Execute(argc, argv);
 }

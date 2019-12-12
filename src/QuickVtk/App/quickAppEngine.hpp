@@ -4,16 +4,15 @@
 #include <QThreadStorage>
 
 namespace quick {
-
     namespace App {
 
-        class Instance {
+        class Engine {
         private:
             QString resourceDir;
         private:
-            static Instance* instance;
+            Engine() = default;
+            static Engine* instance;
             QThreadStorage<bool> m_messageHandled;
-            Instance();
             auto init() -> void;
             auto AddFontDir(const QString&) -> void;
             static auto HandleMessage(QtMsgType, const QMessageLogContext&, const QString&) -> void;

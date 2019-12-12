@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 import QtQuick.Window 2.2
 
 import Lib 1.0 as Lib
@@ -54,7 +54,7 @@ Window {
       anchors.left: parent.left;
       anchors.right: hSplit.left;
       anchors.bottom: footer.top;
-      anchors.bottomMargin: Controllers.console.collapsed ? 0 : 200;
+      anchors.bottomMargin: App.console.collapsed ? 0 : 200;
 
       Rectangle {
         anchors.left: parent.left;
@@ -75,7 +75,7 @@ Window {
       MouseArea {
         anchors.fill: parent;
 
-        onDoubleClicked: Controllers.console.toggle();
+        onDoubleClicked: App.console.toggle();
         //drag.target: parent;
         //drag.axis: Drag.YAxis;
         //drag.minimumY: header.height;
@@ -113,7 +113,7 @@ Window {
           anchors.verticalCenter: parent.verticalCenter;
           icon: icons.fa_terminal;
           label.text: "Console";
-          onClicked: Controllers.console.toggle();
+          onClicked: App.console.toggle();
         }
 
         Rectangle {
@@ -126,7 +126,7 @@ Window {
           Lib.Label {
             id: label_logs;
             anchors.centerIn: parent;
-            text: Controllers.console.items.length;
+            text: App.console.items.length;
             font.pointSize: 10;
           }
         }
@@ -142,7 +142,7 @@ Window {
           anchors.verticalCenter: parent.verticalCenter;
           frameless: true;
           icon: icons.fa_trash;
-          onClicked: Controllers.console.clear();
+          onClicked: App.console.clear();
         }
       }
     }

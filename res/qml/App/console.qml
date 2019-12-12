@@ -1,4 +1,5 @@
-import QtQuick 2.6
+import QtQuick 2.12
+
 import Lib 1.0 as Lib
 
 Rectangle {
@@ -60,7 +61,7 @@ Rectangle {
     anchors.right: parent.right;
     anchors.bottom: parent.bottom;
 
-    model: Controllers.console.items;
+    model: App.console.items;
 
     delegate: Rectangle {
 

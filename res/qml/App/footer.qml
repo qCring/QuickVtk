@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 
@@ -15,12 +15,12 @@ Rectangle {
       Lib.Icon {
         anchors.verticalCenter: parent.verticalCenter;
         icon: icons.fa_bug;
-        visible: Controllers.debugBuild;
+        visible: App.debugBuild;
       }
 
       Lib.Label {
         anchors.verticalCenter: parent.verticalCenter;
-        text: "v. " + Controllers.version;
+        text: "v. " + App.version;
       }
     }
 }

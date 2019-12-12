@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import App 1.0 as App
 
@@ -48,7 +48,7 @@ TextInput {
         var key = event.key;
 
         if (key == Qt.Key_Escape) {
-            Controllers.editor.search.visible = false;
+            context.editor.search.visible = false;
             event.accepted = true;
             refocus.forceActiveFocus();
         }

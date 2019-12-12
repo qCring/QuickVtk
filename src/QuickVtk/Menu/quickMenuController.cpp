@@ -1,12 +1,11 @@
-#include "quickMenuController.hpp"
 #include "quickAppSettings.hpp"
-#include "quickAppInstance.hpp"
-#include "quickMenuItem.hpp"
+#include "quickAppEngine.hpp"
 
+#include "quickMenuController.hpp"
+#include "quickMenuItem.hpp"
 #include "quickConsoleController.hpp"
 #include "quickDocumentController.hpp"
 #include "quickDocumentFile.hpp"
-#include "quickEditorController.hpp"
 #include "quickIO.hpp"
 
 #include <iostream>

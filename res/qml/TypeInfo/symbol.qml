@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Lib 1.0 as Lib
 
@@ -108,7 +108,7 @@ Rectangle {
                 anchors.fill: parent;
                 
                 onClicked: function() {
-                    Controllers.editor.copyToClipboard(symbol.prefix + "." + symbol.name);
+                    context.editor.copyToClipboard(symbol.prefix + "." + symbol.name);
                     iconColorAnim.start();
                 }
             }

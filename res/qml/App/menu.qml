@@ -1,4 +1,5 @@
-import QtQuick 2.6
+import QtQuick 2.12
+
 import Lib 1.0 as Lib
 
 Row {
@@ -6,7 +7,7 @@ Row {
 
   Repeater {
     id: repeater;
-    model: Controllers.menu.items
+    model: App.menu.items
 
     FocusScope {
       id: item
@@ -91,7 +92,7 @@ Row {
                     inner.visible = true;
                   } else {
                     item.focus = false;
-                    Controllers.menu.select(modelData);
+                    App.menu.select(modelData);
                   }
                 }
 
@@ -190,7 +191,7 @@ Row {
 
                         onClicked: {
                           item.focus = false;
-                          Controllers.menu.select(modelData);
+                          App.menu.select(modelData);
                         }
 
                         onExited: {

@@ -1,4 +1,5 @@
-import QtQuick 2.6
+import QtQuick 2.12
+
 import Lib 1.0 as Lib
 
 Rectangle {
@@ -67,50 +68,22 @@ Rectangle {
       }
     }
 
-    Rectangle {
-        color: "#000"
-        border.color: "#6E7582";
-        width: 30;
-        height: 22;
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-        anchors.margins: 4;
-        radius: 4;
-        opacity: ma.containsMouse ? 1 : 0.3;
-
-        visible: Controllers.expanded;
-
-        Lib.Icon {
-            anchors.centerIn: parent;
-
-            icon: icons.fa_navicon;
-            color: ma.containsMouse ? "#fff" : "#9DA5B4";
-        }
-
-        MouseArea {
-            id: ma;
-            anchors.fill: parent;
-            hoverEnabled: true;
-            onClicked: Controllers.expanded = false;
-        }
-    }
-
     function createComponent() {
-      const file = Controllers.document.file;
+      const file = App.document.file;
 
       if (file == undefined) {
-        console.error("unable to create component: Controllers.document.file is undefined");
+        console.error("unable to create component: App.document.file is undefined");
         return;
       }
 
-      Controllers.document.preRun();
+      App.document.preRun();
 
       try {
         if (file.component) {
           file.component.destroy();
         }
 
-        file.component = Qt.createQmlObject(Controllers.document.file.content, container, "root");
+        file.component = Qt.createQmlObject(App.document.file.content, container, "root");
       } catch (exc) {
         var errors = exc.qmlErrors;
 
@@ -124,7 +97,7 @@ Rectangle {
           }
         }
       } finally {
-        Controllers.document.postRun();
+        App.document.postRun();
       }
     }
 
@@ -150,7 +123,7 @@ Rectangle {
     }
 
     Connections {
-        target: Controllers.document;
+        target: App.document;
         onCreateComponent: root.createComponent();
         onDestroyComponent: root.destroyComponent(file);
         onSelectComponent: root.selectComponent(file);

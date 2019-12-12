@@ -8,6 +8,10 @@ namespace quick {
         Qml::Register::Controller<Controller> Controller::Register;
 
         auto Controller::Create() -> void {
+            if (instance) {
+                throw new std::runtime_error("instance already existing");
+            }
+            
             instance = new Controller();
         }
     

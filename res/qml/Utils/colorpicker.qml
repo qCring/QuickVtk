@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.12
 import QtQuick.Dialogs 1.2
 
 import Lib 1.0 as Lib

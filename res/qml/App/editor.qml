@@ -1,13 +1,12 @@
-import QtQuick 2.6
-import QtQuick.Controls 1.4
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 
-import App 1.0 as App
 import Lib 1.0 as Lib
 
 Item {
     id: root;
 
-    property var file: Controllers.document.file;
+    property var file: App.document.file;
 
     clip: true;
 

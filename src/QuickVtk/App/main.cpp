@@ -1,12 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <iostream>
 
 #include "quickAppEngine.hpp"
 
 auto main(int argc, char *argv[]) -> int {
-    
-    std::cout << "arg: " << argc << " argv : " << **argv;
 
 #ifdef _MSC_VER
     _putenv("QML_BAD_GUI_RENDER_LOOP=1");

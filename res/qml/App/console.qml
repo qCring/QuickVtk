@@ -29,7 +29,8 @@ Rectangle {
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.left: parent.left;
-      anchors.leftMargin: 8;
+      leftPadding: 4;
+      rightPadding: 4;
 
       text: "Type"
     }
@@ -38,8 +39,6 @@ Rectangle {
       anchors.verticalCenter: parent.verticalCenter;
       anchors.left: label_type.right;
       anchors.right: label_time.left;
-      anchors.rightMargin: 8;
-      anchors.leftMargin: 8;
 
       text: "Message"
     }
@@ -49,7 +48,7 @@ Rectangle {
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.right: parent.right;
-      anchors.rightMargin: 8;
+      rightPadding: 4;
 
       icon: icons.fa_clock_o;
     }
@@ -67,40 +66,34 @@ Rectangle {
 
       anchors.left: parent.left;
       anchors.right: parent.right;
-      height: label.height + 2;
+      height: label.height + 4;
 
       color: index % 2 ? "#1a1c22" : "#181A1F";
 
-      Item {
-        width: label_type.width + 16;
-        anchors.verticalCenter: time.verticalCenter;
-
-        Lib.Icon {
-          id: ic;
-          icon: modelData.type == 0 ? icons.fa_info_circle : modelData.type > 1 ? icons.fa_exclamation_triangle : "";
-          color: modelData.type == 2 ? "#ffff00" : modelData.type == 3 ? "#ff0000" : "#777";
-          anchors.centerIn: parent;
-        }
+      Lib.Icon {
+        id: ic;
+        icon: modelData.type == 0 ? icons.fa_info_circle : modelData.type > 1 ? icons.fa_exclamation_triangle : "";
+        color: modelData.type == 2 ? "#ffff00" : modelData.type == 3 ? "#ff0000" : "#777";
+        width: label_type.width;
+        font.pointSize: 9;
+        anchors.verticalCenter: parent.verticalCenter;
+        horizontalAlignment: Text.AlignHCenter
       }
 
       Lib.Label {
         id: label;
         text: modelData.message;
         anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: parent.left;
-        anchors.leftMargin: label_type.width + 16;
+        anchors.left: ic.right;
         anchors.right: time.left;
-        anchors.rightMargin: 8;
       }
 
       Lib.Label {
         id: time;
         text: modelData.time;
-
-        anchors.top: parent.top;
-        anchors.topMargin: 1;
         anchors.right: parent.right;
-        anchors.rightMargin: 8;
+        anchors.verticalCenter: parent.verticalCenter;
+        rightPadding: 4;
       }
     }
   }

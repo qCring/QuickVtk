@@ -135,7 +135,6 @@ Window {
       Row {
         anchors.right: parent.right;
         anchors.verticalCenter: parent.verticalCenter;
-        anchors.rightMargin: 8;
         spacing: 8;
 
         Lib.Button {
@@ -159,7 +158,7 @@ Window {
     Console {
       anchors.top: vSplit.bottom;
       anchors.left: parent.left;
-      anchors.right: context.left;
+      anchors.right: hSplit.left;
       anchors.bottom: footer.top;
     }
 

@@ -50,48 +50,39 @@ Item {
         anchors.margins: 8;
 
         onValueChanged: {
-            if (root.from) {
-                root.from[root.bind] = value;
-            }
+          if (root.from) {
+              root.from[root.bind] = value;
+          }
         }
 
         handle: Rectangle {
-            width: 8;
-            height: 8;
+          id: handle;
+          width: 8;
+          height: 8;
+          radius: 4;
+          x: slider.visualPosition * (slider.availableWidth - width / 2) + width / 2;
+          anchors.verticalCenter: parent.verticalCenter;
+
+          color: "#21252B"
+        }
+
+        background: Rectangle {
+          implicitWidth: 200
+          implicitHeight: 8
+          color: "#21252B"
+          border.color: "#666"
+          radius: 6
+
+          Rectangle {
+            anchors.bottom: parent.bottom;
+            anchors.left: parent.left;
+            anchors.top: parent.top;
+            anchors.margins: 1;
+            width: handle.x + handle.width * 1.5 - 2;
+
             radius: 4;
-
             color: "#2B68A4"
-            border.color: "#fff"
-        }
-
-        /*style: SliderStyle {
-            handle: Rectangle {
-                width: 8;
-                height: 8;
-                radius: 4;
-
-                color: "#2B68A4"
-                border.color: "#fff"
-            }
-
-            groove: Rectangle {
-                implicitWidth: 200
-                implicitHeight: 8
-                color: "#21252B"
-                border.color: "#666"
-                radius: 8
-
-                Rectangle {
-                    anchors.bottom: parent.bottom;
-                    anchors.left: parent.left;
-                    anchors.top: parent.top;
-
-                    width: (control.value - control.minimumValue) / (control.maximumValue - control.minimumValue) * parent.width
-                    radius: 8;
-                    color: "#2B68A4"
-                }
-           }
-        }
-        */
+          }
+       }
     }
 }

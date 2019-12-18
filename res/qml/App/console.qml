@@ -13,7 +13,7 @@ Rectangle {
     anchors.right: parent.right;
     anchors.top: parent.top;
 
-    height: label_time.height + 8;
+    height: label_type.height + 8;
 
     Rectangle {
       anchors.left: parent.left;
@@ -38,19 +38,21 @@ Rectangle {
     Lib.Label {
       anchors.verticalCenter: parent.verticalCenter;
       anchors.left: label_type.right;
-      anchors.right: label_time.left;
+      anchors.right: btn_clear.left;
 
       text: "Message"
     }
 
-    Lib.Icon {
-      id: label_time;
+    Lib.Button {
+      id: btn_clear;
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.right: parent.right;
-      rightPadding: 4;
+      anchors.rightMargin: 8;
 
-      icon: icons.fa_clock_o;
+      frameless: true;
+      icon: icons.fa_trash;
+      onClicked: App.console.clear();
     }
   }
 

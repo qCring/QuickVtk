@@ -11,8 +11,16 @@ Rectangle {
 
     color: "#181A1F"
 
+    Editor {
+      anchors.fill: parent;
+
+      visible: App.document.showSource;
+    }
+
     Item {
       anchors.fill: parent;
+
+      visible: !App.document.showSource;
 
       Item {
         id: container;
@@ -87,16 +95,16 @@ Rectangle {
       } catch (exc) {
         var errors = exc.qmlErrors;
 
-        //if (errors == undefined) {
+        if (errors == undefined) {
           console.error(file.title + " - " + exc.message);
           file.addError(0, 0, exc.message);
-        /*} else {
+        } else {
           for (var i = 0; i < errors.length; i++) {
             var error = errors[i];
             console.error(file.title + " [" + error.lineNumber + ":" + error.columnNumber + "] - " + error.message);
             file.addError(error.lineNumber, error.columnNumber, error.message);
           }
-        }*/
+        }
       } finally {
         App.document.postRun();
       }

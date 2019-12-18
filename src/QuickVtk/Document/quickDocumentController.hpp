@@ -12,10 +12,12 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(quick::Document::File* file READ getFile NOTIFY fileChanged);
             Q_PROPERTY(QQmlListProperty<quick::Document::File> files READ getFilesList NOTIFY filesChanged);
+            Q_PROPERTY(bool showSource READ getShowSource WRITE setShowSource NOTIFY showSourceChanged);
         private:
             File* m_file;
             QList<File*> m_files;
             static Qml::Register::Controller<Controller> Register;
+            bool m_showSource = false;
         public:
             static Controller* instance;
             static auto Create() -> void;
@@ -28,6 +30,8 @@ namespace quick {
             auto closeFile(File*) -> void;
             auto selectFile(File*) -> void;
             auto getFile(const QString&) -> File*;
+            auto setShowSource(bool) -> void;
+            auto getShowSource() -> bool;
         public slots:
             void run();
             void preRun();
@@ -36,6 +40,7 @@ namespace quick {
             void fileChanged();
             void filesChanged();
             void createComponent();
+            void showSourceChanged();
             void destroyComponent(quick::Document::File* file);
             void selectComponent(quick::Document::File* file);
         };

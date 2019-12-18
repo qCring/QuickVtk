@@ -52,17 +52,40 @@ Item {
         }
 
         Repeater {
-            model: file != undefined ? file.errors : null;
+          model: file != undefined ? file.errors : null;
 
-            delegate: Error {
-                anchors.left: parent.left;
-                anchors.right: parent.right;
+          delegate: Rectangle {
+            id: root;
 
-                height: textEdit.cursorHeight;
-                y: (model.line - 1) * height;
+            anchors.left: parent.left;
+            anchors.right: parent.right;
 
-                error: model;
+            height: textEdit.cursorHeight;
+            y: (model.line) * height;
+            //y: index * height;
+
+            color: "#782A32";
+
+            Rectangle {
+              anchors.left: parent.left;
+              anchors.top: parent.top;
+              anchors.bottom: parent.bottom;
+
+              width: 2;
+              color: "#ff0000"
             }
+
+            Lib.TagLabel {
+              anchors.right: parent.right;
+              anchors.top: parent.top;
+              anchors.bottom: parent.bottom;
+
+              label.text: model.message;
+
+              color: "#181A1F"
+              border.color: root.color;
+            }
+          }
         }
 
         Lib.TextEdit {
@@ -125,6 +148,8 @@ Item {
                     leftPadding: 8;
 
                     font.family: textEdit.font.family;
+                    font.pointSize: textEdit.font.pointSize;
+                    
                     verticalAlignment: Text.AlignVCenter;
 
                     color: "#6E7582"

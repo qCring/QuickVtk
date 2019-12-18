@@ -79,6 +79,17 @@ namespace quick {
             return nullptr;
         }
     
+        auto Controller::setShowSource(bool showSource) -> void {
+            if (this->m_showSource != showSource) {
+                this->m_showSource = showSource;
+                emit this->showSourceChanged();
+            }
+        }
+    
+        auto Controller::getShowSource() -> bool {
+            return this->m_showSource;
+        }
+    
         auto Controller::closeFile(File* file) -> void {
             this->m_files.removeOne(file);
             

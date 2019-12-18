@@ -28,12 +28,11 @@ Window {
       anchors.bottom: vSplit.top;
     }
 
-    Rectangle {
+    Item {
       id: hSplit;
 
       x: parent.width - 400;
       width: 4;
-      color: "#21252B"
 
       anchors.bottom: footer.top;
       anchors.top: header.bottom;
@@ -45,11 +44,10 @@ Window {
       }
     }
 
-    Rectangle {
+    Item {
       id: vSplit;
 
-      height: vLabel.height + 8;
-      color: "#21252B"
+      height: vLabel.height + 4;
 
       anchors.left: parent.left;
       anchors.right: hSplit.left;
@@ -68,29 +66,6 @@ Window {
         anchors.fill: parent;
 
         onDoubleClicked: App.console.toggle();
-        //drag.target: parent;
-        //drag.axis: Drag.YAxis;
-        //drag.minimumY: header.height;
-        //drag.maximumY: root.height - footer.height - parent.height;
-/*
-        onReleased: {
-          const py = vSplit.y + mouse.y;
-          var case_indicator = 0;
-
-          if (py < root.height / 2) {
-            vSplit.anchors.top = header.bottom;
-            vSplit.anchors.bottom = undefined;
-            case_indicator = 1;
-          } else {
-            vSplit.anchors.top = undefined;
-            vSplit.anchors.bottom = footer.top;
-            case_indicator = 2;
-          }
-
-          console.log("py: " + py + " case: " + case_indicator);
-
-          vSplit.y = vSplit.y;
-        }*/
       }
 
       Row {
@@ -126,14 +101,28 @@ Window {
 
       Row {
         anchors.right: parent.right;
-        anchors.verticalCenter: parent.verticalCenter;
-        spacing: 8;
+        anchors.top: parent.top;
 
         Lib.Button {
-          anchors.verticalCenter: parent.verticalCenter;
-          frameless: true;
-          icon: icons.fa_trash;
-          onClicked: App.console.clear();
+          label.text: "Preview"
+          use_toggle: true;
+          toggle_on_click: false;
+          toggle: !App.document.showSource;
+
+          onClicked: {
+            App.document.showSource = false;
+          }
+        }
+
+        Lib.Button {
+          label.text: ".qml"
+          use_toggle: true;
+          toggle_on_click: false;
+          toggle: App.document.showSource;
+
+          onClicked: {
+            App.document.showSource = true;
+          }
         }
       }
     }

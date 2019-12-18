@@ -41,7 +41,7 @@ Row {
 
         width: col.width;
         height: col.height;
-        color: "#cc111111"
+        color: "#ee181A1F"
         border.color: "#222"
         radius: 4;
 
@@ -157,7 +157,7 @@ Row {
                   hideTimer.restart();
                 }
 
-                color: "#cc111111"
+                color: "#ee181A1F"
                 border.color: "#222"
 
                 radius: 4;

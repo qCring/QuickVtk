@@ -4,7 +4,7 @@ import Lib 1.0 as Lib
 
 Rectangle {
     height: 30
-    color: "#21252B"
+    color: "#282C34"
 
     Row {
       anchors.right: parent.right;
@@ -22,5 +22,13 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter;
         text: "v. " + App.version;
       }
+    }
+
+    Rectangle {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.top: parent.top;
+      height: 1;
+      color: "#333842"
     }
 }

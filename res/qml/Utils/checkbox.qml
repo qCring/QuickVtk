@@ -31,7 +31,7 @@ Item {
         width: 14;
         height: 14;
 
-        color: ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
+        color: ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#21252B"
         border.color: "#666";
         radius: 2;
 

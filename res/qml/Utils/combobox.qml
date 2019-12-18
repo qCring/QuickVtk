@@ -71,11 +71,11 @@ Item {
     }
 
     delegate: Lib.Label {
-      //width: control.width
       anchors.left: parent.left;
       anchors.right: parent.right;
       anchors.leftMargin: 4;
       anchors.rightMargin: 4;
+
       topPadding: 4;
       text: modelData
       color: control.highlightedIndex === index || del_ma.containsMouse ? "#fff" : "#9DA5B4";

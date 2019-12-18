@@ -64,14 +64,6 @@ Window {
         color: "#282C34"
       }
 
-      Rectangle {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
-        height: 1;
-        color: "#282C34"
-      }
-
       MouseArea {
         anchors.fill: parent;
 

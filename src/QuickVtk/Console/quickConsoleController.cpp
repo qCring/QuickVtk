@@ -40,25 +40,25 @@ namespace quick {
         }
 
         auto Controller::addInfoMsg(const QString& msg) -> void {
-            this->m_items.append(new Item(msg, Item::Type::Info));
+            this->m_items.append(new Item(QString(msg).remove('\n'), Item::Type::Info));
             
             emit this->itemsChanged();
         }
     
         auto Controller::addDebugMsg(const QString& msg) -> void {
-            this->m_items.append(new Item(msg, Item::Type::Debug));
+            this->m_items.append(new Item(QString(msg).remove('\n'), Item::Type::Debug));
 
             emit this->itemsChanged();
         }
     
         auto Controller::addWarningMsg(const QString& msg) -> void {
-            this->m_items.append(new Item(msg, Item::Type::Warning));
+            this->m_items.append(new Item(QString(msg).remove('\n'), Item::Type::Warning));
             
             emit this->itemsChanged();
         }
     
         auto Controller::addErrorMsg(const QString& msg) -> void {
-            this->m_items.append(new Item(msg, Item::Type::Error));
+            this->m_items.append(new Item(QString(msg).remove('\n'), Item::Type::Error));
             
             emit this->itemsChanged();
         }

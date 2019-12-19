@@ -1,5 +1,6 @@
 module App
 Preview 1.0 preview.qml
+Codeview 1.0 codeview.qml
 Footer 1.0 footer.qml
 Header 1.0 header.qml
 Menu 1.0 menu.qml

@@ -21,7 +21,7 @@ Row {
 
         anchors.centerIn: parent
         text: model.name
-        color: item.focus ? "#fff" : "#a0a0a0";
+        color: item.focus ? "#fff" : "#9DA5B4";
         font.pointSize: 14;
       }
 
@@ -64,7 +64,7 @@ Row {
                 anchors.left: parent.left;
                 anchors.leftMargin: 8;
 
-                property string color: ma_item.containsMouse ? "#fff" : "#a0a0a0";
+                property string color: ma_item.containsMouse ? "#fff" : "#9DA5B4";
 
                 Lib.Icon {
                   icon: icons[model.icon] != undefined ? icons[model.icon] : "";
@@ -170,7 +170,7 @@ Row {
 
                     Item {
                       id: innerItem;
-                      property string color: innerMA.containsMouse ? "#fff" : "#a0a0a0";
+                      property string color: innerMA.containsMouse ? "#fff" : "#9DA5B4";
                       width: Math.max(innerLabel.width + 50, innerCol.width);
                       height: innerLabel.height + 8;
 

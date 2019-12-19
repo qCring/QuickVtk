@@ -45,13 +45,14 @@ Item {
             anchors.verticalCenter: parent.verticalCenter;
 
             text: model.title;
-            color: model.selected ? "#fff" : ma.containsMouse ? "#a0a0a0" : "#888";
+            color: model.selected || ma.containsMouse ? "#fff" : "#9DA5B4";
           }
 
           Lib.Icon {
             icon: icons.fa_times;
-            color: close_ma.containsMouse ? "#fff" : "#888";
+            color: close_ma.containsMouse ? "#fff" : "#9DA5B4";
             anchors.verticalCenter: parent.verticalCenter;
+            font.pointSize: 10;
 
             MouseArea {
               id: close_ma;

@@ -24,21 +24,19 @@ namespace quick {
         Engine* Engine::instance = nullptr;
 
         auto Engine::HandleMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg) -> void {
-            std::cout << msg.toStdString() << std::endl;
+            qDebug() << "  > " << msg;
 
             if (instance->m_messageHandled.localData()) {
                 return;
             }
 
             QScopedValueRollback<bool> roll(instance->m_messageHandled.localData(), true);
-            auto prettyMsg = QString(msg);
-            prettyMsg.remove('\n');
             
             switch(type) {
-                case QtMsgType::QtDebugMsg: Console::Controller::instance->addDebugMsg(prettyMsg); break;
-                case QtMsgType::QtInfoMsg: Console::Controller::instance->addInfoMsg(prettyMsg); break;
-                case QtMsgType::QtWarningMsg: Console::Controller::instance->addWarningMsg(prettyMsg); break;
-                default: Console::Controller::instance->addErrorMsg(prettyMsg); break;
+                case QtMsgType::QtDebugMsg: Console::Controller::instance->addDebugMsg(msg); break;
+                case QtMsgType::QtInfoMsg: Console::Controller::instance->addInfoMsg(msg); break;
+                case QtMsgType::QtWarningMsg: Console::Controller::instance->addWarningMsg(msg); break;
+                default: Console::Controller::instance->addErrorMsg(msg); break;
             }
         }
 

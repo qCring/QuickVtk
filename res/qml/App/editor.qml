@@ -62,7 +62,6 @@ Item {
 
             height: textEdit.cursorHeight;
             y: (model.line) * height;
-            //y: index * height;
 
             color: "#782A32";
 
@@ -124,13 +123,12 @@ Item {
         }
     }
 
-    Rectangle {
+    Item {
         id: lines;
 
         anchors.left: parent.left;
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
-        color: "#282C34";
 
         width: linesCol.width + 4;
 
@@ -149,7 +147,7 @@ Item {
 
                     font.family: textEdit.font.family;
                     font.pointSize: textEdit.font.pointSize;
-                    
+
                     verticalAlignment: Text.AlignVCenter;
 
                     color: "#6E7582"

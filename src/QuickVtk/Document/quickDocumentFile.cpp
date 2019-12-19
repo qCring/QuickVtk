@@ -126,8 +126,8 @@ namespace quick {
             emit this->errorsChanged();
         }
     
-        auto File::addError(int line, int column, const QString& message) -> void { 
-            auto error = new Error(line, column, message);
+        auto File::addError(int line, int column, const QString& message) -> void {
+            auto error = new Error(line, column, QString(message).remove('\n'));
             this->m_errors.append(error);
         }
     }

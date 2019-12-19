@@ -127,5 +127,29 @@ namespace quick {
                 emit this->createComponent();
             }
         }
+    
+        void Controller::selectNext() {
+            auto count = this->m_files.count();
+            
+            if (this->m_file != nullptr && count > 1) {
+                auto index = this->m_files.indexOf(this->m_file) + 1;
+                
+                if (index < count) {
+                    this->setFile(this->m_files.at(index));
+                }
+            }
+        }
+    
+        void Controller::selectPrevious() {
+            if (this->m_file != nullptr && this->m_files.count() > 1) {
+                auto index = this->m_files.indexOf(this->m_file) - 1;
+                
+                if (index < 0) {
+                    return;
+                }
+                    
+                this->setFile(this->m_files.at(index));
+            }
+        }
     }
 }

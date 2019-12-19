@@ -42,7 +42,7 @@ Row {
         width: col.width;
         height: col.height;
         color: "#ee181A1F"
-        border.color: "#222"
+        border.color: "#333842"
         radius: 4;
 
         Column {
@@ -135,6 +135,7 @@ Row {
                 id: inner;
                 visible: false;
 
+                anchors.leftMargin: -4;
                 anchors.left: parent.right;
                 anchors.top: parent.top;
                 height: innerCol.height;
@@ -158,7 +159,7 @@ Row {
                 }
 
                 color: "#ee181A1F"
-                border.color: "#222"
+                border.color: "#333842"
 
                 radius: 4;
 

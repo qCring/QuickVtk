@@ -6,21 +6,11 @@ import Lib 1.0 as Lib
 Item {
   id: root;
 
-  Rectangle {
-    id: header;
-
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-    anchors.top: parent.top;
-
-    height: 30;
-    color: "#282C34"
-  }
-
   Editor {
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.top: header.bottom;
+    anchors.top: parent.top;
     anchors.bottom: parent.bottom;
+    anchors.topMargin: 8;
   }
 }

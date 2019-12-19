@@ -6,9 +6,50 @@ Item {
   height: 30;
 
   Row {
+    id: arrows;
+
     anchors.left: parent.left;
+    anchors.leftMargin: 12;
+    anchors.verticalCenter: parent.verticalCenter;
+    anchors.verticalCenterOffset: 2;
+    spacing: 12;
+
+    Lib.Icon {
+      icon: icons.fa_caret_left;
+      anchors.verticalCenter: parent.verticalCenter;
+      font.pointSize: 14;
+      color: ma_prev.containsMouse ? "#fff" : "#9DA5B4"
+
+      MouseArea {
+        id: ma_prev;
+        anchors.fill: parent
+        anchors.margins: -2;
+        onClicked: App.document.selectPrevious();
+        hoverEnabled: true;
+      }
+    }
+
+    Lib.Icon {
+      icon: icons.fa_caret_right;
+      anchors.verticalCenter: parent.verticalCenter;
+      font.pointSize: 14;
+      color: ma_next.containsMouse ? "#fff" : "#9DA5B4"
+
+      MouseArea {
+        id: ma_next;
+        anchors.fill: parent;
+        anchors.margins: -2;
+        onClicked: App.document.selectNext();
+        hoverEnabled: true;
+      }
+    }
+  }
+
+  Row {
+    anchors.left: arrows.right;
     anchors.bottom: parent.bottom;
     anchors.right: parent.right;
+    anchors.leftMargin: 8;
 
     Repeater {
       model: App.document.files;

@@ -36,6 +36,8 @@ namespace quick {
             void run();
             void preRun();
             void postRun();
+            void selectNext();
+            void selectPrevious();
         signals:
             void fileChanged();
             void filesChanged();

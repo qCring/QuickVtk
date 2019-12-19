@@ -14,9 +14,11 @@ namespace quick {
             Q_OBJECT
             Q_PROPERTY(QQmlListProperty<quick::Menu::Item> items READ getItemList CONSTANT);
         private:
+            Item* m_fileRecentFiles;
+            Item* m_viewToggleConsole;
+        private:
             QList<Item*> m_items;
             static Qml::Register::Controller<Controller> Register;
-            Item* m_recentFiles;
             Controller();
             auto OnFileOpen() -> void;
             auto OnFileOpenRecent(const QString&) -> void;
@@ -25,10 +27,13 @@ namespace quick {
             auto OnEditSettings() -> void;
             auto OnViewConsole() -> void;
             auto OnViewContext() -> void;
+            auto OnViewNextTab() -> void;
+            auto OnViewPreviousTab() -> void;
             auto OnHelpAbout() -> void;
             auto OnHelpWebsite() -> void;
         public:
             auto clearRecentFiles() -> void;
+            auto updateViewConsoleMenu(bool) -> void;
             static Controller* instance;
             static auto Init() -> void;
             static auto Create() -> void;

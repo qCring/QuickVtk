@@ -11,7 +11,6 @@ Rectangle {
 
     color: "#181A1F"
 
-
     Codeview {
       anchors.fill: parent;
 

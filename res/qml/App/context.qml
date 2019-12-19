@@ -12,4 +12,13 @@ Item  {
 
     anchors.fill: parent;
   }
+
+  Rectangle {
+    anchors.left: parent.left;
+    anchors.bottom: parent.bottom;
+    anchors.top: parent.top;
+
+    width: 1;
+    color: "#333842";
+  }
 }

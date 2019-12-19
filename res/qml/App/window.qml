@@ -108,6 +108,8 @@ Window {
           use_toggle: true;
           toggle_on_click: false;
           toggle: !App.document.showSource;
+          color: toggle ? "#181A1F" : "#31353B"
+          radius: 0;
 
           onClicked: {
             App.document.showSource = false;
@@ -119,6 +121,8 @@ Window {
           use_toggle: true;
           toggle_on_click: false;
           toggle: App.document.showSource;
+          color: toggle ? "#181A1F" : "#31353B"
+          radius: 0;
 
           onClicked: {
             App.document.showSource = true;

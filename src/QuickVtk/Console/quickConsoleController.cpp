@@ -1,6 +1,8 @@
 #include "quickConsoleController.hpp"
 #include "quickConsoleItem.hpp"
 
+#include "quickMenuController.hpp"
+
 namespace quick {
 
     namespace Console {
@@ -22,6 +24,7 @@ namespace quick {
             if (this->m_collapsed != collapsed) {
                 this->m_collapsed = collapsed;
                 emit this->collapsedChanged();
+                Menu::Controller::instance->updateViewConsoleMenu(!collapsed);
             }
         }
     
@@ -30,8 +33,7 @@ namespace quick {
         }
     
         void Controller::toggle() {
-            this->m_collapsed = !this->m_collapsed;
-            emit this->collapsedChanged();
+            this->setCollapsed(!this->m_collapsed);
         }
 
         void Controller::clear() {

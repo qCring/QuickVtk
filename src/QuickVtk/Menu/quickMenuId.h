@@ -12,6 +12,8 @@ namespace quick {
             Edit_Settings,
             View_Console,
             View_Context,
+            View_Previous_Tab,
+            View_Next_Tab,
             Help_About,
             Help_Website
         };

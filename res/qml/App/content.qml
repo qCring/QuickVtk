@@ -11,7 +11,8 @@ Rectangle {
 
     color: "#181A1F"
 
-    Editor {
+
+    Codeview {
       anchors.fill: parent;
 
       visible: App.document.showSource;

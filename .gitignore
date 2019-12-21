@@ -4,3 +4,4 @@ bin/
 /doc/doxygen/output/
 .idea
 *.pyc
+.vscode

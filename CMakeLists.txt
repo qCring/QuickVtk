@@ -120,6 +120,11 @@ set (QUICKVTK_CORE_NAME "${PROJECT_NAME}Core")
 add_library (${QUICKVTK_CORE_NAME} SHARED ${list_core_src} ${list_core_hdr})
 set_target_properties(${QUICKVTK_CORE_NAME} PROPERTIES PUBLIC_HEADER "${list_core_hdr}")
 
+# Export symbols for DLL on windows
+if(MSVC)
+target_compile_definitions(${QUICKVTK_CORE_NAME} PRIVATE QuickVtkCore_EXPORTS)
+endif()
+
 set(LINK_LIBRARIES PUBLIC ${VTK_LIBRARIES} PUBLIC Qt5::Core PUBLIC Qt5::Widgets PUBLIC Qt5::Gui PUBLIC Qt5::Quick PUBLIC Qt5::Qml PUBLIC Qt5::Concurrent)
 if(UNIX AND NOT APPLE)
     set(LINK_LIBRARIES ${LINK_LIBRARIES} PUBLIC Qt5::X11Extras)

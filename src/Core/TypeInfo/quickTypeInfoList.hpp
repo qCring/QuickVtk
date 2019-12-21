@@ -1,6 +1,7 @@
 #pragma once
 
 #include "quickQmlRegister.hpp"
+#include "quickExport.h"
 
 #include <QAbstractListModel>
 
@@ -10,7 +11,7 @@ namespace quick {
 
         class Symbol;
 
-        class List : public QAbstractListModel {
+        class QUICKVTKCORE_API List : public QAbstractListModel {
             Q_OBJECT
             Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged);
             Q_PROPERTY(QString filter READ getFilter WRITE setFilter NOTIFY filterChanged);

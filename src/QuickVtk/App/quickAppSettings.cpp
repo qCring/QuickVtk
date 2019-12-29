@@ -1,12 +1,11 @@
 #include "quickAppSettings.hpp"
-#include "quickMenuController.hpp"
 
 namespace quick {
     namespace App {
 
         Settings* Settings::instance = nullptr;
 
-        Qml::Register::Type<Settings> Settings::Register;
+        Qml::Register::Controller<Settings> Settings::Register;
 
         auto Settings::Create() -> void {
             if (instance) {
@@ -14,47 +13,25 @@ namespace quick {
             }
             
             instance = new Settings();
-            
+        }
+    
+        auto Settings::LoadRecentFiles() -> QStringList {
             QSettings settings;
-            auto files = settings.value("menu/recent").toList();
-            
-            for (const auto& entry : files) {
-                instance->m_recentFiles << entry.toString();
-            }
+            return settings.value(Key::RecentFiles).toStringList();
         }
-
-        auto Settings::AddRecentFile(const QString& filePath) -> void {
-            instance->m_recentFiles.append(filePath);
+    
+        auto Settings::SaveRecentFiles(const QStringList& list) -> void{
             QSettings settings;
-            settings.setValue("menu/recent", instance->m_recentFiles);
+            settings.setValue(Key::RecentFiles, list);
         }
-
-        auto Settings::RemoveRecentFile(const QString& filePath) -> void {
-            instance->m_recentFiles.removeOne(filePath);
+    
+        auto Settings::ClearRecentFiles() -> void {
             QSettings settings;
-            settings.setValue("menu/recent", instance->m_recentFiles);
+            settings.remove(Key::RecentFiles);
         }
-
-        auto Settings::GetRecentFiles() -> QStringList {
-            return instance->m_recentFiles;
-        }
-
-        auto Settings::setVisible(bool visible) -> void {
-            if (this->m_visible != visible) {
-                this->m_visible = visible;
-                emit this->visibleChanged();
-            }
-        }
-
-        auto Settings::getVisible() -> bool {
-            return this->m_visible;
-        }
-
-        void Settings::reset() {
-            QSettings settings;
-            settings.remove("menu/recent");
-            instance->m_recentFiles.clear();
-            Menu::Controller::instance->clearRecentFiles();
+    
+        auto Settings::GetRecentFilesCount() -> int {
+            return instance->m_recentFilesCount;
         }
     }
 }

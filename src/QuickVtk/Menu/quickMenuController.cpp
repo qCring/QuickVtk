@@ -1,12 +1,11 @@
-#include "quickAppSettings.hpp"
-#include "quickAppEngine.hpp"
-
 #include "quickMenuController.hpp"
 #include "quickMenuItem.hpp"
 #include "quickConsoleController.hpp"
 #include "quickDocumentController.hpp"
 #include "quickDocumentFile.hpp"
 #include "quickIO.hpp"
+#include "quickAppSettings.hpp"
+#include "quickAppEngine.hpp"
 
 #include <iostream>
 #include <QMenuBar>
@@ -31,36 +30,42 @@ namespace quick {
         }
 
         auto Controller::Init() -> void {
-            auto menu_file = new Item("File");
-            auto menu_edit = new Item("Edit");
-            auto menu_view = new Item("View");
-            auto menu_help = new Item("Help");
+            auto menu_file = Item::Create::SimpleItem("File");
+            auto menu_edit = Item::Create::SimpleItem("Edit");
+            auto menu_view = Item::Create::SimpleItem("View");
+            auto menu_help = Item::Create::SimpleItem("Help");
             
-            instance->m_fileRecentFiles = new Item("Open Recent", Id::File_Open_Recent);
-            instance->m_viewToggleConsole = new Item("Show Console", "fa_terminal", Id::View_Console);
+            instance->m_fileRecentFiles = Item::Create::SimpleItem("Open Recent", Action::File_Open_Recent);
+            instance->m_viewToggleConsole = Item::Create::IconItem("Show Console", "fa_terminal", Action::View_Console);
             
-            auto recentFiles = App::Settings::GetRecentFiles();
+            auto recentFiles = App::Settings::LoadRecentFiles();
+            
+            if (recentFiles.count() > 0) {
+                instance->m_fileRecentFiles->add(Item::Create::SimpleItem("Clear File History", Action::File_Clear_History, Separator::On));
+            } else {
+                instance->m_fileRecentFiles->setEnabled(false);
+            }
             
             for (const auto& entry : recentFiles) {
-                auto menuItem = new Item(entry, Id::File_Open_Recent);
+                auto menuItem = Item::Create::SimpleItem(entry, Action::File_Open_Recent);
                 menuItem->setData(entry);
                 instance->m_fileRecentFiles->add(menuItem);
             }
             
-            menu_file->add(new Item("Open...", "fa_folder_open_o", Id::File_Open));
+            menu_file->add(Item::Create::IconItem("Open...", "fa_folder_open_o", Action::File_Open));
             menu_file->add(instance->m_fileRecentFiles);
-            menu_file->add(new Item("Close", Id::File_Close));
-            menu_file->add(new Item("Quit", "fa_power_off", Id::File_Quit));
+            menu_file->add(Item::Create::SimpleItem("Close", Action::File_Close, Separator::On));
+            menu_file->add(Item::Create::IconItem("Quit", "fa_power_off", Action::File_Quit));
             
-            menu_edit->add(new Item("Settings", "fa_cog", Id::Edit_Settings));
+            menu_edit->add(Item::Create::IconItem("Settings", "fa_cog"));
             
             menu_view->add(instance->m_viewToggleConsole);
-            menu_view->add(new Item("Toggle Context View", Id::View_Context));
-            menu_view->add(new Item("Previous Tab", "fa_caret_square_o_left", Id::View_Previous_Tab));
-            menu_view->add(new Item("Next Tab", "fa_caret_square_o_right", Id::View_Next_Tab));
+            menu_view->add(Item::Create::SimpleItem("Toggle Context View", Action::View_Context));
+            menu_view->add(Item::Create::IconItem("Previous Tab", "fa_caret_square_o_left", Action::View_Previous_Tab));
+            menu_view->add(Item::Create::IconItem("Next Tab", "fa_caret_square_o_right", Action::View_Next_Tab));
             
-            menu_help->add(new Item("About", Id::Help_About));
-            menu_help->add(new Item("Website", "fa_globe", Id::Help_Website));
+            menu_help->add(Item::Create::SimpleItem("About", Action::Help_About));
+            menu_help->add(Item::Create::IconItem("Website", "fa_globe", Action::Help_Website));
             
             instance->m_items.append(menu_file);
             instance->m_items.append(menu_edit);
@@ -93,18 +98,18 @@ namespace quick {
         }
 
         void Controller::select(Item* item) {
-            switch (item->id) {
-                case Id::File_Open: OnFileOpen(); break;
-                case Id::File_Open_Recent: OnFileOpenRecent(item->getData()); break;
-                case Id::File_Close: OnFileClose(); break;
-                case Id::File_Quit: OnFileQuit(); break;
-                case Id::Edit_Settings: OnEditSettings(); break;
-                case Id::View_Console: OnViewConsole(); break;
-                case Id::View_Context: OnViewContext(); break;
-                case Id::View_Previous_Tab: OnViewPreviousTab(); break;
-                case Id::View_Next_Tab: OnViewNextTab(); break;
-                case Id::Help_Website: OnHelpWebsite(); break;
-                case Id::Help_About: OnHelpAbout(); break;
+            switch (item->action) {
+                case Action::File_Open: OnFileOpen(); break;
+                case Action::File_Open_Recent: OnFileOpenRecent(item->getData()); break;
+                case Action::File_Close: OnFileClose(); break;
+                case Action::File_Clear_History: OnFileClearHistory(); break;
+                case Action::File_Quit: OnFileQuit(); break;
+                case Action::View_Console: OnViewConsole(); break;
+                case Action::View_Context: OnViewContext(); break;
+                case Action::View_Previous_Tab: OnViewPreviousTab(); break;
+                case Action::View_Next_Tab: OnViewNextTab(); break;
+                case Action::Help_Website: OnHelpWebsite(); break;
+                case Action::Help_About: OnHelpAbout(); break;
                 default: break;
             }
         }
@@ -116,15 +121,29 @@ namespace quick {
             if (file != nullptr) {
                 file->select();
             } else if (IO::FileExists(filePath)) {
-                auto menuItem = new Item(filePath, Id::File_Open_Recent);
-                menuItem->setData(filePath);
+                bool addToRecentFiles = true;
+                if (this->m_fileRecentFiles->isEmpty()) {
+                    instance->m_fileRecentFiles->add(Item::Create::SimpleItem("Clear File History", Action::File_Clear_History, Separator::On));
+                    instance->m_fileRecentFiles->setEnabled(true);
+                } else {
+                    for (const auto& file : instance->m_fileRecentFiles->getItems()) {
+                        if (file->getData().compare(filePath) == 0) {
+                            addToRecentFiles = false;
+                            break;
+                        }
+                    }
+                }
                 
-                this->m_fileRecentFiles->add(menuItem);
-                App::Settings::AddRecentFile(filePath);
+                if (addToRecentFiles) {
+                    auto menuItem = Item::Create::SimpleItem(filePath, Action::File_Open_Recent);
+                    menuItem->setData(filePath);
+                    
+                    this->m_fileRecentFiles->add(menuItem);
+                    this->saveRecentFiles();
+                }
                 
                 Document::Controller::instance->openFile(filePath);
             }
-            // TODO: handle invalid file urls
         }
     
         auto Controller::OnFileOpenRecent(const QString& path) -> void {
@@ -136,8 +155,14 @@ namespace quick {
                 Document::Controller::instance->openFile(path);
             } else {
                 this->m_fileRecentFiles->removeItem(path);
-                App::Settings::RemoveRecentFile(path);
+                this->saveRecentFiles();
             }
+        }
+    
+        auto Controller::OnFileClearHistory() -> void {
+            this->m_fileRecentFiles->removeItems();
+            this->m_fileRecentFiles->setEnabled(false);
+            App::Settings::ClearRecentFiles();
         }
     
         auto Controller::OnFileClose() -> void {
@@ -150,10 +175,6 @@ namespace quick {
         
         auto Controller::OnFileQuit() -> void {
             QCoreApplication::quit();
-        }
-        
-        auto Controller::OnEditSettings() -> void {
-            App::Settings::instance->setVisible(true);
         }
     
         auto Controller::OnViewConsole() -> void {
@@ -180,16 +201,26 @@ namespace quick {
             qDebug() << "Help > Website";
         }
     
-        auto Controller::clearRecentFiles() -> void {
-            this->m_fileRecentFiles->removeItems();
-        }
-    
         auto Controller::updateViewConsoleMenu(bool visible) -> void {
             if (visible) {
-                this->m_viewToggleConsole->setName("Hide Console");
+                this->m_viewToggleConsole->setLabel("Hide Console");
             } else {
-                this->m_viewToggleConsole->setName("Show Console");
+                this->m_viewToggleConsole->setLabel("Show Console");
             }
+        }
+    
+        auto Controller::saveRecentFiles() -> void {
+            QStringList list;
+            
+            for (const auto& file : this->m_fileRecentFiles->getItems()) {
+                auto filePath = file->getData();
+                
+                if (!filePath.isEmpty()) {
+                    list << file->getData();
+                }
+            }
+            
+            App::Settings::SaveRecentFiles(list);
         }
     }
 }

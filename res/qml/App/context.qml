@@ -8,17 +8,31 @@ Item  {
   property var file: App.document.file;
 
   Item {
-    id: utilsView;
+    id: header;
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: parent.top;
+    height: title.height + 4;
 
-    anchors.fill: parent;
+    Lib.Label {
+      id: title;
+
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.margins: 4;
+
+      text: file ? file.title : "No File Selected"
+      font.pointSize: 15;
+    }
   }
 
-  Rectangle {
-    anchors.left: parent.left;
-    anchors.bottom: parent.bottom;
-    anchors.top: parent.top;
+  Item {
+    id: utilsView;
 
-    width: 1;
-    color: "#333842";
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.bottom: parent.bottom;
+    anchors.top: header.bottom;
   }
 }

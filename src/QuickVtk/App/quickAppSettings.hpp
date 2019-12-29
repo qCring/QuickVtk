@@ -9,25 +9,22 @@ namespace quick {
 
         class Settings : public QObject {
             Q_OBJECT
-            Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged);
         private:
-            static Qml::Register::Type<Settings> Register;
-            bool m_visible = false;
+            class Key {
+            public:
+                static constexpr auto RecentFiles = "history/files";
+            };
+        private:
+            static Qml::Register::Controller<Settings> Register;
             Settings() = default;
-            QStringList m_recentFiles;
+            int m_recentFilesCount = 5;
         public:
             static Settings* instance;
             static auto Create() -> void;
-            static auto AddRecentFile(const QString&) -> void;
-            static auto RemoveRecentFile(const QString&) -> void;
-            static auto GetRecentFiles() -> QStringList;
-        public:
-            auto setVisible(bool) -> void;
-            auto getVisible() -> bool;
-        public slots:
-            void reset();
-        signals:
-            void visibleChanged();
+            static auto LoadRecentFiles() -> QStringList;
+            static auto SaveRecentFiles(const QStringList&) -> void;
+            static auto ClearRecentFiles() -> void;
+            static auto GetRecentFilesCount() -> int;
         };
     }
 }

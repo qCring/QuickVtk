@@ -22,17 +22,18 @@ namespace quick {
             Controller();
             auto OnFileOpen() -> void;
             auto OnFileOpenRecent(const QString&) -> void;
+            auto OnFileClearHistory() -> void;
             auto OnFileClose() -> void;
             auto OnFileQuit() -> void;
-            auto OnEditSettings() -> void;
             auto OnViewConsole() -> void;
             auto OnViewContext() -> void;
             auto OnViewNextTab() -> void;
             auto OnViewPreviousTab() -> void;
             auto OnHelpAbout() -> void;
             auto OnHelpWebsite() -> void;
+        private:
+            auto saveRecentFiles() -> void;
         public:
-            auto clearRecentFiles() -> void;
             auto updateViewConsoleMenu(bool) -> void;
             static Controller* instance;
             static auto Init() -> void;

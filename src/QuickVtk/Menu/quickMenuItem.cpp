@@ -4,11 +4,18 @@ namespace quick {
     namespace Menu {
 
         Qml::Register::Type<Item> Item::Register;
-    
-        Item::Item(const QString& name, Id id) : m_name(name), id(id) {
+
+        Item::Item(const QString& label, const QString& icon, Action action, Separator separator) :
+        m_label(label), m_icon(icon), m_separator(separator == Separator::On), action(action) {
+            
         }
     
-        Item::Item(const QString& name, const QString& icon, Id id) : m_name(name), m_icon(icon), id(id) {
+        auto Item::Create::SimpleItem(const QString& label, Action action, Separator separator) -> Item* {
+            return new Item(label, nullptr, action, separator);
+        }
+        
+        auto Item::Create::IconItem(const QString& label, const QString& icon, Action action, Separator separator) -> Item* {
+            return new Item(label, icon, action, separator);
         }
 
         auto Item::add(Item* item) -> void {
@@ -16,13 +23,13 @@ namespace quick {
             emit this->itemsChanged();
         }
     
-        auto Item::setName(const QString& name) -> void {
-            this->m_name = name;
-            emit this->nameChanged();
+        auto Item::setLabel(const QString& label) -> void {
+            this->m_label = label;
+            emit this->labelChanged();
         }
     
-        auto Item::getName() -> QString {
-            return this->m_name;
+        auto Item::getLabel() -> QString {
+            return this->m_label;
         }
     
         auto Item::setIcon(const QString& icon) -> void {
@@ -33,8 +40,16 @@ namespace quick {
             return this->m_icon;
         }
     
-        auto Item::getItems() -> QQmlListProperty<Item> {
+        auto Item::getSeparator() -> bool {
+            return this->m_separator;
+        }
+    
+        auto Item::getItemList() -> QQmlListProperty<Item> {
             return QQmlListProperty<Item>(this, 0, &itemsCount, &itemsAt);
+        }
+    
+        auto Item::getItems() -> QList<Item*> {
+            return this->m_items;
         }
     
         auto Item::itemsCount(QQmlListProperty<Item>* list) -> int {
@@ -72,12 +87,27 @@ namespace quick {
     
         auto Item::removeItem(const QString& title) -> void {
             for (const auto& item : this->m_items) {
-                if (item->getName().compare(title) == 0) {
+                if (item->getLabel().compare(title) == 0) {
                     this->m_items.removeOne(item);
                     emit this->itemsChanged();
                     break;
                 }
             }
+        }
+    
+        auto Item::isEmpty() -> bool {
+            return this->m_items.isEmpty();
+        }
+    
+        auto Item::setEnabled(bool enabled) -> void {
+            if (this->m_enabled != enabled) {
+                this->m_enabled = enabled;
+                emit this->enabledChanged();
+            }
+        }
+    
+        auto Item::getEnabled() -> bool {
+            return this->m_enabled;
         }
     }
 }

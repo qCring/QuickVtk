@@ -20,7 +20,7 @@ Row {
         id: label
 
         anchors.centerIn: parent
-        text: model.name
+        text: model.label
         color: item.focus ? "#fff" : "#9DA5B4";
         font.pointSize: 14;
       }
@@ -64,7 +64,7 @@ Row {
                 anchors.left: parent.left;
                 anchors.leftMargin: 8;
 
-                property string color: ma_item.containsMouse ? "#fff" : "#9DA5B4";
+                property string color: model.enabled ? ma_item.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
 
                 Lib.Icon {
                   icon: icons[model.icon] != undefined ? icons[model.icon] : "";
@@ -74,11 +74,20 @@ Row {
                 }
 
                 Lib.Label {
-                  text: model.name;
+                  text: model.label;
                   color: content.color;
                   anchors.verticalCenter: parent.verticalCenter;
                   font.pointSize: 14;
                 }
+              }
+
+              Rectangle {
+                anchors.left: parent.left;
+                anchors.right: parent.right;
+                anchors.bottom: parent.bottom;
+                height: 1;
+                color: "#333842";
+                visible: model.separator;
               }
 
               MouseArea {
@@ -88,6 +97,10 @@ Row {
                 hoverEnabled: true;
 
                 onClicked: {
+                  if (!model.enabled) {
+                    return;
+                  }
+
                   if (model.items.length > 0) {
                     inner.visible = true;
                   } else {
@@ -173,16 +186,26 @@ Row {
                       id: innerItem;
                       property string color: innerMA.containsMouse ? "#fff" : "#9DA5B4";
                       width: Math.max(innerLabel.width + 50, innerCol.width);
-                      height: innerLabel.height + 8;
+                      height: innerLabel.height + 10;
 
                       Lib.Label {
                         id: innerLabel;
 
-                        text: model.name;
+                        text: model.label;
                         color: innerItem.color;
+                        font.pointSize: 14;
                         anchors.verticalCenter: parent.verticalCenter;
                         anchors.left: parent.left;
                         anchors.leftMargin: 8;
+                      }
+
+                      Rectangle {
+                        anchors.left: parent.left;
+                        anchors.right: parent.right;
+                        anchors.bottom: parent.bottom;
+                        height: 1;
+                        color: "#333842";
+                        visible: model.separator;
                       }
 
                       MouseArea {

@@ -147,13 +147,6 @@ Window {
       anchors.bottom: footer.top;
     }
 
-    Settings {
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-      anchors.top: header.bottom;
-      anchors.bottom: footer.top;
-    }
-
     Footer {
       id: footer
 

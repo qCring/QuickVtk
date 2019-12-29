@@ -1,45 +1,80 @@
 #pragma once
 
 #include "quickQmlRegister.hpp"
-#include "quickMenuId.h"
 
 #include <QObject>
 
 namespace quick {
     namespace Menu {
     
+        enum class Action {
+            None,
+            File_Open,
+            File_Open_Recent,
+            File_Clear_History,
+            File_Close,
+            File_Quit,
+            View_Console,
+            View_Context,
+            View_Previous_Tab,
+            View_Next_Tab,
+            Help_About,
+            Help_Website
+        };
+    
+        enum class Separator {
+            On,
+            Off
+        };
+    
         class Item : public QObject {
             Q_OBJECT
-            Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged);
+            Q_PROPERTY(QString label READ getLabel WRITE setLabel NOTIFY labelChanged);
             Q_PROPERTY(QString icon READ getIcon WRITE setIcon NOTIFY iconChanged);
-            Q_PROPERTY(QQmlListProperty<quick::Menu::Item> items READ getItems NOTIFY itemsChanged);
+            Q_PROPERTY(QQmlListProperty<quick::Menu::Item> items READ getItemList NOTIFY itemsChanged);
+            Q_PROPERTY(bool separator READ getSeparator CONSTANT);
+            Q_PROPERTY(bool enabled READ getEnabled WRITE setEnabled NOTIFY enabledChanged);
         private:
-            QString m_name;
+            QString m_label;
             QString m_icon;
             QString m_data;
             QList<Item*> m_items;
+            bool m_separator = false;
+            bool m_enabled = true;
             static Qml::Register::Type<Item> Register;
         public:
             static auto itemsCount(QQmlListProperty<Item>*) -> int;
             static auto itemsAt(QQmlListProperty<Item>*, int) -> Item*;
-            const Id id;
+            const Action action;
+        private:
+            Item(const QString&, const QString&, Action action, Separator separator);
         public:
-            Item(const QString&, Id id = Id::None);
-            Item(const QString&, const QString&, Id id = Id::None);
-            auto setName(const QString&) -> void;
-            auto getName() -> QString;
+            class Create {
+            public:
+                static auto SimpleItem(const QString& label, Action action = Action::None, Separator separator = Separator::Off) -> Item*;
+                static auto IconItem(const QString& label, const QString& icon, Action action = Action::None, Separator separator = Separator::Off) -> Item*;
+            };
+        public:
+            auto setLabel(const QString&) -> void;
+            auto getLabel() -> QString;
             auto setData(const QString&) -> void;
             auto getData() -> QString;
             auto setIcon(const QString&) -> void;
             auto getIcon() -> QString;
-            auto getItems() -> QQmlListProperty<Item>;
+            auto setEnabled(bool) -> void;
+            auto getEnabled() -> bool;
+            auto getSeparator() -> bool;
+            auto getItemList() -> QQmlListProperty<Item>;
+            auto getItems() -> QList<Item*>;
             auto add(Item*) -> void;
             auto removeItems() -> void;
             auto removeItem(const QString&) -> void;
+            auto isEmpty() -> bool;
         signals:
-            void nameChanged();
+            void labelChanged();
             void iconChanged();
             void itemsChanged();
+            void enabledChanged();
         };
     }
 }

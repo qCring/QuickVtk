@@ -1,5 +1,4 @@
 #include "quickAppEngine.hpp"
-#include "quickAppSettings.hpp"
 #include "quickAppController.hpp"
 
 #include "quickMenuController.hpp"
@@ -48,7 +47,6 @@ namespace quick {
 
             Qml::RegisterTypes();
             
-            Settings::Create();
             SampleData::Controller::Create();
             Menu::Controller::Init();
 

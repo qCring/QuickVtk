@@ -44,7 +44,7 @@ Item {
     Rectangle {
       anchors.verticalCenter: parent.verticalCenter;
 
-      border.color: App.console.collapsed ? "#6E7582" : "#fff";
+      border.color: App.console.collapsed ? "#6E7582" : "#2B68A4";
       color: "transparent"
       radius: 1;
       height: parent.height * 0.5;
@@ -57,7 +57,7 @@ Item {
         anchors.margins: 2;
 
         height: 3;
-        color: parent.border.color;
+        color: App.console.collapsed ? "#6E7582" : "#2B68A4";
       }
 
       MouseArea {
@@ -69,7 +69,7 @@ Item {
     Rectangle {
       anchors.verticalCenter: parent.verticalCenter;
 
-      border.color: App.showInspector ? "#fff" : "#6E7582";
+      border.color: App.details.collapsed ? "#6E7582" : "#2B68A4";
       radius: 1;
       color: "transparent"
       height: parent.height * 0.5;
@@ -82,12 +82,12 @@ Item {
         anchors.margins: 2;
 
         width: 3;
-        color: parent.border.color;
+        color: App.details.collapsed ? "#6E7582" : "#2B68A4";
       }
 
       MouseArea {
           anchors.fill: parent
-          onClicked: App.toggleInspector();
+          onClicked: App.details.toggle();
       }
     }
   }

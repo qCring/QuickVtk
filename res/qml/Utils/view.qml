@@ -9,48 +9,23 @@ Item {
   anchors.left: parent ? parent.left : undefined;
   anchors.right: parent ? parent.right : undefined;
   anchors.top: parent ? parent.top : undefined;
-  anchors.margins: 8;
+  anchors.leftMargin: 8;
+  anchors.rightMargin: 8;
 
   property var file: null;
   property bool selected: false;
-  property alias title: label.text;
+  property string title: "";
   default property alias content: contentColumn.children;
 
-  height: column.height;
+  height: contentColumn.height;
 
   Column {
-    id: column;
+    id: contentColumn;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    anchors.leftMargin: 8;
-    anchors.rightMargin: 8;
-
-    topPadding: 4;
-    bottomPadding: 4;
-
-    spacing: 2;
-
-    Utils.Label {
-      id: label;
-
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-
-      text: "Properties"
-      color: "#fff"
-      font.bold: true;
-    }
-
-    Column {
-      id: contentColumn;
-
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-
-      spacing: 8;
-    }
+    spacing: 8;
   }
 
   onSelectedChanged: {

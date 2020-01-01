@@ -1,4 +1,4 @@
-module Utils
+module TypeInfo
 Enumeration 1.0 enumeration.qml
 List 1.0 list.qml
 Method 1.0 method.qml

@@ -20,7 +20,7 @@ Window {
     }
 
     Preview {
-      utilsView: inspector.utilsView;
+      utilsView: details.utilsView;
 
       anchors.top: header.bottom;
       anchors.left: parent.left;
@@ -34,7 +34,7 @@ Window {
       anchors.bottom: parent.bottom;
       anchors.top: header.bottom;
       anchors.right: parent.right;
-      anchors.rightMargin: App.showInspector ? 400 : 0;
+      anchors.rightMargin: App.details.collapsed ? 0 : 400;
 
       width: 8;
       // TODO: use mouse drag instead of constant width
@@ -127,8 +127,8 @@ Window {
       }
     }
 
-    Inspector {
-      id: inspector;
+    Details {
+      id: details;
 
       anchors.left: hSplit.right;
       anchors.right: parent.right;

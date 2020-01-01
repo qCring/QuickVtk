@@ -1,5 +1,6 @@
 #include "quickAppController.hpp"
 #include "quickAppSettings.hpp"
+#include "quickAppDetails.hpp"
 
 #include "meta_quickvtk.hpp"
 
@@ -23,33 +24,21 @@ namespace quick {
             
             instance = new Controller();
         }
-    
-        auto Controller::setShowInspector(bool showInspector) -> void {
-            if (this->m_showInspector != showInspector) {
-                this->m_showInspector = showInspector;
-                emit this->showInspectorChanged();
-            }
-        }
-    
-        auto Controller::getShowInspector() -> bool {
-            return this->m_showInspector;
-        }
-    
-        void Controller::toggleInspector() {
-            this->m_showInspector = !this->m_showInspector;
-            emit this->showInspectorChanged();
-        }
 
         auto Controller::getVersion() -> QString {
             return Meta::AppVersion;
         }
+    
+        auto Controller::getSettings() -> Settings* {
+            return Settings::instance;
+        }
+
+        auto Controller::getDetails() -> Details* {
+            return Details::instance;
+        }
 
         auto Controller::getConsoleController() -> Console::Controller* {
             return Console::Controller::instance;
-        }
-
-        auto Controller::getSettingsController() -> Settings* {
-            return Settings::instance;
         }
 
         auto Controller::getMenuController() -> Menu::Controller* {

@@ -5,7 +5,7 @@ Footer 1.0 footer.qml
 Header 1.0 header.qml
 Menu 1.0 menu.qml
 Console 1.0 console.qml
-Inspector 1.0 inspector.qml
+Details 1.0 details.qml
 Content 1.0 content.qml
 Tabs 1.0 tabs.qml
 Editor 1.0 editor.qml

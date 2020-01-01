@@ -32,6 +32,7 @@ namespace quick {
 
         class Controller : public QObject {
             Q_OBJECT
+            Q_PROPERTY(bool showInspector READ getShowInspector WRITE setShowInspector NOTIFY showInspectorChanged);
             Q_PROPERTY(bool debugBuild READ isDebugBuild CONSTANT);
             Q_PROPERTY(QString version READ getVersion CONSTANT);
             Q_PROPERTY(quick::App::Settings* settings READ getSettingsController CONSTANT);
@@ -40,7 +41,7 @@ namespace quick {
             Q_PROPERTY(quick::Menu::Controller* menu READ getMenuController CONSTANT);
             Q_PROPERTY(quick::TypeInfo::List* typeList READ getTypeList CONSTANT);
         private:
-            bool m_showList = false;
+            bool m_showInspector = false;
             QString m_version;
             Controller() = default;
         public:
@@ -54,8 +55,12 @@ namespace quick {
             auto getConsoleController() -> Console::Controller*;
             auto getMenuController() -> Menu::Controller*;
             auto getDocumentController() -> Document::Controller*;
+            auto setShowInspector(bool) -> void;
+            auto getShowInspector() -> bool;
+        public slots:
+            void toggleInspector();
         signals:
-            void expandedChanged();
+            void showInspectorChanged();
         };
     }
 }

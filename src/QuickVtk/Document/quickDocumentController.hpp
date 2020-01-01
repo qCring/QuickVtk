@@ -18,6 +18,8 @@ namespace quick {
             QList<File*> m_files;
             static Qml::Register::Controller<Controller> Register;
             bool m_showSource = false;
+        private:
+            auto ProcessObjectInfo(const QObject*) -> void;
         public:
             static Controller* instance;
             static auto Create() -> void;

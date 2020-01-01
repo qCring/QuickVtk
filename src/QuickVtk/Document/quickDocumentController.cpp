@@ -122,7 +122,6 @@ namespace quick {
         }
     
         void Controller::run() {
-            
             if (this->m_file != nullptr) {
                 emit this->createComponent();
             }

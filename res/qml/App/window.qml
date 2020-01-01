@@ -20,38 +20,34 @@ Window {
     }
 
     Preview {
-      utilsView: context.utilsView;
+      utilsView: inspector.utilsView;
 
       anchors.top: header.bottom;
       anchors.left: parent.left;
-      anchors.right: hSplit.left;
+      anchors.right: hSplit.right;
       anchors.bottom: vSplit.top;
     }
 
     Item {
       id: hSplit;
 
-      x: parent.width - 400;
-      width: 4;
-
-      anchors.bottom: footer.top;
+      anchors.bottom: parent.bottom;
       anchors.top: header.bottom;
+      anchors.right: parent.right;
+      anchors.rightMargin: App.showInspector ? 400 : 0;
 
-      MouseArea {
-        anchors.fill: parent;
-        drag.target: parent;
-        drag.axis: Drag.XAxis;
-      }
+      width: 8;
+      // TODO: use mouse drag instead of constant width
     }
 
     Item {
       id: vSplit;
 
-      height: vLabel.height + 4;
+      height: 30;
 
       anchors.left: parent.left;
-      anchors.right: hSplit.left;
-      anchors.bottom: footer.top;
+      anchors.right: hSplit.right;
+      anchors.bottom: parent.bottom;
       anchors.bottomMargin: App.console.collapsed ? 0 : 200;
 
       Rectangle {
@@ -131,28 +127,20 @@ Window {
       }
     }
 
-    Context {
-      id: context;
+    Inspector {
+      id: inspector;
 
       anchors.left: hSplit.right;
       anchors.right: parent.right;
       anchors.top: header.bottom;
-      anchors.bottom: footer.top;
+      anchors.bottom: parent.bottom;
     }
 
     Console {
       anchors.top: vSplit.bottom;
       anchors.left: parent.left;
-      anchors.right: hSplit.left;
-      anchors.bottom: footer.top;
-    }
-
-    Footer {
-      id: footer
-
-      anchors.left: parent.left
-      anchors.right: parent.right
-      anchors.bottom: parent.bottom
+      anchors.right: hSplit.right;
+      anchors.bottom: parent.bottom;
     }
 
     Header {

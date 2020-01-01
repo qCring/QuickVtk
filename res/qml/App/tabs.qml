@@ -9,15 +9,15 @@ Item {
     id: arrows;
 
     anchors.left: parent.left;
-    anchors.leftMargin: 12;
+    anchors.leftMargin: 8;
     anchors.verticalCenter: parent.verticalCenter;
     anchors.verticalCenterOffset: 2;
-    spacing: 12;
+    spacing: 8;
 
     Lib.Icon {
-      icon: icons.fa_caret_left;
+      icon: icons.fa_chevron_left;
       anchors.verticalCenter: parent.verticalCenter;
-      font.pointSize: 14;
+      font.pointSize: 12;
       color: ma_prev.containsMouse ? "#fff" : "#9DA5B4"
 
       MouseArea {
@@ -30,9 +30,9 @@ Item {
     }
 
     Lib.Icon {
-      icon: icons.fa_caret_right;
+      icon: icons.fa_chevron_right;
       anchors.verticalCenter: parent.verticalCenter;
-      font.pointSize: 14;
+      font.pointSize: 12;
       color: ma_next.containsMouse ? "#fff" : "#9DA5B4"
 
       MouseArea {

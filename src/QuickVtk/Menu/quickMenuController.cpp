@@ -7,10 +7,6 @@
 #include "quickAppSettings.hpp"
 #include "quickAppEngine.hpp"
 
-#include <iostream>
-#include <QMenuBar>
-#include <QDesktopServices>
-
 namespace quick {
     namespace Menu {
 
@@ -61,8 +57,8 @@ namespace quick {
             
             menu_view->add(instance->m_viewToggleConsole);
             menu_view->add(Item::Create::SimpleItem("Toggle Context View", Action::View_Context));
-            menu_view->add(Item::Create::IconItem("Previous Tab", "fa_caret_square_o_left", Action::View_Previous_Tab));
-            menu_view->add(Item::Create::IconItem("Next Tab", "fa_caret_square_o_right", Action::View_Next_Tab));
+            menu_view->add(Item::Create::SimpleItem("Previous Tab", Action::View_Previous_Tab));
+            menu_view->add(Item::Create::SimpleItem("Next Tab", Action::View_Next_Tab));
             
             menu_help->add(Item::Create::SimpleItem("About", Action::Help_About));
             menu_help->add(Item::Create::IconItem("Website", "fa_globe", Action::Help_Website));

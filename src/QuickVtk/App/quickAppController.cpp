@@ -23,6 +23,22 @@ namespace quick {
             
             instance = new Controller();
         }
+    
+        auto Controller::setShowInspector(bool showInspector) -> void {
+            if (this->m_showInspector != showInspector) {
+                this->m_showInspector = showInspector;
+                emit this->showInspectorChanged();
+            }
+        }
+    
+        auto Controller::getShowInspector() -> bool {
+            return this->m_showInspector;
+        }
+    
+        void Controller::toggleInspector() {
+            this->m_showInspector = !this->m_showInspector;
+            emit this->showInspectorChanged();
+        }
 
         auto Controller::getVersion() -> QString {
             return Meta::AppVersion;

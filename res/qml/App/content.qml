@@ -9,7 +9,7 @@ Rectangle {
 
     clip: true;
 
-    color: "#181A1F"
+    color: "#282C34"
 
     Codeview {
       anchors.fill: parent;
@@ -42,12 +42,12 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter;
             icon: icons.fa_folder_open_o;
             font.pointSize: 35;
-            color: "#31353B";
+            color: "#4C5363";
           }
 
           Row {
             anchors.horizontalCenter: parent.horizontalCenter;
-            property string color: "#31353B";
+            property string color: "#4C5363";
             property int textSize: 20;
             spacing: 4;
 

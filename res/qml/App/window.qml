@@ -8,7 +8,7 @@ import TypeInfo 1.0 as TypeInfo
 Window {
     id: root;
 
-    color: "#282C34"
+    color: "#21252B"
 
     FocusScope {
       id: defaultFocus;
@@ -55,7 +55,7 @@ Window {
         anchors.right: parent.right;
         anchors.top: parent.top;
         height: 1;
-        color: "#282C34"
+        color: "#181A1F"
       }
 
       MouseArea {
@@ -95,34 +95,18 @@ Window {
         }
       }
 
-      Row {
-        anchors.right: parent.right;
+      Lib.Button {
         anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
+        anchors.right: parent.right;
+        anchors.rightMargin: 8;
 
-        Lib.Button {
-          label.text: "Preview"
-          use_toggle: true;
-          toggle_on_click: false;
-          toggle: !App.document.showSource;
-          color: toggle ? "#181A1F" : "#31353B"
-          radius: 0;
+        frameless: true;
+        icon: icons.fa_exchange;
+        label.text: App.document.showSource ? "Preview" : "Source";
 
-          onClicked: {
-            App.document.showSource = false;
-          }
-        }
-
-        Lib.Button {
-          label.text: ".qml"
-          use_toggle: true;
-          toggle_on_click: false;
-          toggle: App.document.showSource;
-          color: toggle ? "#181A1F" : "#31353B"
-          radius: 0;
-
-          onClicked: {
-            App.document.showSource = true;
-          }
+        onClicked: {
+          App.document.showSource = !App.document.showSource;
         }
       }
     }

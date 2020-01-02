@@ -7,7 +7,7 @@ TextEdit {
 
     selectByMouse: true
     mouseSelectionMode: TextEdit.SelectCharacters
-    selectionColor: "#3d4856"
+    selectionColor: "#4D69A8"
     color: "#fff"
 
     textFormat: TextEdit.PlainText

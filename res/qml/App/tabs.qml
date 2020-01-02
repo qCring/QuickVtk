@@ -5,18 +5,29 @@ import Lib 1.0 as Lib
 Item {
   height: 30;
 
+  Rectangle {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.bottom: parent.bottom;
+
+    height: 1;
+    color: "#181A1F"
+  }
+
   Row {
     id: arrows;
 
     anchors.left: parent.left;
     anchors.leftMargin: 8;
-    anchors.verticalCenter: parent.verticalCenter;
-    anchors.verticalCenterOffset: 2;
+    anchors.top: parent.top;
+    anchors.bottom: parent.bottom;
+
     spacing: 8;
 
     Lib.Icon {
       icon: icons.fa_chevron_left;
-      anchors.verticalCenter: parent.verticalCenter;
+      anchors.top: parent.top;
+      anchors.bottom: parent.bottom;
       font.pointSize: 12;
       color: ma_prev.containsMouse ? "#fff" : "#9DA5B4"
 
@@ -31,7 +42,8 @@ Item {
 
     Lib.Icon {
       icon: icons.fa_chevron_right;
-      anchors.verticalCenter: parent.verticalCenter;
+      anchors.top: parent.top;
+      anchors.bottom: parent.bottom;
       font.pointSize: 12;
       color: ma_next.containsMouse ? "#fff" : "#9DA5B4"
 
@@ -48,6 +60,7 @@ Item {
   Row {
     anchors.left: arrows.right;
     anchors.bottom: parent.bottom;
+    anchors.top: parent.top;
     anchors.right: parent.right;
     anchors.leftMargin: 8;
 
@@ -56,12 +69,28 @@ Item {
 
       Rectangle {
         anchors.bottom: parent.bottom;
-        height: content.height + 10;
+        anchors.top: parent.top;
         width: content.width + 20;
-        color: "#181A1F"
-        border.color: "#282C34";
-        radius: 4;
-        anchors.bottomMargin: -2;
+        color: "#282C34"
+
+        Rectangle {
+          anchors.top: parent.top;
+          anchors.right: parent.right;
+          anchors.bottom: parent.bottom;
+
+          width: 1;
+          color: "#181A1F"
+        }
+
+        Rectangle {
+          anchors.left: parent.left;
+          anchors.right: parent.right;
+          anchors.bottom: parent.bottom;
+
+          height: 1;
+          color: "#181A1F"
+          visible: !model.selected;
+        }
 
         MouseArea {
           id: ma;
@@ -78,7 +107,9 @@ Item {
           id: content;
 
           spacing: 10;
-          anchors.centerIn: parent;
+          anchors.horizontalCenter: parent.horizontalCenter;
+          anchors.top: parent.top;
+          anchors.bottom: parent.bottom;
 
           Lib.Label {
             id: label;
@@ -92,7 +123,8 @@ Item {
           Lib.Icon {
             icon: icons.fa_times;
             color: close_ma.containsMouse ? "#fff" : "#9DA5B4";
-            anchors.verticalCenter: parent.verticalCenter;
+            anchors.top: parent.top;
+            anchors.bottom: parent.bottom;
             font.pointSize: 10;
 
             MouseArea {
@@ -109,13 +141,5 @@ Item {
         }
       }
     }
-  }
-
-  Rectangle {
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-    anchors.bottom: parent.bottom;
-    height: 1;
-    color: "#282C34";
   }
 }

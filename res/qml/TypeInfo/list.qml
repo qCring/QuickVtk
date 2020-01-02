@@ -6,6 +6,7 @@ Lib.List {
     clip: true;
 
     model: App.typeList;
+    spacing: 4;
 
     delegate: Symbol {
         symbol: model.symbol;

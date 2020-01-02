@@ -97,6 +97,6 @@ Item {
     anchors.right: parent.right;
     anchors.bottom: parent.bottom;
     height: 1;
-    color: "#333842";
+    color: "#181A1F";
   }
 }

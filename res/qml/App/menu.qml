@@ -21,13 +21,15 @@ Row {
 
         anchors.centerIn: parent
         text: model.label
-        color: item.focus ? "#fff" : "#9DA5B4";
+        color: item.focus || outerMa.containsMouse ? "#fff" : "#9DA5B4";
         font.pointSize: 14;
       }
 
       MouseArea {
+        id: outerMa;
         anchors.fill: parent
         enabled: modelData.items.length > 0;
+        hoverEnabled: true;
 
         onClicked: {
           item.focus = !item.focus;

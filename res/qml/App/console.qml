@@ -4,7 +4,7 @@ import Lib 1.0 as Lib
 
 Rectangle {
 
-  color: "#181A1F"
+  color: "#21252B"
 
   Item {
     id: header;
@@ -14,15 +14,6 @@ Rectangle {
     anchors.top: parent.top;
 
     height: label_type.height + 8;
-
-    Rectangle {
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-      anchors.bottom: parent.bottom;
-
-      height: 1;
-      color: "#21252B"
-    }
 
     Lib.Label {
       id: label_type;
@@ -64,13 +55,13 @@ Rectangle {
 
     model: App.console.items;
 
-    delegate: Rectangle {
+    delegate: Item {
 
       anchors.left: parent.left;
       anchors.right: parent.right;
       height: label.height + 4;
 
-      color: index % 2 ? "#1a1c22" : "#181A1F";
+      //color: index % 2 ? "#1a1c22" : "#181A1F";
 
       Lib.Icon {
         id: ic;

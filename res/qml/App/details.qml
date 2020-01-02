@@ -16,6 +16,15 @@ Item  {
     anchors.top: parent.top;
     height: 30;
 
+    Rectangle {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.bottom: parent.bottom;
+
+      height: 1;
+      color: "#181A1F"
+    }
+
     Row {
       anchors.fill: parent;
 
@@ -83,22 +92,14 @@ Item  {
       font.pointSize: 14;
       font.bold: true;
     }
-
-    Rectangle {
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-      anchors.top: parent.top;
-
-      height: 1;
-      color: "#333842"
-    }
   }
 
-  Item {
+  Rectangle {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: header.bottom;
     anchors.bottom: footer.top;
+    color: "#282C34"
 
     Item {
       id: utilsView;
@@ -121,6 +122,15 @@ Item  {
     }
   }
 
+  Rectangle {
+    anchors.left: parent.left;
+    anchors.top: tabs.bottom;
+    anchors.bottom: footer.top;
+
+    width: 1;
+    color: "#181A1F"
+  }
+
   Item {
     id: footer;
 
@@ -136,7 +146,7 @@ Item  {
       anchors.top: parent.top;
 
       height: 1;
-      color: "#333842"
+      color: "#181A1F"
     }
 
     Row {

@@ -5,6 +5,16 @@ import Lib 1.0 as Lib
 Rectangle {
 
   color: "#21252B"
+  visible: !App.console.collapsed;
+
+  Rectangle {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: parent.top;
+
+    height: 1;
+    color: "#181A1F";
+  }
 
   Item {
     id: header;
@@ -27,23 +37,21 @@ Rectangle {
     }
 
     Lib.Label {
-      anchors.verticalCenter: parent.verticalCenter;
-      anchors.left: label_type.right;
-      anchors.right: btn_clear.left;
-
-      text: "Message"
-    }
-
-    Lib.Button {
-      id: btn_clear;
+      id: label_time;
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.right: parent.right;
-      anchors.rightMargin: 8;
+      rightPadding: 4;
 
-      frameless: true;
-      icon: icons.fa_trash;
-      onClicked: App.console.clear();
+      text: "Time"
+    }
+
+    Lib.Label {
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.left: label_type.right;
+      anchors.right: label_time.left;
+
+      text: "Description"
     }
   }
 
@@ -51,7 +59,7 @@ Rectangle {
     anchors.top: header.bottom;
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.bottom: parent.bottom;
+    anchors.bottom: footer.top;
 
     model: App.console.items;
 
@@ -88,6 +96,37 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter;
         rightPadding: 4;
       }
+    }
+  }
+
+  Item {
+    id: footer;
+
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.bottom: parent.bottom;
+
+    height: 30;
+
+    Rectangle {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.top: parent.top;
+
+      height: 1;
+      color: "#181A1F";
+    }
+
+    Lib.Button {
+      id: btn_clear;
+
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.right: parent.right;
+      anchors.rightMargin: 8;
+
+      frameless: true;
+      icon: icons.fa_trash;
+      onClicked: App.console.clear();
     }
   }
 }

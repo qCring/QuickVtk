@@ -23,6 +23,7 @@ Rectangle {
   radius: 2;
 
   signal clicked;
+  signal doubleClicked;
 
   Row {
     id: row;
@@ -64,6 +65,10 @@ Rectangle {
 
       root.forceActiveFocus();
       root.clicked();
+    }
+
+    onDoubleClicked: {
+      root.doubleClicked();
     }
   }
 }

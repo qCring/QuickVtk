@@ -32,7 +32,7 @@ Item {
         height: 14;
 
         color: ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#21252B"
-        border.color: "#666";
+        border.color: "#1B1D23";
         radius: 2;
 
         Lib.Icon {

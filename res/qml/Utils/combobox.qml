@@ -63,11 +63,11 @@ Item {
     background: Rectangle {
       id: _background;
 
-      implicitWidth: 120
-      color: "#21252B"
-      border.color: "#666"
-      border.width: control.visualFocus ? 2 : 1
-      radius: 2
+      implicitWidth: 120;
+      color: "#21252B";
+      border.color: "#1B1D23";
+      border.width: 1;
+      radius: 2;
     }
 
     delegate: Lib.Label {
@@ -114,7 +114,7 @@ Item {
 
       background: Rectangle {
         color: "#21252B"
-        border.color: "#666"
+        border.color: "#1B1D23"
         radius: 2
       }
     }

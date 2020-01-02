@@ -43,7 +43,7 @@ Item {
         height: 14;
         radius: 2;
 
-        border.color: "#666";
+        border.color: "#1B1D23";
         color: picker.color;
 
         MouseArea {

@@ -16,17 +16,22 @@ namespace quick {
             };
         private:
             Q_ENUM(Type);
-            Q_PROPERTY(QString message READ getMessage CONSTANT);
+            Q_PROPERTY(QString description READ getDescription CONSTANT);
             Q_PROPERTY(Type type READ getType CONSTANT);
             Q_PROPERTY(QString time READ getTime CONSTANT);
+            Q_PROPERTY(QString label READ getLabel CONSTANT);
         private:
             Type m_type;
-            QString m_message;
+            QString m_description;
+            QString m_label;
             QString m_time;
             static Qml::Register::Type<Item> Register;
+        private:
+            auto typeToString(Type) -> QString;
         public:
             Item(const QString&, Type);
-            auto getMessage() -> QString;
+            auto getDescription() -> QString;
+            auto getLabel() -> QString;
             auto getType() -> Type;
             auto getTime() -> QString;
         };

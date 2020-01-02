@@ -72,25 +72,46 @@ Item  {
     }
   }
 
-  Item {
+  Rectangle {
     id: header;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: tabs.bottom;
-    height: title.height + 18;
 
-    Lib.Label {
-      id: title;
+    height: title.height + 18;
+    color: "#282C34"
+
+    Row {
+      anchors.left: parent.left;
+      anchors.top: parent.top;
+      anchors.bottom: parent.bottom;
+      anchors.leftMargin: 8;
+      
+      spacing: 8;
+
+      Lib.Icon {
+        icon: icons.fa_bars;
+        anchors.verticalCenter: parent.verticalCenter;
+      }
+
+      Lib.Label {
+        id: title;
+        anchors.verticalCenter: parent.verticalCenter;
+
+        text: App.details.title;
+        font.pointSize: 14;
+        font.bold: true;
+      }
+    }
+
+    Rectangle {
       anchors.left: parent.left;
       anchors.right: parent.right;
-      anchors.verticalCenter: parent.verticalCenter;
-      anchors.leftMargin: 8;
-      anchors.rightMargin: 8;
+      anchors.bottom: parent.bottom;
 
-      text: App.details.title;
-      font.pointSize: 14;
-      font.bold: true;
+      height: 1;
+      color: "#181A1F"
     }
   }
 

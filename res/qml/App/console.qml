@@ -8,15 +8,6 @@ Rectangle {
   visible: !App.console.collapsed;
 
   Rectangle {
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-    anchors.top: parent.top;
-
-    height: 1;
-    color: "#181A1F";
-  }
-
-  Item {
     id: header;
 
     anchors.left: parent.left;
@@ -24,16 +15,26 @@ Rectangle {
     anchors.top: parent.top;
 
     height: label_type.height + 8;
+    color: "#282C34"
 
     Lib.Label {
       id: label_type;
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.left: parent.left;
-      leftPadding: 4;
-      rightPadding: 4;
+
+      leftPadding: 20;
+      rightPadding: 20;
 
       text: "Type"
+    }
+
+    Lib.Label {
+      anchors.verticalCenter: parent.verticalCenter;
+      anchors.left: label_type.right;
+      anchors.right: label_time.left;
+
+      text: "Description"
     }
 
     Lib.Label {
@@ -45,14 +46,15 @@ Rectangle {
 
       text: "Time"
     }
+  }
 
-    Lib.Label {
-      anchors.verticalCenter: parent.verticalCenter;
-      anchors.left: label_type.right;
-      anchors.right: label_time.left;
+  Rectangle {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: parent.top;
 
-      text: "Description"
-    }
+    height: 1;
+    color: "#181A1F";
   }
 
   Lib.List {
@@ -67,30 +69,42 @@ Rectangle {
 
       anchors.left: parent.left;
       anchors.right: parent.right;
-      height: label.height + 4;
+      height: _description.height + 4;
 
-      //color: index % 2 ? "#1a1c22" : "#181A1F";
+      Item {
+        id: _label;
 
-      Lib.Icon {
-        id: ic;
-        icon: modelData.type == 0 ? icons.fa_info_circle : modelData.type > 1 ? icons.fa_exclamation_triangle : "";
-        color: modelData.type == 2 ? "#ffff00" : modelData.type == 3 ? "#ff0000" : "#777";
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
+
+        //color: modelData.type == 2 ? "#D4B05E" : modelData.type == 3 ? "#C54632" : "transparent";
         width: label_type.width;
-        font.pointSize: 9;
-        anchors.verticalCenter: parent.verticalCenter;
-        horizontalAlignment: Text.AlignHCenter
+
+        Lib.Label {
+          anchors.left: parent.left;
+          anchors.verticalCenter: parent.verticalCenter;
+
+          leftPadding: 4;
+          rightPadding: 4;
+          text: modelData.label;
+          //color: modelData.type > 1 ? "#fff" : "#9DA5B4"
+          font.bold: modelData.type > 1;
+          color: modelData.type == 2 ? "#D4B05E" : modelData.type == 3 ? "#C54632" : "#9DA5B4";
+        }
       }
 
       Lib.Label {
-        id: label;
-        text: modelData.message;
+        id: _description;
+
+        text: modelData.description;
         anchors.verticalCenter: parent.verticalCenter;
-        anchors.left: ic.right;
-        anchors.right: time.left;
+        anchors.left: _label.right;
+        anchors.right: _time.left;
       }
 
       Lib.Label {
-        id: time;
+        id: _time;
+
         text: modelData.time;
         anchors.right: parent.right;
         anchors.verticalCenter: parent.verticalCenter;

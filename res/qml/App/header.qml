@@ -3,12 +3,13 @@ import QtQuick 2.12
 import Lib 1.0 as Lib
 import TypeInfo 1.0 as TypeInfo
 
-Item {
+Rectangle {
   id: root;
 
   height: 35
   property var file: App.document.file;
   property bool modified: file != undefined && file.modified;
+  color: "#282C34"
 
   Menu {
     anchors.top: parent.top;
@@ -47,8 +48,8 @@ Item {
       border.color: App.console.collapsed ? "#6E7582" : "#2B68A4";
       color: "transparent"
       radius: 1;
-      height: parent.height * 0.5;
-      width: height * 1.4;
+      height: parent.height * 0.4;
+      width: height * 1.3;
 
       Rectangle {
         anchors.left: parent.left;
@@ -72,8 +73,8 @@ Item {
       border.color: App.details.collapsed ? "#6E7582" : "#2B68A4";
       radius: 1;
       color: "transparent"
-      height: parent.height * 0.5;
-      width: height * 1.4;
+      height: parent.height * 0.4;
+      width: height * 1.3;
 
       Rectangle {
         anchors.right: parent.right;

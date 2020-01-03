@@ -1,6 +1,6 @@
 module App
 Preview 1.0 preview.qml
-Codeview 1.0 codeview.qml
+Editor 1.0 editor.qml
 Footer 1.0 footer.qml
 Header 1.0 header.qml
 Menu 1.0 menu.qml
@@ -8,4 +8,3 @@ Console 1.0 console.qml
 Details 1.0 details.qml
 Content 1.0 content.qml
 Tabs 1.0 tabs.qml
-Editor 1.0 editor.qml

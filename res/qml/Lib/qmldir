@@ -1,12 +1,7 @@
 module Lib
 Button 1.0 button.qml
-CheckBox 1.0 checkbox.qml
 Icon 1.0 icon.qml
 Label 1.0 label.qml
-TagLabel 1.0 taglabel.qml
 TextInput 1.0 textinput.qml
-TextEdit 1.0 textedit.qml
-ScrollView 1.0 scrollview.qml
-SplitView 1.0 splitview.qml
-TabView 1.0 tabview.qml
-List 1.0 list.qml
+ListView 1.0 listview.qml
+Badge 1.0 badge.qml

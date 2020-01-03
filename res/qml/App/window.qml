@@ -79,19 +79,33 @@ Window {
           onClicked: App.console.toggle();
         }
 
-        Rectangle {
-          color: "#181A1F"
-          width: label_logs.width + 12;
-          height: label_logs.height + 2;
+        Lib.Badge {
           anchors.verticalCenter: parent.verticalCenter;
-          radius: 4;
+          label.text: App.console.items.length;
+        }
 
-          Lib.Label {
-            id: label_logs;
-            anchors.centerIn: parent;
-            text: App.console.items.length;
-            font.pointSize: 10;
-          }
+        Lib.Icon {
+          anchors.verticalCenter: parent.verticalCenter;
+
+          icon: icons.fa_exclamation_triangle;
+          color: App.console.warningCount > 0 ? "#D4B05E" : "#6E7582"
+        }
+
+        Lib.Badge {
+          anchors.verticalCenter: parent.verticalCenter;
+          label.text: App.console.warningCount;
+        }
+
+        Lib.Icon {
+          anchors.verticalCenter: parent.verticalCenter;
+
+          icon: icons.fa_exclamation_circle;
+          color: App.console.errorCount > 0 ? "#C54632" : "#6E7582"
+        }
+
+        Lib.Badge {
+          anchors.verticalCenter: parent.verticalCenter;
+          label.text: App.console.errorCount;
         }
       }
 

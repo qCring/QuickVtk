@@ -24,7 +24,7 @@ Row {
         text: item.name + ": ";
     }
 
-    Lib.TagLabel {
+    Lib.Badge {
         anchors.verticalCenter: parent.verticalCenter;
 
         label.text: item.paramTypes;
@@ -41,7 +41,7 @@ Row {
         color: "#fff"
     }
 
-    Lib.TagLabel {
+    Lib.Badge {
         anchors.verticalCenter: parent.verticalCenter;
 
         label.text: item.returnType;

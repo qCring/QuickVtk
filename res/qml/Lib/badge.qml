@@ -8,8 +8,7 @@ Rectangle {
 
     property alias label: label;
 
-    color: "#008800";
-    border.color: "#181A1F"
+    color: "#1B1D23";
 
     radius: 2;
 
@@ -17,10 +16,11 @@ Rectangle {
         id: label;
 
         anchors.centerIn: parent;
+        leftPadding: 8;
+        rightPadding: 8;
         font.weight: Font.Medium;
         font.pointSize: 11;
 
         padding: 1;
-        color: "#fff"
     }
 }

@@ -57,7 +57,7 @@ Rectangle {
     color: "#181A1F";
   }
 
-  Lib.List {
+  Lib.ListView {
     anchors.top: header.bottom;
     anchors.left: parent.left;
     anchors.right: parent.right;

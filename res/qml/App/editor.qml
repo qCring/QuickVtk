@@ -48,7 +48,7 @@ Item {
             y: textEdit.cursorY;
             height: textEdit.cursorHeight;
 
-            color: "#21252B"
+            color: "#2D313C"
         }
 
         Repeater {
@@ -63,7 +63,7 @@ Item {
             height: textEdit.cursorHeight;
             y: (model.line) * height;
 
-            color: "#782A32";
+            color: "#C54632";
 
             Rectangle {
               anchors.left: parent.left;
@@ -74,7 +74,7 @@ Item {
               color: "#ff0000"
             }
 
-            Lib.TagLabel {
+            Lib.Badge {
               anchors.right: parent.right;
               anchors.top: parent.top;
               anchors.bottom: parent.bottom;
@@ -87,10 +87,20 @@ Item {
           }
         }
 
-        Lib.TextEdit {
+
+        TextEdit {
             id: textEdit
 
             readOnly: true;
+            font.family: "Bitstream Vera Sans Mono";
+
+            selectByMouse: true
+            mouseSelectionMode: TextEdit.SelectCharacters
+            selectionColor: "#aa4D69A8"
+            color: "#fff"
+
+            textFormat: TextEdit.PlainText
+            wrapMode: TextEdit.NoWrap
 
             width: Math.max(implicitWidth, root.width - lines.width);
             height: Math.max(implicitHeight, root.height);

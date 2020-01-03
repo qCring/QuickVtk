@@ -20,6 +20,14 @@ namespace quick {
             instance = new Controller();
         }
     
+        auto Controller::getErrorCount() -> int {
+            return this->m_errorCount;
+        }
+    
+        auto Controller::getWarningCount() -> int {
+            return this->m_warningCount;
+        }
+    
         auto Controller::setCollapsed(bool collapsed) -> void {
             if (this->m_collapsed != collapsed) {
                 this->m_collapsed = collapsed;
@@ -38,7 +46,12 @@ namespace quick {
 
         void Controller::clear() {
             this->m_items.clear();
+            this->m_warningCount = 0;
+            this->m_errorCount = 0;
+            
             emit this->itemsChanged();
+            emit this->errorCountChanged();
+            emit this->warningCountChanged();
         }
 
         auto Controller::addInfoMsg(const QString& msg) -> void {
@@ -55,13 +68,17 @@ namespace quick {
     
         auto Controller::addWarningMsg(const QString& msg) -> void {
             this->m_items.append(new Item(QString(msg).remove('\n'), Item::Type::Warning));
+            ++this->m_warningCount;
             
+            emit this->warningCountChanged();
             emit this->itemsChanged();
         }
     
         auto Controller::addErrorMsg(const QString& msg) -> void {
             this->m_items.append(new Item(QString(msg).remove('\n'), Item::Type::Error));
+            ++this->m_errorCount;
             
+            emit this->errorCountChanged();
             emit this->itemsChanged();
         }
     

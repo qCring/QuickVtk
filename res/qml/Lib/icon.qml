@@ -7,7 +7,7 @@ Text {
 
     property var icons: FA.Icons;
     property alias icon: root.text;
-    property alias pointSize: root.font.pointSize;
+    property alias iconSize: root.font.pointSize;
 
     font.family: "FontAwesome";
     font.pointSize: 13;

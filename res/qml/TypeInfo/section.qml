@@ -26,7 +26,7 @@ Column {
             anchors.verticalCenter: parent.verticalCenter;
 
             icon: icons.fa_caret_down;
-            pointSize: 12;
+            iconSize: 12;
         }
 
         Lib.Label {

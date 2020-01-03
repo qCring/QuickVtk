@@ -44,7 +44,8 @@ Item {
       anchors.rightMargin: 8;
       anchors.verticalCenter: _label.verticalCenter;
 
-      icon: icons.fa_caret_down;
+      icon: icons.fa_chevron_down;
+      iconSize: 10;
     }
 
     contentItem: Lib.Label {
@@ -54,6 +55,9 @@ Item {
       anchors.right: _indicator.left;
       anchors.leftMargin: 4;
       anchors.rightMargin: 4;
+
+      topPadding: 2;
+      bottomPadding: 2;
 
       text: control.displayText;
       elide: Text.ElideRight;

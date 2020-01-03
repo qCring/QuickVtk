@@ -11,15 +11,15 @@ Item {
     clip: true;
 
     Flickable {
-        id: flickable;
+        id: _flickable;
 
-        anchors.left: lines.right;
+        anchors.left: _lines.right;
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
         anchors.right: parent.right;
 
-        contentWidth: textEdit.width;
-        contentHeight: textEdit.height;
+        contentWidth: _textEdit.width;
+        contentHeight: _textEdit.height;
 
         boundsBehavior: Flickable.StopAtBounds
 
@@ -34,19 +34,17 @@ Item {
         function updateScrollY(y) {
             if (contentY >= y) {
                 contentY = y;
-            } else if (contentY + height <= y + textEdit.cursorHeight) {
-                contentY = y + textEdit.cursorHeight - height;
+            } else if (contentY + height <= y + _textEdit.cursorHeight) {
+                contentY = y + _textEdit.cursorHeight - height;
             }
         }
 
         Rectangle {
-            id: cursorBg;
-
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            y: textEdit.cursorY;
-            height: textEdit.cursorHeight;
+            y: _textEdit.cursorY;
+            height: _textEdit.cursorHeight;
 
             color: "#2D313C"
         }
@@ -60,36 +58,65 @@ Item {
             anchors.left: parent.left;
             anchors.right: parent.right;
 
-            height: textEdit.cursorHeight;
+            height: _textEdit.cursorHeight;
             y: (model.line) * height;
+            color: "#22C54632";
 
-            color: "#C54632";
+            Lib.Icon {
+              anchors.verticalCenter: parent.verticalCenter;
+              anchors.right: parent.left;
 
-            Rectangle {
-              anchors.left: parent.left;
-              anchors.top: parent.top;
-              anchors.bottom: parent.bottom;
-
-              width: 2;
-              color: "#ff0000"
+              icon: icons.fa_chevron_right;
+              color: "#933628";
+              iconSize: _textEdit.font.pointSize;
             }
 
-            Lib.Badge {
+            Rectangle {
               anchors.right: parent.right;
               anchors.top: parent.top;
               anchors.bottom: parent.bottom;
+              anchors.rightMargin: 2;
 
-              label.text: model.message;
+              width: _error.width + 16;
+              radius: 2;
+              color: "#933628"
 
-              color: "#181A1F"
-              border.color: root.color;
+              Lib.Icon {
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.right: parent.left;
+
+                icon: icons.fa_caret_left;
+                color: "#933628";
+                iconSize: _textEdit.font.pointSize;
+              }
+
+              Row {
+                id: _error;
+
+                anchors.centerIn: parent;
+                spacing: 8;
+
+                Lib.Icon {
+                  anchors.verticalCenter: parent.verticalCenter;
+                  icon: icons.fa_exclamation_circle;
+                  iconSize: _textEdit.font.pointSize - 1;
+                  color: "#fff";
+                }
+
+                Lib.Label {
+                  anchors.verticalCenter: parent.verticalCenter;
+                  font.pointSize: _textEdit.font.pointSize;
+                  text: model.message;
+                  color: "#fff"
+                }
+              }
             }
           }
         }
 
 
         TextEdit {
-            id: textEdit
+            id: _textEdit;
 
             readOnly: true;
             font.family: "Bitstream Vera Sans Mono";
@@ -102,7 +129,7 @@ Item {
             textFormat: TextEdit.PlainText
             wrapMode: TextEdit.NoWrap
 
-            width: Math.max(implicitWidth, root.width - lines.width);
+            width: Math.max(implicitWidth, root.width - _lines.width);
             height: Math.max(implicitHeight, root.height);
 
             leftPadding: 4;
@@ -116,47 +143,45 @@ Item {
             text: file != undefined ? file.content : "";
 
             onCursorXChanged: {
-                flickable.updateScrollX(cursorX);
+                _flickable.updateScrollX(cursorX);
             }
 
             onCursorYChanged: {
-                flickable.updateScrollY(cursorY);
+                _flickable.updateScrollY(cursorY);
             }
 
             cursorDelegate: Rectangle {
-                id: cursorDel;
-
                 width: 1.5;
                 color: "orange";
-                visible: textEdit.showCursor;
+                visible: _textEdit.showCursor;
             }
         }
     }
 
     Item {
-        id: lines;
+        id: _lines;
 
         anchors.left: parent.left;
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
 
-        width: linesCol.width + 4;
+        width: _linesCol.width + 4;
 
         Column {
-            id: linesCol;
+            id: _linesCol;
 
-            y: -flickable.contentY;
+            y: -_flickable.contentY;
 
             Repeater {
-                model: textEdit.lineCount;
+                model: _textEdit.lineCount;
 
                 delegate: Text {
                     anchors.right: parent.right;
                     rightPadding: 8;
                     leftPadding: 8;
 
-                    font.family: textEdit.font.family;
-                    font.pointSize: textEdit.font.pointSize;
+                    font.family: _textEdit.font.family;
+                    font.pointSize: _textEdit.font.pointSize;
 
                     verticalAlignment: Text.AlignVCenter;
 

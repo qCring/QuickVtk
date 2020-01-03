@@ -30,7 +30,7 @@ Rectangle {
 
     anchors.centerIn: parent;
 
-    spacing: 4;
+    spacing: 8;
 
     Icon {
       id: icon;

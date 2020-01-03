@@ -74,7 +74,7 @@ Window {
           id: vLabel;
           frameless: true
           anchors.verticalCenter: parent.verticalCenter;
-          icon: icons.fa_terminal;
+          icon: App.console.collapsed ? icons.fa_caret_up : icons.fa_caret_down;
           label.text: "Console";
           onClicked: App.console.toggle();
         }

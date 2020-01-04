@@ -18,10 +18,44 @@ Item {
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
 
+    property int lastY: 0;
+
     clip: true;
 
+    onContentYChanged: {
+      if (!_ma.pressed) {
+        if (_lv.moving) {
+          lastY = contentY;
+        }
+
+        _handle.y = contentY / _handle.scrollRatio;
+      }
+    }
+
+    onMovingChanged: {
+      if (!moving) {
+        lastY = contentY;
+        _handle.released();
+      }
+    }
+
     onModelChanged: {
-      positionViewAtEnd();
+      if (_ma.pressed) {
+        contentY = lastY;
+        return;
+      }
+
+      if (_handle.sticky) {
+        positionViewAtEnd();
+        return;
+      }
+
+      if (model == undefined || model.length == 0) {
+        lastY = contentY = 0;
+        return;
+      }
+
+      contentY = lastY;
     }
   }
 
@@ -33,15 +67,17 @@ Item {
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
 
-    //color: "#1B1D23";
-    //radius: 4;
     width: 12;
 
     Item {
+      id: _handle;
+
       anchors.left: parent.left;
       anchors.right: parent.right;
 
-      height: Math.max(Math.min(_root.height * _root.height / _lv.contentHeight, _root.height), 12);
+      height: Math.max(Math.min(_root.height * _root.height / _lv.contentHeight, _root.height), 16);
+      property real scrollRatio: (_lv.contentHeight - _root.height) / (_root.height - height);
+      property bool sticky: false;
 
       Rectangle {
         anchors.fill: parent;
@@ -49,6 +85,35 @@ Item {
 
         color: "#3D424E";
         radius: 4;
+      }
+
+      onYChanged: {
+        if (_ma.pressed) {
+          _lv.contentY = _lv.lastY = y * scrollRatio;
+        }
+      }
+
+      function released() { // make handle sticky if near bottom
+        if (_handle.y > _root.height - _handle.height - 5) { // 5px tolerance
+          _handle.sticky = true;
+        } else {
+          _handle.sticky = false;
+        }
+      }
+
+      MouseArea {
+        id: _ma;
+
+        anchors.fill: parent;
+
+        drag.target: parent;
+        drag.axis: Drag.YAxis;
+        drag.minimumY: 0;
+        drag.maximumY: _root.height - _handle.height;
+
+        onReleased: {
+          _handle.released();
+        }
       }
     }
   }

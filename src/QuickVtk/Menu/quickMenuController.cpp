@@ -37,7 +37,7 @@ namespace quick {
             auto recentFiles = App::Settings::LoadRecentFiles();
             
             if (recentFiles.count() > 0) {
-                instance->m_fileRecentFiles->add(Item::Create::SimpleItem("Clear File History", Action::File_Clear_History, Separator::On));
+                instance->m_fileRecentFiles->add(Item::Create::SimpleItem("Clear History", Action::File_Clear_History, Separator::On));
             } else {
                 instance->m_fileRecentFiles->setEnabled(false);
             }

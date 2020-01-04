@@ -118,7 +118,6 @@ Window {
         frameless: true;
         icon: icons.fa_exchange;
         label.text: App.document.showSource ? "Show Preview" : "Show Code";
-        enabled: App.document.file;
 
         onClicked: {
           App.document.showSource = !App.document.showSource;

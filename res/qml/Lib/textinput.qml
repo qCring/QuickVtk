@@ -24,8 +24,7 @@ TextInput {
     rightPadding: 4;
 
     color: enabled ? "#fff" : "#9DA5B4";
-    selectedTextColor: "#000";
-    selectionColor: root.borderActive;
+    selectionColor: "#aa4D69A8";
 
     font.family: "Roboto";
     font.pointSize: 13;
@@ -38,12 +37,9 @@ TextInput {
     Rectangle {
         id: rect;
 
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.verticalCenter: parent.verticalCenter;
+        anchors.fill: parent;
 
         z: parent.z - 1;
-        height: root.contentHeight;
 
         color: "#333842"
         border.color: root.activeFocus ? root.borderActive : root.borderDefault;

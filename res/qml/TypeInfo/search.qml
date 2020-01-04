@@ -28,14 +28,17 @@ Item {
         anchors.bottom: parent.bottom;
         anchors.margins: 4;
 
-        from: context.typeList;
+        topPadding: 4;
+        bottomPadding: 4;
+
+        from: App.typeList;
         bind: "filter";
 
         immediate: true;
         radius: 2;
 
         onActiveFocusChanged: {
-            context.typeList.visible = activeFocus;
+            App.typeList.visible = activeFocus;
         }
     }
 
@@ -43,9 +46,7 @@ Item {
         anchors.right: input.right;
         anchors.rightMargin: 4;
         anchors.verticalCenter: parent.verticalCenter;
-        text: context.typeList.count + "/" + context.typeList.totalCount;
+        text: App.typeList.count + "/" + App.typeList.totalCount;
         font.pointSize: 11;
-        font.bold: true;
-        visible: input.activeFocus;
     }
 }

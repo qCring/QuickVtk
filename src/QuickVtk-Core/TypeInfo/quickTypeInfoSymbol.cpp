@@ -83,14 +83,15 @@ namespace quick {
 
         auto Symbol::MakeEnum(QMetaEnum metaEnum) -> void {
             auto name = Get::EnumName(metaEnum);
+            auto prefix = Get::EnumPrefix(metaEnum);
 
-            if (GetEnums().contains(name)) {
+            if (GetEnums().contains(name) || prefix.isEmpty()) {
                 return;
             }
 
             auto symbol = new Enum();
 
-            symbol->m_prefix = Get::EnumPrefix(metaEnum);
+            symbol->m_prefix = prefix;
             symbol->m_name = name;
             symbol->m_type = "enum";
             symbol->m_color = "#E6713E";

@@ -17,10 +17,10 @@ Item {
     anchors.right: _scroll.left;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
+    
+    clip: true;
 
     property int lastY: 0;
-
-    clip: true;
 
     onContentYChanged: {
       if (!_ma.pressed) {

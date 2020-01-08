@@ -59,7 +59,7 @@ Item {
             anchors.right: parent.right;
 
             height: _textEdit.cursorHeight;
-            y: (model.line) * height;
+            y: (Math.max(model.line - 1, 0)) * height;
             color: "#22C54632";
 
             Lib.Icon {

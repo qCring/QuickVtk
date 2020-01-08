@@ -5,7 +5,7 @@ import Lib 1.0 as Lib
 Item {
     id: root;
 
-    property var utilsView: undefined;
+    property var controls: undefined;
 
     Tabs {
       id: tabs;
@@ -16,7 +16,7 @@ Item {
     }
 
     Content {
-      utilsView: root.utilsView;
+      controls: root.controls;
 
       anchors.top: tabs.bottom;
       anchors.left: parent.left;

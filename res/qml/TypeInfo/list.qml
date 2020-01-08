@@ -12,25 +12,39 @@ Item {
     anchors.right: parent.right;
   }
 
-  Lib.ListView {
+  Lib.Area {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.bottom: parent.bottom;
+    anchors.top: _search.bottom;
+
+    Lib.ListView {
       clip: true;
 
       model: App.typeList;
-
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-      anchors.bottom: parent.bottom;
-      anchors.top: _search.bottom;
+      anchors.fill: parent;
 
       delegate: Item {
         anchors.left: parent.left;
         anchors.right: parent.right;
         height: _label.height;
 
+        Lib.Icon {
+          id: _ic;
+
+          anchors.left: parent.left;
+          anchors.leftMargin: 8;
+          anchors.verticalCenter: parent.verticalCenter;
+
+          icon: icons.fa_cube;
+          iconSize: 11;
+          color: "#872BCB"
+        }
+
         Lib.Label {
           id: _label;
 
-          anchors.left: parent.left;
+          anchors.left: _ic.right;
           anchors.verticalCenter: parent.verticalCenter
 
           leftPadding: 8;
@@ -38,16 +52,19 @@ Item {
           bottomPadding: 4;
 
           text: modelData.prefix + "." + modelData.name;
-          color: _ma.containsMouse ? "#fff" : "#9DA5B4"
+          color: "#fff";
         }
 
-        Lib.Badge {
-          anchors.verticalCenter: parent.verticalCenter
+        Lib.Label {
+          id: _type;
+
           anchors.right: parent.right;
           anchors.rightMargin: 4;
+          anchors.verticalCenter: parent.verticalCenter;
 
-          label.text: modelData.type;
-          label.color: modelData.color;
+          text: modelData.type;
+          color: modelData.color;
+          font.pointSize: 10;
         }
 
         MouseArea {
@@ -57,5 +74,6 @@ Item {
           hoverEnabled: true;
         }
       }
+    }
   }
 }

@@ -1,4 +1,5 @@
 module Lib
+Area 1.0 area.qml
 Button 1.0 button.qml
 Icon 1.0 icon.qml
 Label 1.0 label.qml

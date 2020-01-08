@@ -12,7 +12,7 @@ namespace quick {
             }
             
             instance = new Details();
-            instance->showProperties();
+            instance->showInfo();
         }
     
         auto Details::setCollapsed(bool collapsed) -> void {
@@ -26,12 +26,12 @@ namespace quick {
             return this->m_collapsed;
         }
     
-        auto Details::getProperties() -> bool {
-            return this->m_properties;
+        auto Details::getInfo() -> bool {
+            return this->m_info;
         }
         
-        auto Details::getSettings() -> bool {
-            return this->m_settings;
+        auto Details::getNotifications() -> bool {
+            return this->m_notifications;
         }
         
         auto Details::getTypes() -> bool {
@@ -47,40 +47,40 @@ namespace quick {
             return this->m_title;
         }
     
-        void Details::showProperties() {
-            this->m_properties = true;
-            this->m_settings = false;
+        void Details::showInfo() {
+            this->m_info = true;
             this->m_types = false;
+            this->m_notifications = false;
             
-            this->setTitle("Properties");
+            this->setTitle("Information");
             
-            emit this->propertiesChanged();
-            emit this->settingsChanged();
+            emit this->infoChanged();
             emit this->typesChanged();
+            emit this->notificationsChanged();
         }
         
-        void Details::showSettings() {
-            this->m_properties = false;
-            this->m_settings = true;
+        void Details::showNotifications() {
+            this->m_info = false;
             this->m_types = false;
+            this->m_notifications = true;
             
-            this->setTitle("Settings");
+            this->setTitle("Notifications");
             
-            emit this->propertiesChanged();
-            emit this->settingsChanged();
+            emit this->infoChanged();
             emit this->typesChanged();
+            emit this->notificationsChanged();
         }
         
         void Details::showTypes() {
-            this->m_properties = false;
-            this->m_settings = false;
+            this->m_info = false;
             this->m_types = true;
+            this->m_notifications = false;
             
             this->setTitle("Type List");
             
-            emit this->propertiesChanged();
-            emit this->settingsChanged();
+            emit this->infoChanged();
             emit this->typesChanged();
+            emit this->notificationsChanged();
         }
     
         void Details::toggle() {

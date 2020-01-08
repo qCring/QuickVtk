@@ -112,7 +112,7 @@ namespace quick {
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
             symbol->m_type = "class";
-            symbol->m_color = "#319CD3";
+            symbol->m_color = "#fff";
             symbol->m_isWrapper = isWrapper;
             
             for (auto i = metaObject.enumeratorOffset(); i < metaObject.enumeratorCount(); ++i) {

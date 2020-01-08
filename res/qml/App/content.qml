@@ -5,7 +5,7 @@ import Lib 1.0 as Lib
 Rectangle {
     id: root;
 
-    property var utilsView: undefined;
+    property var controls: undefined;
 
     clip: true;
 

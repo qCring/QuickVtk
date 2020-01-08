@@ -20,15 +20,15 @@ TextInput {
     property color borderDefault: "#181A1F"
     property color borderActive: "#9DA5B4"
 
-    leftPadding: 4;
-    rightPadding: 4;
-
     color: enabled ? "#fff" : "#9DA5B4";
     selectionColor: "#aa4D69A8";
 
     font.family: "Roboto";
     font.pointSize: 13;
     verticalAlignment: TextInput.AlignVCenter;
+
+    leftPadding: 4;
+    rightPadding: 4;
 
     activeFocusOnPress: true;
     selectByMouse: true;
@@ -38,11 +38,13 @@ TextInput {
         id: rect;
 
         anchors.fill: parent;
+        anchors.topMargin: 4;
+        anchors.bottomMargin: 4;
 
         z: parent.z - 1;
 
-        color: "#333842"
-        border.color: root.activeFocus ? root.borderActive : root.borderDefault;
+        color: "#282C34"
+        radius: 4;
     }
 
     onActiveFocusChanged: {

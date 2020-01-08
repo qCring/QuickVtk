@@ -8,3 +8,5 @@ Console 1.0 console.qml
 Details 1.0 details.qml
 Content 1.0 content.qml
 Tabs 1.0 tabs.qml
+Notifications 1.0 notifications.qml
+Info 1.0 info.qml

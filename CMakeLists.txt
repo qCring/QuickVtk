@@ -107,6 +107,7 @@ AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/App" "App" list_app_s
 AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Console" "Console" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Document" "Document" list_app_src)
 AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Menu" "Menu" list_app_src)
+AddApplicationSources("${SOURCE_DIR}/${TARGET_APPLICATION}/Notification" "Notification" list_app_src)
 
 AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/Math" "Math" list_core_src list_core_hdr)
 AddCoreSources("${SOURCE_DIR}/${TARGET_CORE}/SampleData" "SampleData" list_core_src list_core_hdr)

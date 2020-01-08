@@ -31,7 +31,7 @@ Item {
   onSelectedChanged: {
     if (selected) {
       root.visible = root.enabled = true;
-      root.parent = utilsView;
+      root.parent = controls;
     } else {
       root.visible = root.enabled = false;
       root.parent = null;
@@ -46,6 +46,6 @@ Item {
 
   Component.onCompleted: {
     this.file = App.document.file;
-    root.parent = utilsView;
+    root.parent = controls;
   }
 }

@@ -20,7 +20,7 @@ Window {
     }
 
     Preview {
-      utilsView: details.utilsView;
+      controls: details.controls;
 
       anchors.top: header.bottom;
       anchors.left: parent.left;
@@ -77,6 +77,13 @@ Window {
           icon: App.console.collapsed ? icons.fa_caret_up : icons.fa_caret_down;
           label.text: "Console";
           onClicked: App.console.toggle();
+        }
+
+        Lib.Icon {
+          anchors.verticalCenter: parent.verticalCenter;
+
+          color: "#6E7582"
+          icon: icons.fa_info_circle;
         }
 
         Lib.Badge {

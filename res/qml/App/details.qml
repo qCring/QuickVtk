@@ -4,16 +4,17 @@ import Lib 1.0 as Lib
 import TypeInfo 1.0 as TypeInfo
 
 Item  {
-
-  property alias utilsView: utilsView;
+  property alias controls: infoView.controls;
   property var file: App.document.file;
   visible: !App.details.collapsed;
 
   Item {
     id: tabs;
+
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: parent.top;
+
     height: 30;
 
     Rectangle {
@@ -37,9 +38,9 @@ Item  {
         frameless: true;
         use_toggle: true;
         toggle_on_click: false;
-        toggle: App.details.properties;
+        toggle: App.details.info;
 
-        onClicked: App.details.showProperties();
+        onClicked: App.details.showInfo();
       }
 
       Lib.Button {
@@ -56,90 +57,97 @@ Item  {
         onClicked: App.details.showTypes();
       }
 
-      Lib.Button {
-        anchors.verticalCenter: parent.verticalCenter;
+      Item {
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
 
-        iconSize: 16;
-        icon: icons.fa_cog;
         width: parent.width / 3;
-        frameless: true;
-        use_toggle: true;
-        toggle_on_click: false;
-        toggle: App.details.settings;
 
-        onClicked: App.details.showSettings();
+        Lib.Icon {
+          anchors.centerIn: parent;
+          iconSize: 16;
+          icon: icons.fa_bell;
+
+          Lib.Label {
+            id: _nlabel;
+
+            anchors.verticalCenter: parent.verticalCenter;
+            anchors.left: parent.right;
+            anchors.leftMargin: 4;
+
+            font.pointSize: 10;
+            font.bold: true;
+            text: App.notification.items.length;
+            enabled: App.notification.items.length > 0;
+          }
+        }
+
+        MouseArea {
+          anchors.fill: parent;
+          onClicked: App.details.showNotifications();
+        }
       }
     }
   }
 
-  Rectangle {
-    id: header;
-
+  Item {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: tabs.bottom;
+    anchors.bottom: footer.top;
+    //color: "#282C34"
 
-    height: title.height + 18;
-    color: "#282C34"
+    Item {
+      id: _header;
 
-    Row {
       anchors.left: parent.left;
+      anchors.right: parent.right;
       anchors.top: parent.top;
-      anchors.bottom: parent.bottom;
-      anchors.leftMargin: 8;
-      
-      spacing: 8;
-
-      Lib.Icon {
-        icon: icons.fa_bars;
-        anchors.verticalCenter: parent.verticalCenter;
-      }
+      height: 50;
 
       Lib.Label {
-        id: title;
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.leftMargin: 8;
         anchors.verticalCenter: parent.verticalCenter;
 
         text: App.details.title;
-        font.pointSize: 14;
+        font.pointSize: 15;
         font.bold: true;
+        color: "#fff";
       }
     }
 
-    Rectangle {
+    Item {
       anchors.left: parent.left;
       anchors.right: parent.right;
+      anchors.top: _header.bottom;
       anchors.bottom: parent.bottom;
 
-      height: 1;
-      color: "#181A1F"
-    }
-  }
+      anchors.leftMargin: 8;
+      anchors.rightMargin: 8;
+      anchors.topMargin: 8;
+      anchors.bottomMargin: 8;
 
-  Rectangle {
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-    anchors.top: header.bottom;
-    anchors.bottom: footer.top;
-    color: "#282C34"
+      Info {
+        id: infoView;
 
-    Item {
-      id: utilsView;
+        anchors.fill: parent;
+        visible: App.details.info;
+        enabled: visible;
+      }
 
-      anchors.fill: parent;
-      visible: App.details.properties;
-      enabled: visible;
-    }
+      TypeInfo.List {
+        anchors.fill: parent;
+        visible: App.details.types;
+        enabled: visible;
+      }
 
-    TypeInfo.List {
-      anchors.fill: parent;
-      visible: App.details.types;
-      enabled: visible;
-    }
-
-    Item {
-      anchors.fill: parent;
-      visible: App.details.settings;
-      enabled: visible;
+      Notifications {
+        anchors.fill: parent;
+        visible: App.details.notifications;
+        enabled: visible;
+      }
     }
   }
 

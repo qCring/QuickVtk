@@ -77,6 +77,7 @@ Item {
         anchors.leftMargin: 8;
 
         font.pointSize: 14;
+        font.bold: true;
         color: "#fff";
         text: root.hasErrors ? "Errors" : "Properties";
       }

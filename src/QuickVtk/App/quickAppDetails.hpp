@@ -13,7 +13,7 @@ namespace quick {
             Q_PROPERTY(bool info READ getInfo NOTIFY infoChanged);
             Q_PROPERTY(bool types READ getTypes NOTIFY typesChanged);
         private:
-            bool m_collapsed = true;
+            bool m_collapsed = false;
             bool m_info = true;
             bool m_types = false;
             static Qml::Register::Controller<Details> Register;

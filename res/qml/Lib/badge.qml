@@ -1,26 +1,26 @@
 import QtQuick 2.12
 
 Rectangle {
-    id: root;
+  id: root;
 
-    width: label.width;
-    height: label.height;
+  width: label.width;
+  height: label.height;
 
-    property alias label: label;
+  property alias label: label;
 
-    color: "#1B1D23";
+  color: "#1B1D23";
 
-    radius: 2;
+  radius: 2;
 
-    Label {
-        id: label;
+  Label {
+    id: label;
 
-        anchors.centerIn: parent;
-        leftPadding: 8;
-        rightPadding: 8;
-        font.weight: Font.Medium;
-        font.pointSize: 11;
+    anchors.centerIn: parent;
+    leftPadding: 8;
+    rightPadding: 8;
+    font.weight: Font.Medium;
+    font.pointSize: 11;
 
-        padding: 1;
-    }
+    padding: 1;
+  }
 }

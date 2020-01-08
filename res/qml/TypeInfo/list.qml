@@ -39,7 +39,7 @@ Item {
 
           icon: icons.fa_cube;
           iconSize: 11;
-          color: "#872BCB"
+          color: "#2B68A4"
         }
 
         Lib.Label {

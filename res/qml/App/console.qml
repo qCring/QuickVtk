@@ -140,6 +140,7 @@ Rectangle {
 
       frameless: true;
       icon: icons.fa_trash;
+      label.text: "Clear";
       onClicked: App.console.clear();
     }
   }

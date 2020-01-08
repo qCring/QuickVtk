@@ -4,6 +4,7 @@ import Lib 1.0 as Lib
 
 Item {
   anchors.fill: parent;
+  anchors.topMargin: 8;
 
   Search {
     id: _search;

@@ -8,5 +8,6 @@ Text {
 
     elide: Text.ElideRight;
     textFormat: Text.PlainText;
-    horizontalAlignment : Text.AlignLeft;
+    horizontalAlignment: Text.AlignLeft;
+    verticalAlignment: Text.AlignVCenter;
 }

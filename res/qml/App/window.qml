@@ -116,18 +116,55 @@ Window {
         }
       }
 
-      Lib.Button {
-        anchors.top: parent.top;
-        anchors.bottom: parent.bottom;
+      Row {
         anchors.right: parent.right;
         anchors.rightMargin: 8;
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom;
 
-        frameless: true;
-        icon: icons.fa_exchange;
-        label.text: App.document.showSource ? "Show Preview" : "Show Code";
+        spacing: 8;
 
-        onClicked: {
-          App.document.showSource = !App.document.showSource;
+        Lib.Label {
+          anchors.top: parent.top;
+          anchors.bottom: parent.bottom;
+
+          text: "Code"
+          color: _codeMa.containsMouse || App.document.showSource ? "#fff" : "#9DA5B4";
+          font.bold: true;
+
+          MouseArea {
+              id: _codeMa;
+
+              anchors.fill: parent;
+              hoverEnabled: true;
+              onClicked: App.document.showSource = true;
+          }
+        }
+
+        Lib.Button {
+          anchors.top: parent.top;
+          anchors.bottom: parent.bottom;
+
+          frameless: true;
+          icon: icons.fa_exchange;
+          onClicked: App.document.showSource = !App.document.showSource;
+        }
+
+        Lib.Label {
+          anchors.top: parent.top;
+          anchors.bottom: parent.bottom;
+
+          text: "Preview"
+          color: _previewMa.containsMouse || !App.document.showSource ? "#fff" : "#9DA5B4";
+          font.bold: true;
+
+          MouseArea {
+              id: _previewMa;
+
+              anchors.fill: parent
+              onClicked: App.document.showSource = false;
+              hoverEnabled: true;
+          }
         }
       }
     }

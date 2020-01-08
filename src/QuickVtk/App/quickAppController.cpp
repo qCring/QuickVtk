@@ -4,7 +4,6 @@
 
 #include "meta_quickvtk.hpp"
 
-#include "quickNotificationController.hpp"
 #include "quickDocumentController.hpp"
 #include "quickConsoleController.hpp"
 #include "quickMenuController.hpp"
@@ -50,10 +49,6 @@ namespace quick {
             return Document::Controller::instance;
         }
     
-        auto Controller::getNotificationController() -> Notification::Controller* {
-            return Notification::Controller::instance;
-        }
-
         auto Controller::getTypeList() -> TypeInfo::List* {
             return TypeInfo::List::GetInstance();
         }

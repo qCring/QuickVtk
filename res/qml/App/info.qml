@@ -7,6 +7,7 @@ Item {
   property alias controls: _controls;
   property var file: App.document.file;
   property var hasErrors: file ? file.errors.length > 0 : false;
+  anchors.topMargin: 16;
 
   Column {
     id: _info;
@@ -24,8 +25,8 @@ Item {
 
         anchors.left: parent.left;
         anchors.right: _indicator.left;
-        anchors.rightMargin: 8;
         anchors.verticalCenter: parent.verticalCenter;
+        anchors.rightMargin: 4;
 
         text: file ? file.title : "No File selected"
         color: file ? "#fff" : "#6E7582"
@@ -36,7 +37,6 @@ Item {
 
         anchors.right: parent.right;
         anchors.verticalCenter: parent.verticalCenter;
-        anchors.rightMargin: 8;
 
         visible: file;
         icon: root.hasErrors ? icons.fa_exclamation_circle : icons.fa_check;

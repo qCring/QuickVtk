@@ -22,10 +22,6 @@ namespace quick {
         class Controller;
     }
 
-    namespace Notification {
-        class Controller;
-    }
-
     namespace Menu {
         class Controller;
     }
@@ -41,7 +37,6 @@ namespace quick {
             Q_PROPERTY(QString version READ getVersion CONSTANT);
             Q_PROPERTY(quick::App::Settings* settings READ getSettings CONSTANT);
             Q_PROPERTY(quick::App::Details* details READ getDetails CONSTANT);
-            Q_PROPERTY(quick::Notification::Controller* notification READ getNotificationController CONSTANT);
             Q_PROPERTY(quick::Document::Controller* document READ getDocumentController CONSTANT);
             Q_PROPERTY(quick::Console::Controller* console READ getConsoleController CONSTANT);
             Q_PROPERTY(quick::Menu::Controller* menu READ getMenuController CONSTANT);
@@ -61,7 +56,6 @@ namespace quick {
             auto getConsoleController() -> Console::Controller*;
             auto getMenuController() -> Menu::Controller*;
             auto getDocumentController() -> Document::Controller*;
-            auto getNotificationController() -> Notification::Controller*;
             auto setShowInspector(bool) -> void;
             auto getShowInspector() -> bool;
         };

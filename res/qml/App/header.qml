@@ -24,8 +24,7 @@ Rectangle {
     anchors.bottom: parent.bottom;
     anchors.rightMargin: 8;
 
-    icon: icons.fa_exchange;
-    label.text: App.details.collapsed ? "Show Details" : "Hide Details";
+    icon: icons.fa_bars;
     frameless: true;
     onClicked: App.details.toggle();
   }

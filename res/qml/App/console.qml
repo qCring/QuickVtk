@@ -42,7 +42,7 @@ Rectangle {
 
       anchors.verticalCenter: parent.verticalCenter;
       anchors.right: parent.right;
-      rightPadding: 4;
+      rightPadding: 18;
 
       text: "Time"
     }

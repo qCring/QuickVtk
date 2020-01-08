@@ -1,11 +1,14 @@
 #include "quickMenuController.hpp"
+
 #include "quickMenuItem.hpp"
 #include "quickConsoleController.hpp"
 #include "quickDocumentController.hpp"
 #include "quickDocumentFile.hpp"
-#include "quickIO.hpp"
+
 #include "quickAppSettings.hpp"
 #include "quickAppEngine.hpp"
+
+#include "quickIO.hpp"
 
 namespace quick {
     namespace Menu {
@@ -152,6 +155,7 @@ namespace quick {
             } else {
                 this->m_fileRecentFiles->removeItem(path);
                 this->saveRecentFiles();
+                Console::Controller::instance->addWarningMsg("The file (" + path + ") has been deleted or renamed and will be removed from the file history.");
             }
         }
     

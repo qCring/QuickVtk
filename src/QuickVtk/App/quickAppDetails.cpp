@@ -12,7 +12,6 @@ namespace quick {
             }
             
             instance = new Details();
-            instance->showInfo();
         }
     
         auto Details::setCollapsed(bool collapsed) -> void {
@@ -29,58 +28,25 @@ namespace quick {
         auto Details::getInfo() -> bool {
             return this->m_info;
         }
-        
-        auto Details::getNotifications() -> bool {
-            return this->m_notifications;
-        }
-        
+
         auto Details::getTypes() -> bool {
             return this->m_types;
-        }
-    
-        auto Details::setTitle(const QString& title) -> void {
-            this->m_title = title;
-            emit this->titleChanged();
-        }
-        
-        auto Details::getTitle() -> QString {
-            return this->m_title;
         }
     
         void Details::showInfo() {
             this->m_info = true;
             this->m_types = false;
-            this->m_notifications = false;
-            
-            this->setTitle("Information");
             
             emit this->infoChanged();
             emit this->typesChanged();
-            emit this->notificationsChanged();
-        }
-        
-        void Details::showNotifications() {
-            this->m_info = false;
-            this->m_types = false;
-            this->m_notifications = true;
-            
-            this->setTitle("Notifications");
-            
-            emit this->infoChanged();
-            emit this->typesChanged();
-            emit this->notificationsChanged();
         }
         
         void Details::showTypes() {
             this->m_info = false;
             this->m_types = true;
-            this->m_notifications = false;
-            
-            this->setTitle("Type List");
             
             emit this->infoChanged();
             emit this->typesChanged();
-            emit this->notificationsChanged();
         }
     
         void Details::toggle() {

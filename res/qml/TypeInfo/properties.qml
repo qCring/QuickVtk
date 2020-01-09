@@ -4,7 +4,7 @@ import Lib 1.0 as Lib
 
 Group {
   title: "Properties"
-  visible: model != undefined;
+  visible: model != undefined && model.length > 0;
 
   delegate: Item {
     anchors.left: parent.left;
@@ -26,7 +26,6 @@ Group {
       id: _name;
 
       anchors.left: _ic.right;
-      anchors.right: _type.left;
       anchors.verticalCenter: parent.verticalCenter;
 
       topPadding: 4;
@@ -38,8 +37,16 @@ Group {
     }
 
     Lib.Label {
-      id: _type;
+      visible: modelData.inherited;
+      anchors.left: _name.right;
+      anchors.verticalCenter: parent.verticalCenter;
 
+      leftPadding: 8;
+
+      text: "inherited";
+    }
+
+    Lib.Label {
       anchors.right: parent.right;
       anchors.verticalCenter: parent.verticalCenter;
 

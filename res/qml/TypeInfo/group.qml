@@ -11,14 +11,13 @@ Column {
   property alias model: _content.model;
   property alias delegate: _content.delegate;
 
-  Rectangle {
+  Item {
     id: _header;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
 
     height: _title.height;
-    color: "#21252B"
 
     Lib.Label {
       id: _title;
@@ -36,7 +35,6 @@ Column {
       color: "#fff";
     }
 
-/*
     Rectangle {
       anchors.left: parent.left;
       anchors.right: parent.right;
@@ -44,7 +42,7 @@ Column {
 
       height: 1;
       color: "#181A1F"
-    }*/
+    }
   }
 
   Column {

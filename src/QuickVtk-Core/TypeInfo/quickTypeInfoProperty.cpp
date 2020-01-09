@@ -7,7 +7,7 @@ namespace quick {
 
         Qml::Register::Type<Property> Property::Register;
 
-        auto Property::Create(QMetaProperty metaProperty) -> Property* {
+        auto Property::Create(QMetaProperty metaProperty, Type type) -> Property* {
             auto name = QString(metaProperty.name());
 
             if (name == "objectName") {
@@ -27,6 +27,7 @@ namespace quick {
             property->m_name = name;
             property->m_sequence = sequence;
             property->m_readonly = !metaProperty.isWritable();
+            property->m_inherited = type == Type::BaseProperty;
 
             return property;
         }
@@ -45,6 +46,10 @@ namespace quick {
 
         auto Property::isReadonly() -> bool {
             return this->m_readonly;
+        }
+    
+        auto Property::isInherited() -> bool {
+            return this->m_inherited;
         }
     }
 }

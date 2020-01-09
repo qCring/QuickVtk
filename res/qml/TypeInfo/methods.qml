@@ -43,6 +43,8 @@ Group {
         anchors.verticalCenter: parent.verticalCenter;
 
         font.pointSize: 13;
+        rightPadding: 2;
+        leftPadding: 2;
         text: modelData.paramTypes;
       }
 

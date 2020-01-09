@@ -119,9 +119,13 @@ namespace quick {
                 
                 symbol->addEnumDefinition(Symbol::Get::EnumPrefix(metaEnum), Symbol::Get::EnumName(metaEnum));
             }
-
+            
             for (auto i = metaObject.propertyOffset(); i < metaObject.propertyCount(); ++i) {
-                symbol->addProperty(metaObject.property(i));
+                symbol->addClassProperty(metaObject.property(i));
+            }
+            
+            for (auto i = 0; i < metaObject.propertyOffset(); ++i) {
+                symbol->addBaseProperty(metaObject.property(i));
             }
 
             for (auto i = metaObject.methodOffset(); i < metaObject.methodCount(); ++i) {
@@ -144,9 +148,13 @@ namespace quick {
             symbol->m_isWrapper = isWrapper;
 
             symbol->setAbstract(true);
-
-            for (auto i = 0; i < metaObject.propertyCount(); ++i) {
-                symbol->addProperty(metaObject.property(i));
+            
+            for (auto i = metaObject.propertyOffset(); i < metaObject.propertyCount(); ++i) {
+                symbol->addClassProperty(metaObject.property(i));
+            }
+            
+            for (auto i = 0; i < metaObject.propertyOffset(); ++i) {
+                symbol->addBaseProperty(metaObject.property(i));
             }
 
             List::Add(symbol);

@@ -33,9 +33,17 @@ namespace quick {
             return QQmlListProperty<Method>(this, this->m_methods);
         }
 
-        auto Class::addProperty(QMetaProperty metaProperty) -> void {
-            auto property = Property::Create(metaProperty);
+        auto Class::addClassProperty(QMetaProperty metaProperty) -> void {
+            auto property = Property::Create(metaProperty, Property::Type::ClassProperty);
 
+            if (property) {
+                this->m_properties.append(property);
+            }
+        }
+    
+        auto Class::addBaseProperty(QMetaProperty metaProperty) -> void {
+            auto property = Property::Create(metaProperty, Property::Type::BaseProperty);
+            
             if (property) {
                 this->m_properties.append(property);
             }

@@ -12,10 +12,9 @@ namespace quick {
 
         class Symbol : public QObject {
             Q_OBJECT
-            Q_PROPERTY(QColor color READ getColor CONSTANT);
             Q_PROPERTY(QString name READ getName CONSTANT);
-            Q_PROPERTY(QString type READ getType CONSTANT);
             Q_PROPERTY(QString prefix READ getPrefix CONSTANT);
+            Q_PROPERTY(int type READ getType CONSTANT);
         private:
             struct Get {
                 static auto ClassName(QMetaObject) -> QString;
@@ -25,10 +24,9 @@ namespace quick {
                 static auto BaseString(QMetaObject) -> QString;
             };
         private:
-            QColor m_color;
-            QString m_type;
             QString m_name;
             QString m_prefix;
+            int m_type; // 0 = abstract, 1 = class, 2 = enum
             bool m_isWrapper = false;
         private:
             static auto GetEnums() -> QStringList&;
@@ -40,11 +38,10 @@ namespace quick {
             static auto MakeAbstractClass(QMetaObject, bool isWrapper) -> void;
             static auto PrettifyTypeName(QString) -> QString;
             auto operator < (const Symbol&) -> const bool;
-            auto getColor() -> QColor;
-            auto getType() -> QString;
             auto getName() -> QString;
             auto getPrefix() -> QString;
             auto isWrapper() -> bool;
+            auto getType() -> int;
             auto matches(const QString&) -> bool;
         };
     }

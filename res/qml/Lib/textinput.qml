@@ -43,7 +43,8 @@ TextInput {
 
         z: parent.z - 1;
 
-        color: "#282C34"
+        //color: "#282C34"
+        color: "transparent"
         radius: 4;
     }
 

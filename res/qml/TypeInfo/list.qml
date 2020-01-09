@@ -6,75 +6,85 @@ Item {
   anchors.fill: parent;
   anchors.topMargin: 8;
 
-  Search {
-    id: _search;
+  Item { // search + listview
+    anchors.fill: parent;
 
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-  }
+    visible: !detail.symbol;
 
-  Lib.Area {
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-    anchors.bottom: parent.bottom;
-    anchors.top: _search.bottom;
+    Search {
+      id: _search;
 
-    Lib.ListView {
-      clip: true;
+      anchors.left: parent.left;
+      anchors.right: parent.right;
 
-      model: App.typeList;
-      anchors.fill: parent;
+    }
 
-      delegate: Item {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        height: _label.height;
+    Lib.Area {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.bottom: parent.bottom;
+      anchors.top: _search.bottom;
 
-        Lib.Icon {
-          id: _ic;
+      Lib.ListView {
+        clip: true;
 
+        model: App.typeList;
+        anchors.fill: parent;
+
+        delegate: Item {
           anchors.left: parent.left;
-          anchors.leftMargin: 8;
-          anchors.verticalCenter: parent.verticalCenter;
-
-          icon: icons.fa_cube;
-          iconSize: 11;
-          color: "#2B68A4"
-        }
-
-        Lib.Label {
-          id: _label;
-
-          anchors.left: _ic.right;
-          anchors.verticalCenter: parent.verticalCenter
-
-          leftPadding: 8;
-          topPadding: 4;
-          bottomPadding: 4;
-
-          text: modelData.prefix + "." + modelData.name;
-          color: "#fff";
-        }
-
-        Lib.Label {
-          id: _type;
-
           anchors.right: parent.right;
-          anchors.rightMargin: 4;
-          anchors.verticalCenter: parent.verticalCenter;
+          height: _label.height;
 
-          text: modelData.type;
-          color: modelData.color;
-          font.pointSize: 10;
-        }
+          Lib.Icon {
+            id: _ic;
 
-        MouseArea {
-          id: _ma;
+            anchors.left: parent.left;
+            anchors.leftMargin: 8;
+            anchors.verticalCenter: parent.verticalCenter;
 
-          anchors.fill: parent;
-          hoverEnabled: true;
+            icon: icons.fa_cube;
+            color: "#872BCB";
+          }
+
+          Lib.Label {
+            id: _label;
+
+            anchors.left: _ic.right;
+            anchors.right: _type.left;
+            anchors.verticalCenter: parent.verticalCenter
+
+            leftPadding: 8;
+            topPadding: 4;
+            bottomPadding: 4;
+
+            text: modelData.prefix + "." + modelData.name;
+            color: "#fff";
+          }
+
+          Lib.Label {
+            id: _type;
+
+            anchors.right: parent.right;
+            anchors.rightMargin: 4;
+            anchors.verticalCenter: parent.verticalCenter;
+            text: modelData.type == 0 ? "A" : modelData.type == 1 ? "C" : "E";
+            font.pointSize: 9;
+            font.bold: true;
+          }
+
+          MouseArea {
+            id: _ma;
+
+            anchors.fill: parent;
+            onClicked: detail.symbol = modelData;
+          }
         }
       }
     }
+  }
+
+  Detail {
+    id: detail;
   }
 }

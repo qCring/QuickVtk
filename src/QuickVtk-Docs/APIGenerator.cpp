@@ -96,10 +96,18 @@ namespace quick {
         }
         
         auto name = symbol->getName();
-        auto type = symbol->getType();
+        auto type = "unspecified";
+        
+        switch(symbol->getType()) {
+            case 0: type = "abstract"; break;
+            case 1: type = "class"; break;
+            case 2: type = "enum"; break;
+            default: break;
+        }
+        
         auto identifier = prefix + "." + name;
         
-        if (type.compare("class") == 0 || type.compare("abstract") == 0) {
+        if (symbol->getType() != 2) {
             QJsonObject json;
             
             if (!doc_dirs.contains(prefix)) {
@@ -233,7 +241,7 @@ namespace quick {
             return;
         }
         
-        if (symbol->getType().compare("enum") == 0) {
+        if (symbol->getType() == 2) {
             return;
         }
         

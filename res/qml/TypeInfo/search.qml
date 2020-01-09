@@ -36,7 +36,6 @@ Item {
       icon: icons.fa_search;
       color: input.activeFocus ? "#fff" : "#6E7582"
       rightPadding: 8;
-      leftPadding: 8;
     }
   }
 

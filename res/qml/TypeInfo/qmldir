@@ -6,3 +6,8 @@ Property 1.0 property.qml
 Section 1.0 section.qml
 Symbol 1.0 symbol.qml
 Search 1.0 search.qml
+Detail 1.0 detail.qml
+Group 1.0 group.qml
+Properties 1.0 properties.qml
+Enums 1.0 enums.qml
+Methods 1.0 methods.qml

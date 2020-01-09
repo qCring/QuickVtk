@@ -1,4 +1,4 @@
-import QtQuick 2.13
+import QtQuick 2.12
 
 Rectangle {
   color: "#282C34"

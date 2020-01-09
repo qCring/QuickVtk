@@ -1,4 +1,4 @@
-import QtQuick 2.13
+import QtQuick 2.12
 import Lib 1.0 as Lib
 
 Item {
@@ -28,7 +28,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter;
         anchors.rightMargin: 4;
 
-        text: file ? file.title : "No File selected"
+        text: file ? file.title : "No file selected"
         color: file ? "#fff" : "#6E7582"
       }
 

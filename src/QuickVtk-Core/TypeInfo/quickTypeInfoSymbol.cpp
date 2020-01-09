@@ -93,8 +93,7 @@ namespace quick {
 
             symbol->m_prefix = prefix;
             symbol->m_name = name;
-            symbol->m_type = "enum";
-            symbol->m_color = "#E6713E";
+            symbol->m_type = 2;
 
             for (auto i = 0; i < metaEnum.keyCount(); ++i) {
                 symbol->add(new EnumItem(metaEnum.key(i), metaEnum.value(i)));
@@ -112,8 +111,7 @@ namespace quick {
             symbol->setBase(Get::BaseString(metaObject));
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
-            symbol->m_type = "class";
-            symbol->m_color = "#fff";
+            symbol->m_type = 1;
             symbol->m_isWrapper = isWrapper;
             
             for (auto i = metaObject.enumeratorOffset(); i < metaObject.enumeratorCount(); ++i) {
@@ -142,8 +140,7 @@ namespace quick {
             symbol->setBase(Get::BaseString(metaObject));
             symbol->m_prefix = Get::ClassPrefix(metaObject);
             symbol->m_name = Get::ClassName(metaObject);
-            symbol->m_type = "abstract";
-            symbol->m_color = "#9DA5B4";
+            symbol->m_type = 0;
             symbol->m_isWrapper = isWrapper;
 
             symbol->setAbstract(true);
@@ -162,7 +159,6 @@ namespace quick {
 
             for (auto word : words) {
                 match = this->m_name.contains(word, Qt::CaseInsensitive) ||
-                    this->m_type.contains(word, Qt::CaseInsensitive) ||
                     this->m_prefix.contains(word, Qt::CaseInsensitive);
 
                 if (!match) return false;
@@ -183,12 +179,8 @@ namespace quick {
             return this->m_prefix;
         }
 
-        auto Symbol::getType() -> QString {
+        auto Symbol::getType() -> int {
             return this->m_type;
-        }
-
-        auto Symbol::getColor() -> QColor {
-            return this->m_color;
         }
     
         auto Symbol::isWrapper() -> bool {

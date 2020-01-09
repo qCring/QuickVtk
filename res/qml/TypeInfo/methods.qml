@@ -22,8 +22,20 @@ Group {
       icon: icons.fa_cube;
     }
 
-    Row {
+    Lib.Label {
+      id: _base;
+
+      visible: modelData.inherited;
+
       anchors.left: _ic.right;
+      anchors.verticalCenter: parent.verticalCenter;
+
+      rightPadding: 8;
+      text: "base";
+    }
+
+    Row {
+      anchors.left: modelData.inherited ? _base.right : _ic.right;
       anchors.verticalCenter: parent.verticalCenter;
 
       Lib.Label {

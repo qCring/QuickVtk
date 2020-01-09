@@ -128,10 +128,19 @@ namespace quick {
                 symbol->addBaseProperty(metaObject.property(i));
             }
 
+            for (auto i = 0; i < metaObject.methodOffset(); ++i) {
+                auto method = metaObject.method(i);
+                
+                if (method.methodType() == QMetaMethod::MethodType::Slot && method.access() == QMetaMethod::Access::Public) {
+                    symbol->addBaseMethod(metaObject.method(i));
+                }
+            }
+            
             for (auto i = metaObject.methodOffset(); i < metaObject.methodCount(); ++i) {
                 auto method = metaObject.method(i);
+                
                 if (method.methodType() == QMetaMethod::MethodType::Slot && method.access() == QMetaMethod::Access::Public) {
-                    symbol->addMethod(metaObject.method(i));
+                    symbol->addClassMethod(metaObject.method(i));
                 }
             }
 

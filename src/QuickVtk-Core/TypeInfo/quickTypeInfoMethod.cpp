@@ -7,7 +7,7 @@ namespace quick {
 
         Qml::Register::Type<Method> Method::Register;
 
-        auto Method::Create(QMetaMethod metaMethod) -> Method* {
+        auto Method::Create(QMetaMethod metaMethod, Type type) -> Method* {
             auto name = QString(metaMethod.name());
             auto paramTypes = QString();
             auto sequence = false;
@@ -43,6 +43,7 @@ namespace quick {
             method->m_paramTypes = paramTypes;
             method->m_name = name;
             method->m_sequence = sequence;
+            method->m_inherited = type == Type::BaseMethod;
 
             return method;
         }
@@ -57,6 +58,10 @@ namespace quick {
 
         auto Method::isSequence() -> bool {
             return this->m_sequence;
+        }
+    
+        auto Method::isInherited() -> bool {
+            return this->m_inherited;
         }
 
         auto Method::getName() -> QString {

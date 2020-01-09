@@ -34,7 +34,8 @@ namespace quick {
             auto addEnumDefinition(const QString& prefix, const QString& name) -> void;
             auto addBaseProperty(QMetaProperty) -> void;
             auto addClassProperty(QMetaProperty) -> void;
-            auto addMethod(QMetaMethod) -> void;
+            auto addBaseMethod(QMetaMethod) -> void;
+            auto addClassMethod(QMetaMethod) -> void;
             auto getAllProperties() -> QList<class Property*>;
             auto getAllMethods() -> QList<class Method*>;
             auto getAllEnumDefinitions() -> QStringList;

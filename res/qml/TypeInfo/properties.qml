@@ -23,9 +23,22 @@ Group {
     }
 
     Lib.Label {
-      id: _name;
+      id: _base;
+
+      visible: modelData.inherited;
 
       anchors.left: _ic.right;
+      anchors.verticalCenter: parent.verticalCenter;
+
+      rightPadding: 8;
+      text: "base";
+    }
+
+    Lib.Label {
+      id: _name;
+
+      anchors.left: modelData.inherited ? _base.right : _ic.right;
+      anchors.right: _type.left;
       anchors.verticalCenter: parent.verticalCenter;
 
       topPadding: 4;
@@ -37,16 +50,8 @@ Group {
     }
 
     Lib.Label {
-      visible: modelData.inherited;
-      anchors.left: _name.right;
-      anchors.verticalCenter: parent.verticalCenter;
+      id: _type;
 
-      leftPadding: 8;
-
-      text: "inherited";
-    }
-
-    Lib.Label {
       anchors.right: parent.right;
       anchors.verticalCenter: parent.verticalCenter;
 

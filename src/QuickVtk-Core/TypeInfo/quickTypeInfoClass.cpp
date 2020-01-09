@@ -49,8 +49,16 @@ namespace quick {
             }
         }
 
-        auto Class::addMethod(QMetaMethod metaMethod) -> void {
-            auto method = Method::Create(metaMethod);
+        auto Class::addClassMethod(QMetaMethod metaMethod) -> void {
+            auto method = Method::Create(metaMethod, Method::Type::ClassMethod);
+
+            if (method) {
+                this->m_methods.append(method);
+            }
+        }
+    
+        auto Class::addBaseMethod(QMetaMethod metaMethod) -> void {
+            auto method = Method::Create(metaMethod, Method::Type::BaseMethod);
 
             if (method) {
                 this->m_methods.append(method);

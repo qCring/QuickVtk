@@ -1,7 +1,7 @@
 import QtQuick 2.12
 
 import Utils 1.0 as Utils
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   id: root;

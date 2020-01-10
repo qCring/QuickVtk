@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Row {
     id: root;
@@ -13,7 +13,7 @@ Row {
     property var item;
     property color typeColor: "#9DA5B4"
 
-    Lib.Label {
+    UI.Label {
         id: nameLabel;
 
         anchors.verticalCenter: parent.verticalCenter;
@@ -24,7 +24,7 @@ Row {
         text: item.name + ": ";
     }
 
-    Lib.Badge {
+    UI.Badge {
         anchors.verticalCenter: parent.verticalCenter;
 
         label.text: item.paramTypes;
@@ -34,14 +34,14 @@ Row {
         color: "#00000000"
     }
 
-    Lib.Icon {
+    UI.Icon {
         anchors.verticalCenter: parent.verticalCenter;
 
         icon: icons.fa_long_arrow_right;
         color: "#fff"
     }
 
-    Lib.Badge {
+    UI.Badge {
         anchors.verticalCenter: parent.verticalCenter;
 
         label.text: item.returnType;

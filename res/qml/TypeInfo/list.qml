@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   anchors.fill: parent;
@@ -19,13 +19,13 @@ Item {
 
     }
 
-    Lib.Area {
+    UI.Area {
       anchors.left: parent.left;
       anchors.right: parent.right;
       anchors.bottom: parent.bottom;
       anchors.top: _search.bottom;
 
-      Lib.ListView {
+      UI.ListView {
         clip: true;
 
         model: App.typeList;
@@ -36,7 +36,7 @@ Item {
           anchors.right: parent.right;
           height: _label.height;
 
-          Lib.Icon {
+          UI.Icon {
             id: _ic;
 
             anchors.left: parent.left;
@@ -47,7 +47,7 @@ Item {
             color: "#872BCB";
           }
 
-          Lib.Label {
+          UI.Label {
             id: _label;
 
             anchors.left: _ic.right;
@@ -62,7 +62,7 @@ Item {
             color: "#fff";
           }
 
-          Lib.Label {
+          UI.Label {
             id: _type;
 
             anchors.right: parent.right;

@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
     id: root;
@@ -62,7 +62,7 @@ Item {
             y: (Math.max(model.line - 1, 0)) * height;
             color: "#22C54632";
 
-            Lib.Icon {
+            UI.Icon {
               anchors.verticalCenter: parent.verticalCenter;
               anchors.right: parent.left;
 
@@ -81,7 +81,7 @@ Item {
               radius: 2;
               color: "#933628"
 
-              Lib.Icon {
+              UI.Icon {
                 anchors.verticalCenter: parent.verticalCenter;
                 anchors.right: parent.left;
 
@@ -96,14 +96,14 @@ Item {
                 anchors.centerIn: parent;
                 spacing: 8;
 
-                Lib.Icon {
+                UI.Icon {
                   anchors.verticalCenter: parent.verticalCenter;
                   icon: icons.fa_exclamation_circle;
                   iconSize: _textEdit.font.pointSize - 1;
                   color: "#fff";
                 }
 
-                Lib.Label {
+                UI.Label {
                   anchors.verticalCenter: parent.verticalCenter;
                   font.pointSize: _textEdit.font.pointSize;
                   text: model.message;

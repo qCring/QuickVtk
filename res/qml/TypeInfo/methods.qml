@@ -1,8 +1,8 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
-Group {
+UI.List {
   title: "Methods";
   visible: model != undefined && model.length > 0;
 
@@ -12,7 +12,7 @@ Group {
 
     height: _label.height;
 
-    Lib.Icon {
+    UI.Icon {
       id: _ic;
 
       anchors.left: parent.left;
@@ -22,7 +22,7 @@ Group {
       icon: icons.fa_cube;
     }
 
-    Lib.Label {
+    UI.Label {
       id: _base;
 
       visible: modelData.inherited;
@@ -38,7 +38,7 @@ Group {
       anchors.left: modelData.inherited ? _base.right : _ic.right;
       anchors.verticalCenter: parent.verticalCenter;
 
-      Lib.Label {
+      UI.Label {
         id: _name;
 
         anchors.verticalCenter: parent.verticalCenter;
@@ -51,7 +51,7 @@ Group {
         color: "#fff";
       }
 
-      Lib.Label {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
 
         font.pointSize: 13;
@@ -60,7 +60,7 @@ Group {
         text: modelData.paramTypes;
       }
 
-      Lib.Label {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
 
         font.pointSize: 13;
@@ -68,7 +68,7 @@ Group {
         text: ")";
       }
 
-      Lib.Icon {
+      UI.Icon {
         anchors.verticalCenter: parent.verticalCenter;
         rightPadding: 8;
         leftPadding: 8;
@@ -76,7 +76,7 @@ Group {
         icon: icons.fa_long_arrow_right;
       }
 
-      Lib.Label {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
 
         font.pointSize: 13;

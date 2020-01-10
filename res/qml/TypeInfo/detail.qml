@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   anchors.fill: parent;
@@ -16,7 +16,7 @@ Item {
     anchors.right: parent.right;
     height: _label.height + 16;
 
-    Lib.Button {
+    UI.Button {
       id: _close;
 
       anchors.left: parent.left;
@@ -27,7 +27,7 @@ Item {
       onClicked: symbol = null;
     }
 
-    Lib.Label {
+    UI.Label {
       id: _label;
 
       anchors.left: _close.right;
@@ -58,18 +58,18 @@ Item {
       anchors.right: parent.right;
       anchors.top: parent.top;
 
-      Lib.Badge {
+      UI.Badge {
         label.text: symbol ? symbol.type == 0 ? "Abstract Class" : symbol.type == 1 ? "Class" : "Enum" : "" ;
         label.font.pointSize: 14;
       }
 
-      Lib.Badge {
+      UI.Badge {
         label.text: symbol ? symbol.prefix : ""
       }
     }
   }
 
-  Lib.Area {
+  UI.Area {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _info.bottom;

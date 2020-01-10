@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
@@ -18,7 +18,7 @@ Rectangle {
     anchors.leftMargin: 4;
   }
 
-  Lib.Button {
+  UI.Button {
     anchors.right: parent.right;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;

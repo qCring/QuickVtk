@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Dialogs 1.2
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
     id: root;
@@ -16,7 +16,7 @@ Item {
     property var from;
     property string bind;
 
-    Lib.Label {
+    UI.Label {
         id: label;
 
         anchors.left: parent.left;
@@ -26,7 +26,7 @@ Item {
         text: root.bind;
     }
 
-    Lib.Label {
+    UI.Label {
         anchors.left: rect.right;
         anchors.leftMargin: 8;
         text: picker.color;

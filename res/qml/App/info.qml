@@ -1,5 +1,5 @@
 import QtQuick 2.12
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   id: root;
@@ -20,7 +20,7 @@ Item {
       anchors.right: parent.right;
       height: _label.height;
 
-      Lib.Label {
+      UI.Label {
         id: _label;
 
         anchors.left: parent.left;
@@ -32,7 +32,7 @@ Item {
         color: file ? "#fff" : "#6E7582"
       }
 
-      Lib.Icon {
+      UI.Icon {
         id: _indicator;
 
         anchors.right: parent.right;
@@ -44,7 +44,7 @@ Item {
       }
     }
 
-    Lib.Label {
+    UI.Label {
       anchors.left: parent.left;
       anchors.right: parent.right;
 
@@ -53,7 +53,7 @@ Item {
     }
   }
 
-  Lib.Area {
+  UI.Area {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _info.bottom;
@@ -70,7 +70,7 @@ Item {
 
       height: 30;
 
-      Lib.Label {
+      UI.Label {
         anchors.left: parent.left;
         anchors.right: parent.right;
         anchors.verticalCenter: parent.verticalCenter;
@@ -124,7 +124,7 @@ Item {
 
               height: _errLabel.height + 8;
 
-              Lib.Icon {
+              UI.Icon {
                 id: _errIcon;
 
                 anchors.verticalCenter: parent.verticalCenter;
@@ -134,7 +134,7 @@ Item {
                 color: "#C54632";
               }
 
-              Lib.Label {
+              UI.Label {
                 id: _errLabel;
 
                 anchors.verticalCenter: parent.verticalCenter;
@@ -145,7 +145,7 @@ Item {
                 text: "[" + modelData.line + ":" + modelData.column + "] " + modelData.message;
               }
 
-              Lib.Button {
+              UI.Button {
                 id: _errBtn;
 
                 anchors.verticalCenter: parent.verticalCenter;

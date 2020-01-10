@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   id: root;
@@ -8,7 +8,7 @@ Item {
   height: input.height;
   width: 280;
 
-  Lib.TextInput {
+  UI.TextInput {
     id: input;
 
     anchors.left: parent.left;
@@ -28,7 +28,7 @@ Item {
       App.typeList.visible = activeFocus;
     }
 
-    Lib.Icon {
+    UI.Icon {
       id: _ic;
 
       anchors.left: parent.left;
@@ -39,7 +39,7 @@ Item {
     }
   }
 
-  Lib.Label {
+  UI.Label {
     anchors.right: input.right;
     anchors.rightMargin: 8;
     anchors.verticalCenter: parent.verticalCenter;

@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Row {
     id: root;
@@ -10,7 +10,7 @@ Row {
 
     property var item;
 
-    Lib.Label {
+    UI.Label {
         id: nameLabel;
 
         anchors.verticalCenter: parent.verticalCenter;
@@ -20,7 +20,7 @@ Row {
         text: item.name + ":  ";
     }
 
-    Lib.Label {
+    UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
 
         font.pointSize: 12;

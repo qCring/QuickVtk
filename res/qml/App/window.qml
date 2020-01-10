@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.2
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 import Code 1.0 as Code
 import TypeInfo 1.0 as TypeInfo
 
@@ -70,7 +70,7 @@ Window {
         anchors.leftMargin: 8;
         spacing: 8;
 
-        Lib.Button {
+        UI.Button {
           id: vLabel;
           frameless: true
           anchors.verticalCenter: parent.verticalCenter;
@@ -79,38 +79,38 @@ Window {
           onClicked: App.console.toggle();
         }
 
-        Lib.Icon {
+        UI.Icon {
           anchors.verticalCenter: parent.verticalCenter;
 
           color: "#6E7582"
           icon: icons.fa_info_circle;
         }
 
-        Lib.Badge {
+        UI.Badge {
           anchors.verticalCenter: parent.verticalCenter;
           label.text: App.console.items.length;
         }
 
-        Lib.Icon {
+        UI.Icon {
           anchors.verticalCenter: parent.verticalCenter;
 
           icon: icons.fa_exclamation_triangle;
           color: App.console.warningCount > 0 ? "#D4B05E" : "#6E7582"
         }
 
-        Lib.Badge {
+        UI.Badge {
           anchors.verticalCenter: parent.verticalCenter;
           label.text: App.console.warningCount;
         }
 
-        Lib.Icon {
+        UI.Icon {
           anchors.verticalCenter: parent.verticalCenter;
 
           icon: icons.fa_exclamation_circle;
           color: App.console.errorCount > 0 ? "#C54632" : "#6E7582"
         }
 
-        Lib.Badge {
+        UI.Badge {
           anchors.verticalCenter: parent.verticalCenter;
           label.text: App.console.errorCount;
         }
@@ -124,7 +124,7 @@ Window {
 
         spacing: 8;
 
-        Lib.Label {
+        UI.Label {
           anchors.top: parent.top;
           anchors.bottom: parent.bottom;
 
@@ -141,7 +141,7 @@ Window {
           }
         }
 
-        Lib.Button {
+        UI.Button {
           anchors.top: parent.top;
           anchors.bottom: parent.bottom;
 
@@ -150,7 +150,7 @@ Window {
           onClicked: App.document.showSource = !App.document.showSource;
         }
 
-        Lib.Label {
+        UI.Label {
           anchors.top: parent.top;
           anchors.bottom: parent.bottom;
 

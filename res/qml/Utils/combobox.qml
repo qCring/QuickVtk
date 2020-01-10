@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   id: root;
@@ -16,7 +16,7 @@ Item {
 
   signal indexChanged(var index);
 
-  Lib.Label {
+  UI.Label {
     id: label;
 
     anchors.left: parent.left;
@@ -37,7 +37,7 @@ Item {
     bottomInset: 0;
     onCurrentIndexChanged: root.indexChanged(currentIndex);
 
-    indicator: Lib.Icon {
+    indicator: UI.Icon {
       id: _indicator;
 
       anchors.right: parent.right;
@@ -48,7 +48,7 @@ Item {
       iconSize: 10;
     }
 
-    contentItem: Lib.Label {
+    contentItem: UI.Label {
       id: _label;
 
       anchors.left: parent.left;
@@ -74,7 +74,7 @@ Item {
       radius: 2;
     }
 
-    delegate: Lib.Label {
+    delegate: UI.Label {
       anchors.left: parent.left;
       anchors.right: parent.right;
       anchors.leftMargin: 4;
@@ -110,7 +110,7 @@ Item {
 
         Repeater {
           model: control.popup.visible ? control.delegateModel : null
-          Lib.Label {
+          UI.Label {
             text: modelData;
           }
         }

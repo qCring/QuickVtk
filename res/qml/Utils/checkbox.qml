@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
     id: root;
@@ -13,7 +13,7 @@ Item {
     property string bind;
     property bool checked;
 
-    Lib.Label {
+    UI.Label {
         id: label;
 
         anchors.left: parent.left;
@@ -35,7 +35,7 @@ Item {
         border.color: "#1B1D23";
         radius: 2;
 
-        Lib.Icon {
+        UI.Icon {
             anchors.centerIn: parent;
 
             color: "#fff";

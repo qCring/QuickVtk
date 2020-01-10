@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
   height: 30;
@@ -24,7 +24,7 @@ Item {
 
     spacing: 8;
 
-    Lib.Icon {
+    UI.Icon {
       icon: icons.fa_chevron_left;
       anchors.top: parent.top;
       anchors.bottom: parent.bottom;
@@ -40,7 +40,7 @@ Item {
       }
     }
 
-    Lib.Icon {
+    UI.Icon {
       icon: icons.fa_chevron_right;
       anchors.top: parent.top;
       anchors.bottom: parent.bottom;
@@ -111,13 +111,13 @@ Item {
           anchors.top: parent.top;
           anchors.bottom: parent.bottom;
 
-          Lib.Icon {
+          UI.Icon {
             anchors.verticalCenter: parent.verticalCenter;
             icon: model.errors.length > 0 ? icons.fa_exclamation_circle : icons.fa_check;
             color: model.errors.length > 0 ? "#C54632" : "#2B68A4";
           }
 
-          Lib.Label {
+          UI.Label {
             id: label;
 
             anchors.verticalCenter: parent.verticalCenter;
@@ -126,7 +126,7 @@ Item {
             color: model.selected || ma.containsMouse ? "#fff" : "#9DA5B4";
           }
 
-          Lib.Icon {
+          UI.Icon {
             icon: icons.fa_times;
             color: close_ma.containsMouse ? "#fff" : "#9DA5B4";
             anchors.top: parent.top;

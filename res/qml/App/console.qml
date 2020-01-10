@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Rectangle {
 
@@ -17,7 +17,7 @@ Rectangle {
     height: label_type.height + 8;
     color: "#282C34"
 
-    Lib.Label {
+    UI.Label {
       id: label_type;
 
       anchors.verticalCenter: parent.verticalCenter;
@@ -29,7 +29,7 @@ Rectangle {
       text: "Type"
     }
 
-    Lib.Label {
+    UI.Label {
       anchors.verticalCenter: parent.verticalCenter;
       anchors.left: label_type.right;
       anchors.right: label_time.left;
@@ -37,7 +37,7 @@ Rectangle {
       text: "Description"
     }
 
-    Lib.Label {
+    UI.Label {
       id: label_time;
 
       anchors.verticalCenter: parent.verticalCenter;
@@ -57,7 +57,7 @@ Rectangle {
     color: "#181A1F";
   }
 
-  Lib.ListView {
+  UI.ListView {
     anchors.top: header.bottom;
     anchors.left: parent.left;
     anchors.right: parent.right;
@@ -80,7 +80,7 @@ Rectangle {
         //color: modelData.type == 2 ? "#D4B05E" : modelData.type == 3 ? "#C54632" : "transparent";
         width: label_type.width;
 
-        Lib.Label {
+        UI.Label {
           anchors.left: parent.left;
           anchors.verticalCenter: parent.verticalCenter;
 
@@ -93,7 +93,7 @@ Rectangle {
         }
       }
 
-      Lib.Label {
+      UI.Label {
         id: _description;
 
         text: modelData.description;
@@ -102,7 +102,7 @@ Rectangle {
         anchors.right: _time.left;
       }
 
-      Lib.Label {
+      UI.Label {
         id: _time;
 
         text: modelData.time;
@@ -131,7 +131,7 @@ Rectangle {
       color: "#181A1F";
     }
 
-    Lib.Button {
+    UI.Button {
       id: btn_clear;
 
       anchors.verticalCenter: parent.verticalCenter;

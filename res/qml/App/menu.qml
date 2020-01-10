@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Row {
   spacing: 4
@@ -16,7 +16,7 @@ Row {
       anchors.top: parent.top;
       anchors.bottom: parent.bottom;
 
-      Lib.Label {
+      UI.Label {
         id: label
 
         anchors.centerIn: parent
@@ -68,14 +68,14 @@ Row {
 
                 property string color: model.enabled ? ma_item.containsMouse ? "#fff" : "#9DA5B4" : "#6E7582";
 
-                Lib.Icon {
+                UI.Icon {
                   icon: icons[model.icon] != undefined ? icons[model.icon] : "";
                   anchors.verticalCenter: parent.verticalCenter;
                   width: 20;
                   color: content.color;
                 }
 
-                Lib.Label {
+                UI.Label {
                   text: model.label;
                   color: content.color;
                   anchors.verticalCenter: parent.verticalCenter;
@@ -135,7 +135,7 @@ Row {
                 }
               }
 
-              Lib.Icon {
+              UI.Icon {
                 visible: model.items.length > 0;
                 icon: icons.fa_caret_right;
 
@@ -190,7 +190,7 @@ Row {
                       width: Math.max(innerLabel.width + 50, innerCol.width);
                       height: innerLabel.height + 10;
 
-                      Lib.Label {
+                      UI.Label {
                         id: innerLabel;
 
                         text: model.label;

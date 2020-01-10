@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
     id: root;
@@ -20,7 +20,7 @@ Item {
 
         height: nameLabel.height;
 
-        Lib.Label {
+        UI.Label {
             id: nameLabel;
 
             anchors.verticalCenter: parent.verticalCenter;
@@ -31,7 +31,7 @@ Item {
             text: item.name + ": ";
         }
 
-        Lib.Label {
+        UI.Label {
             id: typeLabel;
 
             anchors.verticalCenter: parent.verticalCenter;
@@ -43,7 +43,7 @@ Item {
         }
     }
 
-    Lib.Label {
+    UI.Label {
         id: rwLabel;
 
         anchors.verticalCenter: parent.verticalCenter;

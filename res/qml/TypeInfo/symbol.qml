@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Column {
   id: col;
@@ -30,7 +30,7 @@ Column {
       //anchors.right: parent.right;
       anchors.verticalCenter: parent.verticalCenter;
 
-      Lib.Label {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
 
         text: symbol.prefix + ".";
@@ -39,7 +39,7 @@ Column {
         font.pointSize: 12;
       }
 
-      Lib.Label {
+      UI.Label {
         id: nameLabel;
 
         anchors.verticalCenter: parent.verticalCenter;
@@ -50,7 +50,7 @@ Column {
         font.pointSize: 12;
       }
 
-      Lib.Label {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
 
         visible: symbol.base != undefined && symbol.base;

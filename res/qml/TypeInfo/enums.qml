@@ -1,8 +1,8 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
-Group {
+UI.List {
   title: "Enum Values"
   visible: model != undefined;
 
@@ -12,7 +12,7 @@ Group {
 
     height: _name.height;
 
-    Lib.Icon {
+    UI.Icon {
       id: _ic;
 
       anchors.left: parent.left;
@@ -22,7 +22,7 @@ Group {
       icon: icons.fa_cube;
     }
 
-    Lib.Label {
+    UI.Label {
       id: _name;
 
       anchors.left: _ic.right;
@@ -37,7 +37,7 @@ Group {
       color: "#fff";
     }
 
-    Lib.Label {
+    UI.Label {
       id: _value;
 
       anchors.right: parent.right;

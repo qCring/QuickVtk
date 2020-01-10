@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Column {
     property alias model: repeater.model;
@@ -22,14 +22,14 @@ Column {
 
         property alias text: label.text;
 
-        Lib.Icon {
+        UI.Icon {
             anchors.verticalCenter: parent.verticalCenter;
 
             icon: icons.fa_caret_down;
             iconSize: 12;
         }
 
-        Lib.Label {
+        UI.Label {
             id: label;
 
             anchors.verticalCenter: parent.verticalCenter;

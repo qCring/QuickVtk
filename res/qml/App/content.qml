@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Rectangle {
     id: root;
@@ -38,7 +38,7 @@ Rectangle {
           anchors.centerIn: parent;
           spacing: 8;
 
-          Lib.Icon {
+          UI.Icon {
             anchors.horizontalCenter: parent.horizontalCenter;
             icon: icons.fa_folder_open_o;
             font.pointSize: 35;
@@ -51,21 +51,21 @@ Rectangle {
             property int textSize: 20;
             spacing: 4;
 
-            Lib.Label {
+            UI.Label {
               anchors.verticalCenter: parent.verticalCenter;
               text: "Open .qml Files from the Menu via File "
               font.pointSize: parent.textSize;
               color: parent.color;
             }
 
-            Lib.Icon {
+            UI.Icon {
               anchors.verticalCenter: parent.verticalCenter;
               icon: icons.fa_angle_right;
               color: parent.color;
               font.pointSize: parent.textSize;
             }
 
-            Lib.Label {
+            UI.Label {
               anchors.verticalCenter: parent.verticalCenter;
               text: "Open..."
               font.pointSize: parent.textSize;

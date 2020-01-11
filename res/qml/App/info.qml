@@ -40,7 +40,7 @@ Item {
 
         visible: file;
         icon: root.hasErrors ? icons.fa_exclamation_circle : icons.fa_check;
-        color: root.hasErrors ? "#C54632" : "#2B68A4";
+        color: root.hasErrors ? "#C54632" : "#2BA468";
       }
     }
 

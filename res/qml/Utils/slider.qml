@@ -63,7 +63,7 @@ Item {
           x: slider.visualPosition * (slider.availableWidth - width / 2) + width / 2;
           anchors.verticalCenter: parent.verticalCenter;
 
-          color: "#21252B"
+          color: "#fff"
         }
 
         background: Rectangle {
@@ -81,7 +81,7 @@ Item {
             width: handle.x + handle.width * 1.5 - 2;
 
             radius: height / 2;
-            color: "#2B68A4"
+            color: "#3D424E"
           }
        }
     }

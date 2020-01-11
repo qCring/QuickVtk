@@ -3,6 +3,8 @@ import QtQuick 2.12
 import UI 1.0 as UI
 
 Item {
+  id: root;
+
   anchors.fill: parent;
 
   property var symbol: null;
@@ -85,21 +87,21 @@ Item {
         anchors.left: parent.left;
         anchors.right: parent.right;
 
-        model: symbol ? symbol.properties : null;
+        symbol: root.symbol;
       }
 
       Methods {
         anchors.left: parent.left;
         anchors.right: parent.right;
 
-        model: symbol ? symbol.methods : null;
+        symbol: root.symbol;
       }
 
       Enums {
         anchors.left: parent.left;
         anchors.right: parent.right;
 
-        model: symbol ? symbol.enumerations : null;
+        symbol: root.symbol;
       }
     }
   }

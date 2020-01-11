@@ -4,84 +4,91 @@ import UI 1.0 as UI
 
 UI.List {
   title: "Methods";
-  visible: model != undefined && model.length > 0;
+  property var symbol;
+  visible: _rep.model != undefined && _rep.model.length > 0;
 
-  delegate: Item {
-    anchors.left: parent.left;
-    anchors.right: parent.right;
+  Repeater {
+    id: _rep;
 
-    height: _label.height;
+    model: symbol ? symbol.methods : null;
 
-    Tag {
-      id: _ic;
-
+    delegate: Item {
       anchors.left: parent.left;
-      anchors.verticalCenter: parent.verticalCenter;
+      anchors.right: parent.right;
 
-      label.text: "M";
-      label.color: "#2BA468";
-    }
+      height: _label.height;
 
-    UI.Label {
-      id: _base;
+      Tag {
+        id: _ic;
 
-      visible: modelData.inherited;
-
-      anchors.left: _ic.right;
-      anchors.verticalCenter: parent.verticalCenter;
-
-      leftPadding: 8;
-      text: "base";
-    }
-
-    Row {
-      anchors.left: modelData.inherited ? _base.right : _ic.right;
-      anchors.verticalCenter: parent.verticalCenter;
-
-      UI.Label {
-        id: _name;
-
+        anchors.left: parent.left;
         anchors.verticalCenter: parent.verticalCenter;
 
-        topPadding: 4;
-        bottomPadding: 4;
+        label.text: "M";
+        label.color: "#2BA468";
+      }
+
+      UI.Label {
+        id: _base;
+
+        visible: modelData.inherited;
+
+        anchors.left: _ic.right;
+        anchors.verticalCenter: parent.verticalCenter;
+
         leftPadding: 8;
-
-        font.pointSize: 13;
-        text: modelData.name + " (";
-        color: "#fff";
+        text: "base";
       }
 
-      UI.Label {
+      Row {
+        anchors.left: modelData.inherited ? _base.right : _ic.right;
         anchors.verticalCenter: parent.verticalCenter;
 
-        font.pointSize: 13;
-        rightPadding: 2;
-        leftPadding: 2;
-        text: modelData.paramTypes;
-      }
+        UI.Label {
+          id: _name;
 
-      UI.Label {
-        anchors.verticalCenter: parent.verticalCenter;
+          anchors.verticalCenter: parent.verticalCenter;
 
-        font.pointSize: 13;
-        color: "#fff"
-        text: ")";
-      }
+          topPadding: 4;
+          bottomPadding: 4;
+          leftPadding: 8;
 
-      UI.Icon {
-        anchors.verticalCenter: parent.verticalCenter;
-        rightPadding: 8;
-        leftPadding: 8;
+          font.pointSize: 13;
+          text: modelData.name + " (";
+          color: "#fff";
+        }
 
-        icon: icons.fa_long_arrow_right;
-      }
+        UI.Label {
+          anchors.verticalCenter: parent.verticalCenter;
 
-      UI.Label {
-        anchors.verticalCenter: parent.verticalCenter;
+          font.pointSize: 13;
+          rightPadding: 2;
+          leftPadding: 2;
+          text: modelData.paramTypes;
+        }
 
-        font.pointSize: 13;
-        text: modelData.returnType;
+        UI.Label {
+          anchors.verticalCenter: parent.verticalCenter;
+
+          font.pointSize: 13;
+          color: "#fff"
+          text: ")";
+        }
+
+        UI.Icon {
+          anchors.verticalCenter: parent.verticalCenter;
+          rightPadding: 8;
+          leftPadding: 8;
+
+          icon: icons.fa_long_arrow_right;
+        }
+
+        UI.Label {
+          anchors.verticalCenter: parent.verticalCenter;
+
+          font.pointSize: 13;
+          text: modelData.returnType;
+        }
       }
     }
   }

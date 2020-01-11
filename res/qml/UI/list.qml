@@ -8,8 +8,7 @@ Column {
   spacing: 8;
 
   property alias title: _title.text;
-  property alias model: _content.model;
-  property alias delegate: _content.delegate;
+  default property alias content: _col.children;
 
   Item {
     id: _header;
@@ -48,10 +47,6 @@ Column {
       anchors.right: parent.right;
       anchors.leftMargin: 8;
       anchors.rightMargin: 8;
-
-      Repeater {
-        id: _content;
-      }
     }
   }
 }

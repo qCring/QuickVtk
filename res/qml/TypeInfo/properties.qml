@@ -12,14 +12,14 @@ UI.List {
 
     height: _name.height;
 
-    UI.Icon {
+    Tag {
       id: _ic;
 
       anchors.left: parent.left;
       anchors.verticalCenter: parent.verticalCenter;
 
-      rightPadding: 8;
-      icon: icons.fa_cube;
+      label.text: "P";
+      label.color: "#2B68A4";
     }
 
     UI.Label {
@@ -30,7 +30,7 @@ UI.List {
       anchors.left: _ic.right;
       anchors.verticalCenter: parent.verticalCenter;
 
-      rightPadding: 8;
+      leftPadding: 8;
       text: "base";
     }
 
@@ -43,13 +43,14 @@ UI.List {
 
       topPadding: 4;
       bottomPadding: 4;
+      leftPadding: 8;
 
       font.pointSize: 13;
       text: modelData.name;
       color: "#fff";
     }
 
-    UI.Label {
+    TypeLabel {
       id: _type;
 
       anchors.right: parent.right;

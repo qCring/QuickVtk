@@ -6,3 +6,5 @@ Group 1.0 group.qml
 Properties 1.0 properties.qml
 Enums 1.0 enums.qml
 Methods 1.0 methods.qml
+Tag 1.0 tag.qml
+TypeLabel 1.0 typelabel.qml

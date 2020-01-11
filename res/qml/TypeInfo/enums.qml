@@ -12,14 +12,14 @@ UI.List {
 
     height: _name.height;
 
-    UI.Icon {
+    Tag {
       id: _ic;
 
       anchors.left: parent.left;
       anchors.verticalCenter: parent.verticalCenter;
 
-      rightPadding: 8;
-      icon: icons.fa_cube;
+      label.text: "E";
+      label.color: "#C54632"
     }
 
     UI.Label {
@@ -31,6 +31,7 @@ UI.List {
 
       topPadding: 4;
       bottomPadding: 4;
+      leftPadding: 8;
 
       font.pointSize: 13;
       text: modelData.name;

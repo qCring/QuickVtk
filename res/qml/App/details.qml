@@ -80,7 +80,7 @@ Item  {
       enabled: visible;
     }
 
-    TypeInfo.List {
+    TypeInfo.View {
       anchors.fill: parent;
       visible: App.details.types;
       enabled: visible;

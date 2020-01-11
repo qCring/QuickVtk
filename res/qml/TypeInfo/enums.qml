@@ -39,7 +39,6 @@ UI.List {
 
         font.pointSize: 13;
         text: modelData.name;
-        color: "#fff";
       }
 
       UI.Label {

@@ -38,6 +38,7 @@ UI.List {
 
         leftPadding: 8;
         text: "base";
+        color: "#2B68A4"
       }
 
       Row {
@@ -53,7 +54,6 @@ UI.List {
 
           font.pointSize: 13;
           text: modelData.name + " (";
-          color: "#fff";
         }
 
         UI.Label {
@@ -69,7 +69,6 @@ UI.List {
           anchors.verticalCenter: parent.verticalCenter;
 
           font.pointSize: 13;
-          color: "#fff"
           text: ")";
         }
 

@@ -38,6 +38,7 @@ UI.List {
 
         leftPadding: 8;
         text: "base";
+        color: "#2B68A4"
       }
 
       UI.Label {
@@ -51,7 +52,6 @@ UI.List {
 
         font.pointSize: 13;
         text: modelData.name;
-        color: "#fff";
       }
 
       TypeLabel {

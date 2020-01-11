@@ -8,9 +8,6 @@ Item {
 
   anchors.left: parent ? parent.left : undefined;
   anchors.right: parent ? parent.right : undefined;
-  anchors.top: parent ? parent.top : undefined;
-  anchors.leftMargin: 8;
-  anchors.rightMargin: 8;
 
   property var file: null;
   property bool selected: false;
@@ -22,8 +19,12 @@ Item {
   Column {
     id: contentColumn;
 
+    anchors.top: parent.top;
     anchors.left: parent.left;
     anchors.right: parent.right;
+
+    topPadding: 8;
+    bottomPadding: 8;
 
     spacing: 8;
   }

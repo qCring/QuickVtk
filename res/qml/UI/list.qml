@@ -28,7 +28,7 @@ Column {
 
       topPadding: 8;
 
-      font.pointSize: 14;
+      font.pointSize: 15;
       color: "#fff";
     }
   }

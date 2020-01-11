@@ -47,8 +47,6 @@ UI.List {
         anchors.right: _type.left;
         anchors.verticalCenter: parent.verticalCenter;
 
-        topPadding: 4;
-        bottomPadding: 4;
         leftPadding: 8;
 
         font.pointSize: 13;

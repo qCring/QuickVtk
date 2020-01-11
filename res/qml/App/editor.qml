@@ -139,7 +139,7 @@ Item {
             property int cursorHeight: cursorRectangle.height;
             property bool showCursor: true;
 
-            font.pointSize: 12;
+            font.pointSize: 13;
             text: file != undefined ? file.content : "";
 
             onCursorXChanged: {

@@ -79,7 +79,7 @@ Item {
     }
 
     UI.List {
-      visible: !root.hasErrors;
+      visible: file && !root.hasErrors;
       title: "Properties"
 
       Column {

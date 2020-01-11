@@ -77,7 +77,6 @@ Rectangle {
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
 
-        //color: modelData.type == 2 ? "#D4B05E" : modelData.type == 3 ? "#C54632" : "transparent";
         width: label_type.width;
 
         UI.Label {
@@ -87,7 +86,6 @@ Rectangle {
           leftPadding: 4;
           rightPadding: 4;
           text: modelData.label;
-          //color: modelData.type > 1 ? "#fff" : "#9DA5B4"
           font.bold: modelData.type > 1;
           color: modelData.type == 2 ? "#D4B05E" : modelData.type == 3 ? "#C54632" : "#9DA5B4";
         }

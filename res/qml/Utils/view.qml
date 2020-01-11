@@ -23,9 +23,6 @@ Item {
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    topPadding: 8;
-    bottomPadding: 8;
-
     spacing: 8;
   }
 

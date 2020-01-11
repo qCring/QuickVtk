@@ -47,6 +47,10 @@ Column {
       anchors.right: parent.right;
       anchors.leftMargin: 8;
       anchors.rightMargin: 8;
+
+      spacing: 8;
+      topPadding: 8;
+      bottomPadding: 8;
     }
   }
 }

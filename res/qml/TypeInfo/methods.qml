@@ -16,7 +16,7 @@ UI.List {
       anchors.left: parent.left;
       anchors.right: parent.right;
 
-      height: _label.height;
+      height: _name.height;
 
       Tag {
         id: _ic;
@@ -49,8 +49,6 @@ UI.List {
 
           anchors.verticalCenter: parent.verticalCenter;
 
-          topPadding: 4;
-          bottomPadding: 4;
           leftPadding: 8;
 
           font.pointSize: 13;

@@ -8,7 +8,7 @@ Rectangle {
   property string text: "";
   width: _row.width + 8;
   height: _label.height + 2;
-  color: "#181A1F";
+  color: "#21252B";
   radius: 4;
 
   Row {

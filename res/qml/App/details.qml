@@ -34,7 +34,7 @@ Item  {
 
         iconSize: 16;
         icon: icons.fa_info_circle;
-        label.text: "Info"
+        label.text: "Properties"
         width: parent.width / 2;
         frameless: true;
         use_toggle: true;
@@ -60,7 +60,6 @@ Item  {
       }
     }
   }
-
 
   Item {
     anchors.left: parent.left;

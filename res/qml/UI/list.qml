@@ -24,35 +24,34 @@ Column {
 
       anchors.left: parent.left;
       anchors.right: parent.right;
-      anchors.leftMargin: 8;
       anchors.rightMargin: 8;
       anchors.verticalCenter: parent.verticalCenter;
 
       topPadding: 8;
-      bottomPadding: 8;
 
-      font.pointSize: 13;
+      font.pointSize: 14;
       color: "#fff";
-    }
-
-    Rectangle {
-      anchors.left: parent.left;
-      anchors.right: parent.right;
-      anchors.bottom: parent.bottom;
-
-      height: 1;
-      color: "#181A1F"
     }
   }
 
-  Column {
+  UI.Area {
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.leftMargin: 8;
-    anchors.rightMargin: 8;
 
-    Repeater {
-      id: _content;
+    height: _col.height;
+
+    Column {
+      id: _col;
+
+      anchors.top: parent.top;
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.leftMargin: 8;
+      anchors.rightMargin: 8;
+
+      Repeater {
+        id: _content;
+      }
     }
   }
 }

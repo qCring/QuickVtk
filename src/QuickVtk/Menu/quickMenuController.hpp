@@ -29,8 +29,6 @@ namespace quick {
             auto OnViewContext() -> void;
             auto OnViewNextTab() -> void;
             auto OnViewPreviousTab() -> void;
-            auto OnHelpAbout() -> void;
-            auto OnHelpWebsite() -> void;
         private:
             auto saveRecentFiles() -> void;
         public:

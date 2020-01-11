@@ -30,9 +30,7 @@ namespace quick {
 
         auto Controller::Init() -> void {
             auto menu_file = Item::Create::SimpleItem("File");
-            auto menu_edit = Item::Create::SimpleItem("Edit");
             auto menu_view = Item::Create::SimpleItem("View");
-            auto menu_help = Item::Create::SimpleItem("Help");
             
             instance->m_fileRecentFiles = Item::Create::SimpleItem("Open Recent", Action::File_Open_Recent);
             instance->m_viewToggleConsole = Item::Create::IconItem("Show Console", "fa_terminal", Action::View_Console);
@@ -56,20 +54,13 @@ namespace quick {
             menu_file->add(Item::Create::SimpleItem("Close", Action::File_Close, Separator::On));
             menu_file->add(Item::Create::IconItem("Quit", "fa_power_off", Action::File_Quit));
             
-            menu_edit->add(Item::Create::IconItem("Settings", "fa_cog"));
-            
             menu_view->add(instance->m_viewToggleConsole);
             menu_view->add(Item::Create::SimpleItem("Toggle Context View", Action::View_Context));
             menu_view->add(Item::Create::SimpleItem("Previous Tab", Action::View_Previous_Tab));
             menu_view->add(Item::Create::SimpleItem("Next Tab", Action::View_Next_Tab));
             
-            menu_help->add(Item::Create::SimpleItem("About", Action::Help_About));
-            menu_help->add(Item::Create::IconItem("Website", "fa_globe", Action::Help_Website));
-            
             instance->m_items.append(menu_file);
-            instance->m_items.append(menu_edit);
             instance->m_items.append(menu_view);
-            instance->m_items.append(menu_help);
         }
     
         auto Controller::getItemList() -> QQmlListProperty<Item> {
@@ -107,8 +98,6 @@ namespace quick {
                 case Action::View_Context: OnViewContext(); break;
                 case Action::View_Previous_Tab: OnViewPreviousTab(); break;
                 case Action::View_Next_Tab: OnViewNextTab(); break;
-                case Action::Help_Website: OnHelpWebsite(); break;
-                case Action::Help_About: OnHelpAbout(); break;
                 default: break;
             }
         }
@@ -191,14 +180,6 @@ namespace quick {
         
         auto Controller::OnViewNextTab() -> void {
             Document::Controller::instance->selectNext();
-        }
-    
-        auto Controller::OnHelpAbout() -> void {
-            qDebug() << "Help > About";
-        }
-        
-        auto Controller::OnHelpWebsite() -> void {
-            qDebug() << "Help > Website";
         }
     
         auto Controller::updateViewConsoleMenu(bool visible) -> void {

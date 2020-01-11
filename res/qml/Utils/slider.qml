@@ -71,7 +71,7 @@ Item {
           implicitHeight: 8
           color: "#21252B"
           border.color: "#1B1D23"
-          radius: 2;
+          radius: height / 2;
 
           Rectangle {
             anchors.bottom: parent.bottom;
@@ -80,7 +80,7 @@ Item {
             anchors.margins: 1;
             width: handle.x + handle.width * 1.5 - 2;
 
-            radius: 2;
+            radius: height / 2;
             color: "#2B68A4"
           }
        }

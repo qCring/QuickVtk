@@ -17,9 +17,7 @@ namespace quick {
             View_Console,
             View_Context,
             View_Previous_Tab,
-            View_Next_Tab,
-            Help_About,
-            Help_Website
+            View_Next_Tab
         };
     
         enum class Separator {

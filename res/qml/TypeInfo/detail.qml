@@ -69,7 +69,7 @@ Item {
     }
   }
 
-  UI.Area {
+  Item {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _info.bottom;

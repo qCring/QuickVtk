@@ -2,7 +2,6 @@ module TypeInfo
 View 1.0 view.qml
 Search 1.0 search.qml
 Detail 1.0 detail.qml
-Group 1.0 group.qml
 Properties 1.0 properties.qml
 Enums 1.0 enums.qml
 Methods 1.0 methods.qml

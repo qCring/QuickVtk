@@ -11,9 +11,12 @@ Item {
     id: _flick;
 
     anchors.left: parent.left;
-    anchors.right: _scroll.left;
+    anchors.right: parent.right;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
+
+    anchors.leftMargin: 8;
+    anchors.rightMargin: 16;
 
     flickableDirection: Flickable.VerticalFlick;
     boundsBehavior: Flickable.StopAtBounds;
@@ -42,10 +45,10 @@ Item {
     anchors.right: parent.right;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
+    anchors.rightMargin: 3;
 
-    property bool showHandle: _flick.contentHeight > root.height;
-    visible: showHandle;
-    width: showHandle ? 12 : 0;
+    visible: _flick.contentHeight > root.height
+    width: 12;
 
     Item {
       id: _handle;

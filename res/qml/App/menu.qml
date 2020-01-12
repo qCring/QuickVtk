@@ -148,11 +148,12 @@ Row {
 
               Rectangle {
                 id: inner;
+
                 visible: false;
 
-                anchors.leftMargin: -4;
                 anchors.left: parent.right;
                 anchors.top: parent.top;
+
                 height: innerCol.height;
                 width: innerCol.width;
 

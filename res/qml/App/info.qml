@@ -15,6 +15,9 @@ Item {
     anchors.right: parent.right;
     anchors.top: parent.top;
 
+    anchors.leftMargin: 8;
+    anchors.rightMargin: 16;
+
     spacing: 8;
 
     UI.List {
@@ -32,10 +35,19 @@ Item {
         text: file ? file.path : "";
       }
     }
+  }
+
+  UI.ScrollView {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: _outer.bottom;
+    anchors.bottom: parent.bottom;
 
     UI.List {
       title: "Errors";
       visible: root.hasErrors;
+
+      bottomPadding: 64;
 
       Repeater {
         model: file ? file.errors : null;
@@ -79,17 +91,12 @@ Item {
         }
       }
     }
-  }
-
-  UI.ScrollView {
-    anchors.left: parent.left;
-    anchors.right: parent.right;
-    anchors.top: _outer.bottom;
-    anchors.bottom: parent.bottom;
 
     UI.List {
       visible: _controls.children.length > 0;
       title: "Properties";
+
+      bottomPadding: 64;
 
       Column {
         id: _controls;

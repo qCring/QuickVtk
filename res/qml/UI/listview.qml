@@ -64,7 +64,7 @@ Item {
     id: _scroll;
 
     anchors.right: parent.right;
-    anchors.rightMargin: 2;
+    anchors.rightMargin: 3;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
 

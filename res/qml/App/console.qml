@@ -53,8 +53,8 @@ Rectangle {
       anchors.top: parent.top;
       anchors.bottom: parent.bottom;
 
-      leftPadding: 6;
-      rightPadding: 6;
+      leftPadding: 7;
+      rightPadding: 7;
 
       icon: icons.fa_long_arrow_down;
       color: _stickyMa.containsMouse ? "#fff" : _lv.sticky ? "#2B68A4" : "#9DA5B4";

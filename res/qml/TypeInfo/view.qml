@@ -4,7 +4,6 @@ import UI 1.0 as UI
 
 Item {
   anchors.fill: parent;
-  anchors.topMargin: 8;
 
   Item { // search + listview
     anchors.fill: parent;
@@ -16,20 +15,30 @@ Item {
 
       anchors.left: parent.left;
       anchors.right: parent.right;
+    }
 
+    Rectangle {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.top: _search.bottom;
+
+      height: 1;
+      color: "#181A1F";
     }
 
     Item {
       anchors.left: parent.left;
       anchors.right: parent.right;
-      anchors.bottom: parent.bottom;
+      anchors.bottom: _footer.top;
       anchors.top: _search.bottom;
 
       UI.ListView {
         clip: true;
 
         model: App.typeList;
+
         anchors.fill: parent;
+        anchors.leftMargin: 8;
 
         delegate: Item {
           anchors.left: parent.left;
@@ -40,7 +49,6 @@ Item {
             id: _ic;
 
             anchors.left: parent.left;
-            anchors.leftMargin: 8;
             anchors.verticalCenter: parent.verticalCenter;
 
             icon: icons.fa_cube;
@@ -80,6 +88,33 @@ Item {
             onClicked: detail.symbol = modelData;
           }
         }
+      }
+    }
+
+    Item {
+      id: _footer;
+
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.bottom: parent.bottom;
+
+      height: 30;
+
+      Rectangle {
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: parent.top;
+
+        height: 1;
+        color: "#181A1F";
+      }
+
+      UI.Badge {
+        anchors.right: parent.right;
+        anchors.verticalCenter: parent.verticalCenter;
+        anchors.rightMargin: 8;
+
+        label.text: App.typeList.count + " / " + App.typeList.totalCount;
       }
     }
   }

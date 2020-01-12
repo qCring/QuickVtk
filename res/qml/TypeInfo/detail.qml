@@ -81,6 +81,7 @@ Item {
     Column {
       anchors.left: parent.left;
       anchors.right: parent.right;
+      bottomPadding: 64;
 
       Properties {
         anchors.left: parent.left;

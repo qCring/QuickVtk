@@ -67,10 +67,6 @@ Item  {
     anchors.top: tabs.bottom;
     anchors.bottom: parent.bottom;
 
-    anchors.leftMargin: 8;
-    anchors.rightMargin: 8;
-    anchors.bottomMargin: 8;
-
     Info {
       id: infoView;
 

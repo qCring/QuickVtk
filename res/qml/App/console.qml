@@ -41,10 +41,32 @@ Rectangle {
       id: label_time;
 
       anchors.verticalCenter: parent.verticalCenter;
-      anchors.right: parent.right;
-      rightPadding: 18;
+      anchors.right: _stickyBtn.left;
 
       text: "Time"
+    }
+
+    UI.Icon {
+      id: _stickyBtn;
+
+      anchors.right: parent.right;
+      anchors.top: parent.top;
+      anchors.bottom: parent.bottom;
+
+      leftPadding: 6;
+      rightPadding: 6;
+
+      icon: icons.fa_long_arrow_down;
+      color: _stickyMa.containsMouse ? "#fff" : _lv.sticky ? "#2B68A4" : "#9DA5B4";
+
+      MouseArea {
+        id: _stickyMa;
+
+        anchors.fill: parent;
+
+        hoverEnabled: true;
+        onClicked: _lv.sticky = !_lv.sticky;
+      }
     }
   }
 
@@ -58,6 +80,8 @@ Rectangle {
   }
 
   UI.ListView {
+    id: _lv;
+
     anchors.top: header.bottom;
     anchors.left: parent.left;
     anchors.right: parent.right;

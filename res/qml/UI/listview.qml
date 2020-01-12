@@ -7,6 +7,8 @@ Item {
   property alias delegate: _lv.delegate;
   property alias spacing: _lv.spacing;
 
+  property bool sticky: false;
+
   ListView {
     id: _lv;
 
@@ -17,7 +19,7 @@ Item {
     anchors.right: _scroll.left;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
-    
+
     clip: true;
 
     property int lastY: 0;
@@ -35,7 +37,6 @@ Item {
     onMovingChanged: {
       if (!moving) {
         lastY = contentY;
-        _handle.released();
       }
     }
 
@@ -45,7 +46,7 @@ Item {
         return;
       }
 
-      if (_handle.sticky) {
+      if (root.sticky) {
         positionViewAtEnd();
         return;
       }
@@ -77,7 +78,6 @@ Item {
 
       height: Math.max(Math.min(_root.height * _root.height / _lv.contentHeight, _root.height), 16);
       property real scrollRatio: (_lv.contentHeight - _root.height) / (_root.height - height);
-      property bool sticky: false;
 
       Rectangle {
         anchors.fill: parent;
@@ -90,14 +90,7 @@ Item {
       onYChanged: {
         if (_ma.pressed) {
           _lv.contentY = _lv.lastY = y * scrollRatio;
-        }
-      }
-
-      function released() { // make handle sticky if near bottom
-        if (_handle.y > _root.height - _handle.height - 5) { // 5px tolerance
-          _handle.sticky = true;
-        } else {
-          _handle.sticky = false;
+          _root.sticky = false;
         }
       }
 
@@ -110,10 +103,6 @@ Item {
         drag.axis: Drag.YAxis;
         drag.minimumY: 0;
         drag.maximumY: _root.height - _handle.height;
-
-        onReleased: {
-          _handle.released();
-        }
       }
     }
   }

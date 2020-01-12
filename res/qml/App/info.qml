@@ -9,6 +9,8 @@ Item {
   property var hasErrors: file ? file.errors.length > 0 : false;
 
   Column {
+    id: _outer;
+
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: parent.top;
@@ -77,10 +79,17 @@ Item {
         }
       }
     }
+  }
+
+  UI.ScrollView {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: _outer.bottom;
+    anchors.bottom: parent.bottom;
 
     UI.List {
       visible: file && !root.hasErrors;
-      title: "Properties"
+      title: "Properties";
 
       Column {
         id: _controls;

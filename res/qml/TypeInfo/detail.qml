@@ -71,7 +71,7 @@ Item {
     }
   }
 
-  Item {
+  UI.ScrollView {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _info.bottom;
@@ -81,7 +81,6 @@ Item {
     Column {
       anchors.left: parent.left;
       anchors.right: parent.right;
-      anchors.top: parent.top;
 
       Properties {
         anchors.left: parent.left;

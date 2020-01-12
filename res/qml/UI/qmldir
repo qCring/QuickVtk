@@ -7,3 +7,4 @@ TextInput 1.0 textinput.qml
 ListView 1.0 listview.qml
 Badge 1.0 badge.qml
 List 1.0 list.qml
+ScrollView 1.0 scrollview.qml

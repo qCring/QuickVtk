@@ -88,7 +88,7 @@ Item {
     anchors.bottom: parent.bottom;
 
     UI.List {
-      visible: file && !root.hasErrors;
+      visible: _controls.children.length > 0;
       title: "Properties";
 
       Column {

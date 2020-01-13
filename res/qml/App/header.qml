@@ -9,7 +9,7 @@ Rectangle {
   height: 35
   property var file: App.document.file;
   property bool modified: file != undefined && file.modified;
-  color: "#282C34"
+  color: "#282C34";
 
   Menu {
     id: _menu;
@@ -36,6 +36,8 @@ Rectangle {
       anchors.left: parent.left;
       anchors.top: parent.top;
       anchors.bottom: parent.bottom;
+
+      rightPadding: 8;
 
       UI.Icon {
         anchors.top: parent.top;
@@ -74,10 +76,28 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter;
 
         leftPadding: 8;
-        rightPadding: 8;
 
         text: file ? file.title : "No File selected";
         color: file ? "#fff" : "#9DA5B4";
+      }
+
+      UI.Label {
+        visible: file;
+
+        anchors.verticalCenter: parent.verticalCenter;
+
+        leftPadding: 8;
+        rightPadding: 8;
+
+        text: "|";
+      }
+
+      UI.Label {
+        visible: file;
+
+        anchors.verticalCenter: parent.verticalCenter;
+
+        text: file ? " | " + file.timeStamp : "";
       }
     }
   }

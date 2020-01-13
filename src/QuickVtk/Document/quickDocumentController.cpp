@@ -118,6 +118,8 @@ namespace quick {
             if (this->m_file != nullptr) {
                 this->m_file->setModified(false);
                 emit this->m_file->errorsChanged();
+                
+                this->m_file->updateTimeStamp();
             }
         }
     

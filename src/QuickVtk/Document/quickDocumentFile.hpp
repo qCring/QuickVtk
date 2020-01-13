@@ -14,6 +14,7 @@ namespace quick {
             Q_PROPERTY(QString path READ getPath NOTIFY pathChanged);
             Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged);
             Q_PROPERTY(QString content READ getContent NOTIFY contentChanged);
+            Q_PROPERTY(QString timeStamp READ getTimeStamp NOTIFY timeStampChanged);
             Q_PROPERTY(bool modified READ getModified NOTIFY modifiedChanged);
             Q_PROPERTY(bool selected READ getSelected NOTIFY selectedChanged);
             Q_PROPERTY(QQmlListProperty<quick::Document::Error> errors READ getErrorList NOTIFY errorsChanged);
@@ -22,6 +23,7 @@ namespace quick {
             QString m_path;
             QString m_title;
             QString m_content;
+            QString m_timeStamp;
             bool m_modified = false;
             bool m_selected = false;
             QObject* m_component = nullptr;
@@ -44,6 +46,8 @@ namespace quick {
             auto getComponent() -> QObject*;
             auto clearErrors() -> void;
             auto getErrorList() -> QQmlListProperty<Error>;
+            auto updateTimeStamp() -> void;
+            auto getTimeStamp() -> QString;
             static auto errorCount(QQmlListProperty<Error>*) -> int;
             static auto errorAt(QQmlListProperty<Error>*, int) -> Error*;
         public slots:
@@ -59,6 +63,7 @@ namespace quick {
             void modifiedChanged();
             void selectedChanged();
             void componentChanged();
+            void timeStampChanged();
         };
     }
 }

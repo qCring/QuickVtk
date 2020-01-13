@@ -4,6 +4,7 @@
 #include "quickIO.hpp"
 
 #include <QDebug>
+#include <QTime>
 
 namespace quick {
     namespace Document {
@@ -93,6 +94,10 @@ namespace quick {
             return this->m_modified;
         }
     
+        auto File::getTimeStamp() -> QString {
+            return this->m_timeStamp;
+        }
+    
         auto File::setSelected(bool selected) -> void {
             if (this->m_selected != selected) {
                 this->m_selected = selected;
@@ -129,6 +134,11 @@ namespace quick {
         auto File::addError(int line, int column, const QString& message) -> void {
             auto error = new Error(line, column, QString(message).remove('\n'));
             this->m_errors.append(error);
+        }
+    
+        auto File::updateTimeStamp() -> void {
+            this->m_timeStamp = QTime::currentTime().toString();
+            emit this->timeStampChanged();
         }
     }
 }

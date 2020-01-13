@@ -28,10 +28,11 @@ namespace quick {
             QList<Symbol*> m_allSymbols;
         private:
             static auto Add(Symbol*) -> void;
+            static QMap<QString, class Enum*> EnumLookup;
         public:
             static Qml::Register::Type<List> Register;
-            static QMap<QString, class Enum*> EnumLookup;
             static auto GetInstance() -> List*;
+            static auto GetEnumLookup() -> QMap<QString, class Enum*>;
             auto init() -> void;
             auto setVisible(bool) -> void;
             auto isVisible() -> bool;

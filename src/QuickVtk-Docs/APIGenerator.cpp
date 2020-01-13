@@ -187,7 +187,7 @@ namespace quick {
 
     auto APIGenerator::generateEnumJson(const QString& identifier, QJsonArray& root) -> void {
         
-        auto enumeration = TypeInfo::List::EnumLookup.value(identifier);
+        auto enumeration = TypeInfo::List::GetEnumLookup().value(identifier);
         
         if (enumeration == nullptr) {
             return;

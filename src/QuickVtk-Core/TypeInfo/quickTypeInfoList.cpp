@@ -12,6 +12,10 @@ namespace quick {
             static List* instance = new List();
             return instance;
         }
+    
+        auto List::GetEnumLookup() -> QMap<QString, Enum*> {
+            return EnumLookup;
+        }
 
         auto List::setVisible(bool visible) -> void {
             if (this->m_visible != visible) {

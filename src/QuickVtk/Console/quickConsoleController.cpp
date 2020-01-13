@@ -32,6 +32,7 @@ namespace quick {
             if (this->m_collapsed != collapsed) {
                 this->m_collapsed = collapsed;
                 emit this->collapsedChanged();
+                
                 Menu::Controller::instance->updateViewConsoleMenu(!collapsed);
             }
         }

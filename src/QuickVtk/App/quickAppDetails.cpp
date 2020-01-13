@@ -1,5 +1,7 @@
 #include "quickAppDetails.hpp"
 
+#include "quickMenuController.hpp"
+
 namespace quick {
     namespace App {
 
@@ -18,6 +20,8 @@ namespace quick {
             if (this->m_collapsed != collapsed) {
                 this->m_collapsed = collapsed;
                 emit this->collapsedChanged();
+                
+                Menu::Controller::instance->updateViewInspectorMenu(!collapsed);
             }
         }
     
@@ -50,8 +54,7 @@ namespace quick {
         }
     
         void Details::toggle() {
-            this->m_collapsed = !this->m_collapsed;
-            emit this->collapsedChanged();
+            this->setCollapsed(!this->m_collapsed);
         }
     }
 }

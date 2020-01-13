@@ -15,7 +15,7 @@ namespace quick {
             File_Close,
             File_Quit,
             View_Console,
-            View_Context,
+            View_Inspector,
             View_Previous_Tab,
             View_Next_Tab
         };

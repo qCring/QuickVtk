@@ -6,6 +6,7 @@
 #include "quickDocumentFile.hpp"
 
 #include "quickAppSettings.hpp"
+#include "quickAppDetails.hpp"
 #include "quickAppEngine.hpp"
 
 #include "quickIO.hpp"
@@ -34,6 +35,7 @@ namespace quick {
             
             instance->m_fileRecentFiles = Item::Create::SimpleItem("Open Recent", Action::File_Open_Recent);
             instance->m_viewToggleConsole = Item::Create::IconItem("Show Console", "fa_terminal", Action::View_Console);
+            instance->m_viewToggleInspector = Item::Create::SimpleItem("Hide Inspector", Action::View_Inspector);
             
             auto recentFiles = App::Settings::LoadRecentFiles();
             
@@ -55,7 +57,7 @@ namespace quick {
             menu_file->add(Item::Create::IconItem("Quit", "fa_power_off", Action::File_Quit));
             
             menu_view->add(instance->m_viewToggleConsole);
-            menu_view->add(Item::Create::SimpleItem("Toggle Context View", Action::View_Context));
+            menu_view->add(instance->m_viewToggleInspector);
             menu_view->add(Item::Create::SimpleItem("Previous Tab", Action::View_Previous_Tab));
             menu_view->add(Item::Create::SimpleItem("Next Tab", Action::View_Next_Tab));
             
@@ -95,7 +97,7 @@ namespace quick {
                 case Action::File_Clear_History: OnFileClearHistory(); break;
                 case Action::File_Quit: OnFileQuit(); break;
                 case Action::View_Console: OnViewConsole(); break;
-                case Action::View_Context: OnViewContext(); break;
+                case Action::View_Inspector: OnViewInspector(); break;
                 case Action::View_Previous_Tab: OnViewPreviousTab(); break;
                 case Action::View_Next_Tab: OnViewNextTab(); break;
                 default: break;
@@ -170,8 +172,8 @@ namespace quick {
             Console::Controller::instance->toggle();
         }
         
-        auto Controller::OnViewContext() -> void {
-            
+        auto Controller::OnViewInspector() -> void {
+            App::Details::instance->toggle();
         }
     
         auto Controller::OnViewPreviousTab() -> void {
@@ -187,6 +189,15 @@ namespace quick {
                 this->m_viewToggleConsole->setLabel("Hide Console");
             } else {
                 this->m_viewToggleConsole->setLabel("Show Console");
+            }
+        }
+    
+
+        auto Controller::updateViewInspectorMenu(bool visible) -> void {
+            if (visible) {
+                this->m_viewToggleInspector->setLabel("Hide Inspector");
+            } else {
+                this->m_viewToggleInspector->setLabel("Show Inspector");
             }
         }
     

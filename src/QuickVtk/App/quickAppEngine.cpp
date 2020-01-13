@@ -57,8 +57,7 @@ namespace quick {
     #endif
             resourceDir = path.absolutePath() + "/Resources/";
 
-            AddFontDir(resourceDir + "fonts/roboto/");
-            AddFontDir(resourceDir + "fonts/vera/");
+            AddFontDir(resourceDir + "fonts/Roboto/");
             AddFontDir(resourceDir + "fonts/font-awesome/");
 
             auto engine = new QQmlApplicationEngine ();

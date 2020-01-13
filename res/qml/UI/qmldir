@@ -1,0 +1,10 @@
+module UI
+Area 1.0 area.qml
+Button 1.0 button.qml
+Icon 1.0 icon.qml
+Label 1.0 label.qml
+TextInput 1.0 textinput.qml
+ListView 1.0 listview.qml
+Badge 1.0 badge.qml
+List 1.0 list.qml
+ScrollView 1.0 scrollview.qml

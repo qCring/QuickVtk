@@ -1,12 +1,10 @@
 #pragma once
 
-namespace quick
-{
-    struct Meta
-    {
-        static constexpr auto appName       = "@PROJECT_NAME@";
-        static constexpr auto orgName       = "@QUICKVTK_ORG_NAME@";
-        static constexpr auto orgDomain     = "@QUICKVTK_ORG_DOMAIN@";
-        static constexpr auto versionString = "@QUICKVTK_VERSION_MAJOR@.@QUICKVTK_VERSION_MINOR@.@QUICKVTK_VERSION_PATCH@";
+namespace quick {
+    struct Meta {
+        static constexpr auto OrgName    = "@QUICKVTK_ORG_NAME@";
+        static constexpr auto OrgDomain  = "@QUICKVTK_ORG_DOMAIN@";
+        static constexpr auto AppName    = "@PROJECT_NAME@";
+        static constexpr auto AppVersion = "@QUICKVTK_VERSION_MAJOR@.@QUICKVTK_VERSION_MINOR@.@QUICKVTK_VERSION_PATCH@";
     };
 }

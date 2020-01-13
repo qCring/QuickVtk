@@ -30,8 +30,16 @@ namespace quick {
         
         Qml::RegisterTypes();
         
-        docs_dir.cdUp();         // cdUp to 'bin'
-        docs_dir.cdUp();         // cdUp to project root directory 'QuickVtk'
+        // cdUp to root directory
+        // this works on macOS & windows, not sure about linux though...
+        
+#ifdef __APPLE__                // application bundle on macOS needs 2cdUps
+        docs_dir.cdUp();
+        docs_dir.cdUp();
+#else
+        docs_dir.cdUp();
+#endif
+        
         docs_dir.cd("docs");     // cd to 'docs'
 
         if (!docs_dir.exists(json_path) && !docs_dir.mkpath(json_path)) {

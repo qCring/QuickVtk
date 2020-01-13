@@ -16,6 +16,9 @@ Item {
     anchors.top: parent.top;
     anchors.left: parent.left;
     anchors.right: parent.right;
+    anchors.leftMargin: 8;
+    anchors.topMargin: 8;
+
     height: _label.height + 16;
 
     UI.Button {
@@ -39,44 +42,95 @@ Item {
 
       text: symbol ? symbol.prefix + "." + symbol.name : "";
       color: "#fff";
-      font.bold: true;
-      font.pointSize: 14;
+      font.pointSize: 15;
     }
   }
 
-  Item {
+  Column {
     id: _info;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _header.bottom;
+    anchors.leftMargin: 8;
 
-    height: _infoCol.height;
+    bottomPadding: 8;
+    spacing: 8;
 
-    Column {
-      id: _infoCol;
-
+    Row {
       anchors.left: parent.left;
       anchors.right: parent.right;
-      anchors.top: parent.top;
+      spacing: 8;
 
-      UI.Badge {
-        label.text: symbol ? symbol.type == 0 ? "Abstract Class" : symbol.type == 1 ? "Class" : "Enum" : "" ;
-        label.font.pointSize: 14;
+      UI.Label {
+        anchors.verticalCenter: parent.verticalCenter;
+        width: _ns.width;
+        text: "Type";
       }
 
       UI.Badge {
-        label.text: symbol ? symbol.prefix : ""
+        anchors.verticalCenter: parent.verticalCenter;
+        label.text: symbol ? symbol.type == 0 ? "Abstract Class" : symbol.type == 1 ? "Class" : "Enum" : "";
+      }
+    }
+
+    Row {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      spacing: 8;
+
+      visible: symbol && symbol.base != undefined;
+
+      UI.Label {
+        anchors.verticalCenter: parent.verticalCenter;
+        width: _ns.width;
+        text: "Base";
+      }
+
+      UI.Badge {
+        anchors.verticalCenter: parent.verticalCenter;
+        label.text: symbol && symbol.base ? symbol.base : "";
+      }
+    }
+
+    Row {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      spacing: 8;
+
+      UI.Label {
+        id: _ns;
+
+        anchors.verticalCenter: parent.verticalCenter;
+        text: "Namespace";
+      }
+
+      UI.Badge {
+        anchors.verticalCenter: parent.verticalCenter;
+        label.text: symbol ? symbol.prefix : "";
       }
     }
   }
 
-  UI.ScrollView {
+  Rectangle {
+    id: _separator;
+
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _info.bottom;
-    anchors.topMargin: 8;
-    anchors.bottom: parent.bottom;
+
+    height: 1;
+    color: "#181A1F";
+    visible: _sv.scrolled;
+  }
+
+  UI.ScrollView {
+    id: _sv;
+
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: _separator.bottom;
+    anchors.bottom: _footer.top;
 
     Column {
       anchors.left: parent.left;
@@ -103,6 +157,25 @@ Item {
 
         symbol: root.symbol;
       }
+    }
+  }
+
+  Item {
+    id: _footer;
+
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.bottom: parent.bottom;
+
+    height: 30;
+
+    Rectangle {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+      anchors.top: parent.top;
+
+      height: 1;
+      color: "#181A1F";
     }
   }
 }

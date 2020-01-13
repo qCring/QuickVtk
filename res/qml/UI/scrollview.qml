@@ -6,6 +6,7 @@ Item {
   id: root;
 
   default property alias content: _content.children;
+  property bool scrolled: _flick.contentY > 0;
 
   Flickable {
     id: _flick;

@@ -9,38 +9,82 @@ Item {
   property var hasErrors: file ? file.errors.length > 0 : false;
 
   Column {
-    id: _outer;
+    id: _header;
 
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: parent.top;
 
+    anchors.topMargin: 8;
     anchors.leftMargin: 8;
     anchors.rightMargin: 16;
 
     spacing: 8;
 
-    UI.List {
-      title: "File"
+    Item {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+
+      height: _title.height;
 
       UI.Label {
+        id: _title;
+
         anchors.left: parent.left;
-        anchors.right: parent.right;
-        text: file ? file.title : "No file selected";
+        anchors.right: _indicator.left;
+        anchors.verticalCenter: parent.verticalCenter;
+
+        font.pointSize: 15;
+        color: "#fff";
+        text: "File";
       }
 
-      UI.Label {
-        anchors.left: parent.left;
+      UI.Icon {
+        id: _indicator;
+
         anchors.right: parent.right;
-        text: file ? file.path : "";
+        anchors.verticalCenter: parent.verticalCenter;
+
+        icon: root.hasErrors ? icons.fa_times_circle : icons.fa_check;
+        color: root.hasErrors ? "#C54632" : "#2BA468";
+        visible: root.file;
       }
+    }
+
+    UI.Label {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+
+      text: root.file ? file.title : "No file selected";
+    }
+
+    UI.Label {
+      anchors.left: parent.left;
+      anchors.right: parent.right;
+
+      text: root.file ? file.path : "";
     }
   }
 
-  UI.ScrollView {
+  Rectangle {
+    id: _separator;
+
+    anchors.top: _header.bottom;
+    anchors.topMargin: 8;
     anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.top: _outer.bottom;
+
+    height: 1;
+    color: "#181A1F";
+    visible: _sv.scrolled; 
+  }
+
+  UI.ScrollView {
+    id: _sv;
+
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.top: _separator.bottom;
     anchors.bottom: parent.bottom;
 
     UI.List {

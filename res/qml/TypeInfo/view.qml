@@ -24,6 +24,7 @@ Item {
 
       height: 1;
       color: "#181A1F";
+      visible: _lv.scrolled;
     }
 
     Item {
@@ -33,6 +34,8 @@ Item {
       anchors.top: _search.bottom;
 
       UI.ListView {
+        id: _lv;
+
         clip: true;
 
         model: App.typeList;
@@ -51,6 +54,7 @@ Item {
             anchors.left: parent.left;
             anchors.verticalCenter: parent.verticalCenter;
 
+            rightPadding: 8;
             icon: icons.fa_cube;
             color: "#872BCB";
           }
@@ -62,7 +66,6 @@ Item {
             anchors.right: _type.left;
             anchors.verticalCenter: parent.verticalCenter
 
-            leftPadding: 8;
             topPadding: 4;
             bottomPadding: 4;
 
@@ -74,8 +77,12 @@ Item {
             id: _type;
 
             anchors.right: parent.right;
-            anchors.rightMargin: 4;
+
             anchors.verticalCenter: parent.verticalCenter;
+
+            leftPadding: 8;
+            rightPadding: 8;
+
             text: modelData.type == 0 ? "A" : modelData.type == 1 ? "C" : "E";
             font.pointSize: 9;
             font.bold: true;

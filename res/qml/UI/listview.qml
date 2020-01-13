@@ -8,6 +8,7 @@ Item {
   property alias spacing: _lv.spacing;
 
   property bool sticky: false;
+  property bool scrolled: _lv.contentY > 0;
 
   ListView {
     id: _lv;

@@ -33,7 +33,7 @@ Item  {
         anchors.verticalCenter: parent.verticalCenter;
 
         iconSize: 16;
-        icon: icons.fa_info_circle;
+        icon: icons.fa_list_alt;
         label.text: "Properties"
         width: parent.width / 2;
         frameless: true;

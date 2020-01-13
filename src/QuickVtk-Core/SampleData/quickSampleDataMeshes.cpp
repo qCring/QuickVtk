@@ -16,6 +16,10 @@ namespace quick {
 
             instance = new Meshes();
         }
+    
+        auto Meshes::GetInstance() -> Meshes* {
+            return instance;
+        }
 
         auto Meshes::makeDataPath(const QString& file) -> QString {
             auto path = QDir(QGuiApplication::applicationDirPath());

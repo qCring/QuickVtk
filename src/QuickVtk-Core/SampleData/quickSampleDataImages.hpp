@@ -18,10 +18,11 @@ namespace quick {
             Q_PROPERTY(QString bJPG READ getBJPG CONSTANT);
         private:
             auto makeDataPath(const QString&) -> QString;
+            static Images* instance;
         public:
             static Qml::Register::Class<Images> Register;
-            static Images* instance;
             static auto Create() -> void;
+            static auto GetInstance() -> Images*;
             auto getLenaPNG() -> QString;
             auto getLenaJPG() -> QString;
             auto getAPNG() -> QString;

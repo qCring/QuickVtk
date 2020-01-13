@@ -23,17 +23,21 @@ namespace quick {
             instance = new Controller();
             return instance;
         }
+    
+        auto Controller::GetInstance() -> Controller* {
+            return instance;
+        }
 
         auto Controller::getImages() -> Images* {
-            return Images::instance;
+            return Images::GetInstance();
         }
 
         auto Controller::getMeshes() -> Meshes* {
-            return Meshes::instance;
+            return Meshes::GetInstance();
         }
 
         auto Controller::getVolumes() -> Volumes* {
-            return Volumes::instance;
+            return Volumes::GetInstance();
         }
     }
 }

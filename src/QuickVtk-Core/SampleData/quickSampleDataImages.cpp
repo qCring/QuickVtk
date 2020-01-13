@@ -16,6 +16,10 @@ namespace quick {
 
             instance = new Images();
         }
+    
+        auto Images::GetInstance() -> Images* {
+            return instance;
+        }
 
         auto Images::makeDataPath(const QString& file) -> QString {
             auto path = QDir(QGuiApplication::applicationDirPath());

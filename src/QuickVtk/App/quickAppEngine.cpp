@@ -64,7 +64,7 @@ namespace quick {
 
             auto context = engine->rootContext();
             context->setContextProperty("App", Controller::instance);
-            context->setContextProperty("SampleData", SampleData::Controller::instance);
+            context->setContextProperty("SampleData", SampleData::Controller::GetInstance());
 
             engine->addImportPath(resourceDir + "qml");
             engine->load(QUrl::fromLocalFile(resourceDir + "qml/App/window.qml"));

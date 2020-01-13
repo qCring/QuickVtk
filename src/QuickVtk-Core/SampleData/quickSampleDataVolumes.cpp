@@ -16,6 +16,10 @@ namespace quick {
 
             instance = new Volumes();
         }
+    
+        auto Volumes::GetInstance() -> Volumes* {
+            return instance;
+        }
 
         auto Volumes::makeDataPath(const QString& file) -> QString {
             auto path = QDir(QGuiApplication::applicationDirPath());

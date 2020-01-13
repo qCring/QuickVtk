@@ -22,10 +22,11 @@ namespace quick {
             Q_PROPERTY(QString bSTL READ getBSTL CONSTANT);
         private:
             auto makeDataPath(const QString&) -> QString;
+            static Meshes* instance;
         public:
             static Qml::Register::Class<Meshes> Register;
-            static Meshes* instance;
             static auto Create() -> void;
+            static auto GetInstance() -> Meshes*;
             auto getSuzanneOBJ() -> QString;
             auto getSuzanneSTL() -> QString;
             auto getTeapotOFF() -> QString;

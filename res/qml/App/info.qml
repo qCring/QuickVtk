@@ -63,6 +63,7 @@ Item {
       anchors.right: parent.right;
 
       text: root.file ? file.path : "";
+      wrapMode: Text.WrapAnywhere;
     }
   }
 
@@ -76,7 +77,7 @@ Item {
 
     height: 1;
     color: "#181A1F";
-    visible: _sv.scrolled; 
+    visible: _sv.scrolled;
   }
 
   UI.ScrollView {

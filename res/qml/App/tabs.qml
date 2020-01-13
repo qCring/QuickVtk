@@ -113,8 +113,9 @@ Item {
 
           UI.Icon {
             anchors.verticalCenter: parent.verticalCenter;
-            icon: model.errors.length > 0 ? icons.fa_exclamation_circle : icons.fa_check;
-            color: model.errors.length > 0 ? "#C54632" : "#2BA468";
+            icon: icons.fa_exclamation_circle;
+            color: "#C54632";
+            visible: model.errors.length > 0;
           }
 
           UI.Label {

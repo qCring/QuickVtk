@@ -39,9 +39,10 @@ UI.List {
 
         font.pointSize: 13;
         text: modelData.name;
+        color: "#fff";
       }
 
-      UI.Label {
+      TypeLabel {
         id: _value;
 
         anchors.right: parent.right;

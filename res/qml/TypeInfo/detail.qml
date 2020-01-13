@@ -52,7 +52,8 @@ Item {
     anchors.left: parent.left;
     anchors.right: parent.right;
     anchors.top: _header.bottom;
-    anchors.leftMargin: 8;
+    anchors.topMargin: 8;
+    anchors.leftMargin: 16;
 
     bottomPadding: 8;
     spacing: 8;
@@ -64,13 +65,14 @@ Item {
 
       UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
-        width: _ns.width;
+        width: _pref.width;
         text: "Type";
       }
 
-      UI.Badge {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
-        label.text: symbol ? symbol.type == 0 ? "Abstract Class" : symbol.type == 1 ? "Class" : "Enum" : "";
+        text: symbol ? symbol.type == 0 ? "Abstract Class" : symbol.type == 1 ? "Class" : "Enum" : "";
+        color: "#fff";
       }
     }
 
@@ -83,13 +85,14 @@ Item {
 
       UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
-        width: _ns.width;
+        width: _pref.width;
         text: "Base";
       }
 
-      UI.Badge {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
-        label.text: symbol && symbol.base ? symbol.base : "";
+        text: symbol && symbol.base ? symbol.base : "";
+        color: "#fff";
       }
     }
 
@@ -99,15 +102,16 @@ Item {
       spacing: 8;
 
       UI.Label {
-        id: _ns;
+        id: _pref;
 
         anchors.verticalCenter: parent.verticalCenter;
-        text: "Namespace";
+        text: "Module";
       }
 
-      UI.Badge {
+      UI.Label {
         anchors.verticalCenter: parent.verticalCenter;
-        label.text: symbol ? symbol.prefix : "";
+        text: symbol ? symbol.prefix : "";
+        color: "#fff";
       }
     }
   }

@@ -17,7 +17,7 @@ Rectangle {
   property bool toggle: false;
   property bool highlighted: use_toggle ? toggle : highlight;
 
-  color: frameless ? "#00000000" : highlighted ? "#2B68A4" : ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
+  color: frameless ? "#00000000" : highlighted ? "#1D9FF2" : ma.pressed ? "#181A1F" : ma.containsMouse ? "#363C46" : "#333842"
   border.color: frameless ? "#00000000" : "#181A1F"
 
   radius: 2;

@@ -28,17 +28,17 @@ UI.List {
         label.color: "#2BA468";
       }
 
-      UI.Label {
+      UI.Badge {
         id: _base;
 
         visible: modelData.inherited;
 
         anchors.left: _ic.right;
+        anchors.leftMargin: 8;
         anchors.verticalCenter: parent.verticalCenter;
 
-        leftPadding: 8;
-        text: "base";
-        color: "#2B68A4"
+        label.text: "base";
+        color: "#21252B";
       }
 
       Row {
@@ -54,6 +54,7 @@ UI.List {
 
           font.pointSize: 13;
           text: modelData.name + " (";
+          color: "#fff";
         }
 
         UI.Label {
@@ -70,6 +71,7 @@ UI.List {
 
           font.pointSize: 13;
           text: ")";
+          color: "#fff";
         }
 
         UI.Icon {
@@ -78,6 +80,7 @@ UI.List {
           leftPadding: 8;
 
           icon: icons.fa_long_arrow_right;
+          color: "#fff";
         }
 
         UI.Label {

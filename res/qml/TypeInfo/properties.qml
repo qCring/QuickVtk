@@ -25,20 +25,20 @@ UI.List {
         anchors.verticalCenter: parent.verticalCenter;
 
         label.text: "P";
-        label.color: "#2B68A4";
+        label.color: "#1D9FF2";
       }
 
-      UI.Label {
+      UI.Badge {
         id: _base;
 
         visible: modelData.inherited;
 
         anchors.left: _ic.right;
+        anchors.leftMargin: 8;
         anchors.verticalCenter: parent.verticalCenter;
 
-        leftPadding: 8;
-        text: "base";
-        color: "#2B68A4"
+        label.text: "base";
+        color: "#21252B";
       }
 
       UI.Label {
@@ -52,6 +52,7 @@ UI.List {
 
         font.pointSize: 13;
         text: modelData.name;
+        color: "#fff"
       }
 
       TypeLabel {

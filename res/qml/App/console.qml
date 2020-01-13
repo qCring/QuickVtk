@@ -57,7 +57,7 @@ Rectangle {
       rightPadding: 7;
 
       icon: icons.fa_long_arrow_down;
-      color: _stickyMa.containsMouse ? "#fff" : _lv.sticky ? "#2B68A4" : "#9DA5B4";
+      color: _stickyMa.containsMouse ? "#fff" : _lv.sticky ? "#1D9FF2" : "#9DA5B4";
 
       MouseArea {
         id: _stickyMa;

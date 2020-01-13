@@ -47,11 +47,13 @@ namespace quick {
             glEnable(GL_BLEND);
             // This one throws an invalid enum
             //glHint(GL_CLIP_VOLUME_CLIPPING_HINT_EXT, GL_FASTEST);
-            glDepthMask(GL_TRUE);
             
-            //int glViewportAfter[4];
-            //glGetIntegerv(GL_VIEWPORT, glViewportAfter);
-            //std::cout << "FboOffscreenWindow::OpenGLInitState 2: " << glViewportAfter[0] << "," << glViewportAfter[1] << "," << glViewportAfter[2] << "," << glViewportAfter[3] << "\n";
+            //NOTE:
+            // disabling the call to glDepthMask fixed an exception on windows
+            // occured only if opacity (vtkProperty) is < 1.0.
+            // this works fine on macOS & windows, not sure about Linux...
+            
+            //glDepthMask(GL_TRUE);
         }
 
         auto FboOffscreenWindow::Render() -> void {

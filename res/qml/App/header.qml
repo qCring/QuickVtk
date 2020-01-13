@@ -1,82 +1,123 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 import TypeInfo 1.0 as TypeInfo
 
 Rectangle {
-    height: visible ? 32 : 0;
-    visible: !Controllers.expanded;
+  id: root;
 
-    color: "#21252B"
+  height: 35
+  property var file: App.document.file;
+  property bool modified: file != undefined && file.modified;
+  color: "#282C34";
 
-    Rectangle {
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
+  Menu {
+    id: _menu;
 
-        height: 1;
+    anchors.top: parent.top;
+    anchors.bottom: parent.bottom;
+    anchors.left: parent.left;
+    anchors.leftMargin: 4;
+  }
 
-        color: "#181A1F"
-    }
+  UI.Area {
+    anchors.left: _menu.right;
+    anchors.leftMargin: 16;
+    anchors.verticalCenter: parent.verticalCenter;
+
+    color: "#21252B";
+
+    height: _label.height + 6;
+    width: _row.width;
 
     Row {
-        anchors.left: parent.left;
-        anchors.leftMargin: 4;
+      id: _row;
+
+      anchors.left: parent.left;
+      anchors.top: parent.top;
+      anchors.bottom: parent.bottom;
+
+      rightPadding: 8;
+
+      UI.Icon {
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
 
-        spacing: 4;
+        enabled: file;
 
-        Lib.Button {
-            anchors.verticalCenter: parent.verticalCenter;
+        leftPadding: 8;
+        rightPadding: 8;
 
-            frameless: true;
-            label.text: "Load";
-            icon: icons.fa_folder_open;
+        icon: icons.fa_play;
 
-            onClicked: Controllers.editor.loadFile();
+        color: enabled ? _ma.containsMouse ? "#fff" : "#1D9FF2" : "#6E7582";
+
+        MouseArea {
+          id: _ma;
+
+          anchors.fill: parent;
+
+          hoverEnabled: true;
+          onClicked: App.document.run();
         }
+      }
 
-        Lib.Button {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            frameless: true;
-            label.text: "Run";
-            icon: icons.fa_play_circle;
-
-            onClicked: {
-                Controllers.editor.run();
-            }
-        }
-
-        Lib.CheckBox {
-            anchors.verticalCenter: parent.verticalCenter;
-
-            label.text: "autorun";
-            from: Controllers.editor; bind: "autorun";
-        }
-    }
-
-    Row {
-        anchors.right: parent.right;
+      Rectangle {
         anchors.top: parent.top;
         anchors.bottom: parent.bottom;
-        anchors.rightMargin: 4;
 
-        spacing: 4;
+        width: 1;
+        color: "#181A1F";
+      }
 
-        TypeInfo.Search {
-            anchors.verticalCenter: parent.verticalCenter;
-        }
+      UI.Label {
+        id: _label;
 
-        Lib.Button {
-            anchors.verticalCenter: parent.verticalCenter;
+        anchors.verticalCenter: parent.verticalCenter;
 
-            icon: icons.fa_expand;
-            onClicked: Controllers.expanded = true;
+        leftPadding: 8;
 
-            color: "#00000000"
-            border.color: "#00000000"
-        }
+        text: file ? file.title : "No File selected";
+        color: file ? "#fff" : "#9DA5B4";
+      }
+
+      UI.Label {
+        visible: file;
+
+        anchors.verticalCenter: parent.verticalCenter;
+
+        leftPadding: 8;
+        rightPadding: 8;
+
+        text: "|";
+      }
+
+      UI.Label {
+        visible: file;
+
+        anchors.verticalCenter: parent.verticalCenter;
+
+        text: file ? " | " + file.timeStamp : "";
+      }
     }
+  }
+
+  UI.Button {
+    anchors.right: parent.right;
+    anchors.top: parent.top;
+    anchors.bottom: parent.bottom;
+    anchors.rightMargin: 8;
+
+    icon: icons.fa_bars;
+    frameless: true;
+    onClicked: App.details.toggle();
+  }
+
+  Rectangle {
+    anchors.left: parent.left;
+    anchors.right: parent.right;
+    anchors.bottom: parent.bottom;
+    height: 1;
+    color: "#181A1F";
+  }
 }

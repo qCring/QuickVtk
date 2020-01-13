@@ -1,88 +1,49 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
 import Utils 1.0 as Utils
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
-Rectangle {
-    id: root;
+Item {
+  id: root;
 
+  anchors.left: parent ? parent.left : undefined;
+  anchors.right: parent ? parent.right : undefined;
+
+  property var file: null;
+  property bool selected: false;
+  property string title: "";
+  default property alias content: contentColumn.children;
+
+  height: contentColumn.height;
+
+  Column {
+    id: contentColumn;
+
+    anchors.top: parent.top;
+    anchors.left: parent.left;
     anchors.right: parent.right;
-    anchors.bottom: parent.bottom;
-    anchors.margins: 8;
 
-    width: 300;
-    height: column.height;
+    spacing: 8;
+  }
 
-    color: "#21252B";
-    border.color: "#3C424F";
-
-default property alias content: contentColumn.children;
-    property bool expanded: true;
-    property alias title: label.text;
-
-    MouseArea {
-        anchors.fill: parent;
-        propagateComposedEvents: false;
+  onSelectedChanged: {
+    if (selected) {
+      root.visible = root.enabled = true;
+      root.parent = controls;
+    } else {
+      root.visible = root.enabled = false;
+      root.parent = null;
     }
+  }
 
-    Column {
-        id: column;
-
-        anchors.left: parent.left;
-        anchors.right: parent.right;
-
-        anchors.leftMargin: 8;
-        anchors.rightMargin: 8;
-
-        topPadding: 4;
-        bottomPadding: 4;
-
-        spacing: 2;
-
-        Item {
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-
-            height: label.height;
-
-            Lib.Icon {
-                id: icon;
-
-                anchors.left: parent.left;
-                anchors.verticalCenter: parent.verticalCenter;
-                icon: root.expanded ? icons.fa_caret_down : icons.fa_caret_up;
-                color: ma.containsMouse ? "#fff" : "#9DA5B4";
-            }
-
-            Utils.Label {
-                id: label;
-
-                anchors.left: icon.right;
-                anchors.leftMargin: 8;
-
-                text: "Properties"
-                color: "#fff"
-                font.bold: true;
-            }
-
-            MouseArea {
-                id: ma;
-
-                anchors.fill: parent;
-                onClicked: root.expanded = !root.expanded;
-                hoverEnabled: true;
-            }
-        }
-
-        Column {
-            id: contentColumn;
-
-            visible: root.expanded;
-
-            anchors.left: parent.left;
-            anchors.right: parent.right;
-
-            spacing: 2;
-        }
+  onFileChanged: {
+    if (file) {
+      root.selected = Qt.binding (function() { return file.selected; });
     }
+  }
+
+  Component.onCompleted: {
+    this.file = App.document.file;
+    root.parent = controls;
+  }
 }

@@ -1,51 +1,57 @@
-import QtQuick 2.6
+import QtQuick 2.12
 
-import Lib 1.0 as Lib
+import UI 1.0 as UI
 
 Item {
-    id: root;
+  id: root;
 
-    height: 30;
-    width: 280;
+  height: input.height;
+  width: 280;
 
-    Lib.Icon {
-        id: icon;
+  UI.TextInput {
+    id: input;
 
-        anchors.left: parent.left;
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.leftMargin: 4;
+    anchors.left: _ic.right;
+    anchors.right: _clear.left;
+    anchors.top: parent.top;
+    anchors.bottom: parent.bottom;
 
-        icon: icons.fa_search;
-        color: input.activeFocus ? "#fff" : "#6E7582"
+    bottomPadding: 8;
+    topPadding: 8;
+
+    from: App.typeList;
+    bind: "filter";
+
+    immediate: true;
+
+    onActiveFocusChanged: {
+      App.typeList.visible = activeFocus;
     }
+  }
 
-    Lib.TextInput {
-        id: input;
+  UI.Icon {
+    id: _ic;
 
-        anchors.left: icon.right;
-        anchors.right: parent.right;
-        anchors.top: parent.top;
-        anchors.bottom: parent.bottom;
-        anchors.margins: 4;
+    anchors.left: parent.left;
+    anchors.verticalCenter: parent.verticalCenter;
 
-        from: Controllers.typeList;
-        bind: "filter";
+    icon: icons.fa_search;
+    color: input.activeFocus ? "#fff" : "#6E7582"
+    rightPadding: 8;
+    leftPadding: 8;
+  }
 
-        immediate: true;
-        radius: 2;
+  UI.Button {
+    id: _clear;
 
-        onActiveFocusChanged: {
-            Controllers.typeList.visible = activeFocus;
-        }
-    }
+    anchors.right: parent.right;
+    anchors.rightMargin: 4;
+    anchors.verticalCenter: parent.verticalCenter;
 
-    Lib.Label {
-        anchors.right: input.right;
-        anchors.rightMargin: 4;
-        anchors.verticalCenter: parent.verticalCenter;
-        text: Controllers.typeList.count + "/" + Controllers.typeList.totalCount;
-        font.pointSize: 11;
-        font.bold: true;
-        visible: input.activeFocus;
-    }
+    frameless: true;
+    icon: icons.fa_times_circle;
+    visible: input.text.length > 0;
+
+    onClicked: input.text = "";
+  }
 }

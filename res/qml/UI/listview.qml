@@ -47,7 +47,7 @@ Item {
         return;
       }
 
-      if (root.sticky) {
+      if (_root.sticky) {
         positionViewAtEnd();
         return;
       }

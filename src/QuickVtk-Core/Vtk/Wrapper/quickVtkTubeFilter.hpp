@@ -56,8 +56,6 @@ namespace quick {
             auto getRadiusFactor() -> qreal;
             auto setTextureLength(qreal) -> void;
             auto getTextureLength() -> qreal;
-            auto setTheta(qreal) -> void;
-            auto getTheta() -> qreal;
             auto setUseDefaultNormal(bool) -> void;
             auto getUseDefaultNormal() -> bool;
             auto setSidesShareVertices(bool) -> void;

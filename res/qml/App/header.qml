@@ -97,7 +97,7 @@ Rectangle {
 
         anchors.verticalCenter: parent.verticalCenter;
 
-        text: file ? " | " + file.timeStamp : "";
+        text: file ? file.timeStamp : "";
       }
     }
   }

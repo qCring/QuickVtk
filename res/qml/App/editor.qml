@@ -119,7 +119,7 @@ Item {
             id: _textEdit;
 
             readOnly: true;
-            font.family: "Bitstream Vera Sans Mono";
+            font.family: "Fira Code";
 
             selectByMouse: true
             mouseSelectionMode: TextEdit.SelectCharacters

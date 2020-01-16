@@ -56,4 +56,6 @@ Item {
         id: picker
         onAccepted: root.from[root.bind] = picker.color;
     }
+
+    Component.onCompleted: root.from[root.bind] = color;
 }

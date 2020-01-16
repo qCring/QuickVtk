@@ -93,6 +93,8 @@ Rectangle {
 
         file.component = Qt.createQmlObject(App.document.file.content, container, "root");
       } catch (exc) {
+        file.component = null;
+        
         var errors = exc.qmlErrors;
 
         if (errors == undefined) {

@@ -26,6 +26,8 @@ namespace quick {
     
         auto TubeFilter::setGenerateTCoords(TCoords tCoords) -> void {
             this->m_vtkObject->SetGenerateTCoords(tCoords);
+            this->update();
+            emit this->generateTCoordsChanged();
         }
     
         auto TubeFilter::getGenerateTCoords() -> TCoords {

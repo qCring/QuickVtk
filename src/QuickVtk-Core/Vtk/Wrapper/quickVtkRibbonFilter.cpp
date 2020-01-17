@@ -26,6 +26,8 @@ namespace quick {
     
         auto RibbonFilter::setGenerateTCoords(TCoords tCoords) -> void {
             this->m_vtkObject->SetGenerateTCoords(tCoords);
+            this->update();
+            emit this->generateTCoordsChanged();
         }
     
         auto RibbonFilter::getGenerateTCoords() -> TCoords {

@@ -90,6 +90,22 @@ namespace quick {
             return this->m_vtkObject->GetThetaResolution();
         }
     
+        auto SuperquadricSource::setAxisOfSymmetry(Axis axis) -> void {
+            switch (axis) {
+                case Axis::X: this->m_vtkObject->SetXAxisOfSymmetry(); break;
+                case Axis::Y: this->m_vtkObject->SetYAxisOfSymmetry(); break;
+                case Axis::Z: this->m_vtkObject->SetZAxisOfSymmetry(); break;
+                default: break;
+            }
+            
+            this->update();
+            emit this->axisOfSymmetryChanged();
+        }
+        
+        auto SuperquadricSource::getAxisOfSymmetry() -> Axis {
+            return this->m_axisOfSymmetry;
+        }
+    
         auto SuperquadricSource::getCenter() -> Math::Vector3* {
             return this->m_center;
         }

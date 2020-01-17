@@ -1,7 +1,6 @@
 #include "quickDocumentError.hpp"
 
 namespace quick {
-
     namespace Document {
     
         Qml::Register::Type<Error> Error::Register;

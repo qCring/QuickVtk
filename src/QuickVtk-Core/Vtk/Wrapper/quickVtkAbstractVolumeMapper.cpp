@@ -1,7 +1,6 @@
 #include "quickVtkAbstractVolumeMapper.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<AbstractVolumeMapper> AbstractVolumeMapper::Register(true);

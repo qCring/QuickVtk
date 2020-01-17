@@ -1,7 +1,6 @@
 #include "quickVtkWarpLens.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<WarpLens> WarpLens::Register(true);

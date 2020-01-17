@@ -1,7 +1,6 @@
 #include "quickVtkWarpScalar.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<WarpScalar> WarpScalar::Register(true);

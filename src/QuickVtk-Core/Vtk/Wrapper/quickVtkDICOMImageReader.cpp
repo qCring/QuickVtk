@@ -1,7 +1,6 @@
 #include "quickVtkDICOMImageReader.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<DICOMImageReader> DICOMImageReader::Register(true);

@@ -5,7 +5,6 @@
 #include <vtkPointSetAlgorithm.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PointSetAlgorithm : public Algorithm {

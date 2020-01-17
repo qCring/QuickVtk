@@ -5,7 +5,6 @@
 #include <vtkWin32RenderWindowInteractor.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Win32Interactor : public vtkWin32RenderWindowInteractor {

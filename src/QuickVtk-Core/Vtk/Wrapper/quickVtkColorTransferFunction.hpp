@@ -10,7 +10,6 @@
 #include <vtkColorTransferFunction.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ColorTransferFunction : public QObject {

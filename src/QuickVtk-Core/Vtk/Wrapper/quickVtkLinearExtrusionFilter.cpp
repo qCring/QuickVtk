@@ -1,7 +1,6 @@
 #include "quickVtkLinearExtrusionFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<LinearExtrusionFilter> LinearExtrusionFilter::Register(true);

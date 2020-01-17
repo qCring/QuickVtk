@@ -1,7 +1,6 @@
 #include "quickVtkWarpTo.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<WarpTo> WarpTo::Register(true);

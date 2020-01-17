@@ -10,7 +10,6 @@
 #include <vtkActor2D.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Actor2D;

@@ -1,7 +1,6 @@
 #include "quickVtkBooleanOperationPolyDataFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<BooleanOperationPolyDataFilter> BooleanOperationPolyDataFilter::Register(true);

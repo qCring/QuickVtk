@@ -5,7 +5,6 @@
 #include <vtkAbstractVolumeMapper.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class AbstractVolumeMapper : public AbstractMapper3D {

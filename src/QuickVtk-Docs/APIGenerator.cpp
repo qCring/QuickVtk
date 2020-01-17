@@ -11,7 +11,6 @@
 #include "quickTypeInfoList.hpp"
 
 namespace quick {
-
     auto APIGenerator::execute() -> int {
         
         if (this->init()) {

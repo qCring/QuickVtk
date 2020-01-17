@@ -2,7 +2,6 @@
 #include "quickTypeInfoSymbol.hpp"
 
 namespace quick {
-
     namespace TypeInfo {
 
         Qml::Register::Type<List> List::Register;

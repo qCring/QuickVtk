@@ -1,7 +1,6 @@
 #include "quickVtkAdaptiveSubdivisionFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
         Qml::Register::Class<AdaptiveSubdivisionFilter> AdaptiveSubdivisionFilter::Register(true);
 

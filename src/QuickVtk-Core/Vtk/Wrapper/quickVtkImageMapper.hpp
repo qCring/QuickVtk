@@ -5,7 +5,6 @@
 #include <vtkImageMapper.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ImageMapper : public Mapper2D {

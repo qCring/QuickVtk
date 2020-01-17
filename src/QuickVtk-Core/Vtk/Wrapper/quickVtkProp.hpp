@@ -7,7 +7,6 @@
 #include <vtkProp.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Viewer;

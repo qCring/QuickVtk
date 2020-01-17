@@ -6,7 +6,6 @@
 #include <vtkCylinderSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class CylinderSource : public PolyDataAlgorithm {

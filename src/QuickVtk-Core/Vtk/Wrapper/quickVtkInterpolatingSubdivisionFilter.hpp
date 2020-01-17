@@ -5,7 +5,6 @@
 #include <vtkInterpolatingSubdivisionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class InterpolatingSubdivisionFilter : public PolyDataAlgorithm {

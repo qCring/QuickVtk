@@ -1,7 +1,6 @@
 #include "quickVtkPointSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<PointSource> PointSource::Register(true);

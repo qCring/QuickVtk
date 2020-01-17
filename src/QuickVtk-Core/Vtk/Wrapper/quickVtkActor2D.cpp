@@ -3,7 +3,6 @@
 #include "quickVtkProperty2D.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<Actor2D> Actor2D::Register(true);

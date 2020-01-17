@@ -1,7 +1,6 @@
 #include "quickVtkTextureMapToCylinder.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<TextureMapToCylinder> TextureMapToCylinder::Register(true);

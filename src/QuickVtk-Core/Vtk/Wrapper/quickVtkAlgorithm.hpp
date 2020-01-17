@@ -9,7 +9,6 @@
 #include <vtkAlgorithm.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Prop;

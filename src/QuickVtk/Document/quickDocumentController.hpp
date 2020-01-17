@@ -3,7 +3,6 @@
 #include "quickQmlRegister.hpp"
 
 namespace quick {
-    
     namespace Document {
     
         class File;

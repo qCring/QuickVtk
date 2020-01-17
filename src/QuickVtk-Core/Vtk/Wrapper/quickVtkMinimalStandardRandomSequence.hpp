@@ -5,7 +5,6 @@
 #include <vtkMinimalStandardRandomSequence.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class MinimalStandardRandomSequence : public RandomSequence {

@@ -8,7 +8,6 @@
 #include <QObject>
 
 namespace quick {
-
     namespace Math {
 
         class Vector3 : public QObject {

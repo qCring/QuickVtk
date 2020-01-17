@@ -2,7 +2,6 @@
 #include "quickVtkViewer.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<Prop> Prop::Register(true);

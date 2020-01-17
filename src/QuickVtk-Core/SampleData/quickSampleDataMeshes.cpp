@@ -2,7 +2,6 @@
 #include <QGuiApplication>
 
 namespace quick {
-
     namespace SampleData {
 
         Meshes* Meshes::instance = nullptr;

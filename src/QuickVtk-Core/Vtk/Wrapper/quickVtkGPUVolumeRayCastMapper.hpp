@@ -5,7 +5,6 @@
 #include <vtkGPUVolumeRayCastMapper.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class GPUVolumeRayCastMapper : public VolumeMapper {

@@ -5,7 +5,6 @@
 #include <vtkSTLReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class STLReader : public AbstractPolyDataReader {

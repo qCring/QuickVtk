@@ -5,7 +5,6 @@
 #include <vtkTextureMapToCylinder.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class TextureMapToCylinder : public DataSetAlgorithm {

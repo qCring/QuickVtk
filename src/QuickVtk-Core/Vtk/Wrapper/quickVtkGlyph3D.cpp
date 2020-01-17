@@ -1,7 +1,6 @@
 #include "quickVtkGlyph3D.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<Glyph3D> Glyph3D::Register(true);

@@ -1,7 +1,6 @@
 #include "quickVtkArrowSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<ArrowSource> ArrowSource::Register(true);

@@ -5,7 +5,6 @@
 #include <vtkMapper.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ScalarsToColors;

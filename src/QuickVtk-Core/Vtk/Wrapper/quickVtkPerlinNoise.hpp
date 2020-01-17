@@ -6,7 +6,6 @@
 #include <vtkPerlinNoise.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PerlinNoise : public ImplicitFunction {

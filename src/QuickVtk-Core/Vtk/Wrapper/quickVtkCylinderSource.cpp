@@ -1,7 +1,6 @@
 #include "quickVtkCylinderSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<CylinderSource> CylinderSource::Register(true);

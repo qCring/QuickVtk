@@ -3,7 +3,6 @@
 #include "quickTypeInfoMethod.hpp"
 
 namespace quick {
-
     namespace TypeInfo {
 
         Class::Class() {

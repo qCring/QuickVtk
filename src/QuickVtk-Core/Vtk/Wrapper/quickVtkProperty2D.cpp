@@ -2,7 +2,6 @@
 #include "quickVtkActor2D.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::UncreatableClass<Property2D> Property2D::Register(true);

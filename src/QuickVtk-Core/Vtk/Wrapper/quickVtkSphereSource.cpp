@@ -1,7 +1,6 @@
 #include "quickVtkSphereSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<SphereSource> SphereSource::Register(true);

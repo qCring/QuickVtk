@@ -9,7 +9,6 @@
 #include <vtkPiecewiseFunction.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PiecewiseFunction : public QObject {

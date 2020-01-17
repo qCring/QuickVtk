@@ -5,7 +5,6 @@
 #include <QObject>
 
 namespace quick {
-
     namespace SampleData {
 
         class Images : public QObject {

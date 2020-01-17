@@ -5,7 +5,6 @@
 #include <vtkPLYReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PLYReader : public AbstractPolyDataReader {

@@ -2,7 +2,6 @@
 #include "quickTypeInfoEnumItem.hpp"
 
 namespace quick {
-
     namespace TypeInfo {
 
         Qml::Register::Type<Enum> Enum::Register;

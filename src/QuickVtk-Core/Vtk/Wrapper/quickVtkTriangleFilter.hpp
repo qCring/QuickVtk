@@ -5,7 +5,6 @@
 #include <vtkTriangleFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class TriangleFilter : public PolyDataAlgorithm {

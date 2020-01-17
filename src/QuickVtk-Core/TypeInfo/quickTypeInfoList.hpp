@@ -5,7 +5,6 @@
 #include <QAbstractListModel>
 
 namespace quick {
-
     namespace TypeInfo {
 
         class Symbol;

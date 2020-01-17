@@ -1,7 +1,6 @@
 #include "quickVtkGPUVolumeRayCastMapper.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<GPUVolumeRayCastMapper> GPUVolumeRayCastMapper::Register(true);

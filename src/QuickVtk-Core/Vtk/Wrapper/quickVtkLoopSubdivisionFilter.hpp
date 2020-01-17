@@ -5,7 +5,6 @@
 #include <vtkLoopSubdivisionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class LoopSubdivisionFilter : public ApproximatingSubdivisionFilter {

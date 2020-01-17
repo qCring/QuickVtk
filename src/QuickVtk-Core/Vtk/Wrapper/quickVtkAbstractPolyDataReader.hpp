@@ -5,7 +5,6 @@
 #include <vtkAbstractPolyDataReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class AbstractPolyDataReader : public PolyDataAlgorithm {

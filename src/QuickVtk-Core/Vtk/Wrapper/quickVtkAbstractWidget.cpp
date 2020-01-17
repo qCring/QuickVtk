@@ -1,7 +1,6 @@
 #include "quickVtkAbstractWidget.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<AbstractWidget> AbstractWidget::Register(true);

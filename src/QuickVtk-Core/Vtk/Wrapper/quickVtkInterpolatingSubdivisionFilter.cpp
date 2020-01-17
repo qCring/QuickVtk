@@ -1,7 +1,6 @@
 #include "quickVtkInterpolatingSubdivisionFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<InterpolatingSubdivisionFilter> InterpolatingSubdivisionFilter::Register(true);

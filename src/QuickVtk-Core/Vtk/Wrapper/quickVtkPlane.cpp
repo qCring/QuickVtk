@@ -1,7 +1,6 @@
 #include "quickVtkPlane.hpp"
 
 namespace quick {
-
     namespace Vtk {
         Qml::Register::Class<Plane> Plane::Register(true);
 

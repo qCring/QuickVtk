@@ -1,7 +1,6 @@
 #include "quickVtkMapper.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<Mapper> Mapper::Register(true);

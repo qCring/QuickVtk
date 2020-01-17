@@ -4,7 +4,6 @@
 #include "quickVtkColorTransferFunction.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::UncreatableClass<VolumeProperty> VolumeProperty::Register(true);

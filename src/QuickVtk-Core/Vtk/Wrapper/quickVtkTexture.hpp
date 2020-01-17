@@ -6,7 +6,6 @@
 #include <vtkTexture.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Texture : public ImageAlgorithm {

@@ -3,7 +3,6 @@
 #include "quickIO.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<OFFReader> OFFReader::Register;

@@ -5,7 +5,6 @@
 #include <vtkDecimatePro.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class DecimatePro : public PolyDataAlgorithm {

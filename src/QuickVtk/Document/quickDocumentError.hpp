@@ -5,7 +5,6 @@
 #include <QAbstractListModel>
 
 namespace quick {
-
     namespace Document {
 
         class Error : public QObject {

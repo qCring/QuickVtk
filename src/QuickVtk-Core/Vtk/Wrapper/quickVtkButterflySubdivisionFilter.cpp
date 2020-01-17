@@ -1,7 +1,6 @@
 #include "quickVtkButterflySubdivisionFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
         Qml::Register::Class<ButterflySubdivisionFilter> ButterflySubdivisionFilter::Register(true);
 

@@ -5,7 +5,6 @@
 #include <vtkAdaptiveSubdivisionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class AdaptiveSubdivisionFilter : public PolyDataAlgorithm {

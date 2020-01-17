@@ -6,7 +6,6 @@
 #include <vtkGlyph3D.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Glyph3D : public PolyDataAlgorithm {

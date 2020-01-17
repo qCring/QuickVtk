@@ -5,7 +5,6 @@
 #include <vtkDataSetAlgorithm.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class DataSetAlgorithm : public Algorithm {

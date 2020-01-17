@@ -1,7 +1,6 @@
 #include "quickVtkConeSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<ConeSource> ConeSource::Register(true);

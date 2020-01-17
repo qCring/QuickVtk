@@ -6,7 +6,6 @@
 #include <vtkTubeFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class TubeFilter : public PolyDataAlgorithm {

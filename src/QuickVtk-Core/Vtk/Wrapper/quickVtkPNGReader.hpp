@@ -5,7 +5,6 @@
 #include <vtkPNGReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PNGReader : public ImageReader2 {

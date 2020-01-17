@@ -1,7 +1,6 @@
 #include "quickVtkPiecewiseFunction.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::UncreatableClass<PiecewiseFunction> PiecewiseFunction::Register(true);

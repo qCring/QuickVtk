@@ -5,7 +5,6 @@
 #include <vtkActor.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Mapper;

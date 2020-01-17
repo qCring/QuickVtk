@@ -16,7 +16,6 @@
 #include <vtkRenderer.h>
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<Viewer> Viewer::Register;

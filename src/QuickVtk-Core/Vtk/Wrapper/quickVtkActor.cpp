@@ -4,7 +4,6 @@
 #include "quickVtkProperty.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<Actor> Actor::Register(true);

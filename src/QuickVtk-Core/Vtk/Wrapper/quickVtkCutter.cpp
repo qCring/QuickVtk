@@ -3,7 +3,6 @@
 #include "quickVtkImplicitFunction.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<Cutter> Cutter::Register(true);

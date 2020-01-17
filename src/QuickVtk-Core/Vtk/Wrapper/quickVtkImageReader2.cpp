@@ -2,7 +2,6 @@
 #include "quickIO.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<ImageReader2> ImageReader2::Register(true);

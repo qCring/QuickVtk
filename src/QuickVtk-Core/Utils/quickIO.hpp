@@ -6,7 +6,6 @@
 #include <QJsonArray>
 
 namespace quick {
-
     namespace IO {
 
         enum class FileSuffix {

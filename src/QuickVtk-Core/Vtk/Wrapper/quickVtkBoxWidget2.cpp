@@ -1,7 +1,6 @@
 #include "quickVtkBoxWidget2.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<BoxWidget2> BoxWidget2::Register(true);

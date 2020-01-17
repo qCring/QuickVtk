@@ -10,6 +10,15 @@ namespace quick {
 
         class SuperquadricSource : public PolyDataAlgorithm {
             Q_OBJECT
+        public:
+            enum Axis {
+                X,
+                Y,
+                Z
+            };
+        private:
+            Q_ENUM(Axis);
+            Q_PROPERTY(Axis axisOfSymmetry READ getAxisOfSymmetry WRITE setAxisOfSymmetry NOTIFY axisOfSymmetryChanged);
             Q_PROPERTY(bool toroidal READ getToroidal WRITE setToroidal NOTIFY toroidalChanged);
             Q_PROPERTY(quick::Math::Vector3* center READ getCenter CONSTANT);
             Q_PROPERTY(quick::Math::Vector3* sccale READ getScale CONSTANT);
@@ -24,6 +33,7 @@ namespace quick {
             vtkSmartPointer<vtkSuperquadricSource> m_vtkObject = nullptr;
             Math::Vector3* m_center = nullptr;
             Math::Vector3* m_scale = nullptr;
+            Axis m_axisOfSymmetry;
         public:
             SuperquadricSource();
             auto setToroidal(bool) -> void;
@@ -40,6 +50,8 @@ namespace quick {
             auto getPhiResolution() -> qreal;
             auto setThetaResolution(qreal) -> void;
             auto getThetaResolution() -> qreal;
+            auto setAxisOfSymmetry(Axis) -> void;
+            auto getAxisOfSymmetry() -> Axis;
             auto getCenter() -> Math::Vector3*;
             auto getScale() -> Math::Vector3*;
         signals:
@@ -50,6 +62,7 @@ namespace quick {
             void thetaRoundnessChanged();
             void phiResolutionChanged();
             void thetaResolutionChanged();
+            void axisOfSymmetryChanged();
         };
     }
 }

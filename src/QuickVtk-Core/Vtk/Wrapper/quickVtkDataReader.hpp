@@ -5,7 +5,6 @@
 #include <vtkDataReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class DataReader : public Algorithm {

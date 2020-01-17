@@ -1,7 +1,6 @@
 #include "quickMathVector2.hpp"
 
 namespace quick {
-
     namespace Math {
 
         Qml::Register::UncreatableClass<Vector2> Vector2::Register;

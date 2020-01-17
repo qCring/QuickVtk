@@ -5,7 +5,6 @@
 #include <vtkApproximatingSubdivisionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ApproximatingSubdivisionFilter : public PolyDataAlgorithm {

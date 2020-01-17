@@ -1,7 +1,6 @@
 #include "quickVtkPlatonicSolidSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<PlatonicSolidSource> PlatonicSolidSource::Register(true);

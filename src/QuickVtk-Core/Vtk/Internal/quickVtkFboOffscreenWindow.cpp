@@ -3,7 +3,6 @@
 #include <vtkOpenGLState.h>
 
 namespace quick {
-
     namespace Vtk {
 
         FboOffscreenWindow::FboOffscreenWindow() : QtParentRenderer(0) {

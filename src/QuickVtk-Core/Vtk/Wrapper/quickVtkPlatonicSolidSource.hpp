@@ -5,7 +5,6 @@
 #include <vtkPlatonicSolidSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PlatonicSolidSource : public PolyDataAlgorithm {

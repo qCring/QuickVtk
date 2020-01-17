@@ -1,7 +1,6 @@
 #include "quickVtkSmartVolumeMapper.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<SmartVolumeMapper> SmartVolumeMapper::Register(true);

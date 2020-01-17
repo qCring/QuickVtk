@@ -1,7 +1,6 @@
 #include "quickVtkDiskSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<DiskSource> DiskSource::Register(true);

@@ -5,7 +5,6 @@
 #include <vtkDiskSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class DiskSource : public PolyDataAlgorithm {

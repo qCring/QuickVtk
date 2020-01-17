@@ -6,7 +6,6 @@
 #include <QFileDialog>
 
 namespace quick {
-
     namespace IO {
 
         namespace FromDialog {

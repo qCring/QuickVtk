@@ -5,7 +5,6 @@
 #include <vtkExtractSurface.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ExtractSurface : public PolyDataAlgorithm {

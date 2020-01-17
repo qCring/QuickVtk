@@ -5,7 +5,6 @@
 #include <vtkImageReader2.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ImageReader2 : public ImageAlgorithm {

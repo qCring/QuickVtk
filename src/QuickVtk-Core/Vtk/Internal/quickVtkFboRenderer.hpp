@@ -9,7 +9,6 @@
 #include <QMouseEvent>
 
 namespace quick {
-
     namespace Vtk {
 
         class FboOffscreenWindow;

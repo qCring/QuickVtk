@@ -1,7 +1,6 @@
 #include "quickVtkArcSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<ArcSource> ArcSource::Register(true);

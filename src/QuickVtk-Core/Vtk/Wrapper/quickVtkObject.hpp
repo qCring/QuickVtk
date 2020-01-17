@@ -5,7 +5,6 @@
 #include <QObject>
 
 namespace quick {
-
     namespace Vtk {
 
         class Object : public QObject {

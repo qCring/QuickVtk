@@ -7,7 +7,6 @@
 #include <QColor>
 
 namespace quick {
-
     namespace TypeInfo {
 
         class Symbol : public QObject {

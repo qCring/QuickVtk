@@ -1,7 +1,6 @@
 #include "quickVtkImageDataGeometryFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<ImageDataGeometryFilter> ImageDataGeometryFilter::Register(true);

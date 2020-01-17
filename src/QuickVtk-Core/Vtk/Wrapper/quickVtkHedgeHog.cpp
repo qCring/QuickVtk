@@ -1,7 +1,6 @@
 #include "quickVtkHedgeHog.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<HedgeHog> HedgeHog::Register(true);

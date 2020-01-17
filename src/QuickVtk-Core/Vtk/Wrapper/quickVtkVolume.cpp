@@ -3,7 +3,6 @@
 #include "quickVtkVolumeProperty.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<Volume> Volume::Register(true);

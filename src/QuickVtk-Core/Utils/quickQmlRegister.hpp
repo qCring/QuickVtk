@@ -11,7 +11,6 @@
 #include <QMetaProperty>
 
 namespace quick {
-
     namespace Qml {
 
         auto RegisterTypes() -> void;

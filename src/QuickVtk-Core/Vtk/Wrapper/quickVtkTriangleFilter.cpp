@@ -1,7 +1,6 @@
 #include "quickVtkTriangleFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<TriangleFilter> TriangleFilter::Register(true);

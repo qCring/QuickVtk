@@ -7,7 +7,6 @@
 #include <vtkAbstractWidget.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class AbstractWidget : public Object {

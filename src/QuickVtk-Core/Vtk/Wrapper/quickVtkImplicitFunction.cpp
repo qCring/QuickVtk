@@ -1,7 +1,6 @@
 #include "quickVtkImplicitFunction.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<ImplicitFunction> ImplicitFunction::Register(true);

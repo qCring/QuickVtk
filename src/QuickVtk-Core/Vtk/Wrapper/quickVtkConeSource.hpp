@@ -6,7 +6,6 @@
 #include <vtkConeSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ConeSource : public PolyDataAlgorithm {

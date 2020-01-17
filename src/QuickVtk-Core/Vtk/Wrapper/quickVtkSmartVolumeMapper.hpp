@@ -5,7 +5,6 @@
 #include <vtkSmartVolumeMapper.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class SmartVolumeMapper : public VolumeMapper {

@@ -5,7 +5,6 @@
 #include <vtkArrowSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ArrowSource : public PolyDataAlgorithm {

@@ -5,7 +5,6 @@
 #include <vtkExtractEdges.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ExtractEdges : public PolyDataAlgorithm {

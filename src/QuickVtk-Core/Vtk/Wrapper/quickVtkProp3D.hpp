@@ -7,7 +7,6 @@
 #include <vtkProp3D.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Prop3D : public Prop {

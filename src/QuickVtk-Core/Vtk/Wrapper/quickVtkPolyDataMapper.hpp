@@ -8,7 +8,6 @@
 #include <vtkPolyDataMapper.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PolyDataAlgorithm;

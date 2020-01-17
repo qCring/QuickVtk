@@ -4,7 +4,6 @@
 #include <vtkAlgorithm.h>
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<PolyDataMapper> PolyDataMapper::Register(true);

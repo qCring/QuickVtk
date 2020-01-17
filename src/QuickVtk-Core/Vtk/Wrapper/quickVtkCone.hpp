@@ -5,7 +5,6 @@
 #include <vtkCone.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Cone : public ImplicitFunction {

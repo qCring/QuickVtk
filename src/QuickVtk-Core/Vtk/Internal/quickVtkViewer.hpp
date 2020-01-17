@@ -10,7 +10,6 @@
 class vtkGenericOpenGLRenderWindow;
 
 namespace quick {
-
     namespace Vtk {
 
         class Object;

@@ -5,7 +5,6 @@
 #include <vtkDICOMImageReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class DICOMImageReader : public ImageReader2 {

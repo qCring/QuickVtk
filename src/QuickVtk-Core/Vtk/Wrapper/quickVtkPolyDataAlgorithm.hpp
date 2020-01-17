@@ -5,7 +5,6 @@
 #include <vtkPolyDataAlgorithm.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PolyDataAlgorithm : public Algorithm {

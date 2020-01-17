@@ -15,7 +15,6 @@
 #include <vtkCommand.h>
 
 namespace quick {
-
     namespace Vtk {
 
         FboRenderer::FboRenderer(FboOffscreenWindow *offscreenWindow) : m_fboOffscreenWindow(offscreenWindow), m_fbo(0) {

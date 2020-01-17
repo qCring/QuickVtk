@@ -1,7 +1,6 @@
 #include "quickVtkApproximatingSubdivisionFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
         Qml::Register::AbstractClass<ApproximatingSubdivisionFilter> ApproximatingSubdivisionFilter::Register(true);
 

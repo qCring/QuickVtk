@@ -8,7 +8,6 @@
 #include <QString>
 
 namespace quick {
-
     namespace TypeInfo {
 
         auto Symbol::Get::ClassName(QMetaObject metaObject) -> QString {

@@ -6,7 +6,6 @@
 #include <vtkArcSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ArcSource : public PolyDataAlgorithm {

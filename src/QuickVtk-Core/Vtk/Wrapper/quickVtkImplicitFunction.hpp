@@ -9,7 +9,6 @@
 #include <vtkImplicitFunction.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ImplicitFunction : public Object {

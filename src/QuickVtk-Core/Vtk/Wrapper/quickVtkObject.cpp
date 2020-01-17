@@ -1,7 +1,6 @@
 #include "quickVtkObject.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<Object> Object::Register(true);

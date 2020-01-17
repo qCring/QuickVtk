@@ -6,7 +6,6 @@
 #include <vtkWarpLens.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class WarpLens : public PointSetAlgorithm {

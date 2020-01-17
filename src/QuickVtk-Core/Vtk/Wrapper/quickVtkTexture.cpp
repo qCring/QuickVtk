@@ -1,7 +1,6 @@
 #include "quickVtkTexture.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::UncreatableClass<Texture> Texture::Register(true);

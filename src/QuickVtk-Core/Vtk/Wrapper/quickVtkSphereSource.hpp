@@ -6,7 +6,6 @@
 #include <vtkSphereSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class SphereSource : public PolyDataAlgorithm {

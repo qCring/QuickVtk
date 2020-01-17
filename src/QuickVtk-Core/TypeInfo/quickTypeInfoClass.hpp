@@ -5,7 +5,6 @@
 #include <QQmlListProperty>
 
 namespace quick {
-
     namespace TypeInfo {
         
         class Class : public Symbol {

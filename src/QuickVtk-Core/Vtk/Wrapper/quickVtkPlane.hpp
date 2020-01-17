@@ -6,7 +6,6 @@
 #include <vtkPlane.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Plane : public ImplicitFunction {

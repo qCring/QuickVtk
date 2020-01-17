@@ -1,7 +1,6 @@
 #include "quickVtkShrinkPolyData.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<ShrinkPolyData> ShrinkPolyData::Register(true);

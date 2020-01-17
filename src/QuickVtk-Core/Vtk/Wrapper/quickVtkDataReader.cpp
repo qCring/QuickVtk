@@ -1,7 +1,6 @@
 #include "quickVtkDataReader.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<DataReader> DataReader::Register(true);

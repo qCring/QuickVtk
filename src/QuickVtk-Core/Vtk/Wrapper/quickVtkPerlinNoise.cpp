@@ -1,7 +1,6 @@
 #include "quickVtkPerlinNoise.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<PerlinNoise> PerlinNoise::Register(true);

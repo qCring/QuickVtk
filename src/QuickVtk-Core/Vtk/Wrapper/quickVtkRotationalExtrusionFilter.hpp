@@ -5,7 +5,6 @@
 #include <vtkRotationalExtrusionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class RotationalExtrusionFilter : public PolyDataAlgorithm {

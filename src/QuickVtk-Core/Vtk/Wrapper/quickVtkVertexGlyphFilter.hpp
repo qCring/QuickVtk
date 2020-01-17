@@ -5,7 +5,6 @@
 #include <vtkVertexGlyphFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class VertexGlyphFilter : public PolyDataAlgorithm {

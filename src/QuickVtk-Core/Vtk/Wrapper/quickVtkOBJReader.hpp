@@ -5,7 +5,6 @@
 #include <vtkOBJReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class OBJReader : public AbstractPolyDataReader {

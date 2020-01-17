@@ -5,7 +5,6 @@
 #include <vtkWarpScalar.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class WarpScalar : public PointSetAlgorithm {

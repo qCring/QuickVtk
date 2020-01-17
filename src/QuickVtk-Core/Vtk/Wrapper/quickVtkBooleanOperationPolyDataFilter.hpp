@@ -5,7 +5,6 @@
 #include <vtkBooleanOperationPolyDataFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class BooleanOperationPolyDataFilter : public PolyDataAlgorithm {

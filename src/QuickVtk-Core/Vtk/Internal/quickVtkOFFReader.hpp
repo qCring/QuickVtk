@@ -5,7 +5,6 @@
 #include <vtkOFFReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class OFFReader : public PolyDataAlgorithm {

@@ -4,7 +4,6 @@
 #include "quickSampleDataVolumes.hpp"
 
 namespace quick {
-
     namespace SampleData {
 
         Controller* Controller::instance = nullptr;

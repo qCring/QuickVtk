@@ -6,7 +6,6 @@
 #include <vtkRibbonFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class RibbonFilter : public PolyDataAlgorithm {

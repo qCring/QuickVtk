@@ -1,7 +1,6 @@
 #include "quickVtkPolyDataNormals.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<PolyDataNormals> PolyDataNormals::Register(true);

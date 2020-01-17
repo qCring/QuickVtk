@@ -7,7 +7,6 @@
 #include <vtkPointSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class PointSource : public PolyDataAlgorithm {

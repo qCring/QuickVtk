@@ -6,7 +6,6 @@
 #include <vtkLinearExtrusionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class LinearExtrusionFilter : public PolyDataAlgorithm {

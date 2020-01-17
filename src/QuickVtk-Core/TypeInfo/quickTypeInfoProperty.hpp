@@ -5,7 +5,6 @@
 #include <QObject>
 
 namespace quick {
-
     namespace TypeInfo {
 
         class Property : public QObject {

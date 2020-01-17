@@ -5,7 +5,6 @@
 #include <vtkSectorSource.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class SectorSource : public PolyDataAlgorithm {

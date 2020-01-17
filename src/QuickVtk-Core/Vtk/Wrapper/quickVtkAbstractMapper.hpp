@@ -8,7 +8,6 @@
 #include "quickVtkAlgorithm.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         class AbstractMapper : public Algorithm {

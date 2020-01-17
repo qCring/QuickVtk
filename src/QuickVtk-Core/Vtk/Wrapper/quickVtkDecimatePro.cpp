@@ -1,7 +1,6 @@
 #include "quickVtkDecimatePro.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<DecimatePro> DecimatePro::Register(true);

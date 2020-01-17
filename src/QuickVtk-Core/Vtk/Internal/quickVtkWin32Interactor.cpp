@@ -6,7 +6,6 @@
 #include <vtkObjectFactory.h>
 
 namespace quick {
-
     namespace Vtk {
 
         vtkStandardNewMacro(Win32Interactor);

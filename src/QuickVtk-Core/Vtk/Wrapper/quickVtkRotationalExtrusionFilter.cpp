@@ -1,7 +1,6 @@
 #include "quickVtkRotationalExtrusionFilter.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<RotationalExtrusionFilter> RotationalExtrusionFilter::Register(true);

@@ -6,7 +6,6 @@
 #include <vtkSphere.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Sphere : public ImplicitFunction {

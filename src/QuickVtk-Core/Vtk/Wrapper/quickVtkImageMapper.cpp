@@ -1,7 +1,6 @@
 #include "quickVtkImageMapper.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<ImageMapper> ImageMapper::Register(true);

@@ -1,7 +1,6 @@
 #include "quickVtkProp3D.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<Prop3D> Prop3D::Register(true);

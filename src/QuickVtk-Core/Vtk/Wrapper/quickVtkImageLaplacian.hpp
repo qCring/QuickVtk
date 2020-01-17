@@ -5,7 +5,6 @@
 #include <vtkImageLaplacian.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ImageLaplacian : public ThreadedImageAlgorithm {

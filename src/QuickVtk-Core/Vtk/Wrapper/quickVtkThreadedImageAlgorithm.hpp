@@ -5,7 +5,6 @@
 #include <vtkThreadedImageAlgorithm.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ThreadedImageAlgorithm : public ImageAlgorithm {

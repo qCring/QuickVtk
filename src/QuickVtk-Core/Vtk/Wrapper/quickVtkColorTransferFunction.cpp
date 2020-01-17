@@ -1,7 +1,6 @@
 #include "quickVtkColorTransferFunction.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::UncreatableClass<ColorTransferFunction> ColorTransferFunction::Register(true);

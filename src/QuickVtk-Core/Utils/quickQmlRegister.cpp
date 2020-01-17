@@ -4,7 +4,6 @@
 #include "quickTypeInfoList.hpp"
 
 namespace quick {
-
     namespace Qml {
 
         auto RegisterTypes() -> void {

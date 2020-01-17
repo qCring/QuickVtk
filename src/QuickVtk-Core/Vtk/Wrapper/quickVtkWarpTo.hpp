@@ -6,7 +6,6 @@
 #include <vtkWarpTo.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class WarpTo : public PointSetAlgorithm {

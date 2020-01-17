@@ -5,7 +5,6 @@
 #include <vtkStructuredPointsReader.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class StructuredPointsReader : public DataReader {

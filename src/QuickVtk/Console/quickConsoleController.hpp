@@ -5,7 +5,6 @@
 #include <QObject>
 
 namespace quick {
-
     namespace Console {
 
         class Item;

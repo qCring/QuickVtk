@@ -5,7 +5,6 @@
 #include <vtkLinearSubdivisionFilter.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class LinearSubdivisionFilter : public InterpolatingSubdivisionFilter {

@@ -6,7 +6,6 @@
 #include <vtkExternalOpenGLRenderWindow.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class FboRenderer;

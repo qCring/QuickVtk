@@ -6,7 +6,6 @@
 #include <vtkSmartPointer.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class RandomSequence : public Object {

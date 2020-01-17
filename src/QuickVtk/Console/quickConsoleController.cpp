@@ -4,7 +4,6 @@
 #include "quickMenuController.hpp"
 
 namespace quick {
-
     namespace Console {
 
         Controller* Controller::instance = nullptr;

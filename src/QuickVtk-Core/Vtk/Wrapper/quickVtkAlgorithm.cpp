@@ -3,7 +3,6 @@
 #include "quickVtkProp.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<Algorithm> Algorithm::Register(true);

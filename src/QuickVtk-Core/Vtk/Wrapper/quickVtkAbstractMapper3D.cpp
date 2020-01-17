@@ -1,7 +1,6 @@
 #include "quickVtkAbstractMapper3D.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::AbstractClass<AbstractMapper3D> AbstractMapper3D::Register(true);

@@ -1,7 +1,6 @@
 #include "quickVtkCone.hpp"
 
 namespace quick {
-
     namespace Vtk {
         Qml::Register::Class<Cone> Cone::Register(true);
 

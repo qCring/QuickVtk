@@ -5,7 +5,6 @@
 #include <vtkShrinkPolyData.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class ShrinkPolyData : public PolyDataAlgorithm {

@@ -5,7 +5,6 @@
 #include <vtkBoxWidget2.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class BoxWidget2 : public AbstractWidget {

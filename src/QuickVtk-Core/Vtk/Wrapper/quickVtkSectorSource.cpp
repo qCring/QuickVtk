@@ -1,7 +1,6 @@
 #include "quickVtkSectorSource.hpp"
 
 namespace quick {
-
     namespace Vtk {
 
         Qml::Register::Class<SectorSource> SectorSource::Register(true);

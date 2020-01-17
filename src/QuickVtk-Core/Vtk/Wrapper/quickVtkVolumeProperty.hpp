@@ -10,7 +10,6 @@
 #include <vtkVolume.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class Volume;

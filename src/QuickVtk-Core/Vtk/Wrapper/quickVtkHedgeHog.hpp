@@ -5,7 +5,6 @@
 #include <vtkHedgeHog.h>
 
 namespace quick {
-
     namespace Vtk {
 
         class HedgeHog : public PolyDataAlgorithm {

@@ -102,15 +102,29 @@ Rectangle {
     }
   }
 
-  UI.Button {
+  Row {
     anchors.right: parent.right;
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
     anchors.rightMargin: 8;
 
-    icon: icons.fa_bars;
-    frameless: true;
-    onClicked: App.details.toggle();
+    spacing: 8;
+
+    UI.Label {
+      anchors.verticalCenter: parent.verticalCenter;
+
+      text: "v " + App.version;
+      color: "#6E7582";
+    }
+
+    UI.Button {
+      anchors.top: parent.top;
+      anchors.bottom: parent.bottom;
+
+      icon: icons.fa_bars;
+      frameless: true;
+      onClicked: App.details.toggle();
+    }
   }
 
   Rectangle {

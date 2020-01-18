@@ -15,13 +15,13 @@ QuickVtk can be built for Windows, macOS, and Linux via [CMake](https://cmake.or
 - The cloned repository from `https://github.com/qCring/QuickVtk.git`
 
 ## Build VTK
-- [VTK](https://vtk.org/) can be built from the `dependencies` folder
+- It is recommended to build [VTK](https://vtk.org/) from the `dependencies` folder
 - Launch [CMake](https://cmake.org/) and set the paths to
   - src: `QuickVtk/dependencies/src`
   - bin: `QuickVtk/dependencies/bin`
 
 - Press **Configure** and specify a project generator
-- Use the **VTK_GIT_TAG** attribute to specify a commit hash which will be used to download and build a specific [VTK](https://vtk.org/) version from the remote repository
+- The **VTK_GIT_TAG** attribute can be used to specify a certain commit which will be used to download and build [VTK](https://vtk.org/) from the remote repository (useful for testing compatibility with more recent VTK versions)
 - Press **Configure** and then **Generate**
 - Make sure you are connected to the internet before starting the build process since [VTK](https://vtk.org/) has to be cloned first
 
@@ -40,14 +40,13 @@ QuickVtk can be built for Windows, macOS, and Linux via [CMake](https://cmake.or
   - src: `QuickVtk`
   - bin: `QuickVtk/bin`
 - Press **Configure** and specify a project generator
-- Set the path to `Qt5Config.cmake`
-  - Depends on your [Qt](https://www.qt.io/) installation but should look something like this
+- Set the path to `Qt5Config.cmake` (depends on your [Qt](https://www.qt.io/) installation):
   - on macOS: `/Qt/5.13.0/clang_64/lib/cmake/Qt5/`
   - on Windows: `/Qt/5.13/msvc2017/lib/cmake/Qt5/`
 - Press **Configure** to apply changes
 - Set the path to [VTK](https://vtk.org/)
-  - `dependencies/bin/VTK/bin` if you are using the VTK build from the `dependencies` folder
-  - alternatively you can use an existing external build
+  - `dependencies/bin/VTK/bin` if you are using the VTK binaries from the `dependencies` folder
+  - alternatively, you can use an existing external build
 - Press **Configure** and specify a project generator
 - Press **Generate**
 

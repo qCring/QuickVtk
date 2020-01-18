@@ -9,15 +9,7 @@ collections:
     output: true
   guide:
     output: true
-  roadmap:
-    output: true
   docs:
-    output: true
-  reference:
-    output: true
-  research:
-    output: true
-  examples:
     output: true
 
 # .css/.js files will be cached by the browser so make sure to increment the

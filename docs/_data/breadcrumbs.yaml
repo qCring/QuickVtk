@@ -13,21 +13,9 @@ api:
 guide:
   title: User Guide
   url: /guide
-examples:
-  title: Examples
-  url: /examples
-roadmap:
-  title: Roadmap
-  url: /roadmap
 docs:
   title: Documentation
   url: /docs
-reference:
-  title: Reference
-  url: /reference
-research:
-  title: Research
-  url: /research
 contributors:
   title: Contributors
   url: /contributors

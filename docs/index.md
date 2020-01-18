@@ -19,18 +19,10 @@ QuickVtk provides an implementation of the [Visualization Toolkit (VTK)](https:/
   User Documentation on how to use QuickVtk
 - [API Reference]({{ site.baseurl }}/api)   
   An overview of all available types in QuickVtk
-- [Examples]({{ site.baseurl }}/examples)   
-  A collection of `.qml` samples
 
 ## Development
-- [Roadmap]({{ site.baseurl }}/roadmap)   
-  Read about current development topics and upcoming changes
 - [Documentation]({{ site.baseurl }}/docs)   
   Development documentation
-- [Reference]({{ site.baseurl }}/reference)   
-  Various resources for developers
-- [Research]({{ site.baseurl }}/research)   
-  Topics that need further research
 - [Contributors]({{ site.baseurl }}/contributors)   
   Huge thanks to the people who invested some time in QuickVtk
 - [How To Contribute]({{ site.baseurl }}/contribute)   

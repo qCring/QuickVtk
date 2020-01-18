@@ -15,23 +15,11 @@
     - nav: guide
       title: User Guide
       url: /guide
-    - nav: examples
-      title: Examples
-      url: /examples
 - title: Development
   pages:
-    - nav: roadmap
-      title: Roadmap
-      url: /roadmap
     - nav: docs
       title: Documentation
       url: /docs
-    - nav: reference
-      title: Reference
-      url: /reference
-    - nav: research
-      title: Research
-      url: /research
     - nav: contributors
       title: Contributors
       url: /contributors

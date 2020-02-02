@@ -56,6 +56,7 @@ namespace quick {
         auto File::fileChanged(const QString& path) -> void {
             this->setContent(IO::Read::TextFromUrl(path));
             this->setModified(true);
+            Controller::instance->fileChangedExternally(this);
         }
     
         auto File::setPath(const QString& path) -> void {

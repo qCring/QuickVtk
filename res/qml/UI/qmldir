@@ -1,6 +1,7 @@
 module UI
 Area 1.0 area.qml
 Button 1.0 button.qml
+CheckBox 1.0 checkbox.qml
 Icon 1.0 icon.qml
 Label 1.0 label.qml
 TextInput 1.0 textinput.qml

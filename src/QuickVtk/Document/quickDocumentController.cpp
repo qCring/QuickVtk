@@ -108,6 +108,12 @@ namespace quick {
             this->setFile(file);
         }
     
+        auto Controller::fileChangedExternally(File* file) -> void {
+            if (file == this->m_file) {
+                this->run();
+            }
+        }
+    
         void Controller::preRun() {
             if (this->m_file != nullptr) {
                 this->m_file->clearErrors();

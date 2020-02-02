@@ -33,6 +33,7 @@ namespace quick {
             auto getFile(const QString&) -> File*;
             auto setShowSource(bool) -> void;
             auto getShowSource() -> bool;
+            auto fileChangedExternally(File*) -> void;
         public slots:
             void run();
             void preRun();

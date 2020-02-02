@@ -8,6 +8,8 @@ Column {
   spacing: 8;
 
   property alias title: _title.text;
+  property bool collapsible: true;
+  property bool collapsed: false;
   default property alias content: _col.children;
 
   Item {
@@ -16,17 +18,25 @@ Column {
     anchors.left: parent.left;
     anchors.right: parent.right;
 
-    height: _title.height;
+    height: _title.height + 8;
+
+    UI.Button {
+      anchors.verticalCenter: parent.verticalCenter;
+
+      icon: collapsed ? icons.fa_caret_right : icons.fa_caret_down;
+      visible: collapsible;
+      frameless: true;
+      onClicked: collapsed = !collapsed;
+    }
 
     UI.Label {
       id: _title;
 
       anchors.left: parent.left;
       anchors.right: parent.right;
+      anchors.leftMargin: collapsible ? 20 : 0;
       anchors.rightMargin: 8;
       anchors.verticalCenter: parent.verticalCenter;
-
-      topPadding: 8;
 
       font.pointSize: 15;
       color: "#fff";
@@ -38,6 +48,8 @@ Column {
     anchors.right: parent.right;
 
     height: _col.height;
+
+    visible: !collapsed;
 
     Column {
       id: _col;

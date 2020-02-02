@@ -20,7 +20,7 @@ Window {
     }
 
     Preview {
-      controls: details.controls;
+      controls: sidebar.controls;
 
       anchors.top: header.bottom;
       anchors.left: parent.left;
@@ -169,8 +169,8 @@ Window {
       }
     }
 
-    Details {
-      id: details;
+    Sidebar {
+      id: sidebar;
 
       anchors.left: hSplit.right;
       anchors.right: parent.right;

@@ -174,6 +174,7 @@ namespace quick {
         
         json[Key::Name] = prop->getName();
         json[Key::Type] = prop->getType();
+        json[Key::Base] = prop->isInherited();
         
         if (prop->isReadonly()) {
             json[Key::Readonly] = true;

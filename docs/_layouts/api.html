@@ -100,7 +100,11 @@
 
               {%- for property in info.properties -%}
                 <tr>
-                  <td>{{ property.name }}</td>
+                  {%- if property.base -%}
+                    <td>(base) {{ property.name }}</td>
+                  {%- else -%}
+                    <td>{{ property.name }}</td>
+                  {%- endif -%}
                   <td>{% include api/type-label.html type=property.type %}</td>
                   {%- if property.readonly -%}
                     <td>R</td>

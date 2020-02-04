@@ -35,26 +35,34 @@ Item {
 
         height: _title.height;
 
-        UI.Label {
-          id: _title;
-
+        Row {
           anchors.left: parent.left;
           anchors.verticalCenter: parent.verticalCenter;
+          spacing: 8;
 
-          font.pointSize: 15;
-          color: "#fff";
-          text: symbol ? symbol.prefix + "." + symbol.name : "";
+          UI.Icon {
+            anchors.verticalCenter: parent.verticalCenter;
+            icon: icons.fa_chevron_left;
+            color: _ma.containsMouse ? "#fff" : "#9DA5B4";
+          }
+
+          UI.Label {
+            id: _title;
+
+            anchors.verticalCenter: parent.verticalCenter;
+
+            font.pointSize: 15;
+            color: "#fff";
+            text: symbol ? symbol.prefix + "." + symbol.name : "";
+          }
         }
 
-        UI.Button {
-          id: _close;
+        MouseArea {
+          id: _ma;
 
-          anchors.right: parent.right;
-          anchors.verticalCenter: parent.verticalCenter;
-          anchors.rightMargin: 8;
+          anchors.fill: parent;
 
-          frameless: true;
-          icon: icons.fa_times_rectangle;
+          hoverEnabled: true;
           onClicked: symbol = null;
         }
       }
@@ -66,6 +74,43 @@ Item {
         topPadding: 8;
         bottomPadding: 8;
         spacing: 8;
+
+        Row {
+          anchors.left: parent.left;
+          anchors.right: parent.right;
+          spacing: 8;
+
+          UI.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+            width: _pref.width;
+            text: "Name";
+          }
+
+          UI.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+            text: symbol ? symbol.name : "";
+            color: "#fff";
+          }
+        }
+
+        Row {
+          anchors.left: parent.left;
+          anchors.right: parent.right;
+          spacing: 8;
+
+          UI.Label {
+            id: _pref;
+
+            anchors.verticalCenter: parent.verticalCenter;
+            text: "Module";
+          }
+
+          UI.Label {
+            anchors.verticalCenter: parent.verticalCenter;
+            text: symbol ? symbol.prefix : "";
+            color: "#fff";
+          }
+        }
 
         Row {
           anchors.left: parent.left;
@@ -104,25 +149,6 @@ Item {
             color: "#fff";
           }
         }
-
-        Row {
-          anchors.left: parent.left;
-          anchors.right: parent.right;
-          spacing: 8;
-
-          UI.Label {
-            id: _pref;
-
-            anchors.verticalCenter: parent.verticalCenter;
-            text: "Module";
-          }
-
-          UI.Label {
-            anchors.verticalCenter: parent.verticalCenter;
-            text: symbol ? symbol.prefix : "";
-            color: "#fff";
-          }
-        }
       }
     }
   }
@@ -151,7 +177,9 @@ Item {
     Column {
       anchors.left: parent.left;
       anchors.right: parent.right;
+
       bottomPadding: 64;
+      spacing: 8;
 
       Properties {
         anchors.left: parent.left;

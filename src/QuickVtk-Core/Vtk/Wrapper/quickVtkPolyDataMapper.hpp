@@ -7,17 +7,15 @@
 
 #include <vtkPolyDataMapper.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class PolyDataAlgorithm;
+    class PolyDataAlgorithm;
 
-        class PolyDataMapper : public Mapper {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<PolyDataMapper> Register;
-        public:
-            PolyDataMapper();
-        };
-    }
+    class PolyDataMapper : public Mapper {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<PolyDataMapper> Register;
+    public:
+        PolyDataMapper();
+    };
 }

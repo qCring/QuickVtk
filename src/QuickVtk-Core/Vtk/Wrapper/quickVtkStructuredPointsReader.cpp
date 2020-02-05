@@ -1,11 +1,9 @@
 #include "quickVtkStructuredPointsReader.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<StructuredPointsReader> StructuredPointsReader::Register(true);
+    Qml::Register::Class<StructuredPointsReader> StructuredPointsReader::Register(true);
 
-        StructuredPointsReader::StructuredPointsReader() : DataReader(vtkSmartPointer<vtkStructuredPointsReader>::New()) {
-        }
+    StructuredPointsReader::StructuredPointsReader() : DataReader(vtkSmartPointer<vtkStructuredPointsReader>::New()) {
     }
 }

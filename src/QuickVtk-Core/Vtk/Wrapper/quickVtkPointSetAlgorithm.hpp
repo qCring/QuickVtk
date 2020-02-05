@@ -4,15 +4,13 @@
 
 #include <vtkPointSetAlgorithm.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class PointSetAlgorithm : public Algorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::AbstractClass<PointSetAlgorithm> Register;
-        public:
-            PointSetAlgorithm(vtkSmartPointer<vtkPointSetAlgorithm>);
-        };
-    }
+    class PointSetAlgorithm : public Algorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::AbstractClass<PointSetAlgorithm> Register;
+    public:
+        PointSetAlgorithm(vtkSmartPointer<vtkPointSetAlgorithm>);
+    };
 }

@@ -1,11 +1,9 @@
 #include "quickVtkVertexGlyphFilter.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<VertexGlyphFilter> VertexGlyphFilter::Register(true);
+    Qml::Register::Class<VertexGlyphFilter> VertexGlyphFilter::Register(true);
 
-        VertexGlyphFilter::VertexGlyphFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkVertexGlyphFilter>::New()) {
-        }
+    VertexGlyphFilter::VertexGlyphFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkVertexGlyphFilter>::New()) {
     }
 }

@@ -1,12 +1,10 @@
 #include "quickVtkImageDataGeometryFilter.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<ImageDataGeometryFilter> ImageDataGeometryFilter::Register(true);
+    Qml::Register::Class<ImageDataGeometryFilter> ImageDataGeometryFilter::Register(true);
 
-        ImageDataGeometryFilter::ImageDataGeometryFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkImageDataGeometryFilter>::New()) {
-            this->m_vtkObject = vtkImageDataGeometryFilter::SafeDownCast(Algorithm::getVtkObject());
-        }
+    ImageDataGeometryFilter::ImageDataGeometryFilter() : PolyDataAlgorithm(vtkSmartPointer<vtkImageDataGeometryFilter>::New()) {
+        this->m_vtkObject = vtkImageDataGeometryFilter::SafeDownCast(Algorithm::getVtkObject());
     }
 }

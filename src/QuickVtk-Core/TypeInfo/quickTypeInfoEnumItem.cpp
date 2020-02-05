@@ -1,19 +1,17 @@
 #include "quickTypeInfoEnumItem.hpp"
 
-namespace quick {
-    namespace TypeInfo {
+namespace quick::TypeInfo {
 
-        Qml::Register::Type<EnumItem> EnumItem::Register;
+    Qml::Register::Type<EnumItem> EnumItem::Register;
 
-        EnumItem::EnumItem(const QString& name, const int value) : m_name(name), m_value(value) {
-        }
+    EnumItem::EnumItem(const QString& name, const int value) : m_name(name), m_value(value) {
+    }
 
-        auto EnumItem::getName() -> QString {
-            return this->m_name;
-        }
+    auto EnumItem::getName() -> QString {
+        return this->m_name;
+    }
 
-        auto EnumItem::getValue() -> int {
-            return this->m_value;
-        }
+    auto EnumItem::getValue() -> int {
+        return this->m_value;
     }
 }

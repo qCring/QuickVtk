@@ -4,16 +4,14 @@
 
 #include <vtkVertexGlyphFilter.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class VertexGlyphFilter : public PolyDataAlgorithm {
-            Q_OBJECT
+    class VertexGlyphFilter : public PolyDataAlgorithm {
+        Q_OBJECT
 
-        private:
-            static Qml::Register::Class<VertexGlyphFilter> Register;
-        public:
-            VertexGlyphFilter();
-        };
-    }
+    private:
+        static Qml::Register::Class<VertexGlyphFilter> Register;
+    public:
+        VertexGlyphFilter();
+    };
 }

@@ -4,15 +4,13 @@
 
 #include <vtkPolyDataAlgorithm.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class PolyDataAlgorithm : public Algorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::AbstractClass<PolyDataAlgorithm> Register;
-        public:
-            PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataAlgorithm>);
-        };
-    }
+    class PolyDataAlgorithm : public Algorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::AbstractClass<PolyDataAlgorithm> Register;
+    public:
+        PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataAlgorithm>);
+    };
 }

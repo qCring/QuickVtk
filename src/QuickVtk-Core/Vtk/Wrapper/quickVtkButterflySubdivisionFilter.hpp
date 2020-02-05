@@ -4,15 +4,13 @@
 
 #include <vtkButterflySubdivisionFilter.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class ButterflySubdivisionFilter : public InterpolatingSubdivisionFilter {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<ButterflySubdivisionFilter> Register;
-        public:
-            ButterflySubdivisionFilter();
-        };
-    }
+    class ButterflySubdivisionFilter : public InterpolatingSubdivisionFilter {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<ButterflySubdivisionFilter> Register;
+    public:
+        ButterflySubdivisionFilter();
+    };
 }

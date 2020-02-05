@@ -1,11 +1,9 @@
 #include "quickVtkPolyDataAlgorithm.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::AbstractClass<PolyDataAlgorithm> PolyDataAlgorithm::Register(true);
+    Qml::Register::AbstractClass<PolyDataAlgorithm> PolyDataAlgorithm::Register(true);
 
-        PolyDataAlgorithm::PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataAlgorithm> vtkObject) : Algorithm(vtkObject) {
-        }
+    PolyDataAlgorithm::PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataAlgorithm> vtkObject) : Algorithm(vtkObject) {
     }
 }

@@ -1,11 +1,9 @@
 #include "quickVtkPointSetAlgorithm.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::AbstractClass<PointSetAlgorithm> PointSetAlgorithm::Register(true);
+    Qml::Register::AbstractClass<PointSetAlgorithm> PointSetAlgorithm::Register(true);
 
-        PointSetAlgorithm::PointSetAlgorithm(vtkSmartPointer<vtkPointSetAlgorithm> vtkObject) : Algorithm(vtkObject) {
-        }
+    PointSetAlgorithm::PointSetAlgorithm(vtkSmartPointer<vtkPointSetAlgorithm> vtkObject) : Algorithm(vtkObject) {
     }
 }

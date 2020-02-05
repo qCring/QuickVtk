@@ -14,98 +14,96 @@
 #include <vtkCamera.h>
 #include <vtkCommand.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        FboRenderer::FboRenderer(FboOffscreenWindow *offscreenWindow) : m_fboOffscreenWindow(offscreenWindow), m_fbo(0) {
-            m_fboOffscreenWindow->Register(NULL);
-            m_fboOffscreenWindow->QtParentRenderer = this;
+    FboRenderer::FboRenderer(FboOffscreenWindow *offscreenWindow) : m_fboOffscreenWindow(offscreenWindow), m_fbo(0) {
+        m_fboOffscreenWindow->Register(NULL);
+        m_fboOffscreenWindow->QtParentRenderer = this;
 
 #ifdef __APPLE__
-            m_interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
+        m_interactor = vtkSmartPointer<vtkRenderWindowInteractor>::New();
 #endif
-            
+        
 #ifdef __linux__
-            m_interactor = vtkSmartPointer<quick::Vtk::GenericInteractor>::New();
+        m_interactor = vtkSmartPointer<quick::Vtk::GenericInteractor>::New();
 #endif
-            
+        
 #ifdef _MSC_VER
-            m_interactor = vtkSmartPointer<quick::Vtk::Win32Interactor>::New();
+        m_interactor = vtkSmartPointer<quick::Vtk::Win32Interactor>::New();
 #endif
-            
-            m_interactorStyle = vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
-            
-            m_interactor->SetRenderWindow(offscreenWindow);
-            m_interactor->Initialize();
-            m_interactor->SetInteractorStyle(m_interactorStyle);
+        
+        m_interactorStyle = vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
+        
+        m_interactor->SetRenderWindow(offscreenWindow);
+        m_interactor->Initialize();
+        m_interactor->SetInteractorStyle(m_interactorStyle);
+    }
+
+    auto FboRenderer::synchronize(QQuickFramebufferObject* fbo) -> void {
+        if (!m_fbo) {
+            auto viewer = static_cast<Viewer*>(fbo);
+            viewer->init();
+        }
+    }
+
+    auto FboRenderer::render() -> void {
+        m_interactor->Disable();
+        m_fboOffscreenWindow->PushState();
+        m_fboOffscreenWindow->OpenGLInitState();
+        m_fboOffscreenWindow->InternalRender();
+        m_fboOffscreenWindow->PopState();
+        m_interactor->Enable();
+    }
+
+    auto FboRenderer::createFramebufferObject(const QSize &size) -> QOpenGLFramebufferObject* {
+        QOpenGLFramebufferObjectFormat format;
+        format.setAttachment(QOpenGLFramebufferObject::Depth);
+        m_fbo = new QOpenGLFramebufferObject(size, format);
+        m_fboOffscreenWindow->SetFramebufferObject(m_fbo);
+
+        return m_fbo;
+    }
+
+    auto FboRenderer::onMouseEvent(QMouseEvent* event) -> void {
+        if(this->m_interactor == nullptr || event == nullptr) {
+            return;
         }
 
-        auto FboRenderer::synchronize(QQuickFramebufferObject* fbo) -> void {
-            if (!m_fbo) {
-                auto viewer = static_cast<Viewer*>(fbo);
-                viewer->init();
+        if(!this->m_interactor->GetEnabled()) {
+            return;
+        }
+
+        this->m_interactor->SetEventInformationFlipY(event->x(), event->y(), (event->modifiers() & Qt::ControlModifier), (event->modifiers() & Qt::ShiftModifier));
+
+        auto command = vtkCommand::NoEvent;
+
+        if (event->type() == QEvent::MouseMove) {
+            command = vtkCommand::MouseMoveEvent;
+        }
+
+        else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick) {
+            switch (event->button()) {
+                case Qt::LeftButton:    command = vtkCommand::LeftButtonPressEvent; break;
+                case Qt::RightButton:   command = vtkCommand::RightButtonPressEvent; break;
+                case Qt::MidButton:     command = vtkCommand::MiddleButtonPressEvent; break;
+                default: break;
             }
         }
 
-        auto FboRenderer::render() -> void {
-            m_interactor->Disable();
-            m_fboOffscreenWindow->PushState();
-            m_fboOffscreenWindow->OpenGLInitState();
-            m_fboOffscreenWindow->InternalRender();
-            m_fboOffscreenWindow->PopState();
-            m_interactor->Enable();
+        else if (event->type() == QEvent::MouseButtonRelease) {
+            switch (event->button()) {
+                case Qt::LeftButton:    command = vtkCommand::LeftButtonReleaseEvent; break;
+                case Qt::RightButton:   command = vtkCommand::RightButtonReleaseEvent; break;
+                case Qt::MidButton:     command = vtkCommand::MiddleButtonReleaseEvent; break;
+                default: break;
+            }
         }
 
-        auto FboRenderer::createFramebufferObject(const QSize &size) -> QOpenGLFramebufferObject* {
-            QOpenGLFramebufferObjectFormat format;
-            format.setAttachment(QOpenGLFramebufferObject::Depth);
-            m_fbo = new QOpenGLFramebufferObject(size, format);
-            m_fboOffscreenWindow->SetFramebufferObject(m_fbo);
+        this->m_interactor->InvokeEvent(command, event);
+    }
 
-            return m_fbo;
-        }
-
-        auto FboRenderer::onMouseEvent(QMouseEvent* event) -> void {
-            if(this->m_interactor == nullptr || event == nullptr) {
-                return;
-            }
-
-            if(!this->m_interactor->GetEnabled()) {
-                return;
-            }
-
-            this->m_interactor->SetEventInformationFlipY(event->x(), event->y(), (event->modifiers() & Qt::ControlModifier), (event->modifiers() & Qt::ShiftModifier));
-
-            auto command = vtkCommand::NoEvent;
-
-            if (event->type() == QEvent::MouseMove) {
-                command = vtkCommand::MouseMoveEvent;
-            }
-
-            else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick) {
-                switch (event->button()) {
-                    case Qt::LeftButton:    command = vtkCommand::LeftButtonPressEvent; break;
-                    case Qt::RightButton:   command = vtkCommand::RightButtonPressEvent; break;
-                    case Qt::MidButton:     command = vtkCommand::MiddleButtonPressEvent; break;
-                    default: break;
-                }
-            }
-
-            else if (event->type() == QEvent::MouseButtonRelease) {
-                switch (event->button()) {
-                    case Qt::LeftButton:    command = vtkCommand::LeftButtonReleaseEvent; break;
-                    case Qt::RightButton:   command = vtkCommand::RightButtonReleaseEvent; break;
-                    case Qt::MidButton:     command = vtkCommand::MiddleButtonReleaseEvent; break;
-                    default: break;
-                }
-            }
-
-            this->m_interactor->InvokeEvent(command, event);
-        }
-
-        FboRenderer::~FboRenderer() {
-            m_fboOffscreenWindow->QtParentRenderer = 0;
-            m_fboOffscreenWindow->Delete();
-        }
-    };
+    FboRenderer::~FboRenderer() {
+        m_fboOffscreenWindow->QtParentRenderer = 0;
+        m_fboOffscreenWindow->Delete();
+    }
 }

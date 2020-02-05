@@ -1,11 +1,9 @@
 #include "quickVtkSTLReader.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<STLReader> STLReader::Register(true);
+    Qml::Register::Class<STLReader> STLReader::Register(true);
 
-        STLReader::STLReader() : AbstractPolyDataReader(vtkSmartPointer<vtkSTLReader>::New()) {
-        }
+    STLReader::STLReader() : AbstractPolyDataReader(vtkSmartPointer<vtkSTLReader>::New()) {
     }
 }

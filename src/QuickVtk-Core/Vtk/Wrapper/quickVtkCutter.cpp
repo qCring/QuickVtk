@@ -2,48 +2,46 @@
 
 #include "quickVtkImplicitFunction.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<Cutter> Cutter::Register(true);
+    Qml::Register::Class<Cutter> Cutter::Register(true);
 
-        Cutter::Cutter() : PolyDataAlgorithm(vtkSmartPointer<vtkCutter>::New()) {
-            this->m_vtkObject = vtkCutter::SafeDownCast(Algorithm::getVtkObject());
-            this->m_cutFunctionCb = [this] () {
-                this->updateCutFunction();
-            };
+    Cutter::Cutter() : PolyDataAlgorithm(vtkSmartPointer<vtkCutter>::New()) {
+        this->m_vtkObject = vtkCutter::SafeDownCast(Algorithm::getVtkObject());
+        this->m_cutFunctionCb = [this] () {
+            this->updateCutFunction();
+        };
+    }
+
+    auto Cutter::updateCutFunction() -> void {
+        if (this->m_cutFunction) {
+            this->update();
+        }
+    }
+
+    auto Cutter::setCutFunction(ImplicitFunction* cutFunction) -> void {
+        if (this->m_cutFunction) {
+            this->m_cutFunction->removeCallback(std::move(this->m_cutFunctionCb));
         }
 
-        auto Cutter::updateCutFunction() -> void {
-            if (this->m_cutFunction) {
-                this->update();
-            }
+        this->m_cutFunction = cutFunction;
+
+        if (cutFunction) {
+            this->m_vtkObject->SetCutFunction(cutFunction->getVtkObject());
+            cutFunction->addCallback(std::move(this->m_cutFunctionCb));
+            this->updateCutFunction();
         }
 
-        auto Cutter::setCutFunction(ImplicitFunction* cutFunction) -> void {
-            if (this->m_cutFunction) {
-                this->m_cutFunction->removeCallback(std::move(this->m_cutFunctionCb));
-            }
+        emit this->cutFunctionChanged();
+    }
 
-            this->m_cutFunction = cutFunction;
+    auto Cutter::getCutFunction() -> ImplicitFunction* {
+        return this->m_cutFunction;
+    }
 
-            if (cutFunction) {
-                this->m_vtkObject->SetCutFunction(cutFunction->getVtkObject());
-                cutFunction->addCallback(std::move(this->m_cutFunctionCb));
-                this->updateCutFunction();
-            }
-
-            emit this->cutFunctionChanged();
-        }
-
-        auto Cutter::getCutFunction() -> ImplicitFunction* {
-            return this->m_cutFunction;
-        }
-
-        Cutter::~Cutter() {
-            if (this->m_cutFunction) {
-                this->m_cutFunction->removeCallback(std::move(this->m_cutFunctionCb));
-            }
+    Cutter::~Cutter() {
+        if (this->m_cutFunction) {
+            this->m_cutFunction->removeCallback(std::move(this->m_cutFunctionCb));
         }
     }
 }

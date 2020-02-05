@@ -1,12 +1,10 @@
 #include "quickVtkExtractEdges.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<ExtractEdges> ExtractEdges::Register(true);
+    Qml::Register::Class<ExtractEdges> ExtractEdges::Register(true);
 
-        ExtractEdges::ExtractEdges() : PolyDataAlgorithm(vtkSmartPointer<vtkExtractEdges>::New()) {
-            this->m_vtkObject = vtkExtractEdges::SafeDownCast(Algorithm::getVtkObject());
-        }
+    ExtractEdges::ExtractEdges() : PolyDataAlgorithm(vtkSmartPointer<vtkExtractEdges>::New()) {
+        this->m_vtkObject = vtkExtractEdges::SafeDownCast(Algorithm::getVtkObject());
     }
 }

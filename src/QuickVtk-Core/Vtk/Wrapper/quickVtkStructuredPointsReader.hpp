@@ -4,15 +4,13 @@
 
 #include <vtkStructuredPointsReader.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class StructuredPointsReader : public DataReader {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<StructuredPointsReader> Register;
-        public:
-            StructuredPointsReader();
-        };
-    }
+    class StructuredPointsReader : public DataReader {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<StructuredPointsReader> Register;
+    public:
+        StructuredPointsReader();
+    };
 }

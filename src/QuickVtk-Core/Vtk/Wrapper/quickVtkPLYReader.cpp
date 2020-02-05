@@ -1,11 +1,9 @@
 #include "quickVtkPLYReader.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<PLYReader> PLYReader::Register(true);
+    Qml::Register::Class<PLYReader> PLYReader::Register(true);
 
-        PLYReader::PLYReader() : AbstractPolyDataReader(vtkSmartPointer<vtkPLYReader>::New()) {
-        }
+    PLYReader::PLYReader() : AbstractPolyDataReader(vtkSmartPointer<vtkPLYReader>::New()) {
     }
 }

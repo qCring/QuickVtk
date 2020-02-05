@@ -1,24 +1,22 @@
 #include "quickVtkDataReader.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::AbstractClass<DataReader> DataReader::Register(true);
+    Qml::Register::AbstractClass<DataReader> DataReader::Register(true);
 
-        DataReader::DataReader(vtkSmartPointer<vtkDataReader> vtkObject) : Algorithm(vtkObject) {
-            this->m_vtkObject = vtkObject;
-        }
+    DataReader::DataReader(vtkSmartPointer<vtkDataReader> vtkObject) : Algorithm(vtkObject) {
+        this->m_vtkObject = vtkObject;
+    }
 
-        auto DataReader::setFileName(const QString& fileName) -> void {
-            this->m_vtkObject->SetFileName(fileName.toStdString().c_str());
-            this->m_vtkObject->Update();
-            this->update();
+    auto DataReader::setFileName(const QString& fileName) -> void {
+        this->m_vtkObject->SetFileName(fileName.toStdString().c_str());
+        this->m_vtkObject->Update();
+        this->update();
 
-            emit this->fileNameChanged();
-        }
+        emit this->fileNameChanged();
+    }
 
-        auto DataReader::getFileName() -> QString {
-            return this->m_vtkObject->GetFileName();
-        }
+    auto DataReader::getFileName() -> QString {
+        return this->m_vtkObject->GetFileName();
     }
 }

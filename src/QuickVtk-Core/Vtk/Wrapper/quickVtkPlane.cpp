@@ -1,28 +1,27 @@
 #include "quickVtkPlane.hpp"
 
-namespace quick {
-    namespace Vtk {
-        Qml::Register::Class<Plane> Plane::Register(true);
+namespace quick::Vtk {
 
-        Plane::Plane() : ImplicitFunction(vtkSmartPointer<vtkPlane>::New()) {
-            this->m_vtkObject = vtkPlane::SafeDownCast(ImplicitFunction::getVtkObject());
+    Qml::Register::Class<Plane> Plane::Register(true);
 
-            this->m_origin = new Math::Vector3([this](){
-                this->m_vtkObject->SetOrigin(this->m_origin->getValues().data());
-                this->update();
-            });
+    Plane::Plane() : ImplicitFunction(vtkSmartPointer<vtkPlane>::New()) {
+        this->m_vtkObject = vtkPlane::SafeDownCast(ImplicitFunction::getVtkObject());
 
-            this->m_normal = new Math::Vector3([this](){
-                this->m_vtkObject->SetNormal(this->m_normal->getValues().data());
-            });
-        }
+        this->m_origin = new Math::Vector3([this](){
+            this->m_vtkObject->SetOrigin(this->m_origin->getValues().data());
+            this->update();
+        });
 
-        auto Plane::getOrigin() -> Math::Vector3* {
-            return this->m_origin;
-        }
+        this->m_normal = new Math::Vector3([this](){
+            this->m_vtkObject->SetNormal(this->m_normal->getValues().data());
+        });
+    }
 
-        auto Plane::getNormal() -> Math::Vector3* {
-            return this->m_origin;
-        }
+    auto Plane::getOrigin() -> Math::Vector3* {
+        return this->m_origin;
+    }
+
+    auto Plane::getNormal() -> Math::Vector3* {
+        return this->m_origin;
     }
 }

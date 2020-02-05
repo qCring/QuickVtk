@@ -1,11 +1,9 @@
 #include "quickVtkDataSetAlgorithm.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::AbstractClass<DataSetAlgorithm> DataSetAlgorithm::Register(true);
+    Qml::Register::AbstractClass<DataSetAlgorithm> DataSetAlgorithm::Register(true);
 
-        DataSetAlgorithm::DataSetAlgorithm(vtkSmartPointer<vtkDataSetAlgorithm> vtkObject) : Algorithm(vtkObject) {
-        }
+    DataSetAlgorithm::DataSetAlgorithm(vtkSmartPointer<vtkDataSetAlgorithm> vtkObject) : Algorithm(vtkObject) {
     }
 }

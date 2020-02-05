@@ -4,15 +4,13 @@
 
 #include <vtkLinearSubdivisionFilter.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class LinearSubdivisionFilter : public InterpolatingSubdivisionFilter {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<LinearSubdivisionFilter> Register;
-        public:
-            LinearSubdivisionFilter();
-        };
-    }
+    class LinearSubdivisionFilter : public InterpolatingSubdivisionFilter {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<LinearSubdivisionFilter> Register;
+    public:
+        LinearSubdivisionFilter();
+    };
 }

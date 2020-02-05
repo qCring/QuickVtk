@@ -1,92 +1,90 @@
 #include "quickVtkPolyDataNormals.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<PolyDataNormals> PolyDataNormals::Register(true);
+    Qml::Register::Class<PolyDataNormals> PolyDataNormals::Register(true);
 
-        PolyDataNormals::PolyDataNormals() : PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataNormals>::New()) {
-            this->m_vtkObject = vtkPolyDataNormals::SafeDownCast(Algorithm::getVtkObject());
-        }
+    PolyDataNormals::PolyDataNormals() : PolyDataAlgorithm(vtkSmartPointer<vtkPolyDataNormals>::New()) {
+        this->m_vtkObject = vtkPolyDataNormals::SafeDownCast(Algorithm::getVtkObject());
+    }
 
-        auto PolyDataNormals::setFeatureAngle(qreal featureAngle) -> void {
-            this->m_vtkObject->SetFeatureAngle(featureAngle);
-            emit this->featureAngleChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setFeatureAngle(qreal featureAngle) -> void {
+        this->m_vtkObject->SetFeatureAngle(featureAngle);
+        emit this->featureAngleChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getFeatureAngle() -> qreal {
-            return this->m_vtkObject->GetFeatureAngle();
-        }
+    auto PolyDataNormals::getFeatureAngle() -> qreal {
+        return this->m_vtkObject->GetFeatureAngle();
+    }
 
-        auto PolyDataNormals::setSplitting(bool splitting) -> void {
-            this->m_vtkObject->SetSplitting(splitting);
-            emit this->splittingChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setSplitting(bool splitting) -> void {
+        this->m_vtkObject->SetSplitting(splitting);
+        emit this->splittingChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getSplitting() -> bool {
-            return this->m_vtkObject->GetSplitting();
-        }
+    auto PolyDataNormals::getSplitting() -> bool {
+        return this->m_vtkObject->GetSplitting();
+    }
 
-        auto PolyDataNormals::setConsistency(bool consistency) -> void {
-            this->m_vtkObject->SetConsistency(consistency);
-            emit this->consistencyChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setConsistency(bool consistency) -> void {
+        this->m_vtkObject->SetConsistency(consistency);
+        emit this->consistencyChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getConsistency() -> bool {
-            return this->m_vtkObject->GetConsistency();
-        }
+    auto PolyDataNormals::getConsistency() -> bool {
+        return this->m_vtkObject->GetConsistency();
+    }
 
-        auto PolyDataNormals::setAutoOrientNormals(bool autoOrientNormals) -> void {
-            this->m_vtkObject->SetAutoOrientNormals(autoOrientNormals);
-            emit this->autoOrientNormalsChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setAutoOrientNormals(bool autoOrientNormals) -> void {
+        this->m_vtkObject->SetAutoOrientNormals(autoOrientNormals);
+        emit this->autoOrientNormalsChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getAutoOrientNormals() -> bool {
-            return this->m_vtkObject->GetAutoOrientNormals();
-        }
+    auto PolyDataNormals::getAutoOrientNormals() -> bool {
+        return this->m_vtkObject->GetAutoOrientNormals();
+    }
 
-        auto PolyDataNormals::setComputePointNormals(bool computePointNormals) -> void {
-            this->m_vtkObject->SetComputePointNormals(computePointNormals);
-            emit this->computePointNormalsChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setComputePointNormals(bool computePointNormals) -> void {
+        this->m_vtkObject->SetComputePointNormals(computePointNormals);
+        emit this->computePointNormalsChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getComputePointNormals() -> bool {
-            return this->m_vtkObject->GetComputePointNormals();
-        }
+    auto PolyDataNormals::getComputePointNormals() -> bool {
+        return this->m_vtkObject->GetComputePointNormals();
+    }
 
-        auto PolyDataNormals::setComputeCellNormals(bool computeCellNormals) -> void {
-            this->m_vtkObject->SetComputeCellNormals(computeCellNormals);
-            emit this->computeCellNormalsChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setComputeCellNormals(bool computeCellNormals) -> void {
+        this->m_vtkObject->SetComputeCellNormals(computeCellNormals);
+        emit this->computeCellNormalsChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getComputeCellNormals() -> bool {
-            return this->m_vtkObject->GetComputeCellNormals();
-        }
+    auto PolyDataNormals::getComputeCellNormals() -> bool {
+        return this->m_vtkObject->GetComputeCellNormals();
+    }
 
-        auto PolyDataNormals::setFlipNormals(bool flipNormals) -> void {
-            this->m_vtkObject->SetFlipNormals(flipNormals);
-            emit this->flipNormalsChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setFlipNormals(bool flipNormals) -> void {
+        this->m_vtkObject->SetFlipNormals(flipNormals);
+        emit this->flipNormalsChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getFlipNormals() -> bool {
-            return this->m_vtkObject->GetFlipNormals();
-        }
+    auto PolyDataNormals::getFlipNormals() -> bool {
+        return this->m_vtkObject->GetFlipNormals();
+    }
 
-        auto PolyDataNormals::setNonManifoldTraversal(bool nonManifoldTraversal) -> void {
-            this->m_vtkObject->SetNonManifoldTraversal(nonManifoldTraversal);
-            emit this->nonManifoldTraversalChanged();
-            this->update();
-        }
+    auto PolyDataNormals::setNonManifoldTraversal(bool nonManifoldTraversal) -> void {
+        this->m_vtkObject->SetNonManifoldTraversal(nonManifoldTraversal);
+        emit this->nonManifoldTraversalChanged();
+        this->update();
+    }
 
-        auto PolyDataNormals::getNonManifoldTraversal() -> bool {
-            return this->m_vtkObject->GetNonManifoldTraversal();
-        }
+    auto PolyDataNormals::getNonManifoldTraversal() -> bool {
+        return this->m_vtkObject->GetNonManifoldTraversal();
     }
 }

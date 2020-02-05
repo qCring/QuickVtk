@@ -4,15 +4,13 @@
 
 #include <vtkSTLReader.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class STLReader : public AbstractPolyDataReader {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<STLReader> Register;
-        public:
-            STLReader();
-        };
-    }
+    class STLReader : public AbstractPolyDataReader {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<STLReader> Register;
+    public:
+        STLReader();
+    };
 }

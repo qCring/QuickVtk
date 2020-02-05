@@ -4,20 +4,17 @@
 
 #include <vtkGenericRenderWindowInteractor.h>
 
-namespace quick {
-    
-    namespace Vtk {
+namespace quick::Vtk {
         
-        class GenericInteractor : public vtkGenericRenderWindowInteractor {
-        public:
-            vtkTypeMacro(GenericInteractor, vtkGenericRenderWindowInteractor);
-            static GenericInteractor* New();
-            auto Initialize() -> void override;
-        protected:
-            GenericInteractor() = default;
-            virtual ~GenericInteractor() = default;
-        };
-    }
+    class GenericInteractor : public vtkGenericRenderWindowInteractor {
+    public:
+        vtkTypeMacro(GenericInteractor, vtkGenericRenderWindowInteractor);
+        static GenericInteractor* New();
+        auto Initialize() -> void override;
+    protected:
+        GenericInteractor() = default;
+        virtual ~GenericInteractor() = default;
+    };
 }
 
 #endif

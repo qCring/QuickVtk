@@ -58,6 +58,7 @@ namespace quick::App {
 
         AddFontDir(resourceDir + "fonts/Roboto/");
         AddFontDir(resourceDir + "fonts/font-awesome/");
+        AddFontDir(resourceDir + "fonts/Fira_Code/");
 
         auto engine = new QQmlApplicationEngine ();
 

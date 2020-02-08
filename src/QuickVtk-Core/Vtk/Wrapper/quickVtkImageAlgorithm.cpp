@@ -1,11 +1,9 @@
 #include "quickVtkImageAlgorithm.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::AbstractClass<ImageAlgorithm> ImageAlgorithm::Register(true);
+    Qml::Register::AbstractClass<ImageAlgorithm> ImageAlgorithm::Register(true);
 
-        ImageAlgorithm::ImageAlgorithm(vtkSmartPointer<vtkImageAlgorithm> vtkObject) : Algorithm(vtkObject) {
-        }
+    ImageAlgorithm::ImageAlgorithm(vtkSmartPointer<vtkImageAlgorithm> vtkObject) : Algorithm(vtkObject) {
     }
 }

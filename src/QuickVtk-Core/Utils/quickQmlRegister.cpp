@@ -3,24 +3,22 @@
 #include "quickTypeInfoSymbol.hpp"
 #include "quickTypeInfoList.hpp"
 
-namespace quick {
-    namespace Qml {
+namespace quick::Qml {
 
-        auto RegisterTypes() -> void {
+    auto RegisterTypes() -> void {
 
-            for (auto initializer : Register::Initializers::GetList()) {
-                initializer();
-            }
-
-            TypeInfo::List::GetInstance()->init();
+        for (auto initializer : Register::Initializers::GetList()) {
+            initializer();
         }
 
-        namespace Register {
+        TypeInfo::List::GetInstance()->init();
+    }
 
-            auto Initializers::GetList() -> QList<std::function<void(void)>>& {
-                static QList<std::function<void(void)>> List;
-                return List;
-            }
+    namespace Register {
+
+        auto Initializers::GetList() -> QList<std::function<void(void)>>& {
+            static QList<std::function<void(void)>> List;
+            return List;
         }
     }
 }

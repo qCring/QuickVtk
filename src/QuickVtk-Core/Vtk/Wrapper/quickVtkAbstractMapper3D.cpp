@@ -1,11 +1,9 @@
 #include "quickVtkAbstractMapper3D.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::AbstractClass<AbstractMapper3D> AbstractMapper3D::Register(true);
+    Qml::Register::AbstractClass<AbstractMapper3D> AbstractMapper3D::Register(true);
 
-        AbstractMapper3D::AbstractMapper3D(vtkSmartPointer<vtkAbstractMapper3D> vtkObject) : AbstractMapper(vtkObject) {
-        }
+    AbstractMapper3D::AbstractMapper3D(vtkSmartPointer<vtkAbstractMapper3D> vtkObject) : AbstractMapper(vtkObject) {
     }
 }

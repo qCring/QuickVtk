@@ -10,55 +10,53 @@
 
 #include "quickTypeInfoList.hpp"
 
-namespace quick {
-    namespace App {
+namespace quick::App {
 
-        Controller* Controller::instance = nullptr;
+    Controller* Controller::instance = nullptr;
 
-        Qml::Register::Controller<Controller> Controller::Register;
+    Qml::Register::Controller<Controller> Controller::Register;
 
-        auto Controller::Create() -> void {
-            if (instance) {
-                throw std::runtime_error("instance already existing");
-            }
-            
-            instance = new Controller();
+    auto Controller::Create() -> void {
+        if (instance) {
+            throw std::runtime_error("instance already existing");
         }
 
-        auto Controller::getVersion() -> QString {
-            return Meta::AppVersion;
-        }
-    
-        auto Controller::getSettings() -> Settings* {
-            return Settings::instance;
-        }
+        instance = new Controller();
+    }
 
-        auto Controller::getDetails() -> Details* {
-            return Details::instance;
-        }
+    auto Controller::getVersion() -> QString {
+        return Meta::AppVersion;
+    }
 
-        auto Controller::getConsoleController() -> Console::Controller* {
-            return Console::Controller::instance;
-        }
+    auto Controller::getSettings() -> Settings* {
+        return Settings::instance;
+    }
 
-        auto Controller::getMenuController() -> Menu::Controller* {
-            return Menu::Controller::instance;
-        }
+    auto Controller::getDetails() -> Details* {
+        return Details::instance;
+    }
 
-        auto Controller::getDocumentController() -> Document::Controller* {
-            return Document::Controller::instance;
-        }
-    
-        auto Controller::getTypeList() -> TypeInfo::List* {
-            return TypeInfo::List::GetInstance();
-        }
-        
-        auto Controller::isDebugBuild() -> bool {
+    auto Controller::getConsoleController() -> Console::Controller* {
+        return Console::Controller::instance;
+    }
+
+    auto Controller::getMenuController() -> Menu::Controller* {
+        return Menu::Controller::instance;
+    }
+
+    auto Controller::getDocumentController() -> Document::Controller* {
+        return Document::Controller::instance;
+    }
+
+    auto Controller::getTypeList() -> TypeInfo::List* {
+        return TypeInfo::List::GetInstance();
+    }
+
+    auto Controller::isDebugBuild() -> bool {
 #ifdef NDEBUG
-            return false;
+        return false;
 #else
-            return true;
+        return true;
 #endif
-        }
     }
 }

@@ -4,24 +4,22 @@
 
 #include <QObject>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class Object : public QObject {
-            Q_OBJECT
-        public:
-            enum class Type {
-                Prop,
-                Algorithm,
-                Widget,
-                Other
-            };
-        private:
-            static Qml::Register::AbstractClass<Object> Register;
-            Type m_type;
-        public:
-            Object(Type);
-            auto getType() -> Type;
+    class Object : public QObject {
+        Q_OBJECT
+    public:
+        enum class Type {
+            Prop,
+            Algorithm,
+            Widget,
+            Other
         };
-    }
+    private:
+        static Qml::Register::AbstractClass<Object> Register;
+        Type m_type;
+    public:
+        Object(Type);
+        auto getType() -> Type;
+    };
 }

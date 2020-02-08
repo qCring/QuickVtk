@@ -2,6 +2,7 @@
 
 #include <vtkPolyDataAlgorithm.h>
 
+//TODO: proper namespace...
 class vtkOFFReader : public vtkPolyDataAlgorithm {
 private:
     char *FileName;

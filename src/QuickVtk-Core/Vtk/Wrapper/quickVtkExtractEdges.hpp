@@ -4,16 +4,14 @@
 
 #include <vtkExtractEdges.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class ExtractEdges : public PolyDataAlgorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<ExtractEdges> Register;
-            vtkSmartPointer<vtkExtractEdges> m_vtkObject = nullptr;
-        public:
-            ExtractEdges();
-        };
-    }
+    class ExtractEdges : public PolyDataAlgorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<ExtractEdges> Register;
+        vtkSmartPointer<vtkExtractEdges> m_vtkObject = nullptr;
+    public:
+        ExtractEdges();
+    };
 }

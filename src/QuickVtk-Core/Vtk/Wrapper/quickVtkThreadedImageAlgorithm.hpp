@@ -4,15 +4,13 @@
 
 #include <vtkThreadedImageAlgorithm.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class ThreadedImageAlgorithm : public ImageAlgorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::AbstractClass<ThreadedImageAlgorithm> Register;
-        public:
-            ThreadedImageAlgorithm(vtkSmartPointer<vtkThreadedImageAlgorithm>);
-        };
-    }
+    class ThreadedImageAlgorithm : public ImageAlgorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::AbstractClass<ThreadedImageAlgorithm> Register;
+    public:
+        ThreadedImageAlgorithm(vtkSmartPointer<vtkThreadedImageAlgorithm>);
+    };
 }

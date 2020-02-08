@@ -1,12 +1,10 @@
 #include "quickVtkBoxWidget2.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        Qml::Register::Class<BoxWidget2> BoxWidget2::Register(true);
+    Qml::Register::Class<BoxWidget2> BoxWidget2::Register(true);
 
-        BoxWidget2::BoxWidget2() : AbstractWidget(vtkSmartPointer<vtkBoxWidget2>::New()) {
-            this->m_vtkObject = vtkBoxWidget2::SafeDownCast(this->getVtkObject());
-        }
+    BoxWidget2::BoxWidget2() : AbstractWidget(vtkSmartPointer<vtkBoxWidget2>::New()) {
+        this->m_vtkObject = vtkBoxWidget2::SafeDownCast(this->getVtkObject());
     }
 }

@@ -4,15 +4,13 @@
 
 #include <vtkLoopSubdivisionFilter.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class LoopSubdivisionFilter : public ApproximatingSubdivisionFilter {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<LoopSubdivisionFilter> Register;
-        public:
-            LoopSubdivisionFilter();
-        };
-    }
+    class LoopSubdivisionFilter : public ApproximatingSubdivisionFilter {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<LoopSubdivisionFilter> Register;
+    public:
+        LoopSubdivisionFilter();
+    };
 }

@@ -1,10 +1,9 @@
 #include "quickVtkLinearSubdivisionFilter.hpp"
 
-namespace quick {
-    namespace Vtk {
-        Qml::Register::Class<LinearSubdivisionFilter> LinearSubdivisionFilter::Register(true);
+namespace quick::Vtk {
 
-        LinearSubdivisionFilter::LinearSubdivisionFilter() : InterpolatingSubdivisionFilter(vtkSmartPointer<vtkLinearSubdivisionFilter>::New()) {
-        }
+    Qml::Register::Class<LinearSubdivisionFilter> LinearSubdivisionFilter::Register(true);
+
+    LinearSubdivisionFilter::LinearSubdivisionFilter() : InterpolatingSubdivisionFilter(vtkSmartPointer<vtkLinearSubdivisionFilter>::New()) {
     }
 }

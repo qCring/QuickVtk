@@ -4,15 +4,13 @@
 
 #include <vtkImageLaplacian.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class ImageLaplacian : public ThreadedImageAlgorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<ImageLaplacian> Register;
-        public:
-            ImageLaplacian();
-        };
-    }
+    class ImageLaplacian : public ThreadedImageAlgorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<ImageLaplacian> Register;
+    public:
+        ImageLaplacian();
+    };
 }

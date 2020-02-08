@@ -4,15 +4,13 @@
 
 #include <vtkPNGReader.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class PNGReader : public ImageReader2 {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<PNGReader> Register;
-        public:
-            PNGReader();
-        };
-    }
+    class PNGReader : public ImageReader2 {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<PNGReader> Register;
+    public:
+        PNGReader();
+    };
 }

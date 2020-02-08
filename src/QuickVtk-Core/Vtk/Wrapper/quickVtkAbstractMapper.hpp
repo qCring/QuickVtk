@@ -7,15 +7,13 @@
 
 #include "quickVtkAlgorithm.hpp"
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class AbstractMapper : public Algorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::AbstractClass<AbstractMapper> Register;
-        public:
-            AbstractMapper(vtkSmartPointer<vtkAbstractMapper>);
-        };
-    }
+    class AbstractMapper : public Algorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::AbstractClass<AbstractMapper> Register;
+    public:
+        AbstractMapper(vtkSmartPointer<vtkAbstractMapper>);
+    };
 }

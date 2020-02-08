@@ -1,57 +1,55 @@
 #include "quickSampleDataImages.hpp"
 #include <QGuiApplication>
 
-namespace quick {
-    namespace SampleData {
+namespace quick::SampleData {
 
-        Images* Images::instance = nullptr;
+    Images* Images::instance = nullptr;
 
-        Qml::Register::Class<Images> Images::Register;
+    Qml::Register::Class<Images> Images::Register;
 
-        auto Images::Create() -> void {
-            if (instance) {
-                throw std::runtime_error("instance already existing");
-            }
-
-            instance = new Images();
-        }
-    
-        auto Images::GetInstance() -> Images* {
-            return instance;
+    auto Images::Create() -> void {
+        if (instance) {
+            throw std::runtime_error("instance already existing");
         }
 
-        auto Images::makeDataPath(const QString& file) -> QString {
-            auto path = QDir(QGuiApplication::applicationDirPath());
+        instance = new Images();
+    }
 
-            #ifdef __APPLE__
-            path.cdUp();
-            #endif
-            QString resourceDir = path.absolutePath() + "/Resources/";
-            return resourceDir + "examples/data/images/" + file;
-        }
+    auto Images::GetInstance() -> Images* {
+        return instance;
+    }
 
-        auto Images::getLenaPNG() -> QString {
-            return makeDataPath("lena.png");
-        }
+    auto Images::makeDataPath(const QString& file) -> QString {
+        auto path = QDir(QGuiApplication::applicationDirPath());
 
-        auto Images::getLenaJPG() -> QString {
-            return makeDataPath("lena.jpg");
-        }
+        #ifdef __APPLE__
+        path.cdUp();
+        #endif
+        QString resourceDir = path.absolutePath() + "/Resources/";
+        return resourceDir + "examples/data/images/" + file;
+    }
 
-        auto Images::getAPNG() -> QString {
-            return makeDataPath("a.png");
-        }
+    auto Images::getLenaPNG() -> QString {
+        return makeDataPath("lena.png");
+    }
 
-        auto Images::getAJPG() -> QString {
-            return makeDataPath("a.jpg");
-        }
+    auto Images::getLenaJPG() -> QString {
+        return makeDataPath("lena.jpg");
+    }
 
-        auto Images::getBPNG() -> QString {
-            return makeDataPath("b.png");
-        }
+    auto Images::getAPNG() -> QString {
+        return makeDataPath("a.png");
+    }
 
-        auto Images::getBJPG() -> QString {
-            return makeDataPath("b.jpg");
-        }
+    auto Images::getAJPG() -> QString {
+        return makeDataPath("a.jpg");
+    }
+
+    auto Images::getBPNG() -> QString {
+        return makeDataPath("b.png");
+    }
+
+    auto Images::getBJPG() -> QString {
+        return makeDataPath("b.jpg");
     }
 }

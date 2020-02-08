@@ -2,21 +2,18 @@
 
 #include "quickTypeInfoSymbol.hpp"
 
-namespace quick {
-    namespace TypeInfo {
-        namespace MakeSymbol {
+namespace quick::TypeInfo::MakeSymbol {
 
-            auto Enum(QMetaEnum metaEnum) -> void {
-                Symbol::MakeEnum(metaEnum);
-            }
-        
-            auto Class(QMetaObject metaObject, bool isWrapper) -> void {
-                Symbol::MakeClass(metaObject, isWrapper);
-            }
-        
-            auto AbstractClass(QMetaObject metaObject, bool isWrapper) -> void {
-                Symbol::MakeAbstractClass(metaObject, isWrapper);
-            }
-        }
+    auto Enum(QMetaEnum metaEnum) -> void {
+        Symbol::MakeEnum(metaEnum);
+    }
+
+    auto Class(QMetaObject metaObject, bool isWrapper) -> void {
+        Symbol::MakeClass(metaObject, isWrapper);
+    }
+
+    auto AbstractClass(QMetaObject metaObject, bool isWrapper) -> void {
+        Symbol::MakeAbstractClass(metaObject, isWrapper);
     }
 }
+

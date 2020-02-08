@@ -4,15 +4,13 @@
 
 #include <vtkOBJReader.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class OBJReader : public AbstractPolyDataReader {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<OBJReader> Register;
-        public:
-            OBJReader();
-        };
-    }
+    class OBJReader : public AbstractPolyDataReader {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<OBJReader> Register;
+    public:
+        OBJReader();
+    };
 }

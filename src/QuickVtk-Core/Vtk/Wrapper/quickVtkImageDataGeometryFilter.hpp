@@ -4,17 +4,15 @@
 
 #include <vtkImageDataGeometryFilter.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class ImageDataGeometryFilter : public PolyDataAlgorithm {
-            Q_OBJECT
-        private:
-            static Qml::Register::Class<ImageDataGeometryFilter> Register;
-            vtkSmartPointer<vtkImageDataGeometryFilter> m_vtkObject = nullptr;
-        public:
-            ImageDataGeometryFilter();
-        signals:
-        };
-    }
+    class ImageDataGeometryFilter : public PolyDataAlgorithm {
+        Q_OBJECT
+    private:
+        static Qml::Register::Class<ImageDataGeometryFilter> Register;
+        vtkSmartPointer<vtkImageDataGeometryFilter> m_vtkObject = nullptr;
+    public:
+        ImageDataGeometryFilter();
+    signals:
+    };
 }

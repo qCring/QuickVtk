@@ -4,16 +4,14 @@
 
 #include <vtkAbstractVolumeMapper.h>
 
-namespace quick {
-    namespace Vtk {
+namespace quick::Vtk {
 
-        class AbstractVolumeMapper : public AbstractMapper3D {
-            Q_OBJECT
-        private:
-            static Qml::Register::AbstractClass<AbstractVolumeMapper> Register;
-        public:
-            AbstractVolumeMapper(vtkSmartPointer<vtkAbstractVolumeMapper>);
-            auto getVtkObject() -> vtkSmartPointer<vtkAbstractVolumeMapper>;
-        };
-    }
+    class AbstractVolumeMapper : public AbstractMapper3D {
+        Q_OBJECT
+    private:
+        static Qml::Register::AbstractClass<AbstractVolumeMapper> Register;
+    public:
+        AbstractVolumeMapper(vtkSmartPointer<vtkAbstractVolumeMapper>);
+        auto getVtkObject() -> vtkSmartPointer<vtkAbstractVolumeMapper>;
+    };
 }

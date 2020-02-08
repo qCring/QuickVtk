@@ -3,40 +3,38 @@
 #include "quickSampleDataMeshes.hpp"
 #include "quickSampleDataVolumes.hpp"
 
-namespace quick {
-    namespace SampleData {
+namespace quick::SampleData {
 
-        Controller* Controller::instance = nullptr;
+    Controller* Controller::instance = nullptr;
 
-        Qml::Register::Type<Controller> Controller::Register;
+    Qml::Register::Type<Controller> Controller::Register;
 
-        auto Controller::Create() -> Controller* {
-            if (instance) {
-                throw std::runtime_error("instance already existing");
-            }
-
-            Images::Create();
-            Meshes::Create();
-            Volumes::Create();
-
-            instance = new Controller();
-            return instance;
-        }
-    
-        auto Controller::GetInstance() -> Controller* {
-            return instance;
+    auto Controller::Create() -> Controller* {
+        if (instance) {
+            throw std::runtime_error("instance already existing");
         }
 
-        auto Controller::getImages() -> Images* {
-            return Images::GetInstance();
-        }
+        Images::Create();
+        Meshes::Create();
+        Volumes::Create();
 
-        auto Controller::getMeshes() -> Meshes* {
-            return Meshes::GetInstance();
-        }
+        instance = new Controller();
+        return instance;
+    }
 
-        auto Controller::getVolumes() -> Volumes* {
-            return Volumes::GetInstance();
-        }
+    auto Controller::GetInstance() -> Controller* {
+        return instance;
+    }
+
+    auto Controller::getImages() -> Images* {
+        return Images::GetInstance();
+    }
+
+    auto Controller::getMeshes() -> Meshes* {
+        return Meshes::GetInstance();
+    }
+
+    auto Controller::getVolumes() -> Volumes* {
+        return Volumes::GetInstance();
     }
 }

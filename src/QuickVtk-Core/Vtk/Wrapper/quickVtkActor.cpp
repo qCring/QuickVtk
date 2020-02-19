@@ -3,6 +3,8 @@
 #include "quickVtkTexture.hpp"
 #include "quickVtkProperty.hpp"
 
+#include <vtkTexture.h>
+
 namespace quick::Vtk {
 
     Qml::Register::Class<Actor> Actor::Register(true);
@@ -10,7 +12,14 @@ namespace quick::Vtk {
     Actor::Actor() : Prop3D(vtkSmartPointer<vtkActor>::New()) {
         this->m_vtkObject = vtkActor::SafeDownCast(Prop::getVtkObject());
         this->m_property = new Property(this);
-        this->m_texture = new Texture(this->m_vtkObject->GetTexture(), [this](){ this->update(); });
+        
+        auto texture = m_vtkObject->GetTexture();
+        
+        if (texture == nullptr) {
+            texture = vtkTexture::New();
+        }
+        
+        this->m_texture = new Texture(texture, [this](){ this->update(); });
     }
 
     Actor::Actor(vtkSmartPointer<vtkActor> vtkObject) : Prop3D(vtkObject) {

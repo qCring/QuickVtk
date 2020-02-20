@@ -34,16 +34,17 @@ namespace quick::Vtk {
         Q_PROPERTY(bool interpolate READ getInterpolate WRITE setInterpolate NOTIFY interpolateChanged);
     private:
         using cb_t = std::function<void()>;
-        static Qml::Register::UncreatableClass<Texture> Register;
+        static Qml::Register::Class<Texture> Register;
         vtkSmartPointer<vtkTexture> m_vtkObject = nullptr;
         cb_t m_callback;
     public:
-        Texture() = delete;
+        Texture();
         Texture(vtkSmartPointer<vtkTexture>, cb_t&&);
         auto setQuality(Quality) -> void;
         auto getQuality() -> Quality;
         auto setBlendingMode(BlendingMode) -> void;
         auto getBlendingMode() -> BlendingMode;
+        auto getVtkObject() -> vtkSmartPointer<vtkTexture>;
         auto setRepeat(bool) -> void;
         auto getRepeat() -> bool;
         auto setEdgeClamp(bool) -> void;

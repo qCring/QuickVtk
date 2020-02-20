@@ -12,14 +12,6 @@ namespace quick::Vtk {
     Actor::Actor() : Prop3D(vtkSmartPointer<vtkActor>::New()) {
         this->m_vtkObject = vtkActor::SafeDownCast(Prop::getVtkObject());
         this->m_property = new Property(this);
-        
-        auto texture = m_vtkObject->GetTexture();
-        
-        if (texture == nullptr) {
-            texture = vtkTexture::New();
-        }
-        
-        this->m_texture = new Texture(texture, [this](){ this->update(); });
     }
 
     Actor::Actor(vtkSmartPointer<vtkActor> vtkObject) : Prop3D(vtkObject) {
@@ -49,6 +41,14 @@ namespace quick::Vtk {
         return this->m_mapper;
     }
 
+    auto Actor::setTexture(Texture* texture) -> void {
+        this->m_texture = texture;
+        this->m_vtkObject->SetTexture(texture->getVtkObject());
+        qDebug() << "set tex: " << texture;
+        emit this->textureChanged();
+        this->update();
+    }
+    
     auto Actor::getTexture() -> Texture* {
         return this->m_texture;
     }

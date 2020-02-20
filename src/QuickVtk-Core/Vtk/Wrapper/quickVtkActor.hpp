@@ -12,7 +12,7 @@ namespace quick::Vtk {
 
     class Actor : public Prop3D {
         Q_OBJECT
-        Q_PROPERTY(quick::Vtk::Texture* texture READ getTexture CONSTANT);
+        Q_PROPERTY(quick::Vtk::Texture* texture READ getTexture WRITE setTexture NOTIFY textureChanged);
         Q_PROPERTY(quick::Vtk::Property* property READ getProperty CONSTANT);
         Q_PROPERTY(quick::Vtk::Mapper* mapper READ getMapper WRITE setMapper NOTIFY mapperChanged);
         Q_CLASSINFO("DefaultProperty", "mapper");
@@ -30,9 +30,11 @@ namespace quick::Vtk {
         auto getMapper() -> Mapper*;
         auto getProperty() -> Property*;
         auto getTexture() -> Texture*;
+        auto setTexture(Texture*) -> void;
         auto getVtkObject() -> vtkSmartPointer<vtkActor>;
         ~Actor();
     signals:
         void mapperChanged();
+        void textureChanged();
     };
 }

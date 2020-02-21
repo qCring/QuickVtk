@@ -11,23 +11,23 @@ namespace quick::Math {
         this->m_callback.operator()();
     }
 
-    auto Vector2::setX(double x) -> void {
+    auto Vector2::setX(qreal x) -> void {
         this->m_values[0] = x;
         emit this->xChanged();
         this->notify();
     }
 
-    auto Vector2::getX() -> double {
+    auto Vector2::getX() -> qreal {
         return this->m_values[0];
     }
 
-    auto Vector2::setY(double y) -> void {
+    auto Vector2::setY(qreal y) -> void {
         this->m_values[1] = y;
         emit this->yChanged();
         this->notify();
     }
 
-    auto Vector2::getY() -> double {
+    auto Vector2::getY() -> qreal {
         return this->m_values[1];
     }
 

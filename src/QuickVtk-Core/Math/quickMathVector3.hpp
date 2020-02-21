@@ -11,12 +11,12 @@ namespace quick::Math {
 
     class Vector3 : public QObject {
         Q_OBJECT
-        Q_PROPERTY(double x READ getX WRITE setX NOTIFY xChanged);
-        Q_PROPERTY(double y READ getY WRITE setY NOTIFY yChanged);
-        Q_PROPERTY(double z READ getZ WRITE setZ NOTIFY zChanged);
+        Q_PROPERTY(qreal x READ getX WRITE setX NOTIFY xChanged);
+        Q_PROPERTY(qreal y READ getY WRITE setY NOTIFY yChanged);
+        Q_PROPERTY(qreal z READ getZ WRITE setZ NOTIFY zChanged);
     private:
         using cb_t = std::function<void()>;
-        using array_t = std::array<double, 3>;
+        using array_t = std::array<qreal, 3>;
         cb_t m_callback;
         array_t m_values;
         auto notify() -> void;
@@ -24,12 +24,14 @@ namespace quick::Math {
         static Qml::Register::UncreatableClass<Vector3> Register;
         Vector3() = delete;
         Vector3(cb_t&&, array_t = {{0,0,0}});
-        auto setX(double) -> void;
-        auto getX() -> double;
-        auto setY(double) -> void;
-        auto getY() -> double;
-        auto setZ(double) -> void;
-        auto getZ() -> double;
+        Vector3(array_t);
+        auto setX(qreal) -> void;
+        auto getX() -> qreal;
+        auto setY(qreal) -> void;
+        auto getY() -> qreal;
+        auto setZ(qreal) -> void;
+        auto getZ() -> qreal;
+        auto setFromVtkArray(double*) -> void;
         auto getValues() -> array_t;
     signals:
         void xChanged();

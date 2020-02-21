@@ -44,7 +44,6 @@ namespace quick::Vtk {
     auto Actor::setTexture(Texture* texture) -> void {
         this->m_texture = texture;
         this->m_vtkObject->SetTexture(texture->getVtkObject());
-        qDebug() << "set tex: " << texture;
         emit this->textureChanged();
         this->update();
     }

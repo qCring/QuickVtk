@@ -13,7 +13,8 @@ namespace quick::Vtk {
             Prop,
             Algorithm,
             Widget,
-            Other
+            Other,
+            InteractorObserver
         };
     private:
         static Qml::Register::AbstractClass<Object> Register;

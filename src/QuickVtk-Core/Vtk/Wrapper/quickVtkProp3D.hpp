@@ -23,6 +23,7 @@ namespace quick::Vtk {
         vtkSmartPointer<vtkProp3D> m_vtkObject = nullptr;
     public:
         Prop3D(vtkSmartPointer<vtkProp3D>);
+        auto getVtkObject() -> vtkSmartPointer<vtkProp3D>;
         auto getScale() -> Math::Vector3*;
         auto getOrigin() -> Math::Vector3*;
         auto getPosition() -> Math::Vector3*;

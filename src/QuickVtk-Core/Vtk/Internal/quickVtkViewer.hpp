@@ -25,7 +25,7 @@ namespace quick::Vtk {
         QList<quick::Vtk::Object*> m_input;
         bool m_initialized = false;
         bool m_hoverEnabled = false;
-        bool m_mouseEnabled = false;
+        bool m_mouseEnabled = true;
         vtkSmartPointer<vtkRenderer> m_renderer;
     public:
         static Qml::Register::Class<Viewer> Register;

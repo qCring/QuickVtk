@@ -60,21 +60,28 @@ namespace quick::Vtk {
         format.setAttachment(QOpenGLFramebufferObject::Depth);
         m_fbo = new QOpenGLFramebufferObject(size, format);
         m_fboOffscreenWindow->SetFramebufferObject(m_fbo);
-
+        
         return m_fbo;
+    }
+    
+    auto FboRenderer::setPixelRatio(qreal pixelRatio) -> void {
+        this->m_pixelRatio = pixelRatio;
     }
 
     auto FboRenderer::onMouseEvent(QMouseEvent* event) -> void {
         if(this->m_interactor == nullptr || event == nullptr) {
             return;
         }
-
+        
         if(!this->m_interactor->GetEnabled()) {
             return;
         }
-
-        this->m_interactor->SetEventInformationFlipY(event->x(), event->y(), (event->modifiers() & Qt::ControlModifier), (event->modifiers() & Qt::ShiftModifier));
-
+        
+        auto mouse_x = event->x() * m_pixelRatio;
+        auto mouse_y = this->m_fbo->size().height() - event->y() * m_pixelRatio;
+        
+        this->m_interactor->SetEventInformation(mouse_x, mouse_y, (event->modifiers() & Qt::ControlModifier), (event->modifiers() & Qt::ShiftModifier));
+        
         auto command = vtkCommand::NoEvent;
 
         if (event->type() == QEvent::MouseMove) {
@@ -99,11 +106,11 @@ namespace quick::Vtk {
             }
         }
 
-        this->m_interactor->InvokeEvent(command, event);
+        this->m_interactor->InvokeEvent(command);
     }
 
     FboRenderer::~FboRenderer() {
-        m_fboOffscreenWindow->QtParentRenderer = 0;
-        m_fboOffscreenWindow->Delete();
+        this->m_fboOffscreenWindow->QtParentRenderer = nullptr;
+        this->m_fboOffscreenWindow->Delete();
     }
 }

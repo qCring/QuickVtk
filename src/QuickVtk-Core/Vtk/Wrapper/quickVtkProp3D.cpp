@@ -28,6 +28,10 @@ namespace quick::Vtk {
         });
     }
 
+    auto Prop3D::getVtkObject() -> vtkSmartPointer<vtkProp3D> {
+        return this->m_vtkObject;
+    }
+
     auto Prop3D::getPosition() -> Math::Vector3* {
         return this->m_position;
     }

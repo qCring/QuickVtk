@@ -4,10 +4,12 @@
 #include "quickVtkFboRenderer.hpp"
 #include "quickVtkAbstractWidget.hpp"
 #include "quickVtkFboOffscreenWindow.hpp"
+#include "quickVtkInteractorObserver.hpp"
 
 #include <QOpenGLFunctions>
 #include <QQuickFramebufferObject>
 #include <QOpenGLFramebufferObject>
+#include <QQuickWindow>
 
 #include <vtkGenericOpenGLRenderWindow.h>
 #include <vtkRendererCollection.h>
@@ -31,21 +33,23 @@ namespace quick::Vtk {
         this->m_renderer = vtkSmartPointer<vtkRenderer>::New();
         rw->AddRenderer(m_renderer);
         this->m_initialized = true;
+        this->m_fboRenderer->setPixelRatio(this->window()->effectiveDevicePixelRatio());
 
         for (auto object : this->m_input) {
             if (object->getType() == Object::Type::Prop) {
-                auto prop = reinterpret_cast<Prop*>(object);
+                auto prop = static_cast<Prop*>(object);
                 prop->linkViewer(this);
                 this->m_renderer->AddActor(prop->getVtkObject());
-            }
-            else if (object->getType() == Object::Type::Widget) {
-                auto widget = reinterpret_cast<AbstractWidget*>(object);
+            } else if (object->getType() == Object::Type::Widget) {
+                auto widget = static_cast<AbstractWidget*>(object);
                 auto vtkWidget = widget->getVtkObject();
-                vtkWidget->CreateDefaultRepresentation();
+                
                 vtkWidget->SetInteractor(this->GetRenderWindow()->GetInteractor());
-                vtkWidget->SetManagesCursor(true);
-                vtkWidget->SetPickingManaged(true);
+                vtkWidget->CreateDefaultRepresentation();
                 vtkWidget->On();
+            } else if (object->getType() == Object::Type::InteractorObserver) {
+                auto interactorObserver = static_cast<InteractorObserver*>(object);
+                interactorObserver->setInteractor(this->GetRenderWindow()->GetInteractor());
             }
         }
 
@@ -102,6 +106,7 @@ namespace quick::Vtk {
     }
 
     auto Viewer::hoverMoveEvent(QHoverEvent* event) -> void {
+        // TODO: fwd hover events properly
     }
 
     auto Viewer::createRenderer() const -> QQuickFramebufferObject::Renderer* {
@@ -119,27 +124,11 @@ namespace quick::Vtk {
     }
 
     auto Viewer::appendInput(QQmlListProperty<quick::Vtk::Object>* list, quick::Vtk::Object* object) -> void {
+        
         auto viewer = qobject_cast<Viewer*>(list->object);
 
         if (object && viewer) {
             viewer->m_input.append(object);
-        }
-
-        if(viewer && viewer->m_renderer && object) {
-
-            if (object->getType() == Object::Type::Prop) {
-                auto prop = reinterpret_cast<Prop*>(object);
-                viewer->m_renderer->AddActor(prop->getVtkObject());
-            } else if (object->getType() == Object::Type::Widget) {
-                auto widget = reinterpret_cast<AbstractWidget*>(object);
-                auto vtkWidget = widget->getVtkObject();
-                vtkWidget->SetInteractor(viewer->GetRenderWindow()->GetInteractor());
-                vtkWidget->CreateDefaultRepresentation();
-                vtkWidget->On();
-            }
-
-            emit viewer->inputChanged();
-            viewer->update();
         }
     }
 
@@ -169,7 +158,7 @@ namespace quick::Vtk {
         if (viewer) {
             for (auto object : viewer->m_input) {
                 if (object->getType() == Object::Type::Prop) {
-                    auto prop = reinterpret_cast<Prop*>(object);
+                    auto prop = static_cast<Prop*>(object);
                     viewer->m_renderer->RemoveActor(prop->getVtkObject());
                 }
             }
